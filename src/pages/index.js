@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import { Link } from 'gatsby';
 
+import './index.scss';
+
 const Index = () => (
   <Fragment>
     <h1>Hello There</h1>
