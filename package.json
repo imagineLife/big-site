@@ -1,7 +1,7 @@
 {
-  "name": "frontendmasters-gatsby",
+  "name": "big-site",
   "private": true,
-  "description": "Bare-bones starter for the Gatsby Frontend Masters workshop.",
+  "description": "Bare-bones starter.",
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
@@ -23,6 +23,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jlengstorf/frontendmasters-gatsby"
+    "url": "https://github.com/imagineLife/big-site.git"
   }
 }
