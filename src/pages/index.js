@@ -1,13 +1,15 @@
 import React, { Fragment } from 'react';
+// Components
 import { Link } from 'gatsby';
+import Layout from './../layout';
 
 import './index.scss';
 
 const Index = () => (
-  <Fragment>
+  <Layout>
     <h1>Hello There</h1>
     <p>I'm a human.</p>
     <Link to="/about">About</Link>
-  </Fragment>
+  </Layout>
 );
 export default Index;
