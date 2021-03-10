@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 // Components
 import { Link } from 'gatsby';
-import Layout from './../layout';
+import Layout from './../components/layout';
 
 import './index.scss';
 
