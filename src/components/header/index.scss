@@ -19,5 +19,10 @@ header {
     margin: 0 0.5rem 0 0;
     padding: 0.25rem;
     text-decoration: none;
+
+    //Class provided by gatsby
+    &.current-page {
+      border-bottom: 2px solid #222;
+    }
   }
 }
