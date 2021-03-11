@@ -5,7 +5,7 @@ import { Link } from 'gatsby';
 const Header = () => (
   <header>
     <Link className="nav-link" to="/">
-      Init
+      Home
     </Link>
   </header>
 );
