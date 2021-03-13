@@ -1,7 +1,9 @@
 import { graphql, useStaticQuery } from 'gatsby';
 
-const getPosts = () => {
-  const data = useStaticQuery(graphql`
+const usePosts = () => {
+  const {
+    allMdx: { nodes },
+  } = useStaticQuery(graphql`
     query {
       allMdx {
         nodes {
@@ -13,6 +15,12 @@ const getPosts = () => {
       }
     }
   `);
+
+  return nodes.map(({ frontmatter: { title, author, slug } }) => ({
+    title,
+    author,
+    slug,
+  }));
 };
 
-export defaut getPosts;
+export default usePosts;
