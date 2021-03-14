@@ -5,11 +5,6 @@ import useSiteMetadata from './../../hooks/use-site-metadata';
 
 const PageHeader = () => {
   const { title, description } = useSiteMetadata();
-  console.log('title');
-  console.log(title);
-  console.log('description');
-  console.log(description);
-
   return (
     <Helmet>
       <html lang="en" />
