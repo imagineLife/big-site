@@ -10,7 +10,9 @@ const usePosts = () => {
           frontmatter {
             title
             slug
+            author
           }
+          excerpt
         }
       }
     }
