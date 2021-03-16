@@ -15,6 +15,7 @@ export const query = graphql`
   }
 `;
 
+// gets the post data as a prop
 const PostTemplate = ({ data: { mdx: post } }) => {
   console.log('post');
   console.log(post.body);
