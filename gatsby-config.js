@@ -21,5 +21,12 @@ module.exports = {
         path: `posts`,
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `recipes`,
+        path: `recipes`,
+      },
+    },
   ],
 };
