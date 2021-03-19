@@ -1,15 +1,16 @@
 import React from 'react';
-import './index.scss'
-import { Link, graphql, useStaticQuery } from 'gatsby';
+import './index.scss';
+import { Link } from 'gatsby';
 
-function Hero(){
+function Hero() {
   return (
     <div id="hero">
-      <h1>Blog<h2>
+      <h1>Blog</h1>
       <p>
-        <Link to='/about'>About Me &rarr;</Link>
+        <Link to="/about">About Me &rarr;</Link>
       </p>
-  )
+    </div>
+  );
 }
 
 export default Hero;
