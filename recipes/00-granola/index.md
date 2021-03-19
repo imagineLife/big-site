@@ -1,0 +1,8 @@
+## Granola
+
+### Ingredients
+
+- rolled oats
+- nuts
+- shredded sweetened coconut
+- dried fruit (_raisins, mixed dried fruit, dried cranberries, etc._)
