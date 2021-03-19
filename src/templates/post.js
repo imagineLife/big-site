@@ -3,6 +3,11 @@ import { graphql, Link } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import Layout from './../components/layout';
 
+/*
+  the $slug variable gets set in the gatsby-node file,
+  using the slug key in the context object
+*/
+
 export const query = graphql`
   query($slug: String!) {
     mdx(frontmatter: { slug: { eq: $slug } }) {
@@ -17,8 +22,9 @@ export const query = graphql`
 
 // gets the post data as a prop
 const PostTemplate = ({ data: { mdx: post } }) => {
-  console.log('post');
-  console.log(post.body);
+  /*
+    post.body is a mess to look at but converts to html nicely :)
+  */
 
   return (
     <Layout>
