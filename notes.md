@@ -16,6 +16,7 @@
 ```
 
 - adjust to a different `type` of posts from a different directory source
+  - include another instance of the `gatsby-source-filesystem` in the satsby-node config, example...
 
 ```js
 {
