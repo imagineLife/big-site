@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import './index.scss';
+
 // Components
 import { Link } from 'gatsby';
 import Layout from './../components/layout';
-import getPosts from './../hooks/get-posts';
-// import getRecipes from './../hooks/get-recipes';
+import Hero from './../components/hero';
 
-import './index.scss';
+// helper fns
+import getPosts from './../hooks/get-posts';
 
 import PostPreview from './../components/PostPreview';
 const Index = () => {
@@ -14,15 +16,15 @@ const Index = () => {
   // console.log(blogPosts);
 
   return (
-    <Layout>
-      <h1>Hello There</h1>
-      <p>I'm a human.</p>
-      <Link to="/about">About</Link>
-      <h2>BlogPosts</h2>
-      {blogPosts.map(bp => (
-        <PostPreview {...bp} key={bp.slug} />
-      ))}
-    </Layout>
+    <Fragment>
+      <Hero />
+      <Layout>
+        <h2>BlogPosts</h2>
+        {blogPosts.map(bp => (
+          <PostPreview {...bp} key={bp.slug} />
+        ))}
+      </Layout>
+    </Fragment>
   );
 };
 export default Index;
