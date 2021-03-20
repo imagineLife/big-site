@@ -1,10 +1,7 @@
 import React from 'react';
 import './index.scss';
 import { Link } from 'gatsby';
-
-function DivWrapper({ id, children }) {
-  return <div id={id}>{children}</div>;
-}
+import DivWrapper from './../divWrapper';
 
 function Hero() {
   return (
