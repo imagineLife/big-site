@@ -7,6 +7,7 @@ import Hero from './../components/hero';
 
 // helper fns
 import getPosts from './../hooks/get-posts';
+// import getRecipes from './../hooks/get-recipes';
 
 import PostPreview from './../components/PostPreview';
 const Index = () => {
