@@ -11,6 +11,13 @@ const usePosts = () => {
             title
             slug
             author
+            coverImage {
+              childImageSharp {
+                fluid {
+                  ...GatsbyImageSharpFluid_withWebp
+                }
+              }
+            }
           }
           excerpt
         }
@@ -18,11 +25,15 @@ const usePosts = () => {
     }
   `);
 
-  return nodes.map(({ frontmatter: { title, author, slug } }) => ({
-    title,
-    author,
-    slug,
-  }));
+  return nodes.map(
+    ({ frontmatter: { title, author, slug, coverImage, coverAlt } }) => ({
+      title,
+      author,
+      slug,
+      coverImage,
+      coverAlt,
+    }),
+  );
 };
 
 export default usePosts;
