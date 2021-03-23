@@ -14,11 +14,13 @@ const PostPreview = ({ title, slug, excerpt, coverImage, coverAlt }) => {
           />
         )}
       </Link>
-      <h3>
-        <Link to={slug}>{title}</Link>
-      </h3>
-      <p>{excerpt}</p>
-      <Link to={slug}>Read Post &rarr;</Link>
+      <div>
+        <h3>
+          <Link to={slug}>{title}</Link>
+        </h3>
+        <p>{excerpt}</p>
+        <Link to={slug}>Read Post &rarr;</Link>
+      </div>
     </article>
   );
 };
