@@ -37,3 +37,12 @@ const usePosts = () => {
 };
 
 export default usePosts;
+/*
+  fluid can get content like...
+  (
+    maxWidth: 100
+    maxHeight: 100
+    duotone: { shadow: "#663399", highlight: "#ddbbff" }
+  )
+  before the {}
+*/
