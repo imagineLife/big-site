@@ -11,6 +11,7 @@ const usePosts = () => {
             title
             slug
             author
+            excerpt
             coverImage {
               childImageSharp {
                 fluid {
@@ -19,19 +20,21 @@ const usePosts = () => {
               }
             }
           }
-          excerpt
         }
       }
     }
   `);
 
   return nodes.map(
-    ({ frontmatter: { title, author, slug, coverImage, coverAlt } }) => ({
+    ({
+      frontmatter: { title, author, slug, coverImage, coverAlt, excerpt },
+    }) => ({
       title,
       author,
       slug,
       coverImage,
       coverAlt,
+      excerpt,
     }),
   );
 };
