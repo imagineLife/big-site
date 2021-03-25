@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
+    "analyze": "cross-env ANALYZE_BUNDLE_SIZE=true gatsby build",
     "build": "gatsby build",
     "develop": "cross-env GATSBY_GRAPHQL_IDE=playground gatsby develop",
     "format": "prettier --write src/**/*.{js,jsx}",
