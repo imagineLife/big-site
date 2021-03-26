@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'Folio',
+    title: 'imagineLife',
     description: 'A Place for some content',
   },
   plugins: [
