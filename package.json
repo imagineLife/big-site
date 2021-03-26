@@ -11,9 +11,10 @@
     "format": "prettier --write src/**/*.{js,jsx}",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
+    "test": "jest"
   },
   "dependencies": {
+    "@babel/plugin-transform-runtime": "^7.13.10",
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
     "gatsby": "^3.0.0",
@@ -33,11 +34,24 @@
     "sass": "^1.32.8"
   },
   "devDependencies": {
+    "babel-preset-gatsby": "^1.1.0",
     "cross-env": "^6.0.3",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "jest": "^26.6.3",
+    "jest-fetch-mock": "^3.0.3",
     "prettier": "^1.19.1"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/imagineLife/big-site.git"
+  },
+  "jest": {
+    "testRegex": [
+      "(/__tests__/.*|(\\.|/)(test))\\.[jt]sx?$"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/enzyme.setup.js"
+    ]
   }
 }
