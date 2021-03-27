@@ -40,7 +40,8 @@ const PostTemplate = ({ data: { mdx: post } }) => {
       <p>Posted by Me</p>
       {/* <MDXProvider components={components}> */}
       {<MDXRenderer>{post.body}</MDXRenderer>}
-      {/* </MDXProvider> */};<Link to="/">&larr; back to posts</Link>
+      {/* </MDXProvider> */}
+      <Link to="/">&larr; back to posts</Link>
     </Layout>
   );
 };
