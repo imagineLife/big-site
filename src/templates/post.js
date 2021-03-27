@@ -5,6 +5,8 @@ import { MDXProvider } from '@mdx-js/react';
 import Layout from './../components/layout';
 import IngredientList from './../components/ingredientList';
 
+import './post.scss';
+
 /*
   the $slug variable gets set in the gatsby-node file,
   using the slug key in the context object
