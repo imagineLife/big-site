@@ -1,12 +1,20 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
+import { MDXProvider } from '@mdx-js/react';
 import Layout from './../components/layout';
 
 /*
   the $slug variable gets set in the gatsby-node file,
   using the slug key in the context object
 */
+
+function IngredientList({ children }) {
+  return <ul className="ingredient-list">{children}</ul>;
+}
+const components = {
+  ul: IngredientList,
+};
 
 export const query = graphql`
   query($slug: String!) {
@@ -30,8 +38,10 @@ const PostTemplate = ({ data: { mdx: post } }) => {
     <Layout>
       <h1>{post.frontmatter.title}</h1>
       <p>Posted by Me</p>
-      <MDXRenderer>{post.body}</MDXRenderer>
-      <Link to="/">&larr; back to posts</Link>
+      <MDXProvider components={components}>
+        {<MDXRenderer>{post.body}</MDXRenderer>}
+      </MDXProvider>
+      ;<Link to="/">&larr; back to posts</Link>
     </Layout>
   );
 };
