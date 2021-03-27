@@ -1,0 +1,19 @@
+#gatsby-focus-wrapper {
+  > main {
+    > ul {
+      > li {
+        &:nth-child(even) {
+          list-style: none;
+        }
+        > span {
+          > a {
+            > img {
+              -o-object-fit: cover;
+              object-fit: cover;
+            }
+          }
+        }
+      }
+    }
+  }
+}
