@@ -37,7 +37,7 @@ const PostTemplate = ({ data: { mdx: post } }) => {
   return (
     <Layout>
       <h1>{post.frontmatter.title}</h1>
-      <p>Posted by Me</p>
+      {/* <p>Posted by Me</p> */}
       {/* <MDXProvider components={components}> */}
       {<MDXRenderer>{post.body}</MDXRenderer>}
       {/* </MDXProvider> */}
