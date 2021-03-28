@@ -1,8 +1,7 @@
 #gatsby-focus-wrapper {
   > main {
     > ul {
-      &:nth-child(7),
-      &:nth-child(9) {
+      &:nth-child(odd) {
         > li {
           width: 50%;
           display: inline-block;

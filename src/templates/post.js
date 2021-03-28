@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
-import { MDXProvider } from '@mdx-js/react';
+// import { MDXProvider } from '@mdx-js/react';
 import Layout from './../components/layout';
 import IngredientList from './../components/ingredientList';
 
