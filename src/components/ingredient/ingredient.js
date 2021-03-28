@@ -1,9 +1,7 @@
 import React from 'react';
 
-function Ingredient({})(
-  <div className={`ingredient ${className || ''}`}>
-    Ingredient here
-  </div>
-)
+function Ingredient({ className, children }) {
+  return <li className={`ingredient ${className || ''}`}>{children}</li>;
+}
 
 export default Ingredient;
