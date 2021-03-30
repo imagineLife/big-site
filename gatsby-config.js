@@ -8,6 +8,7 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
+    'gatsby-transformer-json',
     {
       resolve: 'gatsby-plugin-mdx',
       options: {
@@ -22,14 +23,14 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `posts`,
-        path: `posts`,
+        path: `content/posts`,
       },
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `recipes`,
-        path: `recipes`,
+        path: `content/recipes`,
       },
     },
     {
@@ -37,6 +38,13 @@ module.exports = {
       options: {
         name: `images`,
         path: `images`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `json-data`,
+        path: `${__dirname}/content`,
       },
     },
     {
