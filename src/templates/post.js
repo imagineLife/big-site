@@ -2,14 +2,12 @@ import React from 'react';
 import { graphql, Link, useStaticQuery } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 // import { MDXProvider } from '@mdx-js/react';
+
+import Tag from './../components/tag';
 import Layout from './../components/layout';
 import IngredientList from './../components/ingredientList';
 
 import './post.scss';
-
-function Tag({ text }) {
-  return <span className="tag">{text}</span>;
-}
 
 export const recipeQuery = graphql`
   query RecipeBySlug($slug: String!) {
@@ -68,12 +66,6 @@ const PostTemplate = data => {
       recipesJson: { title, excerpt, tags },
     },
   } = data;
-  // console.log('recipesJson');
-  // console.log(recipesJson);
-  // const postData = useThisPost(data)
-  /*
-    post.body is a mess to look at but converts to html nicely :)
-  */
 
   return (
     <Layout>
