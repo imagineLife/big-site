@@ -15,6 +15,10 @@ export const recipeQuery = graphql`
       title
       tags
       excerpt
+      ingredients {
+        ingredient
+        amt
+      }
     }
   }
 `;
@@ -23,10 +27,6 @@ export const recipeQuery = graphql`
   the $slug variable gets set in the gatsby-node file,
   using the slug key in the context object
 */
-
-const components = {
-  ul: IngredientList,
-};
 
 // export const query = graphql`
 //   query($slug: String!) {
@@ -63,7 +63,7 @@ const components = {
 const PostTemplate = data => {
   const {
     data: {
-      recipesJson: { title, excerpt, tags },
+      recipesJson: { title, excerpt, tags, ingredients },
     },
   } = data;
 
@@ -75,6 +75,7 @@ const PostTemplate = data => {
         {tags?.map((t, idx) => (
           <Tag key={`tag-${idx}`} text={t} />
         ))}
+        {ingredients && <IngredientList>{ingredients}</IngredientList>}
       </div>
     </Layout>
   );
