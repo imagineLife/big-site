@@ -1,0 +1,10 @@
+.ingredient {
+  &::marker {
+    color: darkblue;
+    font-size: 20px;
+  }
+  > .amt {
+    font-size: 14px;
+    font-style: italic;
+  }
+}
