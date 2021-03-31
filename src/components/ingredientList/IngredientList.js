@@ -9,7 +9,7 @@ export default function IngredientList({ children }) {
           return (
             <Ingredient
               key={`ingredient-${idx}`}
-              {...ch.props}
+              {...ch}
               className="ingredient"
             />
           );
