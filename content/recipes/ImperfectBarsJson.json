@@ -35,5 +35,19 @@
       "ingredient": "Flaky Salt",
       "amt": "A Couple Pinches"
     }
+  ],
+  "directions": [
+    {
+      "txt": "Add the peanut butter to a mixing bowl"
+    },
+    {
+      "txt": "Add the protein powder to the mixing bowl"
+    },
+    {
+      "txt": "Add the sweetener, the honey/maple-syrup mixture, to the bowl"
+    },
+    {
+      "txt": "Mix the 'ingredients - do not overmix"
+    }
   ]
 }
