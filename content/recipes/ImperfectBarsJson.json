@@ -5,5 +5,35 @@
   "coverAlt": "Imperfect Bars",
   "author": "me",
   "excerpt": "A crispier take on a refridgerator bar",
-  "tags": ["recipe", "diy", "snack", "protein"]
+  "tags": ["recipe", "diy", "snack", "protein"],
+  "ingredients": [
+    {
+      "ingredient": "Peanut Butter, all natural",
+      "amt": "1 Cup"
+    },
+    {
+      "ingredient": "Egg White Protein Powder",
+      "amt": "80 Grams"
+    },
+    {
+      "ingredient": "Puffed Rice Cereal",
+      "amt": "1 Cup"
+    },
+    {
+      "ingredient": "Maple Syrup",
+      "amt": "2 Tbps"
+    },
+    {
+      "ingredient": "Honey",
+      "amt": "2 Tbsp"
+    },
+    {
+      "ingredient": "Mini Chocolate Chips",
+      "amt": "1/4 Cup"
+    },
+    {
+      "ingredient": "Flaky Salt",
+      "amt": "A Couple Pinches"
+    }
+  ]
 }
