@@ -16,7 +16,12 @@ const Index = () => {
   return (
     <Fragment>
       <Hero />
-      <Layout>water</Layout>
+      <Layout>
+        <h2>BlogPosts</h2>
+        {blogPosts.map(bp => (
+          <PostPreview {...bp} key={bp.slug} />
+        ))}
+      </Layout>
     </Fragment>
   );
 };
