@@ -1,10 +1,54 @@
 import { graphql, useStaticQuery } from 'gatsby';
 
 const usePosts = () => {
-  const {
-    allMdx: { nodes },
-  } = useStaticQuery(graphql`
+  const { posts, recipes } = useStaticQuery(graphql`
+    fragment postpart on PostsJson {
+      slug
+      title
+      excerpt
+    }
+
+    fragment recipepart on RecipesJson {
+      slug
+      title
+      excerpt
+    }
+
     query {
+      posts: allPostsJson {
+        data: nodes {
+          ...postpart
+        }
+      }
+      recipes: allRecipesJson {
+        data: nodes {
+          ...recipepart
+        }
+      }
+    }
+  `);
+
+  return [...posts.data, ...recipes.data].map(({ title, slug, excerpt }) => ({
+    title,
+    slug,
+    excerpt,
+  }));
+};
+
+export default usePosts;
+/*
+  fluid can get content like...
+  (
+    maxWidth: 100
+    maxHeight: 100
+    duotone: { shadow: "#663399", highlight: "#ddbbff" }
+  )
+  before the {}
+*/
+
+/*
+  mdx-drived static query
+  query {
       allMdx {
         nodes {
           frontmatter {
@@ -22,30 +66,5 @@ const usePosts = () => {
           }
         }
       }
-    }
-  `);
-
-  return nodes.map(
-    ({
-      frontmatter: { title, author, slug, coverImage, coverAlt, excerpt },
-    }) => ({
-      title,
-      author,
-      slug,
-      coverImage,
-      coverAlt,
-      excerpt,
-    }),
-  );
-};
-
-export default usePosts;
-/*
-  fluid can get content like...
-  (
-    maxWidth: 100
-    maxHeight: 100
-    duotone: { shadow: "#663399", highlight: "#ddbbff" }
-  )
-  before the {}
+    } 
 */
