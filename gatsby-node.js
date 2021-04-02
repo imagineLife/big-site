@@ -57,13 +57,15 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   [...postData, ...recipeData].forEach(post => {
     // console.log('post');
-    // console.log(post.frontmatter.slug);
+    // console.log(post)
 
     actions.createPage({
       // where the browser can access the page
       path: post.slug,
       // What component will pass the mdx file to
-      component: require.resolve('./src/templates/post.js'),
+      component: post.slug.includes('post') 
+        ? require.resolve('./src/templates/post')
+        : ? require.resolve('./src/templates/recipe'),
       // name the url slug
       context: {
         slug: post.slug,
