@@ -6,7 +6,7 @@ import GatsbyImage from 'gatsby-image';
 const PostPreview = ({ title, slug, excerpt, coverImage, coverAlt }) => {
   return (
     <article className="post-preview">
-      <Link to={slug} className="image">
+      <Link to={`/${slug}`} className="image">
         {coverImage?.childImageSharp?.fluid && (
           <GatsbyImage
             alt={coverAlt}
@@ -16,7 +16,7 @@ const PostPreview = ({ title, slug, excerpt, coverImage, coverAlt }) => {
       </Link>
       <div>
         <h3>
-          <Link to={slug}>{title}</Link>
+          <Link to={`/${slug}`}>{title}</Link>
         </h3>
         <p>{excerpt}</p>
         <Link to={slug}>Read Post &rarr;</Link>
