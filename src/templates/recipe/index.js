@@ -3,11 +3,11 @@ import { graphql, Link, useStaticQuery } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 // import { MDXProvider } from '@mdx-js/react';
 
-import Tag from './../components/tag';
-import Layout from './../components/layout';
-import IngredientList from './../components/ingredientList';
+import Tag from './../../components/tag';
+import Layout from './../../components/layout';
+import IngredientList from './../../components/ingredientList';
 
-import './post.scss';
+import './recipe.scss';
 
 export const recipeQuery = graphql`
   query RecipeBySlug($slug: String!) {
@@ -19,44 +19,12 @@ export const recipeQuery = graphql`
         ingredient
         amt
       }
+      directions {
+        txt
+      }
     }
   }
 `;
-
-/*
-  the $slug variable gets set in the gatsby-node file,
-  using the slug key in the context object
-*/
-
-// export const query = graphql`
-//   query($slug: String!) {
-//     mdx(frontmatter: { slug: { eq: $slug } }) {
-//       frontmatter {
-//         title
-//         author
-//       }
-//       body
-//     }
-//   }
-// `;
-
-// export const query = graphql`
-//   query {
-//     imperfectBarsJson {
-//       title
-//       slug
-//       excerpt
-//       tags
-//       coverImage {
-//         childImageSharp {
-//           fluid {
-//             src
-//           }
-//         }
-//       }
-//     }
-//   }
-// `;
 
 // gets the post data as a prop
 // { data: { mdx: post } }
