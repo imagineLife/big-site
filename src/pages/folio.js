@@ -52,6 +52,60 @@ function TechList({ listName, itms }) {
   );
 }
 
+const folioItems = [
+  {
+    title: 'OpenJS Certified Node Application Developer',
+    subText:
+      'Through the linux foundation, certified in leveraging core node apis for interacting with data streams, os modules, filesystems, and more.',
+    textContext: 'cert no. LF-0te91c2whv',
+    aLink: 'https://training.linuxfoundation.org/certification/verify/',
+    techList: [
+      'Node Core API',
+      'Buffers & Streams',
+      'Control Flow',
+      'Error Handling',
+      'Unit Testing',
+    ],
+    imgClass: `node-cert-bg`,
+  },
+  {
+    title: 'Certified Professional Scrum Master',
+    subText:
+      'Scrum is a framework that teams can use to enable team-wide transparency, inspection & adaptation while developing & delivering complex products.',
+    aLink: 'https://www.scrum.org/certificates/519854',
+    techList: ['Team Process Framework', 'Servant Leadership'],
+    imgClass: `psmi-bg`,
+  },
+];
+
+function FolioItem({ title, subText, textContext, aLink, techList, imgClass }) {
+  return (
+    <div className="col-3-4 hover-v2">
+      <div target="_blank" className={`box ${imgClass} `}>
+        <div className="caption">
+          <p>{title}</p>
+          <hr />
+          <p className="sub-text">
+            {subText}
+            <br />
+            {textContext && (
+              <sup>
+                <i>{textContext}</i>
+              </sup>
+            )}
+          </p>
+          <a href={aLink} target="_blank" className="open"></a>
+          <ul>
+            {techList.map((itm, itmIdx) => (
+              <li key={`tech-list-${title}-${itmIdx}`}>{itm}></li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Folio() {
   return (
     <main role="main" className="folio">
@@ -75,61 +129,10 @@ export default function Folio() {
       </section>
 
       <section id="projects-wrapper">
-        <div className="col-3-4 hover-v2">
-          <div target="_blank" className="box node-cert-bg">
-            <div className="caption">
-              <p>
-                OpenJS Node Application Developer <i>(Certified)</i>
-              </p>
-              <hr />
-              <p className="sub-text">
-                Through the linux foundation, certified in leveraging core node
-                apis for interacting with data streams, os modules, filesystems,
-                and more.
-                <br />
-                <sup>
-                  <i>cert no. LF-0te91c2whv</i>
-                </sup>
-              </p>
-              <a
-                href="https://training.linuxfoundation.org/certification/verify/"
-                target="_blank"
-                className="open"
-              ></a>
-              <ul>
-                <li>Node Core API</li>
-                <li>Buffers & Streams</li>
-                <li>Control Flow</li>
-                <li>Error Handling</li>
-                <li>Unit Testing</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div className="col-3-4 hover-v2">
-          <div target="_blank" className="box psmi-bg">
-            <div className="caption">
-              <p>
-                Professional Scrum Master <i>(Certified)</i>
-              </p>
-              <hr />
-              <p className="sub-text">
-                Scrum is a framework that teams can use to enable team-wide
-                transparency, inspection & adaptation while developing &
-                delivering complex products.
-              </p>
-              <a
-                href="https://www.scrum.org/certificates/519854"
-                target="_blank"
-                className="open"
-              ></a>
-              <ul>
-                <li>Team Process Framework</li>
-                <li>Servant Leadership</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+        {folioItems.map((itm, itmIdex) => (
+          <FolioItem key={`folio-item-${itmIdex}`} {...itm} />
+        ))}
+
         <div className="col-3-4 hover-v2">
           <div target="_blank" className="box slice-n-dice-bg">
             <div className="caption">
