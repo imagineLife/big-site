@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react';
 import './folio.scss';
+import FolioItem from './../components/folioItem';
+import TechList from './../components/techList';
 
 const techs = {
   frontend: [
@@ -34,23 +36,6 @@ const techs = {
     'INTJ',
   ],
 };
-
-function TechList({ listName, itms }) {
-  return (
-    <ul className="tech-list">
-      <li className="tech-li title">
-        <b>{listName}</b>
-      </li>
-      <br />
-      {itms.map((t, tIdx) => (
-        <Fragment key={`frontend-${listName}-${tIdx}`}>
-          <li className="tech-li">{t}</li>
-          {tIdx !== itms.length < 1 && ' '}
-        </Fragment>
-      ))}
-    </ul>
-  );
-}
 
 const folioItems = [
   {
@@ -122,35 +107,97 @@ const folioItems = [
       'logging',
     ],
   },
+  {
+    title: 'SayWhat?!',
+    subText:
+      'Look at patterns in the text of presidential inaugural addresses in this data-viz focused, full-stack, mobile-first responsive project.',
+    imgClass: 'say-what-bg',
+    aLink: 'https://say-what.netlify.com/',
+    techList: [
+      'D3',
+      'React',
+      'MongoDB',
+      'Express (Node)',
+      'Data Visualization',
+      'Responsive Design',
+      'Text Analysis',
+      'HTML',
+      'JS',
+      'CSS',
+    ],
+  },
+  {
+    title: 'WEO Country Categories Mapped',
+    subText:
+      'Zoom, toggle, & hover in this map of the countries of the world categorically colored by their GNI per capita.',
+    imgClass: 'world-map-bg',
+    aLink: 'https://imaginelife.github.io/worldMap/',
+    techList: [
+      'D3',
+      'Mapping',
+      'GeoJSON (topJSON)',
+      'JavaScript',
+      'HTML',
+      'CSS',
+      'Data Visualization',
+    ],
+  },
+  {
+    imgClass: 'rhode-island-bg',
+    title: 'R.I Stats',
+    aLink: 'https://imaginelife.github.io/ristats/',
+    subText:
+      'Review Poverty & Income levels in Rhode Island through simple charts & maps.',
+    techList: [
+      'D3',
+      'Mapping',
+      'GeoJSON (topJSON',
+      'JavaScript',
+      'HTML',
+      'CSS',
+      'Data Visualization',
+    ],
+  },
+  {
+    title: 'CT Housing Permist, Mapped',
+    subText:
+      'An interactive choropleth mapping project, representing the range of housing permits issued per town in Connecticut in 2018.',
+    aLink: 'https://imaginelife.github.io/stateHousingPermits/',
+    imgClass: 'housing-permits-bg',
+    techList: [
+      'D3',
+      'Mapping',
+      'Responsive Design',
+      'Data Visualization',
+      'JS',
+      'HTML',
+      'CSS',
+    ],
+  },
+  {
+    title: 'Enterprise Resource Planner',
+    subText:
+      'A time-tracking, ticket-based, resource management system. I do not own the code to this project.',
+    imgClass: 'erp-bg',
+    techList: ['DHTMLX', 'JS', 'HTML', 'CSS', 'PHP'],
+  },
+  {
+    title: 'MyMiles',
+    imgClass: 'my-miles-bg',
+    subText:
+      'Record, edit & export vehicle mileage logs in this responsive app.',
+    aLink: 'https://tranquil-sierra-12911.herokuapp.com/',
+    techList: ['API', 'Responsive Design', 'JS', 'HTML', 'CSS'],
+  },
+  {
+    title: 'MacroRecipes',
+    subText:
+      'Find Recipes based on ingredients and gram counts of carbs, calories, fat, and protein.',
+    imgClass: 'macro-recipes-bg',
+    aLink: 'https://imaginelife.github.io/MacroRecipes/',
+    techList: ['API', 'Responsive Design', 'CSS', 'HTML', 'JS'],
+  },
 ];
-
-function FolioItem({ title, subText, textContext, aLink, techList, imgClass }) {
-  return (
-    <div className="col-3-4 hover-v2">
-      <div target="_blank" className={`box ${imgClass} `}>
-        <div className="caption">
-          <p>{title}</p>
-          <hr />
-          <p className="sub-text">
-            {subText}
-            <br />
-            {textContext && (
-              <sup>
-                <i>{textContext}</i>
-              </sup>
-            )}
-          </p>
-          <a href={aLink} target="_blank" className="open"></a>
-          <ul>
-            {techList.map((itm, itmIdx) => (
-              <li key={`tech-list-${title}-${itmIdx}`}>{itm}></li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 export default function Folio() {
   return (
@@ -178,239 +225,6 @@ export default function Folio() {
         {folioItems.map((itm, itmIdex) => (
           <FolioItem key={`folio-item-${itmIdex}`} {...itm} />
         ))}
-
-        <div className="col-3-4 hover-v2">
-          <div className="box say-what-bg">
-            <div className="caption">
-              <p>SayWhat?!</p>
-              <hr />
-              <p className="sub-text">
-                Look at patterns in the text of presidential inaugural addresses
-                in this data-viz focused, full-stack, mobile-first responsive
-                project.
-              </p>
-              <div className="link-box">
-                <a
-                  href="https://say-what.netlify.com/"
-                  target="_blank"
-                  className="open"
-                ></a>
-                <a
-                  href="https://github.com/imagineLife/say-what"
-                  target="_blank"
-                  className="git"
-                ></a>
-              </div>
-              <ul>
-                <li>D3</li>
-                <li>React</li>
-                <li>MongoDB</li>
-                <li>
-                  Express <i>(Node)</i>
-                </li>
-                <li>Data Visualization</li>
-                <li>Responsive Design</li>
-                <li>Text Analysis</li>
-                <li>HTML</li>
-                <li>JS</li>
-                <li>CSS</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div className="col-3-4 hover-v2">
-          <div
-            className="box world-map-bg"
-            href="https://imaginelife.github.io/worldMap/"
-            target="_blank"
-          >
-            <div className="caption">
-              <p>WEO Country Categories Mapped</p>
-              <hr />
-              <p className="sub-text">
-                Zoom, toggle, & hover in this map of the countries of the world
-                categorically colored by their GNI per capita.
-              </p>
-              <div className="link-box">
-                <a
-                  href="https://imaginelife.github.io/worldMap/"
-                  target="_blank"
-                  className="open"
-                ></a>
-                <a
-                  href="https://github.com/imagineLife/worldMap"
-                  target="_blank"
-                  className="git"
-                ></a>
-              </div>
-              <ul>
-                <li>D3</li>
-                <li>Mapping</li>
-                <li>
-                  GeoJSON <i>(topJSON)</i>
-                </li>
-                <li>JavaScript</li>
-                <li>HTML</li>
-                <li>CSS</li>
-                <li>Data Visualization</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div className="col-3-4 hover-v2">
-          <div
-            className="box rhode-island-bg"
-            href="https://imaginelife.github.io/ristats/"
-            target="_blank"
-          >
-            <div className="caption">
-              <p>R.I Stats</p>
-              <hr />
-              <p className="sub-text">
-                Review Poverty & Income levels in Rhode Island through simple
-                charts & maps.
-              </p>
-              <div className="link-box">
-                <a
-                  href="https://imaginelife.github.io/ristats/"
-                  target="_blank"
-                  className="open"
-                ></a>
-                <a
-                  href="https://github.com/imagineLife/ristats"
-                  target="_blank"
-                  className="git"
-                ></a>
-              </div>
-              <ul>
-                <li>D3</li>
-                <li>Mapping</li>
-                <li>
-                  GeoJSON <i>(topJSON)</i>
-                </li>
-                <li>JavaScript</li>
-                <li>HTML</li>
-                <li>CSS</li>
-                <li>Data Visualization</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div className="col-3-4 hover-v2">
-          <div className="box housing-permits-bg">
-            <div className="caption">
-              <p>CT Housing Permits, Mapped</p>
-              <hr />
-              <p className="sub-text">
-                An interactive choropleth mapping project, representing the
-                range of housing permits issued per town in Connecticut in 2018.
-              </p>
-              <div className="link-box">
-                <a
-                  href="https://imaginelife.github.io/stateHousingPermits/"
-                  target="_blank"
-                  className="open"
-                ></a>
-                <a
-                  href="https://github.com/imagineLife/stateHousingPermits"
-                  target="_blank"
-                  className="git"
-                ></a>
-              </div>
-              <ul>
-                <li>D3</li>
-                <li>Mapping</li>
-                <li>Responsive Design</li>
-                <li>Data Visualization</li>
-                <li>JS</li>
-                <li>HTML</li>
-                <li>CSS</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div className="col-3-4 hover-v2">
-          <div className="box erp-bg">
-            <div className="caption">
-              <p>Enterprise Resource Planner</p>
-              <hr />
-              <p className="sub-text">
-                A time-tracking, ticket-based, resource management system.
-                <br />
-                <i>I do not own the code to this project.</i>
-              </p>
-              <ul>
-                <li>DHTMLX</li>
-                <li>JS</li>
-                <li>HTML</li>
-                <li>CSS</li>
-                <li>PHP</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div className="col-3-4 hover-v2">
-          <div className="box my-miles-bg">
-            <div className="caption">
-              <p>MyMiles</p>
-              <hr />
-              <p className="sub-text">
-                Record, edit & export vehicle mileage logs in this responsive
-                app.
-              </p>
-              <div className="link-box">
-                <a
-                  href="https://tranquil-sierra-12911.herokuapp.com/"
-                  target="_blank"
-                  className="open"
-                ></a>
-                <a
-                  href="https://github.com/imagineLife/myMiles"
-                  target="_blank"
-                  className="git"
-                ></a>
-              </div>
-              <ul>
-                <li>API</li>
-                <li>Responsive Design</li>
-                <li>JS</li>
-                <li>HTML</li>
-                <li>CSS</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div className="col-3-4 hover-v2">
-          <div className="box macro-recipes-bg">
-            <div className="caption">
-              <p>MacroRecipes</p>
-              <hr />
-              <p className="sub-text">
-                Find Recipes based on ingredients and gram counts of carbs,
-                calories, fat, and protein.
-              </p>
-              <div className="link-box">
-                <a
-                  href="https://imaginelife.github.io/MacroRecipes/"
-                  target="_blank"
-                  className="open"
-                ></a>
-                <a
-                  href="https://github.com/imagineLife/MacroRecipes"
-                  target="_blank"
-                  className="git"
-                ></a>
-              </div>
-              <ul>
-                <li>API</li>
-                <li>Responsive Design</li>
-                <li>CSS</li>
-                <li>HTML</li>
-                <li>JS</li>
-              </ul>
-            </div>
-          </div>
-        </div>
       </section>
     </main>
   );
