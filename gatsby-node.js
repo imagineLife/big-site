@@ -63,9 +63,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       // where the browser can access the page
       path: post.slug,
       // What component will pass the mdx file to
-      component: post.slug.includes('post') 
+      component: post.slug.includes('post')
         ? require.resolve('./src/templates/post')
-        : ? require.resolve('./src/templates/recipe'),
+        : require.resolve('./src/templates/recipe'),
       // name the url slug
       context: {
         slug: post.slug,
