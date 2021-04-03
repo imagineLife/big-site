@@ -1,6 +1,39 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import './folio.scss';
 
+const techs = {
+  frontend: [
+    'D3',
+    'React',
+    'Webpack',
+    'Wireframing',
+    'JS',
+    'Responsive Design',
+    'Enzyme',
+    'Jest',
+    'Cypress',
+    'Travis-CI',
+  ],
+  backend: [
+    'Node',
+    'Express',
+    'Postman',
+    'Swagger',
+    'REST API',
+    'Socket.io',
+    'JWT',
+    'Mocha',
+    'Chai',
+  ],
+  db: ['MongoDB', 'PostGreSQL', 'MySQL'],
+  people: [
+    'Certified Professional Scrum Master',
+    'Git',
+    'GitLab',
+    'StrengthFinder Advocate',
+    'INTJ',
+  ],
+};
 export default function Folio() {
   return (
     <main role="main" className="folio">
@@ -20,51 +53,57 @@ export default function Folio() {
                 <b>Frontend</b>
               </li>
               <br />
-              <li className="tech-li">D3</li>
-              <li className="tech-li">React</li>
-              <li className="tech-li">Webpack</li>
-              <li className="tech-li">Wireframing</li>
-              <li className="tech-li">JS</li>
-              <li className="tech-li">Responsive Design</li>
-              <li className="tech-li">Enzyme</li>
-              <li className="tech-li">Jest</li>
-              <li className="tech-li">Cypress</li>
-              <li className="tech-li">Travis-CI</li>
+              {techs.frontend.map((t, tIdx) => (
+                <Fragment>
+                  <li key={`frontend-tech-${tIdx}`} className="tech-li">
+                    {t}
+                  </li>
+                  {tIdx !== techs.frontend.length < 1 && ' '}
+                </Fragment>
+              ))}
             </ul>
             <ul className="tech-list">
               <li className="tech-li title">
                 <b>Server</b>
               </li>
               <br />
-              <li className="tech-li">Node</li>
-              <li className="tech-li">Express</li>
-              <li className="tech-li">Postman</li>
-              <li className="tech-li">Swagger</li>
-              <li className="tech-li">REST API</li>
-              <li className="tech-li">Socket.io</li>
-              <li className="tech-li">JWT</li>
-              <li className="tech-li">Mocha</li>
-              <li className="tech-li">Chai</li>
+              {techs.backend.map((t, tIdx) => (
+                <Fragment>
+                  <li key={`backend-tech-${tIdx}`} className="tech-li">
+                    {t}
+                  </li>
+                  {tIdx !== techs.backend.length < 1 && ' '}
+                </Fragment>
+              ))}
+              <br />
             </ul>
             <ul className="tech-list">
               <li className="tech-li title">
                 <b>DataBase</b>
               </li>
               <br />
-              <li className="tech-li">MongoDB</li>
-              <li className="tech-li">PostGreSQL</li>
-              <li className="tech-li">MySQL</li>
+              {techs.db.map((t, tIdx) => (
+                <Fragment>
+                  <li key={`db-tech-${tIdx}`} className="tech-li">
+                    {t}
+                  </li>
+                  {tIdx !== techs.db.length < 1 && ' '}
+                </Fragment>
+              ))}
             </ul>
             <ul className="tech-list">
               <li className="tech-li title">
-                <b>Team</b>
+                <b>Team & People</b>
               </li>
               <br />
-              <li className="tech-li">Certified Professional Scrum Master</li>
-              <li className="tech-li">Git</li>
-              <li className="tech-li">GitLab</li>
-              <li className="tech-li">StrengthFinder Advocate</li>
-              <li className="tech-li">INTJ</li>
+              {techs.people.map((t, tIdx) => (
+                <Fragment>
+                  <li key={`db-people-${tIdx}`} className="tech-li">
+                    {t}
+                  </li>
+                  {tIdx !== techs.people.length < 1 && ' '}
+                </Fragment>
+              ))}
             </ul>
           </div>
         </div>
