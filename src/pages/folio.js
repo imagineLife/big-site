@@ -34,6 +34,24 @@ const techs = {
     'INTJ',
   ],
 };
+
+function TechList({ listName, itms }) {
+  return (
+    <ul className="tech-list">
+      <li className="tech-li title">
+        <b>{listName}</b>
+      </li>
+      <br />
+      {itms.map((t, tIdx) => (
+        <Fragment key={`frontend-${listName}-${tIdx}`}>
+          <li className="tech-li">{t}</li>
+          {tIdx !== itms.length < 1 && ' '}
+        </Fragment>
+      ))}
+    </ul>
+  );
+}
+
 export default function Folio() {
   return (
     <main role="main" className="folio">
@@ -48,63 +66,10 @@ export default function Folio() {
             <br />
           </p>
           <div className="tech-list-box">
-            <ul className="tech-list">
-              <li className="tech-li title">
-                <b>Frontend</b>
-              </li>
-              <br />
-              {techs.frontend.map((t, tIdx) => (
-                <Fragment>
-                  <li key={`frontend-tech-${tIdx}`} className="tech-li">
-                    {t}
-                  </li>
-                  {tIdx !== techs.frontend.length < 1 && ' '}
-                </Fragment>
-              ))}
-            </ul>
-            <ul className="tech-list">
-              <li className="tech-li title">
-                <b>Server</b>
-              </li>
-              <br />
-              {techs.backend.map((t, tIdx) => (
-                <Fragment>
-                  <li key={`backend-tech-${tIdx}`} className="tech-li">
-                    {t}
-                  </li>
-                  {tIdx !== techs.backend.length < 1 && ' '}
-                </Fragment>
-              ))}
-              <br />
-            </ul>
-            <ul className="tech-list">
-              <li className="tech-li title">
-                <b>DataBase</b>
-              </li>
-              <br />
-              {techs.db.map((t, tIdx) => (
-                <Fragment>
-                  <li key={`db-tech-${tIdx}`} className="tech-li">
-                    {t}
-                  </li>
-                  {tIdx !== techs.db.length < 1 && ' '}
-                </Fragment>
-              ))}
-            </ul>
-            <ul className="tech-list">
-              <li className="tech-li title">
-                <b>Team & People</b>
-              </li>
-              <br />
-              {techs.people.map((t, tIdx) => (
-                <Fragment>
-                  <li key={`db-people-${tIdx}`} className="tech-li">
-                    {t}
-                  </li>
-                  {tIdx !== techs.people.length < 1 && ' '}
-                </Fragment>
-              ))}
-            </ul>
+            <TechList listName="Frontend" itms={techs.frontend} />
+            <TechList listName="Server" itms={techs.backend} />
+            <TechList listName="DataBase" itms={techs.db} />
+            <TechList listName="Teams & People" itms={techs.people} />
           </div>
         </div>
       </section>
