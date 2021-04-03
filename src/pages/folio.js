@@ -76,6 +76,52 @@ const folioItems = [
     techList: ['Team Process Framework', 'Servant Leadership'],
     imgClass: `psmi-bg`,
   },
+  {
+    title: 'Slice-n-Dice Times',
+    subText:
+      "An interactive newspaper-influenced UI, analyzing textual themes in the president's Innaugural Address.",
+    aLink: 'https://slice-n-dice-times.herokuapp.com/',
+    techList: [
+      'D3',
+      'Data Vizualization',
+      'React',
+      'HTML',
+      'CSS',
+      'JavaScript',
+      'Data Analysis',
+    ],
+    imgClass: 'slice-n-dice-bg',
+  },
+  {
+    title: 'Mastering D3v5',
+    subText:
+      'An online course I created covering D3v5, interactive mapping, linked visualizations, 3rd party api integration & more.',
+    aLink:
+      'https://www.packtpub.com/product/mastering-d3-js-5-video/9781789951332',
+    techList: [
+      'D3',
+      'Data Vizualization',
+      'Curriculum Development',
+      'Audio/Video Recording & Editing',
+    ],
+    imgClass: 'mastering-bg',
+  },
+  {
+    title: 'Restaurant Node API',
+    subText:
+      'An API using core Node API, no npm: account & cart management (CRUD), a cli, auth, stripe & mailgun api integration, logging & more.',
+    imgClass: 'pizza-bg',
+    aLink: 'https://github.com/imagineLife/nodeWork/tree/master/pizzaAPI',
+    techList: [
+      'Node',
+      'JavaScript',
+      'Auth',
+      'Encryption',
+      'Compression + Decompression',
+      'cli',
+      'logging',
+    ],
+  },
 ];
 
 function FolioItem({ title, subText, textContext, aLink, techList, imgClass }) {
@@ -133,86 +179,6 @@ export default function Folio() {
           <FolioItem key={`folio-item-${itmIdex}`} {...itm} />
         ))}
 
-        <div className="col-3-4 hover-v2">
-          <div target="_blank" className="box slice-n-dice-bg">
-            <div className="caption">
-              <p>Slice-'n-Dice Times</p>
-              <hr />
-              <p className="sub-text">
-                An interactive newspaper-influenced UI, analyzing textual themes
-                in the president's Innaugural Address.
-              </p>
-              <a
-                href="https://slice-n-dice-times.herokuapp.com/"
-                target="_blank"
-                className="open"
-              ></a>
-              <ul>
-                <li>D3</li>
-                <li>Data Vizualization</li>
-                <li>React</li>
-                <li>HTML</li>
-                <li>CSS</li>
-                <li>JavaScript</li>
-                <li>Data Analysis</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div className="col-3-4 hover-v2">
-          <div target="_blank" className="box mastering-bg">
-            <div className="caption">
-              <p>Mastering D3v5</p>
-              <hr />
-              <p className="sub-text">
-                An online course I created covering D3v5, interactive mapping,
-                linked visualizations, 3rd party api integration & more.
-              </p>
-              <a
-                href="https://www.packtpub.com/product/mastering-d3-js-5-video/9781789951332"
-                target="_blank"
-                className="open"
-              ></a>
-              <ul>
-                <li>D3</li>
-                <li>Data Vizualization</li>
-                <li>Curriculum Development</li>
-                <li>Audio/Video Recording & Editing</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div className="col-3-4 hover-v2">
-          <div
-            className="box pizza-bg"
-            href="https://github.com/imagineLife/nodeWork/tree/master/pizzaAPI"
-            target="_blank"
-          >
-            <div className="caption">
-              <p>Restaurant Node API</p>
-              <hr />
-              <p className="sub-text">
-                An API using core Node API, no npm: account & cart management
-                <i>(CRUD)</i>, a cli, auth,
-                <i>stripe & mailgun api</i> integration, logging & more.
-              </p>
-              <a
-                href="https://github.com/imagineLife/nodeWork/tree/master/pizzaAPI"
-                target="_blank"
-                className="git"
-              ></a>
-              <ul>
-                <li>Node</li>
-                <li>JavaScript</li>
-                <li>Auth</li>
-                <li>Encryption</li>
-                <li>Compression + Decompression</li>
-                <li>cli</li>
-                <li>logging</li>
-              </ul>
-            </div>
-          </div>
-        </div>
         <div className="col-3-4 hover-v2">
           <div className="box say-what-bg">
             <div className="caption">
