@@ -8,11 +8,17 @@ const Header = () => (
       Home
     </Link>
     <nav>
-      <Link className="styled" activeClassName="current-page" to="/">
-        Home
+      <Link className="styled" activeClassName="current-page" to="/folio">
+        Folio
       </Link>
       <Link className="styled" activeClassName="current-page" to="/about">
         About
+      </Link>
+      <Link className="styled" activeClassName="current-page" to="/posts">
+        Posts
+      </Link>
+      <Link className="styled" activeClassName="current-page" to="/strengths">
+        strengths
       </Link>
     </nav>
   </header>
