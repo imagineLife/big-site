@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link, useStaticQuery, query } from 'gatsby';
+import getStrengths from './../../hooks/get-strengths';
 
 export default function Strengths() {
-  // const strengthsWritings = getStrengthsWritings()
+  const strengthsSlugs = getStrengths();
+
   return (
     <section id="strengths-list">
       <h1>Personality & Strengths</h1>
@@ -15,6 +17,7 @@ export default function Strengths() {
         >
           StrengthsFinder
         </Link>
+        .
       </p>
     </section>
   );
