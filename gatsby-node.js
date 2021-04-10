@@ -13,6 +13,12 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       excerpt
     }
 
+    fragment strengthspart on StrengthsJson {
+      slug
+      title
+      excerpt
+    }
+
     query {
       posts: allPostsJson {
         data: nodes {
@@ -22,6 +28,11 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       recipes: allRecipesJson {
         data: nodes {
           ...recipepart
+        }
+      }
+      strengths: allStrengthsJson {
+        data: nodes {
+          ...strengthspart
         }
       }
     }
@@ -46,24 +57,15 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const {
     recipes: { data: recipeData },
     posts: { data: postData },
+    strengths: { data: strengthsData },
   } = res.data;
-  console.log('recipeData');
-  console.log(recipeData);
-  console.log('postData');
-  console.log(postData);
 
-  // pull post nodes from graphql obj
-  // const posts = res.data.allMdx.nodes;
-
-  [...postData, ...recipeData].forEach(post => {
-    // console.log('post');
-    // console.log(post)
-
+  [...postData, ...recipeData, ...strengthsData].forEach(post => {
     actions.createPage({
       // where the browser can access the page
       path: post.slug,
       // What component will pass the mdx file to
-      component: post.slug.includes('post')
+      component: ['post', 'strengths'].includes(post.slug)
         ? require.resolve('./src/templates/post')
         : require.resolve('./src/templates/recipe'),
       // name the url slug
