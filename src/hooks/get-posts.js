@@ -1,7 +1,7 @@
 import { graphql, useStaticQuery } from 'gatsby';
 
 const usePosts = () => {
-  const { posts, recipes } = useStaticQuery(graphql`
+  const { posts, recipes, strengths } = useStaticQuery(graphql`
     fragment postpart on PostsJson {
       slug
       title
@@ -9,6 +9,12 @@ const usePosts = () => {
     }
 
     fragment recipepart on RecipesJson {
+      slug
+      title
+      excerpt
+    }
+
+    fragment strengthspart on StrengthsJson {
       slug
       title
       excerpt
@@ -25,14 +31,21 @@ const usePosts = () => {
           ...recipepart
         }
       }
+      strengths: allStrengthsJson {
+        data: nodes {
+          ...strengthspart
+        }
+      }
     }
   `);
 
-  return [...posts.data, ...recipes.data].map(({ title, slug, excerpt }) => ({
-    title,
-    slug,
-    excerpt,
-  }));
+  return [...posts.data, ...recipes.data, ...strengths.data].map(
+    ({ title, slug, excerpt }) => ({
+      title,
+      slug,
+      excerpt,
+    }),
+  );
 };
 
 export default usePosts;
