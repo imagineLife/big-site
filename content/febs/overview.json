@@ -2,10 +2,23 @@
   "title": "Frontend Build System Tooling Overview",
   "sections": [
     {
+      "class": "hope-gap",
       "title": "The Gap",
       "list-items": [
         "I Don't know what tools are being used when I build a website using react",
         "I can build a project with create-react-app, and I've heard about webpack, but I don't know whats going between them"
+      ]
+    },
+    {
+      "class": "hope-gap",
+      "title": "The Hope",
+      "subTitle": "As a developer I'd like to...",
+      "list-items": [
+        "...understand the tooling",
+        "...be able to articulate the tolls that I'm using",
+        "...be able to give <i>at least an overview</i> of how these tools are working together",
+        "...have my own boilerplate project where I've compiled react/webpack/babel etc.",
+        "...understand and being able to assemble a frontend app using the tools of react, webpack, babel, npm, and node."
       ]
     }
   ]
