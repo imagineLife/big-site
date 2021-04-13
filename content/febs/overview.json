@@ -46,6 +46,28 @@
           "title": "Node",
           "content": "With the node runtime, JS can run on a server. Node is used here to develop an http server. Node is an underlying tech, and a frontend build system hardly writes any core node code."
         }
+      ],
+      "links": [
+        {
+          "txt": "React",
+          "url": "https://reactjs.org/"
+        },
+        {
+          "txt": "Webpack",
+          "url": "https://webpack.js.org/"
+        },
+        {
+          "txt": "Babel",
+          "url": "https://babeljs.io/"
+        },
+        {
+          "txt": "NPM",
+          "url": "https://www.npmjs.com/"
+        },
+        {
+          "txt": "Node",
+          "url": "https://nodejs.org/en/"
+        }
       ]
     }
   ]
