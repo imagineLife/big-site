@@ -20,6 +20,25 @@
         "...have my own boilerplate project where I've compiled react/webpack/babel etc.",
         "...understand and being able to assemble a frontend app using the tools of react, webpack, babel, npm, and node."
       ]
+    },
+    {
+      "class": "practice",
+      "title": "The Practice",
+      "subTitle": "Here's a few one-liners to give an overview of the tooling",
+      "list-items": [
+        {
+          "title": "React",
+          "content": "A lightweight JavaScript library used for building component-focused UIs (almost lifted directly from their website!). In a frontend build system, React builds the entire UI from an otherwise empty html document."
+        },
+        {
+          "title": "Webpack",
+          "content": "An npm module used to 'compile' or 'bundle' javascript. In a frontend build system, webpack shrinks the size of the javascript that is delivered to the browser. Webpack dev server is also used as a server during the development process."
+        },
+        {
+          "title": "Babel",
+          "content": ""
+        }
+      ]
     }
   ]
 }
