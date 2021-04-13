@@ -1,0 +1,12 @@
+{
+  "title": "Frontend Build System Tooling Overview",
+  "sections": [
+    {
+      "title": "The Gap",
+      "list-items": [
+        "I Don't know what tools are being used when I build a website using react",
+        "I can build a project with create-react-app, and I've heard about webpack, but I don't know whats going between them"
+      ]
+    }
+  ]
+}
