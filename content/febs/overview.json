@@ -36,7 +36,7 @@
         },
         {
           "title": "Babel",
-          "content": ""
+          "content": "A module that transforms code when the syntax is not natively readable by a browser. Browsers don't know what to do with JSX."
         }
       ]
     }
