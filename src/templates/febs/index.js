@@ -18,6 +18,10 @@ export const febsQuery = graphql`
         class
         title
         subTitle
+        listitems {
+          itmTitle: title
+          itmTxt: content
+        }
       }
       footer {
         link {
@@ -44,7 +48,29 @@ const FebsTemplate = data => {
     <Layout>
       <section className="febs-wrapper">
         <h1>{title}</h1>
-        <p>body will go here</p>
+        {sections?.map(
+          ({ class: sectionClass, title, subTitle, listitems }, sidx) => {
+            return (
+              <section
+                key={`section-${sidx}`}
+                className={`section ${sectionClass}`}
+              >
+                <h3>{title}</h3>
+                {subTitle && <sub>{subTitle}</sub>}
+                {listitems?.map(({ itmTitle, itmTxt }, lidx) => (
+                  <ul key={`list-items-${sidx}-${lidx}`}>
+                    <li>
+                      {itmTitle && (
+                        <span className="itm-title">{itmTitle}</span>
+                      )}
+                      <span className="itm-txt">{itmTxt}</span>
+                    </li>
+                  </ul>
+                ))}
+              </section>
+            );
+          },
+        )}
       </section>
       <footer>
         <Link to={`/${footer.link.url}`}>{footer.link.text}</Link>
