@@ -1,5 +1,6 @@
 {
   "title": "Frontend Build System Tooling Overview",
+  "slug": "febs/overview",
   "sections": [
     {
       "class": "hope-gap",
@@ -70,5 +71,12 @@
         }
       ]
     }
-  ]
+  ],
+  "footer": {
+    "text": "Setup NPM",
+    "link": {
+      "text": "next ->",
+      "url": "febs/npm-setup"
+    }
+  }
 }
