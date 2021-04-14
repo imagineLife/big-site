@@ -18,6 +18,21 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       title
       excerpt
     }
+    fragment febspart on FebsJson {
+      slug
+      title
+      sections {
+        class
+        title
+        subTitle
+      }
+      footer {
+        link {
+          text
+          url
+        }
+      }
+    }
 
     query {
       posts: allPostsJson {
@@ -30,25 +45,19 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           ...recipepart
         }
       }
+
       strengths: allStrengthsJson {
         data: nodes {
           ...strengthspart
         }
       }
-    }
-  `);
-  /*
-    allMDX Query
-    query {
-      allMdx {
-        nodes {
-          frontmatter {
-            slug
-          }
+      febs: allFebsJson {
+        data: nodes {
+          ...febspart
         }
       }
     }
-  */
+  `);
 
   if (res.errors) {
     reporter.panic(`failed to create posts ->`, res.errors);
@@ -58,16 +67,25 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     recipes: { data: recipeData },
     posts: { data: postData },
     strengths: { data: strengthsData },
+    febs: { data: febsData },
   } = res.data;
 
-  [...postData, ...recipeData, ...strengthsData].forEach(post => {
+  [...postData, ...recipeData, ...strengthsData, ...febsData].forEach(post => {
+    console.log('post.slug');
+    console.log(post.slug);
+    let thisComponent = ['post', 'strengths'].includes(post.slug)
+      ? require.resolve('./src/templates/post')
+      : post.slug.includes('febs')
+      ? require.resolve('./src/templates/febs')
+      : require.resolve('./src/templates/recipe');
+    if (post.slug.includes('febs')) {
+      console.log('FEBS ROUTE!!');
+    }
     actions.createPage({
       // where the browser can access the page
       path: post.slug,
       // What component will pass the mdx file to
-      component: ['post', 'strengths'].includes(post.slug)
-        ? require.resolve('./src/templates/post')
-        : require.resolve('./src/templates/recipe'),
+      component: thisComponent,
       // name the url slug
       context: {
         slug: post.slug,
