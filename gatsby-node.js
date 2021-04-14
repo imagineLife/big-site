@@ -25,6 +25,10 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         class
         title
         subTitle
+        listitems {
+          title
+          content
+        }
       }
       footer {
         link {
@@ -78,9 +82,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       : post.slug.includes('febs')
       ? require.resolve('./src/templates/febs')
       : require.resolve('./src/templates/recipe');
-    if (post.slug.includes('febs')) {
-      console.log('FEBS ROUTE!!');
-    }
+
     actions.createPage({
       // where the browser can access the page
       path: post.slug,
