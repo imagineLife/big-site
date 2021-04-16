@@ -24,6 +24,7 @@ export const febsQuery = graphql`
         }
       }
       footer {
+        text
         link {
           text
           url
@@ -75,7 +76,9 @@ const FebsTemplate = data => {
         )}
       </section>
       <footer>
-        <Link to={`/${footer.link.url}`}>{footer.link.text}</Link>
+        <Link to={`/${footer.link.url}`}>
+          {footer.text} {footer.link.text}
+        </Link>
       </footer>
     </Layout>
   );
