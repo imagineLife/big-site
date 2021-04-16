@@ -24,5 +24,21 @@ section.febs-wrapper {
       text-decoration: underline;
       margin-bottom: 10px;
     }
+
+    > ul {
+      list-style: none;
+
+      > li {
+        > span.itm-title {
+          font-weight: bold;
+          margin: 5px 0;
+          display: block;
+        }
+
+        > .itm-txt {
+          margin: 0 1%;
+        }
+      }
+    }
   }
 }
