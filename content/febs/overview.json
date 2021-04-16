@@ -4,7 +4,7 @@
   "sections": [
     {
       "class": "hope-gap",
-      "title": "The Gap",
+      "title": "A Gap",
       "listitems": [
         {
           "title": "",
@@ -18,7 +18,7 @@
     },
     {
       "class": "hope-gap",
-      "title": "The Hope",
+      "title": "A Hope",
       "subTitle": "As a developer I'd like to...",
       "listitems": [
         {
@@ -45,7 +45,7 @@
     },
     {
       "class": "practice",
-      "title": "The Practice",
+      "title": "A Practice",
       "subTitle": "Here's a few one-liners to give an overview of the tooling",
       "listitems": [
         {
