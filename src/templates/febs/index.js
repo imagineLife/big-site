@@ -75,7 +75,7 @@ const FebsTemplate = data => {
           },
         )}
       </section>
-      <footer>
+      <footer className="footer">
         <Link to={`/${footer.link.url}`}>
           {footer.text} {footer.link.text}
         </Link>
