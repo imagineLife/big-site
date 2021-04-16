@@ -57,16 +57,18 @@ const FebsTemplate = data => {
               >
                 <h3>{title}</h3>
                 {subTitle && <sub>{subTitle}</sub>}
-                {listitems?.map(({ itmTitle, itmTxt }, lidx) => (
-                  <ul key={`list-items-${sidx}-${lidx}`}>
-                    <li>
-                      {itmTitle && (
-                        <span className="itm-title">{itmTitle}</span>
-                      )}
-                      <span className="itm-txt">{itmTxt}</span>
-                    </li>
+                {listitems && (
+                  <ul>
+                    {listitems?.map(({ itmTitle, itmTxt }, lidx) => (
+                      <li key={`list-items-${sidx}-${lidx}`}>
+                        {itmTitle && (
+                          <span className="itm-title">{itmTitle}</span>
+                        )}
+                        <span className="itm-txt">{itmTxt}</span>
+                      </li>
+                    ))}
                   </ul>
-                ))}
+                )}
               </section>
             );
           },
