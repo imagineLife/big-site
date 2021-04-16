@@ -18,4 +18,11 @@ section.febs-wrapper {
       }
     }
   }
+
+  > section.practice {
+    > h3 {
+      text-decoration: underline;
+      margin-bottom: 10px;
+    }
+  }
 }
