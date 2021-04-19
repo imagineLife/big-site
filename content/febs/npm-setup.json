@@ -52,10 +52,10 @@
     }
   ],
   "footer": {
-    "text": "Begin Configuring Webpack",
+    "text": "Initialize A Source Directory",
     "link": {
       "text": "next ->",
-      "url": "febs/webpack-config"
+      "url": "febs/setup-src"
     }
   }
 }
