@@ -28,6 +28,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         listitems {
           title
           content
+          contentlist
         }
       }
       footer {
