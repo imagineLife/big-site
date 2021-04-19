@@ -21,6 +21,7 @@ export const febsQuery = graphql`
         listitems {
           itmTitle: title
           itmTxt: content
+          imtList: contentlist
         }
       }
       footer {
@@ -60,12 +61,24 @@ const FebsTemplate = data => {
                 {subTitle && <sub>{subTitle}</sub>}
                 {listitems && (
                   <ul>
-                    {listitems?.map(({ itmTitle, itmTxt }, lidx) => (
-                      <li key={`list-items-${sidx}-${lidx}`}>
+                    {listitems?.map(({ itmTitle, itmTxt, imtList }, lidx) => (
+                      <li
+                        key={`list-items-${sidx}-${lidx}`}
+                        className="list-item"
+                      >
                         {itmTitle && (
                           <span className="itm-title">{itmTitle}</span>
                         )}
-                        <span className="itm-txt">{itmTxt}</span>
+                        {itmTxt && <span className="itm-txt">{itmTxt}</span>}
+                        {imtList &&
+                          imtList.map((listItemText, itmListIdx) => (
+                            <li
+                              key={`${lidx}-imtList-${itmListIdx}`}
+                              className="nested-list-item"
+                            >
+                              {listItemText}
+                            </li>
+                          ))}
                       </li>
                     ))}
                   </ul>

@@ -28,7 +28,7 @@ section.febs-wrapper {
     > ul {
       list-style: none;
 
-      > li {
+      > li.list-item {
         > span.itm-title {
           font-weight: bold;
           margin: 5px 0;
@@ -37,6 +37,12 @@ section.febs-wrapper {
 
         > .itm-txt {
           margin: 0 1%;
+        }
+
+        > .nested-list-item {
+          display: block;
+          margin: 0.4em 0;
+          list-style-type: circle;
         }
       }
     }
