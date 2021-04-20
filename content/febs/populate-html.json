@@ -48,6 +48,13 @@
             "Add a document description with `<meta name='description' content='A Frontend boilerplate leveraging webpack, babel, and react.'>`",
             "add a viewport declaration with `<meta name='viewport' content='width=device-width, initial-scale=1'/>`"
           ]
+        },
+        {
+          "title": "Build and fill the body",
+          "contentlist": [
+            "Build the Body with an opening and closing `<body>` and `</body>`. Include an empty line between the two elements.",
+            "Between the body tags, add 1 div with an id, using `<div id='root'></div>`. Here is where we will make react leverage the dom."
+          ]
         }
       ]
     }
