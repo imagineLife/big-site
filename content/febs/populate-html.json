@@ -29,8 +29,25 @@
       "subTitle": "Here, some boilerplate content for an html file. There are great boilerplates that can be found across the world wide web. This includes bits that appear in several boilerplates.",
       "listitems": [
         {
-          "title": "Create A Directory",
-          "content": "Inside the project, make a directory. We'll call it `src`. Webpack leverages the `src` as the default `entry point` for this type of project."
+          "title": "Set the DocType",
+          "content": "at the top of the file add a line `<!DOCTYPE html>`"
+        },
+        {
+          "title": "Set the HTML element",
+          "content": "Next, add an opening `<html>` tag. Make two line-breaks and add the closing `</html>` tag."
+        },
+        {
+          "title": "Begin Building the document head",
+          "content": "Between the html tags, ad an opening `<head>` and closing `</head>` tags. Make an empty line between the head tags."
+        },
+        {
+          "title": "Fill the Head",
+          "contentlist": [
+            "Add a charset declaration with `<meta charset='utf-8'/>`",
+            "Add a document title with `<title>Frontend Boilerplate</title>`",
+            "Add a document description with `<meta name='description' content='A Frontend boilerplate leveraging webpack, babel, and react.'>`",
+            "add a viewport declaration with `<meta name='viewport' content='width=device-width, initial-scale=1'/>`"
+          ]
         }
       ]
     }
