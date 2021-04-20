@@ -1,0 +1,45 @@
+{
+  "title": "Project Setup - Initialize a Source Directory",
+  "slug": "febs/populate-html",
+  "sections": [
+    {
+      "class": "hope-gap",
+      "title": "A Gap",
+      "listitems": [
+        {
+          "title": "",
+          "content": "I have an empty html file and I need some boilerplate content for a frontend build system."
+        }
+      ]
+    },
+    {
+      "class": "hope-gap",
+      "title": "A Hope",
+      "subTitle": "As a developer I'd like to...",
+      "listitems": [
+        {
+          "title": "",
+          "content": "Populate an HTML file with appropriate 'boilerplate' content for a frontend build system."
+        }
+      ]
+    },
+    {
+      "class": "practice",
+      "title": "A Practice",
+      "subTitle": "Here, some boilerplate content for an html file. There are great boilerplates that can be found across the world wide web. This includes bits that appear in several boilerplates.",
+      "listitems": [
+        {
+          "title": "Create A Directory",
+          "content": "Inside the project, make a directory. We'll call it `src`. Webpack leverages the `src` as the default `entry point` for this type of project."
+        }
+      ]
+    }
+  ],
+  "footer": {
+    "text": "Populate the js file",
+    "link": {
+      "text": "next ->",
+      "url": "febs/populate-js"
+    }
+  }
+}
