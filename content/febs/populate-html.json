@@ -60,10 +60,10 @@
     }
   ],
   "footer": {
-    "text": "Populate the js file",
+    "text": "Include Babel & webpack loader dependencies",
     "link": {
       "text": "next ->",
-      "url": "febs/populate-js"
+      "url": "febs/more-dependencies"
     }
   }
 }
