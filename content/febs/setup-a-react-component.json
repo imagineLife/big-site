@@ -1,0 +1,53 @@
+{
+  "title": "Project Setup - Setup A react Component",
+  "slug": "febs/setup-a-react-component",
+  "sections": [
+    {
+      "class": "hope-gap",
+      "title": "A Gap",
+      "listitems": [
+        {
+          "title": "",
+          "content": "I have plugins and an understanding of frontend build system parts, but I don't have a React component setup yet."
+        }
+      ]
+    },
+    {
+      "class": "hope-gap",
+      "title": "A Hope",
+      "subTitle": "As a developer I'd like to...",
+      "listitems": [
+        {
+          "title": "Setup React to manipulate the dom",
+          "content": "...get to the "
+        }
+      ]
+    },
+    {
+      "class": "practice",
+      "title": "A Practice",
+      "subTitle": "Here, setup the root React component of the project",
+      "listitems": [
+        {
+          "title": "Begin with the JS file & import dependencies",
+          "content": "import React using `import React from 'react'` and on the next line import react-dom using `import ReactDOM from 'react-dom'`"
+        },
+        {
+          "title": "Build a Component",
+          "content": "Let make a 'Title' component by adding another line to the js file - `const Title = () => <h1>First Component</h1>`"
+        },
+        {
+          "title": "Render the Component to the dom",
+          "content": "Add the last piece of code for this section - `ReactDOM.render(<Title />, document.getElementById('root'))`"
+        }
+      ]
+    }
+  ],
+  "footer": {
+    "text": "Run it",
+    "link": {
+      "text": "next ->",
+      "url": "febs/run-it"
+    }
+  }
+}
