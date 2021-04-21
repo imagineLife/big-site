@@ -50,22 +50,15 @@
             "style-loader: puts css into the dom",
             "install script: `npm i @babel/preset-react@7.12.13 babel-loader@8.2.2 css-loader@5.0.2 html-loader@2.0.0 html-webpack-plugin@5.1.0 sass-loader@11.0.1 style-loader@2.0.0` "
           ]
-        },
-        {
-          "title": "Build and fill the body",
-          "contentlist": [
-            "Build the Body with an opening and closing `<body>` and `</body>`. Include an empty line between the two elements.",
-            "Between the body tags, add 1 div with an id, using `<div id='root'></div>`. Here is where we will make react leverage the dom."
-          ]
         }
       ]
     }
   ],
   "footer": {
-    "text": "Include Babel & webpack loader dependencies",
+    "text": "Setup a React Component",
     "link": {
       "text": "next ->",
-      "url": "febs/more-dependencies"
+      "url": "febs/setup-a-react-component"
     }
   }
 }
