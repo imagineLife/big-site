@@ -44,7 +44,11 @@
             "@babel/preset-react: includes a few other plugins that transform react's jsx syntax to brwoser-readable js",
             "babel-loader: transforms 'modern' javascript that may not be readable by browsers and makes the js readable",
             "css-loader: converts js 'import' syntax on css files for browsers",
-            "html-loader: we'll use this to minify our 'template' html file"
+            "html-webpack=plugin: we'll tell this plugin to use our html template for the html root of our project",
+            "html-loader: we'll use this to minify our template html file",
+            "sass-loader: loads && convers sass files to css files",
+            "style-loader: puts css into the dom",
+            "install script: `npm i @babel/preset-react@7.12.13 babel-loader@8.2.2 css-loader@5.0.2 html-loader@2.0.0 html-webpack-plugin@5.1.0 sass-loader@11.0.1 style-loader@2.0.0` "
           ]
         },
         {
