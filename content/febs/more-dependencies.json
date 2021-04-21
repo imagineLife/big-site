@@ -1,0 +1,67 @@
+{
+  "title": "Project Setup - Install Babel & loader Dependencies",
+  "slug": "febs/more-dependencies",
+  "sections": [
+    {
+      "class": "hope-gap",
+      "title": "A Gap",
+      "listitems": [
+        {
+          "title": "",
+          "content": "I need tools to convert JSX to browser-readable content"
+        }
+      ]
+    },
+    {
+      "class": "hope-gap",
+      "title": "A Hope",
+      "subTitle": "As a developer I'd like to...",
+      "listitems": [
+        {
+          "title": "Understand Loaders",
+          "content": "...communicate how loaders 'fit' into a frontend build system"
+        },
+        {
+          "title": "Include some loaders into a frontend boilerpalte setup",
+          "content": "...know which loaders to user here and install them in this frontend build system"
+        }
+      ]
+    },
+    {
+      "class": "practice",
+      "title": "A Practice",
+      "subTitle": "Here, some understanding of tooling and some technical details building on the frontend build system",
+      "listitems": [
+        {
+          "title": "Why loaders",
+          "content": "Loaders are used by webpack to do several tasks - convert files to browser readable code, bundle files, images, stylesheets, and more for client-ready consumption, and more."
+        },
+
+        {
+          "title": "Install some loaders",
+          "contentlist": [
+            "Here's a list of loaders, a brief description of each, and a single install script at the end -",
+            "@babel/preset-react: includes a few other plugins that transform react's jsx syntax to brwoser-readable js",
+            "babel-loader: transforms 'modern' javascript that may not be readable by browsers and makes the js readable",
+            "css-loader: converts js 'import' syntax on css files for browsers",
+            "html-loader: we'll use this to minify our 'template' html file"
+          ]
+        },
+        {
+          "title": "Build and fill the body",
+          "contentlist": [
+            "Build the Body with an opening and closing `<body>` and `</body>`. Include an empty line between the two elements.",
+            "Between the body tags, add 1 div with an id, using `<div id='root'></div>`. Here is where we will make react leverage the dom."
+          ]
+        }
+      ]
+    }
+  ],
+  "footer": {
+    "text": "Include Babel & webpack loader dependencies",
+    "link": {
+      "text": "next ->",
+      "url": "febs/more-dependencies"
+    }
+  }
+}
