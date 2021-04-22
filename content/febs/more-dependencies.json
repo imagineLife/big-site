@@ -30,26 +30,40 @@
     {
       "class": "practice",
       "title": "A Practice",
-      "subTitle": "Here, some understanding of tooling and some technical details building on the frontend build system",
+      "subTitle": "Here, install loaders",
       "listitems": [
         {
           "title": "Why loaders",
-          "content": "Loaders are used by webpack to do several tasks - convert files to browser readable code, bundle files, images, stylesheets, and more for client-ready consumption, and more."
+          "content": "Loaders are used by webpack to do several tasks - convert files to browser readable code, bundle files, images, stylesheets, and more for client-ready consumption, and more. Here's a list of loaders, a brief description of each, and a single install script at the end."
         },
-
         {
-          "title": "Install some loaders",
-          "contentlist": [
-            "Here's a list of loaders, a brief description of each, and a single install script at the end -",
-            "@babel/preset-react: includes a few other plugins that transform react's jsx syntax to brwoser-readable js",
-            "babel-loader: transforms 'modern' javascript that may not be readable by browsers and makes the js readable",
-            "css-loader: converts js 'import' syntax on css files for browsers",
-            "html-webpack=plugin: we'll tell this plugin to use our html template for the html root of our project",
-            "html-loader: we'll use this to minify our template html file",
-            "sass-loader: loads && convers sass files to css files",
-            "style-loader: puts css into the dom",
-            "install script: `npm i @babel/preset-react@7.12.13 babel-loader@8.2.2 css-loader@5.0.2 html-loader@2.0.0 html-webpack-plugin@5.1.0 sass-loader@11.0.1 style-loader@2.0.0` "
-          ]
+          "title": "@babel/preset-react",
+          "content": "includes a few other plugins that transform react's jsx syntax to brwoser-readable js"
+        },
+        {
+          "title": "babel-loader",
+          "content": "transforms 'modern' javascript that may not be readable by browsers and makes the js readable"
+        },
+        {
+          "title": "css-loader",
+          "content": "converts js 'import' syntax on css files for browsers"
+        },
+        {
+          "title": "html-webpack=plugin",
+          "content": "we'll tell this plugin to use our html template for the html root of our project"
+        },
+        {
+          "title": "html-loader",
+          "content": "we'll use this to minify our template html file"
+        },
+        {
+          "title": "sass-loader",
+          "content": "loads && convers sass files to css files"
+        },
+        { "title": "style-loader", "content": "puts css into the dom" },
+        {
+          "title": "install script",
+          "content": "npm i @babel/preset-react@7.12.13 babel-loader@8.2.2 css-loader@5.0.2 html-loader@2.0.0 html-webpack-plugin@5.1.0 sass-loader@11.0.1 style-loader@2.0.0"
         }
       ]
     }
