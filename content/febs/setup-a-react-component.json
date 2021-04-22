@@ -44,7 +44,7 @@
     }
   ],
   "footer": {
-    "text": "Run it",
+    "text": "Run it!",
     "link": {
       "text": "next ->",
       "url": "febs/run-it"
