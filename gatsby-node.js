@@ -26,15 +26,27 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         title
         subTitle
         listitems {
-          title
-          content
-          contentlist
+          itmTitle: title
+          itmTxt: content
         }
       }
       footer {
         link {
           text
           url
+        }
+      }
+    }
+
+    fragment chartparts on ChartsJson {
+      slug
+      title
+      chartdata {
+        xdomain
+        ydomain
+        values {
+          x
+          y
         }
       }
     }
@@ -61,6 +73,11 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           ...febspart
         }
       }
+      charts: allChartsJson {
+        data: nodes {
+          ...chartparts
+        }
+      }
     }
   `);
 
@@ -73,15 +90,24 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     posts: { data: postData },
     strengths: { data: strengthsData },
     febs: { data: febsData },
+    charts: { data: chartsData },
   } = res.data;
 
-  [...postData, ...recipeData, ...strengthsData, ...febsData].forEach(post => {
+  [
+    ...postData,
+    ...recipeData,
+    ...strengthsData,
+    ...febsData,
+    ...chartsData,
+  ].forEach(post => {
     console.log('post.slug');
     console.log(post.slug);
     let thisComponent = ['post', 'strengths'].includes(post.slug)
       ? require.resolve('./src/templates/post')
       : post.slug.includes('febs')
       ? require.resolve('./src/templates/febs')
+      : post.slug.includes('charts')
+      ? require.resolve('./src/templates/chart')
       : require.resolve('./src/templates/recipe');
 
     actions.createPage({
