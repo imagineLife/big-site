@@ -1,0 +1,26 @@
+{
+  "title": "Bar Chart",
+  "slug": "charts/bar",
+  "chartdata": {
+    "xdomain": ["couches", "computers", "shoes", "plants"],
+    "ydomain": [0, 14],
+    "values": [
+      {
+        "x": "computers",
+        "y": 4
+      },
+      {
+        "x": "couches",
+        "y": 2
+      },
+      {
+        "x": "shoes",
+        "y": 10
+      },
+      {
+        "x": "plants",
+        "y": 12
+      }
+    ]
+  }
+}
