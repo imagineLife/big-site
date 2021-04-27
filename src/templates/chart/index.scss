@@ -20,11 +20,21 @@ main.chart-detail {
     section.chart-column {
       width: 100%;
       max-width: $left-col-width;
+      margin-right: 10px;
+      position: -webkit-sticky;
+      position: sticky;
+      top: 87px;
     }
 
     section.chart-description-column {
       width: 100%;
       max-width: $right-col-width;
+
+      pre {
+        code {
+          font-size: 0.75rem;
+        }
+      }
     }
   }
 }
