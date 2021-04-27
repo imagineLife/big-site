@@ -18,8 +18,6 @@ export const postQuery = graphql`
   }
 `;
 
-// gets the post data as a prop
-// { data: { mdx: post } }
 const PostTemplate = data => {
   const {
     data: {
@@ -38,9 +36,3 @@ const PostTemplate = data => {
 };
 
 export default PostTemplate;
-/*
-  {
-  tags?.map((t, idx) => <Tag key={`tag-${idx}`} text={t} />);
-}
-
-*/
