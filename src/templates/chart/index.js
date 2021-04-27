@@ -28,14 +28,8 @@ export default function ChartsTemplate(apiData) {
       },
     },
   } = apiData;
-  console.log(
-    '%c Charts Template here!',
-    'background-color: blue; color: white;',
-  );
 
   const [xDomain, setXdomain] = useState(xdomain);
-  console.log('xDomain');
-  console.log(xDomain);
 
   return (
     <main className="chart-detail">
@@ -64,7 +58,13 @@ export default function ChartsTemplate(apiData) {
               onChange={e => {
                 setXdomain([e.target.value]);
               }}
-            ></input>
+            />
+            <br />
+            <dfn>
+              The X Domain represents the categories, or bars, that the chart is
+              displaying. This chart shows these categories in the order they
+              are displayed in the input.
+            </dfn>
           </article>
         </section>
       </section>
