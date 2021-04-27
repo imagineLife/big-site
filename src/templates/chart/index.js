@@ -42,7 +42,8 @@ export default function ChartsTemplate(apiData) {
           </div>
         </section>
         <section className="chart-description-column d-ib b-dev">
-          <pre>{`<script>
+          <pre>
+            <code>{`<script>
 
 
 // set the dimensions and margins of the graph
@@ -94,7 +95,8 @@ svg.selectAll("mybar")
 
 })
 
-</script>`}</pre>
+</script>`}</code>
+          </pre>
         </section>
       </section>
     </main>
