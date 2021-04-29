@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { graphql } from 'gatsby';
 import './index.scss';
+import { scaleBand, scaleLinear } from 'd3-scale';
 
 export const chartQuery = graphql`
   query ChartsBySlug($slug: String!) {
@@ -29,15 +30,43 @@ export default function ChartsTemplate(apiData) {
     },
   } = apiData;
 
-  const [xDomain, setXdomain] = useState(xdomain);
-  const [yDomain, setYdomain] = useState(ydomain);
+  const [barWidthPercentage] = useState(0.5);
+  const [xDomain] = useState(xdomain);
+  const [yDomain] = useState(ydomain);
   const [localVals, setLocalVals] = useState(values);
   const [margins, setMargins] = useState({
-    top: 20,
+    top: 5,
     right: 5,
-    bottom: 20,
-    left: 20,
+    bottom: 5,
+    left: 5,
   });
+
+  const [vizBoxDims, setVizBoxDims] = useState({ w: null, h: 350 });
+  const vizBoxRef = useRef();
+
+  function getBoxDims(refItm, setDimsFn) {
+    if (refItm) {
+      let dims = { w: refItm.offsetWidth };
+      setDimsFn(curDims => ({ ...curDims, ...dims }));
+    }
+  }
+
+  // Get vizBoxDims
+  useEffect(() => {
+    if (!vizBoxRef || !vizBoxRef.current || vizBoxDims.w !== null) return;
+
+    getBoxDims(vizBoxRef.current, setVizBoxDims);
+  }, [vizBoxRef, vizBoxDims]);
+
+  // if (vizBoxDims.w === null) return <p>water</p>;
+
+  const xScale = scaleBand()
+    .range([0, vizBoxDims.w])
+    .domain(xDomain);
+
+  const yScale = scaleLinear()
+    .domain([yDomain[0], yDomain[1]])
+    .range([vizBoxDims.h, 0]);
 
   return (
     <main className="chart-detail">
@@ -45,13 +74,33 @@ export default function ChartsTemplate(apiData) {
       <section className="scroll-box">
         {/* Left Column */}
         <section className="chart-column d-ib b-dev">
-          <div id="viz-box">
-            <svg className="chart-detail" width="400" height="400">
-              {xDomain.map((itm, idx) => (
-                <text key={`x-domain-${idx}`} y={(idx + 1) * 25}>
-                  {itm}
-                </text>
-              ))}
+          <div id="viz-box" ref={vizBoxRef}>
+            <svg
+              className="chart-detail"
+              width={vizBoxDims.w}
+              height={vizBoxDims.h}
+            >
+              <g
+                className="bar-group"
+                transform={`translate(${margins.left},${margins.top})`}
+              >
+                {localVals.map((d, idx) => {
+                  // calc bar props
+                  const barProps = {
+                    width: !barWidthPercentage
+                      ? xScale.bandwidth()
+                      : xScale.bandwidth() * barWidthPercentage,
+                    height: yScale(0) - yScale(d.y),
+                    y: yScale(d.y),
+                    fill: 'lightgray',
+                    x: !barWidthPercentage
+                      ? xScale(d.x)
+                      : xScale(d.x) +
+                        xScale.bandwidth() * (barWidthPercentage / 2),
+                  };
+                  return <rect key={`rect-${d.x}-${idx}`} {...barProps} />;
+                })}
+              </g>
             </svg>
           </div>
         </section>
@@ -93,6 +142,7 @@ export default function ChartsTemplate(apiData) {
               name="y-domain"
               id="y-domain"
               value={yDomain.map((elm, elmIdx) => `${elm}`)}
+              onChange={() => {}}
             />
             <br />
             <dfn>
@@ -111,6 +161,7 @@ export default function ChartsTemplate(apiData) {
               name="x-domain"
               id="x-domain"
               value={xDomain.map((elm, elmIdx) => `${elm}`)}
+              onChange={() => {}}
             />
             <br />
             <dfn>
