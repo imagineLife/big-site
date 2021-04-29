@@ -24,6 +24,11 @@ main.chart-detail {
       position: -webkit-sticky;
       position: sticky;
       top: 87px;
+
+      > div#viz-box {
+        > svg.chart-detail {
+        }
+      }
     }
 
     section.chart-description-column {
