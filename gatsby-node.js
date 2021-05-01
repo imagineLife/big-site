@@ -100,15 +100,14 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     ...febsData,
     ...chartsData,
   ].forEach(post => {
-    console.log('post.slug');
-    console.log(post.slug);
-    let thisComponent = ['post', 'strengths'].includes(post.slug)
-      ? require.resolve('./src/templates/post')
-      : post.slug.includes('febs')
-      ? require.resolve('./src/templates/febs')
-      : post.slug.includes('charts')
-      ? require.resolve('./src/templates/chart')
-      : require.resolve('./src/templates/recipe');
+    let thisComponent =
+      post.slug.includes('posts') || post.slug.includes('strengths')
+        ? require.resolve('./src/templates/post')
+        : post.slug.includes('febs')
+        ? require.resolve('./src/templates/febs')
+        : post.slug.includes('charts')
+        ? require.resolve('./src/templates/chart')
+        : require.resolve('./src/templates/recipe');
 
     actions.createPage({
       // where the browser can access the page
