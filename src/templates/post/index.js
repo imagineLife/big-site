@@ -7,7 +7,7 @@ import Tag from './../../components/tag';
 import Layout from './../../components/layout';
 import IngredientList from './../../components/ingredientList';
 
-import './post.scss';
+// import './recipe.scss';
 
 export const postQuery = graphql`
   query PostBySlug($slug: String!) {
