@@ -28,7 +28,7 @@ export const recipeQuery = graphql`
 
 // gets the post data as a prop
 // { data: { mdx: post } }
-const PostTemplate = data => {
+const RecipeTemplate = data => {
   const {
     data: {
       recipesJson: { title, excerpt, tags, ingredients },
@@ -49,4 +49,4 @@ const PostTemplate = data => {
   );
 };
 
-export default PostTemplate;
+export default RecipeTemplate;
