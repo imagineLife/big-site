@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useStaticQuery, query } from 'gatsby';
 import getStrengths from './../../hooks/get-strengths';
+import PostPreview from './../../components/PostPreview';
 
 export default function Strengths() {
   const strengthsSlugs = getStrengths();
@@ -19,6 +20,15 @@ export default function Strengths() {
         </Link>
         .
       </p>
+
+      <div id="strengths-post-list">
+        {strengthsSlugs?.map(({ title, excerpt, slug }, idx) => (
+          <PostPreview
+            key={`strengths-post-preview-${idx}`}
+            {...{ title, excerpt, slug }}
+          />
+        ))}
+      </div>
     </section>
   );
 }
