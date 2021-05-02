@@ -7,13 +7,21 @@ const useStrengths = () => {
     query {
       allMdx(filter: { slug: { regex: "/strengths/" } }) {
         nodes {
-          slug
+          frontmatter {
+            title
+            slug
+            excerpt
+          }
         }
       }
     }
   `);
 
-  return nodes.map(n => n.slug);
+  return nodes.map(({ frontmatter: { slug, excerpt, title } }) => ({
+    slug,
+    excerpt,
+    title,
+  }));
 };
 
 export default useStrengths;
