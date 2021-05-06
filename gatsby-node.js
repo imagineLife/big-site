@@ -13,11 +13,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       excerpt
     }
 
-    fragment strengthspart on StrengthsJson {
-      slug
-      title
-      excerpt
-    }
     fragment febspart on FebsJson {
       slug
       title
@@ -62,12 +57,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           ...recipepart
         }
       }
-
-      strengths: allStrengthsJson {
-        data: nodes {
-          ...strengthspart
-        }
-      }
       febs: allFebsJson {
         data: nodes {
           ...febspart
@@ -76,6 +65,17 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       charts: allChartsJson {
         data: nodes {
           ...chartparts
+        }
+      }
+      strengths: allMdx(
+        filter: { frontmatter: { slug: { regex: "/strengths/" } } }
+      ) {
+        nodes {
+          frontmatter {
+            title
+            slug
+            excerpt
+          }
         }
       }
     }
@@ -88,26 +88,29 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const {
     recipes: { data: recipeData },
     posts: { data: postData },
-    strengths: { data: strengthsData },
     febs: { data: febsData },
     charts: { data: chartsData },
+    strengths: { nodes: strengthsData },
   } = res.data;
 
   [
     ...postData,
     ...recipeData,
-    ...strengthsData,
+    ...strengthsData.map(d => d.frontmatter),
     ...febsData,
     ...chartsData,
   ].forEach(post => {
-    let thisComponent =
-      post.slug.includes('posts') || post.slug.includes('strengths')
-        ? require.resolve('./src/templates/post')
-        : post.slug.includes('febs')
-        ? require.resolve('./src/templates/febs')
-        : post.slug.includes('charts')
-        ? require.resolve('./src/templates/chart')
-        : require.resolve('./src/templates/recipe');
+    console.log('looping posts');
+    console.log(post);
+    console.log('// - - - - - //');
+
+    let thisComponent = post.slug.includes('posts')
+      ? require.resolve('./src/templates/post')
+      : post.slug.includes('febs')
+      ? require.resolve('./src/templates/febs')
+      : post.slug.includes('charts')
+      ? require.resolve('./src/templates/chart')
+      : require.resolve('./src/templates/recipe');
 
     actions.createPage({
       // where the browser can access the page
