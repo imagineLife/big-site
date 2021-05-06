@@ -67,17 +67,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           ...chartparts
         }
       }
-      strengths: allMdx(
-        filter: { frontmatter: { slug: { regex: "/strengths/" } } }
-      ) {
-        nodes {
-          frontmatter {
-            title
-            slug
-            excerpt
-          }
-        }
-      }
     }
   `);
 
@@ -90,27 +79,27 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     posts: { data: postData },
     febs: { data: febsData },
     charts: { data: chartsData },
-    strengths: { nodes: strengthsData },
+    // strengths: { nodes: strengthsData },
   } = res.data;
 
   [
     ...postData,
     ...recipeData,
-    ...strengthsData.map(d => d.frontmatter),
+    // ...strengthsData.map(d => d.frontmatter),
     ...febsData,
     ...chartsData,
   ].forEach(post => {
     console.log('looping posts');
-    console.log(post);
+    console.log(post.slug);
     console.log('// - - - - - //');
 
-    let thisComponent = post.slug.includes('posts')
-      ? require.resolve('./src/templates/post')
+    let thisComponent = post.slug.includes('recipes')
+      ? require.resolve('./src/templates/recipe')
       : post.slug.includes('febs')
       ? require.resolve('./src/templates/febs')
       : post.slug.includes('charts')
       ? require.resolve('./src/templates/chart')
-      : require.resolve('./src/templates/recipe');
+      : require.resolve('./src/templates/post');
 
     actions.createPage({
       // where the browser can access the page
