@@ -1,7 +1,7 @@
 import { graphql, useStaticQuery } from 'gatsby';
 
 const usePosts = () => {
-  const { posts, recipes, strengths } = useStaticQuery(graphql`
+  const { posts, recipes } = useStaticQuery(graphql`
     fragment postpart on PostsJson {
       slug
       title
@@ -9,12 +9,6 @@ const usePosts = () => {
     }
 
     fragment recipepart on RecipesJson {
-      slug
-      title
-      excerpt
-    }
-
-    fragment strengthspart on StrengthsJson {
       slug
       title
       excerpt
@@ -31,53 +25,14 @@ const usePosts = () => {
           ...recipepart
         }
       }
-      strengths: allStrengthsJson {
-        data: nodes {
-          ...strengthspart
-        }
-      }
     }
   `);
 
-  return [...posts.data, ...recipes.data, ...strengths.data].map(
-    ({ title, slug, excerpt }) => ({
-      title,
-      slug,
-      excerpt,
-    }),
-  );
+  return [...posts.data, ...recipes.data].map(({ title, slug, excerpt }) => ({
+    title,
+    slug,
+    excerpt,
+  }));
 };
 
 export default usePosts;
-/*
-  fluid can get content like...
-  (
-    maxWidth: 100
-    maxHeight: 100
-    duotone: { shadow: "#663399", highlight: "#ddbbff" }
-  )
-  before the {}
-*/
-
-/*
-  mdx-drived static query
-  query {
-      allMdx {
-        nodes {
-          frontmatter {
-            title
-            slug
-            author
-            excerpt
-            coverImage {
-              childImageSharp {
-                fluid {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
-              }
-            }
-          }
-        }
-      }
-    } 
-*/
