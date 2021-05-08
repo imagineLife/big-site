@@ -23,6 +23,15 @@ const About = () => (
         categoriing and approaching 'types' of problems in an org...
       </p>
     </section>
+    <section className="about-section">
+      <h2>An Executer</h2>
+      <p>
+        I am restless if I'm not intentionally getting something done. Even my
+        down time is intentional, focused on connecting with my wife and/or
+        friends, considering future plans, even solitude and meditaion are
+        task-oriented and achievable for me.
+      </p>
+    </section>
 
     <Link to="/">Home</Link>
   </Layout>
