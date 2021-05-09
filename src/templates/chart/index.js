@@ -110,7 +110,7 @@ export default function ChartsTemplate(apiData) {
           <h3>Chart Props</h3>
           {/* Data Values */}
           <article className="chart-prop">
-            <p>Data Values</p>
+            <h4>Data Values</h4>
             <table>
               <tbody>
                 <tr>
@@ -125,14 +125,14 @@ export default function ChartsTemplate(apiData) {
                 ))}
               </tbody>
             </table>
-            <br />
-            <dfn>
-              The Y Domain represents the minimin and maximum values that the
-              y-axis displays.
-            </dfn>
+            <p>
+              Here, the data is such that each dat 'element' has a 'value'.
+              Looking at the chart, each bar has a height.{' '}
+            </p>
           </article>
-          ;{/* Y-Domain */}
+          {/* Domains */}
           <article className="chart-prop">
+            <h4>Data Domains</h4>
             <label className={`y-domain`} htmlFor="y-domain">
               Y Domain
             </label>
@@ -151,25 +151,23 @@ export default function ChartsTemplate(apiData) {
             </dfn>
           </article>
           {/* X-Domain */}
-          <article className="chart-prop">
-            <label className={`x-domain`} htmlFor="x-domain">
-              X Domain
-            </label>
-            <input
-              className={`x-domain`}
-              type="text"
-              name="x-domain"
-              id="x-domain"
-              value={xDomain.map((elm, elmIdx) => `${elm}`)}
-              onChange={() => {}}
-            />
-            <br />
-            <dfn>
-              The X Domain represents the categories, or bars, that the chart is
-              displaying. This chart shows these categories in the order they
-              are displayed in the input.
-            </dfn>
-          </article>
+          <label className={`x-domain`} htmlFor="x-domain">
+            X Domain
+          </label>
+          <input
+            className={`x-domain`}
+            type="text"
+            name="x-domain"
+            id="x-domain"
+            value={xDomain.map((elm, elmIdx) => `${elm}`)}
+            onChange={() => {}}
+          />
+          <br />
+          <dfn>
+            The X Domain represents the categories, or bars, that the chart is
+            displaying. This chart shows these categories in the order they are
+            displayed in the input.
+          </dfn>
         </section>
       </section>
     </main>
