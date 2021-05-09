@@ -26,10 +26,10 @@ const About = () => (
     <section className="about-section">
       <h2>A Do-er</h2>
       <p>
-        I am restless if I'm not intentionally getting something done. Even my
-        down time is intentional, focused on connecting with my wife and/or
-        friends, considering future plans, even solitude and meditaion are
-        task-oriented and achievable for me.
+        I am restless if I'm not intentionally getting something done, or on my
+        way to doing something. Even my down time is intentional, focused on
+        connecting with my wife and/or friends, considering future plans...
+        solitude and meditaion are task-oriented and achievable for me.
       </p>
     </section>
     <section className="about-section">
@@ -74,6 +74,7 @@ const About = () => (
         personalities on interpersonal and team dynamics.
       </p>
     </section>
+
     <Link to="/">Home</Link>
   </Layout>
 );
