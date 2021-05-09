@@ -1,6 +1,6 @@
 {
   "title": "Bar Chart",
-  "slug": "charts/bar",
+  "slug": "/charts/bar",
   "usefor": "Bar Charts can be most useful for showing numerical differences (ex. y-axis value changes) across categories (ex. x-axis bar entities).",
   "excerpt": "This is one of the most common chart types && one of the easiest to read.",
   "chartdata": {
