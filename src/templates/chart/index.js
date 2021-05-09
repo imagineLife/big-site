@@ -51,10 +51,9 @@ export default function ChartsTemplate(apiData) {
     }
   }
 
-  // Get vizBoxDims
+  //gets && sets vixBoxDims after the vizBox element is rendered to the dom
   useEffect(() => {
     if (!vizBoxRef || !vizBoxRef.current || vizBoxDims.w !== null) return;
-
     getBoxDims(vizBoxRef.current, setVizBoxDims);
   }, [vizBoxRef, vizBoxDims]);
 
@@ -67,6 +66,8 @@ export default function ChartsTemplate(apiData) {
   const yScale = scaleLinear()
     .domain([yDomain[0], yDomain[1]])
     .range([vizBoxDims.h, 0]);
+
+  console.log(yScale.range());
 
   return (
     <main className="chart-detail">
@@ -149,25 +150,66 @@ export default function ChartsTemplate(apiData) {
               The Y Domain represents the minimin and maximum values that the
               y-axis displays.
             </dfn>
+            <br />
+            {/* X-Domain */}
+            <label className={`x-domain`} htmlFor="x-domain">
+              X Domain
+            </label>
+            <input
+              className={`x-domain`}
+              type="text"
+              name="x-domain"
+              id="x-domain"
+              value={xDomain.map((elm, elmIdx) => `${elm}`)}
+              onChange={() => {}}
+            />
+            <br />
+            <dfn>
+              The X Domain represents the categories, or bars, that the chart is
+              displaying. This chart shows these categories in the order they
+              are displayed in the input.
+            </dfn>
           </article>
-          {/* X-Domain */}
-          <label className={`x-domain`} htmlFor="x-domain">
-            X Domain
-          </label>
-          <input
-            className={`x-domain`}
-            type="text"
-            name="x-domain"
-            id="x-domain"
-            value={xDomain.map((elm, elmIdx) => `${elm}`)}
-            onChange={() => {}}
-          />
-          <br />
-          <dfn>
-            The X Domain represents the categories, or bars, that the chart is
-            displaying. This chart shows these categories in the order they are
-            displayed in the input.
-          </dfn>
+          {/* Ranges */}
+          <article className="chart-prop">
+            <h4>Data Ranges</h4>
+            <label className={`y-range`} htmlFor="y-range">
+              Y Range
+            </label>
+            <input
+              className={`y-range`}
+              type="text"
+              name="y-range"
+              id="y-range"
+              value={'water'} //yRange.map((elm, elmIdx) => `${elm}`)
+              onChange={() => {}}
+            />
+            <br />
+            <dfn>
+              The Y Range represents the screen placement across the Y 'plane'.
+              Here, the Y range represents the relative starting & ending y
+              coordinates on the screen that the bars can consume.
+            </dfn>
+            <br />
+            {/* X-Range */}
+            <label className={`x-range`} htmlFor="x-range">
+              X Range
+            </label>
+            <input
+              className={`x-range`}
+              type="text"
+              name="x-range"
+              id="x-range"
+              value={'juice'} //xrange.map((elm, elmIdx) => `${elm}`)}
+              onChange={() => {}}
+            />
+            <br />
+            <dfn>
+              The X Range represents the screen placement across the X 'plane'.
+              Here, the X range represents the starting & ending X coordinates
+              on the screen tha the bars can consume.
+            </dfn>
+          </article>
         </section>
       </section>
     </main>
