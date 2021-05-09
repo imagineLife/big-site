@@ -57,8 +57,6 @@ export default function ChartsTemplate(apiData) {
     getBoxDims(vizBoxRef.current, setVizBoxDims);
   }, [vizBoxRef, vizBoxDims]);
 
-  // if (vizBoxDims.w === null) return <p>water</p>;
-
   const xScale = scaleBand()
     .range([0, vizBoxDims.w])
     .domain(xDomain);
@@ -66,8 +64,6 @@ export default function ChartsTemplate(apiData) {
   const yScale = scaleLinear()
     .domain([yDomain[0], yDomain[1]])
     .range([vizBoxDims.h, 0]);
-
-  console.log(yScale.range());
 
   return (
     <main className="chart-detail">
@@ -181,7 +177,7 @@ export default function ChartsTemplate(apiData) {
               type="text"
               name="y-range"
               id="y-range"
-              value={'water'} //yRange.map((elm, elmIdx) => `${elm}`)
+              value={JSON.stringify(yScale.range())}
               onChange={() => {}}
             />
             <br />
@@ -200,7 +196,7 @@ export default function ChartsTemplate(apiData) {
               type="text"
               name="x-range"
               id="x-range"
-              value={'juice'} //xrange.map((elm, elmIdx) => `${elm}`)}
+              value={JSON.stringify(xScale.range())}
               onChange={() => {}}
             />
             <br />
