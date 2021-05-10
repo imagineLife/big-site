@@ -1,16 +1,21 @@
 import { graphql, useStaticQuery } from 'gatsby';
 
 const useCharts = () => {
-  const { chartsJson } = useStaticQuery(graphql`
+  const {
+    allChartsJson: { data },
+  } = useStaticQuery(graphql`
     query {
-      chartsJson {
-        title
-        slug
+      allChartsJson {
+        data: nodes {
+          title
+          excerpt
+          slug
+        }
       }
     }
   `);
 
-  return [chartsJson];
+  return data;
 };
 
 export default useCharts;
