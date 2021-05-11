@@ -1,0 +1,12 @@
+// Adjust for responsive design later
+section.scroll-box {
+  width: 100%;
+  padding: 0 15px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+
+  &.chart-layout {
+    height: 800px;
+  }
+}
