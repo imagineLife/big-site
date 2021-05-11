@@ -18,6 +18,7 @@ export const chartQuery = graphql`
         }
         className
       }
+      explanations
     }
   }
 `;
@@ -25,14 +26,17 @@ export const chartQuery = graphql`
 export default function ChartsTemplate(apiData) {
   const {
     data: {
-      chartsJson: { title, sections },
+      chartsJson: { title, sections, explanations },
     },
   } = apiData;
 
   return (
     <main className="chart-detail">
       <h1>{title || 'A Chart'}</h1>
-      <ChartScrollBox sections={sections} />
+      {explanations?.map((txt, txtIdx) => (
+        <p key={`explanation-${txtIdx}`}>{txt}</p>
+      ))}
+      <ChartScrollBox {...{ title, explanations, sections }} />
     </main>
   );
 }
