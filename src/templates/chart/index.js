@@ -33,9 +33,13 @@ export default function ChartsTemplate(apiData) {
   return (
     <main className="chart-detail">
       <h1>{title || 'A Chart'}</h1>
-      {explanations?.map((txt, txtIdx) => (
-        <p key={`explanation-${txtIdx}`}>{txt}</p>
-      ))}
+      {explanations && (
+        <section className="explanation">
+          {explanations?.map((txt, txtIdx) => (
+            <p key={`explanation-${txtIdx}`}>{txt}</p>
+          ))}
+        </section>
+      )}
       <ChartScrollBox {...{ title, explanations, sections }} />
     </main>
   );
