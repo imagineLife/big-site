@@ -2,12 +2,9 @@ import React, { Fragment } from 'react';
 import './index.scss';
 
 export default function ChartScrollBox({ children, sections }) {
-  console.log('sections');
-  console.log(sections);
-
   return (
     <div className="chart-scroll-box">
-      {sections.map((s, sidx) => (
+      {sections?.map((s, sidx) => (
         <section
           className={`scroll-box${s.className ? ` ${s.className}` : ''}`}
           key={`chart-scroll-box-${sidx}`}
