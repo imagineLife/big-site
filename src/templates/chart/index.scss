@@ -6,6 +6,12 @@
   border: 1px solid darkblue;
 }
 main.chart-detail {
+  > .explanation {
+    p {
+      margin: 0.2rem 0;
+    }
+  }
+
   pre {
     code {
       font-size: 0.75rem;
