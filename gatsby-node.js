@@ -44,6 +44,15 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           y
         }
       }
+      sections {
+        box {
+          data
+        }
+        column {
+          data
+        }
+        className
+      }
     }
 
     query {
