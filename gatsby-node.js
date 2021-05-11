@@ -53,6 +53,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         }
         className
       }
+      explanations
     }
 
     query {
