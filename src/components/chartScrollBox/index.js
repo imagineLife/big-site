@@ -13,7 +13,9 @@ export default function ChartScrollBox({ children, sections }) {
           key={`chart-scroll-box-${sidx}`}
         >
           <section className="chart-column d-ib b-dev">{s.box.data}</section>
-          <section className="chart-description-column d-ib b-dev"></section>
+          <section className="chart-description-column d-ib b-dev">
+            {s.column.data}
+          </section>
         </section>
       ))}
     </div>

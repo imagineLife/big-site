@@ -1,3 +1,5 @@
+$column-height: 800px;
+
 // Adjust for responsive design later
 section.scroll-box {
   width: 100%;
@@ -6,7 +8,16 @@ section.scroll-box {
   display: flex;
   align-items: flex-start;
 
+  // "the-layout"
   &.chart-layout {
-    height: 800px;
+    height: $column-height;
+
+    > .chart-column {
+      height: 300px;
+    }
+
+    > .chart-description-column {
+      height: $column-height;
+    }
   }
 }
