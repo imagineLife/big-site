@@ -1,0 +1,25 @@
+{
+  "title": "A Layout",
+  "slug": "/charts/the-layout",
+  "excerpt": "Here, an Overview of a layout which mixes scrolling and 'sticky' chart elements",
+  "sections": [
+    {
+      "box": {
+        "data": "Here, a box. This box is 'sticky'"
+      },
+      "column": {
+        "data": "Here, a column. This column is 'scrollable'"
+      },
+      "className": "chart-layout"
+    },
+    {
+      "box": {
+        "data": "Here, another box. This box is, again, is 'sticky'"
+      },
+      "column": {
+        "data": "Here, another column. This column, again, is 'scrollable'"
+      },
+      "className": "chart-layout"
+    }
+  ]
+}
