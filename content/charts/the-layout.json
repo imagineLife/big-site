@@ -2,10 +2,17 @@
   "title": "A Layout",
   "slug": "/charts/the-layout",
   "excerpt": "Here, an Overview of a layout which mixes scrolling and 'sticky' chart elements",
+  "explanations": [
+    "From the outside-in, this layout contains a wrapping div. This has minimal constraining styles.",
+    "Inside the wrapping div are 2 sections. These have 100% width, some padding & margins, display set to flex and the flex aligment set at the element start.",
+    "The widths of each section/column are set to my liking here & the important detail about column widths is that here the combined width is 100% of the available space.",
+    "The first section, the left column, has position set to sticky. The section has a fixed height in this case. The div has a 100% width wix max-width @ 40%.",
+    "The second section, the right column, has a fied height in this case to 800px. The section has width set to 100% with max-width set to 60%."
+  ],
   "sections": [
     {
       "box": {
-        "data": "Here, a box. This box is 'sticky'"
+        "data": "Here, a box. This box is 'sticky'. The height is set through css-in-js. The 'sticky' position is also set through css-in-js."
       },
       "column": {
         "data": "Here, a column. This column is 'scrollable'"
@@ -14,7 +21,7 @@
     },
     {
       "box": {
-        "data": "Here, another box. This box is, again, is 'sticky'"
+        "data": "Here, another box. This box is, again, is 'sticky'. The height is set through css-in-js. The 'sticky' position is also set through css-in-js."
       },
       "column": {
         "data": "Here, another column. This column, again, is 'scrollable'"
