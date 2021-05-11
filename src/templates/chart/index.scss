@@ -9,36 +9,27 @@ $right-col-width: 60%;
   border: 1px solid darkblue;
 }
 main.chart-detail {
-  // Adjust for responsive design later
-  section.scroll-box {
+  section.chart-column {
     width: 100%;
-    padding: 0 15px;
-    margin: 0 auto;
-    display: flex;
-    align-items: flex-start;
+    max-width: $left-col-width;
+    margin-right: 10px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 87px;
 
-    section.chart-column {
-      width: 100%;
-      max-width: $left-col-width;
-      margin-right: 10px;
-      position: -webkit-sticky;
-      position: sticky;
-      top: 87px;
-
-      > div#viz-box {
-        > svg.chart-detail {
-        }
+    > div#viz-box {
+      > svg.chart-detail {
       }
     }
+  }
 
-    section.chart-description-column {
-      width: 100%;
-      max-width: $right-col-width;
+  section.chart-description-column {
+    width: 100%;
+    max-width: $right-col-width;
 
-      pre {
-        code {
-          font-size: 0.75rem;
-        }
+    pre {
+      code {
+        font-size: 0.75rem;
       }
     }
   }
