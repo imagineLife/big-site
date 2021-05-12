@@ -9,7 +9,7 @@ export default function TechList({ listName, itms }) {
       {itms.map((t, tIdx) => (
         <Fragment key={`frontend-${listName}-${tIdx}`}>
           <li className="tech-li">{t}</li>
-          {tIdx !== itms.length < 1 && ' '}
+          {tIdx !== itms.length - 1 && ' '}
         </Fragment>
       ))}
     </ul>

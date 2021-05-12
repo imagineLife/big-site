@@ -22,7 +22,14 @@ export default function FolioItem({
               </sup>
             )}
           </p>
-          {aLink && <a href={aLink} target="_blank" className="open"></a>}
+          {aLink && (
+            <a
+              href={aLink}
+              target="_blank"
+              rel="noreferrer"
+              className="open"
+            ></a>
+          )}
           <ul>
             {techList.map((itm, itmIdx) => (
               <li key={`tech-list-${title}-${itmIdx}`}>{itm}</li>
