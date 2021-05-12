@@ -4,22 +4,28 @@ import { Link } from 'gatsby';
 import GatsbyImage from 'gatsby-image';
 
 const PostPreview = ({ title, slug, excerpt, coverImage, coverAlt }) => {
+  const slugString = slug; //.includes('strength')
+  // ? slug.replace('strengths/', '')
+  // : slug;
   return (
     <article className="post-preview">
-      <Link to={`/${slug}`} className="image">
-        {coverImage?.childImageSharp?.fluid && (
-          <GatsbyImage
-            alt={coverAlt}
-            fluid={coverImage?.childImageSharp.fluid}
-          />
-        )}
-      </Link>
+      {/* Optional Preview Image/Link */}
+      {coverImage && (
+        <Link to={slugString} className="image">
+          {coverImage?.childImageSharp?.fluid && (
+            <GatsbyImage
+              alt={coverAlt}
+              fluid={coverImage?.childImageSharp.fluid}
+            />
+          )}
+        </Link>
+      )}
       <div>
         <h3>
-          <Link to={`/${slug}`}>{title}</Link>
+          <Link to={slugString}>{title}</Link>
         </h3>
         <p>{excerpt}</p>
-        <Link to={slug}>Read Post &rarr;</Link>
+        <Link to={slugString}>Read Post &rarr;</Link>
       </div>
     </article>
   );
