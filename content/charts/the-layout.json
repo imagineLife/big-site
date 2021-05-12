@@ -6,8 +6,8 @@
     "From the outside-in, this layout contains a wrapping div. This has minimal constraining styles.",
     "Inside the wrapping div are 2 sections. These have 100% width, some padding & margins, display set to flex and the flex alignment set at the element start.",
     "The widths of each section/column are set to my liking here & the important detail about column widths is that here the combined width is 100% of the available space.",
-    "The first section, the left column, has position set to sticky. The section has a fixed height in this case. The div has a 100% width with max-width @ 40%.",
-    "The second section, the right column, has a fixed height in this case to 800px. The section has width set to 100% with max-width set to 60%."
+    "The first section, the left column, has position set to sticky. The section has a fixed height in this case. The div has a 100% width with max-width @ 40%. This section has a border, so that it is easily recognizable.",
+    "The second section, the right column, has a fixed height in this case to 800px. The section has width set to 100% with max-width set to 60%. This section has a border, so that it is easily recognizable."
   ],
   "sections": [
     {
@@ -15,7 +15,7 @@
         "data": "Here, a box. This box is 'sticky'. The height is set through css-in-js. The 'sticky' position is also set through css-in-js."
       },
       "column": {
-        "data": "Here, a column. This column is 'scrollable'"
+        "data": "Here, a column. This column is 'scrollable'. As this item scrolls, this item will 'move up' as the squaure on the left will look 'stuck'."
       },
       "className": "chart-layout"
     },
@@ -24,7 +24,7 @@
         "data": "Here, another box. This box is, again, is 'sticky'. The height is set through css-in-js. The 'sticky' position is also set through css-in-js."
       },
       "column": {
-        "data": "Here, another column. This column, again, is 'scrollable'"
+        "data": "Here, another column. This column, again, is 'scrollable'. This section, as well as the box on the left, are both identical in layout to the items above. Notice that the box that was sticking on the left has moved out of the viewport and has been 'replaced' by the 'new' sticky box to the left of this section."
       },
       "className": "chart-layout"
     }
