@@ -28,5 +28,12 @@
       },
       "className": "chart-layout"
     }
-  ]
+  ],
+  "footer": {
+    "text": "With the layout laid out, the next section covers introducting SVG elements into the left-side box.",
+    "link": {
+      "text": "Including SVG",
+      "url": "charts/adding-svg"
+    }
+  }
 }
