@@ -36,6 +36,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     fragment chartparts on ChartsJson {
       slug
       title
+      explanations
       chartdata {
         xdomain
         ydomain
@@ -47,13 +48,21 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       sections {
         box {
           data
+          itm
         }
         column {
           data
+          itm
         }
         className
       }
-      explanations
+      footer {
+        text
+        link {
+          text
+          url
+        }
+      }
     }
 
     query {
