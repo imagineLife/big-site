@@ -1,7 +1,5 @@
 import React from 'react';
-import { graphql, Link, useStaticQuery } from 'gatsby';
-import { MDXRenderer } from 'gatsby-plugin-mdx';
-// import { MDXProvider } from '@mdx-js/react';
+import { graphql } from 'gatsby';
 
 import Tag from './../../components/tag';
 import Layout from './../../components/layout';
