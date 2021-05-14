@@ -1,7 +1,7 @@
 {
-  "title": "A Layout",
-  "slug": "/charts/the-layout",
-  "excerpt": "Here, an Overview of a layout which mixes scrolling and 'sticky' chart elements",
+  "title": "Adding SVG",
+  "slug": "/charts/adding-svg-to-a-layout",
+  "excerpt": "With a Layout laid out, SVG can get included into the DOM",
   "explanations": [
     "From the outside-in, this layout contains a wrapping div. This has minimal constraining styles.",
     "Inside the wrapping div are 2 sections. These have 100% width, some padding & margins, display set to flex and the flex alignment set at the element start.",
@@ -12,10 +12,12 @@
   "sections": [
     {
       "box": {
-        "data": "Here, a box. This box is 'sticky'. The height is set through css-in-js. The 'sticky' position is also set through css-in-js."
+        "data": null,
+        "itm": "AddingSvg"
       },
       "column": {
-        "data": "Here, a column. This column is 'scrollable'. As this item scrolls, this item will 'move up' as the squaure on the left will look 'stuck'."
+        "data": null,
+        "itm": "AddingSvg"
       },
       "className": "chart-layout"
     },
@@ -33,7 +35,7 @@
     "text": "With the layout laid out, the next section covers introducting SVG elements into the left-side box.",
     "link": {
       "text": "Including SVG",
-      "url": "charts/adding-svg-to-a-layout"
+      "url": "charts/adding-svg"
     }
   }
 }
