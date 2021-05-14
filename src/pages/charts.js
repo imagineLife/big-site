@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'gatsby';
 import getCharts from './../hooks/get-charts';
 import PostPreview from './../components/PostPreview';
 export default function Charts() {
