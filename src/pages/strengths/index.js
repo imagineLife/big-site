@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useStaticQuery, query } from 'gatsby';
+import { Link } from 'gatsby';
 import getStrengths from './../../hooks/get-strengths';
 
 // Components
@@ -8,8 +8,6 @@ import Layout from './../../components/layout';
 
 export default function Strengths() {
   const strengthsSlugs = getStrengths();
-  console.log('strengthsSlugs');
-  console.log(strengthsSlugs);
 
   return (
     <Layout>
