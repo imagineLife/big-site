@@ -13,9 +13,11 @@ export const chartQuery = graphql`
       sections {
         box {
           data
+          itm
         }
         column {
           data
+          itm
         }
         className
       }
