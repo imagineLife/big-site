@@ -20,6 +20,7 @@ export const chartQuery = graphql`
           itm
         }
         className
+        interactiveStateWrapper
       }
       footer {
         text
