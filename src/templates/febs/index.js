@@ -39,10 +39,6 @@ const FebsTemplate = data => {
       febsJson: { title, sections, footer },
     },
   } = data;
-
-  console.log('sections');
-  console.log(sections);
-
   return (
     <Layout>
       <section className="febs-wrapper">

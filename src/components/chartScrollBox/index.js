@@ -7,11 +7,21 @@ export default function ChartScrollBox({ children, sections }) {
     <div className="chart-scroll-box">
       {sections?.map((s, sidx) => {
         let boxContent = s.box.data || chartLookupObj.box[s.box.itm];
-        let colContent = s.column.data || chartLookupObj.col[s.box.itm];
+        let colContent = s.column.data || chartLookupObj.col[s.column.itm];
+        let stateContent = !s.interactiveStateWrapper
+          ? null
+          : s.interactiveStateWrapper ||
+            chartLookupObj.state[s.interactiveStateWrapper];
         let BoxContent =
           typeof boxContent === 'function' ? boxContent : () => boxContent;
         let ColContent =
-          typeof colContent === 'function' ? colContent : () => boxContent;
+          typeof colContent === 'function' ? colContent : () => colContent;
+        let StateContent =
+          stateContent === null
+            ? null
+            : typeof stateContent === 'function'
+            ? stateContent
+            : () => stateContent;
 
         return (
           <section
