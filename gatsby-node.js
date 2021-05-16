@@ -55,6 +55,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           itm
         }
         className
+        interactiveStateWrapper
       }
       footer {
         text

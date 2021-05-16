@@ -13,7 +13,8 @@
         "data": null,
         "itm": "AddingSvg"
       },
-      "className": "chart-layout"
+      "className": "chart-layout",
+      "interactiveStateWrapper": "AddingSvg"
     }
   ],
   "footer": {
