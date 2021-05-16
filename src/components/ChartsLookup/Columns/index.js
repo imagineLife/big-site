@@ -1,2 +1,4 @@
 import AddingSvg from './AddingSvg';
-export { AddingSvg };
+import TheLayout from './TheLayout';
+
+export { AddingSvg, TheLayout };
