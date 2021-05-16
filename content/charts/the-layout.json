@@ -2,6 +2,7 @@
   "title": "A Layout",
   "slug": "/charts/the-layout",
   "excerpt": "Here, an Overview of a layout which mixes scrolling and 'sticky' chart elements",
+  "order": 1,
   "explanations": [
     "From the outside-in, this layout contains a wrapping div. This has minimal constraining styles.",
     "Inside the wrapping div are 2 sections. These have 100% width, some padding & margins, display set to flex and the flex alignment set at the element start.",

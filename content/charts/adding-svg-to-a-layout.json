@@ -3,6 +3,7 @@
   "slug": "/charts/adding-svg-to-a-layout",
   "excerpt": "With a Layout laid out, SVG can get included into the DOM",
   "explanations": ["With a Layout laid out, SVG can get included into the DOM"],
+  "order": 2,
   "sections": [
     {
       "box": {
