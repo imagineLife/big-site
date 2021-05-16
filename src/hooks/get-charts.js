@@ -5,7 +5,7 @@ const useCharts = () => {
     allChartsJson: { data },
   } = useStaticQuery(graphql`
     query {
-      allChartsJson {
+      allChartsJson(sort: { fields: order, order: ASC }) {
         data: nodes {
           title
           excerpt
