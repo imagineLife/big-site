@@ -25,7 +25,8 @@
         "data": "Here, another box. This box is, again, is 'sticky'. The height is set through css-in-js. The 'sticky' position is also set through css-in-js."
       },
       "column": {
-        "data": "Here, another column. This column, again, is 'scrollable'. This section, as well as the box on the left, are both identical in layout to the items above. Notice that the box that was sticking on the left has moved out of the viewport and has been 'replaced' by the 'new' sticky box to the left of this section."
+        "data": null,
+        "itm": "TheLayout"
       },
       "className": "chart-layout"
     }
