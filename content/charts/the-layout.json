@@ -18,7 +18,7 @@
       "column": {
         "data": "Here, a column. This column is 'scrollable'. As this item scrolls, this item will 'move up' as the squaure on the left will look 'stuck'."
       },
-      "className": "chart-layout"
+      "className": "chart-layout the-layout"
     },
     {
       "box": {
@@ -28,7 +28,7 @@
         "data": null,
         "itm": "TheLayout"
       },
-      "className": "chart-layout"
+      "className": "chart-layout the-layout"
     }
   ],
   "footer": {
