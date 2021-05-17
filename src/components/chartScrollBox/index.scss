@@ -32,6 +32,13 @@ div.chart-scroll-box {
       > .chart-description-column {
         height: $column-height;
       }
+
+      &.the-layout {
+        section.chart-column,
+        section.chart-description-column {
+          border: 1px solid darkblue;
+        }
+      }
     }
   }
 }
