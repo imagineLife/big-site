@@ -16,6 +16,17 @@
       },
       "className": "chart-layout",
       "interactiveStateWrapper": "AddingSvg"
+    },
+    {
+      "box": {
+        "data": null,
+        "itm": "IncludeSvgDimensions"
+      },
+      "column": {
+        "data": "water"
+      },
+      "className": "chart-layout",
+      "interactiveStateWrapper": "AddingSvg"
     }
   ],
   "footer": {
