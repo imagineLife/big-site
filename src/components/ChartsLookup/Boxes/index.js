@@ -1,2 +1,4 @@
 import AddingSvg from './AddingSvg';
-export { AddingSvg };
+import IncludeSvgDimensions from './IncludeSvgDimensions';
+
+export { AddingSvg, IncludeSvgDimensions };
