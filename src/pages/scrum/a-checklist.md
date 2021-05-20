@@ -3,7 +3,14 @@
 A Checklist for understanding and adoption  
 [Read The Guide Online](https://scrumguides.org/scrum-guide.html)
 
-### Theory Must-Have's
+- [Scrum](#scrum)
+  - [Adopt the Theories](#adopt-the-theories)
+    - [Scrum is "purposefully incomplete"](#scrum-is-purposefully-incomplete)
+    - [We Gain Knowledge Empirically](#we-gain-knowledge-empirically)
+    - [Minimi](#minimi)
+    - [**Incrementality** is key](#incrementality-is-key)
+
+### Adopt the Theories
 
 Scrum (_and perhaps agility in general_) is more than a management framework. Some folks adopt parts of scrum and wonder why their long-term estimations are not any more clear.
 
