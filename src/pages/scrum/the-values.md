@@ -1,15 +1,15 @@
 # Scrum
 
-The philosophies and theories behind the framework.  
-[Read The Guide Online](https://scrumguides.org/scrum-guide.html)  
-Scrum (_and perhaps agility in general_) is more than a management framework. Some folks might adopt parts of scrum and wonder why their long-term estimations are not any more clear, or wonder why scrum might not be addressing issues outside it's scope.
+A Checklist for understanding and adoption  
+[Read The Guide Online](https://scrumguides.org/scrum-guide.html)
 
 - [Scrum](#scrum)
     - [Scrum is "purposefully incomplete"](#scrum-is-purposefully-incomplete)
+  - [Adopt the Theories](#adopt-the-theories)
     - [Knowledge Comes From Experience](#knowledge-comes-from-experience)
     - [Minimize Waste](#minimize-waste)
-    - [Incrementality is key](#incrementality-is-key)
-    - [Transparency, Inspection, and Adaptation](#transparency-inspection-and-adaptation)
+    - [**Incrementality** is key](#incrementality-is-key)
+    - [Transparency Inspection and Adaptation](#transparency-inspection-and-adaptation)
       - [Transparency](#transparency)
       - [Inspection](#inspection)
       - [Adaptation](#adaptation)
@@ -17,6 +17,10 @@ Scrum (_and perhaps agility in general_) is more than a management framework. So
 ### Scrum is "purposefully incomplete"
 
 Scrum strays from detailed process instructions and instead outlines ways to relate and interact together for a team of folks.
+
+## Adopt the Theories
+
+Scrum (_and perhaps agility in general_) is more than a management framework. Some folks adopt parts of scrum and wonder why their long-term estimations are not any more clear.
 
 ### Knowledge Comes From Experience
 
@@ -29,11 +33,11 @@ Instead, we will know about these things through our observations of ourselves, 
 
 Lean thinking is all about maximizing value and minimizing waste. In an org, this could look like refocusing _from_ individual elements or departments or technologies _to_ releasing a wholistic end-to-end value 'stream', no matter how small and incomplete each piece might seem compared to each of it's parts.
 
-### Incrementality is key
+### **Incrementality** is key
 
 Small steps improve predictability. Small releases of value-added elements provide more value than larger long-term complications that have a growing number of 'unknowns' as the project develops.
 
-### Transparency, Inspection, and Adaptation
+### Transparency Inspection and Adaptation
 
 Scrum has a small number of events to inspect the work, adapt to changes, and share clearly what is going on. In order to fully appreciate the details of the events, these 3 themes must be adopted.
 
