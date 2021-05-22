@@ -13,7 +13,6 @@ A Checklist for understanding and adoption
       - [Transparency](#transparency)
       - [Inspection](#inspection)
       - [Adaptation](#adaptation)
-  - [Adopt the Values](#adopt-the-values)
 
 ### Scrum is "purposefully incomplete"
 
@@ -53,5 +52,3 @@ Frequently assessing the work toward shared goals allows quick recognition of pr
 #### Adaptation
 
 With the work being visible (_transparent_) and unknowns or problems are revealed (_inspection_), the team _must_ make changes based on the insights. The team is "_expected to adapt the moment it learns anything new through inspection_".
-
-## Adopt the Values
