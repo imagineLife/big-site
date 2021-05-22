@@ -9,6 +9,10 @@ A Checklist for understanding and adoption
     - [Knowledge Comes From Experience](#knowledge-comes-from-experience)
     - [Minimize Waste](#minimize-waste)
     - [**Incrementality** is key](#incrementality-is-key)
+  - [Transparency Inspection and Adaptation](#transparency-inspection-and-adaptation)
+    - [Transparency](#transparency)
+    - [Inspection](#inspection)
+    - [Adaptation](#adaptation)
 
 ## Adopt the Theories
 
@@ -32,3 +36,19 @@ Lean thinking is all about maximizing value and minimizing waste. In an org, thi
 ### **Incrementality** is key
 
 Small steps improve predictability. Small releases of value-added elements provide more value than larger long-term complications that have a growing number of 'unknowns' as the project develops.
+
+## Transparency Inspection and Adaptation
+
+Scrum has a small number of events to inspect the work, adapt to changes, and share clearly what is going on. In order to fully appreciate the details of the events, these 3 themes must be adopted.
+
+### Transparency
+
+The details of the work must be seen by all doing the work and all recieving the work. The current reality of the work helps inform the team about progress toward goals.
+
+### Inspection
+
+Frequently assessing the work toward shared goals allows quick recognition of problems.
+
+### Adaptation
+
+With the work being visible (_transparent_) and unknowns or problems are revealed (_inspection_), the team _must_ make changes based on the insights.
