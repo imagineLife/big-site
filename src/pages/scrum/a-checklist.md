@@ -51,4 +51,4 @@ Frequently assessing the work toward shared goals allows quick recognition of pr
 
 ### Adaptation
 
-With the work being visible (_transparent_) and unknowns or problems are revealed (_inspection_), the team _must_ make changes based on the insights.
+With the work being visible (_transparent_) and unknowns or problems are revealed (_inspection_), the team _must_ make changes based on the insights. The team is "_expected to adapt the moment it learns anything new through inspection_".
