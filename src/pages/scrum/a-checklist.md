@@ -4,23 +4,24 @@ A Checklist for understanding and adoption
 [Read The Guide Online](https://scrumguides.org/scrum-guide.html)
 
 - [Scrum](#scrum)
-  - [Adopt the Theories](#adopt-the-theories)
     - [Scrum is "purposefully incomplete"](#scrum-is-purposefully-incomplete)
+  - [Adopt the Theories](#adopt-the-theories)
     - [Knowledge Comes From Experience](#knowledge-comes-from-experience)
     - [Minimize Waste](#minimize-waste)
     - [**Incrementality** is key](#incrementality-is-key)
-  - [Transparency Inspection and Adaptation](#transparency-inspection-and-adaptation)
-    - [Transparency](#transparency)
-    - [Inspection](#inspection)
-    - [Adaptation](#adaptation)
+    - [Transparency Inspection and Adaptation](#transparency-inspection-and-adaptation)
+      - [Transparency](#transparency)
+      - [Inspection](#inspection)
+      - [Adaptation](#adaptation)
+  - [Adopt the Values](#adopt-the-values)
+
+### Scrum is "purposefully incomplete"
+
+Scrum strays from detailed process instructions and instead outlines ways to relate and interact together for a team of folks.
 
 ## Adopt the Theories
 
 Scrum (_and perhaps agility in general_) is more than a management framework. Some folks adopt parts of scrum and wonder why their long-term estimations are not any more clear.
-
-### Scrum is "purposefully incomplete"
-
-straying from detailed process instructions toward relational and interactional guidance
 
 ### Knowledge Comes From Experience
 
@@ -37,18 +38,20 @@ Lean thinking is all about maximizing value and minimizing waste. In an org, thi
 
 Small steps improve predictability. Small releases of value-added elements provide more value than larger long-term complications that have a growing number of 'unknowns' as the project develops.
 
-## Transparency Inspection and Adaptation
+### Transparency Inspection and Adaptation
 
 Scrum has a small number of events to inspect the work, adapt to changes, and share clearly what is going on. In order to fully appreciate the details of the events, these 3 themes must be adopted.
 
-### Transparency
+#### Transparency
 
 The details of the work must be seen by all doing the work and all recieving the work. The current reality of the work helps inform the team about progress toward goals.
 
-### Inspection
+#### Inspection
 
 Frequently assessing the work toward shared goals allows quick recognition of problems.
 
-### Adaptation
+#### Adaptation
 
 With the work being visible (_transparent_) and unknowns or problems are revealed (_inspection_), the team _must_ make changes based on the insights. The team is "_expected to adapt the moment it learns anything new through inspection_".
+
+## Adopt the Values
