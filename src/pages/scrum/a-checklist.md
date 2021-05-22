@@ -6,8 +6,8 @@ A Checklist for understanding and adoption
 - [Scrum](#scrum)
   - [Adopt the Theories](#adopt-the-theories)
     - [Scrum is "purposefully incomplete"](#scrum-is-purposefully-incomplete)
-    - [We Gain Knowledge Empirically](#we-gain-knowledge-empirically)
-    - [Minimi](#minimi)
+    - [Knowledge Comes From Experience](#knowledge-comes-from-experience)
+    - [Minimize Waste](#minimize-waste)
     - [**Incrementality** is key](#incrementality-is-key)
 
 ### Adopt the Theories
@@ -18,11 +18,14 @@ Scrum (_and perhaps agility in general_) is more than a management framework. So
 
 straying from detailed process instructions toward relational and interactional guidance
 
-#### We Gain Knowledge Empirically
+#### Knowledge Comes From Experience
 
-_Knowledge_, about a team, about the nature of the work, about the complexity of work, about the completion of work... does not come from reasoning. We will not know about these things through intuition. Knowledge is not built-in to our nature. Instead, we will know about these things through our observations of ourselves, each other, and the work at hand.
+_Knowledge_, about a team, about the nature of the work, about the complexity of work, about the completion of work - knowledg of these things comes from our experience.  
+We will not know about work through intuition.  
+Our knowledge of the systems we work in is not built-in to our human nature.  
+Instead, we will know about these things through our observations of ourselves, each other, and the work at hand.
 
-#### Minimi
+#### Minimize Waste
 
 Lean thinking is all about maximizing value and minimizing waste. In an org, this could look like refocusing _from_ individual elements or departments or technologies _to_ releasing a wholistic end-to-end value 'stream', no matter how small and incomplete each piece might seem compared to each of it's parts.
 
