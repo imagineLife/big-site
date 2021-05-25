@@ -1,6 +1,5 @@
 exports.createPages = async ({ actions, graphql, reporter }) => {
-  // reporter is a console interface
-  const res = await graphql(`
+  /*
     fragment postpart on PostsJson {
       slug
       title
@@ -88,26 +87,47 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         }
       }
     }
+  */
+  const res = await graphql(`
+    query {
+      scrum: allMdx(filter: { frontmatter: { slug: { regex: "/scrum/" } } }) {
+        nodes {
+          frontmatter {
+            slug
+            title
+            excerpt
+          }
+        }
+      }
+    }
   `);
 
   if (res.errors) {
     reporter.panic(`failed to create posts ->`, res.errors);
   }
 
+  console.log('res.data.scrum');
+  console.log(res.data.scrum);
+
   const {
-    recipes: { data: recipeData },
-    posts: { data: postData },
-    febs: { data: febsData },
-    charts: { data: chartsData },
+    // recipes: { data: recipeData },
+    // posts: { data: postData },
+    // febs: { data: febsData },
+    // charts: { data: chartsData },
     // strengths: { nodes: strengthsData },
+    scrum: { nodes: scrumData },
   } = res.data;
 
+  console.log('scrumData');
+  console.log(scrumData);
+
   [
-    ...postData,
-    ...recipeData,
+    // ...postData,
+    // ...recipeData,
     // ...strengthsData.map(d => d.frontmatter),
-    ...febsData,
-    ...chartsData,
+    // ...febsData,
+    // ...chartsData,
+    ...scrumData.map(d => d.frontmatter),
   ].forEach(post => {
     console.log('looping posts');
     console.log(post.slug);
