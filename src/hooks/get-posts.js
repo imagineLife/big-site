@@ -1,8 +1,6 @@
 import { graphql, useStaticQuery } from 'gatsby';
-
-const usePosts = () => {
-  const { posts, recipes, strengths } = useStaticQuery(graphql`
-    fragment postpart on PostsJson {
+/*
+  fragment postpart on PostsJson {
       slug
       title
       excerpt
@@ -37,13 +35,28 @@ const usePosts = () => {
         }
       }
     }
+*/
+const usePosts = () => {
+  const {
+    scrum: { nodes: scrumdata },
+  } = useStaticQuery(graphql`
+    query {
+      scrum: allMdx(filter: { frontmatter: { slug: { regex: "/scrum/" } } }) {
+        nodes {
+          frontmatter {
+            slug
+            title
+            excerpt
+          }
+        }
+      }
+    }
   `);
+  // ...posts.data,
+  // ...recipes.data,
+  // ...strengths.data.map(d => d.frontmatter),
 
-  return [
-    ...posts.data,
-    ...recipes.data,
-    ...strengths.data.map(d => d.frontmatter),
-  ].map(({ title, slug, excerpt }) => ({
+  return scrumdata.map(({ frontmatter: { title, slug, excerpt } }) => ({
     title,
     slug,
     excerpt,
