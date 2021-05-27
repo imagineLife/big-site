@@ -121,35 +121,35 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   console.log('scrumData');
   console.log(scrumData);
 
-  [
-    // ...postData,
-    // ...recipeData,
-    // ...strengthsData.map(d => d.frontmatter),
-    // ...febsData,
-    // ...chartsData,
-    ...scrumData.map(d => d.frontmatter),
-  ].forEach(post => {
-    console.log('looping posts');
-    console.log(post.slug);
-    console.log('// - - - - - //');
+  // [
+  //   // ...postData,
+  //   // ...recipeData,
+  //   // ...strengthsData.map(d => d.frontmatter),
+  //   // ...febsData,
+  //   // ...chartsData,
+  //   ...scrumData.map(d => d.frontmatter),
+  // ].forEach(post => {
+  //   console.log('looping posts');
+  //   console.log(post.slug);
+  //   console.log('// - - - - - //');
 
-    let thisComponent = post.slug.includes('recipes')
-      ? require.resolve('./src/templates/recipe')
-      : post.slug.includes('febs')
-      ? require.resolve('./src/templates/febs')
-      : post.slug.includes('charts')
-      ? require.resolve('./src/templates/chart')
-      : require.resolve('./src/templates/post');
+  //   let thisComponent = post.slug.includes('recipes')
+  //     ? require.resolve('./src/templates/recipe')
+  //     : post.slug.includes('febs')
+  //     ? require.resolve('./src/templates/febs')
+  //     : post.slug.includes('charts')
+  //     ? require.resolve('./src/templates/chart')
+  //     : require.resolve('./src/templates/post');
 
-    actions.createPage({
-      // where the browser can access the page
-      path: post.slug,
-      // What component will pass the mdx file to
-      component: thisComponent,
-      // name the url slug
-      context: {
-        slug: post.slug,
-      },
-    });
-  });
+  //   actions.createPage({
+  //     // where the browser can access the page
+  //     path: post.slug,
+  //     // What component will pass the mdx file to
+  //     component: thisComponent,
+  //     // name the url slug
+  //     context: {
+  //       slug: post.slug,
+  //     },
+  //   });
+  // });
 };
