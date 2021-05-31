@@ -106,9 +106,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     reporter.panic(`failed to create posts ->`, res.errors);
   }
 
-  console.log('res.data.scrum');
-  console.log(res.data.scrum);
-
   const {
     // recipes: { data: recipeData },
     // posts: { data: postData },
@@ -117,9 +114,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     // strengths: { nodes: strengthsData },
     scrum: { nodes: scrumData },
   } = res.data;
-
-  console.log('scrumData');
-  console.log(scrumData);
 
   // [
   //   // ...postData,
