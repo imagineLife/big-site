@@ -1,18 +1,14 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import './TitledSection.scss';
 
+import Title from './../Title';
+
 const TitledSection = ({ title, headerSize, children }) => {
-  const Title =
-    headerSize == '2'
-      ? ({ txt }) => <h2>{txt}</h2>
-      : headerSize == '3'
-      ? ({ txt }) => <h3>{txt}</h3>
-      : ({ txt }) => <h1>{txt}</h1>;
   return (
-    <Fragment>
-      <Title txt={title} />
+    <section className="titled-section">
+      <Title txt={title} size={headerSize} />
       {children}
-    </Fragment>
+    </section>
   );
 };
 
