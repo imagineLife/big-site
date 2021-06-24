@@ -1,0 +1,23 @@
+.toc-wrapper {
+  max-width: 700px;
+  margin: 0 auto;
+  .toc-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+    background-color: white;
+    padding: 5px 15px;
+
+    .title {
+      font-size: 20px;
+      padding: 15px 30px;
+    }
+
+    .content {
+      padding: 0 15px 15px 15px;
+      line-height: 1.5;
+    }
+  }
+}
