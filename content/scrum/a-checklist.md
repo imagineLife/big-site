@@ -1,3 +1,12 @@
+---
+title: A Scrum Checklist
+slug: scrum/a-checklist
+author: Jake Laursen
+excerpt: An overview of the elements that are part of scrum
+tags: team, scrum, process
+order: 6
+---
+
 # A Scrum Checklist
 
 Considering Scrum for your Org? Here are the must-haves for Scrum To Work

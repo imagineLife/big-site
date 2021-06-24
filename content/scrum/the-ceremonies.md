@@ -7,25 +7,21 @@ tags: team, scrum, process
 order: 4
 ---
 
-import TitledSection from './../../components/TitledSection';
-
 # Scrum Ceremonies
-The Sprint, Sprint Planning, Sprint Review, Sprint Retrospective and Daily Scrum provide opportinuties for transparency, inspection, and adaptation.
 
+The Sprint, Sprint Planning, Sprint Review, Sprint Retrospective and Daily Scrum provide opportunities for transparency, inspection, and adaptation.
 
-<TitledSection title={"The Sprint"} headerSize={2}> 
+## The Sprint
+
 This is the center of the scrum timeline.  
-The Sprint is **timeboxed at one month**.  
-</TitledSection>
+The Sprint is **timeboxed at one month**.
 
-<TitledSection title={"Consistent"} headerSize={3}> 
+## Consistent
 
 Teams that adopt same-length sprints provide a regular rhythm of releasable value for the org and the client.  
-Predictability may emerge from consistent & short-term Sprints. The Scrum Guide requires a maximum length of a Sprint to be 1 month.  
+Predictability may emerge from consistent & short-term Sprints. The Scrum Guide requires a maximum length of a Sprint to be 1 month.
 
-</TitledSection>
-
-<TitledSection title={"Short Term"} headerSize={3}>  
+## Short Term
 
 When a Sprint is "too long", several unintended effects may arise:
 
@@ -37,89 +33,64 @@ Maintaining shorter Sprints enable a few effects:
 
 - Complexity can decrease. Constant consideration of a short release timeline requires tradeoffs between over-engineering to perfection, on one hand, and getting something small and irrelevant out the door.
 - Risk can decrease. When a 2-week estimation is off-target, a few days of work may be the cost. Smaller features alongside shorter sprint cycles allow for less risk when results are not met.
-- Learning can become a more regular part of the team's workflow. Sprint after Sprint, the team has built-in opportunities to review, plan, iterate, question, and learn from their work, their team, and their product.  
+- Learning can become a more regular part of the team's workflow. Sprint after Sprint, the team has built-in opportunities to review, plan, iterate, question, and learn from their work, their team, and their product.
 
-</TitledSection>
+## All Encompassing
 
-<TitledSection title={"All Encompassing"} headerSize={3}>  
+All implementations of planning, building, inspecting, adapting, and backlog refinement are encapsulated within the sprint.
 
-All implementations of planning, building, inspecting, adapting, and backlog refinement are encapsulated within the sprint.  
+## Consecutive
 
-</TitledSection>
+Immediately after 1 Sprint stops, another Sprint starts. There is no down-time between Sprints.
 
-<TitledSection title={"Consecutive"} headerSize={3}>  
-
-Immediately after 1 Sprint stops, another Sprint starts. There is no down-time between Sprints.  
-
-</TitledSection>
-
-<TitledSection title={"Allow for Frequent Review Of Abilities"} headerSize={3}>  
+## Allow for Frequent Review Of Abilities
 
 Lifted directly from the Scrum Guide,  
-"_Various practices exist to forecast progress, like burn-downs, burn-ups, or cumulative flows. While proven useful, these do not replace the importance of empiricism. In complex environments, what will happen is unknown. Only what has already happened may be used for forward-looking decision making._"  
+"_Various practices exist to forecast progress, like burn-downs, burn-ups, or cumulative flows. While proven useful, these do not replace the importance of empiricism. In complex environments, what will happen is unknown. Only what has already happened may be used for forward-looking decision making._"
 
-</TitledSection>
-
-<TitledSection title={"Cancellable"} headerSize={3}>  
+## Cancellable
 
 Sprints can be cancelled when the Sprint Goal has become irrelevant - this can happen for several reasons.  
-The Product Owner is the person authorized to cancel the Sprint.  
+The Product Owner is the person authorized to cancel the Sprint.
 
-</TitledSection>
-
-<TitledSection title={"Sprint Planning"} headerSize={2}>
+## Sprint Planning
 
 This is the start of the Sprint. Here, the work that the developers will go during the Sprint gets identified and agreed upon.
-The session is **timeboxed at 8 hrs per one-month** Sprint.  
+The session is **timeboxed at 8 hrs per one-month** Sprint.
 
-</TitledSection>
-
-<TitledSection title={"For The Scrum Team"} headerSize={3}>  
+## For The Scrum Team
 
 Sprint Planning is for the Product Owner and the Developers, primarily.  
 The Scrum Master ensures this event happens.  
-The Scrum Team can invite others, and the Scrum Guide says others can attend "_to provide advice_".  
+The Scrum Team can invite others, and the Scrum Guide says others can attend "_to provide advice_".
 
-</TitledSection>
+## Team Arrives Prepared
 
-<TitledSection title={"Team Arrives Prepared"} headerSize={3}>  
+Directly from the Scrum Guide, "_The Product Owner ensures that attendees are prepared to discuss the most important Product Backlog items and how they map to the Product Goal._"
 
-Directly from the Scrum Guide, "_The Product Owner ensures that attendees are prepared to discuss the most important Product Backlog items and how they map to the Product Goal._"  
-
-</TitledSection>
-
-<TitledSection title={"Topic: Why The Sprint Is Valuable"} headerSize={3}>  
+## Topic: Why The Sprint Is Valuable
 
 The Product Owner leads with focus on the Product.  
 The Product Owner proposes to the team how value can be added to the Product during the current Sprint.  
-The Scrum Team, as a whole, then collabs on defining a Sprint Goal.  
+The Scrum Team, as a whole, then collabs on defining a Sprint Goal.
 
-</TitledSection>
-
-<TitledSection title={"Topic: What can be Done this Sprint"} headerSize={3}>  
+## Topic: What can be Done this Sprint
 
 Devs & Product Owner select items from the Product Backlog to add to the Sprint Backlog.
-_The more the devs know about their past performance, their upcoming capacity, and their D.o.D,_ the more confident they can be in their forecast.  
+_The more the devs know about their past performance, their upcoming capacity, and their D.o.D,_ the more confident they can be in their forecast.
 
-</TitledSection>
+## Topic: How will the work get done
 
-<TitledSection title={"Topic: How will the work get done"} headerSize={3}>  
+Devs plan the work of each Sprint Item in order to make an Increment.
 
-Devs plan the work of each Sprint Item in order to make an Increment.  
-
-</TitledSection>
-
-
-<TitledSection title={"Sprint Review"} headerSize={2}>
+## Sprint Review
 
 The Scrum Team presents the work that has been done during the sprint.  
 Stakeholders hear and see progress toward the Produt Goal.
 Collaboration takes place regarding what will happen next for the Scrum Team.  
-The session is **timeboxed at 4 hours per one-month** Sprint.  
+The session is **timeboxed at 4 hours per one-month** Sprint.
 
-</TitledSection>
-
-<TitledSection title={"Sprint Retrospective"} headerSize={2}>
+## Sprint Retrospective
 
 The Scrum Team inspects the previous Sprint regarding individuals, interactions, processes, tools and Definitions of Done.  
 This session is not about the details of Product tasks. This session is about _how_ the team does its work.  
@@ -132,9 +103,7 @@ Improvements to interactions, processes, && tooling are identified.
 The removal of negative processes and the refining of working processes is an implementation and Scrum expression of Lean Thinking.  
 The session is **timeboxed at 3 hours per one-month** Sprint.
 
-</TitledSection>
-
-<TitledSection title={"Daily Scrum"} headerSize={2}>
+## Daily Scrum
 
 This is the most frequent ceremony in Scrum.  
 A goal here is to gather Developers of the team on a daily basis and inspect the progress toward the Sprint Goal.  
@@ -142,5 +111,3 @@ Another goal is to communicate and plan action items for the coming day of work.
 Hosting this event can improve transparency, inspection, and adaptation during the working processes of the Developers.  
 Developers are allowed to adjust their plan any time they want, not just during the Daily Scrum. Developers opfent meet throughout the day to cover similar and more granualr topics.  
 The session is **timeboxed at 15 minutes per day**.
-
-</TitledSection>
