@@ -19,6 +19,7 @@ module.exports = {
         plugins: ['gatsby-remark-images'],
       },
     },
+    { resolve: `gatsby-transformer-remark` },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -44,7 +45,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `scrum`,
-        path: `src/pages/scrum`,
+        path: `content/scrum`,
       },
     },
     {
