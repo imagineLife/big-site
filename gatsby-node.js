@@ -1,3 +1,4 @@
+const path = require('path');
 exports.createPages = async ({ actions, graphql, reporter }) => {
   /*
     fragment postpart on PostsJson {
@@ -88,33 +89,96 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       }
     }
   */
+  // const res = await graphql(`
+  //   query {
+  //     scrum: allMdx(filter: { frontmatter: { slug: { regex: "/scrum/" } } }) {
+  //       nodes {
+  //         frontmatter {
+  //           slug
+  //           title
+  //           excerpt
+  //         }
+  //       }
+  //     }
+  //   }
+  // `);
   const res = await graphql(`
     query {
-      scrum: allMdx(filter: { frontmatter: { slug: { regex: "/scrum/" } } }) {
-        nodes {
-          frontmatter {
-            slug
-            title
-            excerpt
+      allMarkdownRemark(
+        sort: { fields: frontmatter___order }
+        filter: { frontmatter: { order: { gt: 0 } } }
+      ) {
+        edges {
+          node {
+            frontmatter {
+              slug
+              title
+              tags
+            }
+            html
           }
         }
       }
     }
   `);
 
+  /*
+   query {
+      allMarkdownRemark(
+        sort: { fields: frontmatter___order }
+        filter: { frontmatter: { order: { gt: 0 } } }
+      ) {
+        pages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              tags
+            }
+            content: html
+          }
+        }
+      }
+    }
+*/
   if (res.errors) {
     reporter.panic(`failed to create posts ->`, res.errors);
   }
 
+  //destructure markdown/gql results
   const {
-    // recipes: { data: recipeData },
-    // posts: { data: postData },
-    // febs: { data: febsData },
-    // charts: { data: chartsData },
-    // strengths: { nodes: strengthsData },
-    scrum: { nodes: scrumData },
-  } = res.data;
+    data: {
+      allMarkdownRemark: { edges },
+    },
+  } = res;
 
+  // const {
+  // recipes: { data: recipeData },
+  // posts: { data: postData },
+  // febs: { data: febsData },
+  // charts: { data: chartsData },
+  // strengths: { nodes: strengthsData },
+  //   scrum: { nodes: scrumData },
+  // } = res.data;
+
+  console.log('edged');
+  console.log(typeof edges);
+
+  console.log('- - - -');
+  const mdTemplate = path.resolve(`src/templates/markdown/index.js`);
+  edges.forEach(({ node }) => {
+    console.log('looping through pages');
+    console.log('page.overview.slug');
+    console.log(node.frontmatter.slug);
+
+    actions.createPage({
+      path: node.frontmatter.slug,
+      component: mdTemplate,
+      context: {
+        slug: node.frontmatter.slug,
+      },
+    });
+  });
   // [
   //   // ...postData,
   //   // ...recipeData,
