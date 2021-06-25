@@ -1,5 +1,5 @@
 import React from 'react';
-import { StaticQuery, graphql } from 'gatsby';
+import { StaticQuery, graphql, Link } from 'gatsby';
 import './scrum.scss';
 
 const IndexPage = () => (
@@ -36,7 +36,9 @@ const IndexPage = () => (
             ) => {
               return (
                 <div className="toc-card" key={`scrum-toc-${pageIdx}`}>
-                  <p className="title">{title}</p>
+                  <Link to={`/${slug}`} className="title">
+                    {title}
+                  </Link>
                   <p className="content">{excerpt}</p>
                 </div>
               );
