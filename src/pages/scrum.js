@@ -1,5 +1,10 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { StaticQuery, graphql, Link } from 'gatsby';
+
+import Layout from './../components/layout';
+import Hero from './../components/hero';
+import PostPreview from './../components/PostPreview';
+
 import './scrum.scss';
 
 const IndexPage = () => (
@@ -24,29 +29,34 @@ const IndexPage = () => (
     `}
     render={({ allMarkdownRemark: { pages } }) => {
       return (
-        <section className="toc-wrapper">
-          <h1>Scrum</h1>
-          <p class="subtitle">A Brief collection of writings</p>
-          {pages.map(
-            (
-              {
-                page: {
-                  overview: { slug, title, excerpt },
+        <Fragment>
+          <Hero />
+          <Layout>
+            <section className="toc-wrapper">
+              <h1>Scrum</h1>
+              <p class="subtitle">A Brief collection of writings</p>
+              {pages.map(
+                (
+                  {
+                    page: {
+                      overview: { slug, title, excerpt },
+                    },
+                  },
+                  pageIdx,
+                ) => {
+                  return (
+                    <div className="toc-card" key={`scrum-toc-${pageIdx}`}>
+                      <Link to={`/${slug}`} className="title">
+                        {title}
+                      </Link>
+                      <p className="content">{excerpt}</p>
+                    </div>
+                  );
                 },
-              },
-              pageIdx,
-            ) => {
-              return (
-                <div className="toc-card" key={`scrum-toc-${pageIdx}`}>
-                  <Link to={`/${slug}`} className="title">
-                    {title}
-                  </Link>
-                  <p className="content">{excerpt}</p>
-                </div>
-              );
-            },
-          )}
-        </section>
+              )}
+            </section>
+          </Layout>
+        </Fragment>
       );
     }}
   />
