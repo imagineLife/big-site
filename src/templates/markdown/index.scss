@@ -1,13 +1,26 @@
+$margin-big: 10px;
+$margin-med: 5px;
+$margin-small: 3px;
+
 .md-wrapper {
   margin: 0 auto;
   max-width: 1000px;
 
+  h2 {
+    margin: $margin-big 0;
+  }
+
   h3 {
-    margin: 10px 0;
+    margin: $margin-med 0;
+  }
+
+  h4 {
+    margin: $margin-small 0;
   }
 
   p {
     margin: 0 20px;
+    line-height: 1.5rem;
   }
 }
 
