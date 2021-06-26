@@ -161,16 +161,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   //   scrum: { nodes: scrumData },
   // } = res.data;
 
-  console.log('edged');
-  console.log(typeof edges);
-
-  console.log('- - - -');
   const mdTemplate = path.resolve(`src/templates/markdown/index.js`);
   edges.forEach(({ node }) => {
-    console.log('looping through pages');
-    console.log('page.overview.slug');
-    console.log(node.frontmatter.slug);
-
     actions.createPage({
       path: node.frontmatter.slug,
       component: mdTemplate,
