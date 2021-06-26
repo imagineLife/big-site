@@ -9,19 +9,10 @@ order: 1
 
 # Scrum
 
-The philosophies and theories behind the framework.  
-[Read The Guide Online](https://scrumguides.org/scrum-guide.html)  
-Scrum (_and perhaps agility in general_) is more than a management framework. Some folks might adopt parts of scrum and wonder why their long-term estimations are not any more clear, or wonder why scrum might not be addressing issues outside it's scope.
+[Read The Guide Online](https://scrumguides.org/scrum-guide.html)
 
-- [Scrum](#scrum)
-  - [Scrum is "purposefully incomplete"](#scrum-is-purposefully-incomplete)
-  - [Knowledge Comes From Experience](#knowledge-comes-from-experience)
-  - [Minimize Waste](#minimize-waste)
-  - [Incrementality is key](#incrementality-is-key)
-  - [Transparency, Inspection, and Adaptation](#transparency-inspection-and-adaptation)
-    - [Transparency](#transparency)
-    - [Inspection](#inspection)
-    - [Adaptation](#adaptation)
+Here, an overview of the philosophies and theories behind the framework.  
+Scrum (_and perhaps agility in general_) is more than a management framework. Some folks might adopt parts of scrum and wonder why their long-term estimations are not any more clear, or wonder why scrum might not be addressing issues outside it's scope.
 
 ### Scrum is "purposefully incomplete"
 
