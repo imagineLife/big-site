@@ -19,8 +19,6 @@ export default function Template({
     },
     [],
   );
-  console.log('footerLinks');
-  console.log(footerLinks);
 
   return (
     <Fragment>
@@ -31,7 +29,9 @@ export default function Template({
       <footer className="md-footer">
         <div id="link-wrapper">
           {footerLinks?.map(({ slug, title }, idx) => (
-            <Link to={`/${slug}`}>{title}</Link>
+            <Link key={`footer-link-${title}`} to={`/${slug}`}>
+              {title}
+            </Link>
           ))}
         </div>
       </footer>
