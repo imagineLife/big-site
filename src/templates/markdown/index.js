@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { graphql, Link } from 'gatsby';
 import './index.scss';
 
@@ -11,11 +11,7 @@ export default function Template({
   const footerLinks = pages.reduce(
     (resArr, { page: { overview: pg } }, pgIdx) => {
       // get previous, current, && next page details
-      if (
-        pgIdx !== overview.order &&
-        pgIdx !== overview.order - 1 &&
-        pgIdx !== overview.order + 1
-      )
+      if (pgIdx !== overview.order - 1 && pgIdx !== overview.order + 1)
         return resArr;
       else {
         return [...resArr, pg];
@@ -27,10 +23,19 @@ export default function Template({
   console.log(footerLinks);
 
   return (
-    <main
-      className="md-wrapper"
-      dangerouslySetInnerHTML={{ __html: content }}
-    ></main>
+    <Fragment>
+      <main
+        className="md-wrapper"
+        dangerouslySetInnerHTML={{ __html: content }}
+      ></main>
+      <footer className="md-footer">
+        <div id="link-wrapper">
+          {footerLinks?.map(({ slug, title }, idx) => (
+            <Link to={`/${slug}`}>{title}</Link>
+          ))}
+        </div>
+      </footer>
+    </Fragment>
   );
 }
 
