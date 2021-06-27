@@ -1,6 +1,6 @@
 ---
 title: Granola
-slug: granola
+slug: recipes/granola
 author: Jake Laursen
 excerpt: A simple, tasty snack
 type: recipe, diy
