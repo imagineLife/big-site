@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import './index.scss';
 
+import { Link } from 'gatsby';
 // Components
 import Layout from './../components/layout';
 import Hero from './../components/hero';
@@ -20,14 +21,13 @@ const Index = () => {
       <Hero />
       <Layout>
         <section className="centered">
-          <p>A collection of writings on topics I've been working with - </p>
-          <ul>
-            <li>Scrum</li>
-            <li>Personality & "Strengths"</li>
-            <li>Node</li>
-            <li>React</li>
-            <li>Developing Engineer Competencies toward career growth</li>
-          </ul>
+          <p>A collection of writings on topics I've been working with</p>
+          <Link to="/scrum">Scrum</Link>
+          <Link to="/strengths">Personality & "Strengths"</Link>
+          <Link to="/node">Node</Link>
+          {/* <Link to="/frontend">React & Frontend Skills</Link> */}
+          {/* <Link to="">Developing Engineer Competencies toward career growth</Link> */}
+          <Link to="/recipes">Making Food</Link>
         </section>
       </Layout>
     </Fragment>
