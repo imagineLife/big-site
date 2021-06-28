@@ -76,7 +76,13 @@ const About = () => (
       </p>
 
       <h2>A StrengthsFinder Advocate</h2>
-      <p>I've</p>
+      <p>
+        I've been enjoying the principles of a strengths-first way of being,
+        both in my own life and when working with others. When conflict arises,
+        we can learn to leverage one anothers' personality tendencies for the
+        best, and take steps toward conflict resolution by pressing into the
+        best parts of our personalities.
+      </p>
       <Link to="/">Home</Link>
     </Layout>
   </Fragment>
