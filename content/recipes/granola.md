@@ -4,11 +4,14 @@ slug: recipes/granola
 author: Jake Laursen
 excerpt: A simple, tasty snack
 type: recipe, diy
-coverImage: ./index.JPG
-coverAlt: Granola
+# coverImage: ./index.JPG
+# coverAlt: Granola
+order: 1
 ---
 
 ## Granola
+
+![Granola](./granola/index.JPG)
 
 ### Ingreients
 
