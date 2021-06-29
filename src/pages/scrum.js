@@ -11,9 +11,11 @@ const IndexPage = () => (
   <StaticQuery
     query={graphql`
       query ScrumTOC {
-        allMarkdownRemark(
+        scrum: allMarkdownRemark(
           sort: { fields: frontmatter___order }
-          filter: { frontmatter: { order: { gt: 0 } } }
+          filter: {
+            frontmatter: { order: { gt: 0 }, slug: { regex: "/scrum/" } }
+          }
         ) {
           pages: edges {
             page: node {
@@ -27,7 +29,7 @@ const IndexPage = () => (
         }
       }
     `}
-    render={({ allMarkdownRemark: { pages } }) => {
+    render={({ scrum: { pages } }) => {
       return (
         <Fragment>
           <Hero />
