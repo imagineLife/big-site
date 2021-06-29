@@ -26,7 +26,6 @@
     "gatsby-plugin-sass": "^4.0.2",
     "gatsby-plugin-sharp": "^3.1.1",
     "gatsby-plugin-webpack-bundle-analyzer": "^1.0.5",
-    "gatsby-remark-images": "^4.1.1",
     "gatsby-source-filesystem": "^3.0.0",
     "gatsby-transformer-json": "^3.1.0",
     "gatsby-transformer-remark": "^4.5.0",
@@ -41,6 +40,10 @@
     "cross-env": "^6.0.3",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
+    "gatsby-remark-autolink-headers": "^4.5.0",
+    "gatsby-remark-copy-linked-files": "^4.5.0",
+    "gatsby-remark-images": "^5.5.0",
+    "gatsby-remark-prismjs": "^5.5.0",
     "jest": "^26.6.3",
     "jest-fetch-mock": "^3.0.3",
     "prettier": "^1.19.1"
