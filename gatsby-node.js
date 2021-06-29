@@ -104,18 +104,35 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   // `);
   const res = await graphql(`
     query {
-      allMarkdownRemark(
+      scrum: allMarkdownRemark(
         sort: { fields: frontmatter___order }
-        filter: { frontmatter: { order: { gt: 0 } } }
+        filter: {
+          frontmatter: { order: { gt: 0 }, slug: { regex: "/scrum/" } }
+        }
       ) {
-        edges {
-          node {
-            frontmatter {
+        pages: edges {
+          page: node {
+            overview: frontmatter {
               slug
               title
-              tags
+              excerpt
             }
-            html
+          }
+        }
+      }
+      recipes: allMarkdownRemark(
+        sort: { fields: frontmatter___order }
+        filter: {
+          frontmatter: { order: { gt: 0 }, slug: { regex: "/recipes/" } }
+        }
+      ) {
+        pages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              excerpt
+            }
           }
         }
       }
@@ -148,7 +165,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   //destructure markdown/gql results
   const {
     data: {
-      allMarkdownRemark: { edges },
+      scrum: { pages: scrumPages },
+      recipes: { pages: recipePages },
     },
   } = res;
 
@@ -162,12 +180,12 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   // } = res.data;
 
   const mdTemplate = path.resolve(`src/templates/markdown/index.js`);
-  edges.forEach(({ node }) => {
+  [...scrumPages, ...recipePages].forEach(({ page }) => {
     actions.createPage({
-      path: node.frontmatter.slug,
+      path: page.overview.slug,
       component: mdTemplate,
       context: {
-        slug: node.frontmatter.slug,
+        slug: page.overview.slug,
       },
     });
   });
