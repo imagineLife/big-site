@@ -1,6 +1,7 @@
 {
   "title": "Project Setup - Install Babel & loader Dependencies",
   "slug": "febs/more-dependencies",
+  "order": 5,
   "sections": [
     {
       "class": "hope-gap",

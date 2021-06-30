@@ -1,6 +1,7 @@
 {
   "title": "Project Setup - Webpack Dependencies",
   "slug": "febs/npm-setup",
+  "order": 2,
   "sections": [
     {
       "class": "hope-gap",

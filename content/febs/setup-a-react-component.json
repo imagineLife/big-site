@@ -1,6 +1,7 @@
 {
   "title": "Project Setup - Setup A react Component",
   "slug": "febs/setup-a-react-component",
+  "order": 6,
   "sections": [
     {
       "class": "hope-gap",

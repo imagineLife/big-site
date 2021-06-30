@@ -1,6 +1,7 @@
 {
   "title": "Project Setup - Initialize a Source Directory",
   "slug": "febs/setup-src",
+  "order": 3,
   "sections": [
     {
       "class": "hope-gap",

@@ -1,6 +1,7 @@
 {
   "title": "Frontend Build System Tooling Overview",
   "slug": "febs/overview",
+  "order": 1,
   "sections": [
     {
       "class": "hope-gap",
