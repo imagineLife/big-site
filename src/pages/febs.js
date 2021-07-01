@@ -29,7 +29,7 @@ const IndexPage = () => (
           <Hero />
           <Layout>
             <section className="toc-wrapper">
-              <h1>Scrum</h1>
+              <h1>FEBS</h1>
               <p className="subtitle">A Frontend Build System</p>
               {pages
                 .sort((a, b) => (a.order > b.order ? 1 : -1))
