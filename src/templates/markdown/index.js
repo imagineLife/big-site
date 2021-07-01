@@ -40,7 +40,7 @@ export default function Template({
 }
 
 export const pgQuery = graphql`
-  query ScrumBySlug($slug: String!) {
+  query MarkdownBySlug($slug: String!) {
     pageData: markdownRemark(frontmatter: { slug: { eq: $slug } }) {
       overview: frontmatter {
         slug
