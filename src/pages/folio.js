@@ -17,7 +17,7 @@ const techs = {
     'Travis-CI',
   ],
   backend: [
-    'Node',
+    'Node (OpenJS Certified Node Application Developer)',
     'Express',
     'Postman',
     'Swagger',
