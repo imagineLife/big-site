@@ -103,6 +103,25 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   //   }
   // `);
   const res = await graphql(`
+    fragment febspart on FebsJson {
+      slug
+      title
+      sections {
+        class
+        title
+        subTitle
+        listitems {
+          itmTitle: title
+          itmTxt: content
+        }
+      }
+      footer {
+        link {
+          text
+          url
+        }
+      }
+    }
     query {
       scrum: allMarkdownRemark(
         sort: { fields: frontmatter___order }
@@ -136,28 +155,14 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           }
         }
       }
-    }
-  `);
-
-  /*
-   query {
-      allMarkdownRemark(
-        sort: { fields: frontmatter___order }
-        filter: { frontmatter: { order: { gt: 0 } } }
-      ) {
-        pages: edges {
-          page: node {
-            overview: frontmatter {
-              slug
-              title
-              tags
-            }
-            content: html
-          }
+      febs: allFebsJson {
+        data: nodes {
+          ...febspart
         }
       }
     }
-*/
+  `);
+
   if (res.errors) {
     reporter.panic(`failed to create posts ->`, res.errors);
   }
@@ -167,6 +172,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     data: {
       scrum: { pages: scrumPages },
       recipes: { pages: recipePages },
+      febs: { data: febsPages },
     },
   } = res;
 
@@ -186,6 +192,17 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       component: mdTemplate,
       context: {
         slug: page.overview.slug,
+      },
+    });
+  });
+
+  const febsTemplate = path.resolve('src/templates/febs/index.js');
+  febsPages.forEach(febPage => {
+    actions.createPage({
+      path: febPage.slug,
+      component: febsTemplate,
+      context: {
+        slug: febPage.slug,
       },
     });
   });
