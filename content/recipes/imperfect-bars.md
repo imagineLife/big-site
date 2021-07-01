@@ -4,12 +4,14 @@ slug: recipes/imperfect-bars
 author: Jake Laursen
 excerpt: A crispier take on a refridgerator bar
 tags: recipe, diy, protein, snack, home
-# coverImage: ./index.JPG
-# coverAlt: imperfect bars
+coverImage: ./index.JPG
+coverAlt: imperfect bars
 order: 1
 ---
 
 ## Imperfect Bars
+
+![imperfect bars](./imperfect-bars/imperfect-bars.png)
 
 ### Ingreients
 
