@@ -24,6 +24,7 @@ const Index = () => {
           <p>A collection of writings on topics I've been working with</p>
           <Link to="/scrum">Scrum</Link>
           <Link to="/strengths">Personality & "Strengths"</Link>
+          <Link to="/febs">A Frontend Build System</Link>
           {/* <Link to="/node">Node</Link> */}
           {/* <Link to="/frontend">React & Frontend Skills</Link> */}
           {/* <Link to="">Developing Engineer Competencies toward career growth</Link> */}
