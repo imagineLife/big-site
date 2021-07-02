@@ -68,7 +68,7 @@ exports.createPages = async ({
   //     }
   //   }
   // `);
-  const res = await graphql(`
+  /*
     fragment febspart on FebsJson {
       slug
       title
@@ -88,6 +88,8 @@ exports.createPages = async ({
         }
       }
     }
+  */
+  const res = await graphql(`
     fragment chartparts on ChartsJson {
       slug
       title
@@ -153,9 +155,18 @@ exports.createPages = async ({
           }
         }
       }
-      febs: allFebsJson {
-        data: nodes {
-          ...febspart
+      febs: allMarkdownRemark(
+        sort: { fields: frontmatter___order }
+        filter: { frontmatter: { order: { gt: 0 }, slug: { regex: "/febs/" } } }
+      ) {
+        pages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              excerpt
+            }
+          }
         }
       }
       charts: allChartsJson {
@@ -175,22 +186,13 @@ exports.createPages = async ({
     data: {
       scrum: { pages: scrumPages },
       recipes: { pages: recipePages },
-      febs: { data: febsPages },
       charts: { data: chartsData },
+      febs: { data: febsPages },
     },
   } = res;
 
-  // const {
-  // recipes: { data: recipeData },
-  // posts: { data: postData },
-  // febs: { data: febsData },
-  // charts: { data: chartsData },
-  // strengths: { nodes: strengthsData },
-  //   scrum: { nodes: scrumData },
-  // } = res.data;
-
   const mdTemplate = path.resolve(`src/templates/markdown/index.js`);
-  [...scrumPages, ...recipePages].forEach(({ page }) => {
+  [...scrumPages, ...recipePages, ...febsPages].forEach(({ page }) => {
     createPage({
       path: page.overview.slug,
       component: mdTemplate,
@@ -200,16 +202,16 @@ exports.createPages = async ({
     });
   });
 
-  const febsTemplate = path.resolve('src/templates/febs/index.js');
-  febsPages.forEach(febPage => {
-    createPage({
-      path: febPage.slug,
-      component: febsTemplate,
-      context: {
-        slug: febPage.slug,
-      },
-    });
-  });
+  // const febsTemplate = path.resolve('src/templates/febs/index.js');
+  // febsPages.forEach(febPage => {
+  //   createPage({
+  //     path: febPage.slug,
+  //     component: febsTemplate,
+  //     context: {
+  //       slug: febPage.slug,
+  //     },
+  //   });
+  // });
 
   const chartsTemplate = path.resolve('src/templates/chart/index.js');
 
