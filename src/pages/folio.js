@@ -2,6 +2,7 @@ import React from 'react';
 import './folio.scss';
 import FolioItem from './../components/folioItem';
 import TechList from './../components/techList';
+import { Link } from 'gatsby';
 
 const techs = {
   frontend: [
@@ -204,14 +205,11 @@ export default function Folio() {
     <main role="main" className="folio">
       <section className="welcome">
         <div className="text-box">
-          <p className="intro-text">
-            <b>Welcome</b>
-            <br />
-            Friends & Family call me Jake. <br />I make web-based software.
-            <br />
-            I also enjoy making data visualizations.
-            <br />
-          </p>
+          <b>Welcome</b>
+          <p>Friends & Family call me Jake. </p>
+          <p>I make web-based software.</p>
+          <p>I also enjoy making data visualizations.</p>
+          <Link to="/">To My Writings</Link>
           <div className="tech-list-box">
             <TechList listName="Frontend" itms={techs.frontend} />
             <TechList listName="Server" itms={techs.backend} />
