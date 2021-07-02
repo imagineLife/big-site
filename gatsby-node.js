@@ -1,5 +1,9 @@
 const path = require('path');
-exports.createPages = async ({ actions, graphql, reporter }) => {
+exports.createPages = async ({
+  actions: { createPage },
+  graphql,
+  reporter,
+}) => {
   /*
     fragment postpart on PostsJson {
       slug
@@ -33,39 +37,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       }
     }
 
-    fragment chartparts on ChartsJson {
-      slug
-      title
-      explanations
-      chartdata {
-        xdomain
-        ydomain
-        values {
-          x
-          y
-        }
-      }
-      sections {
-        box {
-          data
-          itm
-        }
-        column {
-          data
-          itm
-        }
-        className
-        interactiveStateWrapper
-      }
-      footer {
-        text
-        link {
-          text
-          url
-        }
-      }
-    }
-
     query {
       posts: allPostsJson {
         data: nodes {
@@ -80,11 +51,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       febs: allFebsJson {
         data: nodes {
           ...febspart
-        }
-      }
-      charts: allChartsJson {
-        data: nodes {
-          ...chartparts
         }
       }
     }
@@ -116,6 +82,38 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         }
       }
       footer {
+        link {
+          text
+          url
+        }
+      }
+    }
+    fragment chartparts on ChartsJson {
+      slug
+      title
+      explanations
+      chartdata {
+        xdomain
+        ydomain
+        values {
+          x
+          y
+        }
+      }
+      sections {
+        box {
+          data
+          itm
+        }
+        column {
+          data
+          itm
+        }
+        className
+        interactiveStateWrapper
+      }
+      footer {
+        text
         link {
           text
           url
@@ -160,6 +158,11 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           ...febspart
         }
       }
+      charts: allChartsJson {
+        data: nodes {
+          ...chartparts
+        }
+      }
     }
   `);
 
@@ -173,6 +176,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       scrum: { pages: scrumPages },
       recipes: { pages: recipePages },
       febs: { data: febsPages },
+      charts: { data: chartsData },
     },
   } = res;
 
@@ -187,7 +191,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   const mdTemplate = path.resolve(`src/templates/markdown/index.js`);
   [...scrumPages, ...recipePages].forEach(({ page }) => {
-    actions.createPage({
+    createPage({
       path: page.overview.slug,
       component: mdTemplate,
       context: {
@@ -198,7 +202,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   const febsTemplate = path.resolve('src/templates/febs/index.js');
   febsPages.forEach(febPage => {
-    actions.createPage({
+    createPage({
       path: febPage.slug,
       component: febsTemplate,
       context: {
@@ -206,6 +210,19 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       },
     });
   });
+
+  const chartsTemplate = path.resolve('src/templates/chart/index.js');
+
+  chartsData.forEach(chartPage => {
+    createPage({
+      path: chartPage.slug,
+      component: chartsTemplate,
+      context: {
+        slug: chartPage.slug,
+      },
+    });
+  });
+
   // [
   //   // ...postData,
   //   // ...recipeData,
@@ -226,7 +243,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   //     ? require.resolve('./src/templates/chart')
   //     : require.resolve('./src/templates/post');
 
-  //   actions.createPage({
+  //   createPage({
   //     // where the browser can access the page
   //     path: post.slug,
   //     // What component will pass the mdx file to
