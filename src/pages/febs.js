@@ -10,15 +10,21 @@ import './scrum.scss';
 const IndexPage = () => (
   <StaticQuery
     query={graphql`
-      fragment febspart on FebsJson {
-        slug
-        title
-        order
-      }
-      query {
-        febs: allFebsJson {
-          pages: nodes {
-            ...febspart
+      query FebsTOC {
+        febs: allMarkdownRemark(
+          sort: { fields: frontmatter___order }
+          filter: {
+            frontmatter: { order: { gt: 0 }, slug: { regex: "/febs/" } }
+          }
+        ) {
+          pages: edges {
+            page: node {
+              overview: frontmatter {
+                slug
+                title
+                excerpt
+              }
+            }
           }
         }
       }
@@ -29,25 +35,26 @@ const IndexPage = () => (
           <Hero />
           <Layout>
             <section className="toc-wrapper">
-              <h1>FEBS</h1>
-              <p className="subtitle">A Frontend Build System</p>
-              {pages
-                .sort((a, b) => (a.order > b.order ? 1 : -1))
-                .map(
-                  (
-                    { slug, title }, //excerpt
-                    pageIdx,
-                  ) => {
-                    return (
-                      <div className="toc-card" key={`scrum-toc-${pageIdx}`}>
-                        <Link to={`/${slug}`} className="title">
-                          {title}
-                        </Link>
-                        {/* <p className="content">{excerpt}</p> */}
-                      </div>
-                    );
+              <h1>A Frontend Build System</h1>
+              {pages.map(
+                (
+                  {
+                    page: {
+                      overview: { slug, title, excerpt },
+                    },
                   },
-                )}
+                  pageIdx,
+                ) => {
+                  return (
+                    <div className="toc-card" key={`febs-toc-${pageIdx}`}>
+                      <Link to={`/${slug}`} className="title">
+                        {title}
+                      </Link>
+                      <p className="content">{excerpt}</p>
+                    </div>
+                  );
+                },
+              )}
             </section>
           </Layout>
         </Fragment>
