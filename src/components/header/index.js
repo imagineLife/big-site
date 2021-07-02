@@ -14,12 +14,15 @@ const Header = () => (
       <Link className="styled" activeClassName="current-page" to="/about">
         About
       </Link>
-      <Link className="styled" activeClassName="current-page" to="/posts">
+      {/* <Link className="styled" activeClassName="current-page" to="/posts">
         Posts
+      </Link> */}
+      <Link className="styled" activeClassName="current-page" to="/scrum">
+        Scrum
       </Link>
-      <Link className="styled" activeClassName="current-page" to="/strengths">
-        strengths
-      </Link>
+      {/* <Link className="styled" activeClassName="current-page" to="/strengths">
+  strengths
+</Link> */}
     </nav>
   </header>
 );

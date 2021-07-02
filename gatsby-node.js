@@ -187,7 +187,7 @@ exports.createPages = async ({
       scrum: { pages: scrumPages },
       recipes: { pages: recipePages },
       charts: { data: chartsData },
-      febs: { data: febsPages },
+      febs: { pages: febsPages },
     },
   } = res;
 
