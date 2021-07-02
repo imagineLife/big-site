@@ -81,8 +81,8 @@ const About = () => (
           I've been enjoying the principles of a strengths-first way of being,
           both in my own life and when working with others. When conflict
           arises, we can learn to leverage one anothers' personality tendencies
-          for the best, and take steps toward conflict resolution by pressing
-          into the best parts of our personalities.
+          for the best, and take steps toward conflict resolution by pulling out
+          the best in one another.
         </p>
       </div>
       <Link to="/">Home</Link>
