@@ -4,91 +4,6 @@ exports.createPages = async ({
   graphql,
   reporter,
 }) => {
-  /*
-    fragment postpart on PostsJson {
-      slug
-      title
-      excerpt
-    }
-
-    fragment recipepart on RecipesJson {
-      slug
-      title
-      excerpt
-    }
-
-    fragment febspart on FebsJson {
-      slug
-      title
-      sections {
-        class
-        title
-        subTitle
-        listitems {
-          itmTitle: title
-          itmTxt: content
-        }
-      }
-      footer {
-        link {
-          text
-          url
-        }
-      }
-    }
-
-    query {
-      posts: allPostsJson {
-        data: nodes {
-          ...postpart
-        }
-      }
-      recipes: allRecipesJson {
-        data: nodes {
-          ...recipepart
-        }
-      }
-      febs: allFebsJson {
-        data: nodes {
-          ...febspart
-        }
-      }
-    }
-  */
-  // const res = await graphql(`
-  //   query {
-  //     scrum: allMdx(filter: { frontmatter: { slug: { regex: "/scrum/" } } }) {
-  //       nodes {
-  //         frontmatter {
-  //           slug
-  //           title
-  //           excerpt
-  //         }
-  //       }
-  //     }
-  //   }
-  // `);
-  /*
-    fragment febspart on FebsJson {
-      slug
-      title
-      sections {
-        class
-        title
-        subTitle
-        listitems {
-          itmTitle: title
-          itmTxt: content
-        }
-      }
-      footer {
-        link {
-          text
-          url
-        }
-      }
-    }
-  */
   const res = await graphql(`
     fragment chartparts on ChartsJson {
       slug
@@ -135,6 +50,7 @@ exports.createPages = async ({
               slug
               title
               excerpt
+              parentDir
             }
           }
         }
@@ -198,20 +114,10 @@ exports.createPages = async ({
       component: mdTemplate,
       context: {
         slug: page.overview.slug,
+        parentDir: page.overview.parentDir || page.overview.slug,
       },
     });
   });
-
-  // const febsTemplate = path.resolve('src/templates/febs/index.js');
-  // febsPages.forEach(febPage => {
-  //   createPage({
-  //     path: febPage.slug,
-  //     component: febsTemplate,
-  //     context: {
-  //       slug: febPage.slug,
-  //     },
-  //   });
-  // });
 
   const chartsTemplate = path.resolve('src/templates/chart/index.js');
 
@@ -224,36 +130,4 @@ exports.createPages = async ({
       },
     });
   });
-
-  // [
-  //   // ...postData,
-  //   // ...recipeData,
-  //   // ...strengthsData.map(d => d.frontmatter),
-  //   // ...febsData,
-  //   // ...chartsData,
-  //   ...scrumData.map(d => d.frontmatter),
-  // ].forEach(post => {
-  //   console.log('looping posts');
-  //   console.log(post.slug);
-  //   console.log('// - - - - - //');
-
-  //   let thisComponent = post.slug.includes('recipes')
-  //     ? require.resolve('./src/templates/recipe')
-  //     : post.slug.includes('febs')
-  //     ? require.resolve('./src/templates/febs')
-  //     : post.slug.includes('charts')
-  //     ? require.resolve('./src/templates/chart')
-  //     : require.resolve('./src/templates/post');
-
-  //   createPage({
-  //     // where the browser can access the page
-  //     path: post.slug,
-  //     // What component will pass the mdx file to
-  //     component: thisComponent,
-  //     // name the url slug
-  //     context: {
-  //       slug: post.slug,
-  //     },
-  //   });
-  // });
 };
