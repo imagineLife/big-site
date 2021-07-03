@@ -1,6 +1,7 @@
 ---
 title: Project Setup - Install Babel & loader Dependencies,
-slug: febs/more-dependencies,
+slug: febs/more-dependencies
+parentDir: febs
 order: 5
 ---
 

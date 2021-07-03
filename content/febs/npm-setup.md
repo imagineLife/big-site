@@ -1,6 +1,7 @@
 ---
 title: Project Setup - Webpack Dependencies
 slug: febs/npm-setup
+parentDir: febs
 order: 2
 ---
 

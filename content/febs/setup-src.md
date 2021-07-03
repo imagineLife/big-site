@@ -1,6 +1,7 @@
 ---
 title: Initialize a Source Directory
 slug: febs/setup-src
+parentDir: febs
 order: 3
 ---
 

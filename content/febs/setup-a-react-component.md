@@ -1,6 +1,7 @@
 ---
 title: Setup A react Component
 slug: febs/setup-a-react-component
+parentDir: febs
 order: 6
 ---
 
