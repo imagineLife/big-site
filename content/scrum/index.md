@@ -4,6 +4,7 @@ slug: scrum/
 author: Jake Laursen
 excerpt: One-Liners about import parts of scrum - from theories and values to artifacts and events
 tags: team, scrum, process
+parentDir: scrum
 order: 0
 ---
 

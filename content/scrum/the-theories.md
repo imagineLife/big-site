@@ -4,6 +4,7 @@ slug: scrum/the-theories
 author: Jake Laursen
 excerpt: Empiricism, Lean Thinking, Transparency, Inpsection and Adaptation keep Scrum honest
 tags: team, scrum, process, theory
+parentDir: scrum
 order: 1
 ---
 

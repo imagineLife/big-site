@@ -4,6 +4,7 @@ slug: scrum/the-increment
 author: Jake Laursen
 excerpt: The tool that can transform ideas into releasable content
 tags: team, scrum, process, increment, transformation
+parentDir: scrum
 order: 7
 ---
 
