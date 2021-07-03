@@ -1,21 +1,21 @@
-$margin-big: 10px;
-$margin-med: 5px;
-$margin-small: 3px;
+$margin-big: 12px;
+$margin-med: 8px;
+$margin-small: 5px;
 
 .md-wrapper {
   margin: 0 auto;
   max-width: 1000px;
 
   h2 {
-    margin: $margin-big 0;
+    margin: $margin-small;
   }
 
   h3 {
-    margin: $margin-med 0;
+    margin: $margin-med;
   }
 
   h4 {
-    margin: $margin-small 0;
+    margin: $margin-big;
   }
 
   p {

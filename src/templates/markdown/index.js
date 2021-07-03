@@ -4,21 +4,20 @@ import './index.scss';
 
 export default function Template({
   data: {
-    pageData: { overview, content },
+    pageData: {
+      content,
+      overview: { order },
+    },
     pageSummaries: { pages },
   },
 }) {
-  const footerLinks = pages.reduce(
-    (resArr, { page: { overview: pg } }, pgIdx) => {
-      // get previous, current, && next page details
-      if (pgIdx !== overview.order - 1 && pgIdx !== overview.order + 1)
-        return resArr;
-      else {
-        return [...resArr, pg];
-      }
-    },
-    [],
-  );
+  const footerLinks = pages.reduce((resArr, itm, pgIdx) => {
+    // get previous, current, && next page details
+    if (pgIdx !== order - 1 && pgIdx !== order + 1) return resArr;
+    else {
+      return [...resArr, itm.details];
+    }
+  }, []);
 
   return (
     <Fragment>
@@ -40,24 +39,21 @@ export default function Template({
 }
 
 export const pgQuery = graphql`
-  query MarkdownBySlug($slug: String!) {
+  query MarkdownBySlug($slug: String!, $parentDir: String!) {
     pageData: markdownRemark(frontmatter: { slug: { eq: $slug } }) {
+      content: html
       overview: frontmatter {
-        slug
-        title
-        tags
         order
       }
-      content: html
     }
-    pageSummaries: allMarkdownRemark(sort: { fields: frontmatter___order }) {
-      pages: edges {
-        page: node {
-          overview: frontmatter {
-            slug
-            title
-            order
-          }
+    pageSummaries: allMarkdownRemark(
+      sort: { fields: frontmatter___order }
+      filter: { frontmatter: { parentDir: { eq: $parentDir } } }
+    ) {
+      pages: nodes {
+        details: frontmatter {
+          slug
+          title
         }
       }
     }
