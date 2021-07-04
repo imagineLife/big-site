@@ -1,39 +1,73 @@
-import React from 'react';
-import { Link } from 'gatsby';
-import getStrengths from './../../hooks/get-strengths';
+import React, { Fragment } from 'react';
+import { StaticQuery, graphql, Link } from 'gatsby';
 
 // Components
 import PostPreview from './../../components/PostPreview';
 import Layout from './../../components/layout';
+// import Layout from './../components/layout';
+import Hero from './../../components/hero';
+// import PostPreview from './../components/PostPreview';
 
-export default function Strengths() {
-  const strengthsSlugs = getStrengths();
+// import './scrum.scss';
 
-  return (
-    <Layout>
-      <section id="strengths-list">
-        <h1>Personality & Strengths</h1>
-        <p>
-          Welcome to this section of my blog, highlighting some thoughts and
-          experiences about personalities and{' '}
-          <Link
-            target="_blank"
-            to="https://www.gallup.com/cliftonstrengths/en/home.aspx"
-          >
-            StrengthsFinder
-          </Link>
-          .
-        </p>
+const IndexPage = () => (
+  <StaticQuery
+    query={graphql`
+      query StrengthsTOC {
+        strengths: allMarkdownRemark(
+          sort: { fields: frontmatter___order }
+          filter: {
+            frontmatter: { order: { gt: 0 }, slug: { regex: "/strengths/" } }
+          }
+        ) {
+          pages: edges {
+            page: node {
+              overview: frontmatter {
+                slug
+                title
+                excerpt
+              }
+            }
+          }
+        }
+      }
+    `}
+    render={({ strengths: { pages } }) => {
+      return (
+        <Fragment>
+          <Hero />
+          <Layout>
+            <section className="toc-wrapper">
+              <h1>On Strengths</h1>
+              <p>
+                Some thoughts on how we can view ourselves and one another as
+                individuals with natural talents.
+              </p>
+              {pages.map(
+                (
+                  {
+                    page: {
+                      overview: { slug, title, excerpt },
+                    },
+                  },
+                  pageIdx,
+                ) => {
+                  return (
+                    <div className="toc-card" key={`strengths-toc-${pageIdx}`}>
+                      <Link to={`/${slug}`} className="title">
+                        {title}
+                      </Link>
+                      <p className="content">{excerpt}</p>
+                    </div>
+                  );
+                },
+              )}
+            </section>
+          </Layout>
+        </Fragment>
+      );
+    }}
+  />
+);
 
-        <div id="strengths-post-list">
-          {strengthsSlugs?.map(({ title, excerpt, slug }, idx) => (
-            <PostPreview
-              key={`strengths-post-preview-${idx}`}
-              {...{ title, excerpt, slug }}
-            />
-          ))}
-        </div>
-      </section>
-    </Layout>
-  );
-}
+export default IndexPage;
