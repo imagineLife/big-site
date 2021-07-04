@@ -22,6 +22,15 @@ $margin-small: 5px;
     margin: 0 20px;
     line-height: 1.5rem;
   }
+
+  pre{
+    color: #d6deeb;
+    background-color: #011627;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: monospace;
+    overflow: auto;
+  }
 }
 
 .md-footer {
@@ -37,3 +46,5 @@ $margin-small: 5px;
     }
   }
 }
+
+
