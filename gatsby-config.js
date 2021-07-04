@@ -55,7 +55,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `strengths`,
-        path: `src/pages/strengths`,
+        path: `content/strengths`,
       },
     },
     {
