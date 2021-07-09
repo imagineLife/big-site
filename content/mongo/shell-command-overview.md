@@ -7,6 +7,9 @@ There are 3 "groups" of shell commands
 - sh
   - WRAP commands controlling shard clusters + deployments
 
+## Run commands from a driver
+These shell commands may not explicitly be available in a driver.  
+
 ## db examples
 - db.createUser()
 - db.dropUser()
@@ -36,3 +39,5 @@ db.runCommand(
   - mongo creates collections implicitly
 - db.serverStatus()
   - get data about the db
+- db.commandHelp('curious-command-here')
+  - get deets on the command
