@@ -23,9 +23,32 @@ This role has **privileges on the cluster**:
 This role has a **privilege on all dbs in the cluster**:
 - killCursors
 
-## clusterManager
+## clusterManager  
+This role can monitor and manage the cluster. This role is granted access to both the _local_ and _config_ databases. These dbs are used in replication (_local_) and sharding(_config_).  
+
+#### On the Cluster
+- addShard
+- appendOplogNote
+- applicationMessage
+- cleanupOrphaned
+- flushRouterConfig
+- getDefaultRWConcern (New in version 4.4)
+- listSessions (New in version 3.6)
+- listShards
+- removeShard
+- replSetConfigure
+- replSetGetConfig
+- replSetGetStatus
+- replSetStateChange
+- resync
+- setDefaultRWConcern (New in version 4.4)
+- setFeatureCompatibilityVersion
+- setFreeMonitoring
+
+
 ## clusterMonitor
-This user has _read-only access_ to monitoring tools. This user has privileges across the cluster, on all dbs, and on particular dbs.
+This role has _read-only access_ to monitoring tools. This role has privileges across the cluster, on all dbs, and on particular dbs.  
+
 #### On the Cluster
 - checkFreeMonitoringStatus
 - connPoolStats
