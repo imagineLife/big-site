@@ -40,4 +40,6 @@ net:
   sslMode
 processManagement:
   fork
+replication: 
+  replSetName: "M103"
 ```
