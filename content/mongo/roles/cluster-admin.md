@@ -78,6 +78,7 @@ On all _non-system collections_:
 On all collections in the local db:  
 - ... all the same privileges of the non-system collections in the config db (_above_)
 
+On the system.replset && system.profile resources, this role can _find_.
 
 
 ## clusterAdmin  
