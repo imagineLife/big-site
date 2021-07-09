@@ -214,6 +214,22 @@ Here's a snapshot of some example logs.
     "ok" : 1
 }
 ```
+Each single log can be formatted with javascript using `JSON.parse` and the output will look like the following:
+```bash
+{
+  t: { 
+    '\$date': '2021-07-09T10:39:12.888+00:00' 
+  },
+  s: 'I',
+  c: 'STORAGE',
+  id: 22430,
+  ctx: 'WTCheckpointThread',
+  msg: 'WiredTiger message',
+  attr: {
+    message: '[1625827152:888965][1:0xffff99ea9ed0], WT_SESSION.checkpoint: [WT_VERB_CHECKPOINT_PROGRESS] saving checkpoint snapshot min: 50, snapshot max: 50 snapshot count: 0, oldest timestamp: (0, 0) , meta checkpoint timestamp: (0, 0)'
+  }
+}
+```
 
 ### Changing Verbosity of a log, the index
 ```bash
@@ -229,3 +245,42 @@ The output here will be the complete verbosity levels of all logs, but looking a
   "verbosity" : 0
 }
 ```
+
+### Analyzing a log
+With an example log for reference, here are some thoughts on the log details:
+```bash
+{
+t: { '\$date': '2021-07-09T10:52:53.655+00:00' },
+s: 'I',
+c: 'COMMAND',
+id: 23435,
+ctx: 'conn4',
+msg: 'Successfully set parameter to new value',
+attr: {
+parameterName: 'logComponentVerbosity',
+newValue: '{ index: { verbosity: 0.0 } }',
+oldValue: '{ verbosity: 0, accessControl: { verbosity: -1 }, command: { verbosity: -1 }, control: { verbosity: -1 }, executor: { verbosity: -1 }, geo: { verbosity: -1 }, index: { verbosity: -1 }, network: { verbosity: -1, asio: { verbosity: -1 }, bridge: { verbosity: -1 }, connectionPool: { verbosity: -1 } }, query: { verbosity: -1 }, replication: { verbosity: -1, election: { verbosity: -1 }, heartbeats: { verbosity: -1 }, initialSync: { verbosity: -1 }, rollback: { verbosity: -1 } }, sharding: { verbosity: -1, rangeDeleter: { verbosity: -1 }, shardingCatalogRefresh: { verbosity: -1 }, migration: { verbosity: -1 } }, storage: { verbosity: -1, recovery: { verbosity: -1 }, journal: { verbosity: -1 } }, write: { verbosity: -1 }, ftdc: { verbosity: -1 }, tracking: { verbosity: -1 }, transaction: { verbosity: -1 }, test: { verbosity: -1 } }'
+}
+}
+
+```
+t - the date of the event
+s - severity: has a few options, here they are
+  - F: fatal
+  - E: error
+  - W: warning
+  - I: Informational
+    - this coincides with verbosity level 0
+  - D - Debug
+    - this coincides with verbosity levels 1-5
+id: - the log id
+c: the category of the logged event: has a few options, here's a few of them...
+  - ACCESS: access control
+  - COMMAND: db commands
+  - CONTROL: things like init
+  - ELECTION: replica set election
+  - FTDC
+  - GEO
+  - INDEX
+  ... there's a bunch more, [check out the mongo docs on this](https://docs.mongodb.com/manual/reference/log-messages/#std-label-log-message-field-types)
+
