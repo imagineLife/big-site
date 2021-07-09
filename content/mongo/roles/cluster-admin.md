@@ -53,6 +53,53 @@ This role can monitor and manage the cluster. This role is granted access to bot
 - splitChunk
 - splitVector
 
+#### On the Config DB
+**In the system.js resource**:  
+- collStats
+- dbHash
+- dbStats
+- find
+- killCursors
+- listCollections
+- listIndexes
+- planCacheRead
+
+**On all non-system collections in the config db**:  
+- all privileges in the system.js resource (_above_)
+- enableSharding
+- insert
+- moveChunk
+- remove
+- splitChunk
+- splitVector
+- update
+
+
+#### On the local DB
+
+**In the system.replset resource**:
+
+- collStats
+- dbHash
+- dbStats
+- find
+- killCursors
+- listCollections
+- listIndexes
+- planCacheRead
+
+**On all non-system collections in the local db**:
+- enableSharding
+- insert
+- moveChunk
+- remove
+- splitChunk
+- splitVector
+- update
+
+
+
+
 
 ## clusterMonitor
 This role has _read-only access_ to monitoring tools. This role has privileges across the cluster, on all dbs, and on particular dbs.  
