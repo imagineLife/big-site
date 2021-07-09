@@ -70,6 +70,13 @@ On all _non-system collections_:
 - getShardVersion
 - indexStats
 
+#### On local db
+**on the system.js collection in the local db**:
+- ... all the same privileges of the system.js collection of the config db  
+
+
+On all collections in the local db:  
+- ... all the same privileges of the non-system collections in the config db (_above_)
 
 
 
