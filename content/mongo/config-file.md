@@ -1,0 +1,43 @@
+# Mongo Config
+Here, `mongod` is the main executable. This can have _many_ cli args...
+- dbpath
+- logpath
+- fork
+- replSet
+- keyFile
+- bindPort
+
+## CLI Config Options
+- dbpath
+  - where the data lives
+- logpath
+  - where the log files live
+- bind_ip
+  - can only accept connection on the same host without this 
+- replSet
+- keyFile
+  - replSet && keyFile start mongod in replication mode with basic intra-cluster auth security && auth enabled
+- sslPEMKey
+- sslCAKey
+  - for security content
+- fork
+  - run mongod as a daemon, not tied to a terminal window
+
+## Config File Keys
+[some](https://docs.mongodb.com/manual/reference/program/mongod/#bin.mongod) [references](https://docs.mongodb.com/manual/reference/configuration-options/)
+
+```yaml
+storage:
+  dbPath
+systemLog:
+  path
+  destination
+net:
+  bind_ip
+  ssl:
+    sslPEMKey
+    sslCAKey
+  sslMode
+processManagement:
+  fork
+```
