@@ -28,10 +28,10 @@ Here, `mongod` is the main executable. This can have _many_ cli args...
 
 ```yaml
 storage:
-  dbPath
+  dbPath: "/data/db"
 systemLog:
-  path
-  destination
+  path: "data/log/mongod.log"
+  destination: "file" # file-type
 net:
   bind_ip
   ssl:
