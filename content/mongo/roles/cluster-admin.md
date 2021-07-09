@@ -54,6 +54,24 @@ This user has _read-only access_ to monitoring tools. This user has privileges a
 - indexStats
 - useUUID
 
+#### On Config DB
+**on the system.js collection in the config db**:  
+- collStats
+- dbHash
+- dbStats
+- find
+- killCursors
+- listCollections
+- listIndexes
+- planCacheRead
+
+On all _non-system collections_:  
+- ... all above privileges
+- getShardVersion
+- indexStats
+
+
+
 
 ## clusterAdmin  
 This role has all of the privileges of the above 3 roles: the _clusterManager_, _clusterMonitor_, as well as _hostManager_.
