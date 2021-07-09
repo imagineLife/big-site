@@ -32,8 +32,8 @@ This role can monitor and manage the cluster. This role is granted access to bot
 - applicationMessage
 - cleanupOrphaned
 - flushRouterConfig
-- getDefaultRWConcern (New in version 4.4)
-- listSessions (New in version 3.6)
+- getDefaultRWConcern
+- listSessions
 - listShards
 - removeShard
 - replSetConfigure
@@ -41,9 +41,17 @@ This role can monitor and manage the cluster. This role is granted access to bot
 - replSetGetStatus
 - replSetStateChange
 - resync
-- setDefaultRWConcern (New in version 4.4)
+- setDefaultRWConcern
 - setFeatureCompatibilityVersion
 - setFreeMonitoring
+
+#### On All DBs
+- clearJumboFlag
+- enableSharding
+- refineCollectionShardKey
+- moveChunk
+- splitChunk
+- splitVector
 
 
 ## clusterMonitor
