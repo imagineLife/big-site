@@ -43,3 +43,7 @@ security:
 processManagement:
   fork: true
 ```
+### Using config file in cli
+```bash
+mongod --config "/etc/mongod.conf" #also the default config file
+```
