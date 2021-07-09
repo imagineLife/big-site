@@ -1,3 +1,11 @@
+---
+slug: mongo/roles/cluster-admin
+parentSlug: mongo/roles
+title: Cluster Admin Roles
+excerpt: hostManager, clusterManager, clusterMonitor, and clusterAdmin
+order: 2
+---
+
 # Cluster Admin Roles
 These roles are for the _admin_ database. These roles are meant to administer more than a db, including replica sets as well as sharded clusters.  
 
