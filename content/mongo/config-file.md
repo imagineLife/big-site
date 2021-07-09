@@ -33,13 +33,13 @@ systemLog:
   path: "data/log/mongod.log"
   destination: "file" # file-type
 net:
-  bind_ip
+  bind_ip: "127.0.0.1, 192.168.0.10"
   ssl:
-    sslPEMKey
-    sslCAKey
-  sslMode
+    mode: "requireSSL"
+    PEMKeyFile: "/etc/ssl/ssl.pem"
+    CAFile: "/etc/ssl/SSLCA.pem"
+security:
+  keyFile: "/data/keyfile"
 processManagement:
-  fork
-replication: 
-  replSetName: "M103"
+  fork: true
 ```
