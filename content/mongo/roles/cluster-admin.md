@@ -3,7 +3,7 @@ These roles are for the _admin_ database. These roles are meant to administer mo
 
 ## hostManager
 This role can manage and monitor servers.  
-This role has privileges on the cluster:
+This role has **privileges on the cluster**:
 - applicationMessage
 - closeAllDatabases
 - connPoolSync
@@ -19,6 +19,9 @@ This role has privileges on the cluster:
 - shutdown
 - touch
 - unlock
+
+This role has a **privilege on all dbs in the cluster**:
+- killCursors
 
 ## clusterManager
 ## clusterMonitor
