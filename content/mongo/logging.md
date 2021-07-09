@@ -172,3 +172,28 @@ In a db that has activity and privileges to do this, running `db.getLogComponent
   }
 }
 ```
+
+### Log Component Analysis
+
+**verbosity field**  
+The verbosity field is a default verbosity level. This field value can be inherited by all other fields.  
+
+**log verbosity values**  
+Log levels traverse from -1 to 5:
+- -1 show inheritance
+- 0 is default, info only: helpful for monitoring
+- 1-5 means more in-depth details
+
+## Looking at logs
+- getLogsDb
+- use a utility
+
+### GetLogs command
+Against a running mongo instance,
+```bash
+use admin
+```  
+then
+```bash
+db.adminCommand({"getLog": "global"})
+```
