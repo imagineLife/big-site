@@ -25,5 +25,28 @@ This role has a **privilege on all dbs in the cluster**:
 
 ## clusterManager
 ## clusterMonitor
+This user has _read-only access_ to monitoring tools. This user has privileges across the cluster, on all dbs, and on particular dbs.
+#### On the Cluster
+- checkFreeMonitoringStatus
+- connPoolStats
+- getCmdLineOpts
+- getDefaultRWConcern
+- getLog
+- getParameter
+- getShardMap
+- hostInfo
+- inprog
+- listDatabases
+- listSessions
+- listShards
+- netstat
+- replSetGetConfig
+- replSetGetStatus
+- serverStatus
+- setFreeMonitoring
+- shardingState
+- top
+
+
 ## clusterAdmin  
 This role has all of the privileges of the above 3 roles: the _clusterManager_, _clusterMonitor_, as well as _hostManager_.
