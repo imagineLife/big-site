@@ -1,0 +1,38 @@
+# Shell Commands
+There are 3 "groups" of shell commands
+- db
+  - WRAP commands that interact with the db
+- rs
+  - WRAP commands that deal with replica-sets
+- sh
+  - WRAP commands controlling shard clusters + deployments
+
+## db examples
+- db.createUser()
+- db.dropUser()
+
+## db collection management
+- db.renameCollection()
+- db.<collection-name>.createIndex()
+  - compared to the db command...
+```js
+db.runCommand(
+  {
+    "createIndexes": "<collection-name>",
+    "indexes": [
+      {
+        "key" : { "product": 1 }
+      },
+      "name": "product_index"
+    ]
+  }
+)
+```
+- db.<collection-name>.drop()
+
+## db management
+- db.dropDatabase()
+- db.createCollection()
+  - mongo creates collections implicitly
+- db.serverStatus()
+  - get data about the db
