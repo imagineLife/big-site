@@ -189,6 +189,8 @@ Log levels traverse from -1 to 5:
 - use a utility
 
 ### GetLogs command
+[mongo docs on the topic](https://docs.mongodb.com/manual/reference/command/getLog/)  
+
 Against a running mongo instance,
 ```bash
 use admin
@@ -196,4 +198,34 @@ use admin
 then
 ```bash
 db.adminCommand({"getLog": "global"})
+```
+Here's a snapshot of some example logs.  
+**NOTE** that [Starting in MongoDB 4.4, getLog returns log data in escaped Relaxed Extended JSON v2.0 format. Previously, log data was returned as plaintext.
+](https://docs.mongodb.com/manual/reference/command/getLog/#mongodb-dbcommand-dbcmd.getLog)
+```bash
+    	"{\"t\":{\"$date\":\"2021-07-09T10:34:12.822+00:00\"},\"s\":\"I\",  \"c\":\"STORAGE\",  \"id\":22430,   \"ctx\":\"WTCheckpointThread\",\"msg\":\"WiredTiger message\",\"attr\":{\"message\":\"[1625826852:822777][1:0xffff99ea9ed0], WT_SESSION.checkpoint: [WT_VERB_CHECKPOINT_PROGRESS] saving checkpoint snapshot min: 45, snapshot max: 45 snapshot count: 0, oldest timestamp: (0, 0) , meta checkpoint timestamp: (0, 0)\"}}",
+    	"{\"t\":{\"$date\":\"2021-07-09T10:35:12.842+00:00\"},\"s\":\"I\",  \"c\":\"STORAGE\",  \"id\":22430,   \"ctx\":\"WTCheckpointThread\",\"msg\":\"WiredTiger message\",\"attr\":{\"message\":\"[1625826912:841997][1:0xffff99ea9ed0], WT_SESSION.checkpoint: [WT_VERB_CHECKPOINT_PROGRESS] saving checkpoint snapshot min: 46, snapshot max: 46 snapshot count: 0, oldest timestamp: (0, 0) , meta checkpoint timestamp: (0, 0)\"}}",
+    	"{\"t\":{\"$date\":\"2021-07-09T10:36:12.850+00:00\"},\"s\":\"I\",  \"c\":\"STORAGE\",  \"id\":22430,   \"ctx\":\"WTCheckpointThread\",\"msg\":\"WiredTiger message\",\"attr\":{\"message\":\"[1625826972:850134][1:0xffff99ea9ed0], WT_SESSION.checkpoint: [WT_VERB_CHECKPOINT_PROGRESS] saving checkpoint snapshot min: 47, snapshot max: 47 snapshot count: 0, oldest timestamp: (0, 0) , meta checkpoint timestamp: (0, 0)\"}}",
+    	"{\"t\":{\"$date\":\"2021-07-09T10:37:12.863+00:00\"},\"s\":\"I\",  \"c\":\"STORAGE\",  \"id\":22430,   \"ctx\":\"WTCheckpointThread\",\"msg\":\"WiredTiger message\",\"attr\":{\"message\":\"[1625827032:863817][1:0xffff99ea9ed0], WT_SESSION.checkpoint: [WT_VERB_CHECKPOINT_PROGRESS] saving checkpoint snapshot min: 48, snapshot max: 48 snapshot count: 0, oldest timestamp: (0, 0) , meta checkpoint timestamp: (0, 0)\"}}",
+    	"{\"t\":{\"$date\":\"2021-07-09T10:38:12.872+00:00\"},\"s\":\"I\",  \"c\":\"STORAGE\",  \"id\":22430,   \"ctx\":\"WTCheckpointThread\",\"msg\":\"WiredTiger message\",\"attr\":{\"message\":\"[1625827092:872345][1:0xffff99ea9ed0], WT_SESSION.checkpoint: [WT_VERB_CHECKPOINT_PROGRESS] saving checkpoint snapshot min: 49, snapshot max: 49 snapshot count: 0, oldest timestamp: (0, 0) , meta checkpoint timestamp: (0, 0)\"}}",
+    	"{\"t\":{\"$date\":\"2021-07-09T10:39:12.888+00:00\"},\"s\":\"I\",  \"c\":\"STORAGE\",  \"id\":22430,   \"ctx\":\"WTCheckpointThread\",\"msg\":\"WiredTiger message\",\"attr\":{\"message\":\"[1625827152:888965][1:0xffff99ea9ed0], WT_SESSION.checkpoint: [WT_VERB_CHECKPOINT_PROGRESS] saving checkpoint snapshot min: 50, snapshot max: 50 snapshot count: 0, oldest timestamp: (0, 0) , meta checkpoint timestamp: (0, 0)\"}}",
+    	"{\"t\":{\"$date\":\"2021-07-09T10:40:12.900+00:00\"},\"s\":\"I\",  \"c\":\"STORAGE\",  \"id\":22430,   \"ctx\":\"WTCheckpointThread\",\"msg\":\"WiredTiger message\",\"attr\":{\"message\":\"[1625827212:899955][1:0xffff99ea9ed0], WT_SESSION.checkpoint: [WT_VERB_CHECKPOINT_PROGRESS] saving checkpoint snapshot min: 51, snapshot max: 51 snapshot count: 0, oldest timestamp: (0, 0) , meta checkpoint timestamp: (0, 0)\"}}"
+    ],
+    "ok" : 1
+}
+```
+
+### Changing Verbosity of a log, the index
+```bash
+db.setLogLevel(0, "index")
+```
+Check that the change took
+```bash
+db.getLogComponents()
+```
+The output here will be the complete verbosity levels of all logs, but looking at _just the index log component_ shows that the log value is now 0
+```bash
+"index" : {
+  "verbosity" : 0
+}
 ```
