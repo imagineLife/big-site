@@ -17,3 +17,20 @@ This is a "backdoor" that mongo gives for authenticated dbs.
 - **use this to create a user with admin priveleges as the first user**  
 
 ## Creating a MongoDB Superuser
+connect with 
+```bash
+mongo --host 127.0.0.1:27017
+```
+```bash 
+use admin
+```
+create the user
+```bash
+db.createUser(
+  {
+    user: "root",
+    pwd: "root",
+    roles: ["root"]
+  }
+)
+```
