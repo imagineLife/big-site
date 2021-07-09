@@ -47,6 +47,13 @@ This user has _read-only access_ to monitoring tools. This user has privileges a
 - shardingState
 - top
 
+#### On All DBs
+- collStats
+- dbStats
+- getShardVersion
+- indexStats
+- useUUID
+
 
 ## clusterAdmin  
 This role has all of the privileges of the above 3 roles: the _clusterManager_, _clusterMonitor_, as well as _hostManager_.
