@@ -250,17 +250,17 @@ The output here will be the complete verbosity levels of all logs, but looking a
 With an example log for reference, here are some thoughts on the log details:
 ```bash
 {
-t: { '\$date': '2021-07-09T10:52:53.655+00:00' },
-s: 'I',
-c: 'COMMAND',
-id: 23435,
-ctx: 'conn4',
-msg: 'Successfully set parameter to new value',
-attr: {
-parameterName: 'logComponentVerbosity',
-newValue: '{ index: { verbosity: 0.0 } }',
-oldValue: '{ verbosity: 0, accessControl: { verbosity: -1 }, command: { verbosity: -1 }, control: { verbosity: -1 }, executor: { verbosity: -1 }, geo: { verbosity: -1 }, index: { verbosity: -1 }, network: { verbosity: -1, asio: { verbosity: -1 }, bridge: { verbosity: -1 }, connectionPool: { verbosity: -1 } }, query: { verbosity: -1 }, replication: { verbosity: -1, election: { verbosity: -1 }, heartbeats: { verbosity: -1 }, initialSync: { verbosity: -1 }, rollback: { verbosity: -1 } }, sharding: { verbosity: -1, rangeDeleter: { verbosity: -1 }, shardingCatalogRefresh: { verbosity: -1 }, migration: { verbosity: -1 } }, storage: { verbosity: -1, recovery: { verbosity: -1 }, journal: { verbosity: -1 } }, write: { verbosity: -1 }, ftdc: { verbosity: -1 }, tracking: { verbosity: -1 }, transaction: { verbosity: -1 }, test: { verbosity: -1 } }'
-}
+  t: { '\$date': '2021-07-09T10:52:53.655+00:00' },
+  s: 'I',
+  c: 'COMMAND',
+  id: 23435,
+  ctx: 'conn4',
+  msg: 'Successfully set parameter to new value',
+  attr: {
+    parameterName: 'logComponentVerbosity',
+    newValue: '{ index: { verbosity: 0.0 } }',
+    oldValue: '{ verbosity: 0, accessControl: { verbosity: -1 }, command: { verbosity: -1 }, control: { verbosity: -1 }, executor: { verbosity: -1 }, geo: { verbosity: -1 }, index: { verbosity: -1 }, network: { verbosity: -1, asio: { verbosity: -1 }, bridge: { verbosity: -1 }, connectionPool: { verbosity: -1 } }, query: { verbosity: -1 }, replication: { verbosity: -1, election: { verbosity: -1 }, heartbeats: { verbosity: -1 }, initialSync: { verbosity: -1 }, rollback: { verbosity: -1 } }, sharding: { verbosity: -1, rangeDeleter: { verbosity: -1 }, shardingCatalogRefresh: { verbosity: -1 }, migration: { verbosity: -1 } }, storage: { verbosity: -1, recovery: { verbosity: -1 }, journal: { verbosity: -1 } }, write: { verbosity: -1 }, ftdc: { verbosity: -1 }, tracking: { verbosity: -1 }, transaction: { verbosity: -1 }, test: { verbosity: -1 } }'
+  }
 }
 
 ```
