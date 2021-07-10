@@ -28,9 +28,20 @@ create the user
 ```bash
 db.createUser(
   {
-    user: "root",
-    pwd: "root",
+    user: "myroot", 
+    pwd: "mypwd", 
     roles: ["root"]
   }
 )
+```
+
+**NOTES**
+- the "root" role has the highest role
+- the un / pw are for authentication
+
+## Test the new user credentials
+stop the current mongo process. This step is going to simulate any user trying to use the `mongo` cli tool to access the server. 
+
+```bash
+mongo --host 127.0.0.1:27017 --username myroot --password mypwd --authenticationDatabase admin
 ```
