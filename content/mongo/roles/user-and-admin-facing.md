@@ -75,7 +75,7 @@ use admin
 db.runCommand({
   rolesInfo: {
     role: 'dbOwner',
-    dbOwner: 'another'
+    db: 'another'
   },
   showPrivileges: true
 })
