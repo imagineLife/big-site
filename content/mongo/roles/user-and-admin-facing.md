@@ -48,3 +48,14 @@ db.createUser({
   ]
 })
 ```
+**NOTE**
+Use the admin db to create users.  
+In the admin table, the user definition contains which db(s) each user has permissions over.  
+
+## grant more roles to existing user
+Multiple roles can be had across multiple dbs.  
+Here, the db_admin user, with the dbAdmin role over the `specific` db, will be granted dbOwner role over `another` db.
+```bash
+use admin
+db.grantRolesToUser('db_admin', [{db: 'another', role: 'dbOwner'}])
+```
