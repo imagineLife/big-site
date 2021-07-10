@@ -82,3 +82,12 @@ mongoexport --port 12017 -u "usernameHere" -p "pwHere" --authenticationDatabase 
 mongoimport --drop --port 12017 -u "usernameHere" -p "pwHere" --authenticationDatabase "admin" jsonDataFileName.json
 ```
 **NOTE** the import didnt `know` where to put the data. mongoimport defaults to db named `test` && the name of the json file `jsonDataFileName` becomes the collection name.  
+
+## Test 
+- connect to an authenticated mongod instance on port 27000
+  - the un is m103-application-user && pw is m103-application-pass
+  - import a doc to an applicationData db in the products collection
+  - the doc to import is at `/dataset/products.json`
+
+**Answer**  
+mongoimport --drop --port 27000 -u "m103-application-user" -p "m103-application-pass" --authenticationDatabase "admin" --db "applicationData" -c "products"  /dataset/products.json
