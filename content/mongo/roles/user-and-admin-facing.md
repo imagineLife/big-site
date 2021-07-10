@@ -79,6 +79,10 @@ db.runCommand({
   },
   showPrivileges: true
 })
+
+# should return a large object in the terminal
+
+
 ```
 
 ## review users setup on the dbs
