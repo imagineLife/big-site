@@ -67,4 +67,11 @@ rs.reconfig(cfg)
 # review the config
 rs.conf()
 # should show one of the members as hidden with no voting privileges
-``
+```
+
+
+### Final thoughts
+updating a replica set with `rs.reconfig()`
+- requires the entire config object to be passed as a param
+- does not requile any config file to be directly updated
+- does not require nodes to be restarted
