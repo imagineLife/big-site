@@ -46,3 +46,4 @@ db.serverStatus()['repl']
 - only returns current node's data
 - contains timestamps for first + last events in the oplog
 - contains MB size of the oplog
+- does NOT contain the olpog _statements_: only this "metadata" of times and oplog size
