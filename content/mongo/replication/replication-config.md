@@ -29,4 +29,8 @@ A replication set config doc...
     - **priority**: int // 0 - 1000. higher priorities get elected more often. setting priority to 0 pretty much makes sure a member will never become primary. Change in priority triggers new election. When a member is an arbiterOnly, the priority needs to be 0. When a node is hidden, the priority must be 0.
     - **slaveDelay**: int //delay in seconds, default to 0. When set to, say 3600 (1 hour), this member replicates data from other nodes 1-hour-ago. This implies hidden/0-priority values. Why?! Hmm.
 
+There are a lot more details to configure: settings, version, configsvr... these are beyond basic.
 
+## Final Thoughts
+- replication config doc defines the replica set: properties are defined and shared across the set
+- `members` field notes deets about each replSet member
