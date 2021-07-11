@@ -30,3 +30,14 @@ The app can 'prefer' to read data from a secondary member.
 ## Stale data on read preference modes
 When a secondary has not received a write, and a read is reading from a secondary, the 'older' doc will be returned.  
 The delay between primary + secondaries affects the durability.  
+
+## Scenario
+- a 3 node replica set
+- 2 nodes go down
+**QUESTION**: Which read preferences will work for getting data from it?  
+**Answer & Insight**: when 2 nodes go down in this scenario, the last node is automagically a secondary node.  
+This means connecting to it is like connecting to any secondary node. These will work:
+- primaryPreferred
+- secondary
+- secondaryPreferred
+- nearest
