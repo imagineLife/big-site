@@ -52,6 +52,8 @@ Election depends on 2 things: recency of data and priority.
 - **decreasing a node priority to 0** will guarantee that the node will not be primary
   - it can still vote in elections
   - it can not run for election
+  - this 'rig's the election, forcing which node will be become primary
+
 ##### how to change priority
 ```bash
 # store config in var
@@ -66,3 +68,13 @@ rs.isMaster()
 ```
 - rs.stepDown always tries to choose a new primary node
 
+#### when nodes are not reachable
+if the current primary can not reach a majority of nodes, the primary automagically steps down.  
+An election can not take place till a majority of nodes is available.  
+
+
+## Overview Thoughts
+- Not all nodes have an equal chance of becoming primary during an election
+  - nodes with higher priority are more likely to elected primary
+- elections can not take place ANY TIME that the primary is available
+- nodes with priority 0 cannot be elected as primary - this "rigs" the election
