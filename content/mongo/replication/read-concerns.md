@@ -15,3 +15,18 @@ Want Fast && latest?  local / available
 Want Fast & Safe? majority  
 Want Safe & Latest? linearizable - slower, but single-docs read only  
 
+# Read Preferences
+Prefer where to get the data from.  
+This is usually set in a driver.  
+By default the app reads/writes to the primary.  
+The app can 'prefer' to read data from a secondary member.  
+## Read Preference Modes
+- primary: default
+- primaryPreferred: when primary is unavailable, during election or failover, the app can read from secondary
+- secondary: only from secondary members
+- secondaryPreferred: when secondary are not available, route to the primary
+- nearest: regardless of type, pick the nearest geographically
+
+## Stale data on read preference modes
+When a secondary has not received a write, and a read is reading from a secondary, the 'older' doc will be returned.  
+The delay between primary + secondaries affects the durability.  
