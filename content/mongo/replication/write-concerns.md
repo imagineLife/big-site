@@ -10,3 +10,12 @@ On data write, acknowledgement happens from nodes. Which nodes give acknowledgem
 **1 (default)**: Wait for acknowledgement from the primary node  
 **>=2**: wait for acknowledgement from the primary node (n) and and (_number - 1_) secondary nodes  
 **majority**: wait for acknowledgement from a majority of nodes - majority is (count-of-nodes) / 2, rounding up. Majority is nice, so that when the number of nodes changes, the number of acknowledgements is flexible.  
+
+## Does not impact data replication
+This is only present for us to track "durability".  
+
+## Config Options
+**wtimeout**: set max time the app waits before marking the write as failed. This does not equate to a failed write, but tells the requester that the durability has not been met
+**j**: requires that each rep. member needs to get the write AND commit to the journal
+  - note, a majority concern includes this **j** by default
+  - if j is false, the node only needs to store the data in memory before reporting success
