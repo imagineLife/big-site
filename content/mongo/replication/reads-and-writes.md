@@ -82,3 +82,4 @@ rs.isMaster()
 - reading data directly from a secondary requires a few details
   - connect to the secondary node without the replica name in the connection string
   - running `rs.slaveOk()` in the cli to "allow" data reads on the secondary node
+- writing to a replica set when a majority of the nodes are not available is impossible
