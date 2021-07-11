@@ -39,3 +39,11 @@ Some workloads just work better in distribution: single-threaded operations, geo
 **An example of a single-thread operation is an aggregation pipeline.**  
 Sharding will help speed up aggregation pipelines.  
 
+## Consider sharding when
+- more than 5TB of data are on each server && operational costs are increasing 
+- geographically close data is required
+- powerful machines are getting outgrown
+
+## dont necessarily need to consider sharding when
+- disks are full
+- start a new mongo project
