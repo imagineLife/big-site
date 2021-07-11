@@ -23,7 +23,46 @@ Here, an explanation of performing rolling upgrades on a 1-primary and 2-seconda
 - restart the mongod process
 
 ## elections
-- happen with a change in topology
+- happen with a change in topology, a reconfig in the replica set
 - will see a new primary when...
   - the current primary steps down
-  - the current primary is unavailable
+  - the current primary is unavailable  
+
+### elections and priority
+Election depends on 2 things: recency of data and priority.
+- the default priorities assigned to all nodes is the same
+
+**scenario**  
+- a node with the most recent data will/can run for election
+  - "asks" the other nodes for support
+  - other nodes "vote" for it and it becomes the new primary
+
+**scenario**  
+- 2 secondary nodes && they both run for primary
+  - this doesn't matter in an odd node count, as the oddball is the tie breaker
+  - when an even number of nodes are present, they MIGHT split the vote, && trigger a tie
+    - the nodes have to start over and hold another election
+    - THIS IS BLOCKING APPLICATIONS FROM ACCESSING THE DATA
+
+#### Priority 
+- default primary is `1`
+- any node with priority 1 or higher can become primary during an election
+- the priority can be changed
+- **increasing a priority does not GUARANTEE that the node with a higher priority will become priority**  
+- **decreasing a node priority to 0** will guarantee that the node will not be primary
+  - it can still vote in elections
+  - it can not run for election
+##### how to change priority
+```bash
+# store config in var
+let c = rs.conf()
+c.members[2].priority = 0
+rs.reconfig(c)
+
+# check out the new topology
+rs.isMaster()
+
+# see that the node with priority 0 is now in the "passive" node list
+```
+- rs.stepDown always tries to choose a new primary node
+
