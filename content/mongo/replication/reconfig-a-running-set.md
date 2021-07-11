@@ -34,3 +34,37 @@ rs.isMaster()
 # the hosts array should have 4 nodes
 # the arbiters array should have 1 node
 ```
+
+## new scenario
+- remove the arbiter
+- use a hidden node to store backups
+- kill 2 birds with one stone
+- killing the arbiter causes a problem, resulting in an even number of voting members
+  - one of the secondary nodes can be set to a non-voting member
+  - the same member can be hidden
+
+```bash
+rs.remove('m103-example:28000')
+
+# review configs
+rs.conf()
+
+let cfg = rs.conf()
+
+# chnage the vot privelege of the 4th node in the set to false
+cfg.members[3].votes = 0
+
+# hide the 4th node
+cfg.members[3].hidden = true
+
+# MUST set priority to 0 to keep things working right for hidden non-voting nodes
+cfg.members[3].priority = 0;
+
+# update the config of the replica set
+rs.reconfig(cfg)
+# this MIGHT trigger an election depending on the config
+
+# review the config
+rs.conf()
+# should show one of the members as hidden with no voting privileges
+``
