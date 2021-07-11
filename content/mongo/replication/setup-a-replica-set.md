@@ -2,6 +2,14 @@
 There will be 3 mongod instances.  
 Each will use a unique config file. The differences between the config files will be the dbpath and the port that they run on. In this case, they will all run on the same host machine (_my/your computer_), and be hosted on different ports.  
 
+**NOTE ON PERMISSIONING**  
+Permissioning here is critical.  
+The ability to read & edit directories and files makes-or-breaks this entire setup.  
+
+**Use Logs for debugging**  
+`data/mongod.log` is a great logfile that can contain helpful details when debugging this process.  
+
+
 ## First Node Config File
 create a file that will hold the config deets.  
 ```bash
@@ -56,3 +64,62 @@ Open node2 && node3 conf files. Alter the data dir from `data` to `data2` and `d
 Clone the data dir and make the `data2` and `data3` directories, 1 per mongod instance.
 
 
+## Setup the nodes to connect
+```bash
+
+# Connect to the first mongod instance
+mongo --port 27011
+
+rs.initiate()
+
+# switch to admin db
+use admin
+
+# create a root privilege user
+db.createUser({
+  user: 'adminroot',
+  pwd: 'adminrootpw',
+  roles: [
+    { role: 'root', db: 'admin' }
+  ]
+})
+
+# exit  out of mongo session
+exit
+
+# log back in as that user
+mongo --host "m103-example/localhost:27011" -u "adminroot" -p "adminrootpw" --authenticationDatabase "admin"
+
+review the status of the replica set
+```bash 
+rs.status()
+```
+see stats on the replica set
+
+### add nodes to the replica set
+```bash
+rs.add("localhost:27012")
+rs.add("localhost:27013")
+
+
+``` 
+**NOTE** the connection host includes the cluster name: `cluster:host:port`  
+
+
+...more
+```
+(base) Jakes-4:replication Jake\$ mongo --port 27011
+#....connection & confirmation/err details...
+MongoDB Enterprise m103-example:SECONDARY> use admin
+# switched to db admin
+MongoDB Enterprise m103-example:PRIMARY> db.createUser({ user: "rs-admin", pwd:"rs-admin-pw", roles: [ { role: "root", db: "admin" } ] })
+```
+
+can force an election - 
+```bash
+rs.stepDown()
+```
+#### Last Thoughts
+- enabling internal authentication in a replica set implicityly enables client auth
+- when connecting to a replica set from a mongo cli, the cli redirects connection to the primary node.
+  - INTERESTING!
