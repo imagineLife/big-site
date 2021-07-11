@@ -50,3 +50,13 @@ if primary fails before writing to secondaries...
 - BLOCK when a secondary node goes down - the downed node needs to come back online before acknowledging
   - one adjustment to make for this could be to decrease the `wtimeout`, so that the app might recieve a warning if the wrote takes too long on high write concerns
 
+## Final Thoughts
+When a 3-node replica set is up, and only 2 nodes are healthy and receive an insert like 
+```bash
+use thisdb
+db.collection.insert({"name": "molly", "salary":125000}, {"writeConcern": {"w": 3, "wtimeout": 1000}})
+```
+- if a `writeConcernError` is thrown, the insert doc is written to the healthy nodes
+- the write will not always return an error
+- if `w` were a majority, the write would return successful
+- the downed node will get the doc when it is back up & running
