@@ -17,10 +17,25 @@ The data on the config server is duplicated through a replica sets.
 Is it still economically viable to vertically scale?  
 Will adding more cpu/network/ram/disk actually help?  
 
-### scenario
+#### scenario
 Current architecture: 100$/hr per server.  
 Next higher server costs 1k$ / hr with performance 2x performance increase.  
 **This does not make economic sense.**  
 
 #### Operational Impact
 Will increasing disk help solve operational problems?  
+
+#### scenario
+Wanting to increase HD for more data storage.  
+PRO - more data.  
+CON - more time to sync data, to backup data, network impact for these things. Also, more data needs more indexes, which are stored in ram, and may tangentially require more ram.  
+
+**SHARDING** can be helpful to allow for parallelization.  
+
+### Suggestions
+Individual servers should have 2-5 TB of data.  
+More becomes too time-consuming to operate.  
+Some workloads just work better in distribution: single-threaded operations, geographically distributed data, etc.  
+**An example of a single-thread operation is an aggregation pipeline.**  
+Sharding will help speed up aggregation pipelines.  
+
