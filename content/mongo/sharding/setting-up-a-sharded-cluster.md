@@ -6,6 +6,7 @@ Here,
 - a config server replica set will be built
 
 ## Building the CSRS
+(_config server replica set_)  
 Here's a config server config file
 ```yaml
 sharding:
@@ -63,3 +64,5 @@ db.auth('m103-config-user', 'm103-config-pw')
 rs.add('localhost:26002')
 rs.add('localhost:26003')
 ```
+
+ Start `mongos` and "point" it to the new config server replica set (csrs)
