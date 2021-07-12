@@ -38,7 +38,7 @@ mongod -f csrs_1.conf
 mongod -f csrs_2.conf
 mongod -f csrs_3.conf
 ```
-**Connect** to the first config server, initiate a replica set, and leverage the localhost exception to create an admin user. Then, connnect the other dbs to the replica set.  
+**Connect** to the first config server, initiate a replica set, and leverage the localhost exception to create an admin user. Then, connect the other config servers to the replica set.  
 ```bash
 # connect
 mongo --port 26001
@@ -120,11 +120,40 @@ mongod -f node2.conf
 
 # connect to the other secondary node, & shut it down
 
-mongo --port 270123-u "adminroot" -p "adminrootpw" --authenticationDatabase "admin"
+mongo --port 27013-u "adminroot" -p "adminrootpw" --authenticationDatabase "admin"
 use admin
 db. shutdownServer()
 
 # start back up with same config file, containing the new shard deets
 mongod -f node3.conf
 
+# connect to primary, step it down, upgrade it
+mongo --port 27011 -u "adminroot" -p "adminrootpw" --authenticationDatabase "admin"
+use admin
+
+# force election, make this one become a secondary
+rs.stepDown()
+
+db.shutdownServer()
+# start back up with same config file, containing the new shard deets
+mongod -f node1.conf
 ```
+
+```bash
+#reconnect to mongos
+mongo --port 26000 -u "m103-config-user" -p "m103-config-pw" --authenticationDatabase "admin"
+
+# add the shard that was just enabled
+# note, the port just needs to be one of the data nodes - it'll figure out which data node is the primary data node
+sh.addShard('m103-example/localhost:27012')
+
+#check the status of the shard setup
+sh.status()
+```
+
+### Thoughts and Reminders
+- mongos config doesn't have a dbpath - it gets data from the config replica set
+- mongo config needs to explicitly state the config server: config servers need to be up && running before mongos is up && running
+- the config server config files don't say anything about mongos
+- the `mongos` config file needs to have a port
+- users dont need to be created on the `mongos` server - the users are inherited from the config server, so make an admin user on the config server and `mongos` will use the same user
