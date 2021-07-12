@@ -65,4 +65,66 @@ rs.add('localhost:26002')
 rs.add('localhost:26003')
 ```
 
- Start `mongos` and "point" it to the new config server replica set (csrs)
+ Start `mongos` and "point" it to the new config server replica set (csrs). 
+ The config of `mongos`
+
+call this one `mongos.conf`
+```yaml
+sharding:
+  configDB: m103-csrs/localhost:26001,localhost:26002,localhost:26003
+security:
+  keyFile: pki/m103-keyfile
+net:
+  bindIp: localhost
+  port: 26000
+systemLog:
+  destination: file
+  path: db/mongos.log
+  logAppend: true
+processManagement:
+  fork: true
+ ```
+ **NOTE**
+ - there is no dbPath - mongos doesn't store data. mongos uses data from the config servers
+ - a sharding section is present
+ - the same keyfile is present between the config servers
+
+ start mongos, login to the new server, & check shard status
+ ```bash
+ mongos -f mongos.conf
+ ```
+- mongos has auth enabled && inherits users created on the config servers
+
+login to the new mongos server
+```bash
+mongo --port 26000 -u "m103-config-user" -p "m103-config-pw" --authenticationDatabase "admin"
+
+# check status of the shard setup
+sh.status()
+```
+edit the config on the mongod data stores - set them to each be part of a shard server. add this to each data server's config file
+```yaml
+sharding: 
+  clusterRole: shardsvr
+```
+
+restart the data nodes, with a rolling upgrade pattern
+```bash
+# connect to a secondary node, & shut it down
+mongo --port 27012 -u "adminroot" -p "adminrootpw" --authenticationDatabase "admin"
+use admin
+db. shutdownServer()
+
+# start back up with same config file, containing the new shard deets
+mongod -f node2.conf  
+
+# connect to the other secondary node, & shut it down
+
+mongo --port 270123-u "adminroot" -p "adminrootpw" --authenticationDatabase "admin"
+use admin
+db. shutdownServer()
+
+# start back up with same config file, containing the new shard deets
+mongod -f node3.conf
+
+```
