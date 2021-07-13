@@ -66,6 +66,28 @@ Good Shard keys allow for good read isolation.
 When the Shard Key is in a read query, the read query goes straight to that shard, allowing reads to only take place on a single data source and skip scanning the whole dataset.  
 _Without_ the shard key, mongo has to perform these "scatter gather" type operations.  
 
+## A more robust example
+Here's a config of a running mongos instance
+```bash
+sharding:
+  configDB: csrs/localhost:27004
+security:
+  keyFile: /var/mongodb/pki/m103-keyfile
+net:
+  bindIp: localhost
+  port: 26000
+systemLog:
+  destination: file
+  path: /var/mongodb/logs/mongos.log
+  logAppend: true
+processManagement:
+  fork: true
+```
+Import a dataset from `/dataset/products.json` into the db `m103` and the collection `products`
+```bash
+
+mongoimport --drop --port 26000 -u "m103-admin" -p "m103pw" --authenticationDatabase "admin" --db "m103" -c "products" /dataset/products.json
+```
 
 ## TakeAways
 - the Shard Key determines how data is distributed across the shard cluster
