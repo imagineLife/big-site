@@ -58,7 +58,7 @@ The more often the unique values of the shard key increase ability to disperse t
 If keys are states, with max of 50 shards, but 80% of the data comes in NY state, the shards will be uneven, and NY data querying will still be slow.  
 
 ### NonMonotonically Changing
-Avoid shard key values that are changing at an even expected rate.  
+Avoid shard keys that are changing at an even expected rate.  
 _Timestamps_ are _high cardinality and high frequency_. Timestamps are bad Shard key though due to the bounds that are set on each shard. All new entries will end up in the 'last' shard.  
 
 Good Shard keys allow for good read isolation.  
@@ -72,3 +72,12 @@ _Without_ the shard key, mongo has to perform these "scatter gather" type operat
 - the keys are immutable
 - the key _values_ are immutable
 - the index needs to be created before sharding
+- Good Shard Keys...
+  - provide even write distribution
+  - provide read isolation, where possible
+  - have high cardinality, low frequency, and avoid monotonically changing keys
+- Once Sharded, Always Sharded:
+  - cant unshard a collection
+  - cant update the shard key
+  - cant update the shard key _values_
+**NOTE** these don't necessarily need to be indexed fields.  
