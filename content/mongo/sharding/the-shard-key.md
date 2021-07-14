@@ -85,8 +85,7 @@ processManagement:
 ```
 Import a dataset from `/dataset/products.json` into the db `m103` and the collection `products`
 ```bash
-
-mongoimport --drop --port 26000 -u "m103-admin" -p "m103pw" --authenticationDatabase "admin" --db "m103" -c "products" /dataset/products.json
+mongoimport --drop --host "localhost:26000" -u "m103-admin" -p "m103-pass" --authenticationDatabase "admin" --db "m103" -c "products" /dataset/products.json
 ```
 
 ## TakeAways
