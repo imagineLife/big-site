@@ -3,6 +3,18 @@ These are groups of docs.
 Chunks live at one shard at a time. All docs within the chunk bounds live in the same chunk.  
 THe shard key cardinality & frequency determine the number of chunks.
 
+## Docs and Shards and Chunks
+Docs contain fields.  
+Fields can be used as shard keys.  
+As soon as a collection gets sharded, a single chunk gets created.  
+The chunk goes from "MinKey" to "MaxKey".  
+Min key is inclusive.  
+Max key is exclusive.
+The vals that the shard key holds defines the "key space" of the sharding collection.  
+
+### Over Time  
+As time goes on, the cluster splits the initial chunk into many. This distributes data evenly between shards. 
+
 ## Leveraging Mongos cli to inspect Chunk data
 ```bash
 # use a mongos instance/conneciton, mont mongo or mongod
@@ -31,6 +43,7 @@ db.chunks.findOne()
   lastmod: Timestamp(1,0),
   lastmodEpoch: ObjectId(...)
 }
+- min & max fields indicate the BOUNDs of the chunk
 
 ```
 
