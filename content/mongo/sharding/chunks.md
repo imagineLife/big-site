@@ -1,7 +1,10 @@
 # Chunks
+## Overview
 These are groups of docs.  
-Chunks live at one shard at a time. All docs within the chunk bounds live in the same chunk.  
-THe shard key cardinality & frequency determine the number of chunks.
+Chunks live at one shard at a time.  
+All docs within the chunk "bounds" live in the same chunk.  
+THe shard key cardinality & frequency determine the number of chunks.  
+Config servers hold the mapping of chunks to shards.  
 
 ## Docs and Shards and Chunks
 Docs contain fields.  
@@ -43,9 +46,28 @@ db.chunks.findOne()
   lastmod: Timestamp(1,0),
   lastmodEpoch: ObjectId(...)
 }
-- min & max fields indicate the BOUNDs of the chunk
+# min & max fields indicate the BOUNDs of the chunk
 
+
+# another method for inspecting chunk stats
+sh.status()
+
+# see the sibling file chunks-sh-status.js for a complete example of the output - its about 30 lines
+...
+chunks:
+  # could look somethin like...
+  m103-shard1   2
+  m103-shard1 1
+...
 ```
+
+
+
+## Chunks & Chunk Sizes
+The number of chunks that the shard key "allows" _might_ define the maximum number of shards that the system can hold.  
+### Chunk Size  
+Mongo has a default set to 64MB. This chunk size can be configured to be between 1mb && 1gb(1024mb). This can be configured during run time.     
+
 
 ## Jumbo Chunks and Disproportional Chunks
 Jumbo chunks happen over time.  
