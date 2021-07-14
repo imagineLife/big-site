@@ -100,7 +100,7 @@ mongoimport --username 'csrs_admin' --password 'csrs_admin_pw' --authenticationD
 ```
 
 ## Jumbo Chunks and Disproportional Chunks
-Jumbo chunks happen over time.  
+Jumbo chunks happen over time. These can be damaging.  
 Data can be disproportionately added to a set of dat ain a single chunk, based on the shard key & shard key value. This is like a lot of docs starting with the letter "W" where each letter of the alphabet is a shard key/val.  
 ### These are marked
 the db 'knows' about these.  
@@ -109,3 +109,7 @@ the db skips these when rebalancing the chunks. This is too big to be moved.
 ### Might Not be Splittable
 Depending on the frequency of the shard key, these might not be splittable.
 
+
+## Thoughts
+- Chunk Ranges can change over time
+- Several Docs associated with the same chunk must live in the same shard
