@@ -61,13 +61,43 @@ chunks:
 ...
 ```
 
-
-
 ## Chunks & Chunk Sizes
 The number of chunks that the shard key "allows" _might_ define the maximum number of shards that the system can hold.  
 ### Chunk Size  
 Mongo has a default set to 64MB. This chunk size can be configured to be between 1mb && 1gb(1024mb). This can be configured during run time.     
 
+### Adjusting the Chunk size setting
+```bash
+# adjust the mongos instance chunksize in the config.settings db.collections
+
+use config
+db.settings.save({_id: "chunksize", value: 2})
+```
+**NOTE**: the above setting change does not change the _data_, only the _setting_. 
+
+### Adjust the data Chunk sizes
+First, lets add some data so that mongos _has_ a bunch of data to split
+```bash
+# import MORE data into the mongos instance
+mongoimport --username 'csrs_admin' --password 'csrs_admin_pw' --authenticationDatabase 'admin' --db "m103-example" --collection "products" --port 26000 products.part2.json
+# should return...
+# <the-date> connected to: mongodb://localhost:26000/
+# <the-date> [#.......................] m103-example.products 2.76MB/44.5MB (6.2%)
+# <the-date> [###.....................] m103-example.products 6.34MB/44.5MB (14.3%)
+# <the-date> [#####...................] m103-example.products 9.82MB/44.5MB (22.1%)
+# <the-date> [#######.................] m103-example.products 13.8MB/44.5MB (31.1%)
+# <the-date> [#########...............] m103-example.products 17.4MB/44.5MB (39.1%)
+# <the-date> [###########.............] m103-example.products 21.1MB/44.5MB (47.5%)
+# <the-date> [#############...........] m103-example.products 25.1MB/44.5MB (56.3%)
+# <the-date> [###############.........] m103-example.products 29.1MB/44.5MB (65.5%)
+# <the-date> [#################.......] m103-example.products 32.4MB/44.5MB (72.8%)
+# <the-date> [###################.....] m103-example.products 36.3MB/44.5MB (81.6%)
+# <the-date> [#####################...] m103-example.products 40.5MB/44.5MB (91.1%)
+# <the-date> [########################] m103-example.products 44.5MB/44.5MB (100.0%)
+# <the-date> 258390 document(s) imported successfully. 0 document(s) failed to import.
+
+
+```
 
 ## Jumbo Chunks and Disproportional Chunks
 Jumbo chunks happen over time.  
