@@ -83,3 +83,42 @@ mongo --host "m103-example/localhost:27011" -u "data-admin" -p "data-pw" --authe
 ```
 **Note**  
 The Replica set name is included in the host name flag `replica-set-name/server:port`
+
+6. inspect the replica set and add the other 2 running mongo processes as members of this replica set
+```bash
+# while connected from previous step...
+rs.status()
+
+# notice the "members" array has 1 item in it, this primary rs member
+
+rs.add('localhost:27012')
+
+# should return...
+{
+  "ok" : 1,
+  "$clusterTime" : {
+    "clusterTime" : Timestamp(1626312894, 1),
+    "signature" : {
+      "hash" : BinData(0,"gJMD6I30nLoNm2LqcaUkIOODUcE="),
+      "keyId" : NumberLong("6984954851637592068")
+    }
+  },
+  "operationTime" : Timestamp(1626312894, 1)
+}
+
+rs.add('localhost:27013')
+
+# should return...
+{
+"ok" : 1,
+  "$clusterTime" : {
+    "clusterTime" : Timestamp(1626312927, 1),
+    "signature" : {
+      "hash" : BinData(0,"sbCUJIfmXueSDJHN2ajGH9hJyCM="),
+      "keyId" : NumberLong("6984954851637592068")
+    }
+  },
+  "operationTime" : Timestamp(1626312927, 1)
+}
+
+```
