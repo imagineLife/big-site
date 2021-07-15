@@ -31,7 +31,7 @@ replication:
 ```bash
 mongod --config path/to/config/file.conf
 ```
-3. Initiate the replicate sets to talk to each other
+3. Initiate the replicate set on a "primary" node
 ```bash
 # connect to what will be the primary
 mongo --port 27011
@@ -44,5 +44,29 @@ rs.initiate()
   "info2" : "no configuration specified. Using a default configuration for the set",
   "me" : "localhost:27011",
   "ok" : 1
+}
+```
+
+4. make an admin user on the primary node
+```bash
+# while still connected to mongo node from previous step...
+use admin
+db.createUser({
+  user: "data-admin",
+  pw: "data-pw",
+  roles: [
+    { role: "root", db: "admin"}
+  ]
+})
+
+#should return...
+Successfully added user: {
+  "user" : "data-admin",
+  "roles" : [
+    {
+      "role" : "root",
+      "db" : "admin"
+    }
+  ]
 }
 ```
