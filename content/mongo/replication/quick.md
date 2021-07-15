@@ -70,3 +70,16 @@ Successfully added user: {
   ]
 }
 ```
+
+5. log out, & reconnect as new admin user
+```bash
+# while connected from previous step...
+
+exit
+
+# should kick us out of the logged in unauthed session
+
+mongo --host "m103-example/localhost:27011" -u "data-admin" -p "data-pw" --authenticationDatabase "admin"
+```
+**Note**  
+The Replica set name is included in the host name flag `replica-set-name/server:port`
