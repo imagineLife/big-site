@@ -152,3 +152,19 @@ should return something like...
 501 60307 1 0 9:03PM ?? 8:32.92 mongod --config configs/datars/node2.conf
 501 60358 1 0 9:05PM ?? 7:50.95 mongod --config configs/datars/node3.conf
 ```
+
+
+## Get Info On Replica set
+1. rs.status()
+- gets health of the replica set
+  - state of a node
+  - uptime
+  - optime
+  - heartbeat stats
+  - frequency of heartbeat with heartbeat millis
+2. rs.isMaster()
+  - brief version of rs.status
+  - gives the name of the primary node
+3. db.serverStatus()['repl']
+  - similar to rs.isMaster()
+  - includes details on how many rollbacks were called on a node
