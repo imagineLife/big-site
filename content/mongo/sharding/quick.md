@@ -290,4 +290,29 @@ sh.addShard('m103-example/localhost:27012')
     }
   }
 }
+
+# check the shard 
+sh.status()
+--- Sharding Status ---
+sharding version: {
+    "_id" : 1,
+    "minCompatibleVersion" : 5,
+    "currentVersion" : 6,
+    "clusterId" : ObjectId("60f16ad29d1726d244394f46")
+  }
+shards:
+  { "_id" : "m103-example", "host" : "m103-example/localhost:27011,localhost:27012,localhost:27013", "state" : 1 }
+active mongoses:
+  "4.2.6" : 1
+autosplit:
+  Currently enabled: yes
+balancer:
+  Currently enabled: yes
+  Currently running: no
+  Failed balancer rounds in last 5 attempts: 0
+  Migration Results for the last 24 hours:
+  No recent migrations
+databases:
+  { "_id" : "config", "primary" : "config", "partitioned" : true }
+  { "_id" : "warehouse", "primary" : "m103-example", "partitioned" : false, "version" : { "uuid" : UUID("d0e80910-256f-4662-ac03-b5fa0a36ef6a"), "lastMod" : 1 } }
 ```
