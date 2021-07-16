@@ -12,7 +12,9 @@ net:
   bindIp: localhost
   port: 27011
 security:
+  # client auth
   authorization: enabled
+  #inter-cluster auth key
   keyFile: pki/m103-keyfile
 systemLog:
   destination: file
@@ -121,4 +123,12 @@ rs.add('localhost:27013')
   "operationTime" : Timestamp(1626312927, 1)
 }
 
+# check status again
+rs.status()
+
+#notice the members array has 3 elements in it
 ```
+
+**extra note**  
+One way to force a change in primary node can be done by forcing an election  
+
