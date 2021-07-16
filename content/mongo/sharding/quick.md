@@ -270,3 +270,24 @@ db.shutdownServer()
 # restart with updated config file
 mongod --config configs/datars/node1.conf
 ```
+
+### get new sharded data nodes in sharded cluster
+```bash
+# reconnect to mongos server if not connected in a terminal
+# ... see previous connection params
+sh.addShard('m103-example/localhost:27012')
+
+# should return ...
+{
+  "shardAdded" : "m103-example",
+  "ok" : 1,
+  "operationTime" : Timestamp(1626436358, 1),
+  "$clusterTime" : {
+    "clusterTime" : Timestamp(1626436358, 1),
+    "signature" : {
+      "hash" : BinData(0,"MLst0dLnXHVvG36nvCFOgwH4UVs="),
+      "keyId" : NumberLong("6985481947204026374")
+    }
+  }
+}
+```
