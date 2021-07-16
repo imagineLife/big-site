@@ -196,3 +196,7 @@ replication:
   rs.add('localhost:27014')
   rs.addArb('localhost:28000')
 ```
+Next, kill the arbiter
+```bash
+rs.remove('localhost:28000')
+```
