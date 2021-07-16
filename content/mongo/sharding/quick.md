@@ -153,4 +153,61 @@ rs.add('localhost:26003')
   "operationTime" : Timestamp(1626434490, 1)
 }
 
+#validate with
+rs.isMaster()
+
+# hosts should have 3 members, the 3 mongod instances setup for this set
+```
+## Get mongos up and connected
+setup a config file for a `mongos` server instance
+```yaml
+# no db path, mongos doesnt store data - data comes from configservers
+sharding:
+  configDB: m103-example/localhost:26001,localhost:26002,localhost:26003
+security:
+  # member auth is inherited from config servers, so use config admin/pw creds on the mongos instance
+  keyFile: pki/m103-keyfile
+net:
+  bindIp: localhost
+  port: 26000
+systemLog:
+  destination: file
+  path: data/mongos/mongod.log
+  logAppend: true
+processManagement:
+  fork: true
+```
+start the `mongos` instance
+```bash
+mongos --config mongos.conf
+```
+
+login with csrs auth creds
+```bash
+mongo --port 26000 -u 'csrs_admin' -p 'csrs_pw' --authenticationDatabase 'admin'
+```
+check the status of the sharding setup
+```bash
+sh.status()
+
+# should return...
+--- Sharding Status ---
+  sharding version: {
+    "_id" : 1,
+    "minCompatibleVersion" : 5,
+    "currentVersion" : 6,
+    "clusterId" : ObjectId("60f16ad29d1726d244394f46")
+  }
+  shards:
+  active mongoses:
+  autosplit:
+    Currently enabled: yes
+  balancer:
+    Currently enabled: yes
+    Currently running: no
+    Failed balancer rounds in last 5 attempts: 0
+    Migration Results for the last 24 hours:
+    No recent migrations
+  databases:
+  { "_id" : "config", "primary" : "config", "partitioned" : true }
 ```
