@@ -51,6 +51,7 @@ Where queries do not consider the shard key (_like get me all people between age
 ## Setup a Config Server Sharded Cluster
 This assumes a data replica set is already setup & running with 3 mongod instance. see the `replica set` files for deets.  
 
+### Build 3 Config files
 Build a config file
 ```yaml
 # unique section for config servers
@@ -89,5 +90,36 @@ should return something like
 501 72506 1 0 7:10AM ?? 0:02.72 mongod --config configs/csrs/csrs_1.conf
 501 72539 1 0 7:10AM ?? 0:02.51 mongod --config configs/csrs/csrs_2.conf
 501 72542 1 0 7:10AM ?? 0:02.52 mongod --config configs/csrs/csrs_3.conf
+```
+
+### Setup auth on the replica set & link nodes
+```bash
+# not in a running mongo terminal
+mongo --port 26001
+
+use admin 
+
+# setup replica set
+rs.initiate()
+
+# create a super user
+db.createUser({
+  user: 'csrs_admin',
+  pwd: 'csrs_pw',
+  roles: [
+    { role: 'root', db: 'admin' }
+  ]
+})
+
+# should result in...
+Successfully added user: {
+  "user" : "csrs_admin",
+  "roles" : [
+    {
+      "role" : "root",
+      "db" : "admin"
+    }
+  ]
+}
 
 ```
