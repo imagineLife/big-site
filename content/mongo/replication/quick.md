@@ -168,3 +168,31 @@ should return something like...
 3. db.serverStatus()['repl']
   - similar to rs.isMaster()
   - includes details on how many rollbacks were called on a node
+
+  ## Reconfiguring a Running set
+  Example - with 3 nodes running, add an arbiter and another data node
+  - create a new conf file with a new port, && new data source dir
+  - create an arbiter config file
+```yaml
+storage:
+  dbPath: /var/mongodb/db/arbiter
+net:
+  bindIp: localhost
+  port: 28000
+systemLog:
+  destination: file
+  path: /var/mongodb/db/arbiter/mongod.log
+  logAppend: true
+processManagement:
+  fork: true
+replication:
+  replSetName: m103-example
+```
+- start both nodes, the 4th data node && the arbiter node
+- add the nodes to the existing set
+  - if not logged in authd to primary node, log in again
+  - run 2 commands to add the nodes to the repl set
+```bash
+  rs.add('localhost:27014')
+  rs.addArb('localhost:28000')
+```
