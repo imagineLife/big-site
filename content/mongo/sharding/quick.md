@@ -316,3 +316,55 @@ databases:
   { "_id" : "config", "primary" : "config", "partitioned" : true }
   { "_id" : "warehouse", "primary" : "m103-example", "partitioned" : false, "version" : { "uuid" : UUID("d0e80910-256f-4662-ac03-b5fa0a36ef6a"), "lastMod" : 1 } }
 ```
+
+## Apply a shard key
+NOTE: Once sharded, can't unshard.  
+
+```bash
+# enable sharding on the db
+sh.enableSharding('warehouse')
+
+# should return...
+{
+  "ok" : 1,
+  "operationTime" : Timestamp(1626475918, 3),
+  "$clusterTime" : {
+    "clusterTime" : Timestamp(1626475918, 3),
+    "signature" : {
+      "hash" : BinData(0,"H4X4Pg96BufWEDmVZwP023650rw="),
+      "keyId" : NumberLong("6985481947204026374")
+    }
+  }
+}
+
+
+# create an index on the colleciton
+db.products.createIndex({'sku': 1})
+
+# should return...
+{
+  "raw" : {
+    "m103-example/localhost:27011,localhost:27012,localhost:27013" : {
+      "createdCollectionAutomatically" : false,
+      "numIndexesBefore" : 1,
+      "numIndexesAfter" : 2,
+      "ok" : 1
+    }
+  },
+  "ok" : 1,
+  "operationTime" : Timestamp(1626475962, 1),
+  "$clusterTime" : {
+    "clusterTime" : Timestamp(1626475962, 1),
+    "signature" : {
+      "hash" : BinData(0,"ruDuTEho1qzJyImw4dGWihNOzGk="),
+      "keyId" : NumberLong("6985481947204026374")
+    }
+  }
+}
+
+# shard the collection
+sh.shardCollection('warehouse.products', { 'sku': 1 })
+
+# checkout the new shards with
+sh.status()
+```
