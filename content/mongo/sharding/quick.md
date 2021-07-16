@@ -211,3 +211,62 @@ sh.status()
   databases:
   { "_id" : "config", "primary" : "config", "partitioned" : true }
 ```
+
+## Adjust data nodes to work as shard nodes  
+adjust data node config files, informing the data nodes that they can be shard nodes in a sharded cluster
+```yaml
+#new section
+sharding:
+  clusterRole: shardsvr
+storage:
+  dbPath: data/1
+net:
+  bindIp: localhost
+  port: 27011
+security:
+  authorization: enabled
+  keyFile: pki/m103-keyfile
+systemLog:
+  destination: file
+  path: data/1/mongod.log
+  logAppend: true
+processManagement:
+  fork: true
+replication:
+  replSetName: m103-example
+```
+### Apply the new configs to the data nodes, using a rolling upgrade setup
+```bash
+# connect to secondary node
+mongo --port 27012 -u 'data-admin' -p 'data-pw' --authenticationDatabase 'admin'
+# switch to admin db
+use admin
+
+# shutdown the node
+db.shutdownServer()
+
+# restart with updated config file
+mongod --config configs/datars/node3.conf
+
+
+# connect to other secondary node
+# switch to admin db
+use admin
+
+# shutdown the node
+db.shutdownServer()
+
+# restart with updated config file
+mongod --config configs/datars/node3.conf
+
+
+# connect to primary node
+# force election, making THIS primary become a secondary
+rs.stepDown()
+# switch to admin db
+use admin
+# shutdown the node
+db.shutdownServer()
+# restart with updated config file
+mongod --config configs/datars/node1.conf
+```
