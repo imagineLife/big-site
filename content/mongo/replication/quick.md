@@ -209,3 +209,19 @@ cfg.members[3].hidden = true
 cfg.members[3].priority = 0
 rs.reconfig(cfg)
 ```
+## Import data to a replica set
+be sure to send to the host with a list of hosts...
+```bash
+mongoimport --host m103-example/localhost:27011,localhost:27012,localhost:27013 -u "data-admin" -p "data-pw" --authenticationDatabase "admin" --db warehouse --collection products --file products.json
+```
+
+## Connect to & Read from secondary notes
+- dont use the replica set name in the host string
+```bash
+mongo --host "localhost:27012" -u "data-admin" -p "data-pw" --authenticationDatabase "admin"
+
+# enable reading on secondary node
+rs.slaveOk()
+
+
+```
