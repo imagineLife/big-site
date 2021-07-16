@@ -200,3 +200,12 @@ Next, kill the arbiter
 ```bash
 rs.remove('localhost:28000')
 ```
+Next, transform the 4th data node to be a non-voting hidden node
+```bash
+# if not connected to primary node in a cli, connect as auth'd user
+cfg = rs.conf()
+cfg.members[3].votes = 0
+cfg.members[3].hidden = true
+cfg.members[3].priority = 0
+rs.reconfig(cfg)
+```
