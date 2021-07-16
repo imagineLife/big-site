@@ -121,5 +121,36 @@ Successfully added user: {
     }
   ]
 }
+```
+### log in ass admin & add other nodes to repl set
+```bash
+
+exit
+
+mongo --port 26001 -u 'csrs_admin' -p 'csrs_pw' --authenticationDatabase 'admin'
+
+rs.add('localhost:26002')
+rs.add('localhost:26003')
+
+# for each add, should return...
+{
+  "ok" : 1,
+  "$gleStats" : {
+    "lastOpTime" : {
+      "ts" : Timestamp(1626434490, 1),
+      "t" : NumberLong(1)
+    },
+    "electionId" : ObjectId("7fffffff0000000000000001")
+  },
+  "lastCommittedOpTime" : Timestamp(1626434477, 1),
+  "$clusterTime" : {
+    "clusterTime" : Timestamp(1626434490, 1),
+    "signature" : {
+      "hash" : BinData(0,"hMGav98Och7D4vQgeJNNMk5Orh4="),
+      "keyId" : NumberLong("6985481947204026374")
+    }
+  },
+  "operationTime" : Timestamp(1626434490, 1)
+}
 
 ```
