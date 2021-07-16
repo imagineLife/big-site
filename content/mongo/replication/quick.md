@@ -23,6 +23,7 @@ systemLog:
 processManagement:
   fork: true
 replication:
+  # enable replication, name of replica set
   replSetName: m103-example
 ```
 **Key Details**  
@@ -132,3 +133,22 @@ rs.status()
 **extra note**  
 One way to force a change in primary node can be done by forcing an election  
 
+7. Setup 2 other node conf files
+Clone the node conf file
+- change the port, inc + 1
+- keep the key file name 
+  - typically, in real-world, this key would be copied across different hosts
+- start them all
+```bash
+mongo --host "m103-example/localhost:27011" -u "data-admin" -p "data-pw" --authenticationDatabase "admin"
+```
+8. key detail to see what processes were running, and what cli command(s) started them
+```bash
+ps -edaf | grep mongo | grep -v grep
+```
+should return something like...
+```bash
+501 60261 1 0 9:03PM ?? 8:34.27 mongod --config configs/datars/node1.conf
+501 60307 1 0 9:03PM ?? 8:32.92 mongod --config configs/datars/node2.conf
+501 60358 1 0 9:05PM ?? 7:50.95 mongod --config configs/datars/node3.conf
+```
