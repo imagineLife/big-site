@@ -134,3 +134,6 @@ db.solarSystem.aggregate([
 { "name" : "Venus", "numberOfMoons" : 0, "hasMagneticField" : false }
 ```
 see that the `false` magnetic fields are all under the `true` magnetic fields, in descending `numberOfMoons` count
+**SORT & MEMORY USAGE**: Sort by default only can take 100mb of memory.  
+When sort is early in the pipeline, it can take advantage of indexes for optimization.  
+Sorts in agg should be paired with `allowDiskUse: true` in the pipeline to accommodate larger sorts.  
