@@ -103,3 +103,34 @@ db.solarSystem.aggregate([
 ])
 ```
 
+sort can operate on multiple fields in combination:
+```bash
+db.solarSystem.aggregate([
+  {
+    $project:{
+      _id: 0,
+      name: 1,
+      hasMagneticField: 1,
+      numberOfMoons: 1
+    }
+  },
+  {
+    $sort: {
+      hasMagneticField: -1,
+      numberOfMoons: -1
+    }
+  }
+])
+
+# will return...
+{ "name" : "Jupiter", "numberOfMoons" : 67, "hasMagneticField" : true }
+{ "name" : "Saturn", "numberOfMoons" : 62, "hasMagneticField" : true }
+{ "name" : "Uranus", "numberOfMoons" : 27, "hasMagneticField" : true }
+{ "name" : "Neptune", "numberOfMoons" : 14, "hasMagneticField" : true }
+{ "name" : "Earth", "numberOfMoons" : 1, "hasMagneticField" : true }
+{ "name" : "Sun", "numberOfMoons" : 0, "hasMagneticField" : true }
+{ "name" : "Mercury", "numberOfMoons" : 0, "hasMagneticField" : true }
+{ "name" : "Mars", "numberOfMoons" : 2, "hasMagneticField" : false }
+{ "name" : "Venus", "numberOfMoons" : 0, "hasMagneticField" : false }
+```
+see that the `false` magnetic fields are all under the `true` magnetic fields, in descending `numberOfMoons` count
