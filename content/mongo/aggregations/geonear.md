@@ -3,6 +3,9 @@ works with geojson data.
 performs geoqueries in a pipeline.  
 must be the first stage in the pipe.  
 can be used on sharded collections. `$near`, a find operation, cannot.  
+When using 2dSperes, the distance is returned in meters.  
+When using "legacy coordinates" instead of a 2d sphere, the distance is returned in radians.  
+
 
 ## analysis of geonear args
 ```bash
