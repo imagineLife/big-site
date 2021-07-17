@@ -27,3 +27,28 @@ db.nycFacilities.aggregate([
   }
 ])
 ```
+adding some restrictions, find 5 nearest hospitals: 
+- minDistance: closest
+- maxDistance: furthest
+- query: like `$match`
+- includeLocs: ?? huh
+- distanceMultiplier: can convert distance from radians to something else
+
+```bash
+db.nycFacilities.aggregate([
+  {
+    $geoNear: {
+      near: {
+        type: "Point",
+        coordinates: [-73.98769766092299, 40.757345233626594]
+      },
+      distanceField: "distanceFromMongoDB",
+      spherical: true,
+      query: { type: "Hospital" }
+    }
+  },
+  {
+    $limit: 5
+  }
+])
+```
