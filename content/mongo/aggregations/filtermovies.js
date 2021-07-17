@@ -59,3 +59,11 @@ db.movies
     { $match: { titleWordCount: { $lt: 2 } } },
   ])
   .itcount();
+
+/*
+  Get ONLY the writers where there ARE writers listed
+*/
+db.movies.aggregate([
+  { $match: { writers: { $elemMatch: { $exists: true } } } },
+  { $project: { writers: 1, _id: 0 } },
+]);
