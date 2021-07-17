@@ -12,6 +12,26 @@ db.solarSystem.find({},{_id: 0, name:1, numberOfMoons:1}).pretty()
 count the number of docs
 ```bash
 db.solarSystem.find({},{_id: 0, name:1, numberOfMoons:1}).count()
+
+# count where the type is terrestrial planet
+db.solarSystem.aggregate([
+  {
+    $match: { type: "Terrestrial planet" }
+  },
+  {
+    $project: {
+      _id:0,
+      name:1,
+      numberOfMoons:1
+    }
+  },
+  {
+    $count: "terrestrial planets"
+  }
+])
+
+# should return...
+{ "terrestrial planets" : 4 }
 ```
 
 skip 5 docs
