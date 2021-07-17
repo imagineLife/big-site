@@ -77,5 +77,23 @@ db.solarSystem.aggregate([{$project: {_id:0, name:1, surfaceGravity: '$gravity.v
 { "name" : "Saturn", "surfaceGravity" : 10.44 }
 { "name" : "Uranus", "surfaceGravity" : 8.87 }
 { "name" : "Neptune", "surfaceGravity" : 11.15 }
+```
 
+## Dabbling with value calculations
+Figure out how much I weigh on each planet.  
+With a weight of 140lb, 140 will be multiplied by a new gravityRatio.  
+- the gravityRatio will be calculated by `gravity.value` divided by 9.8, earths gravitational force calculation
+- the gravityRatio will then be multiplied by 140
+- this resulting value will be assigned to `myWeight`
+```bash
+db.solarSystem.aggregate([{$project: {_id:0, name:1, myWeight: {$multiply: [{$divide: ["$gravity.value",9.8]},140]}}}])
+{ "name" : "Sun", "myWeight" : 3914.285714285714 }
+{ "name" : "Mercury", "myWeight" : 46.28571428571429 }
+{ "name" : "Venus", "myWeight" : 126.7142857142857 }
+{ "name" : "Earth", "myWeight" : 140 }
+{ "name" : "Mars", "myWeight" : 53 }
+{ "name" : "Jupiter", "myWeight" : 354.1428571428571 }
+{ "name" : "Saturn", "myWeight" : 149.14285714285714 }
+{ "name" : "Uranus", "myWeight" : 126.7142857142857 }
+{ "name" : "Neptune", "myWeight" : 159.28571428571428 }
 ```
