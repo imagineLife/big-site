@@ -15,7 +15,11 @@ Example:
 - next stage `$group`, take buncha docs && group into fewer docs by an aggregate
 
 ## Aggregation Framework Syntax
-https://docs.mongodb.com/manual/meta/aggregation-quick-reference/
+A Pipeline is an array of args as stages.  
+Stages have aggregations operations or expressions.  
+Expressions can have 1 or more args.  
+
+[quick ref page](https://docs.mongodb.com/manual/meta/aggregation-quick-reference/)
 
 ```bash
 db..userCollection.aggregate([
@@ -31,7 +35,7 @@ Pipeline example
 ```bash
 db.solarSystem.aggregate([
   {$match: 
-    { atmosphericComposition: { $in: [/02/] }, 
+    { atmosphericComposition: { $in: [/O2/] }, 
       meanTemperature: { $gte: -40, $lte: 40 }
     }
   }, 
@@ -40,3 +44,22 @@ db.solarSystem.aggregate([
   }
 ],{allowDiskUse:true})
 ```
+### Expressions and Operators
+**Stages have operators and expressions**.  
+
+#### Operators
+Operators refer to query operators or aggregation stages.  
+- `$match` and `$project` are agg operators
+- `$in`, `$gte` and `$lte` are query operators
+- operators generally always show in the key position
+
+#### Expressions
+Expressions are like functions.  
+- we provide args
+- expressions provide a computed output
+- can be composed
+
+#### Special Examples
+- **Field Path Expression**: `$numberOfMoons` is used to access a field in the document
+- **System Level Variable**: `$$UPEERCASEWORD` like {`$CURRENT`} referring to the current doc
+- **User Level Variable**:  `$$lowercaseword` is a temporarily bound var to a name
