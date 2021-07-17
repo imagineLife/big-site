@@ -47,3 +47,19 @@ db.solarSystem.aggregate([{$project: {_id:0, name:1, 'gravity.value': 1}}])
 { "name" : "Uranus", "gravity" : { "value" : 8.87 } }
 { "name" : "Neptune", "gravity" : { "value" : 11.15 } }
 ```
+
+## Reassigning fields
+Here, the dub-field of `gravity.value` will be re-assigned to `value`.  
+```bash
+db.solarSystem.aggregate([{$project: {_id:0, name:1, gravity: '$gravity.value'}}])
+{ "name" : "Sun", "gravity" : 274 }
+{ "name" : "Mercury", "gravity" : 3.24 }
+{ "name" : "Venus", "gravity" : 8.87 }
+{ "name" : "Earth", "gravity" : 9.8 }
+{ "name" : "Mars", "gravity" : 3.71 }
+{ "name" : "Jupiter", "gravity" : 24.79 }
+{ "name" : "Saturn", "gravity" : 10.44 }
+{ "name" : "Uranus", "gravity" : 8.87 }
+{ "name" : "Neptune", "gravity" : 11.15 }
+
+```
