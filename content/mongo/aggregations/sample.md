@@ -1,5 +1,11 @@
 # Sample
 Gets a random sample from the collection, by a specified number of docs (_n_).  
+Useful to...
+- do initial analysis on a dataset
+- do sampling on result set
+- fetch docs for random-user-searching
+- seed some random obj for computation
+
 ## Conditions
 When...
 _n_ < 5% of the collection
