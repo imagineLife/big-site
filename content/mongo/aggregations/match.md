@@ -19,3 +19,7 @@ Match uses mongodb `read` operation query syntax.
 #### must
 - use the `$match` as the first operator when using the `$text` operator
 
+connecting directly to the aggregation db in the atlas cluster
+```bash
+mongo "mongodb://cluster0-shard-00-00-jxeqq.mongodb.net:27017,cluster0-shard-00-01-jxeqq.mongodb.net:27017,cluster0-shard-00-02-jxeqq.mongodb.net:27017/aggregations?replicaSet=Cluster0-shard-0" --authenticationDatabase admin --ssl -u m121 -p aggregations --norc
+```
