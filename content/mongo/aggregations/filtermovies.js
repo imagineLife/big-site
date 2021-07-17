@@ -67,3 +67,29 @@ db.movies.aggregate([
   { $match: { writers: { $elemMatch: { $exists: true } } } },
   { $project: { writers: 1, _id: 0 } },
 ]);
+
+/*  
+  Get the write names, & exclude the conditional "(rando)" text
+*/
+db.movies.aggregate([
+  { $match: { writers: { $elemMatch: { $exists: true } } } },
+  {
+    $project: {
+      writers: {
+        $map: {
+          input: '$writers',
+          as: 'writer',
+          in: {
+            $arrayElemAt: [
+              {
+                $split: ['$$writer', ' ('],
+              },
+              0,
+            ],
+          },
+        },
+      },
+      _id: 0,
+    },
+  },
+]);
