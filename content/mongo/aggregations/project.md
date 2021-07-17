@@ -64,3 +64,18 @@ db.solarSystem.aggregate([{$project: {_id:0, name:1, gravity: '$gravity.value'}}
 { "name" : "Uranus", "gravity" : 8.87 }
 { "name" : "Neptune", "gravity" : 11.15 }
 ```
+### Creating an entirely new field
+The new name of a reassigned field is arbitrary, and does not need to match the original field names at all. Here, the `gravity.value` kub-field gets reassigned to a new `surfaceGravity` key/value pair -
+```bash
+db.solarSystem.aggregate([{$project: {_id:0, name:1, surfaceGravity: '$gravity.value'}}])
+{ "name" : "Sun", "surfaceGravity" : 274 }
+{ "name" : "Mercury", "surfaceGravity" : 3.24 }
+{ "name" : "Venus", "surfaceGravity" : 8.87 }
+{ "name" : "Earth", "surfaceGravity" : 9.8 }
+{ "name" : "Mars", "surfaceGravity" : 3.71 }
+{ "name" : "Jupiter", "surfaceGravity" : 24.79 }
+{ "name" : "Saturn", "surfaceGravity" : 10.44 }
+{ "name" : "Uranus", "surfaceGravity" : 8.87 }
+{ "name" : "Neptune", "surfaceGravity" : 11.15 }
+
+```
