@@ -40,6 +40,18 @@ Compound indexes -
     - querying this will NOT target the query: `db.products.find({type: 'banana'})`
     - querying this will NOT target the query: `db.products.find({name: 'pinto'})`
 
+## SEE which fields have triggered targeted queries
+```bash
+db.products.find({sku: 100000749}).explain()
+
+# will show that the scanning takes advantage of the sku
+# including IXSCAN in the stage
 
 
+db.products.find( {
+"name" : "Gods And Heroes: Rome Rising - Windows [Digital Download]" }
+).explain()
 
+# will show COLLSCAN as a step, a slower step
+# with multiple shards, this will scan all shards
+```
