@@ -1,6 +1,7 @@
 # project
 Like map in js.  
 Project shapes a new output in this step of the pipeline.
+Project can be re-used a bunch in pipelines.  
 
 ## Remove values 
 Project can remove fields from being presented after this pipeline step.  
