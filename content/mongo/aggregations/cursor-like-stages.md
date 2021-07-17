@@ -1,0 +1,27 @@
+# Cursor-Like Stages
+sort.  
+skip.  
+limit.  
+count.  
+
+A basic query
+```bash
+db.solarSystem.find({},{_id: 0, name:1, numberOfMoons:1}).pretty()
+```
+
+count the number of docs
+```bash
+db.solarSystem.find({},{_id: 0, name:1, numberOfMoons:1}).count()
+```
+
+skip 5 docs
+- without _sorting_ the results, the order returned is the order at which they were inserted, the `natural order`
+```bash
+db.solarSystem.find({},{_id: 0, name:1, numberOfMoons:1}).skip(5).pretty()
+```
+
+limit the number of results
+```bash
+db.solarSystem.find({},{_id: 0, name:1, numberOfMoons:1}).limit(5).pretty()
+```
+
