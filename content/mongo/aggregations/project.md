@@ -1,5 +1,6 @@
 # project
 Like map in js.  
+Project shapes a new output in this step of the pipeline.
 
 ## Remove values 
 Project can remove fields from being presented after this pipeline step.  
@@ -50,6 +51,7 @@ db.solarSystem.aggregate([{$project: {_id:0, name:1, 'gravity.value': 1}}])
 
 ## Reassigning fields
 Here, the dub-field of `gravity.value` will be re-assigned to `value`.  
+The new field gets declared as a key. The value that the project uses to assign to the new key, the aggregation expression must prefix the field (_& subfield combo if present, like below_) with a `$`.
 ```bash
 db.solarSystem.aggregate([{$project: {_id:0, name:1, gravity: '$gravity.value'}}])
 { "name" : "Sun", "gravity" : 274 }
@@ -61,5 +63,4 @@ db.solarSystem.aggregate([{$project: {_id:0, name:1, gravity: '$gravity.value'}}
 { "name" : "Saturn", "gravity" : 10.44 }
 { "name" : "Uranus", "gravity" : 8.87 }
 { "name" : "Neptune", "gravity" : 11.15 }
-
 ```
