@@ -25,3 +25,9 @@ limit the number of results
 db.solarSystem.find({},{_id: 0, name:1, numberOfMoons:1}).limit(5).pretty()
 ```
 
+
+sort the docs
+```bash
+db.solarSystem.find({},{_id: 0, name:1, numberOfMoons:1}).sort({numberOfMoons: -1}).pretty()
+```
+
