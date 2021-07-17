@@ -58,7 +58,8 @@ Expressions are like functions.
 - we provide args
 - expressions provide a computed output
 - can be composed
-
+- Some expression can only be used in specific stages
+  - accumulators can only be used in `$group` stage
 #### Special Examples
 - **Field Path Expression**: `$numberOfMoons` is used to access a field in the document
 - **System Level Variable**: `$$UPEERCASEWORD` like {`$CURRENT`} referring to the current doc
