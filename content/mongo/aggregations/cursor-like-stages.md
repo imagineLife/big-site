@@ -137,3 +137,48 @@ see that the `false` magnetic fields are all under the `true` magnetic fields, i
 **SORT & MEMORY USAGE**: Sort by default only can take 100mb of memory.  
 When sort is early in the pipeline, it can take advantage of indexes for optimization.  
 Sorts in agg should be paired with `allowDiskUse: true` in the pipeline to accommodate larger sorts.  
+
+#### Complex Example
+For movies 
+- released in the USA 
+- with a `tomatoes.viewer.rating` greater than or equal to 3
+... calculate a new field called `num_favs` 
+  - that represents how many favorites appear in the `cast` field of the movie
+- Sort the results by `num_favs`, `tomatoes.viewer.rating`, and `title`, all in descending order
+**QUESTION**: What is the title of the 25th film in the aggregation result?
+**A**: "The Heat". Blam.  
+```bash
+db.movies.aggregate([
+  {
+    $match: {
+      countries: { $in: ["USA"]},
+      "tomatoes.viewer.rating": {$gte: 3}
+
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      title: 1,
+      rating: "$tomatoes.viewer.rating",
+      num_favs: { 
+        $size: {
+          $cond:{
+            if: {
+              $setIntersection: ['$cast', ["Sandra Bullock","Tom Hanks","Julia Roberts","Kevin Spacey","George Clooney"]]
+            }, 
+            then: {
+              $setIntersection: ['$cast', ["Sandra Bullock","Tom Hanks","Julia Roberts","Kevin Spacey","George Clooney"]]
+            },
+            else: []
+          }
+        }
+      }
+    }
+  },
+  {
+    $sort: { num_favs: -1, rating: -1, title: -1 }
+  },
+  { $limit: 25 }
+])
+```
