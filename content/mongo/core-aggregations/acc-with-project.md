@@ -71,6 +71,7 @@ db.icecream_data.aggregate([
 - here, `$$value` is like the accumulator
 - $this is the current item in the iterator
 
+## Max
 Now, use the `$max` which is a type of grouping.
 ```bash
 db.icecream_data.aggregate([
@@ -87,6 +88,7 @@ db.icecream_data.aggregate([
 ```
 Much smaller query.   
 
+## Min
 Now, get the min avg low temp
 ```bash
 db.icecream_data.aggregate([
@@ -103,7 +105,7 @@ db.icecream_data.aggregate([
 # should return
 { "min_avg_low" : 27 }
 ```
-
+## stdDevPop and Avg
 Calc avg cpi.  
 Calc the cpi standard deviation.    
 ```bash
@@ -125,3 +127,19 @@ db.icecream_data.aggregate([
 { "avg_cpi" : 221.275, "cpi_deviation" : 6.632511464998266 }
 ```
 
+## Sum
+```bash
+db.icecream_data.aggregate([
+  {
+    $project: {
+      _id:0,
+      yearly_sales_in_millions: {
+        $sum: "$trends.icecream_sales_in_millions"
+      }
+    }
+  }
+])
+
+# should return...
+{ "yearly_sales_in_millions" : 1601 }
+```
