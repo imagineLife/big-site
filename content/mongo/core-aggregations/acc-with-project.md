@@ -1,6 +1,16 @@
 # accumulator exps inside project
 The accumulator logic happens on a per-doc basis.  
+### Available accumulators
+- $sum
+- $avg
+- $max
+- $min
+- $stdDevPop
+- $stdDevSam
 
+These expressions do not stay across documents.  
+
+## Practice
 Start with some data.  
 Not to forget, this is on the `aggregation` db. Here, the icecream dataset will be leveraged.  
 
@@ -142,4 +152,82 @@ db.icecream_data.aggregate([
 
 # should return...
 { "yearly_sales_in_millions" : 1601 }
+```
+
+## Another example
+For the films collection
+- only use films that won at least 1 Oscar, 
+- calculate 
+  - the standard deviation of imdb.rating (_Use the sample standard deviation expression_) 
+  - highest imdb.rating
+  - lowest imdb.rating
+  - average imdb.rating  
+
+```bash
+# starting off
+db.movies.aggregate([
+  {
+    $match: { 
+       awards: { $exists: true },
+       'imdb.rating': { $exists: true }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      awards: 1,
+      title: 1,
+      rating: "$imdb.rating"
+    }
+  }
+])
+
+# next, not doing what I want
+db.movies.aggregate([
+  {
+    $match: {
+      awards: { $exists: true },
+      'imdb.rating': { $exists: true }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      awards: 1,
+      title: 1,
+      rating: "$imdb.rating"
+    }
+  },
+  {
+    $project: {
+      avg_rating: {
+        $avg: "$rating"
+      },
+      max_rating: {
+        $max: "$rating"
+      },
+      min_rating: {
+        $min: "$rating"
+      }
+    }
+  }
+])
+
+# next, adding group
+# ...hmm, max not working, doing not-equal to ""
+db.movies.aggregate([
+  {
+    $match: {
+      awards: { $exists: true },
+      'imdb.rating': { $exists: true, $ne: "" },
+    }
+  },
+  {
+    $group:{
+      _id: 0,
+      lowest_rating: { $min: "$imdb.rating" },
+      highest_rating: { $max: "$imdb.rating" }
+    }
+  }
+])
 ```
