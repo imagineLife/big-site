@@ -35,13 +35,13 @@ db.icecream_data.findOne()
 # ...etc
 ```
 
-Idea One, find the, use `$reduce` to find the maximum avg. high-temp value from the `trends` array
+Idea One, find the max avg_high_temp, && use `$reduce`. high-temp value from the `trends` array
 ```bash
 db.icecream_data.aggregate([
   {
     $project: {
       _id: 0,
-      max_avg_high: {
+      max_high: {
         $reduce: {
           input: "$trends",
           initialValue: 0,
@@ -60,9 +60,46 @@ db.icecream_data.aggregate([
     }
   }
 ])
+
+# should return 
+{ "max_high" : 87 }
+
 ```
 - if the current iteration avg high temp is greater than the accumulator
   - return this high temp val
   - else return the accumulator
 - here, `$$value` is like the accumulator
 - $this is the current item in the iterator
+
+Now, use the `$max` which is a type of grouping.
+```bash
+db.icecream_data.aggregate([
+  {
+    $project: {
+      _id: 0,
+      max_high: { $max: "$trends.avg_high_tmp" }
+    }
+  }
+])
+
+# should return same as above,
+{ "max_high" : 87 }
+```
+Much smaller query.   
+
+Now, get the min avg low temp
+```bash
+db.icecream_data.aggregate([
+  {
+    $project: {
+      _id: 0,
+      min_avg_low: {
+        $min: "$trends.avg_low_tmp"
+      }
+    }
+  }
+])
+
+# should return
+{ "min_avg_low" : 27 }
+```
