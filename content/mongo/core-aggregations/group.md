@@ -10,6 +10,7 @@ db.movies.aggregate([
 ])
 
 # group by year, sum the num films per year
+NOTE: `sum:1` will get the count of all grouped docs in the resulting group
 db.movies.aggregate([
   {
     $group: {
@@ -45,3 +46,46 @@ db.movies.aggregate([
 { "_id" : 2010, "num_films" : 1538 }
 # etc
 ```
+
+Maintaining types, here when an item is not an array, forcing a calculated array length to return `0`: on a new `numDirectors` field
+```bash
+db.movies.aggregate([
+  {
+    $group: {
+      _id: {
+        numDirectors: {
+          $cond: [
+            {$isArray: "$directors"},
+            {$size: "$directors"},
+            0
+          ]
+        }
+      },
+      numFilms: { $sum: 1 },
+      avgMetacritic: {$avg: "$metacritic"}
+    }
+  },
+  {
+    $sort: {"_id.numDirectors": -1}
+  }
+])
+
+# returns...
+{ "_id" : { "numDirectors" : 44 }, "numFilms" : 1, "avgMetacritic" : null }
+{ "_id" : { "numDirectors" : 42 }, "numFilms" : 1, "avgMetacritic" : null }
+{ "_id" : { "numDirectors" : 41 }, "numFilms" : 1, "avgMetacritic" : null }
+{ "_id" : { "numDirectors" : 36 }, "numFilms" : 1, "avgMetacritic" : null }
+{ "_id" : { "numDirectors" : 30 }, "numFilms" : 1, "avgMetacritic" : 53 }
+
+```
+## On Missing Fields
+NOTE: the avgMetacritic is null here - odd.  
+WHY? a bunch of original docs don't even have the field.  
+**A missing field**.  
+This can lead analysis to sanitize the field.  
+Missing Files may lead to field sanitizations.  
+The datatypes matter.  
+
+Accumulator expressions ignore docs where 
+- the field is missing entirely
+- the _value_ of the field does not match the accumulator expectation
