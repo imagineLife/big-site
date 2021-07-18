@@ -101,3 +101,24 @@ db.movies.aggregate([
   }
 ])
 ```
+
+### Calculating an average where key is missing in some
+Filter, or `$match`, the docs that do not have the field
+```bash
+db.movies.aggregate([
+  {
+    $match: {
+      metacritic: { $gte: 0 }
+    }
+  },
+  {
+    $group: {
+      _id: null,
+      avgMetacritic: { $avg: "$metacritic" }
+    }
+  }
+])
+
+#will return
+{ "_id" : null, "avgMetacritic" : 56.931091693396745 }
+```
