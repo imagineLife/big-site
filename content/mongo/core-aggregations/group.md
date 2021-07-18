@@ -122,3 +122,8 @@ db.movies.aggregate([
 #will return
 { "_id" : null, "avgMetacritic" : 56.931091693396745 }
 ```
+
+### Notes
+- all accumulator expressions can be used in a `$group` statement
+- `$group` can be used many times in a single pipeline
+- sanitizing data may be necessary with the group, to avoid bad/missing data
