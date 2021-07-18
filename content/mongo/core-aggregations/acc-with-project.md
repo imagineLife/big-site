@@ -58,8 +58,7 @@ db.icecream_data.aggregate([
           in: { 
             $cond: {
               if: {
-                $gt : ["$$this.avg_high_tmp"
-, "$$value"]
+                $gt : ["$$this.avg_high_tmp", "$$value"]
               },
               then: "$$this.avg_high_tmp",
               else: "$$value"
