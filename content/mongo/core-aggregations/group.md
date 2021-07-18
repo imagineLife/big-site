@@ -89,3 +89,15 @@ The datatypes matter.
 Accumulator expressions ignore docs where 
 - the field is missing entirely
 - the _value_ of the field does not match the accumulator expectation
+
+## On Grouping All Docs with no grouping strategy
+```bash
+db.movies.aggregate([
+  {
+    $group: {
+      _id: null,
+      count: { $sum: 1 }
+    }
+  }
+])
+```
