@@ -356,5 +356,39 @@ db.movies.aggregate([
 
 # returns
 { "_id" : 0, "lowest_rating" : 4.5, "highest_rating" : 9.2, "avg_rating" : 7.527024070021882 }
+```
+
+adding stdDevSam && rating must be greater-than or equal to 1
+```bash
+db.movies.aggregate([
+  {
+    $match: {
+      awards: { $regex: /Won.*Oscar/ },
+      'imdb.rating': { $ne: "", $gte: 1},
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      title: 1,
+      awards: 1,
+      rating: "$imdb.rating"
+    }
+  },
+  {
+    $group:{
+      _id: 0,
+      lowest_rating: { $min: "$rating" },
+      highest_rating: { $max: "$rating" },
+      avg_rating: { $avg: "$rating" },
+      std_dev: { $stdDevSamp: "$rating" }
+    }
+  }
+])
+
+# returns
+{ "_id" : 0, "lowest_rating" : 4.5, "highest_rating" : 9.2, "avg_rating" : 7.527024070021882, "std_dev" : 0.5988145513344498 }
+
+
 
 ```
