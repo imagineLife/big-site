@@ -126,14 +126,13 @@ db.movies.aggregate([
   {
     $unwind: '$cast',
   },
-  { $project: { _id: 0, cast: 1, title: 1 } },
+  { $project: { _id: 0, cast: 1, title: 1, rating: '$imdb.rating' } },
 ]);
 
 /*
   returns...
-  { "title" : "The Musketeers of Pig Alley", "cast" : "Lillian Gish" }
-  { "title" : "The Musketeers of Pig Alley", "cast" : "Clara T. Bracy" }
-  { "title" : "The Musketeers of Pig Alley", "cast" : "Walter Miller" }
-  { "title" : "The New York Hat", "cast" : "Mary Pickford" }
-  { "title" : "The New York Hat", "cast" : "Charles Hill Mailes" }
+{ "title" : "A Corner in Wheat", "cast" : "James Kirkwood", "rating" : 6.6 }
+{ "title" : "A Corner in Wheat", "cast" : "Linda Arvidson", "rating" : 6.6 }
+{ "title" : "The Sealed Room", "cast" : "Arthur V. Johnson", "rating" : 6.1 }
+{ "title" : "The Sealed Room", "cast" : "Marion Leonard", "rating" : 6.1 }
 */
