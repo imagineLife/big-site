@@ -218,8 +218,8 @@ db.movies.aggregate([
 db.movies.aggregate([
   {
     $match: {
-      awards: { $exists: true },
-      'imdb.rating': { $exists: true, $ne: "" },
+      awards: { $exists: true, },
+      'imdb.rating': { $ne: "" },
     }
   },
   {
@@ -230,4 +230,99 @@ db.movies.aggregate([
     }
   }
 ])
+
+# returns
+{ "_id" : 0, "lowest_rating" : 1.6, "highest_rating" : 9.6 }
+
+
+# NEXT, only return where awarded movies
+# hmm, not sure yet
+db.movies.aggregate([
+  {
+    $match: {
+      awards: { $regex: /Oscar/ },
+      'imdb.rating': { $ne: ""},
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      title: 1,
+      awards: 1,
+      rating: "$imdb.rating"
+    }
+  },
+  {
+    $group:{
+      _id: 0,
+      lowest_rating: { $min: "$rating" },
+      highest_rating: { $max: "$rating" }
+    }
+  }
+])
+
+## keep checking some movie data without the group
+db.movies.aggregate([
+  {
+    $match: {
+      awards: { $regex: /^Won/ },
+      'imdb.rating': { $ne: ""},
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      title: 1,
+      awards: 1,
+      rating: "$imdb.rating"
+    }
+  }
+])
+
+# got the "Won x Oscar(s)"
+db.movies.aggregate([
+  {
+    $match: {
+    awards: { $regex: /Won.*Oscar/ },
+    'imdb.rating': { $ne: ""},
+    }
+  },
+  {
+    $project: {
+    _id: 0,
+    title: 1,
+    awards: 1,
+    rating: "$imdb.rating"
+    }
+  }
+])
+
+# reintroduce the min + max
+
+db.movies.aggregate([
+  {
+    $match: {
+      awards: { $regex: /Won.*Oscar/ },
+      'imdb.rating': { $ne: ""},
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      title: 1,
+      awards: 1,
+      rating: "$imdb.rating"
+    }
+  },
+  {
+    $group:{
+      _id: 0,
+      lowest_rating: { $min: "$rating" },
+      highest_rating: { $max: "\$rating" }
+    }
+  }
+])
+
+# returns...
+{ "_id" : 0, "lowest_rating" : 4.5, "highest_rating" : 9.2 }
 ```
