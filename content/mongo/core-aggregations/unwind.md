@@ -13,3 +13,17 @@ db.movies.aggregate([
 { "title" : "Baby's Dinner", "cast" : "Andr�e Lumi�re" }
 { "title" : "Baby's Dinner", "cast" : "Auguste Lumi�re" }
 ```
+
+## Can be helpful for grouping on array entries
+Grouping movies based on year AND genres is complex. Array order matters.  
+
+### Exampl
+Find 
+- most popular genre 
+  - grouped by year
+  - from 2010-2015  
+  - with runtime of greater-than 90 min
+  - movies that have been rated
+
+```bash
+```
