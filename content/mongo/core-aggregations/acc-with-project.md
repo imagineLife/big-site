@@ -318,11 +318,43 @@ db.movies.aggregate([
     $group:{
       _id: 0,
       lowest_rating: { $min: "$rating" },
-      highest_rating: { $max: "\$rating" }
+      highest_rating: { $max: "$rating" },
     }
   }
 ])
 
 # returns...
 { "_id" : 0, "lowest_rating" : 4.5, "highest_rating" : 9.2 }
+```
+
+add avg
+```bash
+db.movies.aggregate([
+  {
+    $match: {
+      awards: { $regex: /Won.*Oscar/ },
+      'imdb.rating': { $ne: ""},
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      title: 1,
+      awards: 1,
+      rating: "$imdb.rating"
+    }
+  },
+  {
+    $group:{
+      _id: 0,
+      lowest_rating: { $min: "$rating" },
+      highest_rating: { $max: "$rating" },
+      avg_rating: { $avg: "$rating" }
+    }
+  }
+])
+
+# returns
+{ "_id" : 0, "lowest_rating" : 4.5, "highest_rating" : 9.2, "avg_rating" : 7.527024070021882 }
+
 ```
