@@ -103,3 +103,25 @@ db.icecream_data.aggregate([
 # should return
 { "min_avg_low" : 27 }
 ```
+
+Calc avg cpi.  
+Calc the cpi standard deviation.    
+```bash
+db.icecream_data.aggregate([
+  {
+    $project: {
+      _id: 0,
+      avg_cpi: {
+        $avg: "$trends.icecream_cpi"
+      },
+      cpi_deviation: {
+        $stdDevPop: "$trends.icecream_cpi"
+      }
+    }
+  }
+])
+
+# should return...
+{ "avg_cpi" : 221.275, "cpi_deviation" : 6.632511464998266 }
+```
+
