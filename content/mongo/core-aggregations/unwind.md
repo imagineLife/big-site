@@ -17,7 +17,7 @@ db.movies.aggregate([
 ## Can be helpful for grouping on array entries
 Grouping movies based on year AND genres is complex. Array order matters.  
 
-### Exampl
+### Example
 Find 
 - most popular genre 
   - grouped by year
@@ -26,4 +26,42 @@ Find
   - movies that have been rated
 
 ```bash
+db.movies.aggregate([
+  {
+  $match: {
+    'imdb.rating': {
+        $gte: 0,
+      },
+      year: { $gte: 2010, $lte: 2015 },
+      runtime: { $gte: 90 },
+    },
+  },
+  {
+    $unwind: '$genres',
+  },
+  {
+    $group: {
+      _id: {
+        year: '$year',
+        genre: '$genres',
+      },
+      avg_rating: { $avg: '$imdb.rating' },
+    },
+  },
+  {
+    $sort: {
+      '_id.year': -1,
+      avg_rating: -1,
+    },
+  },
+  {
+    $group: {
+      _id: '$_id.year',
+      genre: { $first: '$_id.genre' },
+      avg_rating: { $first: '$avg_rating' },
+    },
+  }
+])
 ```
+
+NOTE: unwind on large documents may cause performance issues.
