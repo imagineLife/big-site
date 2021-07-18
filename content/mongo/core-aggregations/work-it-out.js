@@ -136,3 +136,44 @@ db.movies.aggregate([
 { "title" : "The Sealed Room", "cast" : "Arthur V. Johnson", "rating" : 6.1 }
 { "title" : "The Sealed Room", "cast" : "Marion Leonard", "rating" : 6.1 }
 */
+
+/*
+  NEXT: re-group into...
+  actor_stats: {
+    _id: joe,
+    numFilms: 1, 
+    average: 1.1
+  }
+*/
+
+db.movies.aggregate([
+  {
+    $match: {
+      languages: { $in: ['English'] },
+    },
+  },
+  {
+    $unwind: '$cast',
+  },
+  {
+    $project: {
+      _id: 0,
+      cast: 1,
+      title: 1,
+      rating: '$imdb.rating',
+    },
+  },
+  {
+    $group: {
+      _id: '$cast',
+      average: { $avg: '$rating' },
+      numFilms: { $sum: 1 },
+    },
+  },
+  {
+    $sort: { numFilms: -1 },
+  },
+  {
+    $limit: 1,
+  },
+]);
