@@ -65,3 +65,9 @@ db.parent_reference.aggregate([
 - startWith the `reports_to` field of the `$matched` document
 - connectFrom `reports_to` to `_id_` in other docs
 - stores in `bosses` arr
+
+### NOTE
+- `startWith` does NOT indicate an index to use to execute the recursive match
+- `as` determines a subdoc to store the results
+- `connectFromField` matches the `connectToField` in the recursive match
+- `connectToField` is used in the recursive find operator
