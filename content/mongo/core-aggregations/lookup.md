@@ -58,6 +58,95 @@ db.air_alliances.aggregate([
 $ ...etc
 ```
 
+### Another example
+
+DID NOT GET IT HERE...
+```bash
+db.air_alliances.aggregate([
+  {
+    $lookup: {
+      from: "air_routes",
+      localField: "airlines",
+      foreignField: "airline.name",
+      as: "matches"
+    }
+  },
+
+  {
+    $project: {
+      _id: 0,
+      name: 1,
+      match_count: {
+        $size: {}
+      }
+    }
+  }
+])
+```
+
+1. Get Just routes that have 747 or 380 airplanes in them
+```bash
+db.air_routes.aggregate([
+  {
+    $match: {
+      airplane: /747|380/
+    }
+  }
+])
+```
+
+2. lookup other table 
+```bash
+db.air_routes.aggregate([
+  {
+    $match: {
+      airplane: /747|380/
+    }
+  },
+  {
+    $lookup: {
+      from: "air_alliances",
+      localField: "airline.name",
+      foreignField: "airlines",
+      as: "alliance"
+    }
+  }
+])
+```
+
+3. build 1 doc per array element in alliance arr, && then re-combine on count of alliance name. Then sort by most-to-least
+```bash
+db.air_routes.aggregate([
+  {
+    $match: {
+      airplane: /747|380/
+    }
+  },
+  {
+    $lookup: {
+      from: "air_alliances",
+      localField: "airline.name",
+      foreignField: "airlines",
+      as: "alliance"
+    }
+  },
+  {
+    $unwind: "$alliance"
+  },
+  {
+    $group: {
+      _id: "$alliance.name",
+      count: { $sum: 1 }
+    }
+  },
+  {
+    $sor: { count: -1 }
+  }
+])
+```
+
+
+
 ### Thoughts
 - the `from` field cannot be sharded
 - the `from` collection must be in the same db
