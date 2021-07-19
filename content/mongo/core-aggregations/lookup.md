@@ -9,5 +9,9 @@ ARGS:
 - as: alias fieldName in the resulting doc
 
 example:
-Table 1: a list of airlines  
-Tbale 2: a list of "alliances", which each have a list of airlines (_can be related to the airlines collection_)
+**Table 1**: a list of airlines  
+**Table 2**: a list of "alliances", which each have a list of airlines (_can be related to the airlines collection_)
+**Goal**: use the "alliances" table as the 'root' table, and for each airline listed in the list of airlines among the alliance, replace the airline name with the complete airline object from the `airline` collection
+
+```bash
+```
