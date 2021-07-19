@@ -156,6 +156,24 @@ db.child_reference.aggregate([
 
 ```
 
+## on limiting the level of a hierarchy search
+A 0-index `maxDepth` field which identifies how many 'levels' to look
+```bash
+db.child_reference.aggregate([
+  {$match: { name: "Dev" }},
+  {$graphLookup: {
+    from: 'child_reference',
+    startWith: '$direct_reports',
+    connectFromField: 'direct_reports',
+    connectToField: 'name',
+    as: 'two_level_reports',
+    maxDepth: 1,
+    depthField: 'hierarchy_level_from_start'
+  }}
+])
+
+```
+
 ### NOTE
 - when looking up 'parent' documents, use the `parent_reference`
 - when looking up 'child' documents where child elements are listed in the parent doc, use the `child_reference`
@@ -163,4 +181,4 @@ db.child_reference.aggregate([
 - `as` determines a subdoc to store the results
 - `connectFromField` matches the `connectToField` in the recursive match
 - `connectToField` is used in the recursive find operator
-
+- `depth_field` takes a value which becomes a new key, and the value becomes how many levels from the start were traversed
