@@ -1,4 +1,6 @@
 # lookup
+[mongo docs](https://docs.mongodb.com/manual/reference/operator/aggregation/lookup/)  
+
 Like a left outer join.  
 ARGS:
 - from: a collection from which to look up docs
