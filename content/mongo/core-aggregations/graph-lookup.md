@@ -37,5 +37,31 @@ db.parent_reference.aggregate([
   }
 ])
 ```
-- match the `reports_to` val to the `_id` field
-- stores in `all_reports`
+- `$match` on the document of interest to start with
+- startWith the _id field of the `$matched` document
+- connectFrom `_id` to `reports_to` in other docs
+- stores in `all_reports` arr
+
+# who does vp of ed report to
+```bash
+db.parent_reference.aggregate([
+  {
+    $match: {
+      name: 'Shannon'
+    }
+  },
+  {
+    $graphLookup: {
+      from: 'parent_reference',
+      startWith: '$reports_to',
+      connectFromField: 'reports_to',
+      connectToField: '_id',
+      as: 'bosses'
+    }
+  }
+])
+```
+- `$match` on the document of interest to start with
+- startWith the `reports_to` field of the `$matched` document
+- connectFrom `reports_to` to `_id_` in other docs
+- stores in `bosses` arr
