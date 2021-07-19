@@ -33,3 +33,20 @@ CONNECT BY PRIOR empno = mgr
 order by "Employee", "Manager", "Pathlen", "Path;"
 ```
 **IN Algebra** 
+This is transitive closure.  
+
+### usage
+similar to `$lookup`
+
+```bash
+$graphLookup: {
+  from:             # the table to get res from
+  startWith:        # the value to start the recursive search with
+  connectFromField: # field in from collection used in the next recursive query
+  connectToField:   # sets field in the doc in the TO collection
+  as:               # a field in the output, an alias, of the arr of res
+  maxDepth:         # optional, max depth of the lookup
+  depthField:       # optional (0 for first lookup), field name in resulting doc 
+  restrictSearchWithMatch:  # optional, a filter on the from collection
+}
+```
