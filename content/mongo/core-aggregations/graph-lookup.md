@@ -155,8 +155,12 @@ db.child_reference.aggregate([
 ])
 
 ```
+
 ### NOTE
+- when looking up 'parent' documents, use the `parent_reference`
+- when looking up 'child' documents where child elements are listed in the parent doc, use the `child_reference`
 - `startWith` does NOT indicate an index to use to execute the recursive match
 - `as` determines a subdoc to store the results
 - `connectFromField` matches the `connectToField` in the recursive match
 - `connectToField` is used in the recursive find operator
+
