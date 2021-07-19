@@ -8,10 +8,50 @@ ARGS:
 - foreignField: field formt he doc of the "from" collection
 - as: alias fieldName in the resulting doc
 
-example:
+### example 1
 **Table 1**: a list of airlines  
 **Table 2**: a list of "alliances", which each have a list of airlines (_can be related to the airlines collection_)
 **Goal**: use the "alliances" table as the 'root' table, and for each airline listed in the list of airlines among the alliance, replace the airline name with the complete airline object from the `airline` collection
 
 ```bash
+db.air_alliances.aggregate([
+  {
+    $lookup: { 
+      from: "air_airlines", 
+      localField: "airlines", 
+      foreignField: "name", 
+      as: "airlines" 
+    }
+  }
+])
+.pretty()
+
+# returns...
+{
+"\_id" : ObjectId("5980bef9a39d0ba3c650ae9d"),
+"name" : "OneWorld",
+"airlines" : [
+{
+"\_id" : ObjectId("56e9b497732b6122f87907c8"),
+"airline" : 1355,
+"name" : "British Airways",
+"alias" : "BA",
+"iata" : "BAW",
+"icao" : "SPEEDBIRD",
+"active" : "Y",
+"country" : "United Kingdom",
+"base" : "VDA"
+},
+{
+"\_id" : ObjectId("56e9b497732b6122f87908cd"),
+"airline" : 1615,
+"name" : "Canadian Airlines",
+"alias" : "CP",
+"iata" : "CDN",
+"icao" : "CANADIAN",
+"active" : "Y",
+"country" : "Canada",
+"base" : "LVI"
+},
+$ ...etc
 ```
