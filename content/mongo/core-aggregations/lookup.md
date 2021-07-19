@@ -55,3 +55,10 @@ db.air_alliances.aggregate([
 },
 $ ...etc
 ```
+
+### Thoughts
+- the `from` field cannot be sharded
+- the `from` collection must be in the same db
+- the values in the `localField` and `foreignField` are matched on equality
+- `as` can be _any name_
+  - if the `as` is a field that laready exists, the og field will be overwritten
