@@ -174,6 +174,30 @@ db.child_reference.aggregate([
 
 ```
 
+## Dont Forget Concerns
+- `$lookup` might take up a lot of memory
+  - leverage `$allowDiskUse`
+  - may exceed the 100MB allocation EVEN WITH `allowDiskUse`
+- use indexes
+  - indexes will speed up queries
+  - if the `connectToField`, the field in the FROM collection, is indexed, this will help
+- collections cannot be sharded in the `from` collection
+- unrelated `matched` stages do not get pushed before `graphLookup`
+
+
+### A Complex example
+Find 
+- a list of all possible distinct destinations
+  - with at most one layover
+  - departing from the base airports of 
+    - airlines from `Germany`, `Spain` or `Canada` 
+    - that are part of the "OneWorld" alliance 
+- Include 
+  - both the destination 
+  - and which airline services that location
+- there should be 158 results
+
+
 ### NOTE
 - when looking up 'parent' documents, use the `parent_reference`
 - when looking up 'child' documents where child elements are listed in the parent doc, use the `child_reference`
