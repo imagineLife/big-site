@@ -5,6 +5,7 @@ Consider 2 collections
 
 ## A Goal
 From an airport, where can I go with a maximum of X layovers?  
+Can I START at an airport, and make sure all flights I connect with use the same airline?
 ```bash
 db.air_airlines.aggregate([
   {$match: {name: "TAP Portugal"}},
@@ -15,7 +16,9 @@ db.air_airlines.aggregate([
     connectFromField: 'dst_airport',
     connectToField: 'src_airport',
     depthField: 'layovers',
-    maxDepth: 1
+    maxDepth: 1,
+    restrictSearchWithMatch: { 'airline.name': "TAP Portugal" }
   }}
-])
+]).pretty()
+
 ```
