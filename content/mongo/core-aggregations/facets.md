@@ -222,3 +222,114 @@ db.startups.aggregate([
   - supports specific strings (_R5, R20, etc_)
 
 ## show multi-facetted output
+`$facet`  
+Facet allows performing multiple aggregate functions and returning each aggregate to a named key.  
+Here, the `category`, `employees`, and `founded` keys hold faceted results.  
+**NOTE**  
+Each `facet` takes the _same input_. Below, the first stage matches on `Databases`, and all 3 facts get the same input where text matches databases.  
+
+Facet output does not affect following facet inputs. This is unlike other pipeline operators, where pipeline output directly affects following pipeline inputs.  
+
+```bash
+db.startups.aggregate([
+  {$match: {$text: {$search: 'Databases'}}},
+  {$facet: {
+    categories: [{$sortByCount: '$category_code'}],
+    employees: [
+      {$match: {founded_year: {$gt: 1980}}},
+      {$bucket: {
+        groupBy: '$number_of_employees',
+        boundaries: [0,20,50,100,500,1000,Infinity],
+        default: 'Other'
+      }}
+    ],
+    founded: [
+      {$match: {'offices.city': 'New York'}},
+      {$bucketAuto: {
+        groupBy: '$founded_year',
+        buckets: 5
+      }}
+    ]
+  }}
+])
+
+#returns something like...
+{
+  "categories" : [
+    {
+    "_id" : "software",
+    "count" : 136
+    },
+    {
+    "_id" : "web",
+    "count" : 101
+    },
+    ...more
+  ],
+  "employees" : [
+    {
+    "_id" : 0,
+    "count" : 183
+    },
+    {
+    "_id" : 20,
+    "count" : 52
+    },
+    ...more
+  ],
+  "founded" : [
+    {
+      "_id" : {
+        "min" : null,
+        "max" : 1994
+      },
+      "count" : 7
+    },
+    {
+      "_id" : {
+        "min" : 1994,
+        "max" : 2004
+      },
+      "count" : 7
+    },
+    ...more
+  ]
+}
+```
+
+### A Complex example
+Using a single query to the db, how many movies are in both the top ten highest rated movies according to the `imdb.rating` and the `metacritic` fields?
+```bash
+db.movies.aggregate([
+  {$match:{ metacritic: {$exists: true}}},
+  {$facet:{
+    top_rated: [
+      {$match: {metacritic: {$ne: null}}},
+      {$sort: { 'imdb.rating': -1 }},
+      {$limit: 10},
+      {$project:{
+        _id:0,
+        title:1,
+        rating: '$imdb.rating',
+        meta: '$metacritic'
+      }}
+    ],
+    top_criticd: [
+      {$match: {'imdb.rating': {$ne: null}}},
+      {$sort: { 'metacritic': -1 }},
+      {$limit: 10},
+      {$project:{
+        _id:0,
+        title:1,
+        rating: '$imdb.rating',
+        meta: '$metacritic'
+      }}
+    ]
+  }},
+  {$project: {
+    in_both: {
+      $setIntersection: ['$top_rated','$top_criticd']
+    }
+  }}
+])
+```
