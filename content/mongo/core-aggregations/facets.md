@@ -126,6 +126,34 @@ db.startups.aggregate([
 ```
 - lower bound is inclusive
 - upper bound is exclusive
+- values outside the boundaries throw an error 
+  - when a value is a string and the buckets are bucketing by numbers, error
+  - buckets can have a `default` key/value, for all items outside the boundaries
+    - usefull for `null` or `undefined` values
+
+### allow other in bucketing
+```bash
+db.startups.aggregate([
+  {$match: {
+      founded_year: { $gt: 1980 },
+    }},
+    {$bucket: {
+      groupBy: '\$number_of_employees',
+      boundaries: [0,20,50,100,500,1000,5000,Infinity],
+      default: 'Other'
+  }}
+])
+
+# should return...
+{ "_id" : 0, "count" : 5447 }
+{ "_id" : 20, "count" : 1172 }
+{ "_id" : 50, "count" : 652 }
+{ "_id" : 100, "count" : 738 }
+{ "_id" : 500, "count" : 98 }
+{ "_id" : 1000, "count" : 88 }
+{ "_id" : 5000, "count" : 49 }
+{ "_id" : "Other", "count" : 4522 }
+```
 
 ## Rendering Multiple Facets
 
