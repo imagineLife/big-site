@@ -21,14 +21,14 @@ The app also has _filters_, _dimensions_ of search.
 Explore the `startups` dataset.  
 Get `factes` out of the data.  
 
-### A Simple Query
+### Get Companies where 'network' is in the search
 get data on companies...
 - overview
 - description
 ... for companies related to networking
 ```bash
 # create text indexes on 2 cols for this
-db.companies.createIndex({'description': 'text', 'overview': 'text'})
+db.startups.createIndex({'description': 'text', 'overview': 'text'})
 
 # should return
 {
@@ -38,6 +38,19 @@ db.companies.createIndex({'description': 'text', 'overview': 'text'})
   "ok" : 1
 }
 
+db.startups.aggregate([{'$match': { '$text': {'$search': 'network' }}}]).itcount()
+```
+
+### Get aagg counts grouped by the category code
+```bash
+db.startups.aggregate([
+  {'$match': 
+    { '$text': 
+      {'$search': 'network' }
+    }
+  },
+  {'$sortByCount': '$category_code'}
+])
 ```
 
 
