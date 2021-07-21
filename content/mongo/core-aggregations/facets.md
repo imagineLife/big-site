@@ -155,7 +155,7 @@ db.startups.aggregate([
 { "_id" : "Other", "count" : 4522 }
 ```
 
-### show multi-facteted output
+## More Robust bucket Output
 Per bucket
 - total count of startups
 - average number of employees
@@ -178,6 +178,7 @@ db.startups.aggregate([
 
 ### Auto generating buckets
 `$bucketAuto`  
+[Mongo Docs](https://docs.mongodb.com/manual/reference/operator/aggregation/bucketAuto/)
 ```bash
 db.startups.aggregate([
   {$match: {'offices.city': 'New York'}},
@@ -215,9 +216,9 @@ db.startups.aggregate([
 { "_id" : { "min" : 2003, "max" : 2007 }, "total" : 207, "avg_employees" : 162.703125 }
 { "_id" : { "min" : 2007, "max" : 2009 }, "total" : 248, "avg_employees" : 623.4342857142857 }
 { "_id" : { "min" : 2009, "max" : 2013 }, "total" : 38, "avg_employees" : 57.52173913043478 }
-
->
-
 ```
-## Rendering Multiple Facets
+#### AutoBucket Granularity
+- can config the auto-buckets [preferred number series](https://en.wikipedia.org/wiki/Preferred_number)
+  - supports specific strings (_R5, R20, etc_)
 
+## show multi-facetted output
