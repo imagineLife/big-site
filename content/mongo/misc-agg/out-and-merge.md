@@ -121,3 +121,15 @@ source_pipeline = [
   }}
 ]
 ```
+
+### append from a temp collection to perm collection
+
+```bash
+db.tempcollection.aggregate([
+  {...maybe some data cleansing},
+  {$merge: {
+    into: 'goalcollection',
+    whenMatched: 'fail'
+  }}
+])
+```
