@@ -23,7 +23,7 @@ retains field at cur doc, accept for subdocs and arrays of docs.
 db.employees.aggregate([
   {$redact: {
     $cond: [
-      {$in: ['Management','$acl']},
+      {$in: ['HR','$acl']},
       '$$DESCEND',
       '$$PRUNE'
     ]}
@@ -33,3 +33,9 @@ db.employees.aggregate([
 at each level of the document
 - if management is in the acl array, show the data
 = else, remove the child elements
+
+## Use Cases
+- limit access to data
+- users who can USE this, can see all data - NOT usefule for collection or field-level restrictions
+- IF comparing to a field, THE FIELD MUST EXIST - else
+ may error
