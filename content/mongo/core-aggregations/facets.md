@@ -131,7 +131,7 @@ db.startups.aggregate([
   - buckets can have a `default` key/value, for all items outside the boundaries
     - usefull for `null` or `undefined` values
 
-### allow other in bucketing
+### allow 'other' in bucketing
 ```bash
 db.startups.aggregate([
   {$match: {
@@ -155,5 +155,10 @@ db.startups.aggregate([
 { "_id" : "Other", "count" : 4522 }
 ```
 
+### show multi-facteted output
+Per bucket
+- total count of startups
+- average number of employees
+- list of startup categories
 ## Rendering Multiple Facets
 
