@@ -41,7 +41,7 @@ db.startups.createIndex({'description': 'text', 'overview': 'text'})
 db.startups.aggregate([{'$match': { '$text': {'$search': 'network' }}}]).itcount()
 ```
 
-### Get aagg counts grouped by the category code
+### Get agg counts grouped by the category code
 ```bash
 db.startups.aggregate([
   {'$match': 
@@ -51,6 +51,15 @@ db.startups.aggregate([
   },
   {'$sortByCount': '$category_code'}
 ])
+
+# should return...
+{ "_id" : "web", "count" : 788 }
+{ "_id" : "software", "count" : 463 }
+{ "_id" : "network_hosting", "count" : 306 }
+{ "_id" : "games_video", "count" : 276 }
+{ "_id" : "mobile", "count" : 264 }
+{ "_id" : "advertising", "count" : 205 }
+# ...etc
 ```
 
 
