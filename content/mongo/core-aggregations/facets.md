@@ -160,5 +160,40 @@ Per bucket
 - total count of startups
 - average number of employees
 - list of startup categories
+```bash
+db.startups.aggregate([
+  {$match: { founded_year: {$gt: 1980} }},
+  {$bucket: {
+    groupBy: '$number_of_employees',
+    boundaries: [0,20,50,100,500,1000,5000,Infinity],
+    default: 'Other',
+    output: {
+      total: {$sum:1},
+      average: {$avg: '$number_of_employees'},
+      categories: {'$addToSet': '$category_code'}
+    }
+  }}
+])
+```
+
+### Auto generating buckets
+`$bucketAuto`  
+```bash
+db.startups.aggregate([
+  {$match: {'offices.city': 'New York'}},
+  {$bucketAuto: {
+    groupBy: '$founded_year',
+    buckets: 5
+  }}
+])
+
+# returns...
+{ "_id" : { "min" : null, "max" : 1994 }, "count" : 169 }
+{ "_id" : { "min" : 1994, "max" : 2003 }, "count" : 170 }
+{ "_id" : { "min" : 2003, "max" : 2007 }, "count" : 207 }
+{ "_id" : { "min" : 2007, "max" : 2009 }, "count" : 248 }
+{ "_id" : { "min" : 2009, "max" : 2013 }, "count" : 38 }
+```
+
 ## Rendering Multiple Facets
 
