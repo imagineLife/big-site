@@ -88,6 +88,9 @@ db.startups.aggregate([
 { "_id" : "San Jose", "count" : 53 }
 
 ```
+The above queries illustrate 1-attribute result sets.  
+Aggregate on 1 field, including filters (`$match`)
+- per city
 
 ## Manual and auto bucketing
 
