@@ -62,6 +62,32 @@ db.startups.aggregate([
 # ...etc
 ```
 
+### Get agg on office city location
+```bash
+db.startups.aggregate([
+  {'$match': {
+    '$text': {
+      '$search': 'network'
+    }
+  }},
+  {'$unwind': '$offices'},
+  {'$match': {
+    'offices.city': { '$ne': '' }
+    }
+  },
+  {'$sortByCount': '$offices.city'}
+])
+
+# should return
+{ "_id" : "San Francisco", "count" : 245 }
+{ "_id" : "New York", "count" : 218 }
+{ "_id" : "London", "count" : 133 }
+{ "_id" : "Los Angeles", "count" : 66 }
+{ "_id" : "Palo Alto", "count" : 62 }
+{ "_id" : "Sunnyvale", "count" : 58 }
+{ "_id" : "San Jose", "count" : 53 }
+
+```
 
 ## Manual and auto bucketing
 
