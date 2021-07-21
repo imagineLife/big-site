@@ -37,3 +37,32 @@ $merge: {
 }
 ```
 
+## Merge Syntax
+What happens when the source docs DONT match target docs?
+- no match, usually want to insert new docs
+- match, get to pick...
+    - overwrite?
+    - update?
+    - `whenNotMatched`: insert by default, like update with upsert. Can set to `discard` or `fail`, which could be useful when i DONT want to over-write docs.
+    - `whenMatched`: merge by default. can be set to `replace`, `keepExisting`, `fail`, OR specify with a custom pipeline!!! crazy.
+### on custom whenMatched
+With a custom `whenMatched`, an agg pipleline can be written. Takes incoming fields AND output fields.  
+Single calculations: project, addFields...
+
+`$$new.<field>` refers to incoming data.  
+`$<field>` refers to the output doc.  
+
+```bash
+{
+  $merge: {
+    into: 'goalcollection',
+    whenMatched: [
+      {
+        $addFields: {
+          total: {$sum: ["$total", "$new.total"]}
+        }
+      }
+    ]
+  }
+}
+```
