@@ -133,3 +133,45 @@ db.tempcollection.aggregate([
   }}
 ])
 ```
+
+### populate rollup tables from an existing table
+An existing collection has ALL registration deets for ALL events.  
+A goal table is an aggregate of registrars, a `registrationsummary` collection:
+- count of people who registered
+- event name
+- grouped by day  
+
+The summary table will NOT merge on the same `_id` field as the source table.  
+The summary table will merge on a combo of date & event name.  
+
+
+```bash
+# create unique index
+db.registrationsummary.createIndex({event: 1, date:1}, {unique: 1})
+
+# pull & merge data
+# grab 1 event
+# group by date & count of registrations per date
+# project a cleaner output event,date,total
+# merge to goal dir
+
+summarizePipeline = [
+  {$match: {event_id: "MDVW19"}},
+  {$group: {
+    _id: {$dateToString: {date: "$date", format: "%Y-%m-%d"}},
+    count: {$sum:1}
+  }},
+  {$project: {
+    _id:0,
+    event: "MDVW19",
+    date: "%_id",
+    total: "$count"
+  }},
+  {$merge: {
+    into: "registrationsummary",
+    on: ["event", "date"]
+  }}
+]
+
+
+```
