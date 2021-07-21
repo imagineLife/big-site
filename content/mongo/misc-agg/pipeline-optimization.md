@@ -70,12 +70,15 @@ db.movies.aggregate([
 ```
 
 ### Takeaways
-AVOID NEEDLESS PROJECTS.  
+AVOID NEEDLESS PROJECTS OR STAGES.  
+Agg can project fields automagically.  
 If the query can figure out the shape of the doc based on the agg input, the query will remove fields auto-magically.  
 In the last example, the `$title` was the ONLY field listed.  
 The query planner notices, and ONLY deals with that field.  
 Let the optimizer works for me.  
 group & sort can be replaced with `$sortByCount`. Same under the hood, less input by a human though!
+Causing a merge in a sharded deployment will cause all subsequent pipeline stages to be performed in the same location as the merge.  
+The `$match` stage can leverage an index, avoiding the og data.  
 
 
 ## Another example...
@@ -110,11 +113,139 @@ perhaps the pipeline could be...
 - group AGAIN with actions....
   - huh
 
+### The problem explained
 Considering if sharding is involved,  
 - unwind happens on EACH shard
 - the first grouping stage happens EACH shard
 - the final group happens on 1 shard
 - ... if MORE stages were there, EVEN more would have to happen on that last shard
 
+### another solution
+```bash
+db.stocks.aggregate([
+  {$project: {
+    buy_actions: {
+      $size: {
+        $filter: {
+          input: "$trades",
+          cond: {$eq: ["$$this.action",'buy']}
+        }
+      }
+    },
+    sell_action: {
+      $size: {
+        $filter: {
+          input: "$trades",
+          cond: {$eq: ["$$this.action",'sell']}
+        }
+      }
+    },
+    total_trades: {$size: "$trades"}
+  }}
+])
+```
+
+- different shaped output, but the value is still present
+- project happens across shards, less work overall
+
+### another problem
+Find how many times a specific stock was bought, sold etc, for MDB stocks (_mongodb stocks!_)  
+
+```bash
+db.stocks.aggregate([
+  {
+    $project: {
+      _id:0,
+      mdb: {
+        $reduce: {
+          input: {
+            $filter: {
+              input: "$trades",
+              cond: { seq: ["$$this.ticker","MDB"] }
+            }
+          },
+          initialValue: {
+            bought: {total_count: 0, total_value: 0},
+            sold: {total_count: 0, total_value: 0}
+          },
+          in: {
+            $cond: [
+              {$eq: ["$$this.action", buy]},
+              {
+                buy: {
+                  total_count: {
+                    $add: ["$$value.bought.total_count", 1]
+                  },
+                  total_value: {
+                    $add: ["$$value.bought.total_value", "$$this.price"]
+                  },
+                },
+                sell: "$$this.sell"
+              },
+              {
+                sell: {
+                  total_count: {
+                    $add: ["$$value.sold.total_count", 1]
+                  },
+                  total_value: {
+                    $add: ["$$value.sold.total_value", "$$this.price"]
+                  },
+                },
+                buy: "$$value.buy"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+])
+```
 
 
+
+
+
+
+## Most Complex Example
+Using the air_alliances and air_routes collections, find which alliance has the most unique carriers(airlines) operating between the airports JFK and LHR, in either directions.
+
+Names are distinct, i.e. Delta != Delta Air Lines
+
+src_airport and dst_airport contain the originating and terminating airport information.
+
+```bash
+db.air_routes.aggregate([
+  {
+    $match: {
+      src_airport: { $in: ["LHR", "JFK"] },
+      dst_airport: { $in: ["LHR", "JFK"] }
+    }
+  },
+  {
+    $lookup: {
+      from: "air_alliances",
+      foreignField: "airlines",
+      localField: "airline.name",
+      as: "alliance"
+    }
+  },
+  {
+    $match: { alliance: { $ne: [] } }
+  },
+  {
+    $addFields: {
+      alliance: { $arrayElemAt: ["$alliance.name", 0] }
+    }
+  },
+  {
+    $group: {
+      _id: "$airline.id",
+      alliance: { $first: "$alliance" }
+    }
+  },
+  {
+    $sortByCount: "$alliance"
+  }
+])
+```
