@@ -42,6 +42,20 @@ db.startups.aggregate([{'$match': { '$text': {'$search': 'network' }}}]).itcount
 ```
 
 ### Get agg counts grouped by the category code
+Leveraging `sortByCount`:
+- works like a group then sort in descending direction
+```bash
+db.movies.aggregate([
+  {$group: { _id: '$imdb.rating', count:{$sum:1} }},
+  {$sort: {count: -1}}
+])
+
+# same as
+db.movies.aggregate([
+  {$sortByCount: '$imdb.rating'}
+])
+```
+
 ```bash
 db.startups.aggregate([
   {'$match': 
@@ -333,3 +347,14 @@ db.movies.aggregate([
   }}
 ])
 ```
+
+### Bucket and bucketAutoReview
+- boundaries 
+  - must have at least 2 vals, a min & a max
+  - each be of the same _type_ (_all numbers, or all strings, etc_)
+- `count` is output by default, showing the count of items in each bucket
+- `count` gets removed when the custom `output` field is explicit
+
+bucketAuto
+- cardinality of hte groupBy expression may impact the distribution && number of buckets
+- `granularity` can be more explicitly than default
