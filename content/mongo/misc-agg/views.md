@@ -1,11 +1,10 @@
 # views
 Computed every time a read is performed against the view.  
 Can be used as agg-pipeline-as-a-collection.  
-
+They store no data.  
 ## slicing data
-"vertical" slicing reduces fields being returned.  
-"horizontal" slicing is removing entire docs based on filter criterial.  
-
+"vertical" slicing reduces fields being returned. `$project` can be used for vertical slicing.    
+"horizontal" slicing is removing entire docs based on filter criterial.  Hz slicing is done with `$match`.
 "vertical" can b e used for things like removing sensitive data.  
 
 - show fewer fields
@@ -49,11 +48,15 @@ Read ops:
 db.view.count()
 db.view.distinct()
 db.view.aggregate()
+querying a view does allow _removing_ fields from the resulting query.
 
 ## view restrictions
 - no writes, read-only
 - no indexing
 - no renaming
 - find WITH PROJECTION are not allowed
+  - elemMatch
+  - slice
+  - meta
 - no `$text`
 - no `geoNear` or `$geoNear`
