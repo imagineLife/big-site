@@ -195,5 +195,29 @@ db.startups.aggregate([
 { "_id" : { "min" : 2009, "max" : 2013 }, "count" : 38 }
 ```
 
+#### With custom output per bucket
+```bash
+db.startups.aggregate([
+  {$match: {'offices.city': 'New York'}},
+  {$bucketAuto: {
+    groupBy: '$founded_year',
+    buckets: 5,
+    output: {
+      total: {$sum: 1},
+      avg_employees: {$avg: '$number_of_employees'}
+    }
+  }}
+])
+
+# returns...
+{ "_id" : { "min" : null, "max" : 1994 }, "total" : 169, "avg_employees" : 2015.8222222222223 }
+{ "_id" : { "min" : 1994, "max" : 2003 }, "total" : 170, "avg_employees" : 554.7882352941176 }
+{ "_id" : { "min" : 2003, "max" : 2007 }, "total" : 207, "avg_employees" : 162.703125 }
+{ "_id" : { "min" : 2007, "max" : 2009 }, "total" : 248, "avg_employees" : 623.4342857142857 }
+{ "_id" : { "min" : 2009, "max" : 2013 }, "total" : 38, "avg_employees" : 57.52173913043478 }
+
+>
+
+```
 ## Rendering Multiple Facets
 
