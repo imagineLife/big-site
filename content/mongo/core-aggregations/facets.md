@@ -21,6 +21,26 @@ The app also has _filters_, _dimensions_ of search.
 Explore the `startups` dataset.  
 Get `factes` out of the data.  
 
+### A Simple Query
+get data on companies...
+- overview
+- description
+... for companies related to networking
+```bash
+# create text indexes on 2 cols for this
+db.companies.createIndex({'description': 'text', 'overview': 'text'})
+
+# should return
+{
+  "createdCollectionAutomatically" : true,
+  "numIndexesBefore" : 1,
+  "numIndexesAfter" : 2,
+  "ok" : 1
+}
+
+```
+
+
 ## Manual and auto bucketing
 
 ## Rendering Multiple Facets
