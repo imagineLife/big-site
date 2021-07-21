@@ -93,6 +93,39 @@ Aggregate on 1 field, including filters (`$match`)
 - per city
 
 ## Manual and auto bucketing
+Grouping Data into ranges of values.  
+like...
+- 1-10
+- 11-20
+- 21-30
+- 31-40
+
+Could be by grouped numbers of employees.  
+
+### return companies bucketed by number of employees
+That are also started after 1980
+```bash
+db.startups.aggregate([
+  {$match: {
+    founded_year: { $gt: 1980 },
+    number_of_employees: {$ne: null}
+  }},
+  {$bucket: {
+    groupBy: '$number_of_employees',
+    boundaries: [0,20,50,100,500,1000,Infinity]
+  }}
+])
+
+# should return
+{ "_id" : 0, "count" : 5447 }
+{ "_id" : 20, "count" : 1172 }
+{ "_id" : 50, "count" : 652 }
+{ "_id" : 100, "count" : 738 }
+{ "_id" : 500, "count" : 98 }
+{ "_id" : 1000, "count" : 137 }
+```
+- lower bound is inclusive
+- upper bound is exclusive
 
 ## Rendering Multiple Facets
 
