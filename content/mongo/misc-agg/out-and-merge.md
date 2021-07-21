@@ -66,3 +66,58 @@ Single calculations: project, addFields...
   }
 }
 ```
+
+### the let value
+set variable(s) with a value from the incoming doc
+
+```bash
+{
+  $merge: {
+    into: 'goalcollection',
+    let: {itotal: '$total'},
+    whenMatched: [
+      {
+        $addFields: {
+          total: {$sum: ["$total", "$new.total"]}
+        }
+      }
+    ]
+  }
+}
+```
+
+### using merge for a single collection
+merge can pull data from 2 sources and input merged data into a new single collection.  
+Similar pipelines would be run on 2 source collections.
+```bash
+# from first, on no match, ignore
+source_pipeline = [
+  {$project: {
+    _id: "$username",
+    mfriendbook: "$$ROOT"
+  }},
+  {$merge: {
+    into: {
+      db: "sv",
+      collection: "users"
+    },
+    whenNotMatched: "discard"
+  }}
+]
+
+
+# from second, on no match, ignore
+source_pipeline = [
+  {$project: {
+    _id: "$username",
+    mfriendbook: "$$ROOT"
+  }},
+  {$merge: {
+    into: {
+      db: "sv",
+      collection: "users"
+    },
+    whenNotMatched: "discard"
+  }}
+]
+```
