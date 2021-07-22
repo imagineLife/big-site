@@ -23,3 +23,24 @@ const db = dbConnection.db(DB_VAR)
   // do something with the client
 }
 ```
+
+## Async And Node Driver
+- the driver returns promises or callbacks
+
+## basic reads
+### Use the next method
+`.next`  
+```js
+// get a query
+let dbRes = await movies.find({cast: {$all: [/Hayek/, /Depp/]}})
+expect(dbRes).not.toBeNull();
+
+// .next in action
+let { title, year, cast } = dbRes.next()
+
+/*
+  the dbRes, above, returns a cursor object containing
+  - a readableStream (with many keys)
+  - _events, _eventsCount, _maxListeners, operation,
+*/
+```
