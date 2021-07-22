@@ -124,3 +124,63 @@ theaters.updateOne(
   {upsert: true}
 )
 ```
+
+
+## Joins
+Example: 2 collections, movies && comments.  
+How many comments are associated with each movie?  
+using `$lookup`.  
+NOTE: the `let` field stores temp variables from the _source db_ so the variable can be used later in the pipeline: `id` is used as `$$id`.  
+```js
+db.movies.aggregate([
+  {
+    $lookup: {
+      from: 'comments',
+      let: {id: '$_id'},
+      pipeline: [
+        {
+          $match: {
+            $expr: { $eq: ['$movie_id', '$$id'] }
+          }
+        },
+        {
+          $count: 'count'
+        }
+      ],
+      as: 'movie_comments'
+    }
+  }
+])
+```
+
+
+## Delete
+deleteOne, deleteMany.  
+delete is WRITE in db world.  
+Collection is changed.  
+Indexes are changed.  
+Entries need to be added to the oplog (_for the cluster references_).  
+
+### deleteOne  
+searches the collection.  
+Deletes the first doc found in the `natural order`.  
+With a query obj, the deleteOne will delete the first match of the query obj.  
+
+### deleteMany
+```js
+let res = collection.deleteMany({year: {$lt: 1980}})
+expect(res.result.n).toBe(4)
+```
+NOTICE the result has sub-values that are valuable for result inspection.  
+
+
+## more complex content
+- read concerns
+- join collections with `$lookup`
+- perform bulk operations
+- clean data
+
+### Read Concerns  
+Affect the data returned by a read op.  
+Reads can be isolated from other nodes in a set.  
+Reads can also be confirmed to have been on _x_ number of nodes.  
