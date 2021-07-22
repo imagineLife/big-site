@@ -9,4 +9,10 @@
 ## The URI
 Uniform Resource Identifier.  
 Defines connections between apps && Mongodb instances.  
-`mongodb+srv://<username>:<pw>@<host>/<database>`
+
+The `srv` string tidbit tells mongo it is the address of the `srv` record.  
+`mongodb+srv://<username>:<pw>@<host>/<database>`  
+
+The host is the hostname of the srv record. The host only holds the srv records, not the hosts of the actual databases.
+
+`mongodb+srv://<username>:<pw>@<host>/<database>?retryWrites=true` - retry on connection error
