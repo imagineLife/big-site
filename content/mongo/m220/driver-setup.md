@@ -82,3 +82,45 @@ explicitly naming which fields get written to increases reliability in data-writ
 {writeConcern: {w:0}}
 
 ```
+## Updating
+updateOne, updateMany, upsert 
+### updateOne
+- will only update 1 doc via a query: if multiple objects match the query, the FIRST will be updated
+- can do multiple operations. Below, 3 field values get updated
+```js
+theaters.updateOne({
+    theaterID: 8
+  },
+  {
+    $set: {"location.address.street1": "123 New Address"},
+    $inc: {
+      "location.geo.coordinates.0": -10,
+      "location.geo.coordinates.1": -25,
+    }
+  },
+)
+```
+
+### updateMany
+- multiple docs in a collection
+
+### upsert
+- want to update a doc, not sure if the doc already exists
+  - insert if not present
+  - update if present
+- JUST LIKE updateOne, but with an `{upsert: true}` added after the update obj:
+```js
+theaters.updateOne(
+  {
+    theaterID: 8
+  },
+  {
+    $set: {"location.address.street1": "123 New Address"},
+    $inc: {
+      "location.geo.coordinates.0": -10,
+      "location.geo.coordinates.1": -25,
+    }
+  },
+  {upsert: true}
+)
+```
