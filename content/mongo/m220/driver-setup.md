@@ -44,3 +44,15 @@ let { title, year, cast } = dbRes.next()
   - _events, _eventsCount, _maxListeners, operation,
 */
 ```
+
+### projection
+Projection is a little syntactically different in the mongo npm module
+```js
+cursor = await movies.find(
+  {countries: {$in : [...countries]}},
+  {projection: {title:1}}
+)
+
+// NOTICE the {projection: vals}
+// in the mongo cli for mongo, the projection is JUST the val obj
+```
