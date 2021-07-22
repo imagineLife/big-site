@@ -56,3 +56,29 @@ cursor = await movies.find(
 // NOTICE the {projection: vals}
 // in the mongo cli for mongo, the projection is JUST the val obj
 ```
+
+### Notes on write concerns and durability
+explicitly naming which fields get written to increases reliability in data-writing.
+```js
+// DEFAULT: concerned with 1 node
+{writeConcern: {w:1}}
+
+/*
+  Get confirmation from majority of nodes
+  - takes a little longer
+  - no additional load on the server
+  - guarantees the client that no rollbacks on failure
+    - ex. new user on a website is CRITICAL
+*/ 
+{writeConcern: {w:'majority'}}
+
+/*
+  none of the nodes even need to APPLY the write before responding to request
+  - "FIRE AND FORGET"
+  - the acknowledgement CAN still contain data about network
+  - FAST
+  - less durable
+*/
+{writeConcern: {w:0}}
+
+```
