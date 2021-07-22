@@ -19,3 +19,35 @@ The host is the hostname of the srv record. The host only holds the srv records,
 
 m220student
 m220password
+
+## Some User-Facing Goals
+- setup the mongo driver to connect to the db
+- write data to mongoDB
+  - different write-durability
+- app funcitonality
+  - join site
+  - update prefs
+  - add/edit reviews
+  - read about movies
+  - create a community on the site
+
+### Review of cursor methods and agg pipelines
+can do cursor methods in an agg pipeline. Converting cursor methods to agg pipeline stages moves energy/calculation logic from our api to the db.  
+
+```js
+/*
+  cursors can
+  - sort, .sort()
+  - skip, .skip()
+  - limit, .limit() : here, won't limit in the pipe
+
+*/
+const aPipeline = [
+  {$match: {directors: "Sam Raimi"}},
+  {$project: {_id:0, title:1, cast:1 }},
+  {$sort: {year: 1}},
+  {$skip: 5}
+]
+```
+
+### aggregations and the module api
