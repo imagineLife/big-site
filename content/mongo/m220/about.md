@@ -49,5 +49,3 @@ const aPipeline = [
   {$skip: 5}
 ]
 ```
-
-### aggregations and the module api
