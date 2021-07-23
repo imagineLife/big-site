@@ -184,3 +184,23 @@ NOTICE the result has sub-values that are valuable for result inspection.
 Affect the data returned by a read op.  
 Reads can be isolated from other nodes in a set.  
 Reads can also be confirmed to have been on _x_ number of nodes.  
+- default is 'local'
+- 'majority' is a good choice for stronger read validation
+
+### Bulk Writes  
+Sometimes, many writes need to happen at once.  
+Sometimes, these writes may affect the following write.  
+```js
+  db.collection.bulkWrite([...arrOfObjects])
+```
+Ends on first failure.  
+Assumes the incoming array is in an order that is desired for the write order.  
+Can take a flag
+```js
+{ordered: false}
+```
+This executes the writes in parallel, non-blocking.  
+A single failure does not prevent the writing of the remaining docs.  
+
+Sharded collection ordered bulkWrites take a little longer due to the sharded nature of collections.  
+
