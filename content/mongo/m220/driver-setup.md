@@ -203,4 +203,4 @@ This executes the writes in parallel, non-blocking.
 A single failure does not prevent the writing of the remaining docs.  
 
 Sharded collection ordered bulkWrites take a little longer due to the sharded nature of collections.  
-
+An unordered bulkWrite still takes a little longer.
