@@ -18,3 +18,11 @@ Indexes are not free.
 The _write speed for a collection slows down_ because when a doc is written or changed, the indexes also need to be updated.  
 Don't want too many "unnecessary" indexes.  
 
+
+## Single Field Indexes
+Simplest index.  
+Captures the keys on a single field
+- can _find a single val_ of the indexed field
+- can _find a range of vals_ of the indexed field
+- can _find several distinct vals_ in a single query
+- can use dot notation to index sub-document fields
