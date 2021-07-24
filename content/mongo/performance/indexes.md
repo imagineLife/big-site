@@ -97,3 +97,8 @@ db.people.find({ssn: "720-38-5636"}).explain("executionStats")
 
 ```
 **NOTICE**  
+A lot of output.   
+#### winningPlan
+The `queryPlanner` obj has a `winningPlan` subObject. This tells about the 'winning' query that was used to get data from the collection.  
+The `winningPlan` has a `stage` key/val. 
+ 
