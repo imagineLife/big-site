@@ -99,6 +99,13 @@ db.people.find({ssn: "720-38-5636"}).explain("executionStats")
 **NOTICE**  
 A lot of output.   
 #### winningPlan
-The `queryPlanner` obj has a `winningPlan` subObject. This tells about the 'winning' query that was used to get data from the collection.  
-The `winningPlan` has a `stage` key/val. 
+The `queryPlanner` obj has a `winningPlan` subObject. This tells about the 'winning' query that was used to get data from the collection. This `winningPlan` gives info about the plan that was selected by the [query optimizer](https://docs.mongodb.com/manual/core/query-plans/). The winningPlan is shown as a hierarchy of stages.  
+
+#### winningPlan and stages
+The `winningPlan` has a `stage` key/val. Stages describe the type of db operation & has a few options:
+- `COLLSCAN`: scanning an entire collection
+- `IXSCAN`: scanning index keys
+- `FETCH`: getting docs
+- `SHARD_MERGE`: for merging results from sharded collection data
+- `SHARDING_FILTER`: for filtering _orphan docs_ out of shards
  
