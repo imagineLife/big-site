@@ -16,3 +16,15 @@ In memory...
 - query engine
 - connections (~1MB per connection)  
 
+### CPU
+- Storage Engine
+- Concurrency Model
+Mongo tries to use all cpu cores.  
+WiredTired relies heavily on CPU.  
+Non-Blocking operations use cpu: the more the better - 
+- writing different docs concurrently
+- responding to query requests (_reads_)
+- page compression
+- data calculation
+- agg operations
+- map reduce
