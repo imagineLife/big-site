@@ -98,6 +98,15 @@ db.people.find({ssn: "720-38-5636"}).explain("executionStats")
 ```
 **NOTICE**  
 A lot of output.   
+In summary, the winningPlan involved a collection scan, scanning 50K+ docs, taking an estimated 45ms.  
+```bash
+# notable details
+"nReturned" : 1,
+"executionTimeMillis" : 45,
+"totalKeysExamined" : 0,
+"totalDocsExamined" : 50474,
+```
+
 #### winningPlan
 The `queryPlanner` obj has a `winningPlan` subObject. This tells about the 'winning' query that was used to get data from the collection. This `winningPlan` gives info about the plan that was selected by the [query optimizer](https://docs.mongodb.com/manual/core/query-plans/). The winningPlan is shown as a hierarchy of stages.  
 
