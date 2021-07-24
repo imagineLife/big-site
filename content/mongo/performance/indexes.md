@@ -107,7 +107,7 @@ In summary, the winningPlan involved a collection scan, scanning 50K+ docs, taki
 "totalDocsExamined" : 50474,
 ```
 
-#### the impact of an index
+#### the impact of a single field index
 add an index to the people table on the `ssn` field.  
 ```bash
 db.people.createIndex({ssn: 1})
@@ -134,12 +134,62 @@ review the explain output a bit
 "totalDocsExamined" : 1,
 ```
 
-### Some query explain output details
-#### winningPlan
+#### single field indexes with aggregate queries
+```bash
+exp.find({ssn: { $gte: '555-00-0000', $lt: "556-00-0000" }})
+```
+perusing the explain output
+```bash
+"executionStats" : {
+  "executionSuccess" : true,
+  "nReturned" : 49,
+  "executionTimeMillis" : 6,
+  "totalKeysExamined" : 49,
+  "totalDocsExamined" : 49,
+```
+
+#### single field indexes with select set queries
+
+```bash
+exp.find({ssn: { $in: ["001-29-9184", "177-45-0930"] }})
+```
+
+peruse the results
+```bash
+"executionStats" : {
+  "executionSuccess" : true,
+  "nReturned" : 2,
+  "executionTimeMillis" : 0,
+  "totalKeysExamined" : 4,
+  "totalDocsExamined" : 2,
+```
+Notice here the 3 keys examined: apparently the mongo query planner is not perfect with these types of queries.  
+
+
+
+
+## Some query explain output details
+### ways of running explain
+```bash
+# directly on a query
+db.people.find({"address.city":"Lake Meaganton"});
+
+# with a pre-defined explain object
+exp = db.people.explain();
+exp.find({"address.city":"Lake Meaganton"});
+exp.find({"address.city":"New York"});
+
+# with parameters
+expStats = db.people.explain('executionStats');
+```
+The shell returns what WOULD happen without running the query.  
+
+
+### winningPlan
 
 The `queryPlanner` obj has a `winningPlan` subObject. This tells about the 'winning' query that was used to get data from the collection. This `winningPlan` gives info about the plan that was selected by the [query optimizer](https://docs.mongodb.com/manual/core/query-plans/). The winningPlan is shown as a hierarchy of stages.
 
-#### winningPlan and stages
+### winningPlan and stages
 
 The `winningPlan` has a `stage` key/val. Stages describe the type of db operation & has a few options:
 
