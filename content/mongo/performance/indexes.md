@@ -26,3 +26,74 @@ Captures the keys on a single field
 - can _find a range of vals_ of the indexed field
 - can _find several distinct vals_ in a single query
 - can use dot notation to index sub-document fields
+### A Query without Indexes
+```bash
+db.people.find({ssn: "720-38-5636"}).explain("executionStats")
+
+# Returns...
+{
+  "queryPlanner" : {
+    "plannerVersion" : 1,
+    "namespace" : "m201.people",
+    "indexFilterSet" : false,
+    "parsedQuery" : {
+      "ssn" : {
+      "$eq" : "720-38-5636"
+            }
+    },
+    "winningPlan" : {
+      "stage" : "COLLSCAN",
+      "filter" : {
+        "ssn" : {
+          "$eq" : "720-38-5636"
+        }
+      },
+    "direction" : "forward"
+    },
+    "rejectedPlans" : [ ]
+  },
+  "executionStats" : {
+    "executionSuccess" : true,
+    "nReturned" : 1,
+    "executionTimeMillis" : 45,
+    "totalKeysExamined" : 0,
+    "totalDocsExamined" : 50474,
+    "executionStages" : {
+      "stage" : "COLLSCAN",
+      "filter" : {
+        "ssn" : {
+          "$eq" : "720-38-5636"
+        }
+      },
+      "nReturned" : 1,
+      "executionTimeMillisEstimate" : 7,
+      "works" : 50476,
+      "advanced" : 1,
+      "needTime" : 50474,
+      "needYield" : 0,
+      "saveState" : 50,
+      "restoreState" : 50,
+      "isEOF" : 1,
+      "direction" : "forward",
+      "docsExamined" : 50474
+    }
+  },
+  "serverInfo" : {
+    "host" : "mflix-shard-00-01.c1tb6.mongodb.net",
+    "port" : 27017,
+    "version" : "4.4.7",
+    "gitVersion" : "abb6b9c2bf675e9e2aeaecba05f0f8359d99e203"
+  },
+  "ok" : 1,
+  "$clusterTime" : {
+    "clusterTime" : Timestamp(1627135714, 2),
+    "signature" : {
+      "hash" : BinData(0,"QpwpAS0/4Spo3d80WNe2EXd2aqc="),
+      "keyId" : NumberLong("6928872392752103425")
+    }
+  },
+  "operationTime" : Timestamp(1627135714, 2)
+}
+
+```
+**NOTICE**  
