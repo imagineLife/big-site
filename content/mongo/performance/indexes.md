@@ -203,3 +203,10 @@ The `winningPlan` has a `stage` key/val. Stages describe the type of db operatio
 - `FETCH`: getting docs
 - `SHARD_MERGE`: for merging results from sharded collection data
 - `SHARDING_FILTER`: for filtering _orphan docs_ out of shards
+
+
+## Indexes and sorting
+Sorting with and without indexes can have drastic impact on a query and query performance. In the explain statement, there is a `SORT` stage that can help understand how the db sorted the data.  
+- was an index used
+- if the index was not used and the sort had to happen, then sort happens in memory
+- if the `memUsage` and `memLimit` are close, an exception could be thrown
