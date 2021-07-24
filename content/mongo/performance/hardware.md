@@ -31,6 +31,9 @@ Non-Blocking operations use cpu: the more the better -
 
 
 ### Disks
+Mongo can use several types of disks.  
+This cal allow distributing IO load of DBs, indexes, journaling and log files across drives.  
+
 Types of disks affect performance
 IOPS - input/output operations per sec  
 |Type|IOPS|
@@ -51,3 +54,9 @@ Avoid Raid 0. Provides good write, but not high availability.
 ## Blocking Ops
 Not ALL write/reads are non-blocking.  
 Same-doc writing will block other writes.  
+
+### Networking  
+The faster and the larger the bandwidth, the better performance will be experienced.  
+Replica sets help with high availability.  
+Different hosts that hold different nodes of the db can affect the overall system.  
+How far apart the cluster nodes are also matters.  
