@@ -210,3 +210,30 @@ Sorting with and without indexes can have drastic impact on a query and query pe
 - was an index used
 - if the index was not used and the sort had to happen, then sort happens in memory
 - if the `memUsage` and `memLimit` are close, an exception could be thrown
+
+### Using indexes to sort
+Docs can be sorted in memory or by using an index.  
+Indexes are sorted on index creation.  
+If a query is using an index scan, the order of the docs returned will be guaranteed to be sorted by index keys. There would be no need to perform an explicit sort when leveraging the keys.  
+If index is ascending on an index key, the docs will be ordered ascending on the index.  
+_no need to sort if working with an indexed column and wanting the data in the sort order of the index._  
+
+**to RAM**  
+The server reads docs from disk into ram during a sort. The server stops sorting in memory when over 32MB is in ram.   
+
+A query with a cursor sort on the ssn:
+```bash
+db.people.find({}, { _id:0, last_name: 1, first_name: 1, ssn: 1 } ).sort({ssn:1})
+```
+With an explanation:
+```bash
+exp = db.people.explain("executionStats");
+exp.find({}, { _id:0, last_name: 1, first_name: 1, ssn: 1 } ).sort({ssn:1})
+```
+**NOTICE**:
+```bash
+"totalKeysExamined" : 50474,
+"totalDocsExamined" : 50474,
+```
+Docs AND keys were used. On queries that do not sort on index keys, an in-memory document sort is done.  
+
