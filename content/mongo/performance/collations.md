@@ -57,3 +57,5 @@ CAVEAT: enabling the use of that index is one thing. USING the collation is anot
 ```bash
 db.foreign_text.find({name: 'Maximo'}).collation({locale: 'it'}).explain()
 ```
+
+The above query will show that the IXSCAN will be leveraged.
