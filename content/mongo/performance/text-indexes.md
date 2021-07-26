@@ -6,6 +6,8 @@ As a user, we CAN search for exact string matches, or regex matches or other way
 
 This is not optimal performance, though.
 
+Text indexes are similar to multi-key indexes, in that they make a ....lot....of....indexes.
+
 ## Creating a text index
 
 ```bash
@@ -36,4 +38,33 @@ db.product.createIndex({category:1, productName: "text"})
 
 # a search leveraging the compound index to reduce index scanning
 db.product.find({category: 'drink', $text: {$search: 'soda'} })
+```
+
+## Searching for text
+
+```bash
+# insert 2 similar text-field docs
+db.product.insert({productName: "Tasty clear soda"})
+db.product.insert({productName: "Tasty clear vodka"})
+
+# create text index
+db.product.createIndex({productName: "text"})
+
+# search
+db..product.find({$text: {$search: {"Tasty soda"}}})
+
+# will return both docs.... ?!
+```
+
+This return may result in confusion:  
+Mongo defaults to an `OR` when searching for text: `Tasty` OR `soda`.
+
+### Leverage the SCORE
+
+```bash
+# search
+
+db..product.find({$text: {$search: {"Tasty soda"}}}, {score: {$meta: 'textScore'}})
+
+# will return a matchin score key/val, 0 - 1, for each result
 ```
