@@ -49,3 +49,20 @@ This will create a wildcard index on `waveMeasurement.waves` AND `waveMeasuremen
 ```bash
 db.sample_data.createIndex({waveMeasurement.waves.$**: 1}})
 ```
+
+## 4 syntaxes
+
+```bash
+# index everything
+db.col.createIndex({$**:1})
+
+# index a.b AND all a.b.sub-paths
+db.col.createIndex({a.b.$**:1})
+
+# index a AND all a.sub-paths
+db.col.createIndex({$**:1, {wildcardProjection: {a:1}}})
+
+# index everything ACCEPT a
+db.col.createIndex({$**:1, {wildcardProjection: {a:0}}})
+
+```
