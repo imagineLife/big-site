@@ -34,3 +34,22 @@ Notice the explain output
 ```
 
 Only 31 keys examined! much less with the index.
+
+### Making and using a compound index
+
+```bash
+# create the compound index
+db.people.createIndex({last_name:1, first_name: 1})
+```
+
+check out execution insights output:
+
+```bash
+"executionStats" : {
+  "executionSuccess" : true,
+  "nReturned" : 1,
+  "executionTimeMillis" : 1,
+  "totalKeysExamined" : 1,
+  "totalDocsExamined" : 1,
+
+```
