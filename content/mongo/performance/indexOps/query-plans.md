@@ -6,7 +6,7 @@ The plan contains stages.
 ## An example
 
 ```bash
-db.coll.createindex({address.zipcode:1, cuisine: 1})
+db.coll.createIndex({address.zipcode:1, cuisine: 1})
 
 db.coll.find({"address.zipcode": {$gt: '50000'}, cusine: 'Sushi'}).sort({rating: 1})
 ```
@@ -26,13 +26,13 @@ The available indexes drastically inform the query plan.
 
 On a first query:
 
-- review the available indexes on the collection
+- review all available indexes on the collection
 - planner IDs available indexes to fulfill the query. These are `candidate indexes`
 - from the candidate indexes come `candidate plans`
 - An `empirical query planner` takes over
   - a trial period for each candidate plan is executed over a short period of time
   - the thing knows which was best
-    - most records rasted
+    - most records the fasted
     - correct answers first
 - explain shows the winning plan
 - CACHE the winning plan for future queries to take advantage of
@@ -40,5 +40,6 @@ On a first query:
 The cached winnin plans can be removed, or evicted
 
 - restart server
+- something about the size of the cached plan being too large, or the query taking longer?!
 - rebuilt indexes
 - created or dropped indexes
