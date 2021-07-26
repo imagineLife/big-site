@@ -68,3 +68,17 @@ db.col.createIndex({$**:1, {wildcardProjection: {a:1}}})
 db.col.createIndex({$**:1, {wildcardProjection: {a:0}}})
 
 ```
+
+## Use Cases
+
+- Unpredictable query shapes
+- How attributes are implemented in a data model
+
+### Unpredictable queries
+
+As mongodb consumer goals change, the data model changes.
+
+### Attribute Pattern
+
+Use to index & query across arbitrary number of attributes.
+Wildcards let easier querying on subdocs that contain meaningful attributes.
