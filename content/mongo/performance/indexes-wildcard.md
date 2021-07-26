@@ -35,3 +35,17 @@ will reveal
 
 - each plan is on a single-field index
 - wildcard index CREATES a virtual single-field index on query
+
+## using projections in wildcard indexes
+
+this wil wildcard index on all subfields in the `waveMeasurement` object
+
+```bash
+db.sample_data.createIndex({$**: 1}, {wildcardProjection: {waveMeasurement: 1}})
+```
+
+This will create a wildcard index on `waveMeasurement.waves` AND `waveMeasurement.waves.**` subpaths
+
+```bash
+db.sample_data.createIndex({waveMeasurement.waves.$**: 1}})
+```
