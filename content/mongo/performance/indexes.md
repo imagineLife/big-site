@@ -276,3 +276,32 @@ exp.find({}, { _id:0, last_name: 1, first_name: 1, ssn: 1 } ).sort({last_name:1}
 ```
 
 the explain output has other details to notice that the `executionStats.totalKeysExamined` is 0: this did an in-memory sort. all docs were read in memory, then in-memory sort was done by last_name.
+
+## Forcing Indexes with hint
+
+appending a hint method can enforce which indexes and index shape for the query optimizer works.  
+This overrides mongodbs default index choosing method.
+
+```bash
+db.peeps.find({name:"John Frank", zipcode: {$gt: 63000}}).hint({name: 1, zipcode: 1})
+
+# or
+db.peeps.find({name:"John Frank", zipcode: {$gt: 63000}}).hint("name_1_zipcode_1")
+```
+
+Use this with caution.
+
+## Resource Allocation for indexes
+
+### Determine index sizes
+
+`db.stats` can show index sizes across a db.  
+`db.collection.stats()` can show specific collection index size details, even on a per-index basis.
+
+### Determine what kind of resources are involved in index allocation & operation
+
+Disk to store the info. Disks are usually plentiful. With no disk, usually no index.
+Can separate WHERE data is stored: 1 for collection data, 1 for indexes. INTERESTING!
+Ram to operate with.
+
+### Consider compromises
