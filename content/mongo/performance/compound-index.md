@@ -73,5 +73,7 @@ the ratio of keys-to-docs examined is 1:1, so this is still a great query+indexK
 
 # Index Prefixes
 
-The beginning subset of indexed fields.  
+The beginning subset of indexed fields that is always continuous.  
 When a 2-field index is created, like above, the index prefix is the first indexed field, the `last_name` field.
+These can be used like a regular index.  
+The query planner can use the index prefixes of a multi-part index.
