@@ -1,6 +1,7 @@
 # Wildcard indexes
 
 Fields should only index frequently-indexed fields for optimizing query performance.
+Useful for unpredictable workloads.
 
 ### Con of indexes
 
