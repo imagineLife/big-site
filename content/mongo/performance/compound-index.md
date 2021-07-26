@@ -40,6 +40,9 @@ Only 31 keys examined! much less with the index.
 ```bash
 # create the compound index
 db.people.createIndex({last_name:1, first_name: 1})
+
+# run explain on a find
+exp.find({last_name: "Frazier", first_name: "Jasmine"})
 ```
 
 check out execution insights output:
@@ -51,5 +54,24 @@ check out execution insights output:
   "executionTimeMillis" : 1,
   "totalKeysExamined" : 1,
   "totalDocsExamined" : 1,
-
 ```
+
+another example query
+
+```bash
+exp.find({last_name: "Frazier", first_name: {$gte: "L"}})
+
+# execution output highlight
+"executionStats" : {
+  "nReturned" : 16,
+  "executionTimeMillis" : 0,
+  "totalKeysExamined" : 16,
+  "totalDocsExamined" : 16,
+```
+
+the ratio of keys-to-docs examined is 1:1, so this is still a great query+indexKey example.
+
+# Index Prefixes
+
+The beginning subset of indexed fields.  
+When a 2-field index is created, like above, the index prefix is the first indexed field, the `last_name` field.
