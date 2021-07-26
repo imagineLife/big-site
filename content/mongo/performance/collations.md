@@ -59,3 +59,19 @@ db.foreign_text.find({name: 'Maximo'}).collation({locale: 'it'}).explain()
 ```
 
 The above query will show that the IXSCAN will be leveraged.
+
+## leveraging case insensitive indexes with strength
+
+```bash
+# create collection with collation
+db.createCollection("not_sensitive", {collation: {locale: 'en', strength: 1}})
+
+# insert a few case'd docs
+db.not_sensitive.insert({water: 'Melon'})
+db.not_sensitive.insert({water: 'MeLOn'})
+db.not_sensitive.insert({water: 'melON'})
+
+# sort on water in both directions will make no diff
+db.not_sensitive.find().sort({water: 1})
+db.not_sensitive.find().sort({water: -1})
+```
