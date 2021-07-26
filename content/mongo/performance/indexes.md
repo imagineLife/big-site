@@ -300,8 +300,35 @@ Use this with caution.
 
 ### Determine what kind of resources are involved in index allocation & operation
 
+**DISK**  
 Disk to store the info. Disks are usually plentiful. With no disk, usually no index.
 Can separate WHERE data is stored: 1 for collection data, 1 for indexes. INTERESTING!
-Ram to operate with.
+
+**RAM**  
+Ram to operate with. SHOULD have enough space in memory to accommodate all indexes.  
+If not enough memory space, disk-access will be required. Disk is slow.  
+Inspect how much space in ram is being used by memory.
+
+```bash
+db.coll.stats({indexDetails:true})
+```
+
+This show a lot of stuff.
+try limiting the results with a var
+
+```bash
+s = db.coll.stats({indexDetails:true})
+
+# now stats can be accessed in that var
+
+# shows details on each index
+s.indexDetails
+
+# show cache details on a specific index
+ss.indexDetails.index_name_here.cache
+
+# shows explicit byte-level detail of the index & its cache utilization
+
+```
 
 ### Consider compromises
