@@ -2,6 +2,7 @@
 
 Fields should only index frequently-indexed fields for optimizing query performance.
 Useful for unpredictable workloads.
+New in v 4.2
 
 ### Con of indexes
 
