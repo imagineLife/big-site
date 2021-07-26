@@ -332,3 +332,16 @@ ss.indexDetails.index_name_here.cache
 ```
 
 ### Consider compromises
+
+Sometimes indexes are not needed, expecially in RAM.  
+When queries support 'operational queries', some normal day-to-day operations.
+
+#### Skip BI tooling queries
+
+BI Tooling does not leverage the data as frequently.  
+BI tooling queries can afford to be slower.  
+Indexes can also only be made on secondary nodes, and the BI tools can run only on the secondary, designated, nodes.
+
+#### Skip monotonically growing fields
+
+With monotonically increasing data, the btree will probably become unbalanced. As the index grows, the btree with grow unevenly. Plus, old data may not be needed to be queried as often, so 'old' indexes may become unusable.
