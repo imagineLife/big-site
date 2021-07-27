@@ -24,6 +24,8 @@ Sometimes it makes sense to be less selective to allow for in-memory sort. Lever
 
 These are fast.  
 Satisfied entirely by indexes, 0 docs need to be parsed during the query.  
+Covered Queries ONLY DEAL WITH INDEXES, in query and output.
+
 Example:
 
 ```bash
@@ -33,3 +35,11 @@ db.rest.createIndex({name: 1, cuisine: 1, ratings: 1})
 # use them exclusively
 db.find({name: {$gt: 'L'}, cuisine: 'Sushi', rating: {$gt: 4.0}}, {_id:0, name: 1, cuisine:1, ratings: 1})
 ```
+
+Above, NO data is needed outside of the indexes to get the matching documents. An explain would show that the winningPlan would only require a IDXSCAN followed by a projection.
+
+### Covered query gotchas
+
+- don't work on array field values
+- don't work on embedded docs
+- only work in sharded collections with the shard key
