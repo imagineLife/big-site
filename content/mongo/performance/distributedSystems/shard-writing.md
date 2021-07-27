@@ -29,7 +29,18 @@ sh.shardCollection(`dbname.collectionname`, {fieldOne: 1, fieldTwo: 1})
 ```
 
 **Frequency**
+This contributes to an even distribution of the chunks across nodes.  
+When a chunk grows close to its max size, mongo DOES split chunks - but if a chunk is created where the bounds are the same, (due to too much chunking perhaps?!) the chunk just keeps growing into a `jumbo chunk`.  
+The fields at the beginning of the shard key, in a compound shard key, should have high cardinality.
 
 **Rate of Change**
+Avoid constantly changing values: time, date, ObjectId.  
+Its ok to have a monotonically increasing value to the END of a compound shard key is actually a great idea.
 
 ## Bulk Write Operations
+
+Use unordered writes to speed up bulkWrite performance.
+
+These are specified if they are ordered or not.  
+With ordered, the server writes them all, waiting for each before writing the next.  
+With unordered, the server does not block writing to multiple locations.
