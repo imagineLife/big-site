@@ -66,5 +66,12 @@ Mongo defaults to an `OR` when searching for text: `Tasty` OR `soda`.
 
 db..product.find({$text: {$search: {"Tasty soda"}}}, {score: {$meta: 'textScore'}})
 
-# will return a matchin score key/val, 0 - 1, for each result
+# will return a matching score key/val, 0 - 1, for each result
 ```
+
+### Indexes and Regex
+
+Make regex searches as explicit as possible.
+
+- leverage a starting force `/^beginWith/` to match at the beginning of a string
+  - this is not NEARLY as performant as `/^.irby/`
