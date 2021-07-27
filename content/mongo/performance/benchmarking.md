@@ -29,3 +29,18 @@ This makes using these on MongoDB a little complicated.
 
 YCSB.  
 TPC
+
+## Distributed Systems Benchmarking
+
+Look at how things react across a system.  
+Look at content over time.  
+Look at multi-node failing tolerance and handling.
+
+- linearization
+- serialization
+- fault tolerance
+
+HiBench.  
+Jepsen.
+
+MongoDB includes jepsen tests in their build tooling.
