@@ -43,3 +43,4 @@ Above, NO data is needed outside of the indexes to get the matching documents. A
 - don't work on array field values
 - don't work on embedded docs
 - only work in sharded collections with the shard key
+- IMPORTANT: THE `_id` field is important and interacts with the coverage of a query
