@@ -19,3 +19,17 @@ Range Third.
 ## Tradeoffs Between Index Selectivity and Equality Sort Range
 
 Sometimes it makes sense to be less selective to allow for in-memory sort. Leveraging an index in a select statement over sorting by the same index will use the indexes natural sort.
+
+## Covered Queries
+
+These are fast.  
+Satisfied entirely by indexes, 0 docs need to be parsed during the query.  
+Example:
+
+```bash
+# create indexes
+db.rest.createIndex({name: 1, cuisine: 1, ratings: 1})
+
+# use them exclusively
+db.find({name: {$gt: 'L'}, cuisine: 'Sushi', rating: {$gt: 4.0}}, {_id:0, name: 1, cuisine:1, ratings: 1})
+```
