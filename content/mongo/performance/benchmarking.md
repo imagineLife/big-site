@@ -51,6 +51,10 @@ Majority of tooling are built with relational systems.
 These conditions don't always apply to MongoDB.
 Maybe check out `POCDriver`.
 
+- Use similar hardware
+- Use similar clients
+- Use similar load
+
 ## Benchmarking anti patterns
 
 - database swap replace
