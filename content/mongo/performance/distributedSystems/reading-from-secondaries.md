@@ -26,3 +26,14 @@ Setting read to `nearest`, reads get routed to the node that is geographically c
 Reading from secondary nodes MAY lead to stale data reads.  
 When reading from and writing to primary node, we get `strong consistency`.  
 When reading from a secondary node, we get `eventual consistency`. Data gets async replicated to secondaries.
+
+## When to read from secondaries
+
+- analytics queries
+
+  - a report
+  - may be resource intensive
+  - may be long running
+  - different than consistent operational workloads
+
+- local reads
