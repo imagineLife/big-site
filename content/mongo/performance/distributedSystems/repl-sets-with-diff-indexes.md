@@ -143,4 +143,42 @@ rs.status()
 
 # setup analytics-focused indexes
 db.restaurants.createIndex({cuisine: 1, "address.street": 1, "address.city":1, "address.state":1, "address.zipcode":1})
+
+# run an example explain query
+db.restaurants.find({cuisine: /Medi/, "address.zipcode": /6/}).explain()
+
+# this should show that the new indexes are supporting the query
+```
+
+shutdown the server & relaunch the same server connected to the replica set.  
+NOTE: running the same query against the primary will NOT utilize the indexes that are only set on the secondary node.
+
+```bash
+# shutdown the server
+use admin
+db.shutdownServer()
+
+# relaunch secondary node using replica-set config file
+mongod -f r2.cfg
+
+# reconnect to replica set primary and see non-applied index
+mongo --host M201/localhost:27001,localhost:27002,localhost:27000
+
+use m201
+
+db.restaurants.find({cuisine: /Medi/, "address.zipcode": /6/}).explain()
+
+# see that the indexes are NOT used
+```
+
+switch to the secondary node & run the query, leveraging the indexes on the secondary nodes
+
+```bash
+db = connect("localhost:27002/m201")
+
+# enable reading from secondaries
+db.setSlaveOk()
+
+# see that the indexes are being used
+db.restaurants.find({cuisine: /Medi/, "address.zipcode": /6/}).explain()
 ```
