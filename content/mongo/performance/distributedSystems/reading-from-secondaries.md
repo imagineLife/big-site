@@ -36,4 +36,10 @@ When reading from a secondary node, we get `eventual consistency`. Data gets asy
   - may be long running
   - different than consistent operational workloads
 
-- local reads
+- local reads in geographically dist repl sets
+  - with members across coasts
+
+## When NOT to read from secondaries
+
+- when attempting to offload reads to secondary nodes
+  - all members should have the same write traffic
