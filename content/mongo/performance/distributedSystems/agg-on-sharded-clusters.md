@@ -35,4 +35,22 @@ db.restaurants.aggregate([
 
 Notes on the query and its performance:
 
--
+- pipeline gets split
+- server decides which stages get executed on each shard && which stages run on a final shard
+
+## Merging
+
+Merging generally happens on a random shard.  
+4 aggregation functions happen on the primary shard though:
+
+- `$out`
+- `$facet`
+- `$lookup`
+- `$graphLookup`
+  When these operations run frequently, the primary node gets a lot of work, sort of negating some of the horizontal scaling benefits. One way to deal with this is to have a beefy primary shard.
+
+## Optimizations
+
+Try putting `match` before `sort`.  
+Try merging multiple `limit`s.  
+Try grouping separate `match`es into 1 command.
