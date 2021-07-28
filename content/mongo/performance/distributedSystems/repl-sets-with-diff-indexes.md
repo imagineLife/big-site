@@ -28,14 +28,26 @@ processManagement:
   fork: true
 systemLog:
   destination: 'file'
-  path: '/data/r0/log'
+  path: 'mongo-data/r0/log'
   logAppend: true
 storage:
-  dbPath: '/data/r0'
+  dbPath: 'mongo-data/r0'
   wiredTiger:
     engineConfig:
     cacheSizeGB: 0.5
 replication:
   oplogSizeMB: 10
   replSetName: M201
+```
+
+run them with
+
+```bash
+mongo -f conf1.conf
+```
+
+Validate that the mongod services are running through the cli
+
+```bash
+ps -ef | grep mongod
 ```
