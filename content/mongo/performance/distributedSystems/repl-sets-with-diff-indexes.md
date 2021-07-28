@@ -75,9 +75,10 @@ rs.initiate(c)
 mongoimport --host M201/localhost:27001,localhost:27002,localhost:27000 -d m201 -c restaurants restaurants.json
 ```
 
-### reconnect to the whole replica set
+### reconnect to the replica set
 
-validate that the db & collection has been uploaded
+validate that the db & collection has been uploaded.  
+Create an index on the name field.
 
 ```bash
 mongo --host M201/localhost:27001,localhost:27002,localhost:27000
@@ -87,4 +88,29 @@ use m201
 show collections
 
 db.restaurants.findOne()
+
+db.restaurants.createIndex({"name": 1})
+```
+
+### connect to secondary node
+
+While connected to the primary node, the same shell session can connect to a secondary node.  
+Validate that the index, that was applied on the primary, is now on the secondary.
+
+```bash
+# switch node
+db = connect("localhost:27002/m201")
+
+# allow reading from secondary
+db.setSlaveOk()
+
+db.restaurants.find({name: "Perry Street Brasserie"}).explain()
+
+# should return...
+...
+"winningPlan" : {
+  "stage" : "FETCH",
+  "inputStage" : {
+  "stage" : "IXSCAN"
+...
 ```
