@@ -51,3 +51,20 @@ Validate that the mongod services are running through the cli
 ```bash
 ps -ef | grep mongod
 ```
+
+Connect to a member & set some config on it, assuring 1 secondary node has priority 0.
+
+```bash
+mongo --port 27000
+
+var c = {
+  "_id": "M201",
+  "members": [
+    {"_id": 0, "host": "localhost:27000"},
+    {"_id": 1, "host": "localhost:27001"},
+    {"_id": 2, "host": "localhost:27002", priority: 0}
+  ]
+}
+
+rs.initiate(c)
+```
