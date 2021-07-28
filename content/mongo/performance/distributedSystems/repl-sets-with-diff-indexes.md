@@ -68,3 +68,23 @@ var c = {
 
 rs.initiate(c)
 ```
+
+### Load some data
+
+```bash
+mongoimport --host M201/localhost:27001,localhost:27002,localhost:27000 -d m201 -c restaurants restaurants.json
+```
+
+### reconnect to the whole replica set
+
+validate that the db & collection has been uploaded
+
+```bash
+mongo --host M201/localhost:27001,localhost:27002,localhost:27000
+
+use m201
+
+show collections
+
+db.restaurants.findOne()
+```
