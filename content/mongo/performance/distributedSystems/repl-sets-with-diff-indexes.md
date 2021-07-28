@@ -145,7 +145,7 @@ rs.status()
 db.restaurants.createIndex({cuisine: 1, "address.street": 1, "address.city":1, "address.state":1, "address.zipcode":1})
 
 # run an example explain query
-db.restaurants.find({cuisine: /Medi/, "address.zipcode": /6/}).explain()
+db.restaurants.find({cuisine: /^Medi/, "address.zipcode": /^6/}).explain()
 
 # this should show that the new indexes are supporting the query
 ```
@@ -166,7 +166,7 @@ mongo --host M201/localhost:27001,localhost:27002,localhost:27000
 
 use m201
 
-db.restaurants.find({cuisine: /Medi/, "address.zipcode": /6/}).explain()
+db.restaurants.find({cuisine: /^Medi/, "address.zipcode": /^6/}).explain()
 
 # see that the indexes are NOT used
 ```
@@ -180,5 +180,5 @@ db = connect("localhost:27002/m201")
 db.setSlaveOk()
 
 # see that the indexes are being used
-db.restaurants.find({cuisine: /Medi/, "address.zipcode": /6/}).explain()
+db.restaurants.find({cuisine: /^Medi/, "address.zipcode": /^6/}).explain()
 ```
