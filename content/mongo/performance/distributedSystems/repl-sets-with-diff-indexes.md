@@ -114,3 +114,33 @@ db.restaurants.find({name: "Perry Street Brasserie"}).explain()
   "stage" : "IXSCAN"
 ...
 ```
+
+### allow system to run analytics on secondary node
+
+Some queries do not ever need to be run on the primary.
+
+shutdown the server
+
+```bash
+use admin
+
+db.shutdownServer()
+```
+
+Reconnect instance as a stand-alone instance, without the replica set config in place
+
+```bash
+mongod --port 27002 --dbpath mongo-data/r2 --logpath mongo-data/r2/standalone.log --fork
+```
+
+connect to the server & create indexes specifically for some analytics
+
+```bash
+mongo --port 27002
+
+# validate no replica set setup
+rs.status()
+
+# setup analytics-focused indexes
+db.restaurants.createIndex({cuisine: 1, "address.street": 1, "address.city":1, "address.state":1, "address.zipcode":1})
+```
