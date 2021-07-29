@@ -43,3 +43,13 @@ In NoSQL, there is a choice: to embed or relate.
 ### Apply design patterns or transformations to the current model for performance improvements
 
 Make models more performant or clear, by applying transformations.
+
+## Modeling for simplicity or performance
+
+### Simplicity
+
+avoid complexities that will slow down engineering speed.  
+Quick.  
+limited expectations.  
+CPU, Disk, I/O, Memory - these are usually simple.
+Few collections, sub-docs, simple relationships: one-to-one, one-to-many, etc.
