@@ -13,3 +13,12 @@ Example:
 - ops team needs to validate faulty devices
 - ops team needs to be able to aggregate data for the data scientists
 - data scientists need to explore and find trends
+
+## list the CRUD
+
+| Item/Person    | Use-Case                         | Data                        | CRUD         |
+| -------------- | -------------------------------- | --------------------------- | ------------ |
+| Devices        | Sending data every minute        | device_id, metrics          | WRITE        |
+| Ops Team       | ID busted devices                | device_id, timestamp        | READ         |
+| Ops Team       | aggregate hourly data sets       | device_id, metrics          | READ / WRITE |
+| Data Scientist | run 10 analytical queries hourly | metrics, aggregated metrics | READ         |
