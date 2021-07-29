@@ -37,4 +37,9 @@ Creating a schema.
 
 ### ID the relationships between the entities
 
+In a relational database, this could be like `actors` collection, `reviews` collection and `movies` collection.
+In NoSQL, there is a choice: to embed or relate.
+
 ### Apply design patterns or transformations to the current model for performance improvements
+
+Make models more performant or clear, by applying transformations.
