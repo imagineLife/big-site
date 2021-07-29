@@ -22,3 +22,14 @@ Example:
 | Ops Team       | ID busted devices                | device_id, timestamp        | READ         |
 | Ops Team       | aggregate hourly data sets       | device_id, metrics          | READ / WRITE |
 | Data Scientist | run 10 analytical queries hourly | metrics, aggregated metrics | READ         |
+
+## Understanding write operations
+
+- sent by sensors
+- sent to the server
+- WRITE / INSERT
+- data has device ID, timestamp and metrics
+- 1.6M writes per second
+- Data size = 1000 Bytes
+- Life of data is 10 years
+- Does not need to be extensively durabily, do not need multiple-node majority confirmation on write
