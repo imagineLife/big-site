@@ -29,7 +29,21 @@ Example:
 - sent to the server
 - WRITE / INSERT
 - data has device ID, timestamp and metrics
-- 1.6M writes per second
+- 1.6M writes per second: db partitioned in 10-20 shards can handle this
 - Data size = 1000 Bytes
 - Life of data is 10 years
-- Does not need to be extensively durabily, do not need multiple-node majority confirmation on write
+- Does not need to be extensively durability, do not need multiple-node majority confirmation on write: even though we want 1x-per-minute data, the data will get aggregated hourly most often when consumed
+- consider grouping the writes because there are so many
+
+## Understand the read operations
+
+- most queries will be on temperature data
+- read queries
+- 100 queries per hour: 10 scientists, 10 reqs per person
+- will require collection scans
+- mostly uses last-hour's worth of data
+
+## A takeaway
+
+Consider leveraging a dedicated node for analytics.  
+Primary for writes, secondary for reads.
