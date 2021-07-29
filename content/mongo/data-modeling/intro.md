@@ -52,7 +52,8 @@ avoid complexities that will slow down engineering speed.
 Quick.  
 limited expectations.  
 CPU, Disk, I/O, Memory - these are usually simple.
-Few collections, leveraging sub-docs, with simple relationships: one-to-one, one-to-many, etc. Large documents, less disk-access: 1 read will be able to return a LOT of data.
+Few collections, leveraging sub-docs, with simple relationships: one-to-one, one-to-many, etc. Large documents, less disk-access: 1 read will be able to return a LOT of data.  
+Simplicity favors embedding docs.
 
 ### Performance
 
@@ -60,3 +61,8 @@ Sharding.
 Fast reads, fast writes.  
 Support a lot of operations.  
 Complex projects, perhaps done by larger teams.
+Performance probably leads to a lot of collections.
+
+### Simple First, Performance after
+
+It is easier to find optimization later than it is to remove extra complexity.
