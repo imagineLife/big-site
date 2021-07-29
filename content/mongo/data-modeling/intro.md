@@ -52,4 +52,11 @@ avoid complexities that will slow down engineering speed.
 Quick.  
 limited expectations.  
 CPU, Disk, I/O, Memory - these are usually simple.
-Few collections, sub-docs, simple relationships: one-to-one, one-to-many, etc.
+Few collections, leveraging sub-docs, with simple relationships: one-to-one, one-to-many, etc. Large documents, less disk-access: 1 read will be able to return a LOT of data.
+
+### Performance
+
+Sharding.  
+Fast reads, fast writes.  
+Support a lot of operations.  
+Complex projects, perhaps done by larger teams.
