@@ -26,6 +26,22 @@ This would be bad, though, as the `purchase_order` is be better suited to store 
 
 allowing & accepting staleness in some data.
 
-## Data Integrity
+Analytic queries that are running on secondary nodes may get stale data.
+
+How to deal?  
+Run "Batch" updates.  
+Use MongoDB Change Streams!!
+
+## Referential Integrity
+
+How do these issues happen?  
+Deleting a doc without deleting all references to the now-deleted-data.  
+In Relational dbs, there are foreign keys && cascading details built in that deal with this.
 
 Writing EXTRA application logic to ensure referential integrity between data.
+
+How to deal?
+
+- Leverage change streams
+- embed more docs
+- use multi-doc transactions when removing data && removing references to this data
