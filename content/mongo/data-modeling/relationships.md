@@ -80,4 +80,8 @@ As an example, references between `items` docs and `stores` that carry the items
 
 ## One To Zillion
 
+[see](https://www.vertabelo.com/blog/crow-s-foot-notation) some explanation of relationship diagrams, including "crows feet".  
+More than 1-to-10K.  
+Same as `one-to-many`, just more descriptive.  
 A notation for describing cardinalities is helpful to describe the documents in the relationship: `[0,1K, 100M]`: [`min`,`most-likely`, `max`] number of docs in the relationship of the `zillion`.
+Help devs & add comments in code to the `zillion` table.
