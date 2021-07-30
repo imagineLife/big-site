@@ -77,3 +77,7 @@ As an example, in a `cart` doc, all `items` can be stored in the cart, as the it
 
 Here, an arrays live in BOTH sides of the relationship.
 As an example, references between `items` docs and `stores` that carry the items. The `items` and have a `sold_at` array storing store ids. The `store` documetns each can have a `store_id` that the `items` use as references. The `store` docs also store an array of `items_sold`.
+
+## One To Zillion
+
+A notation for describing cardinalities is helpful to describe the documents in the relationship: `[0,1K, 100M]`: [`min`,`most-likely`, `max`] number of docs in the relationship of the `zillion`.
