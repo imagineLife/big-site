@@ -1,5 +1,7 @@
 # relationships
 
+**NOTE**: when referencing documents between collections, WATCH OUT for the `_id` field: it is default to the mongodb ObjectId(etc) and may not work as a reference from other document `employee_id` or `job_id` type string or number fields.
+
 The better the model, the better the performance.
 Relationships in a data model are where entities and how the entities "connect".
 
@@ -17,7 +19,7 @@ grouping entities within a doc.
 ### Referencing
 
 - same ID would have to live in different docs 1x
-  Example, `person`, and `person_details`.
+  Example, `person`, and `person_details`. Doing this will add complexity to data management. This should only be done for schema optimization reasons.
 
 ## One to Many
 
