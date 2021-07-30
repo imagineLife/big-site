@@ -29,7 +29,7 @@ allowing & accepting staleness in some data.
 Analytic queries that are running on secondary nodes may get stale data.
 
 How to deal?  
-Run "Batch" updates.  
+Run "Batch" or "bulk" updates.  
 Use MongoDB Change Streams!!
 
 ## Referential Integrity
