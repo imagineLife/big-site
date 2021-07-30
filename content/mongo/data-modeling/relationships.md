@@ -5,8 +5,19 @@ Relationships in a data model are where entities and how the entities "connect".
 
 ## One to One
 
+Usually, a single document has all 1-to-1 relationships.  
 person, person_id.  
 grouping entities within a doc.
+
+### Embedding
+
+- fields at the same level
+- groups of docs inside doc
+
+### Referencing
+
+- same ID would have to live in different docs 1x
+  Example, `person`, and `person_details`.
 
 ## One to Many
 
@@ -41,3 +52,26 @@ The "one" side could have an arr of references to the "many" elements by id: a z
 Many products, Many purchase invoices.
 
 Consider using [min, likely, max] to describe data relationships.
+
+### Lookup tables
+
+Leverage a "lookup" style table that hold the relationships.  
+This makes data migration complex in relational dbs.
+
+### Mongo and many to many
+
+Can _copy_ a many item to each related element.  
+The COST here is that when changing the copy, many docs need adjusting.  
+The storage that fits queries is the best storage.
+
+#### Embed
+
+Here, an arr of docs in each side of the relationship.
+Usually, only the most-queried part of the relationship really matters.  
+As an example, in a `cart` doc, all `items` can be stored in the cart, as the items are generally ALWAYS retrieved along side the `cart`.  
+`items` also are stored in their own documents, as the `item` might have specific use-cases outside of `carts`.
+
+#### Reference
+
+Here, an arrays live in BOTH sides of the relationship.
+As an example, references between `items` docs and `stores` that carry the items. The `items` and have a `sold_at` array storing store ids. The `store` documetns each can have a `store_id` that the `items` use as references. The `store` docs also store an array of `items_sold`.
