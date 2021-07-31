@@ -54,4 +54,12 @@ This is a middle-ground between two opposites:
 
 Maybe bucket daily documents.  
 Maybe bucket chat app message content into one doc per channel per day?!  
-These time-based docs make OLD docs easy to identify and easy to archive when old enough.
+These time-based docs make OLD docs easy to identify and easy to archive when old enough.  
+Some data is best used in a "column-oriented" pattern in a relational setup. In Mongo this could be 1-key from EVERY doc.
+Buckets can serve "column-oriented" data for quick access: if one key is regularly needed from a large document, consider making a bucketed collection that is JUST a few keys, including the few that are needed.
+
+### Watch out during bucketing
+
+Bucketing seems to perform best when inserted buckets are always "new", and not randomly sequenced in between other documents. Steer away from "randomly" adding or deleting buckets.
+
+When storing multiple bucketed collections that may be accommodating few-keys (like "column" oriented subsets of data), aggregating and sorting ACROSS BUCKETS is complex. **Sort the documents in bucketed collections** to alleviate the need to sort when querying.
