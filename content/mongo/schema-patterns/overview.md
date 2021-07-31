@@ -18,6 +18,9 @@ Subset could be about moving a handful of unused fields to a different 1-to-1 re
 
 ## Computed
 
+Use this when overusing the CPU.  
+Do this to reduce latency for read operations.
+
 **Math Operations.**  
 Compute sums, averages, median, etc.  
 When doing MANY more reads than writes, the computed pattern saves cpu energy by calculating on-write instead of on-read.
