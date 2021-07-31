@@ -50,6 +50,8 @@ This is a middle-ground between two opposites:
 - One doc with EVERYTHING in it
   - one massive document
 
+This is useful to introduce data duplication as the cost of reducing computational workloads.
+
 ### Group things together
 
 Maybe bucket daily documents.  
