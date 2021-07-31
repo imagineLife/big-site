@@ -63,3 +63,5 @@ Buckets can serve "column-oriented" data for quick access: if one key is regular
 Bucketing seems to perform best when inserted buckets are always "new", and not randomly sequenced in between other documents. Steer away from "randomly" adding or deleting buckets.
 
 When storing multiple bucketed collections that may be accommodating few-keys (like "column" oriented subsets of data), aggregating and sorting ACROSS BUCKETS is complex. **Sort the documents in bucketed collections** to alleviate the need to sort when querying.
+
+Giving bucketed collections & docs to folks may cause confusion. Folks unfamiliar with the bucketed data may notice duplication without understanding _reasoning_ behind the data duplication. Explaining the purpose and even the pointed use-cases for bucketed data is important!
