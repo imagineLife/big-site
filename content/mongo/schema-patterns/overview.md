@@ -22,7 +22,11 @@ Subset could be about moving a handful of unused fields to a different 1-to-1 re
 Compute sums, averages, median, etc.  
 When doing MANY more reads than writes, the computed pattern saves cpu energy by calculating on-write instead of on-read.
 
-**Fan-Out operations.**
+**Fan-Out operations.**  
+Fanning data out either happens on read or write.  
+Fanning out is about the "state" of data being in several places. Fan out on write is about while writing data, writing to many places.  
+Fan out on read is about reading from many places on read.  
+One advantage to fan out on write is to take MORE time writing in exchange for MORE time on read.
 
 **Roll-Up operations.**
 
