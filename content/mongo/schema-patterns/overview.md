@@ -40,3 +40,18 @@ Merge Data together: grouping categories into PARENT categories, grouping time-b
 ## Attribute
 
 ## Bucket
+
+This is a middle-ground between two opposites:
+
+- One Doc PER piece of info
+
+  - IoT devices with bajillions of data elements
+
+- One doc with EVERYTHING in it
+  - one massive document
+
+### Group things together
+
+Maybe bucket daily documents.  
+Maybe bucket chat app message content into one doc per channel per day?!  
+These time-based docs make OLD docs easy to identify and easy to archive when old enough.
