@@ -51,7 +51,8 @@ contacts: []
 
 ### Could define schema version in documents
 
-The document can ALSO include a `schema_version: string` as a way of informing clients of updated schema changes: interesting detail! Each document in a collection can then end up with a different schema version: no `schema_version` key is the first version, a doc with the key and value of `2` is associated with the 2nd version...interesting approach!
+The document can ALSO include a `schema_version: string` as a way of informing clients of updated schema changes: interesting detail! Each document in a collection can then end up with a different schema version: no `schema_version` key is the first version, a doc with the key and value of `2` is associated with the 2nd version...interesting approach!  
+Instead of a `schema_version` field, the consuming applications could "figure out" which version a document was based on...
 
 ## Overview
 
@@ -67,4 +68,21 @@ Versioning schema IN documents solves problems:
 
 Each doc can get a `schema_version` key/value.  
 The child applications should be setup to deal with all versions.  
-A "migration" strategy needs adopting.
+A "migration" strategy needs adopting. We are in charge. We can do it in ways that make sense.
+
+### Benefits and Tradeoffs
+
+- No downtime!
+- set up the apps to work with versions of docs!!
+- handle these technical details in the timeline desired, hopefully addressing in ways that don't let technical debt linger!
+- Limits the VOLUME OF WRITES/UPDATES to the db from all-at-once to a more flexible approach, as long as the consuming application(s) can work with multiple schema versioned docs
+
+## Similar but different ideas
+
+### Maintain document versions
+
+A [Document Versioning Pattern](https://www.mongodb.com/blog/post/building-with-patterns-the-document-versioning-pattern) can be used to keep previous versions of data around. The DB could have an entire collection or multiple collections of previous document versions in addition to the "live" version.
+
+### Dealing with old data
+
+[Zone Sharding](https://docs.mongodb.com/manual/core/zone-sharding/) can be helpful for managing obsolete docs.
