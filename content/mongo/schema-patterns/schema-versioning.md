@@ -34,3 +34,17 @@ skype: string
 hangout: string
 voxer: string
 ```
+
+There are a growing number of "contact" methods.  
+One way to accommodate these fields, the `Attributes Pattern` could be applied, storing ALL contact creds in an array:
+
+```bash
+_id: string
+firstname: string
+lastname: string
+homephone: string
+address: string
+contacts: []
+  method: string
+  value: string
+```
