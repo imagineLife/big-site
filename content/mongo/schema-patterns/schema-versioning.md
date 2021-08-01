@@ -76,6 +76,7 @@ A "migration" strategy needs adopting. We are in charge. We can do it in ways th
 - set up the apps to work with versions of docs!!
 - handle these technical details in the timeline desired, hopefully addressing in ways that don't let technical debt linger!
 - Limits the VOLUME OF WRITES/UPDATES to the db from all-at-once to a more flexible approach, as long as the consuming application(s) can work with multiple schema versioned docs
+- an interesting trade-off: moves some version-handling to the client-side application: for docs of v2, do normal v2 functions. for docs of v3, do v3 functions. I imagine the hope would be to migrate all v2 to v3 THEN remove v2 logic from application code
 
 ## Similar but different ideas
 
