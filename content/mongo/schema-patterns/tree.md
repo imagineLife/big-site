@@ -46,4 +46,16 @@ db.categories.aggregate([
 
 - who are the "children" of X?
 - what "nodes" are children of "X"?
+
+```bash
+db.categories.find({parent: "X"})
+```
+
 - Convert all items under X to be under W
+
+```bash
+db.categories.updateMany(
+  {parent: X},
+  {$set: {parent: W}}
+)
+```
