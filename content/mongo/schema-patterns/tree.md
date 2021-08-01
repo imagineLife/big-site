@@ -45,11 +45,52 @@ db.categories.aggregate([
 ```
 
 - who are the "children" of X?
-- what "nodes" are children of "X"?
 
 ```bash
 db.categories.find({parent: "X"})
 ```
+
+- what "nodes" are children of "X"?
+
+- Convert all items under X to be under W
+
+```bash
+db.categories.updateMany(
+  {parent: X},
+  {$set: {parent: W}}
+)
+```
+
+## Child References
+
+```bash
+{
+  name: "Office",
+  children: ["Books","Electronics","Stickers"]
+}
+```
+
+- Who are the "parents" of X?
+
+```bash
+db.categories.aggregate([
+  {$graphLookup: {
+    from: 'categories',
+    startWith: '$name',
+    connectFromField: 'parent',
+    connectToField: 'name',
+    as: 'ancestors'
+:  }}
+])
+```
+
+- who are the "children" of X?
+
+```bash
+db.categories.find({parent: "X"})
+```
+
+- what "nodes" are children of "X"?
 
 - Convert all items under X to be under W
 
