@@ -48,3 +48,23 @@ contacts: []
   method: string
   value: string
 ```
+
+### Could define schema version in documents
+
+The document can ALSO include a `schema_version: string` as a way of informing clients of updated schema changes: interesting detail! Each document in a collection can then end up with a different schema version: no `schema_version` key is the first version, a doc with the key and value of `2` is associated with the 2nd version...interesting approach!
+
+## Overview
+
+### The Problem
+
+Versioning schema IN documents solves problems:
+
+- avoiding downtime while doing schema upgrades
+- Upgrading docs can take a long time
+- Not all docs need changing, only "old" version docs
+
+### The Solution with schema versioning
+
+Each doc can get a `schema_version` key/value.  
+The child applications should be setup to deal with all versions.  
+A "migration" strategy needs adopting.
