@@ -13,7 +13,7 @@ Results in fewer writes.
 Useful for counters, etc.  
 Benefits:
 
-- less writes
+- less writesakethe86
 - less redundant duplication
   Costs:
 - inexact values
