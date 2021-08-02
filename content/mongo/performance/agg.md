@@ -28,4 +28,4 @@ When doing limit, put this at the beginning of the pipe, too.
 
 Aggs are limited to 16MB output limit. This does NOT apply to stuff IN the pipelines. Mitigate this with the `$limit` and `$project`.  
 Each stage has a 100MB limit. Use indexes.  
-When all else fails, `{allowDiskUse: true}`. This is a last resort measure.
+When all else fails, `{allowDiskUse: true}`. This is a last resort measure. This doesn't even work in `$graphLookup`.
