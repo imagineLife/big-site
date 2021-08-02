@@ -11,4 +11,10 @@ Delete data without ba backup? busted.
 Remove columns without api changes? busted.  
 Change how data is stored to simplify query logic? Better update that api or else.
 
-Anywho, the candidate's reply has poured metaphorical gasoline on a little flame of mine... `well we've been using Mongo so we don't really have to deal with it`(_or something like that_).
+Anywho, the candidate's reply has poured metaphorical gasoline on a little flame of mine...  
+`well we've been using Mongo so we don't really have to deal with it`(_or something like that_).
+
+Intriguing.  
+Perplexing.  
+Freeing, for my brief experience with _dealing with_ versioning db table setups.  
+...this also pushed me farther down a road of _what it might really take to version data in Mongo_.
