@@ -41,5 +41,6 @@ How do schema changes get applied to staging & production databases?
 ## Dabbling With Hierarchical Data
 
 I've been interested in working with hierarchical data.  
+Storing & working with hierarchical data is a unique detail
 Say I can get States, Counties, and either Cities or towns, and store them all in a hierarchical dataset using Mongo.  
 We'll see what happens.
