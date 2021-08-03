@@ -4,7 +4,11 @@ I've begun an endeavor into mongoDB.
 
 ## From the CLI
 
-Mongo can be accessed through a few CLI tools.
+Mongo can be accessed through a few CLI tools. Db interactions can be done through the CLI.
+
+## From an application
+
+Mongo can be accessed through a consumer application. I'm going to use Node and the mongo-supported `mongodb` driver.
 
 ## The Intrigue of noSQL and the Flexible Schema
 
