@@ -63,4 +63,10 @@ We'll see what happens.
 
 ## More In Depth Topics
 
-- [DB Users & Roles](/mongo/roles)
+- [DB Users & Roles](/mongo/roles): Giving db users roles and permission to specific features within the db
+- [Replication](/mongo/replication): Setting up mongo to be resillient against a db instance outage
+- [Sharding](/mongo/Sharding): breaking up a collection across many physical instances
+- [Aggregation Pipelines](/mongo/agg): getting complex with data selection and computation before returning results to the client
+- [DB Performance](mongo/performance): identifying performance metrics & leveraging tools to increase db & query performance
+- [Schema Design](mongo/schema-design)
+- [Intro to the node module](mongo/node-mod): Some details
