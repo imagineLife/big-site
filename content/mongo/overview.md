@@ -54,9 +54,13 @@ Storing & working with hierarchical data is a unique detail
 Say I can get States, Counties, and either Cities or towns, and store them all in a hierarchical dataset using Mongo.  
 We'll see what happens.
 
-## Topics
+## Brief Introductory Topics
 
 - [Shell Overview](/mongo/shell-overview): intro to the shell & mongo's basic commands
 - [Logging](/mongo/logging-db-components): logging details from a db
 - [Profiling](/mongo/profiling): profiling details about a db
 - [Server Tooling](/mongo/server-tooling): a brief overview of importing data, exporting data and getting other stats on dbs
+
+## More In Depth Topics
+
+- [DB Users & Roles](/mongo/roles)
