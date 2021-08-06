@@ -18,3 +18,5 @@ There are a bunch of [built-in Roles](/mongo/roles/built-in) that MongoDB offers
 - [Backups & Restoration](/mongo/roles/backup-restore): restricted to the admin db and for backing up and restoring data
 - [SuperUser](/mongo/roles/super-user): full privileges on all resources, including a dbOwner, userAdmin, and userAdminAnyDatabase
 - [All-Database](/mongo/roles/all-db): reserved for the admin db, and give rights to all dbs except for the `local` db and the `config`
+
+[Here](/mongo/roles/table-view) will live a table view comparing permissions to roles. Many permissions exist in mongo, and roles overlap in allowed actions. This table is an all-visible approach to all roles + permissions.
