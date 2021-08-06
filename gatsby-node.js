@@ -107,6 +107,23 @@ exports.createPages = async ({
           ...chartparts
         }
       }
+      mongo: allMarkdownRemark(
+        sort: { fields: frontmatter___order }
+        filter: {
+          frontmatter: { order: { gt: 0 }, slug: { regex: "/^mongo/" } }
+        }
+      ) {
+        pages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              excerpt
+              parentDir
+            }
+          }
+        }
+      }
     }
   `);
 
@@ -122,22 +139,27 @@ exports.createPages = async ({
       charts: { data: chartsData },
       febs: { pages: febsPages },
       strengths: { pages: strengthsPages },
+      mongo: { pages: mongoPages },
     },
   } = res;
 
   const mdTemplate = path.resolve(`src/templates/markdown/index.js`);
-  [...scrumPages, ...recipePages, ...febsPages, ...strengthsPages].forEach(
-    ({ page }) => {
-      createPage({
-        path: page.overview.slug,
-        component: mdTemplate,
-        context: {
-          slug: page.overview.slug,
-          parentDir: page.overview.parentDir || page.overview.slug,
-        },
-      });
-    },
-  );
+  [
+    ...scrumPages,
+    ...recipePages,
+    ...febsPages,
+    ...strengthsPages,
+    ...mongoPages,
+  ].forEach(({ page }) => {
+    createPage({
+      path: page.overview.slug,
+      component: mdTemplate,
+      context: {
+        slug: page.overview.slug,
+        parentDir: page.overview.parentDir || page.overview.slug,
+      },
+    });
+  });
 
   const chartsTemplate = path.resolve('src/templates/chart/index.js');
   chartsData.forEach(chartPage => {
