@@ -47,3 +47,21 @@ This would select things like...
 {a:3, c:1, b:21}
 {a:17, c:1, b:1}
 ```
+
+[Text indexes](https://docs.mongodb.com/manual/core/index-text/) work in all-inclusive selections.  
+A query like
+
+```bash
+db.phrases.find({$text: {$search: "detail find"}})
+```
+
+will select results like
+
+```bash
+{quote: "Find out if that detail is correct."}
+{quote: "That's a detail, Frank."}
+```
+
+The search will find results that include any of the words in the `$search` string.
+
+Inserting a doc in a collection always includes the `_id` field. When the developer does not include an `_id` field/value, mongo auto-creates one.
