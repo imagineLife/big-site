@@ -65,3 +65,13 @@ will select results like
 The search will find results that include any of the words in the `$search` string.
 
 Inserting a doc in a collection always includes the `_id` field. When the developer does not include an `_id` field/value, mongo auto-creates one.
+
+Wired tiger has features:
+
+- compressing data
+- compressing index prefixes
+- Doc-level concurrency
+- A uniquely dedicated cache of RAM
+  Wired tiger is a data storage engine, and its primary role is to store and get docs from cache and memory.
+
+Wired tiger does not handle replication or sharding. Replica sets and sharded clusters are handled by different parts of the `mongod` process than the [wired tiger storage engine](https://docs.mongodb.com/manual/core/wiredtiger/).
