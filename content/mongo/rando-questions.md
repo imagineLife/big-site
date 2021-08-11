@@ -118,7 +118,7 @@ mongoexport --host localhost:27017 -d dbname -c collname --type=csv -f fields -o
 [Queries can be optimized](https://docs.mongodb.com/manual/core/query-optimization/).
 
 The order of the fields in an index matters.  
-The order of the fields in the selection query are not significant: the query-planner will "reorder" the query keys to match a compound index prefix.
+The order of the fields in the selection query are not significant: the query-planner will "reorder" the query keys to match a compound index prefix. Checkout the [docs on compound index prefixes](https://docs.mongodb.com/manual/core/index-compound/#prefixes).
 
 Some queries can ba completed without sorting in-memory. When queries use only indexed fields, the sort happens on the indexes, not the data.  
 Example
