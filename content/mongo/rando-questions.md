@@ -158,3 +158,9 @@ db.coll.find({indexedfield: /^sink.*drawer/})
 ```
 
 The [`$sample`](https://docs.mongodb.com/manual/reference/operator/aggregation/sample/) agg command returns a random subset of docs from a result set - even if it randomly selects docs that return in the same order from the db!
+
+The [`$match` agg command](https://docs.mongodb.com/manual/reference/operator/aggregation/match/)
+
+- should be used as early as possible
+- can be used as many times as needed
+- has similar syntax to the `find` command
