@@ -14,3 +14,12 @@ There are many valid [BSON](https://docs.mongodb.com/manual/reference/bson-types
 - Int64
 - ObjectId
 - Decimal 128
+
+Mongo uses BSON instead of JSON for a few reasons:
+
+- BSON contains metada of the JSON doc for descriptive purposes
+- BSON supports more types of data than JSON
+
+The `$slice` projection specifies how many elements of an arr are returned after fetching data.
+
+The `_id` field is immutable. A doc with `_id: 432` cannot be updated to a doc with a different `_id`.
