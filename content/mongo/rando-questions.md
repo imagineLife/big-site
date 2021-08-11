@@ -146,3 +146,13 @@ Covered Queries are where
 - all fields in the SELECTION FILTER part of a query must be in the index that the query uses
 - all fields RETURNED must be in the index that the query uses
 - fields in SELECTION FILTERS are not the only fields allowed to be returned: more fields can be returned than in the filter details
+
+Write ops that modify an [indexed field](https://docs.mongodb.com/manual/core/data-model-operations/#indexes) _might_ require MongoDB to update the indexes that are connected to the doc.
+
+Some examples of [Using indexes with regex searches](https://docs.mongodb.com/manual/reference/operator/query/regex/#index-use):
+
+```bash
+db.coll.find({indexedfield: /a.*wa/})
+db.coll.find({indexedfield: /^cat.*horse/})
+db.coll.find({indexedfield: /^sink.*drawer/})
+```
