@@ -164,3 +164,11 @@ The [`$match` agg command](https://docs.mongodb.com/manual/reference/operator/ag
 - should be used as early as possible
 - can be used as many times as needed
 - has similar syntax to the `find` command
+
+#### Replication
+
+No oplog entries get written when a `delete` or `deleteMany` is not deleting any data.
+
+Horizontal Scaling is done by sharding, not by adding replica sets.
+
+[Delayed Replica Set Members](https://docs.mongodb.com/manual/tutorial/configure-a-delayed-replica-set-member/) give a "window of time" to recover from an operation error. The delay time, say 30min, means that it will take 30min before changes on the primary get carried over to the delayed member.
