@@ -75,3 +75,11 @@ Wired tiger has features:
   Wired tiger is a data storage engine, and its primary role is to store and get docs from cache and memory.
 
 Wired tiger does not handle replication or sharding. Replica sets and sharded clusters are handled by different parts of the `mongod` process than the [wired tiger storage engine](https://docs.mongodb.com/manual/core/wiredtiger/).
+
+Journaling cannot be disabled for replica set members through wired tiger.
+
+In order to export data as a csv from a specific collection, use
+
+```bash
+mongoexport --host localhost:27017 -d dbname -c collname --type=csv -f fields -o outputfilename.csv
+```
