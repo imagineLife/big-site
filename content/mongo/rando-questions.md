@@ -1,5 +1,7 @@
 # Random Thoughts
 
+### Mongo Philosophies and Features
+
 To maintain high availability & accommodate for server failure, use `Replication`.
 
 Many update types are [atomic](https://docs.mongodb.com/manual/core/write-operations-atomicity/) in mongo:
@@ -20,9 +22,13 @@ Mongo uses BSON instead of JSON for a few reasons:
 - BSON contains metada of the JSON doc for descriptive purposes
 - BSON supports more types of data than JSON
 
+### on CRUD
+
+The `_id` field is immutable. A doc with `_id: 432` cannot be updated to a doc with a different `_id`.
+
 The `$slice` projection specifies how many elements of an arr are returned after fetching data.
 
-The [\$addToSet](https://docs.mongodb.com/manual/reference/operator/update/addToSet/) operator will not add an item to an arr if the item is already present in an arr. Example
+The [`$addToSet`](https://docs.mongodb.com/manual/reference/operator/update/addToSet/) operator will not add an item to an arr if the item is already present in an arr. Example
 
 ```bash
 db.ab.updateMany( { "city" : "Hartford", "state" : "CT" }, { "$addToSet" : { "hobbies" : "reading" } } )
@@ -35,7 +41,7 @@ db.ab.updateMany( { "city" : "Hartford", "state" : "CT" }, { "$addToSet" : { "ho
 
 ```
 
-The `_id` field is immutable. A doc with `_id: 432` cannot be updated to a doc with a different `_id`.
+Write concerns don't work with read operations. Write concerns work with write operations.
 
 The [\$or operator](https://docs.mongodb.com/manual/reference/operator/query/or/) selects from 2 options. Here is an example `$or` query:
 
@@ -78,6 +84,14 @@ will select results like
 The search will find results that include any of the words in the `$search` string.
 
 Inserting a doc in a collection always includes the `_id` field. When the developer does not include an `_id` field/value, mongo auto-creates one.
+
+### Data and Data Modeling
+
+Mongo can represent data relationships like
+
+- 1-Many
+- Many-Many
+- Graphs
 
 Wired tiger has features:
 
