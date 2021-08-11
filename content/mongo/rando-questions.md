@@ -7,7 +7,7 @@ Many update types are [atomic](https://docs.mongodb.com/manual/core/write-operat
 - a single doc in a replica set
 - multiple docs in a replica set, using transactions
 - a single doc in a sharded cluster
-- **not sure about updates to multiple docs in a sharded cluster**
+- updates to multiple docs in a sharded cluster, through a `transaction`
 
 There are many valid [BSON](https://docs.mongodb.com/manual/reference/bson-types/) types:
 
@@ -21,6 +21,19 @@ Mongo uses BSON instead of JSON for a few reasons:
 - BSON supports more types of data than JSON
 
 The `$slice` projection specifies how many elements of an arr are returned after fetching data.
+
+The [\$addToSet](https://docs.mongodb.com/manual/reference/operator/update/addToSet/) operator will not add an item to an arr if the item is already present in an arr. Example
+
+```bash
+db.ab.updateMany( { "city" : "Hartford", "state" : "CT" }, { "$addToSet" : { "hobbies" : "reading" } } )
+
+# WILL updated
+{ "_id" : ObjectId("57fd48257268886f789b33fc"), "firstName" : "Arthur", "lastName" : "Aaronson", "state" : "CT", "city" : "Hartford", "hobbies" : [ "walking", "talking with friends" ] }
+
+# WILL NOT UPDATE
+{ "_id" : ObjectId("57fd4825726888f789b3402"), "firstName" : "Dawn", "lastName" : "Davis", "state" : "CT", "city" : "Hartford", "hobbies" : [ "walking", "reading", "hiking" ] }
+
+```
 
 The `_id` field is immutable. A doc with `_id: 432` cannot be updated to a doc with a different `_id`.
 
