@@ -156,3 +156,5 @@ db.coll.find({indexedfield: /a.*wa/})
 db.coll.find({indexedfield: /^cat.*horse/})
 db.coll.find({indexedfield: /^sink.*drawer/})
 ```
+
+The [`$sample`](https://docs.mongodb.com/manual/reference/operator/aggregation/sample/) agg command returns a random subset of docs from a result set - even if it randomly selects docs that return in the same order from the db!
