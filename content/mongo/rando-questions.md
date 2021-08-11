@@ -23,3 +23,27 @@ Mongo uses BSON instead of JSON for a few reasons:
 The `$slice` projection specifies how many elements of an arr are returned after fetching data.
 
 The `_id` field is immutable. A doc with `_id: 432` cannot be updated to a doc with a different `_id`.
+
+The [\$or operator](https://docs.mongodb.com/manual/reference/operator/query/or/) selects from 2 options. Here is an example `$or` query:
+
+```bash
+db.sample.find( { "$or" : [ { "a" : { "$in" : [ 3, 10] } }, { "b" : { "$lte" : 2 } } ] } )
+```
+
+That is selecting...
+
+- EITHER
+  - a either 3 or 10
+- OR
+  - b less than 2
+
+This would select things like...
+
+```bash
+{a:2, c:0, b:2}
+{a:3, c:1, b:21}
+{a:3, c:1, b:1}
+{a:3, c:0, b:12}
+{a:3, c:1, b:21}
+{a:17, c:1, b:1}
+```
