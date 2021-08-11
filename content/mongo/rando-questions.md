@@ -139,3 +139,10 @@ db.coll.find({a:{$gt: 84}}).sort({c: -1})
 
 The third example does not leverage all of the keys in the stated compound index.  
 The third example skips the `b`, so only the `a` part of the query leverages the index. the sort on `c` does not leverage the indexed key, causing the data to be stored in memory before sorting.
+
+Covered Queries are where
+[_mongo docs link_](https://docs.mongodb.com/manual/core/query-optimization/#covered-query)
+
+- all fields in the SELECTION FILTER part of a query must be in the index that the query uses
+- all fields RETURNED must be in the index that the query uses
+- fields in SELECTION FILTERS are not the only fields allowed to be returned: more fields can be returned than in the filter details
