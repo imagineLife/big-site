@@ -93,6 +93,8 @@ Mongo can represent data relationships like
 - Many-Many
 - Graphs
 
+### Performance and Indexing
+
 Wired tiger has features:
 
 - compressing data
@@ -110,3 +112,30 @@ In order to export data as a csv from a specific collection, use
 ```bash
 mongoexport --host localhost:27017 -d dbname -c collname --type=csv -f fields -o outputfilename.csv
 ```
+
+#### Note On Indexes and orders
+
+[Queries can be optimized](https://docs.mongodb.com/manual/core/query-optimization/).
+
+The order of the fields in an index matters.  
+The order of the fields in the selection query are not significant: the query-planner will "reorder" the query keys to match a compound index prefix.
+
+Some queries can ba completed without sorting in-memory. When queries use only indexed fields, the sort happens on the indexes, not the data.  
+Example
+
+```bash
+# indexes
+db.coll.createIndex({a:1, b:01, c: -1, d:1})
+
+# run a query without doing an in-memory sort
+db.coll.find({a:45}).sort({b:1,c:1})
+
+# run another query without doing an in-memory sort
+db.coll.find({a:97, b: {$lt: 36}}).sort({b:1})
+
+# a query doing an in-memory sort
+db.coll.find({a:{$gt: 84}}).sort({c: -1})
+```
+
+The third example does not leverage all of the keys in the stated compound index.  
+The third example skips the `b`, so only the `a` part of the query leverages the index. the sort on `c` does not leverage the indexed key, causing the data to be stored in memory before sorting.
