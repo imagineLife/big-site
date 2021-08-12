@@ -180,3 +180,21 @@ The [replica set oplog](https://docs.mongodb.com/manual/core/replica-set-oplog/)
 - allows for changing the priority of RS members
 - allows for setting members to be hidden
 - does NOT allow for changing mongodb versions
+
+#### Sharding
+
+When [shard key cardinality](https://docs.mongodb.com/manual/core/sharding-shard-key/#shard-key-cardinality) is not granular enough
+
+- large chunks will not be splittable down the road
+- document size is not affected
+- query-to-number-of-shard ratio is not affected
+
+In a sharded collection, the [primary shard](https://docs.mongodb.com/manual/core/sharded-cluster-shards/#primary-shard):
+
+- DOES hold unsharded collections for the db
+- does not process queries
+- does not determine the location ofe the data in the cluster
+- is not where a replica set is found
+- not necessarily the first shard initialized
+- does not hold config info for the sharded cluster
+- should not be confused with the primary member of a replica set
