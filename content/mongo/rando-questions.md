@@ -205,3 +205,11 @@ Some [advantages of sharding](https://docs.mongodb.com/manual/sharding/#advantag
 - accommodates a growing data set to fit the data in a single instance
 - improves read performance
 - decreases backup and restore time of the db
+
+[Chunks can migrate](https://docs.mongodb.com/manual/core/sharding-balancer-administration/#chunk-migration-procedure) is a sharded cluster during a migration process:
+
+- a "balancer" sends a `moveChunk` command to a source shard
+- the source starts moving: DURING the migration, operations to the chunk go to the source shard - the source is responsible for write ops of the chunk
+- the shard that is being migrated can still handle reads during shard flight migration
+
+In a sharded cluster, the `_id` index should have unique values - just like a replica set and single db instance. Duplicates would prevent docs from moving as expected during shard migrations.
