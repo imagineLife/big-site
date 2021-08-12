@@ -172,3 +172,11 @@ No oplog entries get written when a `delete` or `deleteMany` is not deleting any
 Horizontal Scaling is done by sharding, not by adding replica sets.
 
 [Delayed Replica Set Members](https://docs.mongodb.com/manual/tutorial/configure-a-delayed-replica-set-member/) give a "window of time" to recover from an operation error. The delay time, say 30min, means that it will take 30min before changes on the primary get carried over to the delayed member.
+
+The [replica set oplog](https://docs.mongodb.com/manual/core/replica-set-oplog/) (operations log) is hoped to be [idempotent](https://docs.mongodb.com/manual/reference/glossary/#term-idempotent). If the server _needs_ to apply oplog entries, the server will always get the same result from an idempotent oplog.
+
+[Reconfiguring a replica set using `rs.reconfig()`](https://docs.mongodb.com/manual/reference/method/rs.reconfig/)
+
+- allows for changing the priority of RS members
+- allows for setting members to be hidden
+- does NOT allow for changing mongodb versions
