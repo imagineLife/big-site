@@ -198,3 +198,10 @@ In a sharded collection, the [primary shard](https://docs.mongodb.com/manual/cor
 - not necessarily the first shard initialized
 - does not hold config info for the sharded cluster
 - should not be confused with the primary member of a replica set
+
+Some [advantages of sharding](https://docs.mongodb.com/manual/sharding/#advantages-of-sharding) are:
+
+- leveraging the shards to "keep up" with the app's write load after exhausting other options
+- accommodates a growing data set to fit the data in a single instance
+- improves read performance
+- decreases backup and restore time of the db
