@@ -183,6 +183,11 @@ The [replica set oplog](https://docs.mongodb.com/manual/core/replica-set-oplog/)
 
 #### Sharding
 
+When [picking a shard key](https://docs.mongodb.com/manual/core/sharding-shard-key/#choosing-a-shard-key) (or (here)[https://www.mongodb.com/blog/post/on-selecting-a-shard-key-for-mongodb])
+
+- **Consider Cardinality**: pick something like a phone-number over an age, eye color, or person's weight. Phone number has higher cardinality over the other examples
+- **Consider read workloads**: setup shard keys that support queries that bear a super majority of the workload of the client(s)
+
 When [shard key cardinality](https://docs.mongodb.com/manual/core/sharding-shard-key/#shard-key-cardinality) is not granular enough
 
 - large chunks will not be splittable down the road
@@ -212,4 +217,4 @@ Some [advantages of sharding](https://docs.mongodb.com/manual/sharding/#advantag
 - the source starts moving: DURING the migration, operations to the chunk go to the source shard - the source is responsible for write ops of the chunk
 - the shard that is being migrated can still handle reads during shard flight migration
 
-In a sharded cluster, the `_id` index should have unique values - just like a replica set and single db instance. Duplicates would prevent docs from moving as expected during shard migrations.
+In a sharded cluster, the `_id` index should have unique values - just like a replica set and single db instance. Duplicates would prevent docs from moving as expected during shard migrations. Shard keys indexes, if they are not the `_id`, are totally ok to have dup vals across docs. [Mongo "...enforces uniqueness on the entire key combination and not individual components of the shard key"](https://docs.mongodb.com/manual/core/sharding-shard-key/#unique-indexes)
