@@ -113,6 +113,8 @@ In order to export data as a csv from a specific collection, use
 mongoexport --host localhost:27017 -d dbname -c collname --type=csv -f fields -o outputfilename.csv
 ```
 
+Use [mongotop](https://docs.mongodb.com/database-tools/mongotop/) to inspect how the `mongod` instance spends its time reading && writing data. `mongotop` gives `per-collection` stat insights. Mongotop will, by default, return terminal output every second.
+
 #### Note On Indexes and orders
 
 [Queries can be optimized](https://docs.mongodb.com/manual/core/query-optimization/).
