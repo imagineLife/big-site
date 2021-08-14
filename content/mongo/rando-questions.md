@@ -218,3 +218,8 @@ Some [advantages of sharding](https://docs.mongodb.com/manual/sharding/#advantag
 - the shard that is being migrated can still handle reads during shard flight migration
 
 In a sharded cluster, the `_id` index should have unique values - just like a replica set and single db instance. Duplicates would prevent docs from moving as expected during shard migrations. Shard keys indexes, if they are not the `_id`, are totally ok to have dup vals across docs. [Mongo "...enforces uniqueness on the entire key combination and not individual components of the shard key"](https://docs.mongodb.com/manual/core/sharding-shard-key/#unique-indexes)
+
+- [Hashed Sharding keys](https://docs.mongodb.com/manual/core/hashed-sharding/) offer
+- increase cardinality over default `_id` field shard keys when inserting docs
+- may decrease the performance on range-based queries
+- do NOT increase security
