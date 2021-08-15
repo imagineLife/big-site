@@ -1,5 +1,13 @@
 # Identify the workload
 
+- Usability Scenarios
+- Production Logs & Stats
+- Business Domain Experts
+- **Data Modeling Expert**
+- Assumptions on workloads
+  - frequencies
+  - relationship amounts (minimum 0, maximum 24?!, maximum 2500?)
+
 Example:
 
 - an IoT EDB
@@ -42,6 +50,12 @@ Example:
 - 100 queries per hour: 10 scientists, 10 reqs per person
 - will require collection scans
 - mostly uses last-hour's worth of data
+
+## Understand Relationships
+
+- What are the relationships?!
+- How many relationships are there?
+- Should these relationships be embedded or linked?!
 
 ## A takeaway
 
