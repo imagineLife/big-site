@@ -10,6 +10,7 @@ Many update types are [atomic](https://docs.mongodb.com/manual/core/write-operat
 - multiple docs in a replica set, using transactions
 - a single doc in a sharded cluster
 - updates to multiple docs in a sharded cluster, through a `transaction`
+- NOTE: updates to multiple docs in a sharded cluster, without a transaction are NOT atomic
 
 There are many valid [BSON](https://docs.mongodb.com/manual/reference/bson-types/) types:
 
@@ -92,6 +93,12 @@ Mongo can represent data relationships like
 - 1-Many
 - Many-Many
 - Graphs
+
+When considering the data model
+
+- consider the access pattern: what are the common queries being used?
+- consider growth of embedded docs - these should not grow to infinity
+- don't worry about data de-duplication - mongo can use data duplication to the advantage of the system
 
 ### Performance and Indexing
 
