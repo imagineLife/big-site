@@ -57,7 +57,20 @@ Example:
 - How many relationships are there?
 - Should these relationships be embedded or linked?!
 
+## Apply patterns
+
+- recognize patterns
+- apply patterns
+
 ## A takeaway
 
 Consider leveraging a dedicated node for analytics.  
 Primary for writes, secondary for reads.
+
+## A Flexible Methodology For Modeling Data
+
+| Goal                              | Shooting For Simplicity                             | Between Simple & Performance | Shooting For Optimal Performance        |
+| :-------------------------------- | :-------------------------------------------------- | :--------------------------- | :-------------------------------------- |
+| Describe the Workload             | ID Most-Frequent Operations                         |                              | ID ALL Operations, quantify ALL of them |
+| Describe ID & Model relationships | Embed a lot of content: large object, less querying |                              | Embed AND Link                          |
+| Apply Patterns                    | Few Patterns - May Include data-duplication         |                              | Many Patterns for many details          |
