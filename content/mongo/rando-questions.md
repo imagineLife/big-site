@@ -142,7 +142,7 @@ db.coll.find({a:{$gt: 84}}).sort({c: -1})
 The third example does not leverage all of the keys in the stated compound index.  
 The third example skips the `b`, so only the `a` part of the query leverages the index. the sort on `c` does not leverage the indexed key, causing the data to be stored in memory before sorting.
 
-Covered Queries are where
+Covered Queries are where...
 [_mongo docs link_](https://docs.mongodb.com/manual/core/query-optimization/#covered-query)
 
 - all fields in the SELECTION FILTER part of a query must be in the index that the query uses
@@ -158,6 +158,13 @@ db.coll.find({indexedfield: /a.*wa/})
 db.coll.find({indexedfield: /^cat.*horse/})
 db.coll.find({indexedfield: /^sink.*drawer/})
 ```
+
+Unique Indexes:
+
+- can be any field in a doc
+- are unique by a constraint
+- no two docs can have the same val in the indexed field
+- NOTE: Hashed indexes cannot be unique
 
 The [`$sample`](https://docs.mongodb.com/manual/reference/operator/aggregation/sample/) agg command returns a random subset of docs from a result set - even if it randomly selects docs that return in the same order from the db!
 
