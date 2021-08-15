@@ -154,9 +154,14 @@ Write ops that modify an [indexed field](https://docs.mongodb.com/manual/core/da
 Some examples of [Using indexes with regex searches](https://docs.mongodb.com/manual/reference/operator/query/regex/#index-use):
 
 ```bash
-db.coll.find({indexedfield: /a.*wa/})
 db.coll.find({indexedfield: /^cat.*horse/})
 db.coll.find({indexedfield: /^sink.*drawer/})
+```
+
+NOTE: this query will not leverage the index, as this query does not search the beginning of the string:
+
+```bash
+db.coll.find({indexedfield: /a.*w/})
 ```
 
 Unique Indexes:
@@ -199,7 +204,7 @@ When [picking a shard key](https://docs.mongodb.com/manual/core/sharding-shard-k
 
 When [shard key cardinality](https://docs.mongodb.com/manual/core/sharding-shard-key/#shard-key-cardinality) is not granular enough
 
-- large chunks will not be splittable down the road
+- large chunks will not be able to be split with a growing data set, causing `Jumbo Chunks`
 - document size is not affected
 - query-to-number-of-shard ratio is not affected
 
