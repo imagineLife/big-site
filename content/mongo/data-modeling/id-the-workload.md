@@ -74,3 +74,12 @@ Primary for writes, secondary for reads.
 | Describe the Workload             | ID Most-Frequent Operations                         |                              | ID ALL Operations, quantify ALL of them |
 | Describe ID & Model relationships | Embed a lot of content: large object, less querying |                              | Embed AND Link                          |
 | Apply Patterns                    | Few Patterns - May Include data-duplication         |                              | Many Patterns for many details          |
+
+### An Example, Data For A Coffee Shop
+
+#### Business Needs
+
+- 1K stores
+- make killer coffee
+- stick to a strict coffee recipe
+- use smart && automated coffee hardware (shelving stock systems, coffee makers, etc.)
