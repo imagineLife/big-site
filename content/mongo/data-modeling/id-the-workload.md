@@ -86,10 +86,12 @@ Primary for writes, secondary for reads.
 
 #### Describe Data Workload
 
-| Query                                                      | Operation Type                                                         | Business Description                                                                          |
-| :--------------------------------------------------------- | :--------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------- |
-| Get/Set the weight of coffee beans on a shelf              | **Write**, when person takes coffee off shelf or stocker adds to shelf | Shelf sends event when coffee bags are removed && added                                       |
-| Read how much coffee was consumed by the store & customers | **Read** as analytics                                                  | Show how much coffee was consumed and forecast how much coffee should be ordered the next day |
-| Find anomalies in the inventory                            | **Read** as analytics                                                  | Gain insights into unexpected inventory details                                               |
-| Capture Coffee-Making details                              | **Writes** from coffee machines (temp, weight, speed, water, etc)      | Coffee Machine reports these details on a cup of coffee being made                            |
-| Analyze The Details of Coffee-Making                       | **Read** as business analytics                                         | Help the org through insights                                                                 |
+| Query                                                      | Operation Type                                                         | Business Description                                                                          | Quantify Freq.    | Qualify Importance |
+| :--------------------------------------------------------- | :--------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------- | :---------------- | :----------------- |
+| Get/Set the weight of coffee beans on a shelf              | **Write**, when person takes coffee off shelf or stocker adds to shelf | Shelf sends event when coffee bags are removed && added                                       | 1 write per sec - |                    |
+| Read how much coffee was consumed by the store & customers | **Read** as analytics                                                  | Show how much coffee was consumed and forecast how much coffee should be ordered the next day |                   |                    |
+| Find anomalies in the inventory                            | **Read** as analytics                                                  | Gain insights into unexpected inventory details                                               |                   |                    |
+
+| Capture Coffee-Making details | **Writes** from coffee machines (temp, weight, speed, water, etc) | Coffee Machine reports these details on a cup of coffee being made || |
+
+| Analyze The Details of Coffee-Making | **Read** as business analytics | Help the org through insights || |
