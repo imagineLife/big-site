@@ -83,3 +83,11 @@ Primary for writes, secondary for reads.
 - make killer coffee
 - stick to a strict coffee recipe
 - use smart && automated coffee hardware (shelving stock systems, coffee makers, etc.)
+
+#### Describe Data Workload
+
+| Query                                                      | Operation Type                                                         | Business Description                                                                          |
+| :--------------------------------------------------------- | :--------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------- |
+| Get/Set the weight of coffee beans on a shelf              | **Write**, when person takes coffee off shelf or stocker adds to shelf | Shelf sends event when coffee bags are removed && added                                       |
+| Read how much coffee was consumed by the store & customers | **Read** as analytics                                                  | Show how much coffee was consumed and forecast how much coffee should be ordered the next day |
+| Find anomalies in the inventory                            | **Read** as analytics                                                  | Gain insights into unexpected inventory details                                               |
