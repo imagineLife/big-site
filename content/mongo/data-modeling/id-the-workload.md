@@ -102,3 +102,16 @@ Primary for writes, secondary for reads.
 | 10,000x1000 writes-per-day every day | 10000x10 writes-per-day every day |
 | 365 billions / yr                    | 3.7 billions / yr                 |
 | 370GB                                | 3.7GB                             |
+
+NOTE: Sharding is best with at least 1TB of data, this does not need sharding according to data needs
+
+#### Describe Entities and Data Relationships
+
+- Coffee Cups
+- Stores
+- Shelves
+- Machines
+- Bags of Coffee
+- coffee scales
+
+#### Modeling Ideas
