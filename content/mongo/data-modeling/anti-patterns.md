@@ -19,3 +19,77 @@ Arrays, though, can get big:
 
 - can grow to the 16MB doc limit
 - index performance on arrays decreases as array-sizes increase
+
+### An Example
+
+```js
+// A PROBLEM
+// Buildings Doc
+{
+  Id: city_hall,
+  name: city_hall,
+  city: new york,
+  state: California,
+  employees: [
+    ...aMassiveAndGrowingArray,
+    {
+      _id: str,
+      first: Joe,
+      last: Joneson,
+      cell: 8675309,
+      start_year: 1981,
+      building: {
+        Id: str,
+        name: city hall,
+        city: new york,
+        state: California,
+      }
+    }
+  ]
+}
+```
+
+NOTICE: each employee store duplicate building data. Every time "city hall" needs updating, each doc in the arr needs updating as well.
+
+Separate The Data:
+
+```js
+// A NEW employee
+{
+\_id: str,
+first: Joe,
+last: Joneson,
+cell: 8675309,
+start_year: 1981,
+building_id: city_hall
+```
+
+Aggregate the data, join it, using agg + lookup
+
+```js
+db.buildings.aggregate({
+  $lookup: {
+    from: 'employees',
+    localField: '_id',
+    foreignField: 'building_id',
+    as: 'employees',
+  },
+});
+```
+
+The above will output the same as the initial storage solution.
+`$lookup` is an expensive method. If `$lookup` is happening a lot, consider migrating to the `extended reference` pattern. This would be like storing, in an employee -
+
+```js
+{
+  _id: str,
+  first: Joe,
+  last: Joneson,
+  cell: 8675309,
+  start_year: 1981,
+  building: {
+    name: City Hall,
+    state: Indiana
+  }
+}
+```
