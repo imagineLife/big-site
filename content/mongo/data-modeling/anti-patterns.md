@@ -95,3 +95,17 @@ The above will output the same as the initial storage solution.
   }
 }
 ```
+
+## Massive Number Of Collections
+
+### The Problem
+
+Why is this a problem?! Who CARES how many collections we have?!
+Well, `_id` gets indexed. These are considered `empty` and/or `unused` indexes.
+Wired Tiger manages this, and decreases performance with lots of indexes:
+
+- Collections have multiple indexes, some to support queries
+- WiredTiger stores a file for each COLLECTION and each INDEX
+- Wired TIger opens all files on startup
+
+LIMIT EACH REPLICA SET TO 10K collections.
