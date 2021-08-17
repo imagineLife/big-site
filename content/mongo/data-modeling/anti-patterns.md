@@ -51,6 +51,8 @@ Arrays, though, can get big:
 
 NOTICE: each employee store duplicate building data. Every time "city hall" needs updating, each doc in the arr needs updating as well.
 
+### Some Solutions
+
 Separate The Data:
 
 ```js
