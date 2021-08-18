@@ -200,5 +200,35 @@ Data that is accessed together should be stored together. NOT: `data that is rel
   - when docs are NOT in cache, mongo goes to disk
   - ideal to put the working-set is in the cache
   - ...remove bloat from freq.-accessed docs
+  - size of working set is...
+    50% of larger of the two - .5GB OR 50% of ram less 1 GB
+    - with 2GB of ram, the working set will be allowed (2 - 1) \* .5 = .5GB of ram
+
+Example: a website about presidents
+
+- a lot of data about.... 4K people
+- collection called `people`
+  - 1 doc per person
+  - ...HOMEPAGE, the most-visited page, seems slow though...?!
+  - using an M10 cluster, comes w. 2GB of RAM
+  - reviewing the config...
+    - 1 collection
+    - 4K+ docs
+    - total size of all docs 580MB
+    - 3 Indexes, several fields
+- GOAL: restructure the data to better-leverage the wired tiger cache, the working set
+  - homepages ONLY needs people's first & last names - these are the ONLY pieces of data that are needed in the working set
+  - create `people_summary` collection
+    - first_name
+    - lastName
+      person_id, a manual reference to the `people` collection
+    - \_id
+  - Review the config...
+    - same number of docs
+    - size of all docs: 454KB
+    - total index sizes, including both collections, is 312KB
+    - 312+454 = 760KB of data that can be stuffed into cache
+- BUT DATA DUPLICATION!!!
+  -
 
 ## Case-Insensitive Queries without Case-Insensitive indexes
