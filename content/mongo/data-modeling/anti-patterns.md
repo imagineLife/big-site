@@ -183,6 +183,8 @@ But why not just throw indexes around then?!
   - opens all files on startup: will get slow on startup
 - Indexes impact write performance
 - RECOMMEND: max 50 indexes in a collection
+  When to drop indexes:
+- when they are redundant: `last_name_1,first_name_1`as a compound index, will cover `last_name` queries: a `last_name` index is not needed
 
 ## Bloated Docs
 
