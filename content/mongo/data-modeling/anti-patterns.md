@@ -143,7 +143,27 @@ Better Approach:
   - 1 hour's worth of info from 1 sensor in each doc
     - somehow bucket the data into averages per hour
 - 2 indexes, one for location, 1 for sensor
+  - storing the HOUR of each bucket IN the \_id field!! taking advantage of the default field index!!
 - SIZE:
   - DB: 3.07GB
   - INDEXES: 27MG
   - COLLECTIONS: 1
+
+**When Should I drop a collection?!**
+
+- empty collections
+- where the SIZE is mostly indexes
+- leverage `$merge` to merge data between collections
+
+### Investigate db stats through cli
+
+```bash
+db.getCollectionNames()
+
+# see stats!
+# number of indexes, collections, etc!
+db.stats()
+
+# get collection-specific stats!
+db.getCollection('2019-0101).stats()
+```
