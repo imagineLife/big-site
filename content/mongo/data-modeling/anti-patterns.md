@@ -167,3 +167,9 @@ db.stats()
 # get collection-specific stats!
 db.getCollection('2019-0101).stats()
 ```
+
+## Unnecessary Indexes
+
+## Bloated Docs
+
+## Case-Insensitive Queries without Case-Insensitive indexes
