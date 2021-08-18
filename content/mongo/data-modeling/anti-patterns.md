@@ -170,6 +170,20 @@ db.getCollection('2019-0101).stats()
 
 ## Unnecessary Indexes
 
+Indexes ARE GREAT!  
+It is easy to get carried away though.  
+Without Indexes, mongodb scans the entire collection.  
+Frequent queries deserve indexes.
+But why not just throw indexes around then?!
+
+- Indexes take up space - at least 8KB per index, growing with the docs in the collection
+- Indexes impact wiredTiger performance
+  - a file per collection
+  - a file per index
+  - opens all files on startup: will get slow on startup
+- Indexes impact write performance
+- RECOMMEND: max 50 indexes in a collection
+
 ## Bloated Docs
 
 ## Case-Insensitive Queries without Case-Insensitive indexes
