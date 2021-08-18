@@ -189,4 +189,16 @@ But why not just throw indexes around then?!
 
 ## Bloated Docs
 
+Data that is accessed together should be stored together. NOT: `data that is related should be stored together`. With a 16MB doc size, who cares if the docs are large?!
+
+### Data Storage and doc size
+
+- Wired tiger deals with storage
+- wired tiger deals with files on disk
+- wired tiger keeps index a frequently-accessed docs in [wired tiger cache](https://docs.mongodb.com/manual/core/wiredtiger/)
+  - when docs are IN the cache, its blazing fast
+  - when docs are NOT in cache, mongo goes to disk
+  - ideal to put the working-set is in the cache
+  - ...remove bloat from freq.-accessed docs
+
 ## Case-Insensitive Queries without Case-Insensitive indexes
