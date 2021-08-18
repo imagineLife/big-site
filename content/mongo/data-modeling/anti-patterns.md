@@ -229,6 +229,13 @@ Example: a website about presidents
     - total index sizes, including both collections, is 312KB
     - 312+454 = 760KB of data that can be stuffed into cache
 - BUT DATA DUPLICATION!!!
-  -
+  - This duplicated data is not going to change very often
 
 ## Case-Insensitive Queries without Case-Insensitive indexes
+
+Example: `db.coll.find({water: 'dog'})`, could be stored as Dog or dOg or doG.  
+THE PROBLEM:
+
+- `$regex` queries that are NOT supported by a case-insensitive indexes
+  are case insensitive AND not performant
+- NON `$regex` queries that are NOT supported by a case-insensitive indexes
