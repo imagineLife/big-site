@@ -109,3 +109,41 @@ Wired Tiger manages this, and decreases performance with lots of indexes:
 - Wired TIger opens all files on startup
 
 LIMIT EACH REPLICA SET TO 10K collections.
+
+Example:
+
+- GOAL: keep track of many sensors, tracking dirt levels in water
+- GOAL: 1-min-by-min tracking of 3 locations
+- PROBLEM BUT COMMON APPROACH:
+  - 1 new collection per day
+  - create 2 indexes in each collection, the `sensor_id` and the `location_id`
+
+```js
+// collections
+/*
+  2019-01-01
+  2019-01-02
+  2019-01-03
+  ...etc
+*/
+```
+
+- SIZES for a year's worth of data:
+
+  - DB: 5.2GB
+  - INDEXES: 1.07GB
+  - COLLECTION COUNT: 365
+
+- trends will be complicated to discover across collections
+
+Better Approach:
+
+- All data in 1 single collection
+- bucket the data
+  - 1 hour's worth of info from 1 sensor in each doc
+    - somehow bucket the data into averages per hour
+- 2 indexes, one for location, 1 for sensor
+- SIZE:
+  - DB: 3.07GB
+  - INDEXES: 27MG
+  - COLLECTIONS: 1
