@@ -265,3 +265,66 @@ db.coll.find({first_name: 'harriet', {locale: 'en', strength: 2}})
 ```
 
 Note on collation: it can be set when creating the collection - there are a bunch of [operations that support collation](https://docs.mongodb.com/manual/reference/collation/#operations-that-support-collation)
+
+## Separating Data that is Accessed Together
+
+`$lookup` is good for ingrequent or rarely used queries.  
+`$lookup` is slower & more resource intensive than single-doc gets.  
+Data that is accessed together should be stored together.  
+Example: storing info about a united nation system:
+
+- stats about countries
+- list of resources each country uses to trade
+- list of delegates for each country
+- policy statements for each country
+
+this COULD be stored with 4 collections:
+
+- countries
+- resources
+- delegates
+- policies
+
+the OUTPUT goal is to provide "reports about each country":
+
+- basic stats
+- resources available to trade
+- delegate list
+- names & dates of last five policy docs
+
+With the above collection layout, `$lookup` would have to be used to merge the data. from the collections together.
+
+A Data-Re-Org is needed for better performance.
+
+```bash
+# Countries collection
+- _id
+- official name
+- capital
+-languages
+- population
+- resources
+- delegates
+- recent_policies
+  - title
+  - date-created
+  - _id
+```
+
+- resources has been merged
+- delegates has been merged
+- a pattern has been introduced to put quickly-accessed data together
+
+### Summary
+
+- CAREFULLY consider schema
+  - data-duplication drawbacks and benefits
+- DON'T separate data that is displayed together
+- Massive arrays can be converted to subset patterns or other patterns
+- Massive number of collections might be able to be merged into a single collection
+- Un-needed indexes can be converted to compound indexes, or removed entirely
+  - indexes are good
+  - maybe figure out how to use the `_id` as the non-default ObjectId
+- Bloated docs store LARGE amounts of data together that is NOT frequently accessed together
+- case-insensitive queries should marry case-insensitive indexes
+  - create case-insensitive indexes where needed
