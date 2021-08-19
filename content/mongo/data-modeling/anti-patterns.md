@@ -234,8 +234,32 @@ Example: a website about presidents
 ## Case-Insensitive Queries without Case-Insensitive indexes
 
 Example: `db.coll.find({water: 'dog'})`, could be stored as Dog or dOg or doG.  
-THE PROBLEM:
+THE PROBLEMS:
 
 - `$regex` queries that are NOT supported by a case-insensitive indexes
   are case insensitive AND not performant
 - NON `$regex` queries that are NOT supported by a case-insensitive indexes
+- the query above is a case-insensitive query
+
+### Collation
+
+Defins the language-specific rules that mongo uses for string comparison:
+
+- Strength: 1-5
+  - 1-2 give case-insensitivity
+
+**Example**
+
+- to search for 2 instances of "sally", where the first-name field HAS and index that is case INSENSITIVE
+
+```bash
+db.coll.find({first_name: {$regex: /sally/i}})
+```
+
+Updating the index could make it go MUCH faster:
+
+```bash
+# a case-insensitive index
+db.coll.createIndex({first_name:1}, {collation: 'en', strength:2}})
+db.coll.find({first_name: 'harriet', {locale: 'en', strength: 2}})
+```
