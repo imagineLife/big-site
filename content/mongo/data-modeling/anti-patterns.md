@@ -263,3 +263,5 @@ Updating the index could make it go MUCH faster:
 db.coll.createIndex({first_name:1}, {collation: 'en', strength:2}})
 db.coll.find({first_name: 'harriet', {locale: 'en', strength: 2}})
 ```
+
+Note on collation: it can be set when creating the collection - there are a bunch of [operations that support collation](https://docs.mongodb.com/manual/reference/collation/#operations-that-support-collation)
