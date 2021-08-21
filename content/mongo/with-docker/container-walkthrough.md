@@ -26,7 +26,14 @@ docker exec -it mongo-box bash
 ## Moving Data Out
 
 Here, the mongo container will leverage data outside of itself.
+By default, mongo looks to a specific directory on whatever machine it is running on to store data on: `/data/db`.
+
+- Pick a data directory on the host machine (_the laptop_)
+- get the absolute path to the directory
+- ensure the permissions are such that the directory is accessible by docker (_this won't cover the directory permissioning & assumes the directory is allowed to be read/written by docker_)
 
 ```bash
 docker run --name dataless-mongo -v /my/own/datadir:/data/db -d mongo
 ```
+
+- the `-v` flag is telling the container to `use /my/own/datadir where the internals of the container references /data/db`.
