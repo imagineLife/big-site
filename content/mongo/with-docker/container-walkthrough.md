@@ -37,3 +37,5 @@ docker run --name dataless-mongo -v /my/own/datadir:/data/db -d mongo
 ```
 
 - the `-v` flag is telling the container to `use /my/own/datadir where the internals of the container references /data/db`.
+
+docker run --name dataless-mongo -v mongo-data:/data/db -d mongo
