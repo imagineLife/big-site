@@ -43,7 +43,8 @@ docker run --name dataless-mongo -v mongo-data:/data/db -d mongo:5.0.2
 ## Allow cli access from the host machine
 
 With a host machine running a "closed" instance of mongo, the container inner mongo instance is not currently accessible through the host machine cli directly.  
-Here, The mongo container will be accessible from the host machine by adding a flag to the docker cli start command.
+Here, The mongo container will be accessible from the host machine by adding a flag to the docker cli start command.  
+port `27017` is the default port that mongo uses. Here, we are mapping the container port to the host machine port to match, so that the mongo cli on the host, which ALSO is looking to use the default port, gains access to the mongod in the container through the default port.
 
 ```bash
 docker run --name dataless-and-accessible-mongo -v mongo-data:/data/db -p 27017:27017 -d mongo:5.0.2
