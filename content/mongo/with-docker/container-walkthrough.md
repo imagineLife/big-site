@@ -33,9 +33,18 @@ By default, mongo looks to a specific directory on whatever machine it is runnin
 - ensure the permissions are such that the directory is accessible by docker (_this won't cover the directory permissioning & assumes the directory is allowed to be read/written by docker_)
 
 ```bash
-docker run --name dataless-mongo -v /my/own/datadir:/data/db -d mongo
+docker run --name dataless-mongo -v /my/own/datadir:/data/db -d mongo:5.0.2
 ```
 
 - the `-v` flag is telling the container to `use /my/own/datadir where the internals of the container references /data/db`.
 
-docker run --name dataless-mongo -v mongo-data:/data/db -d mongo
+docker run --name dataless-mongo -v mongo-data:/data/db -d mongo:5.0.2
+
+## Allow cli access from the host machine
+
+With a host machine running a "closed" instance of mongo, the container inner mongo instance is not currently accessible through the host machine cli directly.  
+Here, The mongo container will be accessible from the host machine by adding a flag to the docker cli start command.
+
+```bash
+docker run --name dataless-and-accessible-mongo -v mongo-data:/data/db -p 27017:27017 -d mongo:5.0.2
+```
