@@ -2,6 +2,7 @@
 
 - [The First Mongo Box](#the-first-mongo-container)
 - [Moving The Data out of The Container](#moving-data-out)
+- [Allow cli access from the host machine](#allow-cli-access-from-the-host-machine)
 
 ## The First Mongo Container
 
@@ -49,3 +50,25 @@ port `27017` is the default port that mongo uses. Here, we are mapping the conta
 ```bash
 docker run --name dataless-and-accessible-mongo -v mongo-data:/data/db -p 27017:27017 -d mongo:5.0.2
 ```
+
+## Including a db admin user
+
+THE PROBLEM: Setting up mongo _without a root user_ means that any connection to the db can make any changes to the db. Since dbs hold super sensitive data, creating users that have explicit permission will be an effective way to restrict connections to the db from making undesired changes.  
+A SOLUTION: Here, a root user to the db is created. This is a first layer of protection against unwanted connections to the db.  
+Here, a user is created in the default `admin` db with the `root` role. This is the most authorized user that mongo offers as a [default user/role combo](https://docs.mongodb.com/manual/reference/built-in-roles/).  
+Also, the friendly name of the container is being adjusted to `mongo-box`.  
+**NOTE**: This first method of creating an admin user will only work on db creation. This will not work once the db has already been created. In order to create an admin user with an already-running database, the 2nd option will work.
+
+### On Database Creation
+
+```bash
+docker run --name mongo-box -v mongo-data:/data/db -p 27017:27017 -d -e MONGO_INITDB_ROOT_USERNAME=apple -e MONGO_INITDB_ROOT_PASSWORD=pie mongo:5.0.2
+```
+
+Now, in order to connect as this new root user, a new set of params is needed from the mongo cli
+
+```bash
+mongo --username rootuser --password rootuserpassword --authenticationDatabase admin
+```
+
+### With a Database already existing
