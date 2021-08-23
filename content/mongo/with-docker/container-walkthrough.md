@@ -103,3 +103,37 @@ db.createUser({
 })
 
 ```
+
+## Including a UserAdmin User
+
+As the [Mongo Docs say](https://docs.mongodb.com/manual/reference/built-in-roles/), this built-in `userAdmin` role
+
+- gives ability to CRUD roles + users on the given db
+- grants ANY privilege to ANY user (..._including themselves!_), practically giving `superuser` access to the given db
+- when this `userAdmin` role is scoped to the `admin` db, this user has the `superuser` access to a CLUSTER
+
+```bash
+use admin
+
+db.createUser({
+  user: "user_administrator",
+  pwd: "i_admin_users",
+  roles: [
+    { db: "admin", role: "userAdmin" }
+  ]
+})
+```
+
+this `userAdmin`role can...
+
+- changeCustomData
+- changePassword
+- createRole
+- createUser
+- dropRole
+- dropUser
+- grantRole
+- revokeRole
+- setAuthenticationRestriction
+- viewRole
+- viewUser
