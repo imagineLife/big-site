@@ -80,3 +80,26 @@ Here, a container will be started without the admin username + password:
 ```bash
 docker run --name mongo-box -v ${PWD}/mongo-data:/data/db -p 27017:27017 -d mongo:5.0.2
 ```
+
+Once the container is up, connect to the container using the mongo cli from the host machine -
+
+```bash
+mongo
+```
+
+Once connected, use the `admin` db to create an admin user with `root` role -
+
+```bash
+use admin
+
+# switches to admin db
+
+db.createUser({
+  user: 'adminroot',
+  pwd: 'adminrootpw',
+  roles: [
+    { role: 'root', db: 'admin' }
+  ]
+})
+
+```
