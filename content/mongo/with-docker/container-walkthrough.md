@@ -124,16 +124,36 @@ db.createUser({
 })
 ```
 
-this `userAdmin`role can...
+See the [Mongo Docs](https://docs.mongodb.com/manual/reference/built-in-roles/#mongodb-authrole-userAdmin) for the permissions that this role is given!
 
-- changeCustomData
-- changePassword
-- createRole
-- createUser
-- dropRole
-- dropUser
-- grantRole
-- revokeRole
-- setAuthenticationRestriction
-- viewRole
-- viewUser
+## Building Custom Roles
+
+Custom roles can be built for more fine-tuned use cases. particularly scoped to specific db instances.
+
+### A Business Analytics Role
+
+Perhaps an application is built to provide business analytics to internal stakeholders. A role can be built specifically for this use-case, with limited read-only type permissions on specific database(s).
+
+```bash
+use admin
+
+db.createRole(
+  {
+    role: "businessAnalytics",
+    privileges: [
+      { resource: { db: "realworldDataDb", collection: "" }, actions: [ "find", "aggregate","count","distinct","listIndexes" ] }
+    ],
+    roles: []
+  },
+  { w: "majority" , wtimeout: 10000 }
+)
+
+```
+
+## Giving a user this role
+
+Here, take the `businessAnalytics` role && assign it to a user. Here, the user will be named `ba_application`:
+
+```bash
+db.grantRolesToUser('ba_application', ["businessAnalytics"])
+```
