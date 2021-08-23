@@ -62,13 +62,21 @@ Also, the friendly name of the container is being adjusted to `mongo-box`.
 ### On Database Creation
 
 ```bash
-docker run --name mongo-box -v mongo-data:/data/db -p 27017:27017 -d -e MONGO_INITDB_ROOT_USERNAME=apple -e MONGO_INITDB_ROOT_PASSWORD=pie mongo:5.0.2
+docker run --name mongo-box -v ${PWD}/mongo-data:/data/db -p 27017:27017 -d -e MONGO_INITDB_ROOT_USERNAME=apple -e MONGO_INITDB_ROOT_PASSWORD=pie mongo:5.0.2
 ```
 
 Now, in order to connect as this new root user, a new set of params is needed from the mongo cli
 
 ```bash
-mongo --username rootuser --password rootuserpassword --authenticationDatabase admin
+mongo --username apple --password pie --authenticationDatabase admin
 ```
 
 ### With a Database already existing
+
+**The Problem**: Mongo db already setup with no admin user.  
+**A Solution**: Add an admin user with the db already up && running.  
+Here, a container will be started without the admin username + password:
+
+```bash
+docker run --name mongo-box -v ${PWD}/mongo-data:/data/db -p 27017:27017 -d mongo:5.0.2
+```
