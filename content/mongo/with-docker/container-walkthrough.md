@@ -3,6 +3,8 @@
 - [The First Mongo Box](#the-first-mongo-container)
 - [Moving The Data out of The Container](#moving-data-out)
 - [Allow cli access from the host machine](#allow-cli-access-from-the-host-machine)
+- [Including some db users and roles](#including-some-db-users-and-roles)
+- [Leveraging a config file](#leveraging-a-config-file)
 
 ## The First Mongo Container
 
@@ -51,7 +53,9 @@ port `27017` is the default port that mongo uses. Here, we are mapping the conta
 docker run --name dataless-and-accessible-mongo -v mongo-data:/data/db -p 27017:27017 -d mongo:5.0.2
 ```
 
-## Including a db admin user
+## Including some db users and roles
+
+### A db admin user
 
 THE PROBLEM: Setting up mongo _without a root user_ means that any connection to the db can make any changes to the db. Since dbs hold super sensitive data, creating users that have explicit permission will be an effective way to restrict connections to the db from making undesired changes.  
 A SOLUTION: Here, a root user to the db is created. This is a first layer of protection against unwanted connections to the db.  
@@ -59,7 +63,7 @@ Here, a user is created in the default `admin` db with the `root` role. This is 
 Also, the friendly name of the container is being adjusted to `mongo-box`.  
 **NOTE**: This first method of creating an admin user will only work on db creation. This will not work once the db has already been created. In order to create an admin user with an already-running database, the 2nd option will work.
 
-### On Database Creation
+#### On Database Creation
 
 ```bash
 docker run --name mongo-box -v ${PWD}/mongo-data:/data/db -p 27017:27017 -d -e MONGO_INITDB_ROOT_USERNAME=apple -e MONGO_INITDB_ROOT_PASSWORD=pie mongo:5.0.2
@@ -71,7 +75,7 @@ Now, in order to connect as this new root user, a new set of params is needed fr
 mongo --username apple --password pie --authenticationDatabase admin
 ```
 
-### With a Database already existing
+#### With a Database already existing
 
 **The Problem**: Mongo db already setup with no admin user.  
 **A Solution**: Add an admin user with the db already up && running.  
@@ -104,7 +108,7 @@ db.createUser({
 
 ```
 
-## Including a UserAdmin User
+### Including a UserAdmin User
 
 As the [Mongo Docs say](https://docs.mongodb.com/manual/reference/built-in-roles/), this built-in `userAdmin` role
 
@@ -126,11 +130,11 @@ db.createUser({
 
 See the [Mongo Docs](https://docs.mongodb.com/manual/reference/built-in-roles/#mongodb-authrole-userAdmin) for the permissions that this role is given!
 
-## Building Custom Roles
+### Building Custom Roles
 
-Custom roles can be built for more fine-tuned use cases. particularly scoped to specific db instances.
+Custom roles can be built for more fine-tuned use cases, scoped particularly to specific db instances.
 
-### A Business Analytics Role
+#### A Business Analytics Role
 
 Perhaps an application is built to provide business analytics to internal stakeholders. A role can be built specifically for this use-case, with limited read-only type permissions on specific database(s).
 
@@ -150,10 +154,22 @@ db.createRole(
 
 ```
 
-## Giving a user this role
+### Giving a user this role
 
 Here, take the `businessAnalytics` role && assign it to a user. Here, the user will be named `ba_application`:
 
 ```bash
 db.grantRolesToUser('ba_application', ["businessAnalytics"])
+```
+
+## Leveraging A Config File
+
+This will take a few steps
+
+- create a config file
+- mount the config file to the default config file location of the mongo instance
+  - mongo looks, as a default, to `/etc/mongod.conf` for the configuration file to use, so below mounts a host-machine config file to that directory
+
+```bash
+docker run -d --name mongo-box -v ${PWD}/mongo-data/node1.conf:/etc/mongod.conf -v ${PWD}/mongo-data/mock-data:/data/db -e MONGO_INITDB_ROOT_USERNAME=apple -e MONGO_INITDB_ROOT_PASSWORD=pie mongo:5.0.2
 ```
