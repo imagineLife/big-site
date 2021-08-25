@@ -28,6 +28,7 @@ const Index = () => {
           {/* <Link to="/node">Node</Link> */}
           {/* <Link to="/frontend">React & Frontend Skills</Link> */}
           {/* <Link to="">Developing Engineer Competencies toward career growth</Link> */}
+          <Link to="/mongo">MongoDB</Link>
           <Link to="/recipes">Making Food</Link>
         </section>
       </Layout>
