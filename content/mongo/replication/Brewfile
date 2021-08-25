@@ -1,0 +1,16 @@
+tap "heroku/brew"
+tap "homebrew/bundle"
+tap "homebrew/core"
+tap "homebrew/services"
+tap "mongodb/brew"
+brew "libyaml"
+brew "node"
+brew "pyenv"
+brew "python@3.9", link: false
+brew "ruby-build"
+brew "rbenv"
+brew "ruby", link: true
+brew "yarn", args: ["without-node"]
+brew "heroku/brew/heroku"
+brew "mongodb/brew/mongodb-community"
+brew "mongodb/brew/mongodb-community-shell", link: false
