@@ -191,8 +191,10 @@ Here's a command-by-command breakdown of the docker run command
 
 - `-d` flag runs in the bg
 - `--name mongo-box-one` assigns mongo-box-one as the friendly name of the docker container
-- `-v \${PWD}/node1.conf:/etc/mongod.conf` maps a config file from outside the container, named `node1.conf`, to the default config file inside the container at `/etc/mongod.conf`. Now, the mongod instance uses the config file from outside the container as its config.
-- `-v \${PWD}/mongo-data/mongod.log:/mongod.log` maps a logfile on the host to a logfile in the container. Note, the logfile path in the container is different than the default location
+- `-v ${PWD}/node1.conf:/etc/mongod.conf` maps a config file from outside the container, named `node1.conf`, to the default config file inside the container at `/etc/mongod.conf`. Now, the mongod instance uses the config file from outside the container as its config.
+- `-v ${PWD}/mongo-data/mongod.log:/mongod.log` maps a logfile on the host to a logfile in the container. Note, the logfile path in the container is different than the default location && is adjusted in the yaml config file
 - `-v ${PWD}/mongo-data/mongodOne:/data/db` maps a data storage file, at `${PWD}/mongo-data/mongodOne` to the default data directory in the container. Now, the mongod instance uses an external directory to hold the data, rather than holding the data in the container.
 - `-e MONGO_INITDB_ROOT_USERNAME=apple -e MONGO_INITDB_ROOT_PASSWORD=pie` enables auth on the admin db with a root user, with username `apple` and pw `pie`
-- `27000:27017` tells docker to take the default port that mongod uses in the container, `27017`, and map that port to a port in the host at `27000`. This makes mongo accessible from the host machine
+- `-p 27000:27017` tells docker to take the default port that mongod uses to serve the mongod instance in the container, `27017`, and map that port to a port in the host at `27000`. This makes mongo accessible from the host machine on port 27000
+- `mongo:5.0.2` tells docker to run a container that is tagged as `mongo:5.0.2`. Here, a mongo container with a specific version is used
+- `--config /etc/mongod.conf` tells mongod to use a config file at the path of `/etc/mongod.conf`. This tells the mongod instance inside the docker container to use this config file. this works in combination with one of the volume mount commands noted above, telling docker to mount an external config file to the in-container config file location, effectively leveraging a config file outside of the container.
