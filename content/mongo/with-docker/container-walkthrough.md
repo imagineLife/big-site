@@ -182,7 +182,6 @@ systemLog:
 
 ```bash
 docker run -d --name mongo-box-one -v ${PWD}/node1.conf:/etc/mongod.conf -v ${PWD}/mongo-data/mongod.log:/mongod.log -v ${PWD}/mongo-data/mongodOne:/data/db -e MONGO_INITDB_ROOT_USERNAME=apple -e MONGO_INITDB_ROOT_PASSWORD=pie -p 27000:27017 mongo:5.0.2 --config /etc/mongod.conf
-
 ```
 
 ### Config and CLI Overview
