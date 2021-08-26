@@ -164,12 +164,27 @@ db.grantRolesToUser('ba_application', ["businessAnalytics"])
 
 ## Leveraging A Config File
 
-This will take a few steps
+This will take a few steps.  
+Prereq: run this from a directory path where a directory exists in the same directory path called `mongo-data`. inside `mongo-data` store another directory called `mongodOne`. inside `mongodOne` add a file called `mongod.log`
 
 - create a config file
 - mount the config file to the default config file location of the mongo instance
   - mongo looks, as a default, to `/etc/mongod.conf` for the configuration file to use, so below mounts a host-machine config file to that directory
 
+an example mongo config file could be
+
+```yaml
+storage:
+  dbPath: mongo-data/mongodOne
+net:
+  bindIp: localhost
+  port: 27017
+systemLog:
+  destination: file
+  path: mongo-data/mongodOne/mongod.log
+  logAppend: true
+```
+
 ```bash
-docker run -d --name mongo-box -v ${PWD}/mongo-data/node1.conf:/etc/mongod.conf -v ${PWD}/mongo-data/mock-data:/data/db -e MONGO_INITDB_ROOT_USERNAME=apple -e MONGO_INITDB_ROOT_PASSWORD=pie mongo:5.0.2
+docker run -d --name mongo-box-one -v ${PWD}/node1.conf:/etc/mongod.conf -v ${PWD}/mongo-data/mongodOne:/data/db -e MONGO_INITDB_ROOT_USERNAME=apple -e MONGO_INITDB_ROOT_PASSWORD=pie -p 27000:27017 mongo:5.0.2
 ```
