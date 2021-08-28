@@ -27,10 +27,14 @@ Mongo uses BSON instead of JSON for a few reasons:
 
 ### on CRUD
 
-The `_id` field is immutable. A doc with `_id: 432` cannot be updated to a doc with a different `_id`.
+**ID Included in writes & non-immutable**  
+The `_id` field is immutable. A doc with `_id: 432` cannot be updated to a doc with a different `_id`.  
+Inserting a doc in a collection always includes the `_id` field. When the developer does not include an `_id` field/value, mongo auto-creates one.
 
+**Array Slice**  
 The `$slice` projection specifies how many elements of an arr are returned after fetching data.
 
+**Array addToSet**  
 The [`$addToSet`](https://docs.mongodb.com/manual/reference/operator/update/addToSet/) operator will not add an item to an arr if the item is already present in an arr. Example
 
 ```bash
@@ -44,8 +48,10 @@ db.ab.updateMany( { "city" : "Hartford", "state" : "CT" }, { "$addToSet" : { "ho
 
 ```
 
+**Write Concerns**  
 Write concerns don't work with read operations. Write concerns work with write operations.
 
+**Or Operator**  
 The [\$or operator](https://docs.mongodb.com/manual/reference/operator/query/or/) selects from 2 options. Here is an example `$or` query:
 
 ```bash
@@ -70,6 +76,7 @@ This would select things like...
 {a:17, c:1, b:1}
 ```
 
+**Text Indexes**  
 [Text indexes](https://docs.mongodb.com/manual/core/index-text/) work in all-inclusive selections.  
 A query like
 
@@ -85,8 +92,6 @@ will select results like
 ```
 
 The search will find results that include any of the words in the `$search` string.
-
-Inserting a doc in a collection always includes the `_id` field. When the developer does not include an `_id` field/value, mongo auto-creates one.
 
 ### Data and Data Modeling
 
