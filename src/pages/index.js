@@ -8,7 +8,7 @@ import Hero from './../components/hero';
 // import PostPreview from './../components/PostPreview';
 
 // helper fns
-// import getPosts from './../hooks/get-posts';
+// import getPosts from './../hooks/get-misc';
 
 const Index = () => {
   //   const blogPosts = getPosts();
@@ -30,6 +30,7 @@ const Index = () => {
           {/* <Link to="">Developing Engineer Competencies toward career growth</Link> */}
           <Link to="/mongo">MongoDB</Link>
           <Link to="/recipes">Making Food</Link>
+          <Link to="/misc">Miscellaneous</Link>
         </section>
       </Layout>
     </Fragment>
