@@ -4,6 +4,7 @@
 
 To maintain high availability & accommodate for server failure, use `Replication`.
 
+**Atomic Updates**  
 Many update types are [atomic](https://docs.mongodb.com/manual/core/write-operations-atomicity/) in mongo:
 
 - a single doc in a replica set
@@ -12,6 +13,7 @@ Many update types are [atomic](https://docs.mongodb.com/manual/core/write-operat
 - updates to multiple docs in a sharded cluster, through a `transaction`
 - NOTE: updates to multiple docs in a sharded cluster, without a transaction are NOT atomic
 
+**BSON**  
 There are many valid [BSON](https://docs.mongodb.com/manual/reference/bson-types/) types:
 
 - Int64
