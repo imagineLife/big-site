@@ -1,16 +1,15 @@
 ---
-title: Becoming A Well-Rounded Web-Based Software Engineer
-slug: misc/becoming-well-rounded
+title: Web-Based Software Beyond The Frontend
+slug: misc/beyond-the-frontend
 author: Jake Laursen
-excerpt: From a Frontend-First perspective
+excerpt: technology topics including & beyond the frontend
 tags: work, growth, topics, engineering
 parentDir: misc
 order: 1
 ---
 
-# Becoming A Well-Rounded Web-Based Software Engineer
+# Web-Based Software Beyond The Frontend
 
-From a Frontend-First Perspective.  
 Here, a list of topics to cover while developing into a well-rounded developer.
 
 ## Frontend
