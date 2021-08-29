@@ -36,7 +36,7 @@ const IndexPage = () => (
           <Layout>
             <section className="toc-wrapper">
               <h1>Scrum</h1>
-              <p class="subtitle">A Brief collection of writings</p>
+              <p className="subtitle">A Brief collection of writings</p>
               {pages.map(
                 (
                   {
