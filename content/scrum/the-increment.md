@@ -10,6 +10,13 @@ order: 7
 
 # Iterations, Increments & Releases
 
+- [Iterations, Increments & Releases](#iterations-increments--releases)
+  - [Big Ideas Take Big Time](#big-ideas-take-big-time)
+  - [Trade The Long Wait For Releasable Value](#trade-the-long-wait-for-releasable-value)
+  - [Release The First Increment](#release-the-first-increment)
+  - [Include Processes to Protect The Increment](#include-processes-to-protect-the-increment)
+    - [Protect Team Focus](#protect-team-focus)
+
 ## Big Ideas Take Big Time
 
 **Sometimes we have amazing ideas** that we are willing to invest a lot of time & energy into without seeing the completed product. We all know that some of our greatest ideas will take some time to organize, to execute on day in & day out, to put the finishing nuts & bolts into, to buff out imperfections that came about along the way, and to put on the showroom floor as maybe the pinnacle representation of our work, our time, our blood, sweat and tears.
