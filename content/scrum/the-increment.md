@@ -12,9 +12,9 @@ order: 7
 
 ## Big Ideas Take Big Time
 
-**Sometimes we have amazing ideas** that we are willing to invest a lot of time & energy into without seeing the completed product. We all know that some of our greatest ideas will take some time to put together some sheet metal and inner workings, to execute on day in & day out, to put the finishing nuts & bolts into, to buff out all the imperfections that came about along the way, and to put on the showroom floor as maybe the pinnacle representation of our work, our time, our blood, sweat and tears.
+**Sometimes we have amazing ideas** that we are willing to invest a lot of time & energy into without seeing the completed product. We all know that some of our greatest ideas will take some time to organize, to execute on day in & day out, to put the finishing nuts & bolts into, to buff out imperfections that came about along the way, and to put on the showroom floor as maybe the pinnacle representation of our work, our time, our blood, sweat and tears.
 
-**The inherent problem with big ideas and big time** is that the time between ideation to release may be long. Uncomfortably long.
+**The inherent problem with big ideas and big time** is that the time between ideation to release may be long. Uncomfortably long, for some.
 
 This is a familiar problem to an innovative product-building organization, both for realizing idea development as well as releasing value.
 
