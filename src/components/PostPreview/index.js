@@ -4,7 +4,8 @@ import { Link } from 'gatsby';
 import GatsbyImage from 'gatsby-image';
 
 const PostPreview = ({ title, slug, excerpt, coverImage, coverAlt }) => {
-  const slugString = slug; //.includes('strength')
+  const slugString = slug.charAt(0) === '/' ? slug : `/${slug}`;
+
   // ? slug.replace('strengths/', '')
   // : slug;
   return (
