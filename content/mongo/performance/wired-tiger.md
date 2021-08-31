@@ -46,6 +46,12 @@ Next, somehow, WiredTiger also validates the new checkpoint is accessible. Once 
 ## Journaling
 
 WiredTiger uses the above checkpoint mechanism as one way of ensuring data durability.  
-WiredTiger also uses a [write-ahead log](https://en.wikipedia.org/wiki/Write-ahead_logging) to provide atomicity and durability.  
+WiredTiger also uses a [write-ahead log](https://en.wikipedia.org/wiki/Write-ahead_logging) (WAL/journal) to provide atomicity and durability.  
 Changes to a db first get recorded in a log.  
 The log gets written before changes are made to the db.
+The WAL/journal persists data between checkpoints.
+
+### Mongo Using the Journal
+
+One way MongoDB can use this wiredTiger journal is to recover data states between saved checkpoints.  
+If Mongo Exits between checkpoints, Mongo uses this WAL/journal to "replay" all data mods since the last saved/known checkpoint.
