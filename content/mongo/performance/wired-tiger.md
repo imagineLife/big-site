@@ -55,3 +55,13 @@ The WAL/journal persists data between checkpoints.
 
 One way MongoDB can use this wiredTiger journal is to recover data states between saved checkpoints.  
 If Mongo Exits between checkpoints, Mongo uses this WAL/journal to "replay" all data mods since the last saved/known checkpoint.
+
+#### The Journal is Compressed
+
+The [snappy](<https://en.wikipedia.org/wiki/Snappy_(compression)>) library is used to compress the logs. This used to be called Zippy. This is written in C++ by Google && was open-sourced in 2011. Snappys "aim" is speed over maximum compression.
+
+### Journaling during data recovery
+
+- Find the ID of the last checkpoint
+- Search the journal files for records that _match_ the ID of the last checkpoint
+- apply operations found in the journal that are _after_ the last checkpoint data
