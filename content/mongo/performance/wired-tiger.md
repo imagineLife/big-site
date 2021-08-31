@@ -42,3 +42,10 @@ Next, somehow, WiredTiger also validates the new checkpoint is accessible. Once 
 ## MongoDB recommends journaling
 
 [Using WiredTiger, even without journaling, MongoDB can recover from the last checkpoint; however, to recover changes made after the last checkpoint, run with journaling.](https://docs.mongodb.com/manual/core/wiredtiger/#snapshots-and-checkpoints)
+
+## Journaling
+
+WiredTiger uses the above checkpoint mechanism as one way of ensuring data durability.  
+WiredTiger also uses a [write-ahead log](https://en.wikipedia.org/wiki/Write-ahead_logging) to provide atomicity and durability.  
+Changes to a db first get recorded in a log.  
+The log gets written before changes are made to the db.
