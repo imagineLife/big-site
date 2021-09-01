@@ -45,4 +45,21 @@ Some of the differences between the two configs above, the top being for a mongo
 
 - **data storage**: the (_bottom config_) host machine mongodb instance talks directly to a data directory (_data_) whereas the docker config makes mongo use the default data dir && the docker config, itself, dictates a volume mapping to the host machine
 - **security**: the (_bottom config_) host machine mongodb instance has security enabled whereas the top docker instance, again, leverages the docker config to setup auth on container startup
-- **rando**: the (_bottom config_) host machine mongodb instance has an explicit security keyfile, systemLog mapping, forking process management, and replica-set member declaration. These things will be explored and expressed in a replica-set-across-containers.
+- **rando**: the (_bottom config_) host machine mongodb instance has an explicit security keyfile, systemLog mapping, forking process management, and replica-set member declaration. These things will be explored and expressed in a replica-set-X
+
+### Creating a keyfile
+
+THis will authenticate each replica-set-member to one-another.
+
+```bash
+openssl rand -base64 741 > /var/mongodb/pki/m103-keyfile
+```
+
+### Enable replication
+
+the bottom 2 lines of the host machine config, above, enables the mongodb instance to be part of a replica set when the time comes.
+
+```yaml
+replication:
+  replSetName: data-repl
+```
