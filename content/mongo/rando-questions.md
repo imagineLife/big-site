@@ -103,9 +103,9 @@ Mongo can represent data relationships like
 
 When considering the data model
 
-- consider the access pattern: what are the common queries being used?
-- consider growth of embedded docs - these should not grow to infinity
-- don't worry about data de-duplication - mongo can use data duplication to the advantage of the system
+- consider the **access pattern**: what are the common queries being used?
+- consider **growth of embedded docs** - these should not grow to infinity
+- **don't worry about data de-duplication** - mongo can use data duplication to the advantage of the system
 
 ### Performance and Indexing
 
