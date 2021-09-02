@@ -18,7 +18,7 @@ order: 8
 # On Advocacy
 
 Scrum needs a champion in order for an org and the scrum team(s) to adopt the values, artifacts and practices.  
-On paper, the Scrum Master fills this role. The Scrum Master can be empowered to facilitate advocacy, education, and process review sessions to both the Scrum Team as well as those outside the scrum team - stakeholders, C-Suite folks, other teams, etc.
+On paper, the Scrum Master fills this role. The Scrum Master can be empowered to facilitate advocacy, education, and process review sessions to both the Scrum Team as well as those outside the scrum team - stakeholders, C-Suite folks, other teams, etc. In the scrum framework, these sessions might fit easily into the sprint retrospective.
 
 ## Advocacy for the Scrum Team
 
@@ -42,9 +42,17 @@ For developers, scrum is an **empowering process framework** for devs to do what
 
 #### Events that Empower
 
-**The Sprint** identifies scope-creep, a complication that devs are familiar with. The Sprint is a process reminder that the whole world does not beed to be fixed, or updated, or or built within a few weeks.  
-**Sprint Planning** carves out some specific space to translate business needs & priorities to the devs. This reserves non-dev efforts to a small part of the devs work, making the super majority of dev time directed toward developing software.  
-**Sprint Review** is the feedback loop where the dev efforts are shown back to others. Sprint Review reminds devs that their after putting their heads down and updating code logic, that their work matters to the broader org and to the consumer(s) of the product(s).  
-**The Daily Scrum** is for the devs to have a formal touch-point to communicate where everyone is at in regards to the Goal of the Sprint. The daily meeting can be a place where extroverts shine. The daily meeting can be the place where introverts are sharing pre-planned communication points to the team. This meeting
+Some of the goals of these meetings might happen outside of the prescribed scheduling of the meetings.  
+Making these events scheduled ensures that the goals of each event have a place in the ongoing rhythm of the team.
+
+**The Sprint** identifies scope-creep, a complication that devs are familiar with. The Sprint is a process reminder that the whole world does not beed to be fixed, or updated, or or built within a few weeks.
+
+**Sprint Planning** carves out some specific space to translate business needs & priorities to the devs. This reserves non-dev efforts to a small part of the devs work, making the super majority of dev time directed toward developing software.
+
+**Sprint Review** is the feedback loop where the dev efforts are shown back to others. Sprint Review reminds devs that their after putting their heads down and updating code logic, that their work matters to the broader org and to the consumer(s) of the product(s).
+
+**The Daily Scrum** is for the devs to have a formal touch-point to communicate where everyone is at in regards to the Goal of the Sprint. The daily meeting can be a place where extroverts shine. The daily meeting can be the place where introverts are sharing pre-planned communication points to the team.
+
+**The Sprint Retrospective** is the team-reflection where devs can figure out how they can work as team better and also celebrate jobs well done. Having this space reserved can keep the whole team involved.
 
 ## Advocacy for those Outside The Scrum Team
