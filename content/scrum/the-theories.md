@@ -30,7 +30,7 @@ Instead, we will know about these things through our observations of ourselves, 
 
 Lean thinking is all about maximizing value and minimizing waste. In an org, this could look like refocusing _from_ individual elements or departments or technologies _to_ releasing a wholistic end-to-end value 'stream', no matter how small and incomplete each piece might seem compared to each of it's parts.
 
-### Incrementality is key
+### Incrementalism is key
 
 Small steps improve predictability. Small releases of value-added elements provide more value than larger long-term complications that have a growing number of 'unknowns' as the project develops.
 
