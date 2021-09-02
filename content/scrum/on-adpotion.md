@@ -34,6 +34,12 @@ For developers, scrum is an **empowering process framework** for devs to do what
 
 **The Sprint Backlog** keeps the work in focus. Devs can use this list to protect their efforts from over-work, misguided expectations.
 
+**The Scrum Guide** is readily available for folks in the team who might be curious about the process.
+
+**The Definition of Done** is an agreed-upon set of expectations that the team can lean together. This can be used to be a guide for agreeing on work for a sprint - "will this be able to meet the definition of done by the end of sprint?". This can be used to be a guide for timeline estimations - "How long will it take us to take this business goal and make it meet our definition of done?".
+
+**The Increment** is a tangible "done" part of work that devs should be proud of.
+
 #### Events that Empower
 
 **The Sprint** identifies scope-creep, a complication that devs are familiar with. The Sprint is a process reminder that the whole world does not beed to be fixed, or updated, or or built within a few weeks.  
