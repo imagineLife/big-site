@@ -1,5 +1,12 @@
 # Setting Up a Replica Set using Docker
 
+- [Setting Up a Replica Set using Docker](#setting-up-a-replica-set-using-docker)
+  - [Overview](#overview)
+  - [The Config Files](#the-config-files)
+    - [Creating a keyfile](#creating-a-keyfile)
+    - [Enable replication](#enable-replication)
+    - [Setting up Three mongod instances](#setting-up-three-mongod-instances)
+
 ## Overview
 
 Here, a replica set will be setup.  
@@ -57,9 +64,24 @@ openssl rand -base64 741 > /var/mongodb/pki/m103-keyfile
 
 ### Enable replication
 
-the bottom 2 lines of the host machine config, above, enables the mongodb instance to be part of a replica set when the time comes.
+the bottom 2 lines of the host machine config, above, enables the mongodb instance to be part of a replica set when the time comes to link them together.
 
 ```yaml
 replication:
   replSetName: data-repl
 ```
+
+[This replication config option](https://docs.mongodb.com/manual/reference/configuration-options/#replication-options) will be added to the simpler config from above, to result in this:
+
+```yaml
+systemLog:
+  destination: file
+  path: /mongod.log
+  logAppend: true
+replication:
+  replSetName: data-repl
+```
+
+### Setting up Three mongod instances
+
+Here
