@@ -11,6 +11,8 @@ order: 8
 - [On Advocacy](#on-advocacy)
   - [Advocacy for the Scrum Team](#advocacy-for-the-scrum-team)
     - [Scrum as the empowerment tool for devs](#scrum-as-the-empowerment-tool-for-devs)
+      - [Artifacts that Empower](#artifacts-that-empower)
+      - [Events that Empower](#events-that-empower)
   - [Advocacy for those Outside The Scrum Team](#advocacy-for-those-outside-the-scrum-team)
 
 # On Advocacy
@@ -24,10 +26,19 @@ The Developers don't need to focus on details of Scrum. Developers focus is to d
 
 ### Scrum as the empowerment tool for devs
 
-For developers, scrum is an **empowering process framework** for devs to do what they do best. In a SaaS org, this means build software.  
+For developers, scrum is an **empowering process framework** for devs to do what they do best. In a SaaS org, this means build software.
+
+#### Artifacts that Empower
+
+**The Sprint Goal** keeps a "bigger goal" in mind. Devs can come up with all kinds of hopeful improvements, re-writes, and enhancements, and the sprint goal can be the "north star" that the devs refer to when debating about when & how to implement code changes in regards to the business-friendly goals of the sprint.
+
+**The Sprint Backlog** keeps the work in focus. Devs can use this list to protect their efforts from over-work, misguided expectations.
+
+#### Events that Empower
+
 **The Sprint** identifies scope-creep. The Sprint is a process reminder that the whole world does not beed to be fixed, updated, or built, within a few weeks.  
 **Sprint Planning** carves out some specific space to translate business needs & priorities to the devs. This reserves non-dev efforts to a small part of the devs work, making the super majority of dev time directed toward developing software.  
 **Sprint Review** is the feedback loop where the dev efforts are shown back to others. Sprint Review reminds devs that their after putting their heads down and updating code logic, that their work matters to the broader org and to the consumer(s) of the product(s).  
-**The Daily Scrum** is for the devs to have a formal touch-point to communicate where everyone is at in regards to the Goal of the Sprint.
+**The Daily Scrum** is for the devs to have a formal touch-point to communicate where everyone is at in regards to the Goal of the Sprint. The daily meeting can be a place where extroverts shine. The daily meeting can be the place where introverts are sharing pre-planned communication points to the team. This meeting
 
 ## Advocacy for those Outside The Scrum Team
