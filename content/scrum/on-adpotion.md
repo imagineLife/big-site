@@ -36,7 +36,7 @@ For developers, scrum is an **empowering process framework** for devs to do what
 
 #### Events that Empower
 
-**The Sprint** identifies scope-creep. The Sprint is a process reminder that the whole world does not beed to be fixed, updated, or built, within a few weeks.  
+**The Sprint** identifies scope-creep, a complication that devs are familiar with. The Sprint is a process reminder that the whole world does not beed to be fixed, or updated, or or built within a few weeks.  
 **Sprint Planning** carves out some specific space to translate business needs & priorities to the devs. This reserves non-dev efforts to a small part of the devs work, making the super majority of dev time directed toward developing software.  
 **Sprint Review** is the feedback loop where the dev efforts are shown back to others. Sprint Review reminds devs that their after putting their heads down and updating code logic, that their work matters to the broader org and to the consumer(s) of the product(s).  
 **The Daily Scrum** is for the devs to have a formal touch-point to communicate where everyone is at in regards to the Goal of the Sprint. The daily meeting can be a place where extroverts shine. The daily meeting can be the place where introverts are sharing pre-planned communication points to the team. This meeting
