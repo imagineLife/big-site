@@ -158,6 +158,9 @@ review the explain output a bit
 - the winning plan does an index scan
 - the winning plan looks at 1 doc
 
+When the query does NOT include the index, the collection gets scanned.  
+Slow.
+
 #### single field indexes with aggregate queries
 
 ```bash
@@ -352,3 +355,21 @@ Indexes can also only be made on secondary nodes, and the BI tools can run only 
 #### Skip monotonically growing fields
 
 With monotonically increasing data, the btree will probably become unbalanced. As the index grows, the btree with grow unevenly. Plus, old data may not be needed to be queried as often, so 'old' indexes may become unusable.
+
+## Indexes and dot notation
+
+```bash
+# add a doc to a collection with a sub-doc && 2 keys -
+db.examples.insertOne({_id: 0, sub: {indexed: "val-here", otherField: "otherVal"}})
+
+# specify the index on the subdoc
+db.examples.createIndex({"sub.indexed": 1})
+
+# example using the dot-notaion index
+db.examples.explain('executionStats').find({sub.indexed: 'val-here'})
+```
+
+- NEVER index on the field that "points to" a sub-doc
+  - like here the `sub`
+  - MUCH BETTER to use dot notation
+  - instead of indexing on more-than-one-field, use a compound index (_see elsewhere_)
