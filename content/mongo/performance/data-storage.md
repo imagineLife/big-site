@@ -10,15 +10,17 @@ There are data-management objects:
 - **indexes on collections**, on fields in docs
 - **documents**, atomic units of info, fields & values
 
-## dbpath content
+## on db startup
 
-Mongodb stores a bunch of docs on startup.  
-**\_mdb_catalog.wt**  
-Contains catalogue of collections & indexes that a particular mongod contains.  
-**indexes**  
-For each index, a new file exists.
+Many files are created.
 
-## Folder per db
+- for each collection wiredTiger writes an individual file
+- - for each index wiredTiger writes an individual file
+- **\_mdb_catalog.wt**, mongo db catalog
+  - contains catalog of all collections + indexes that the db contains
+- these files on startup are configurable...
+
+## Create a Folder per db
 
 can add a cli flag to change data storage
 
@@ -35,12 +37,21 @@ mongo hello --eval 'db.a.insert({a:1}, {writeConcern: {w:1, j:true}})'
 
 The dbpath will reveal different data organization, including a dir called `hello`, the new db. This `hello` dir contains a collection file and an index file.
 
-## data storage setup and performance
+- a `hello` directory
+  - the new db
+  - a new dir per db
+    - each of these db-specific dirs will contain
+      - unique files per collection
+      - unique files per index
 
-### Better io
+Why do this?!
 
-If several disks are present in the server, the dir-per-collection can enable better I/O paralellization.  
-Mongo creates symbolic links to mount-points on different physical drives. On read/write to/from db, most-likely we'll be using the index & data disks, allowing for paralellization by sharing the workload across 2 data stores.
+### Better io and parallelization
+
+When several hard-disks are present in the server, the dir-per-collection can enable better I/O **paralellization**.  
+Mongo creates symbolic links to mount-points on different physical drives.  
+On read/write to/from db, most-likely we'll be using the index & data disks, allowing for parallelization by sharing the workload across 2 data stores.
+Writes will write to the data AND index at the same time.
 
 ### Can include compression
 
