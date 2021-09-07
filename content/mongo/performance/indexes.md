@@ -26,14 +26,17 @@ Don't want too many "unnecessary" indexes.
 ## Single Field Indexes
 
 Simplest index.  
-Captures the keys on a single field
+Captures the keys on a single field.
 
 - can _find a single val_ of the indexed field
 - can _find a range of vals_ of the indexed field
 - can _find several distinct vals_ in a single query
-- can use dot notation to index sub-document fields
+- can _use dot notation_ to index sub-document fields
 
 ### A Query without Indexes
+
+Basically, a query without an index scans a whole collection.  
+A query WITH an index only scans the indexes, then based on the matching index results, pulls the data-by-index from the collection.
 
 ```bash
 db.people.find({ssn: "720-38-5636"}).explain("executionStats")
@@ -125,7 +128,8 @@ add an index to the people table on the `ssn` field.
 db.people.createIndex({ssn: 1})
 ```
 
-prepare an explain statement on the people collection
+prepare an explain statement on the people collection.
+This creates "an explainable object on the `people` collection".
 
 ```bash
 exp = db.people.explain("executionStats")
@@ -150,6 +154,9 @@ review the explain output a bit
 "totalKeysExamined" : 1,
 "totalDocsExamined" : 1,
 ```
+
+- the winning plan does an index scan
+- the winning plan looks at 1 doc
 
 #### single field indexes with aggregate queries
 
