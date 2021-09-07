@@ -178,6 +178,8 @@ perusing the explain output
   "totalDocsExamined" : 49,
 ```
 
+- examined 49 docs for 49 docs result... purf
+
 #### single field indexes with select set queries
 
 ```bash
