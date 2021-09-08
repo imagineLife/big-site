@@ -385,6 +385,8 @@ db.examples.explain('executionStats').find({sub.indexed: 'val-here'})
 
 ## Sorting and compound indexes
 
+### use all indexed keys
+
 Easiest & most straight-forward way to use compound indexes in a sort: use the index key pattern as the sort predicate
 
 ```bash
@@ -397,4 +399,42 @@ var ex = db.people.explain("executionStats")
 
 # simples leverage of compound index sorting
 ex.find({}).sort(indexObj)
+```
+
+### use an index prefix
+
+```bash
+# for THIS compound index
+var indexObj = {"job": 1, "employer": 1, "last_name":1, "first_name": 1}
+
+# there are a few index prefixes
+ipfx1 = {job:1}
+ipfx2 = {job:1, employer: 1}
+ipfx3 = {job:1, employer: 1, last_name: 1}
+
+# any of those used in a sort will use an index to sort!!
+
+# sorting with the SAME keys but OUT-OF-ORDER will NOT use the indexes:
+badSort = { employer:1, job: 1 }
+```
+
+### leverage indexes in sort when not in query
+
+```bash
+# this will STILL use an index to fetch the data
+# even though the FIND QUERY ITSELF doesn't use an index
+db.people.find({email:: "frank@gmail.com"}).sort({job: 1})
+```
+
+- returns 1 doc
+- index scan used for sorting
+- query LOOKS at all docs
+
+### spreading index prefixes across query and sort
+
+When the index prefixes are spread across the query && the sort, as long as they are in order, the query planner will leverage all indexes!
+
+```bash
+# WILL filter AND sort docs using indexes
+db.people.find({job: "therapist", employer: "the state"}).sort({last_name: 1})
 ```
