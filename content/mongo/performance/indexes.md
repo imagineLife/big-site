@@ -438,3 +438,29 @@ When the index prefixes are spread across the query && the sort, as long as they
 # WILL filter AND sort docs using indexes
 db.people.find({job: "therapist", employer: "the state"}).sort({last_name: 1})
 ```
+
+### sort direction across fields
+
+In order to walk the index backwards in a compound index, **all keys present in the sort** have to be either in original sort order or reversed.
+
+```bash
+# create indexes
+db.coll.createIndex({apple: 1, banana: -1, crunchy: 1})
+
+# USING THE INDEX
+var indexObj = {apple: 1, banana: -1, crunchy: 1}
+var revIdxObj = {apple: -1, banana: 1, crunchy: -1}
+
+# sortable with indexes
+# forward-walking indexes
+var yes1 = { apple: 1}
+var yes1B = { apple: 1, banana: -1}
+
+# backward-walking indexes
+var yes2 = { apple: -1}
+var yes2B = { apple: -1, banana: 1}
+
+# WILL NOT USE INDEX to sort and will cause an in-memory sort
+var badQ = {apple: -1, banana: -1}
+var badQTwo = {apple: 1, banana: 1}
+```
