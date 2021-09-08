@@ -12,7 +12,7 @@ Its the best qay to understand what is happening when a query is executed.
   - [How it works](#how-it-works)
   - [Passing Params to see more details](#passing-params-to-see-more-details)
   - [Notice memLimit and memUsage](#notice-memlimit-and-memusage)
-  - [Its output on a Sharded Clister](#its-output-on-a-sharded-clister)
+  - [Its output on a Sharded Cluster](#its-output-on-a-sharded-cluster)
 
 ## How it works
 
@@ -59,4 +59,19 @@ Some "simple math" can be used to consider maximum sorting abilities:
 - (b) the avg size of the docs
 - a \* b ~ total mem size being used by query
 
-## Its output on a Sharded Clister
+## Its output on a Sharded Cluster
+
+Setup a sharded cluster.  
+Add some data to a `people` collection in a db.
+
+A `find` query can be run against the `mongos` instance.
+
+- mongos sends query to each shard
+- each shard evaluates the query && selects a plan
+- the info gets re-aggregated on the mongos instance
+
+```bash
+db.people.find({last_name: "Johnson", "address.state": "New York"})).explain("executionStats")
+```
+
+In the output of the explain, the query description includes how each shard handles the query.
