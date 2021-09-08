@@ -439,6 +439,9 @@ When the index prefixes are spread across the query && the sort, as long as they
 db.people.find({job: "therapist", employer: "the state"}).sort({last_name: 1})
 ```
 
+The query has to precede the sort.  
+Tje query has to be equality checks.
+
 ### sort direction across fields
 
 In order to walk the index backwards in a compound index, **all keys present in the sort** have to be either in original sort order or reversed.
