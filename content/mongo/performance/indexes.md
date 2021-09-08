@@ -241,14 +241,18 @@ The `winningPlan` has a `stage` key/val. Stages describe the type of db operatio
 
 Sorting with and without indexes can have drastic impact on a query and query performance. In the explain statement, there is a `SORT` stage that can help understand how the db sorted the data.
 
+Docs can be sorted in memory or by using an index.
+Docs are stored on disk in an unknown order.  
+If we WANT the data in the order it was PUT on disk, thats great....not very frequent though.  
+The server has to read docs from the disk into ram THEN sort the docs. This can get expensive - so expensive that when > 32MB of mem is used... mongo kills the query.
+
 - was an index used
 - if the index was not used and the sort had to happen, then sort happens in memory
 - if the `memUsage` and `memLimit` are close, an exception could be thrown
 
 ### Using indexes to sort
 
-Docs can be sorted in memory or by using an index.  
-Indexes are sorted on index creation.  
+During index creation, the index key sort order is initialized.  
 If a query is using an index scan, the order of the docs returned will be guaranteed to be sorted by index keys. There would be no need to perform an explicit sort when leveraging the keys.  
 If index is ascending on an index key, the docs will be ordered ascending on the index.  
 _no need to sort if working with an indexed column and wanting the data in the sort order of the index._
@@ -288,6 +292,9 @@ exp.find({}, { _id:0, last_name: 1, first_name: 1, ssn: 1 } ).sort({last_name:1}
 ```
 
 the explain output has other details to notice that the `executionStats.totalKeysExamined` is 0: this did an in-memory sort. all docs were read in memory, then in-memory sort was done by last_name.
+
+- sort can be ascending OR descending and still leverage the index (_when using a single-filed index_)
+- filtering and sorting can be done and still leverage the index
 
 ## Forcing Indexes with hint
 
@@ -375,3 +382,19 @@ db.examples.explain('executionStats').find({sub.indexed: 'val-here'})
   - like here the `sub`
   - MUCH BETTER to use dot notation
   - instead of indexing on more-than-one-field, use a compound index (_see elsewhere_)
+
+## Sorting and compound indexes
+
+Easiest & most straight-forward way to use compound indexes in a sort: use the index key pattern as the sort predicate
+
+```bash
+var indexObj = {"job": 1, "employer": 1, "last_name":1, "first_name": 1}
+# create the index
+db.people.createIndex(indexObj)
+
+# build explain obj
+var ex = db.people.explain("executionStats")
+
+# simples leverage of compound index sorting
+ex.find({}).sort(indexObj)
+```
