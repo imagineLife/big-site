@@ -39,3 +39,14 @@ Attempting to insert an array on an indexed object field will throw an error, so
 #### Covered Queries
 
 MultiKey Indexes do not support covered queries.
+
+## MultiKey Indexes from the shell
+
+MongoDB recognizes multi-key indexes where a sub-doc is an array.
+
+### Compount Multi-Key indexes are still ok
+
+```bash
+# productName holds a string val
+db.products.createIndex({productName:1, "gear.weight": 1})
+```
