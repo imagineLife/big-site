@@ -9,7 +9,8 @@ If a key/val in a document looked like
 genres: ["Rock", "Pop","Metal"]
 ```
 
-the server would create index keys for each item in the array.
+the server would create index keys for each item in the array.  
+For the above example, the db would create indexes on `Rock`, `Pop`, and `Metal`.
 
 With multi-key indexes, Indexes can also deal with nested arrays & nested docs. Could make an index on the below arr of objs, & the db would make index keys on the `color`, `weight`, and `name` keys.
 
@@ -20,6 +21,8 @@ gear: [
   {color: 'green', weight: 4, name: 'Pack'}
 ]
 ```
+
+As an example, with an index on `{"gear.weight": 1}`, queries could leverage the `weight` to sort nested val results.
 
 ### Restrictions
 
