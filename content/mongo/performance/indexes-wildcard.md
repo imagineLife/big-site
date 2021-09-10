@@ -61,6 +61,8 @@ This will create a wildcard index on `waveMeasurement.waves` AND `waveMeasuremen
 db.sample_data.createIndex({waveMeasurement.waves.$**: 1}})
 ```
 
+Wildcard indexes only cover queries where the index is on a single field where the return is the single field being queried.
+
 ## 4 syntaxes
 
 ```bash
