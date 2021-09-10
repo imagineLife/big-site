@@ -117,7 +117,41 @@ db.purchases.find({"purchaser.gender": 'F'})
 
 ```
 
-### Attribute Pattern
+### Simplify the Attribute Pattern
 
 Use to index & query across arbitrary number of attributes.
 Wildcards let easier querying on subdocs that contain meaningful attributes.
+
+```bash
+# a recipes collection, storing recipe ratings across platforms
+# WITHOUT the attribute pattern, attrs in-dc
+{
+  _id: 'q3ernf98h3',
+  title: "Mom's famous Apple Pie",
+  rating_allfoods: 3.7,
+  rating_epicurious: 3.9,
+  rating_dessert_blog: 4.7
+}
+
+# WITH the attribute pattern, attrs in sub-doc
+
+{
+  _id: 'q3ernf98h3',
+  title: "Mom's famous Apple Pie",
+  ratings: [
+    {
+      k: "allfoods",
+      v: : 3.7
+    },
+    {
+      k: "epicurious",
+      v: : 3.9
+    },
+    {
+      k: "dessert_blog",
+      v: : 4.1
+    }
+  ]
+}
+
+```
