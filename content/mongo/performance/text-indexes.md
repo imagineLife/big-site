@@ -14,9 +14,12 @@ Text indexes are similar to multi-key indexes, in that they make a ....lot....of
 db.products.createIndex({productName: "text"})
 ```
 
-When creating an index like this, each word in the text field string creates a unique index.... lotta words === lotta indexes.
+Notice the value of the key is `text`, wherease if the value were a 1 or a -1 the index would expect to be numerical and sorted.
 
-This allows leverage of
+When creating an index like this, _each word in the text field string creates a unique index_...
+...lotta words === lotta indexes.
+
+This allows leverage of text-searching without collection-scanning -
 
 ```bash
 db.products.find({$text: {$search: "some text here"}})
@@ -27,6 +30,7 @@ db.products.find({$text: {$search: "some text here"}})
 - lotta indexes
 - long time to insert
 - long time to BUILD the indexes
+- decrease WRITE performance, as the indexes need to be created && maintained
 
 ## Navigate text indexes with compound indexes
 
@@ -39,6 +43,8 @@ db.product.createIndex({category:1, productName: "text"})
 # a search leveraging the compound index to reduce index scanning
 db.product.find({category: 'drink', $text: {$search: 'soda'} })
 ```
+
+This limits text-keys when querying. the above find query limits text-searches to text string in the `drink` category.
 
 ## Searching for text
 
@@ -53,11 +59,11 @@ db.product.createIndex({productName: "text"})
 # search
 db..product.find({$text: {$search: {"Tasty soda"}}})
 
-# will return both docs.... ?!
+# will return both docs....
 ```
 
 This return may result in confusion:  
-Mongo defaults to an `OR` when searching for text: `Tasty` OR `soda`.
+**Mongo defaults to an `OR` when searching for text: `Tasty` OR `soda`.**
 
 ### Leverage the SCORE
 
