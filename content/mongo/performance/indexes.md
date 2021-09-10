@@ -469,3 +469,64 @@ var yes2B = { apple: -1, banana: 1}
 var badQ = {apple: -1, banana: -1}
 var badQTwo = {apple: 1, banana: 1}
 ```
+
+## Examples of queries that use indexes
+
+Here are some examples describing how the filter + sort both use or don't use the indexes
+
+```bash
+db.stores.createIndex({ "name": 1, "address.state": -1, "address.city": -1, "ssn": 1 })
+```
+
+```bash
+# LEVERAGE INDEXES
+# 1
+db.stores.find({ "name": "Apple" }).sort({ "address.state": 1, "address.city": 1 })
+# 2
+db.stores.find({ "name": "Dell", "address.state": { $lt: "S"} }).sort({ "address.state": 1 })
+# 3
+db.stores.find({ "address.state": "North Dakota", "name": "Microsoft" }).sort({ "address.city": -1 })
+
+
+# DO NOT LEVERAGE INDEXES
+# 4
+db.stores.find({ "name": { $gt: "L" } }).sort({ "address.city": -1 })
+# 5
+db.stores.find({ "address.city": "WestVille" }).sort({ "address.city": -1 })
+
+```
+
+- #1
+  - in the FIND
+    - uses index prefix
+  - in the SORT
+    - uses sort matching backwards expectation
+- #2
+
+  - in the FIND
+    - uses index prefix
+    - FAILS equality for `address.state`
+  - in the SORT
+    - makes up for the failed equality in the find for the sort
+
+- #3
+
+  - in the FIND
+    - uses index prefix
+    - ORDER of fields in the find do not need to match the index prefix, the query planer figures that out
+  - in the SORT
+    - extends the use of the index prefix
+
+- #4
+
+  - in the FIND
+    - does not look for equality on name
+    - does not re-use name in the sort to "make up for" the non-equality match
+  - in the SORT
+    - already busted due to the find
+    - skips the re-use of the name key
+    - skips the next field in the index prefix
+
+- #5
+  - in the FIND
+    - does not use the first index prefix
