@@ -5,6 +5,7 @@ this lets users to specify language-specific rules for text comparison.
 This can be done on a collection, a view, an index, or specific operations that allow collation.
 
 - locale: _mandatory_
+  - icu supported local
 - caseLevel
 - caseFirst
 - strength
@@ -12,6 +13,13 @@ This can be done on a collection, a view, an index, or specific operations that 
 - alternate
 - maxVariable
 - backwards
+
+These options/settings are out-of-scope for this details.
+
+Collations can be defined on...
+
+- collection
+  - all queries + indexees will use collation in the collection
 
 ## example of collation creation
 
@@ -39,6 +47,8 @@ db.foreign_text.aggregate([{$match: { _id: {$exists:1} }}], {collation: {locale:
 ```
 
 ## Using indexes with collations
+
+Can create _indexes_ that over-ride collations. Indexes can even use a different collation that was defined on the collection. The query must explicitly match the collation to leverage any specifically named collation.
 
 Here, creating an index on name that OVERRIDES the default collation AND any collection-level-defined collations.
 
@@ -71,7 +81,7 @@ db.not_sensitive.insert({water: 'Melon'})
 db.not_sensitive.insert({water: 'MeLOn'})
 db.not_sensitive.insert({water: 'melON'})
 
-# sort on water in both directions will make no diff
+# sort on water in both directions will make no diff on query results
 db.not_sensitive.find().sort({water: 1})
 db.not_sensitive.find().sort({water: -1})
 ```
