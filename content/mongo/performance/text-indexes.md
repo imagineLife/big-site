@@ -64,15 +64,23 @@ db..product.find({$text: {$search: {"Tasty soda"}}})
 
 This return may result in confusion:  
 **Mongo defaults to an `OR` when searching for text: `Tasty` OR `soda`.**
+When looking for `tasty soda`, really looking for any doc that includes `tasty` OR `soda`.
 
 ### Leverage the SCORE
+
+Maybe try getting & projecting the textScore val per results.  
+The `textScore` will show a 0 - to - 1 matching "percentage" result of the query.
 
 ```bash
 # search
 
 db..product.find({$text: {$search: {"Tasty soda"}}}, {score: {$meta: 'textScore'}})
-
 # will return a matching score key/val, 0 - 1, for each result
+
+# maybe even sort by matching percentage
+# then the higher matches return first
+db.product.find({$text: {$search: "Tasty soda"}}, {score: {$meta: "textScore"}}).sort({score: {$meta: 'textScore'}})
+
 ```
 
 ### Indexes and Regex
