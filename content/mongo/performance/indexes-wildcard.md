@@ -4,6 +4,15 @@ Fields should only index frequently-indexed fields for optimizing query performa
 Useful for unpredictable workloads.
 New in v 4.2
 
+Why use em?!
+
+- only index fields that queries frequently index
+- be careful with these, they are not replacements for other indexes
+- some workloads have unpredictable access patterns
+  - I.o.T requests may have arbitrary field requirements, making PLANNING EFFECTIVE INDEXING difficult
+- index "every" field in all docs in a collection
+  - prevents unique indexes on each field && field combo
+
 ### Con of indexes
 
 Each index needs maintenance.  
@@ -27,7 +36,7 @@ db.sample_data.createIndx({'$**': 1})
 
 the `&**` is a wildcard operator.
 
-Querying this with a compex query shows some interesting details in an explain plan.
+Querying this with a complex query shows some interesting details in an explain plan.
 
 ```bash
 db.sample_data.find({waveMeasurement.waves.height: .5, waveMeasurement.seaState.quality: 9})
@@ -40,7 +49,7 @@ will reveal
 
 ## using projections in wildcard indexes
 
-this wil wildcard index on all subfields in the `waveMeasurement` object
+this will wildcard index on all subfields in a `waveMeasurement` object in a document.
 
 ```bash
 db.sample_data.createIndex({$**: 1}, {wildcardProjection: {waveMeasurement: 1}})
