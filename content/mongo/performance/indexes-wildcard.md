@@ -122,6 +122,8 @@ db.purchases.find({"purchaser.gender": 'F'})
 Use to index & query across arbitrary number of attributes.
 Wildcards let easier querying on subdocs that contain meaningful attributes.
 
+#### Opt 1: flat data
+
 ```bash
 # a recipes collection, storing recipe ratings across platforms
 # WITHOUT the attribute pattern, attrs in-dc
@@ -132,7 +134,11 @@ Wildcards let easier querying on subdocs that contain meaningful attributes.
   rating_epicurious: 3.9,
   rating_dessert_blog: 4.7
 }
+```
 
+#### Opt 2: attr array
+
+```bash
 # WITH the attribute pattern, attrs in sub-doc
 
 {
@@ -154,4 +160,23 @@ Wildcards let easier querying on subdocs that contain meaningful attributes.
   ]
 }
 
+# index on arr keys/vals for faster query results
+db.recipes.createIndex({"ratings.k": 1, "ratings.v": 1})
+```
+
+#### Opt 3: wildcard on object keys
+
+```bash
+{
+  _id: 'q3ernf98h3',
+  title: "Mom's famous Apple Pie",
+  ratings: {
+    allfoods: 3.7,
+    epicurious: 3.9,
+    dessert_blog: 4.7
+  }
+}
+
+# create index
+db.recipes.createIndex({"ratings.$**": 1})
 ```
