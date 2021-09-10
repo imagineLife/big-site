@@ -85,9 +85,37 @@ db.col.createIndex({$**:1, {wildcardProjection: {a:0}}})
 - Unpredictable query shapes
 - How attributes are implemented in a data model
 
-### Unpredictable queries
+### Unpredictable query shapes
 
 As mongodb consumer goals change, the data model changes.
+
+- we don't always know how dataset will be used
+  - complex sub-docs
+    - maybe with fields that we aren't 100% sure how the fields and vals will be used
+
+```bash
+# data example
+# a db.sales document example
+{
+  _id: <whatevs>,
+  sale_amt: 14,764.32,
+  purchaser: {
+    name: 'Sal',
+    addr: '123 Main St',
+    credit_score: 742,
+    age: 24,
+    gender: 'M'
+  }
+}
+
+# creating wildcard index to leverage all purchaser content  for faster querying
+db.sales.createIndex({"purchaser.$**": 1})
+
+# using the index on any sub-doc field
+db.purchases.find({"purchaser.age": {$gt: 22, $lt: 40}})
+db.purchases.find({"purchaser.gender": 'F'})
+
+```
 
 ### Attribute Pattern
 
