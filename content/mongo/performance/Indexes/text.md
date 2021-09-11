@@ -83,9 +83,10 @@ db.product.find({$text: {$search: "Tasty soda"}}, {score: {$meta: "textScore"}})
 
 ```
 
-### Indexes and Regex
+### Indexes, Performance, and Regex
 
 Make regex searches as explicit as possible.
 
-- leverage a starting force `/^beginWith/` to match at the beginning of a string
-  - this is not NEARLY as performant as `/^.irby/`
+- leverage a starting force `/^kirby/` to match at the beginning of a string
+  - this will ignore all "branches of the Index b-tree" that don't start with the `kirby` text
+  - `/^.irby/` is not NEARLY as performant as this wildcard regex `/^kirby/`
