@@ -60,7 +60,7 @@ On a first query to the DB:
     - (_explain shows the winning plan_)
 - **CACHE the winning plan** for future queries to take advantage of
 
-The cached winnin plans can be removed, or evicted
+The cached winnin plans can be removed, or evicted when the db changes. This can happen when...
 
 - restart server
 - something about the size of the cached plan being too large, or the query taking longer?!
