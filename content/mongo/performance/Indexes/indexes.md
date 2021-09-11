@@ -407,10 +407,19 @@ cache output includes things like...
 
 This can be re-run after queries are run against the db to get "refreshed" and/or updated cache details & analysis.
 
-### Consider compromises
+### Consider compromises and edge cases
 
-Sometimes indexes are not needed, expecially in RAM.  
-When queries support 'operational queries', some normal day-to-day operations.
+Sometimes indexes are not needed, especially in RAM.  
+When queries support 'operational queries', some normal day-to-day operations.  
+Most queries + indexes should support operational data needs - ongoing application requests.
+
+2 Edge-cases don't need their whole index-size in RAM:
+
+- BI tools
+  - these may be less frequently run && the speed of the queries may not be as important as production application requests
+  - secondary nodes in a replica set can be leveraged
+  - indexes on these secondary nodes can be created as well
+- Monotonically-accommodating indexes
 
 #### Skip BI tooling queries
 
