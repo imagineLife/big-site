@@ -357,6 +357,9 @@ Indexes require resources to operate, and are not magical speed-enhancers. They 
 
 ### Determine what kind of resources are involved in index allocation & operation
 
+Indexes need disks to store data.  
+Indexes need memory to operate with the index data structures.
+
 Compass offers nice gui representations
 
 - total index sizes on collections
