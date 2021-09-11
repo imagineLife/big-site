@@ -17,7 +17,25 @@ Want to offload data from the primary? Replica sets allow that.
 
 ## When to Shard
 
-Sharding is important when the vertical scaling limits have already been reached.
+### Sharding hardware and service reqs
+
+- these require `mongos` servers
+  - responsible for routing client request to designated nodes
+- these require `config servers`
+  - hold the mapping of shard-cluster && data resource allocations
+- these require `shard nodes`
+  - holding the data
+  - indexes
+  - HERE is where the major work-loads will exist
+  - SET THESE UP AS REPLICA SETS!!!!
+
+### before sharding
+
+- have we reached the vertical scaling limits?
+- how does the data grow?! How is it accessed?
+  - how will the shard-key make things better?
+  - what shard-key will be used?!
+    Sharding is important when the vertical scaling limits have already been reached.
 
 Sharding is important. Shards as Replica sets are important: if 1 node in a shard were to go down without a replica set, that would be terrible.
 Sharding is horizontally scaling. This is good for large data sets.
