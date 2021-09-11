@@ -1,7 +1,7 @@
 # Query plans
 
-When a query enters the db, a plan forms.  
-The plan contains stages.
+When a query enters the db, a query plan forms.  
+The plan contains stages that "feed in" to one another.
 
 ## An example
 
@@ -9,6 +9,12 @@ The plan contains stages.
 db.coll.createIndex({address.zipcode:1, cuisine: 1})
 
 db.coll.find({"address.zipcode": {$gt: '50000'}, cusine: 'Sushi'}).sort({rating: 1})
+```
+
+```mermaid
+flowchart BT;
+IXSCAN-->FETCH;
+FETCH-->SORT;
 ```
 
 The query plan would look something like...
