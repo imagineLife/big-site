@@ -8,25 +8,36 @@ The plan contains stages that "feed in" to one another.
 ```bash
 db.coll.createIndex({address.zipcode:1, cuisine: 1})
 
-db.coll.find({"address.zipcode": {$gt: '50000'}, cusine: 'Sushi'}).sort({rating: 1})
+db.coll.find({"address.zipcode": {$gt: '50000'}, cuisine: 'Sushi'}).sort({rating: -1})
 ```
 
 ```mermaid
 flowchart BT;
-IXSCAN-->FETCH;
-FETCH-->SORT;
+  IXSCAN-->FETCH;
+  FETCH-->SORT;
 ```
 
 The query plan would look something like...
 
 - IDXSCAN
-  - because the find uses both indexes, an index scan occurs first. Fetch the record IDS.
+  - because the find uses both indexes, an index scan occurs first
+  - fetch the record IDS
 - FETCH
-  - Fetch converts record IDS into complete docs.
+  - Fetch converts record IDS into complete docs
 - SORT
   - in-memory sort
 
 The available indexes drastically inform the query plan.
+WIth these indexes, the query plan would look different
+
+```bash
+db.coll.createIndex({cuisine: 1, stars: 1})
+```
+
+```mermaid
+flowchart BT;
+  IXSCAN-->FETCH;
+```
 
 ## How a query plan is chosen
 
