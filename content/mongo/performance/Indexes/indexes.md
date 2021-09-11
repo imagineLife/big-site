@@ -501,14 +501,13 @@ db.people.find({email:: "frank@gmail.com"}).sort({job: 1})
 When the index prefixes are spread across the query && the sort, as long as they are in order, the query planner will leverage all indexes!
 
 ```bash
-# WILL filter AND sort docs using indexe$$
+# WILL filter AND sort docs using indexes
 
-$$s
 db.people.find({job: "therapist", employer: "the state"}).sort({last_name: 1})
 ```
 
 The query has to precede the sort.  
-Tje query has to be equality checks.
+The query has to be equality checks.
 
 ### sort direction across fields
 
