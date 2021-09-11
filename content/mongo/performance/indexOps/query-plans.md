@@ -39,20 +39,26 @@ flowchart BT;
   IXSCAN-->FETCH;
 ```
 
+- IXSCAN
+  - get record IDs in sort order
+- FETCH
+  - convert record-ids into docs
+  - return docs
+
 ## How a query plan is chosen
 
-On a first query:
+On a first query to the DB:
 
-- review all available indexes on the collection
-- planner IDs available indexes to fulfill the query. These are `candidate indexes`
-- from the candidate indexes come `candidate plans`
+- **REVIEW INDEXES**: review all available indexes on the collection
+- **DECIDE ON VIABLE INDEXES**: (_candidate indexes_) planner IDs available indexes to fulfill the query. These are `candidate indexes`
+- **MAKE CANDIDATE PLANS**: from the candidate indexes come `candidate plans`
 - An `empirical query planner` takes over
-  - a trial period for each candidate plan is executed over a short period of time
-  - the thing knows which was best
+  - **PUT PLANS THROUGH TRIAL PERIOD**: a trial period for each candidate plan is executed over a short period of time
+  - **FIGURE OUT BEST PLAN**: the thing knows which was best
     - most records the fasted
     - correct answers first
-- explain shows the winning plan
-- CACHE the winning plan for future queries to take advantage of
+    - (_explain shows the winning plan_)
+- **CACHE the winning plan** for future queries to take advantage of
 
 The cached winnin plans can be removed, or evicted
 
