@@ -5,6 +5,16 @@ High availability is fundamental to preventing system failure.
 Replica sets are important. Node Failure? Repls have failover.  
 Want to offload data from the primary? Replica sets allow that.
 
+- consider latency
+  - machines talking to one another
+- data spread across nodes
+- read implications
+- write implications
+
+## use replica sets
+
+- leverage high availability
+
 ## When to Shard
 
 Sharding is important when the vertical scaling limits have already been reached.
