@@ -1,5 +1,10 @@
 # Aggregation performance
 
+2 Categories of agg queries
+
+- realtime
+- batch processing
+
 "Realtime" processing...
 
 - used to provide data to apps
@@ -9,7 +14,8 @@
 "Batch" processing
 
 - provided for analytics
-- not necessarily inspected until later
+- probably run less frequently than "realtime" processing queries
+- performance is probably not as important
 
 ## Index usage
 
