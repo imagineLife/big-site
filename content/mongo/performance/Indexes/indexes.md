@@ -298,6 +298,7 @@ the explain output has other details to notice that the `executionStats.totalKey
 
 ## Forcing Indexes with hint
 
+**The Hint Method**
 appending a hint method can enforce which indexes and index shape for the query optimizer works.  
 This overrides mongodbs default index choosing method.
 
@@ -308,16 +309,47 @@ db.peeps.find({name:"John Frank", zipcode: {$gt: 63000}}).hint({name: 1, zipcode
 db.peeps.find({name:"John Frank", zipcode: {$gt: 63000}}).hint("name_1_zipcode_1")
 ```
 
-Use this with caution.
+Use this with caution. The db query optimizer is usually killin at what it does. That's what it does.
 
 ## Resource Allocation for indexes
 
+Indexes optimize queries.  
+Indexes reduce response times, sometimes greatly.  
+Indexes require resources to operate, and are not magical speed-enhancers. They take compromises. Take time to
+
+- Determine index sizes
+- Determine the needed resources needed to accommodate the indexes
+- where compromises exist (edge cases)
+
 ### Determine index sizes
 
-`db.stats` can show index sizes across a db.  
+`db.stats` can show index sizes across a db.
+
+```json
+{
+  "db": "db-name-here",
+  "collections": 5,
+  "views": 0,
+  "objects": 934638,
+  "avgObjSize": 401.32,
+  "dataSize": 9876,
+  "storageSize": 129462,
+  "numExtents": 0,
+  "indexes": 6,
+  "indexSize": 12374,
+  "ok": 1
+}
+```
+
 `db.collection.stats()` can show specific collection index size details, even on a per-index basis.
 
 ### Determine what kind of resources are involved in index allocation & operation
+
+Compass offers nice gui representations
+
+- total index sizes on collections
+
+MongoDB commands can also tell more info.
 
 **DISK**  
 Disk to store the info. Disks are usually plentiful. With no disk, usually no index.
