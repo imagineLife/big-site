@@ -33,8 +33,10 @@ db.orders.agg([...aggTHingHere]), {explain: true})
 
 - `$match` can use indexes
 - `$sort` can use indexes
-  - put these before other transformations
-  - put `$limit` near `$sort`
+  - put these before other transformations, after the match, for optimal performance
+- put `$limit` near `$sort`
+  - and toward front of pipes
+    - this can make there server do a `top-K` sorting algo
 
 ### Agg pipeline parts and indexes
 
@@ -44,6 +46,11 @@ When doing limit, put this at the beginning of the pipe, too.
 
 ### agg memory constraints
 
-Aggs are limited to 16MB output limit. This does NOT apply to stuff IN the pipelines. Mitigate this with the `$limit` and `$project`.  
-Each stage has a 100MB limit. Use indexes.  
-When all else fails, `{allowDiskUse: true}`. This is a last resort measure. This doesn't even work in `$graphLookup`.
+- Aggs are limited to 16MB output limit
+  - This does NOT apply to stuff IN the pipelines.
+  - Mitigate reaching this by using the `$limit` and `$project`
+- Each stage in the pipeline has a 100MB limit
+  - Use indexes
+- When all else fails, add `{allowDiskUse: true}` in the obj following the agg pipeline
+  - Use this as a last resort measure
+  - This doesn't even work in `$graphLookup`
