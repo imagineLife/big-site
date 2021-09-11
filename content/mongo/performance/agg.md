@@ -52,5 +52,6 @@ When doing limit, put this at the beginning of the pipe, too.
 - Each stage in the pipeline has a 100MB limit
   - Use indexes
 - When all else fails, add `{allowDiskUse: true}` in the obj following the agg pipeline
+  - `db.coll.agg([...], {allowDiskUse: true})`
   - Use this as a last resort measure
   - This doesn't even work in `$graphLookup`
