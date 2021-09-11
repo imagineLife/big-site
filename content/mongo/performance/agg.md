@@ -22,7 +22,19 @@
 Be sure that agg queries use indexes.  
 The agg forms a pipeline.  
 SOME agg operators CAN use indexes, some can not.  
-Because of the flow, once one particular stage does not use an index, all following stages are not allowed to use indexes.
+Because of the flow, once one particular stage does not use an index, all following stages are not allowed to use indexes.  
+The query optimizer will try to re-org queries for better performance where possible.
+
+use this to inspect the stats of the query -
+
+```bash
+db.orders.agg([...aggTHingHere]), {explain: true})
+```
+
+- `$match` can use indexes
+- `$sort` can use indexes
+  - put these before other transformations
+  - put `$limit` near `$sort`
 
 ### Agg pipeline parts and indexes
 
