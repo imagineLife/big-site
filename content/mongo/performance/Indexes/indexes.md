@@ -371,7 +371,8 @@ Disk to store the info. Disks are usually plentiful. With no disk, usually no in
 Can separate WHERE data is stored: 1 for collection data, 1 for indexes. INTERESTING!
 
 **RAM**  
-Ram to operate with. SHOULD have enough space in memory to accommodate all indexes.  
+This is the most intensive resource used with index resource allocation.  
+Ram should be able to accommodate ALL INDEXES.  
 If not enough memory space, disk-access will be required. Disk is slow.  
 Inspect how much space in ram is being used by memory.
 
@@ -390,12 +391,21 @@ s = db.coll.stats({indexDetails:true})
 # shows details on each index
 s.indexDetails
 
-# show cache details on a specific index
+# show cache details on all indexes
+ss.indexDetails
+
+# show cache details on a specific index && its cache
 ss.indexDetails.index_name_here.cache
-
-# shows explicit byte-level detail of the index & its cache utilization
-
 ```
+
+cache output includes things like...
+
+- bytes currently in cache
+- bytes READ into cache
+- pages requested FROM the cache
+- pages read into the cache
+
+This can be re-run after queries are run against the db to get "refreshed" and/or updated cache details & analysis.
 
 ### Consider compromises
 
