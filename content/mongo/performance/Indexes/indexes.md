@@ -323,7 +323,7 @@ Indexes require resources to operate, and are not magical speed-enhancers. They 
 
 ### Determine index sizes
 
-`db.stats` can show index sizes across a db.
+`db.stats` can show index sizes across a db:
 
 ```json
 {
@@ -342,6 +342,18 @@ Indexes require resources to operate, and are not magical speed-enhancers. They 
 ```
 
 `db.collection.stats()` can show specific collection index size details, even on a per-index basis.
+...way more verbose output for this command than just `db.stats()`, but key index output details are
+
+```json
+{
+  "nindexes": 3,
+  "totalIndexSize": 128732,
+  "indexSizes": {
+    "_id_": 9623,
+    "other_index_here_1": 238
+  }
+}
+```
 
 ### Determine what kind of resources are involved in index allocation & operation
 
