@@ -6,6 +6,15 @@ This is not a normal setup & may be best used for few use-cases:
 - getting reports on delayed consistency data
 - performing complex text searches
 
+Prep for this rare setup:
+
+- don't allow these nodes to become primary
+  - priority = 0
+  - hidden
+  - delayed secondary
+
+If a primary steps down, the main app will not be setup to leverage these specific use-case secondaries.
+
 ## Preparing Secondary Nodes for Special Cases
 
 Set the node to have priority `0`. This will make it so that the node can not vote.  
