@@ -49,7 +49,7 @@ When querying, use the shard key.
 Sharding increases communication traffic between the `mongos`, the config servers, and the shard nodes.  
 Latency & Entropy become part of the setup.
 
-Co-Locating a `mongos` within the same server as the app server is one way to reduce network traffic.
+Co-Locating a `mongos` within the same server as the app server is one way to reduce network traffic latency. If app server in Barcelona tries to reach a shard node in texas... there will be latency.
 
 #### Querying Methods
 
@@ -57,9 +57,10 @@ The 2 read types also important regarding performance: scatter/gather, or routed
 
 #### Sorting, limiting, and skipping
 
-There are more steps in these types of requests once sharded.
+There are more steps in these types of requests once data is sharded.
 
-After querying the `mongos` instance, the query is sent to the designated shards.  
-Then, on each shard a local (sort/limit/skip) gets performed.  
-Then, the primary shard performs a final (sort/limit/skip) + merge.  
-Then the data gets sent back.
+After querying the `mongos` instance, the query is sent to the designated shards -
+
+- on each shard a local (sort/limit/skip) gets performed
+- then, the primary shard performs a final (sort/limit/skip) + merge of data
+- Then the data gets sent back to the `mongos` client & app client
