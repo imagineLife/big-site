@@ -101,6 +101,17 @@ db.restaurants.findOne()
 db.restaurants.createIndex({"name": 1})
 ```
 
+## Process and Setup Summary
+
+- connect to secondary node
+- shut it down
+- reconnect in a non-repl-set connection
+- add new indexes
+- shutdown server
+- relaunch the server
+  - connected to the replSet
+-
+
 ### connect to secondary node
 
 While connected to the primary node, the same shell session can connect to a secondary node.  
