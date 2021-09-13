@@ -47,6 +47,8 @@ services:
       command: 'mongod --smallfiles --auth --keyFile /opt/keyfile/mongodb-keyfile --replSet docker-mongo-rs'
       depends_on:
         - pki-keys
+      networks:
+        rs-web:
 ```
 
 - the key will be built USING a docker box
