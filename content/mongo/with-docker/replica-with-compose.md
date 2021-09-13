@@ -41,8 +41,12 @@ services:
         - keystore:/opt/keyfile   # security key
         - mongo-rs0:/data/db      # data dir
       env_file:
-        - mongod.env
-
+        - ./rs.env
+      ports:
+        - 27000:27017
+      command: 'mongod --smallfiles --auth --keyFile /opt/keyfile/mongodb-keyfile --replSet docker-mongo-rs'
+      depends_on:
+        - pki-keys
 ```
 
 - the key will be built USING a docker box
