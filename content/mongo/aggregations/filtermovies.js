@@ -69,7 +69,7 @@ db.movies.aggregate([
 ]);
 
 /*  
-  Get the write names, & exclude the conditional "(rando)" text
+  Get the writer names, & exclude the conditional "(rando)" text
 */
 db.movies.aggregate([
   { $match: { writers: { $elemMatch: { $exists: true } } } },
