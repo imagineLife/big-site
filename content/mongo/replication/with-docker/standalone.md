@@ -122,3 +122,9 @@ style 3g fill:transparent,stroke:#323232,stroke-width:1px,stroke-dasharray:5;
 Connect to it from another docker container?!
 docker run -it -v $(pwd)/docker-repl-configs/mongod.conf:/etc/mongo/mongod.conf -v $(pwd)/shellData/db:/data/db -v \$(pwd)/shellData/mongod.log:/mongod.log -p 27001:27017 --name msh mongo:5.0.2 --config /etc/mongo/mongod.conf
 "mongodb://myadmin:mypwd@water:27000"
+
+without unused vols, slimming down
+docker run -v $(pwd)/docker-repl-configs:/etc/mongo -v $(pwd)/data/db:/data/db -v \$(pwd)/data/mongod.log:/mongod.log -p 27000:27017 --name ice mongo:5.0.2 --config /etc/mongo/mongod.conf
+
+trying with docker v4.4.\*
+docker run -v $(pwd)/docker-repl-configs:/etc/mongo -v $(pwd)/data/db:/data/db -v \$(pwd)/data/mongod.log:/mongod.log -p 27000:27017 --name ice mongo:4.4.8 --config /etc/mongo/mongod.conf
