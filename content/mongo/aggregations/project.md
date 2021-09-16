@@ -2,7 +2,7 @@
 
 Like map in js.  
 Project shapes a new output in this step of the pipeline.
-Project can be re-used a bunch in pipelines.
+Project can be re-used in a bunch in pipelines.
 
 Basic project syntax is...
 
@@ -155,4 +155,29 @@ db.solarSystem.aggregate([
 { "name" : "Saturn", "myWeight" : 149.14285714285714 }
 { "name" : "Uranus", "myWeight" : 126.7142857142857 }
 { "name" : "Neptune", "myWeight" : 159.28571428571428 }
+```
+
+### Pipelines and JS
+
+Pipeline arrays can be saved as vars && inserted into the mongodb query module.
+
+```bash
+let weightOnPlanetsProjection = [
+  {
+    $project: {
+      _id:0,
+      name:1,
+      myWeight: {
+        $multiply: [
+          {
+            $divide: ["$gravity.value",9.8]
+          },
+          140
+        ]
+      }
+    }
+  }]
+
+# use it something like this...
+mongoNodeMod.aggregate(weightOnPlanetsProjection)
 ```
