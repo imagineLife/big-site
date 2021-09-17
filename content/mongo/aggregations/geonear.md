@@ -1,21 +1,32 @@
 # geonear
+
 works with geojson data.  
 performs geoqueries in a pipeline.  
 must be the first stage in the pipe.  
 can be used on sharded collections. `$near`, a find operation, cannot.  
 When using 2dSperes, the distance is returned in meters.  
-When using "legacy coordinates" instead of a 2d sphere, the distance is returned in radians.  
-
+When using "legacy coordinates" instead of a 2d sphere, the distance is returned in radians.
 
 ## analysis of geonear args
+
 ```bash
 # required args
 - near: point searching near
-- distanceField: field will be INSERTED into returned docs, returning the distance fromthe `near` fal  
+- distanceField: field will be INSERTED into returned docs, returning the distance fromthe `near` fal
 - spherical: true if index is a 2d sphere index
+
+# optional fields
+minDistance
+maxDistance
+query
+includeLocs
+limit
+num
+distanceMultiplier
 ```
 
 example
+
 ```bash
 db.nycFacilities.aggregate([
   {
@@ -30,7 +41,9 @@ db.nycFacilities.aggregate([
   }
 ])
 ```
-adding some restrictions, find 5 nearest hospitals: 
+
+adding some restrictions, find 5 nearest hospitals:
+
 - minDistance: closest
 - maxDistance: furthest
 - query: like `$match`
