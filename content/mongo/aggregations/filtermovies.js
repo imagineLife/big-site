@@ -70,6 +70,8 @@ db.movies.aggregate([
 
 /*  
   Get the writer names, & exclude the conditional "(rando)" text
+  
+  Here, the $map expression gets used, AND gets used INISDE the projection operation
 */
 db.movies.aggregate([
   { $match: { writers: { $elemMatch: { $exists: true } } } },
