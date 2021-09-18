@@ -1,8 +1,11 @@
 # lookup
-[mongo docs](https://docs.mongodb.com/manual/reference/operator/aggregation/lookup/)  
 
-Like a left outer join.  
+[mongo docs](https://docs.mongodb.com/manual/reference/operator/aggregation/lookup/)
+
+Like a left outer join: All fields from the "left" table, and the desired fields from the "right" table.  
+Merging data from 2 tables.  
 ARGS:
+
 - from: a collection from which to look up docs
   - must be in same db
   - can not be sharded
@@ -11,18 +14,29 @@ ARGS:
 - as: alias fieldName in the resulting doc
 
 ### example 1
+
 **Table 1**: a list of airlines  
 **Table 2**: a list of "alliances", which each have a list of airlines (_can be related to the airlines collection_)
 **Goal**: use the "alliances" table as the 'root' table, and for each airline listed in the list of airlines among the alliance, replace the airline name with the complete airline object from the `airline` collection
 
 ```bash
+# an airlines collection with docs like...
+{ name: "Zeal airline", country: "New Zealand" }
+
+# an air_alliances collection with docs like...
+{
+  name: "The Best Alliance",
+  airlines: ["airline airfair", "flying high"]
+}
+
+# lookup to get all the airline details per alliance
 db.air_alliances.aggregate([
   {
-    $lookup: { 
-      from: "air_airlines", 
-      localField: "airlines", 
-      foreignField: "name", 
-      as: "airlines" 
+    $lookup: {
+      from: "air_airlines",
+      localField: "airlines",
+      foreignField: "name",
+      as: "airlines"
     }
   }
 ])
@@ -61,6 +75,7 @@ $ ...etc
 ### Another example
 
 DID NOT GET IT HERE...
+
 ```bash
 db.air_alliances.aggregate([
   {
@@ -85,6 +100,7 @@ db.air_alliances.aggregate([
 ```
 
 1. Get Just routes that have 747 or 380 airplanes in them
+
 ```bash
 db.air_routes.aggregate([
   {
@@ -95,7 +111,8 @@ db.air_routes.aggregate([
 ])
 ```
 
-2. lookup other table 
+2. lookup other table
+
 ```bash
 db.air_routes.aggregate([
   {
@@ -115,6 +132,7 @@ db.air_routes.aggregate([
 ```
 
 3. build 1 doc per array element in alliance arr, && then re-combine on count of alliance name. Then sort by most-to-least
+
 ```bash
 db.air_routes.aggregate([
   {
@@ -140,14 +158,13 @@ db.air_routes.aggregate([
     }
   },
   {
-    $sor: { count: -1 }
+    $sort: { count: -1 }
   }
 ])
 ```
 
-
-
 ### Thoughts
+
 - the `from` field cannot be sharded
 - the `from` collection must be in the same db
 - the values in the `localField` and `foreignField` are matched on equality
