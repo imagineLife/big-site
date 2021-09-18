@@ -153,9 +153,9 @@ Perhaps a node STORES it's immediate reports
 "name" : "Andrew",
 "title" : "VP Eng",
 "direct_reports" : [
-"Cailin",
-"Dan",
-"Shannon"
+  "Cailin",
+  "Dan",
+  "Shannon"
 ]
 }
 { "_id" : 7, "name" : "Elyse", "title" : "COO" }
@@ -167,11 +167,11 @@ Perhaps a node STORES it's immediate reports
 "name" : "Dev",
 "title" : "CEO",
 "direct_reports" : [
-"Eliot",
-"Meagen",
-"Carlos",
-"Richard",
-"Kristen"
+  "Eliot",
+  "Meagen",
+  "Carlos",
+  "Richard",
+  "Kristen"
 ]
 }
 { "_id" : 8, "name" : "Richard", "title" : "VP PS" }
@@ -183,9 +183,9 @@ Perhaps a node STORES it's immediate reports
 "name" : "Eliot",
 "title" : "CTO",
 "direct_reports" : [
-"Andrew",
-"Elyse",
-"Ron"
+  "Andrew",
+  "Elyse",
+  "Ron"
 ]
 }
 
