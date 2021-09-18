@@ -1,24 +1,59 @@
 # graphLookup
+
+Some data is flat.  
+Some data is deeply nested.  
+Some common data structures that are complex are trees: airport routes, social networks, fraud detection, hierarchies, etc.
+
+`$graphLookup` allows complex datasets to be processed, analyzed and transformed.
+
+## api breakdown
+
+```bash
+$graphLookup: {
+ from: `a collection that this gets results from`
+ startWith: `connect-to val(s) to search with`
+ connectFromField: `a field in each doc in the FROM coll used to perform the next recursive query`
+ connectToField: `sets the field in each doc in the FROM coll that is queried against in each recursive query`
+ as: `field in the output doc that holds the resulting arr of results`
+ maxDepth: (optional)`max number of recursive depth`
+ depthField: (optional)`the field name that holds the number of recursive iterations to REACH this specific node, 0 for first lookup`
+ restrictSearchWIthMatch: (optional) `a match condition`
+}
+```
+
+## A Tree structure example
+
 A "Tree" structure of data, laid out in a "flat" style:
+
 - A CEO (_has 5 direct reports_)
   - CMO
   - CRO
   - SVP Services
   - CFO
-  - CTO (_has 2 direct reports_)
-    - VP Product
-    - SVP Engineering (_has 3 reports_)
-      - vp ed
-      - vs cloud eng.
-      - vp core
-In a dataset like this, each doc has...
-- _id
+  - CTO (_has 2 direct reports_) - VP Product - SVP Engineering (_has 3 reports_) - vp ed - vs cloud eng. - vp core
+    In a dataset like this, each doc has...
+- \_id
 - name
 - title
 - reports_to
-  - pointing to another ID, conditionally present  
+  - pointing to another ID, conditionally present
+
+a look at some mock data for this org would be...
+
+```bash
+# mock show data
+db.parent_refs.find()
+
+# mock res
+{_id: 4, name: "Calros Sangrana", title: "CRO", reports_to: 1 }
+{_id: 5, name: "Henrietta Washington", title: "VP Eng", reports_to: 2 }
+{_id: 6, name: "Sarah Silverstein", title: "VP Web Apps", reports_to: 5 }
+{_id: 7, name: "Wendy Alfredson", title: "VP App Components", reports_to: 5 }
+
+```
 
 ## Who reports to dave
+
 ```bash
 db.parent_reference.aggregate([
   {
@@ -37,12 +72,14 @@ db.parent_reference.aggregate([
   }
 ])
 ```
+
 - `$match` on the document of interest to start with
-- startWith the _id field of the `$matched` document
+- startWith the \_id field of the `$matched` document
 - connectFrom `_id` to `reports_to` in other docs
 - stores in `all_reports` arr
 
 # getting parent hierarchy from document relational key value
+
 ```bash
 # parent reference data
 {
@@ -90,14 +127,16 @@ db.parent_reference.aggregate([
   }
 ])
 ```
+
 - `$match` on the document of interest to start with
 - startWith the `reports_to` field of the `$matched` document
 - connectFrom `reports_to` to `_id_` in other docs
 - stores in `bosses` arr
 
-
 # Getting Children from listed elements in same doc
+
 Perhaps a node STORES it's immediate reports
+
 ```bash
 # child-reference data
 {
@@ -157,7 +196,9 @@ db.child_reference.aggregate([
 ```
 
 ## on limiting the level of a hierarchy search
+
 A 0-index `maxDepth` field which identifies how many 'levels' to look
+
 ```bash
 db.child_reference.aggregate([
   {$match: { name: "Dev" }},
@@ -175,6 +216,7 @@ db.child_reference.aggregate([
 ```
 
 ## Dont Forget Concerns
+
 - `$lookup` might take up a lot of memory
   - leverage `$allowDiskUse`
   - may exceed the 100MB allocation EVEN WITH `allowDiskUse`
@@ -184,16 +226,17 @@ db.child_reference.aggregate([
 - collections cannot be sharded in the `from` collection
 - unrelated `matched` stages do not get pushed before `graphLookup`
 
-
 ### A Complex example
-Find 
+
+Find
+
 - a list of all possible distinct destinations
   - with at most one layover
-  - departing from the base airports of 
-    - airlines from `Germany`, `Spain` or `Canada` 
-    - that are part of the `OneWorld` alliance 
-- Include 
-  - both the `destination` 
+  - departing from the base airports of
+    - airlines from `Germany`, `Spain` or `Canada`
+    - that are part of the `OneWorld` alliance
+- Include
+  - both the `destination`
   - and which airline services that location
 - there should be 158 results
 
@@ -241,8 +284,8 @@ $project: {
 
 ```
 
-
 ### NOTE
+
 - when looking up 'parent' documents, use the `parent_reference`
 - when looking up 'child' documents where child elements are listed in the parent doc, use the `child_reference`
 - `startWith` does NOT indicate an index to use to execute the recursive match
