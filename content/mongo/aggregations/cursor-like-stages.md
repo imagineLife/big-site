@@ -208,6 +208,7 @@ myFavs = [
   "George Clooney"
 ]
 
+# my approach
 db.movies.aggregate([
   {
     $match: {
@@ -240,7 +241,60 @@ db.movies.aggregate([
   },
   { $limit: 25 }
 ])
+
+# another more succinct approach
+db.movies.aggregate([
+  {
+    $match: {
+      "tomatoes.viewer.rating": { $gte: 3 },
+      countries: "USA",
+      cast: {
+        $in: favorites
+      }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      title: 1,
+      "tomatoes.viewer.rating": 1,
+      num_favs: {
+        $size: {
+          $setIntersection: [
+            "$cast",
+            favorites
+          ]
+        }
+      }
+    }
+  },
+  {
+    $sort: {
+      num_favs: -1,
+      "tomatoes.viewer.rating": -1,
+      title: -1
+    }
+  },
+  {
+    $skip: 24
+  },
+  {
+    $limit: 1
+  }
+])
+
 ```
+
+Differences between my approach and the shorter approach
+
+- i did not `match` on cast
+- i re-named the nested rating val to a parent-level val
+- i did not `setIntersection`
+  - i did an `if` case, comparing the favs to the setIntersection results
+  - the shorter approach _just_ returned the `setIntersection` between the `$cast` file and the `favs` array
+- I returned all 25 results in order to find the 25th result
+  - the shorter approach skipped the first 24 results
+  - the shorter approach only returned 1 item
 
 #### Complex Example II
 
