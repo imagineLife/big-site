@@ -34,12 +34,12 @@ db.coll.aggregate(aggArr)
 
 ### Available accumulators
 
-- \$sum
-- \$avg
-- \$max
-- \$min
-- \$stdDevPop
-- \$stdDevSam
+- `$sum`
+- `$avg`
+- `$max`
+- `$min`
+- `$stdDevPop`
+- `$stdDevSam`
 
 These expressions do not stay across documents.
 
