@@ -206,7 +206,12 @@ db.child_reference.aggregate([
 
 ## on limiting the level of a hierarchy search
 
-A 0-index `maxDepth` field which identifies how many 'levels' to look
+Might not be interested in the whole depth available in these lookup results.
+
+The depth represents how "deep" to go:
+
+- `maxDepth:0` is 1 layers/levels
+- `maxDepth: 1` is 2 layers/levels
 
 ```bash
 db.child_reference.aggregate([
@@ -218,6 +223,8 @@ db.child_reference.aggregate([
     connectToField: 'name',
     as: 'two_level_reports',
     maxDepth: 1,
+    # ALSO THIS!
+    # output how many 'levels' deep the doc is
     depthField: 'hierarchy_level_from_start'
   }}
 ])
