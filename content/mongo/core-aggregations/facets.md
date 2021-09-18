@@ -68,6 +68,37 @@ db.startups.aggregate([
   }
 ])
 
+# will return output like...
+{_id: "ecommerce", count: 101}
+{_id:  security, count: 53}
+```
+
+### get more faceted data on companies
+
+```bash
+db.companies.aggregate([
+  # companies with network in text
+  {
+    $match: {$text: {$search: 'network'}}
+  },
+  # make 1 doc per office
+  {
+    $unwind: '$offices'
+  },
+  # where cities ARE present
+  {
+    $match: { 'offices.city': { $ne: '' } }
+  },
+  # sort by count of companies per city
+  {
+    $sortByCount: '$offices.city'
+  }
+])
+
+# returns docs like...
+{_id: SanFrancisco, count: 238}
+{_id: Seattle, count: 91}
+
 ```
 
 ### Get agg counts grouped by the category code
