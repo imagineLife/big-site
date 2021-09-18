@@ -174,7 +174,7 @@ Aggregate on 1 field, including filters (`$match`)
 
 ## Manual and auto bucketing
 
-Grouping Data into ranges of values.  
+Bucketing: Grouping Data into ranges of values.  
 like...
 
 - 1-10
@@ -186,7 +186,7 @@ Could be by grouped numbers of employees.
 
 ### return companies bucketed by number of employees
 
-That are also started after 1980
+using the [\$bucket](https://docs.mongodb.com/manual/reference/operator/aggregation/bucket/) agg pipeline command.
 
 ```bash
 db.startups.aggregate([
@@ -211,6 +211,7 @@ db.startups.aggregate([
 
 - lower bound is inclusive
 - upper bound is exclusive
+  - - 5447 orgs founded after 1980 that have 0-19 employees
 - values outside the boundaries throw an error
   - when a value is a string and the buckets are bucketing by numbers, error
   - buckets can have a `default` key/value, for all items outside the boundaries
@@ -224,8 +225,9 @@ db.startups.aggregate([
       founded_year: { $gt: 1980 },
     }},
     {$bucket: {
-      groupBy: '\$number_of_employees',
+      groupBy: '$number_of_employees',
       boundaries: [0,20,50,100,500,1000,5000,Infinity],
+      # where a doc doesnt fit in the boundaries
       default: 'Other'
   }}
 ])
@@ -248,6 +250,8 @@ Per bucket
 - total count of startups
 - average number of employees
 - list of startup categories
+
+Use the `output` key/val in the `$bucket` arg: below, setting to an obj...
 
 ```bash
 db.startups.aggregate([
