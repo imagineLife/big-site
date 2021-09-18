@@ -25,7 +25,8 @@ db.movies.aggregate([
 
 ## Can be helpful for grouping on array entries
 
-Grouping movies based on year AND genres is complex. Array order matters.
+Grouping movies based on year AND genres is complex.  
+Array item order matters.
 
 ### Example
 
@@ -72,8 +73,26 @@ db.movies.aggregate([
       genre: { $first: '$_id.genre' },
       avg_rating: { $first: '$avg_rating' },
     },
+  }{
+    $sort: { _id: -1}
   }
 ])
+```
+
+- the group stage
+  - group by year
+  - already sorted in the order needed
+  - take FIRST item of each group & set to the genre + average rating
+- sort
+  - return in the order desired
+
+returns docs like...
+
+```bash
+{_id: 2015, genre: "Biography", avg_rating: 7.9}
+{_id: 2013, genre: "Documentary", avg_rating: 7.4}
+
+...etc
 ```
 
 NOTE: unwind on large documents may cause performance issues.
