@@ -1,6 +1,8 @@
 # Group
+
 Has 1 reguired arg: `_id`.  
-The _expression_ to the right of the `_id` is what gets grouped.  
+The _expression_ to the right of the `_id` is what gets grouped.
+
 ```bash
 
 # group by year
@@ -9,6 +11,15 @@ db.movies.aggregate([
   $group: {_id: "$year"}
 ])
 
+# will return objs like...
+{_id: 2019},
+{_id: 2018},
+...etc
+```
+
+Group used with aggregation expressions are common together, like this count by year
+
+```bash
 # group by year, sum the num films per year
 NOTE: `sum:1` will get the count of all grouped docs in the resulting group
 db.movies.aggregate([
@@ -19,10 +30,17 @@ db.movies.aggregate([
     }
   }
 ])
+
+# outputs docs like...
+{_id: 2014, num_films: 2058},
+{_id: 2013, num_films: 1898},
+...etc
 ```
+
 Each time that the `$group` categorizes a new doc, the `$sum` gets called.
 
 Now, including sorting
+
 ```bash
 db.movies.aggregate([
   {
@@ -48,6 +66,7 @@ db.movies.aggregate([
 ```
 
 Maintaining types, here when an item is not an array, forcing a calculated array length to return `0`: on a new `numDirectors` field
+
 ```bash
 db.movies.aggregate([
   {
@@ -78,19 +97,23 @@ db.movies.aggregate([
 { "_id" : { "numDirectors" : 30 }, "numFilms" : 1, "avgMetacritic" : 53 }
 
 ```
+
 ## On Missing Fields
+
 NOTE: the avgMetacritic is null here - odd.  
 WHY? a bunch of original docs don't even have the field.  
 **A missing field**.  
 This can lead analysis to sanitize the field.  
 Missing Files may lead to field sanitizations.  
-The datatypes matter.  
+The datatypes matter.
 
-Accumulator expressions ignore docs where 
+Accumulator expressions ignore docs where
+
 - the field is missing entirely
 - the _value_ of the field does not match the accumulator expectation
 
 ## On Grouping All Docs with no grouping strategy
+
 ```bash
 db.movies.aggregate([
   {
@@ -103,7 +126,9 @@ db.movies.aggregate([
 ```
 
 ### Calculating an average where key is missing in some
+
 Filter, or `$match`, the docs that do not have the field
+
 ```bash
 db.movies.aggregate([
   {
@@ -124,6 +149,7 @@ db.movies.aggregate([
 ```
 
 ### Notes
+
 - all accumulator expressions can be used in a `$group` statement
 - `$group` can be used many times in a single pipeline
 - sanitizing data may be necessary with the group, to avoid bad/missing data
