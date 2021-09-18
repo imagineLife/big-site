@@ -1,31 +1,40 @@
 # Facets
+
 An analytics capability.  
+Multi-"dimensional" analysis.  
 Data usually has to meet multiple SLAs.  
-Facet navigation - 
+Facet navigation -
+
 - create in interface that characterizes query results across multiple dimensions
 - users can narrow results by selecting facet values as a filter
 - this can be used for browsing data catalogues, analyzing data
 
 Example:
+
 - a user catalogue for LinkedIn
   - search the catalogue
     - users with term of mongodb
-    - **can add facets**
+    - **can add "facets" to the search**
       - location
+      - cur org
 
 ## Single Facet Queries
+
 Example: an app has a search bar.  
 The app returns some results on search.  
-The app also has _filters_, _dimensions_ of search.  
+The app also has _filters_, _dimensions_ of search.
 
-Explore the `startups` dataset.  
-Get `factes` out of the data.  
+Explore the `companies` dataset.  
+Get `factes` out of the data.
 
 ### Get Companies where 'network' is in the search
+
 get data on companies...
+
 - overview
 - description
-... for companies related to networking
+  ... for companies related to networking
+
 ```bash
 # create text indexes on 2 cols for this
 db.startups.createIndex({'description': 'text', 'overview': 'text'})
@@ -38,12 +47,35 @@ db.startups.createIndex({'description': 'text', 'overview': 'text'})
   "ok" : 1
 }
 
-db.startups.aggregate([{'$match': { '$text': {'$search': 'network' }}}]).itcount()
+# find companies where "network" is included somewhere
+db.startups.aggregate([
+  {'$match': {
+    '$text': {'$search': 'network' }
+    }
+  }
+]).itcount()
+
+# find companies where "network" is included somewhere
+# AND include the 'category_code' as a facet of each item
+db.startups.aggregate([
+  {
+    $match: {
+      $text: { $search: 'network' }
+    }
+  },
+  {
+    $sortByCount : "$category_code"
+  }
+])
+
 ```
 
 ### Get agg counts grouped by the category code
+
 Leveraging `sortByCount`:
+
 - works like a group then sort in descending direction
+
 ```bash
 db.movies.aggregate([
   {$group: { _id: '$imdb.rating', count:{$sum:1} }},
@@ -58,8 +90,8 @@ db.movies.aggregate([
 
 ```bash
 db.startups.aggregate([
-  {'$match': 
-    { '$text': 
+  {'$match':
+    { '$text':
       {'$search': 'network' }
     }
   },
@@ -77,6 +109,7 @@ db.startups.aggregate([
 ```
 
 ### Get agg on office city location
+
 ```bash
 db.startups.aggregate([
   {'$match': {
@@ -102,22 +135,28 @@ db.startups.aggregate([
 { "_id" : "San Jose", "count" : 53 }
 
 ```
+
 The above queries illustrate 1-attribute result sets.  
 Aggregate on 1 field, including filters (`$match`)
+
 - per city
 
 ## Manual and auto bucketing
+
 Grouping Data into ranges of values.  
 like...
+
 - 1-10
 - 11-20
 - 21-30
 - 31-40
 
-Could be by grouped numbers of employees.  
+Could be by grouped numbers of employees.
 
 ### return companies bucketed by number of employees
+
 That are also started after 1980
+
 ```bash
 db.startups.aggregate([
   {$match: {
@@ -138,14 +177,16 @@ db.startups.aggregate([
 { "_id" : 500, "count" : 98 }
 { "_id" : 1000, "count" : 137 }
 ```
+
 - lower bound is inclusive
 - upper bound is exclusive
-- values outside the boundaries throw an error 
+- values outside the boundaries throw an error
   - when a value is a string and the buckets are bucketing by numbers, error
   - buckets can have a `default` key/value, for all items outside the boundaries
     - usefull for `null` or `undefined` values
 
 ### allow 'other' in bucketing
+
 ```bash
 db.startups.aggregate([
   {$match: {
@@ -170,10 +211,13 @@ db.startups.aggregate([
 ```
 
 ## More Robust bucket Output
+
 Per bucket
+
 - total count of startups
 - average number of employees
 - list of startup categories
+
 ```bash
 db.startups.aggregate([
   {$match: { founded_year: {$gt: 1980} }},
@@ -191,8 +235,10 @@ db.startups.aggregate([
 ```
 
 ### Auto generating buckets
+
 `$bucketAuto`  
 [Mongo Docs](https://docs.mongodb.com/manual/reference/operator/aggregation/bucketAuto/)
+
 ```bash
 db.startups.aggregate([
   {$match: {'offices.city': 'New York'}},
@@ -211,6 +257,7 @@ db.startups.aggregate([
 ```
 
 #### With custom output per bucket
+
 ```bash
 db.startups.aggregate([
   {$match: {'offices.city': 'New York'}},
@@ -231,18 +278,21 @@ db.startups.aggregate([
 { "_id" : { "min" : 2007, "max" : 2009 }, "total" : 248, "avg_employees" : 623.4342857142857 }
 { "_id" : { "min" : 2009, "max" : 2013 }, "total" : 38, "avg_employees" : 57.52173913043478 }
 ```
+
 #### AutoBucket Granularity
+
 - can config the auto-buckets [preferred number series](https://en.wikipedia.org/wiki/Preferred_number)
   - supports specific strings (_R5, R20, etc_)
 
 ## show multi-facetted output
+
 `$facet`  
 Facet allows performing multiple aggregate functions and returning each aggregate to a named key.  
 Here, the `category`, `employees`, and `founded` keys hold faceted results.  
 **NOTE**  
-Each `facet` takes the _same input_. Below, the first stage matches on `Databases`, and all 3 facts get the same input where text matches databases.  
+Each `facet` takes the _same input_. Below, the first stage matches on `Databases`, and all 3 facts get the same input where text matches databases.
 
-Facet output does not affect following facet inputs. This is unlike other pipeline operators, where pipeline output directly affects following pipeline inputs.  
+Facet output does not affect following facet inputs. This is unlike other pipeline operators, where pipeline output directly affects following pipeline inputs.
 
 ```bash
 db.startups.aggregate([
@@ -312,7 +362,9 @@ db.startups.aggregate([
 ```
 
 ### A Complex example
+
 Using a single query to the db, how many movies are in both the top ten highest rated movies according to the `imdb.rating` and the `metacritic` fields?
+
 ```bash
 db.movies.aggregate([
   {$match:{ metacritic: {$exists: true}}},
@@ -349,12 +401,14 @@ db.movies.aggregate([
 ```
 
 ### Bucket and bucketAutoReview
-- boundaries 
+
+- boundaries
   - must have at least 2 vals, a min & a max
   - each be of the same _type_ (_all numbers, or all strings, etc_)
 - `count` is output by default, showing the count of items in each bucket
 - `count` gets removed when the custom `output` field is explicit
 
 bucketAuto
+
 - cardinality of hte groupBy expression may impact the distribution && number of buckets
 - `granularity` can be more explicitly than default
