@@ -1,20 +1,55 @@
 # accumulator exps inside project
-The accumulator logic happens on a per-doc basis.  
-### Available accumulators
-- $sum
-- $avg
-- $max
-- $min
-- $stdDevPop
-- $stdDevSam
 
-These expressions do not stay across documents.  
+The accumulator logic in a projection happens on a per-doc basis.
+
+Here, the accumulator `$avg` is applied to each doc in the original collection, NOT averaging all data arrays in one ->
+
+```bash
+
+# with input like this
+db.coll.find()
+# returns
+{_id: 0, data: [1,2,3,4,5]}
+{_id: 1, data: [1,3,5,7,9]}
+{_id: 2, data: [2,4,6,8,10]}
+
+# agg like this
+let aggArr = [
+  {
+    $project: {
+      dataAvg: { $avg: "$data" }
+    }
+  }
+]
+
+# applying agg
+db.coll.aggregate(aggArr)
+
+# will return
+{_id: 0, dataAvg: 3}
+{_id: 1, dataAvg: 5}
+{_id: 2, dataAvg: 6}
+
+```
+
+### Available accumulators
+
+- \$sum
+- \$avg
+- \$max
+- \$min
+- \$stdDevPop
+- \$stdDevSam
+
+These expressions do not stay across documents.
 
 ## Practice
+
 Start with some data.  
-Not to forget, this is on the `aggregation` db. Here, the icecream dataset will be leveraged.  
+Not to forget, this is on the `aggregation` db. Here, the icecream dataset will be leveraged.
 
 A snapshot of the data
+
 ```bash
 db.icecream_data.findOne()
 
@@ -46,6 +81,7 @@ db.icecream_data.findOne()
 ```
 
 Idea One, find the max avg_high_temp, && use `$reduce`. high-temp value from the `trends` array
+
 ```bash
 db.icecream_data.aggregate([
   {
@@ -55,14 +91,14 @@ db.icecream_data.aggregate([
         $reduce: {
           input: "$trends",
           initialValue: 0,
-          in: { 
+          in: {
             $cond: {
               if: {
                 $gt : ["$$this.avg_high_tmp", "$$value"]
               },
               then: "$$this.avg_high_tmp",
               else: "$$value"
-            } 
+            }
           }
         }
       }
@@ -70,18 +106,21 @@ db.icecream_data.aggregate([
   }
 ])
 
-# should return 
+# should return
 { "max_high" : 87 }
 
 ```
+
 - if the current iteration avg high temp is greater than the accumulator
   - return this high temp val
   - else return the accumulator
 - here, `$$value` is like the accumulator
-- $this is the current item in the iterator
+- \$this is the current item in the iterator
 
 ## Max
+
 Now, use the `$max` which is a type of grouping.
+
 ```bash
 db.icecream_data.aggregate([
   {
@@ -95,10 +134,13 @@ db.icecream_data.aggregate([
 # should return same as above,
 { "max_high" : 87 }
 ```
-Much smaller query.   
+
+Much smaller query.
 
 ## Min
+
 Now, get the min avg low temp
+
 ```bash
 db.icecream_data.aggregate([
   {
@@ -114,9 +156,12 @@ db.icecream_data.aggregate([
 # should return
 { "min_avg_low" : 27 }
 ```
+
 ## stdDevPop and Avg
+
 Calc avg cpi.  
-Calc the cpi standard deviation.    
+Calc the cpi standard deviation.
+
 ```bash
 db.icecream_data.aggregate([
   {
@@ -137,6 +182,7 @@ db.icecream_data.aggregate([
 ```
 
 ## Sum
+
 ```bash
 db.icecream_data.aggregate([
   {
@@ -154,19 +200,21 @@ db.icecream_data.aggregate([
 ```
 
 ## Another example
+
 For the films collection
-- only use films that won at least 1 Oscar, 
-- calculate 
-  - the standard deviation of imdb.rating (_Use the sample standard deviation expression_) 
+
+- only use films that won at least 1 Oscar,
+- calculate
+  - the standard deviation of imdb.rating (_Use the sample standard deviation expression_)
   - highest imdb.rating
   - lowest imdb.rating
-  - average imdb.rating  
+  - average imdb.rating
 
 ```bash
 # starting off
 db.movies.aggregate([
   {
-    $match: { 
+    $match: {
        awards: { $exists: true },
        'imdb.rating': { $exists: true }
     }
@@ -327,6 +375,7 @@ db.movies.aggregate([
 ```
 
 add avg
+
 ```bash
 db.movies.aggregate([
   {
@@ -358,6 +407,7 @@ db.movies.aggregate([
 ```
 
 adding stdDevSam && rating must be greater-than or equal to 1
+
 ```bash
 db.movies.aggregate([
   {
