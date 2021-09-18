@@ -1,0 +1,9 @@
+- match
+- project
+- core agg
+  - group
+  - accumulator stages with group
+  - unwind
+  - lookup
+  - graphLookup
+  - graphLookup cross collections
