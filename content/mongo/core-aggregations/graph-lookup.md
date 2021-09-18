@@ -45,28 +45,37 @@ a look at some mock data for this org would be...
 db.parent_refs.find()
 
 # mock res
+# each doc has a "parent reference"
 {_id: 4, name: "Calros Sangrana", title: "CRO", reports_to: 1 }
 {_id: 5, name: "Henrietta Washington", title: "VP Eng", reports_to: 2 }
 {_id: 6, name: "Sarah Silverstein", title: "VP Web Apps", reports_to: 5 }
 {_id: 7, name: "Wendy Alfredson", title: "VP App Components", reports_to: 5 }
-
 ```
 
 ## Who reports to dave
 
+Get ALL people who report to the TOP person
+
 ```bash
 db.parent_reference.aggregate([
   {
+# get the doc of interest, the top person is "elliot"
     $match: {
       name: 'Eliot'
     }
   },
   {
+    # get all descendent docs from th eparent doc
     $graphLookup: {
+      # same collection, a self-lookup
       from: 'parent_reference',
+      # starting with the id
       startWith: '$_id',
+      # searching on the _id field
       connectFromField: '_id',
+      # using this to match for subsequent iterations
       connectToField: 'reports_to',
+      # store res under this field
       as: 'all_reports'
     }
   }
