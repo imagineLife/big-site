@@ -82,6 +82,16 @@ db.icecream_data.findOne()
 
 Idea One, find the max avg_high_temp, && use `$reduce`. high-temp value from the `trends` array
 
+- use reduce
+  - for the input, use the `trends` arr
+  - initialVal is 0 because any val should be greater than that
+  - output is a condition
+    - if agv_high_temp is HIGHER than cur acc val, use this one
+    - else return acc
+      - NOTE:
+        - the `$$this` is the current item in the arr
+        - the `$$value` is the accumulator
+
 ```bash
 db.icecream_data.aggregate([
   {
@@ -111,15 +121,10 @@ db.icecream_data.aggregate([
 
 ```
 
-- if the current iteration avg high temp is greater than the accumulator
-  - return this high temp val
-  - else return the accumulator
-- here, `$$value` is like the accumulator
-- \$this is the current item in the iterator
-
 ## Max
 
-Now, use the `$max` which is a type of grouping.
+Now, use the `$max` which is a type of grouping.  
+A way simpler way of getting max.
 
 ```bash
 db.icecream_data.aggregate([
@@ -159,8 +164,12 @@ db.icecream_data.aggregate([
 
 ## stdDevPop and Avg
 
+Both in one query -
 Calc avg cpi.  
 Calc the cpi standard deviation.
+
+- `stdDevPop` is based on the WHOLE data set
+- there is another option, `stdDevSamp`, when only using a sample from the dataset
 
 ```bash
 db.icecream_data.aggregate([
