@@ -50,6 +50,8 @@ adding some restrictions, find 5 nearest hospitals:
 - includeLocs: ?? huh
 - distanceMultiplier: can convert distance from radians to something else
 
+Find the 5-nearest hospitals to the MongoDB Headquarters, which is defined by the coordinates
+
 ```bash
 db.nycFacilities.aggregate([
   {
@@ -68,3 +70,5 @@ db.nycFacilities.aggregate([
   }
 ])
 ```
+
+S
