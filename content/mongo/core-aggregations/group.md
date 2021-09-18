@@ -65,7 +65,13 @@ db.movies.aggregate([
 # etc
 ```
 
-Maintaining types, here when an item is not an array, forcing a calculated array length to return `0`: on a new `numDirectors` field
+Maintaining types, here when an item is not an array, forcing a calculated array length to return `0`: on a new `numDirectors` field.
+
+- the `directors` array is checked if its an array
+  - yes?! get the length of the arr && set to `numDirectors`
+  - else set `numDirectors` to 0
+
+Here, the `_id` field is an object! `{numDirectors: <val-here>}`
 
 ```bash
 db.movies.aggregate([
@@ -98,13 +104,19 @@ db.movies.aggregate([
 
 ```
 
-## On Missing Fields
+## Sanitizing input vals
+
+Understand the types of incoming data to understand the output.  
+Accumulator expressions IGNORE docs where the specifield incoming field value does not match the expected type.  
+If ALL docs encountered dont match expectations, the output is NULL!
+
+### On Missing Fields
 
 NOTE: the avgMetacritic is null here - odd.  
 WHY? a bunch of original docs don't even have the field.  
 **A missing field**.  
 This can lead analysis to sanitize the field.  
-Missing Files may lead to field sanitizations.  
+Missing Files may require field sanitizations.  
 The datatypes matter.
 
 Accumulator expressions ignore docs where
@@ -113,6 +125,10 @@ Accumulator expressions ignore docs where
 - the _value_ of the field does not match the accumulator expectation
 
 ## On Grouping All Docs with no grouping strategy
+
+set the `_id` to null.  
+set a `count` to `{$sum: 1}`.  
+this will match the output number of `db.coll.count()`.
 
 ```bash
 db.movies.aggregate([
@@ -127,7 +143,8 @@ db.movies.aggregate([
 
 ### Calculating an average where key is missing in some
 
-Filter, or `$match`, the docs that do not have the field
+Filter, or `$match`, the docs that do not have the field.  
+Docs that do not have `metacritic` won't be included will NOT be part of the average. This is like treating missing data NOT as a `0`.
 
 ```bash
 db.movies.aggregate([
