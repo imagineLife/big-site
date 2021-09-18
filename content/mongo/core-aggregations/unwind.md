@@ -1,7 +1,16 @@
-# unwind  
+# unwind
+
 Unwinds an array.  
-Each item becomes a document.  
+Each item in the arr becomes a document.
+
 ```bash
+# input
+db.movies.find({title: "Baby's Dinner"}, { _id: 0, cast: 1})
+# returns
+{cast: ["Mrs. Auguste Lumiere","Andr�e Lumire","Auguste Lumire"]}
+
+
+# unwind each cast mmember into its own doc with the title
 db.movies.aggregate([
   {$match: {title: "Baby's Dinner"}},
   {$unwind: "$cast"},
@@ -15,13 +24,16 @@ db.movies.aggregate([
 ```
 
 ## Can be helpful for grouping on array entries
-Grouping movies based on year AND genres is complex. Array order matters.  
+
+Grouping movies based on year AND genres is complex. Array order matters.
 
 ### Example
-Find 
-- most popular genre 
+
+Find
+
+- most popular genre
   - grouped by year
-  - from 2010-2015  
+  - from 2010-2015
   - with runtime of greater-than 90 min
   - movies that have been rated
 
@@ -65,5 +77,3 @@ db.movies.aggregate([
 ```
 
 NOTE: unwind on large documents may cause performance issues.
-
-
