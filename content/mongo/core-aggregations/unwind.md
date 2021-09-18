@@ -95,4 +95,33 @@ returns docs like...
 ...etc
 ```
 
-NOTE: unwind on large documents may cause performance issues.
+NOTE: unwinding on large documents may cause performance issues.
+
+### There is a long form
+
+```bash
+{
+  $unwind : {
+    path: `array-path-to-unwind`,
+    includeArrayIndex: `name of new field that will contain the array index value`,
+    preserveNullAndEmptyArrays: <bool>
+  }
+}
+
+# this could be used like...
+db.movies.aggregate([
+{$match: {title: "Baby's Dinner"}},
+{$unwind: {
+  path: "$cast",
+  includeArrayIndex: "idx",
+}},
+{$project: { title: 1, _id: 0, "cast": 1 }}
+])
+
+# returns...
+
+{ "title" : "Baby's Dinner", "cast" : "Mrs. Auguste Lumiere", idx: 0 }
+{ "title" : "Baby's Dinner", "cast" : "Andr�e Lumi�re", idx: 1 }
+{ "title" : "Baby's Dinner", "cast" : "Auguste Lumi�re", idx: 2 }
+
+```
