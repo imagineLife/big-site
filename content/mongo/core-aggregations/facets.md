@@ -275,6 +275,7 @@ db.startups.aggregate([
 [Mongo Docs](https://docs.mongodb.com/manual/reference/operator/aggregation/bucketAuto/)
 
 ```bash
+# group into 5 equal-ish size buckets
 db.startups.aggregate([
   {$match: {'offices.city': 'New York'}},
   {$bucketAuto: {
@@ -291,9 +292,15 @@ db.startups.aggregate([
 { "_id" : { "min" : 2009, "max" : 2013 }, "count" : 38 }
 ```
 
+- the `_id` field shows deets about the bucket
+  - object
+    - `min`, smallest val in bucket
+    - `max`, largest val in bucket
+
 #### With custom output per bucket
 
 ```bash
+# more control over output
 db.startups.aggregate([
   {$match: {'offices.city': 'New York'}},
   {$bucketAuto: {
@@ -315,6 +322,15 @@ db.startups.aggregate([
 ```
 
 #### AutoBucket Granularity
+
+A numerical series where the boundaries adhere to the series.
+
+```bash
+# Interesting way to make incremental docs in a collection
+for(i=o; i < 1000; i++){ db.series.insert({_id: i}) }
+
+db.series.aggregate({ $bucketAuto: { groupBy: "$_id", buckets: 5 } })
+```
 
 - can config the auto-buckets [preferred number series](https://en.wikipedia.org/wiki/Preferred_number)
   - supports specific strings (_R5, R20, etc_)
