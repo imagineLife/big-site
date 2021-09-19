@@ -339,11 +339,10 @@ db.series.aggregate({ $bucketAuto: { groupBy: "$_id", buckets: 5 } })
 
 `$facet`  
 Facet allows performing multiple aggregate functions and returning each aggregate to a named key.  
-Here, the `category`, `employees`, and `founded` keys hold faceted results.  
-**NOTE**  
-Each `facet` takes the _same input_. Below, the first stage matches on `Databases`, and all 3 facts get the same input where text matches databases.
+Here, the `category`, `employees`, and `founded` keys hold faceted results.
 
-Facet output does not affect following facet inputs. This is unlike other pipeline operators, where pipeline output directly affects following pipeline inputs.
+**NOTE**  
+Each `facet` takes the _same input_. Below, the first stage matches on `Databases`, and all 3 facts get the same input where text matches databases. Facet output does not affect following pipeline inputs in the same way that other pipeline operations do, where pipeline output directly affects following pipeline inputs.
 
 ```bash
 db.startups.aggregate([
@@ -368,7 +367,7 @@ db.startups.aggregate([
   }}
 ])
 
-#returns something like...
+# returns something like...
 {
   "categories" : [
     {
@@ -411,6 +410,14 @@ db.startups.aggregate([
   ]
 }
 ```
+
+NOTICE:
+In the query...
+
+- each facet is a key in the `facet` object
+  - each `facet` result, here, gets a hard-coded hand-picked key (_categories, employees, founded_)
+  - the value of each key is of type array
+  - the value of each key is the result of an aggregate set of functions
 
 ### A Complex example
 
@@ -463,3 +470,33 @@ bucketAuto
 
 - cardinality of hte groupBy expression may impact the distribution && number of buckets
 - `granularity` can be more explicitly than default
+
+### sorByGroup
+
+sortByCount takes 1 arg, an expression to group docs on.  
+Works like
+
+- group stage
+- sort in ascending direction
+
+```bash
+# group + sort
+db.coll.aggregate([
+  {
+    $group: {
+      _id: "$stars",
+      count: { $sum: 1 }
+    }
+  },
+  {
+    $sort: { count: -1 }
+  }
+])
+
+# same output but with sortByCount
+db.coll.aggregate([
+  {
+    $sortByCount: "$stars"
+  }
+])
+```
