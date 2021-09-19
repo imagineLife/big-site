@@ -19,10 +19,10 @@
 
 ## Index usage
 
-Be sure that agg queries use indexes.  
+Be sure that agg queries use fields with indexes.  
 The agg forms a pipeline.  
 SOME agg operators CAN use indexes, some can not.  
-Because of the flow, once one particular stage does not use an index, all following stages are not allowed to use indexes.  
+Because of the flow, once one stage does not use an index, all following stages are not allowed to use indexes.  
 The query optimizer will try to re-org queries for better performance where possible.
 
 use this to inspect the stats of the query -
@@ -31,12 +31,15 @@ use this to inspect the stats of the query -
 db.orders.agg([...aggTHingHere]), {explain: true})
 ```
 
+What parts can use indexes?
+
 - `$match` can use indexes
 - `$sort` can use indexes
-  - put these before other transformations, after the match, for optimal performance
+  - put these before other transformations, for optimal performance
 - put `$limit` near `$sort`
   - and toward front of pipes
     - this can make there server do a `top-K` sorting algo
+      - the `top-k` sort lets the server only allocate memory for the final number of docs - no in-memory processing of docs!!
 
 ### Agg pipeline parts and indexes
 
