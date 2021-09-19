@@ -5,7 +5,8 @@
   - [The Config Files](#the-config-files)
     - [Creating a keyfile](#creating-a-keyfile)
     - [Enable replication](#enable-replication)
-    - [Setting up Three mongod instances](#setting-up-three-mongod-instances)
+  - [Setting up Three mongod instances](#setting-up-three-mongod-instances)
+    - [Container Setup](#container-setup)
 
 ## Overview
 
@@ -78,10 +79,23 @@ systemLog:
   destination: file
   path: /mongod.log
   logAppend: true
+security:
+  authorization: enabled
+  keyFile: pki/m103-keyfile
 replication:
   replSetName: data-repl
 ```
 
-### Setting up Three mongod instances
+## Setting up Three mongod instances
 
-Here
+Here, the above config file will be used for 3 instances of mongod.  
+Each instance of mongod will be run by docker.  
+Each container will run 1 instance of mongod.  
+The host machine, a laptop for example, will "map" all the container ports to ports on the host machine.  
+The host machine will use the mongo cli to connect the three mongod instances together in 1 coherent replica set.
+
+### Container Setup
+
+This will be done through docker compose.  
+In a diff file.  
+The above can be done on on a host machine, where the mongod instances are running on the host. Docker compose will allow for easier & faster reproducing of the replica set.
