@@ -15,9 +15,9 @@ sequenceDiagram
 
   Browser->>Web Server: REQUEST </br> Hey web server, can I view this website?
 
-  loop Handling </br> Request
-  Web Server->>Web Server: Receive Request </br>
+  loop Handling </br> the Request
+  Web Server->>Web Server: - Receive Request </br> - Use a "handler" </br> - Prepare The Response
   end
 
-  Web Server-->>Browser: Great!
+  Web Server-->>Browser: RESPONSE: Here's what you asked for!
 ```
