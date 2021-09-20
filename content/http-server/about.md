@@ -1,12 +1,23 @@
 ---
-title: Markdown Template
-slug: http-server/about
+title: Building an HTTP Server
+slug: http-server
 author: Jake Laursen
-excerpt: building an http server
+excerpt: An overview of http servers
 tags: http, web, server, node, express
 order: 1
 ---
 
-# A Markdown Template
+# Serving Content Over The Web
 
-That was a title, here's some text.
+```mermaid
+sequenceDiagram
+  participant Browser
+
+  Browser->>Web Server: REQUEST </br> Hey web server, can I view this website?
+
+  loop Handling </br> Request
+  Web Server->>Web Server: Receive Request </br>
+  end
+
+  Web Server-->>Browser: Great!
+```
