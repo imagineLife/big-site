@@ -32,7 +32,7 @@ Initialize the directory as an place for npm to manage, then add an `index.js` f
 cd web-server
 ```
 
-```js
+```javascript
 npm init -y
 
 # add the index.js file
@@ -43,7 +43,7 @@ touch index.js
 
 The version is explicit here
 
-```js
+```javascript
 npm install express@4.17.1
 ```
 
@@ -51,7 +51,7 @@ npm install express@4.17.1
 
 Based on the express docs [hello world example](https://expressjs.com/en/starter/hello-world.html), build a server in just a few lines of code
 
-```js
+```javascript
 const express = require('express');
 const app = express();
 const port = process.env.API_PORT || 3000;
