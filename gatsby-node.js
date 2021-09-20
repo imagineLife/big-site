@@ -124,6 +124,22 @@ exports.createPages = async ({
           }
         }
       }
+      httpserver: allMarkdownRemark(
+        sort: { fields: frontmatter___order }
+        filter: {
+          frontmatter: { order: { gt: 0 }, slug: { regex: "/http-server/" } }
+        }
+      ) {
+        pages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              excerpt
+            }
+          }
+        }
+      }
     }
   `);
 
@@ -140,6 +156,7 @@ exports.createPages = async ({
       febs: { pages: febsPages },
       strengths: { pages: strengthsPages },
       mongo: { pages: mongoPages },
+      httpserver: { pages: httpServerPages },
     },
   } = res;
 
@@ -150,6 +167,7 @@ exports.createPages = async ({
     ...febsPages,
     ...strengthsPages,
     ...mongoPages,
+    ...httpServerPages,
   ].forEach(({ page }) => {
     createPage({
       path: page.overview.slug,
