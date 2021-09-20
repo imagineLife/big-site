@@ -38,6 +38,12 @@ module.exports = {
       },
     },
     {
+      resolve: 'gatsby-transformer-remark',
+      options: {
+        plugins: ['gatsby-remark-mermaid'],
+      },
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `posts`,
@@ -75,13 +81,6 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `mongo`,
-        path: `content/mongo`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
         name: `images`,
         path: `images`,
       },
@@ -94,12 +93,10 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-plugin-webpack-bundle-analyzer',
+      resolve: `gatsby-source-filesystem`,
       options: {
-        production: true,
-        disable: !process.env.ANALYZE_BUNDLE_SIZE,
-        generateStatsFile: true,
-        analyzerMode: 'static',
+        name: `http-server`,
+        path: `${__dirname}/content/http-server`,
       },
     },
   ],
