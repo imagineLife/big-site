@@ -1,11 +1,11 @@
 ---
-title: Setup An NPM Repo
-slug: http-server/build-it
+title: Send HTML with an HTTP server
+slug: http-server/render-docs
 parentDir: http-server
 author: Jake Laursen
-excerpt: Get A project started with npm, a package.json file, and some dependencies
-tags: http, web, server, node, express, npm
-order: 2
+excerpt: With a simple http server, send a webpage to the browser
+tags: http, web, server, node, express, npm, html
+order: 3
 ---
 
 # Building an HTTP Server
