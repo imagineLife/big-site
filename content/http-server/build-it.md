@@ -1,13 +1,13 @@
 ---
 title: Setup An NPM Repo
-slug: http-server/setup-npm
+slug: http-server/build-it
 author: Jake Laursen
 excerpt: Get A project started with npm, a package.json file, and some dependencies
 tags: http, web, server, node, express, npm
 order: 2
 ---
 
-# Beginning an HTTP Server
+# Building an HTTP Server
 
 Here, a project will get started.  
 A directory will be created that holds the project, and the directory will be initialized for npm to help manage node dependencies.  
@@ -31,6 +31,8 @@ Initialize the directory as an place for npm to manage, then add an `index.js` f
 # make the dir
 cd web-server
 ```
+
+Initialize the repo as an npm repo && make a file that will hold the server code.
 
 ```javascript
 npm init -y
@@ -61,10 +63,29 @@ function helloHandler(req, res) {
 }
 
 function listenCallback() {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Node HTTP Server listening on http://localhost:${port}`);
 }
 
 app.get('/', helloHandler);
 
 app.listen(port, listenCallback);
 ```
+
+## Try It Out
+
+from a terminal
+
+- if not already in the server directory, `cd` into the directory that holds the http server
+- set an API_PORT environment variable && run node with the root `index.js` file
+
+```javascript
+API_PORT=9876 node .
+```
+
+the terminal should output
+
+```bash
+Example app listening at http://localhost:9876
+```
+
+Next, The http server will be setup to send some html, css, and js to the frontend!
