@@ -23,3 +23,12 @@ Here, the server will be updated to serve html.
 The html file will also be looking for some css && js, and the express server will accommodate those files.
 
 ### Send an HTML File
+
+Update the `helloHandler` function to send an html file
+
+```javascript
+function helloHandler(req, res) {
+  let filePath = __dirname + '/home.html';
+  return res.sendFile(filePath);
+}
+```
