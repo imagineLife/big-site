@@ -89,4 +89,7 @@ the terminal should output
 Example app listening at http://localhost:9876
 ```
 
-Next, The http server will be setup to send some html, css, and js to the frontend!
+## Next-Step Options
+
+One path to go here is to [send some html, css, and js to the dom](/render-docs.md).
+Another path to consider is to consider [dig into server scaling](/./../http-server-scaling).
