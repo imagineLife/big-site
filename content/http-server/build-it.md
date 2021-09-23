@@ -91,5 +91,5 @@ Example app listening at http://localhost:9876
 
 ## Next-Step Options
 
-One path to go here is to [send some html, css, and js to the dom](/render-docs.md).
+One path to go here is to [send some html (and more) to the dom](./render-docs).  
 Another path to consider is to consider [dig into server scaling](/./../http-server-scaling).
