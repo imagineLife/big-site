@@ -78,3 +78,8 @@ then, going to a browser and going to the url
 `localhost:9876`.
 
 Note: there are a handful of placeholder commented details here. These will be included & briefly reviewed shortly.
+
+### Next-Step Options
+
+One path to consider is to [dig into some HTML](./../html): elements, attributes, etc.  
+Another direction to go is to [serve css + js](/styling-and-interaction) from this same express server.
