@@ -10,7 +10,7 @@ order: 1
 # A Web-First Path
 
 The UI of a website and a web "app" are visually rewarding to work on - changing item colors, shapes, functionalities for the end-user...  
-There are a lot of nuances in a lot of technologies involved in building web-based tools, though.
+There are a lot of nuances in a lot of technologies involved in building web-based tools, though. This is the beginning of a set of tech to
 
 ## Frontend
 
@@ -50,29 +50,53 @@ Starting From the Http Server
 
 ```mermaid
   flowchart TB
+%% List of nodes at top
+%% Composition of nodes into Sub-Graphs & flow layout in graph below
+
+%% NODES
+  HTTPSERVER[Build an HTTP Server];
+  FIRSTUI[Serving First UI Content];
+  OPTS{Some Options}
+
+%% server nodes
+  REST-API[RESTful API];
+  GRAPH-DATA[graphed data];
+
+%% client nodes
+  HTML[HTML]
+  CSS[CSS]
+  JS[JavaScript]
+  BROWSER-APIS[Browser APIs]
+
 
 %%  HTTP server sub-graph
-%% nodes SG1, A, B
-    subgraph SG1[HTTP Server Setup]
-      direction LR
-      A[Build an HTTP Server] --> B[Serving First UI Content];
-    end;
+
+  subgraph SG1[HTTP Server Setup]
+    direction LR
+    HTTPSERVER --> FIRSTUI;
+  end;
 
 %% HTTP sub-graph to options
-%% nodes C
-    SG1 --> C{Some Options};
+    SG1 --> OPTS;
 
 %% Server-Curious SubGraph
-%% nodes SG2, D, E
-    subgraph SG2[Dig In to the Server]
-      direction TB
+  subgraph SG2[Dig In to the Server]
+    direction TB
+    REST-API;
+    GRAPH-DATA;
+  end;
 
-      D[serve RESTful API];
-      E[serve graphed data]
-    end;
+%% Client-Curious SubGraph
+  subgraph SG3[Dig In to the Client]
+    direction TB
+    HTML;
+    CSS;
+    JS;
+    BROWSER-APIS;
+  end;
 
-
-    C --> |Server-Curious| SG2[RESTful APIs];
-    C --> |Browser-Curious| F[HTML];
+%%
+  OPTS --> |Server-Curious| SG2;
+  OPTS --> |Browser-Curious| SG3;
 
 ```
