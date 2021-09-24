@@ -39,6 +39,8 @@ Check the server sending this to a browser! If the express server is running fro
 # hold down "control" and the "c" key to stop the server
 ^C
 
+# restart the server
+API_PORT=9876 node .
 ```
 
-With the html doc pointing to an `./index.css`, the html page
+With the html doc pointing to an `./index.css`, the html page in the browser is looking for the css file at `http://localhost:9876/index.css`. This file does not exist, unfortunately.
