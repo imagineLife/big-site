@@ -52,8 +52,7 @@ Starting From the Http Server
   flowchart TB
     subgraph SG1[HTTP Server Setup]
       direction LR
-      A[Build an HTTP Server] --> B[Serve RESTful content];
-      B --> C[Serve UI Content];
+      A[Build an HTTP Server] --> B[Serving First UI Content];
     end;
 
     SG1 --> D{Some Options};
