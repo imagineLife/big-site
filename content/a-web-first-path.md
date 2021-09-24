@@ -50,5 +50,14 @@ Starting From the Http Server
 
 ```mermaid
   flowchart LR
-    A[Build an HTTP Server] --> B[Serve RESTful content] --> C[Serve UI Content]
+
+    A[Build an HTTP Server] --> B[Serve RESTful content];
+
+    B --> C[Serve UI Content];
+
+    C --> D{Some Options};
+
+    D --> |Server-Curious| E[RESTful APIs];
+    D --> |Browser-Curious| F[HTML];
+
 ```
