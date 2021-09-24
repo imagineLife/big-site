@@ -43,3 +43,12 @@ HTTP(s) server can serve many "types" of content:
 ### Vertical Scaling
 
 Node provides some handy apis for scaling node.
+
+## A Visual Path
+
+Starting From the Http Server
+
+```mermaid
+  flowchart LR
+    A[Build an HTTP Server] --> B[Serve RESTful content] --> C[Serve UI Content]
+```
