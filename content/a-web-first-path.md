@@ -9,7 +9,8 @@ order: 1
 
 # A Web-First Path
 
-There are a lot of nuances to building web-based technologies:
+The UI of a website and a web "app" are visually rewarding to work on - changing item colors, shapes, functionalities for the end-user...  
+There are a lot of nuances in a lot of technologies involved in building web-based tools, though.
 
 ## Frontend
 
