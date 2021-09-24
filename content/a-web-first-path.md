@@ -50,14 +50,29 @@ Starting From the Http Server
 
 ```mermaid
   flowchart TB
+
+%%  HTTP server sub-graph
+%% nodes SG1, A, B
     subgraph SG1[HTTP Server Setup]
       direction LR
       A[Build an HTTP Server] --> B[Serving First UI Content];
     end;
 
-    SG1 --> D{Some Options};
+%% HTTP sub-graph to options
+%% nodes C
+    SG1 --> C{Some Options};
 
-    D --> |Server-Curious| E[RESTful APIs];
-    D --> |Browser-Curious| F[HTML];
+%% Server-Curious SubGraph
+%% nodes SG2, D, E
+    subgraph SG2[Dig In to the Server]
+      direction TB
+
+      D[serve RESTful API];
+      E[serve graphed data]
+    end;
+
+
+    C --> |Server-Curious| SG2[RESTful APIs];
+    C --> |Browser-Curious| F[HTML];
 
 ```
