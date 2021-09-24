@@ -49,13 +49,14 @@ Node provides some handy apis for scaling node.
 Starting From the Http Server
 
 ```mermaid
-  flowchart LR
+  flowchart TB
+    subgraph SG1[HTTP Server Setup]
+      direction LR
+      A[Build an HTTP Server] --> B[Serve RESTful content];
+      B --> C[Serve UI Content];
+    end;
 
-    A[Build an HTTP Server] --> B[Serve RESTful content];
-
-    B --> C[Serve UI Content];
-
-    C --> D{Some Options};
+    SG1 --> D{Some Options};
 
     D --> |Server-Curious| E[RESTful APIs];
     D --> |Browser-Curious| F[HTML];
