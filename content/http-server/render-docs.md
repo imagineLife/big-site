@@ -82,4 +82,4 @@ Note: there are a handful of placeholder commented details here. These will be i
 ### Next-Step Options
 
 One path to consider is to [dig into some HTML](./../html): elements, attributes, etc.  
-Another direction to go is to [serve css + js](/styling-and-interaction) from this same express server.
+Another direction to go is to [serve css + js](./styling-and-interaction) from this same express server.
