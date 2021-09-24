@@ -134,7 +134,12 @@ Use [mongotop](https://docs.mongodb.com/database-tools/mongotop/) to inspect how
 [Queries can be optimized](https://docs.mongodb.com/manual/core/query-optimization/).
 
 The order of the fields in an index matters.  
-The order of the fields in the selection query are not significant: the query-planner will "reorder" the query keys to match a compound index prefix. Checkout the [docs on compound index prefixes](https://docs.mongodb.com/manual/core/index-compound/#prefixes).
+The order of the fields in the selection query are not significant: the query-planner will "reorder" the query keys to match a compound index prefix. Checkout the [docs on compound index prefixes](https://docs.mongodb.com/manual/core/index-compound/#prefixes).  
+As long as a query uses all keys of a compound index or a combination of index prefixes, the query will make use of the existing index: example
+
+```bash
+
+```
 
 Some queries can ba completed without sorting in-memory. When queries use only indexed fields, the sort happens on the indexes, not the data.  
 Example
