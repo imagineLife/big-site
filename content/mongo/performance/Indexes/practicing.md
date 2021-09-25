@@ -64,13 +64,9 @@ db.listingsAndReviews.getIndexes()
 
 The `property_type_1_room_type_1_beds_1` will be used in several iterations for exploring the impact of the index and the index sort orders on query performance.
 
-### Get Simple Data
-
-```bash
-db.listingsAndReviews.findOne()
-```
-
 ### Saving some objects
+
+These will be shorthand references to the collection && the explainable object
 
 ```bash
 # short ref to the collection
@@ -78,6 +74,55 @@ let lar = db.listingsAndReviews;
 
 # explainable object
 let exp = lar.explain('queryPlanner');
+```
+
+### Get Simple Data
+
+```bash
+# one doc to check out
+lar.findOne()
+
+# keys in a doc
+lar.aggregate([
+  {
+    "$project":{
+      "arrayofkeyvalue":{ "$objectToArray":"$$ROOT"}
+    }
+  },
+  {
+    "$project": {"keys":"$arrayofkeyvalue.k"}
+  },
+  {"$limit": 1}
+])
+
+# returns...
+[
+  {
+    _id: '10006546',
+    keys: [
+      '_id', 'listing_url',
+      'name', 'summary',
+      'space', 'description',
+      'neighborhood_overview', 'notes',
+      'transit', 'access',
+      'interaction', 'house_rules',
+      'property_type', 'room_type',
+      'bed_type', 'minimum_nights',
+      'maximum_nights', 'cancellation_policy',
+      'last_scraped', 'calendar_last_scraped',
+      'first_review', 'last_review',
+      'accommodates', 'bedrooms',
+      'beds', 'number_of_reviews',
+      'bathrooms', 'amenities',
+      'price', 'security_deposit',
+      'cleaning_fee', 'extra_people',
+      'guests_included', 'images',
+      'host', 'address',
+      'availability', 'review_scores',
+      'reviews'
+    ]
+  }
+]
 
 ```
 
