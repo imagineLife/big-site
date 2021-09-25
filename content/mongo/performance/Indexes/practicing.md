@@ -9,6 +9,8 @@ Explain provides insights into query performance.
 
 ## Access the db through mongosh
 
+### Get in
+
 This requires the [`mongosh`](https://docs.mongodb.com/mongodb-shell/install/) mongo shell tool.
 
 ```bash
@@ -16,3 +18,12 @@ mongosh "mongodb+srv://<the-cluster-name>/sample_airbnb" --username demo_user
 ```
 
 the cli will ask for the password, enter that!
+
+### Show the available collection
+
+```bash
+show collections
+
+# should return
+listingsAndReviews
+```
