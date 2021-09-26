@@ -83,17 +83,19 @@ let exp = lar.explain('queryPlanner');
 lar.findOne()
 
 # keys in a doc
-lar.aggregate([
+let keysAggArr =[
   {
     "$project":{
-      "arrayofkeyvalue":{ "$objectToArray":"$$ROOT"}
-    }
+    "arrayofkeyvalue":{ "$objectToArray":"$$ROOT"}
+  }
   },
   {
-    "$project": {"keys":"$arrayofkeyvalue.k"}
+   "$project": {"keys":"$arrayofkeyvalue.k"}
   },
   {"$limit": 1}
-])
+]
+
+lar.aggregate(keysAggArr)
 
 # returns...
 [
@@ -126,4 +128,54 @@ lar.aggregate([
 
 ```
 
-### Using the explain object while querying
+### Get Index value options
+
+Let's review the index `property_type_1_room_type_1_beds_1`.  
+What values are available for
+
+- property type?
+- room type?
+- beds?
+
+```bash
+# store aggs in arrs
+# propType agg
+let ptAgg = [
+  {
+    $group: {
+      _id: "$property_type",
+      records: { $sum: 1 }
+    }
+  },
+  {
+    $sort: {
+      records : -1
+    }
+  }
+]
+
+# returns
+[
+  { _id: 'Apartment', records: 3626 },
+  { _id: 'House', records: 606 },
+  { _id: 'Condominium', records: 399 },
+  { _id: 'Serviced apartment', records: 185 },
+  { _id: 'Loft', records: 142 },
+  { _id: 'Townhouse', records: 108 },
+  { _id: 'Guest suite', records: 81 },
+  { _id: 'Bed and breakfast', records: 69 },
+  { _id: 'Boutique hotel', records: 53 },
+  { _id: 'Guesthouse', records: 50 },
+  { _id: 'Hostel', records: 34 },
+  { _id: 'Villa', records: 32 },
+  { _id: 'Hotel', records: 26 },
+  { _id: 'Aparthotel', records: 23 },
+  { _id: 'Cottage', records: 20 },
+  { _id: 'Other', records: 18 },
+  { _id: 'Cabin', records: 15 },
+  { _id: 'Bungalow', records: 14 },
+  { _id: 'Resort', records: 11 },
+  { _id: 'Casa particular (Cuba)', records: 9 }
+]
+
+```
