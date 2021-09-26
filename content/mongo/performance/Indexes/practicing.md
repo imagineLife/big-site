@@ -29,7 +29,7 @@ show collections
 listingsAndReviews
 
 
-# show collection indexes
+# show indexes on collection
 db.listingsAndReviews.getIndexes()
 
 # should return
@@ -208,6 +208,39 @@ let rtAgg = [
   { _id: 'Entire home/apt', records: 3489 },
   { _id: 'Private room', records: 1983 },
   { _id: 'Shared room', records: 83 }
+]
+
+```
+
+## Restaurants collection performance
+
+```bash
+
+# use my db
+use myrests
+
+# save collection to single-letter var
+r = db.rests
+
+# save execution-stats explain to single letter var
+e = r.explain('executionStats')
+
+# count of cuisines
+let cuisCounts = [
+  {
+    $project: { cuisine: 1, _id: 0 }
+  },
+  {
+    $group: {
+      _id: "$cuisine",
+      records: { $sum: 1 }
+    }
+  },
+  {
+    $sort: {
+      records : -1
+    }
+  }
 ]
 
 ```
