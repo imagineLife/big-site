@@ -144,7 +144,7 @@ What values are available for
 # propType agg
 let ptAgg = [
   {
-    $project: { property_type: 1 }
+    $project: { property_type: 1, _id: 0 }
   },
   {
     $group: {
