@@ -137,6 +137,8 @@ What values are available for
 - room type?
 - beds?
 
+#### Property Type Counts
+
 ```bash
 # store aggs in arrs
 # propType agg
@@ -176,6 +178,33 @@ let ptAgg = [
   { _id: 'Bungalow', records: 14 },
   { _id: 'Resort', records: 11 },
   { _id: 'Casa particular (Cuba)', records: 9 }
+]
+```
+
+#### Room Type Counts
+
+```bash
+# store aggs in arrs
+# roomType agg
+let rtAgg = [
+  {
+    $group: {
+      _id: "$room_type",
+      records: { $sum: 1 }
+    }
+  },
+  {
+    $sort: {
+      records : -1
+    }
+  }
+]
+
+# returns
+[
+  { _id: 'Entire home/apt', records: 3489 },
+  { _id: 'Private room', records: 1983 },
+  { _id: 'Shared room', records: 83 }
 ]
 
 ```
