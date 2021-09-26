@@ -144,6 +144,9 @@ What values are available for
 # propType agg
 let ptAgg = [
   {
+    $project: { property_type: 1 }
+  },
+  {
     $group: {
       _id: "$property_type",
       records: { $sum: 1 }
