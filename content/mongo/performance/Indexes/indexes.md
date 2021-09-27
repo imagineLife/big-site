@@ -646,6 +646,8 @@ db.coll.find().sort( { a: 1, b: 1, c: 1 } )
 # NOTICE THIS GOOD ONE
 db.coll.find( { a: { $gt: 4 } } ).sort( { a: 1, b: 1 } )
 # the index prefix can exist differently in each query predicate and sort
+# THIS query uses the a & b indexes in the sort
+# even though the b is not used in the query predicate
 ```
 
 ### Index Prefixes across selection and sort
@@ -661,5 +663,6 @@ db.coll.find( { b: 3, a: 4 } ).sort( { c: 1 } )
 
 # uses index prefix {a:1, b:1 }
 db.coll.find( { a: 5, b: { $lt: 3} } ).sort( { b: 1 } )
+#  the index fields in the SORT over-write the equality demand in the FIND
 
 ```
