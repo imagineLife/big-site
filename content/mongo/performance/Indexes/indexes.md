@@ -602,6 +602,10 @@ db.stores.find({ "address.city": "WestVille" }).sort({ "address.city": -1 })
 
 ### Compound Indexes and Sorting
 
+From the [mongo docs](https://docs.mongodb.com/v4.4/tutorial/sort-results-with-indexes/#sort-on-multiple-fields)...  
+"_the specified sort direction for all keys in the `cursor.sort()` document must match the index key pattern or match the inverse of the index key pattern._"  
+"_the sort keys must be listed in the same order as they appear in the index_"
+
 ```bash
 # example index prefix
 idxPrefix = {a:1, b:1, c:1 , d:1}
@@ -615,5 +619,47 @@ db.coll.createIndex(idxPrefix)
 
 # cant sort out-of-index-order
 {b:1, a:1}
+
+# cant sort in mis-matched directions from original statement
+# not even if the first key is in order
+{a:1, b:-1}
+```
+
+### Index Prefixes and sorting
+
+```bash
+# given index obj
+{a:1, b:1, c:1, d:1}
+
+# successful index-prefix options
+{a:1}
+{a:1, b:1}
+{a:1, b:1, c:1}
+
+# successful QUERIES that leverage the index prefixes
+db.coll.find().sort( { a: 1 } )
+db.coll.find().sort( { a: -1 } )
+db.coll.find().sort( { a: 1, b: 1 } )
+db.coll.find().sort( { a: -1, b: -1 } )
+db.coll.find().sort( { a: 1, b: 1, c: 1 } )
+
+# NOTICE THIS GOOD ONE
+db.coll.find( { a: { $gt: 4 } } ).sort( { a: 1, b: 1 } )
+# the index prefix can exist differently in each query predicate and sort
+```
+
+### Index Prefixes across selection and sort
+
+Mongo figures out how to leverage indexes while using the selection AND the sorting:
+
+```bash
+# uses index prefix {a:1, b:1, c:1 }
+db.coll.find( { a: 5 } ).sort( { b: 1, c: 1 } )
+
+# uses index prefix {a:1, b:1, c:1 }
+db.coll.find( { b: 3, a: 4 } ).sort( { c: 1 } )
+
+# uses index prefix {a:1, b:1 }
+db.coll.find( { a: 5, b: { $lt: 3} } ).sort( { b: 1 } )
 
 ```
