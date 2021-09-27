@@ -672,3 +672,41 @@ Here is the condition that does not require equality in the query predicate:
 db.coll.find( { a: 5, b: { $lt: 3} } ).sort( { b: 1 } )
 # the index fields in the SORT over-write the equality demand in the FIND
 ```
+
+### Indexes, querying, sorting, and Collation
+
+```bash
+# a collated index
+db.coll.createIndex( { category: 1 }, { collation: { locale: "fr" } } )
+
+# WILL use index
+db.coll.find( { category: "cafe" } ).collation( { locale: "fr" } )
+
+# WILL NOT use index
+db.coll.find( { category: "cafe" } )
+
+```
+
+Collations && compond indexes
+
+```js
+// CREATE a compound collated index
+db.coll.createIndex(
+  { score: 1, price: 1, category: 1 },
+  { collation: { locale: 'fr' } },
+);
+
+// WILL use the indexes :)
+db.coll.find({ score: 5 }).sort({ price: 1 });
+db.coll
+  .find({
+    score: 5,
+    price: {
+      $gt: NumberDecimal('10'),
+    },
+  })
+  .sort({ price: 1 });
+
+// will ONLY use partial index
+db.coll.find({ score: 5, category: 'cafe' });
+```
