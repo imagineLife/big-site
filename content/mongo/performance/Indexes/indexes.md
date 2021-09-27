@@ -652,17 +652,23 @@ db.coll.find( { a: { $gt: 4 } } ).sort( { a: 1, b: 1 } )
 
 ### Index Prefixes across selection and sort
 
-Mongo figures out how to leverage indexes while using the selection AND the sorting:
+Mongo figures out how to leverage indexes while using the selection AND the sorting, even when the query predicate (_the 'find' type selection_) may not include all indexes.  
+In order for this to work, the indexes included in the query predicate (_the 'find' type section_) that appear prior to the sort index prefix subset, MUST include EQUALITY CONDITIONS.
 
 ```bash
 # uses index prefix {a:1, b:1, c:1 }
+# a is equal to 5
 db.coll.find( { a: 5 } ).sort( { b: 1, c: 1 } )
 
 # uses index prefix {a:1, b:1, c:1 }
+# a = 5, b = 3
 db.coll.find( { b: 3, a: 4 } ).sort( { c: 1 } )
+```
 
-# uses index prefix {a:1, b:1 }
+Here is the condition that does not require equality in the query predicate:
+
+```bash
+#  a = 5, b NOT EQUAL
 db.coll.find( { a: 5, b: { $lt: 3} } ).sort( { b: 1 } )
-#  the index fields in the SORT over-write the equality demand in the FIND
-
+# the index fields in the SORT over-write the equality demand in the FIND
 ```
