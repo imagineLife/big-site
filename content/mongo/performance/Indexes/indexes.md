@@ -595,3 +595,25 @@ db.stores.find({ "address.city": "WestVille" }).sort({ "address.city": -1 })
 - #5
   - in the FIND
     - does not use the first index prefix
+
+## More index deep dive details
+
+## Indexes and sort
+
+### Compound Indexes and Sorting
+
+```bash
+# example index prefix
+idxPrefix = {a:1, b:1, c:1 , d:1}
+db.coll.createIndex(idxPrefix)
+
+# GOOD SORT objs
+{a:1}
+{a:1, b:1}
+{a: -1, b: -1}
+# BAD SORTS
+
+# cant sort out-of-index-order
+{b:1, a:1}
+
+```
