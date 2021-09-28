@@ -237,7 +237,7 @@ The `winningPlan` has a `stage` key/val. Stages describe the type of db operatio
 - `SHARD_MERGE`: for merging results from sharded collection data
 - `SHARDING_FILTER`: for filtering _orphan docs_ out of shards
 
-## Indexes and sorting
+## Indexes and sorting and performance
 
 Sorting with and without indexes can have drastic impact on a query and query performance. In the explain statement, there is a `SORT` stage that can help understand how the db sorted the data.
 
@@ -687,7 +687,7 @@ db.coll.find( { category: "cafe" } )
 
 ```
 
-Collations && compond indexes
+Collations && compound indexes
 
 ```js
 // CREATE a compound collated index
@@ -709,4 +709,30 @@ db.coll
 
 // will ONLY use partial index
 db.coll.find({ score: 5, category: 'cafe' });
+```
+
+### MultiKey Indexes and Performance
+
+#### Sorting arrays blocks
+
+Querying && sorting on an arrs indexed with a multi-key index _includes a blocking sort_ stage. This can slow down a queries performance.
+
+#### Tricky GET query syntax
+
+```js
+db.coll.find({
+  ratings: {
+    $elemMatch: {
+      $gte: 3,
+      $lte: 6,
+    },
+  },
+});
+
+/*
+Above, the $elemMatch requires that the array contains
+AT LEAST 1 ELEMENT THAT MATCHES THE CONDITIONS!
+- single elemMatch
+- multiple conditions inside the single elemMatch
+*/
 ```
