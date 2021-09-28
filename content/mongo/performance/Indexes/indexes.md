@@ -756,6 +756,29 @@ db.coll.find({
 
 #### Compound Indexes on arrays
 
+Mongo approaches compound-indexed multi-key-index-inclusive queries by grouping & re-grouping.
+Here's an example including the query && the regrouped way mongo might approach handling the query -
+
+```js
+db.survey2.find({
+  item: "XYZ",
+  "ratings.score":
+    { $lte: 5 },
+  "ratings.by": "anon"
+})
+
+// Mongo might re-interpret the query:
+{
+"item" : [ [ "XYZ", "XYZ" ] ],
+"ratings.score" : [ [ -Infinity, 5 ] ],
+"ratings.by" : [ [ MinKey, MaxKey ] ]
+}
+
+
+```
+
+More examples
+
 ```js
 let coll = [
   { itm: 'a', prices: [3,9,14,29,47] },
@@ -770,5 +793,4 @@ db.coll.find( { itm: "XYZ", prices: { $gte: 31 } } )
 
 // mongo can compound BOTH requirements into something more like...
 { itm: [ [ "XYZ", "XYZ" ] ], prices: [ [ 31, Infinity ] ] }
-
 ```
