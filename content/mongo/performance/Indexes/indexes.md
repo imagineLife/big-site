@@ -734,5 +734,41 @@ Above, the $elemMatch requires that the array contains
 AT LEAST 1 ELEMENT THAT MATCHES THE CONDITIONS!
 - single elemMatch
 - multiple conditions inside the single elemMatch
+The query returns where
+- at least 1 element is <= 3 && <= 6
 */
+
+db.coll.find({
+  ratings: {
+    $gte: 3,
+    $lte: 6,
+  },
+});
+/*
+  Above, elemMatch is not present.
+  MongoDB cannot apply the search params to a single element in the search
+  MongoDB will returns
+  - at least 1 element greater <= 3 
+  - at least 1 element <= 6
+  - NOT REQUIRED TO BE THE SAME ELEMENT!
+*/
+```
+
+#### Compound Indexes on arrays
+
+```js
+let coll = [
+  { itm: 'a', prices: [3,9,14,29,47] },
+  { itm: 'b', prices: [3,9,14,29,47] },
+];
+
+// COMPOUND INDEX, including arr
+db.coll.createIndex({ itm: 1, prices: 1 });
+
+// a query example
+db.coll.find( { itm: "XYZ", prices: { $gte: 31 } } )
+
+// mongo can compound BOTH requirements into something more like...
+{ itm: [ [ "XYZ", "XYZ" ] ], prices: [ [ 31, Infinity ] ] }
+
 ```
