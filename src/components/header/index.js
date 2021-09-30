@@ -20,6 +20,9 @@ const Header = () => (
       <Link className="styled" activeClassName="current-page" to="/scrum">
         Scrum
       </Link>
+      <Link className="styled" activeClassName="current-page" to="/mongo">
+        Mongo
+      </Link>
       {/* <Link className="styled" activeClassName="current-page" to="/strengths">
   strengths
 </Link> */}
