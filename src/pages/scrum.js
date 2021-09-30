@@ -1,11 +1,6 @@
-import React, { Fragment } from 'react';
-import { StaticQuery, graphql, Link } from 'gatsby';
-
-import Layout from './../components/layout';
-import Hero from './../components/hero';
-import PostPreview from './../components/PostPreview';
-
-import './scrum.scss';
+import React from 'react';
+import { StaticQuery, graphql } from 'gatsby';
+import TOC from './../components/TOC';
 
 const IndexPage = () => (
   <StaticQuery
@@ -31,34 +26,7 @@ const IndexPage = () => (
     `}
     render={({ scrum: { pages } }) => {
       return (
-        <Fragment>
-          <Hero />
-          <Layout>
-            <section className="toc-wrapper">
-              <h1>Scrum</h1>
-              <p className="subtitle">A Brief collection of writings</p>
-              {pages.map(
-                (
-                  {
-                    page: {
-                      overview: { slug, title, excerpt },
-                    },
-                  },
-                  pageIdx,
-                ) => {
-                  return (
-                    <div className="toc-card" key={`scrum-toc-${pageIdx}`}>
-                      <Link to={`/${slug}`} className="title">
-                        {title}
-                      </Link>
-                      <p className="content">{excerpt}</p>
-                    </div>
-                  );
-                },
-              )}
-            </section>
-          </Layout>
-        </Fragment>
+        <TOC title="Scrum" sub="A Brief collection of writings" pages={pages} />
       );
     }}
   />
