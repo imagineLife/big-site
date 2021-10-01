@@ -54,6 +54,26 @@ NOTES:
 - partial indexes represent a _superset_ of the functionality of sparse indexes
 - users can not support
 
+## Example 3 - Compound Partial
+
+```bash
+let idxObj = {
+  fair: 1,
+  name: 1
+}
+let partialConfigObj = {
+  partialFilterExpression: {
+    rating: {
+      $gt: 5
+    }
+  }
+}
+
+
+db.coll.createIndex(idxObj, partialConfigObj)
+
+```
+
 ## Comparing partial to sparse
 
 Sparse are a special case of partial.  
@@ -80,3 +100,15 @@ Queries without the explicit partial field value match will not leverage the ind
 - cant specify a partial filter expression AND a sparse option
 - the `_id` cannot be partially indexed
   - every doc HAS to have a fully indexed `_id` field
+
+### Partial Index available conditions
+
+```bash
+- $exists
+- $gt
+- $gte
+- $lt
+- $lte
+- $type
+- $and
+```
