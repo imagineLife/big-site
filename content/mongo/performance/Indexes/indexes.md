@@ -604,7 +604,7 @@ db.stores.find({ "address.city": "WestVille" }).sort({ "address.city": -1 })
 
 From the [mongo docs](https://docs.mongodb.com/v4.4/tutorial/sort-results-with-indexes/#sort-on-multiple-fields)...  
 "_the specified sort direction for all keys in the `cursor.sort()` document must match the index key pattern or match the inverse of the index key pattern._"  
-"_the sort keys must be listed in the same order as they appear in the index_"
+"_the sort keys must be listed in the same order as they appear in the index_" AND the sort orders must all either align or all be inverse.
 
 ```bash
 # example index prefix
@@ -642,6 +642,7 @@ db.coll.find().sort( { a: -1 } )
 db.coll.find().sort( { a: 1, b: 1 } )
 db.coll.find().sort( { a: -1, b: -1 } )
 db.coll.find().sort( { a: 1, b: 1, c: 1 } )
+db.coll.find( { a: { $gt: 4 } } ).sort( { a: 1, b: 1 } )
 
 # NOTICE THIS GOOD ONE
 db.coll.find( { a: { $gt: 4 } } ).sort( { a: 1, b: 1 } )
@@ -656,6 +657,9 @@ Mongo figures out how to leverage indexes while using the selection AND the sort
 In order for this to work, the indexes included in the query predicate (_the 'find' type section_) that appear prior to the sort index prefix subset, MUST include EQUALITY CONDITIONS.
 
 ```bash
+# given index obj
+# {a:1, b:1, c:1, d:1}
+
 # uses index prefix {a:1, b:1, c:1 }
 # a is equal to 5
 db.coll.find( { a: 5 } ).sort( { b: 1, c: 1 } )
@@ -684,7 +688,6 @@ db.coll.find( { category: "cafe" } ).collation( { locale: "fr" } )
 
 # WILL NOT use index
 db.coll.find( { category: "cafe" } )
-
 ```
 
 Collations && compound indexes
