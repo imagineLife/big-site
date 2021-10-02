@@ -264,20 +264,22 @@ The server reads docs from disk into ram during a sort. The server stops sorting
 
 A query with a cursor sort on the ssn:
 
-```bash
-db.people.find({}, { _id:0, last_name: 1, first_name: 1, ssn: 1 } ).sort({ssn:1})
+```js
+db.people
+  .find({}, { _id: 0, last_name: 1, first_name: 1, ssn: 1 })
+  .sort({ ssn: 1 });
 ```
 
 With an explanation:
 
-```bash
-exp = db.people.explain("executionStats");
-exp.find({}, { _id:0, last_name: 1, first_name: 1, ssn: 1 } ).sort({ssn:1})
+```js
+exp = db.people.explain('executionStats');
+exp.find({}, { _id: 0, last_name: 1, first_name: 1, ssn: 1 }).sort({ ssn: 1 });
 ```
 
 **NOTICE**:
 
-```bash
+```js
 "totalKeysExamined" : 50474,
 "totalDocsExamined" : 50474,
 "winningPlan.inputStage" "IXSCAN"
@@ -287,8 +289,10 @@ Docs AND keys were used. On queries that do not sort on index keys, an in-memory
 THe `ixscan` was used not for the indexes, themselves, but for sorting.  
 Comparing this query to another query sorting on a non-indexed field...
 
-```bash
-exp.find({}, { _id:0, last_name: 1, first_name: 1, ssn: 1 } ).sort({last_name:1})
+```js
+exp
+  .find({}, { _id: 0, last_name: 1, first_name: 1, ssn: 1 })
+  .sort({ last_name: 1 });
 ```
 
 the explain output has other details to notice that the `executionStats.totalKeysExamined` is 0: this did an in-memory sort. all docs were read in memory, then in-memory sort was done by last_name.
@@ -302,11 +306,15 @@ the explain output has other details to notice that the `executionStats.totalKey
 appending a hint method can enforce which indexes and index shape for the query optimizer works.  
 This overrides mongodbs default index choosing method.
 
-```bash
-db.peeps.find({name:"John Frank", zipcode: {$gt: 63000}}).hint({name: 1, zipcode: 1})
+```js
+db.peeps
+  .find({ name: 'John Frank', zipcode: { $gt: 63000 } })
+  .hint({ name: 1, zipcode: 1 });
 
-# or
-db.peeps.find({name:"John Frank", zipcode: {$gt: 63000}}).hint("name_1_zipcode_1")
+//  or
+db.peeps
+  .find({ name: 'John Frank', zipcode: { $gt: 63000 } })
+  .hint('name_1_zipcode_1');
 ```
 
 Use this with caution. The db query optimizer is usually killin at what it does. That's what it does.
@@ -376,26 +384,26 @@ Ram should be able to accommodate ALL INDEXES.
 If not enough memory space, disk-access will be required. Disk is slow.  
 Inspect how much space in ram is being used by memory.
 
-```bash
-db.coll.stats({indexDetails:true})
+```js
+db.coll.stats({ indexDetails: true });
 ```
 
 This show a lot of stuff.
 try limiting the results with a var
 
-```bash
-s = db.coll.stats({indexDetails:true})
+```js
+s = db.coll.stats({ indexDetails: true });
 
-# now stats can be accessed in that var
+// now stats can be accessed in that var
 
-# shows details on each index
-s.indexDetails
+// shows details on each index
+s.indexDetails;
 
-# show cache details on all indexes
-ss.indexDetails
+// show cache details on all indexes
+ss.indexDetails;
 
-# show cache details on a specific index && its cache
-ss.indexDetails.index_name_here.cache
+// show cache details on a specific index && its cache
+ss.indexDetails.index_name_here.cache;
 ```
 
 cache output includes things like...
@@ -433,14 +441,14 @@ With monotonically increasing data, the btree will probably become unbalanced. A
 
 ## Indexes and dot notation
 
-```bash
-# add a doc to a collection with a sub-doc && 2 keys -
+```js
+// add a doc to a collection with a sub-doc && 2 keys -
 db.examples.insertOne({_id: 0, sub: {indexed: "val-here", otherField: "otherVal"}})
 
-# specify the index on the subdoc
+// specify the index on the subdoc
 db.examples.createIndex({"sub.indexed": 1})
 
-# example using the dot-notaion index
+// example using the dot-notaion index
 db.examples.explain('executionStats').find({sub.indexed: 'val-here'})
 ```
 
@@ -455,33 +463,33 @@ db.examples.explain('executionStats').find({sub.indexed: 'val-here'})
 
 Easiest & most straight-forward way to use compound indexes in a sort: use the index key pattern as the sort predicate
 
-```bash
-var indexObj = {"job": 1, "employer": 1, "last_name":1, "first_name": 1}
-# create the index
-db.people.createIndex(indexObj)
+```js
+var indexObj = { job: 1, employer: 1, last_name: 1, first_name: 1 };
+// create the index
+db.people.createIndex(indexObj);
 
-# build explain obj
-var ex = db.people.explain("executionStats")
+// build explain obj
+var ex = db.people.explain('executionStats');
 
-# simples leverage of compound index sorting
-ex.find({}).sort(indexObj)
+// simples leverage of compound index sorting
+ex.find({}).sort(indexObj);
 ```
 
-### use an index prefix
+## use an index prefix
 
-```bash
-# for THIS compound index
-var indexObj = {"job": 1, "employer": 1, "last_name":1, "first_name": 1}
+```js
+// for THIS compound index
+var indexObj = { job: 1, employer: 1, last_name: 1, first_name: 1 };
 
-# there are a few index prefixes
-ipfx1 = {job:1}
-ipfx2 = {job:1, employer: 1}
-ipfx3 = {job:1, employer: 1, last_name: 1}
+// there are a few index prefixes
+ipfx1 = { job: 1 };
+ipfx2 = { job: 1, employer: 1 };
+ipfx3 = { job: 1, employer: 1, last_name: 1 };
 
-# any of those used in a sort will use an index to sort!!
+// any of those used in a sort will use an index to sort!!
 
-# sorting with the SAME keys but OUT-OF-ORDER will NOT use the indexes:
-badSort = { employer:1, job: 1 }
+// sorting with the SAME keys but OUT-OF-ORDER will NOT use the indexes:
+badSort = { employer: 1, job: 1 };
 ```
 
 ### leverage indexes in sort when not in query
@@ -627,28 +635,40 @@ db.coll.createIndex(idxPrefix)
 
 ### Index Prefixes and sorting
 
-```bash
-# given index obj
+Indexes support sorting _uniquely and separately_ than the "find" predicate.
+
+```js
+// given index obj
 {a:1, b:1, c:1, d:1}
 
-# successful index-prefix options
+// successful index-prefix options
 {a:1}
 {a:1, b:1}
 {a:1, b:1, c:1}
 
-# successful QUERIES that leverage the index prefixes
-db.coll.find().sort( { a: 1 } )
-db.coll.find().sort( { a: -1 } )
-db.coll.find().sort( { a: 1, b: 1 } )
-db.coll.find().sort( { a: -1, b: -1 } )
-db.coll.find().sort( { a: 1, b: 1, c: 1 } )
-db.coll.find( { a: { $gt: 4 } } ).sort( { a: 1, b: 1 } )
+const goodSorts = {
+  a: { a: 1 },
+  b: { a: -1 },
+  c: { a: 1, b: 1 },
+  d: { a: -1, b: -1 },
+  e: { a: 1, b: 1, c: 1 },
+  f: { a: -1, b: -1, c: -1 }
+}
 
-# NOTICE THIS GOOD ONE
+// successful QUERIES that leverage the index prefixes
+db.coll.find().sort( goodSorts.a)
+db.coll.find().sort( goodSorts.b)
+db.coll.find().sort( goodSorts.c )
+db.coll.find().sort( goodSorts.d)
+db.coll.find().sort( goodSorts.e)
+db.coll.find().sort( goodSorts.f)
+db.coll.find( { a: { $gt: 4 } } ).sort( goodSorts.c)
+
+// NOTICE THIS GOOD ONE
 db.coll.find( { a: { $gt: 4 } } ).sort( { a: 1, b: 1 } )
-# the index prefix can exist differently in each query predicate and sort
-# THIS query uses the a & b indexes in the sort
-# even though the b is not used in the query predicate
+// the index prefix can exist differently in each query predicate and sort
+// THIS query uses the a & b indexes in the sort
+// even though the b is not used in the query predicate
 ```
 
 ### Index Prefixes across selection and sort
