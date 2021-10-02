@@ -5,33 +5,31 @@ import { Link } from 'gatsby';
 // Components
 import Layout from './../components/layout';
 import Hero from './../components/hero';
-// import PostPreview from './../components/PostPreview';
-
-// helper fns
-// import getPosts from './../hooks/get-misc';
+import BlogSectionPreview from './../components/BlogSectionPreview';
+import useSections from './../hooks/use-sections';
 
 const Index = () => {
-  //   const blogPosts = getPosts();
-  //   {
-  //   blogPosts?.map(bp => <PostPreview key={bp.slug} {...bp} />);
-  // }
+  const sections = useSections();
 
   return (
     <Fragment>
       <Hero />
       <Layout>
-        <section className="centered">
-          <p>A collection of writings on topics I've been working with</p>
-          <Link to="/scrum">Scrum</Link>
-          <Link to="/strengths">Personality & "Strengths"</Link>
-          <Link to="/febs">A Frontend Build System</Link>
+        <main className="centered">
+          <h2>A collection of writings on topics I've been working with</h2>
+          <section className="flex col">
+            {sections.map((s, sidx) => (
+              <BlogSectionPreview key={`content-section-${sidx}`} {...s} />
+            ))}
+          </section>
+          {/* <Link to="/febs">A Frontend Build System</Link> */}
           {/* <Link to="/node">Node</Link> */}
           {/* <Link to="/frontend">React & Frontend Skills</Link> */}
           {/* <Link to="">Developing Engineer Competencies toward career growth</Link> */}
           <Link to="/mongo">MongoDB</Link>
           <Link to="/recipes">Making Food</Link>
           <Link to="/misc">Miscellaneous</Link>
-        </section>
+        </main>
       </Layout>
     </Fragment>
   );
