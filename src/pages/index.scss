@@ -10,3 +10,11 @@ section.centered {
     display: block;
   }
 }
+
+.flex{
+  display: flex;
+
+  &-col{
+    flex-direction: column;
+  }
+}
