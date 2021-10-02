@@ -14,7 +14,7 @@ Collections can have many collections to help speed up different queries.
 ## Mongodb uses a btree
 
 The indexed keys are stored in an order.  
-Mongodb uses the betree.  
+Mongodb uses the btree.  
 With a btree, each new insertion does not necessarily require a new comparison when searching for an index value.
 
 ## Indexes have overhead
@@ -676,17 +676,17 @@ db.coll.find( { a: { $gt: 4 } } ).sort( { a: 1, b: 1 } )
 Mongo figures out how to leverage indexes while using the selection AND the sorting, even when the query predicate (_the 'find' type selection_) may not include all indexes.  
 In order for this to work, the indexes included in the query predicate (_the 'find' type section_) that appear prior to the sort index prefix subset, MUST include EQUALITY CONDITIONS.
 
-```bash
-# given index obj
-# {a:1, b:1, c:1, d:1}
+```js
+// given index obj
+let idxObj = { a: 1, b: 1, c: 1, d: 1 };
 
-# uses index prefix {a:1, b:1, c:1 }
-# a is equal to 5
-db.coll.find( { a: 5 } ).sort( { b: 1, c: 1 } )
+// uses index prefix {a:1, b:1, c:1 }
+// a is equal to 5
+db.coll.find({ a: 5 }).sort({ b: 1, c: 1 });
 
-# uses index prefix {a:1, b:1, c:1 }
-# a = 5, b = 3
-db.coll.find( { b: 3, a: 4 } ).sort( { c: 1 } )
+// uses index prefix {a:1, b:1, c:1 }
+// a = 5, b = 3
+db.coll.find({ b: 3, a: 4 }).sort({ c: 1 });
 ```
 
 Here is the condition that does not require equality in the query predicate:
@@ -699,15 +699,15 @@ db.coll.find( { a: 5, b: { $lt: 3} } ).sort( { b: 1 } )
 
 ### Indexes, querying, sorting, and Collation
 
-```bash
-# a collated index
-db.coll.createIndex( { category: 1 }, { collation: { locale: "fr" } } )
+```js
+// a collated index
+db.coll.createIndex({ category: 1 }, { collation: { locale: 'fr' } });
 
-# WILL use index
-db.coll.find( { category: "cafe" } ).collation( { locale: "fr" } )
+// WILL use index
+db.coll.find({ category: 'cafe' }).collation({ locale: 'fr' });
 
-# WILL NOT use index
-db.coll.find( { category: "cafe" } )
+// WILL NOT use index
+db.coll.find({ category: 'cafe' });
 ```
 
 Collations && compound indexes
