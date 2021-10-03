@@ -14,10 +14,12 @@ function BlogSectionPreview({
   let sectionsImgStr = `images/sections/`;
   return (
     <Link id={`content-link ${title}`} to={to} className="blog-section">
-      <div className="text">
+      {fluid && (
+        <GatsbyImage alt="alt-img" className="full-size-img" fluid={fluid} />
+      )}
+      <div className="text image-overlay">
         <h1>{title || 'Title Here'}</h1>
         <p className="animate-text">{snippet || 'snippet goes here'}</p>
-        {fluid && <GatsbyImage alt="alt-img" fluid={fluid} />}
       </div>
     </Link>
   );
