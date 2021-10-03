@@ -10,6 +10,13 @@ const useSections = () => {
           title
           snippet
           to
+          image {
+            childImageSharp {
+              fluid {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
         }
       }
     }
