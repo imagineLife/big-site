@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Scrum",
+    "snippet": "Thoughts on the ins-and-outs of this agile framework",
+    "to": "/scrum",
+    "image": "./sections/Scrum.jpg"
+  },
+  {
+    "title": "Personality & Strengths",
+    "snippet": "Understanding and Leveraging our natural tendencies for the best",
+    "to": "/strengths",
+    "image": "./sections/Personality.jpg"
+  }
+]
