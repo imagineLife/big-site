@@ -10,7 +10,6 @@ import useSections from './../hooks/use-sections';
 
 const Index = () => {
   const sections = useSections();
-
   return (
     <Fragment>
       <Hero />
