@@ -16,5 +16,11 @@
     "snippet": "JavaScript on the Server",
     "to": "/node",
     "image": "./sections/Node.jpg"
+  },
+  {
+    "title": "MongoDB",
+    "snippet": "JavaScript Document Data Store",
+    "to": "/mongo",
+    "image": "./sections/Mongo.jpg"
   }
 ]
