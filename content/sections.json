@@ -14,7 +14,7 @@
   {
     "title": "Node",
     "snippet": "JavaScript on the Server",
-    "to": "/node",
+    "to": "/http-server",
     "image": "./sections/Node.jpg"
   },
   {
@@ -22,5 +22,11 @@
     "snippet": "JavaScript Document Data Store",
     "to": "/mongo",
     "image": "./sections/Mongo.jpg"
+  },
+  {
+    "title": "Recipes",
+    "snippet": "Making Food",
+    "to": "/recipes",
+    "image": "./sections/MakingFood.jpg"
   }
 ]
