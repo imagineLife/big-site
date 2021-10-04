@@ -1,6 +1,6 @@
 [
   {
-    "title": "Scrum",
+    "title": "Scrum & Organizing Engineering Work",
     "snippet": "Thoughts on the ins-and-outs of this agile framework",
     "to": "/scrum",
     "image": "./sections/Scrum.jpg"
@@ -28,5 +28,11 @@
     "snippet": "Making Food",
     "to": "/recipes",
     "image": "./sections/MakingFood.jpg"
+  },
+  {
+    "title": "A Frontend Build System",
+    "snippet": "Leveraging React, Webpack, Babel, and NPM for a hot-reloading frontend dev environment",
+    "to": "/febs",
+    "image": "./sections/febs.jpg"
   }
 ]
