@@ -22,10 +22,7 @@ const Index = () => {
             ))}
           </section>
           {/* <Link to="/febs">A Frontend Build System</Link> */}
-          {/* <Link to="/node">Node</Link> */}
-          {/* <Link to="/frontend">React & Frontend Skills</Link> */}
           {/* <Link to="">Developing Engineer Competencies toward career growth</Link> */}
-          <Link to="/recipes">Making Food</Link>
           <Link to="/misc">Miscellaneous</Link>
         </main>
       </Layout>
