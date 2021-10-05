@@ -1,6 +1,6 @@
 ---
 title: MongoDB, an Overview
-slug: mongo/
+slug: mongo/overview
 author: Jake Laursen
 excerpt: Thoughts on Mongo and blog posts
 tags: database, javascript, blogpost, overview, tech
