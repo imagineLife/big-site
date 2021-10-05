@@ -817,3 +817,12 @@ db.coll.find( { itm: "XYZ", prices: { $gte: 31 } } )
 // mongo can compound BOTH requirements into something more like...
 { itm: [ [ "XYZ", "XYZ" ] ], prices: [ [ 31, Infinity ] ] }
 ```
+
+## Understanding sort and index usage
+
+The `explain` cli output can give insight into how a query uses indexes.  
+As the [MongoDB Docs say](https://docs.mongodb.com/manual/reference/explain-results/#sort-stage), "_If MongoDB cannot use an index or indexes to obtain the sort order, the results include a SORT stage indicating a blocking sort operation_". The "winningPlan" will either
+
+- show the `SORT` stage when sorting docs in memory, indicating that the sort is not leveraging indexes
+- _not show the `SORT` stage_, indicating that the sort is leveraging indexes
+  - when using indexes, the explain output `queryPlanner.winningPlan.inputStage.inputStage.direction` will either be `backward` or `forward`
