@@ -14,3 +14,7 @@ Not only does give us the ability to run JavaScript on the server, but Node has 
 - `path` is an all-encompassing tool for dealing with files & directories and their paths
 - `process` gives access to and information about the running node process
 - `readline` allows for interpreting stream-based input, most commonly in practice with the command-line input
+- `stream` is a verbose tool allowing for handling streaming data like fs content, and http network response content (_and many more!_)
+- `string_decoder` allows for converting buffers to strings
+- `util` is an all-encompassing module with a bunch of properties
+-
