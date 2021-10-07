@@ -37,4 +37,9 @@ Not only does give us the ability to run JavaScript on the server, but Node has 
 
 - CRUD operations on a filesystem
 - async workflows using callbacks, promises, and async/await syntax
-- Buffer exploration
+- Buffers: allocation, encoding & decoding strings
+- Watching directories
+- Errors
+- Events & an event-driven setup
+- Scaling a node server leveraging the cluster module
+- Streams: read, write, pipelines, duplex, transform
