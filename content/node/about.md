@@ -28,3 +28,13 @@ Not only does give us the ability to run JavaScript on the server, but Node has 
 - **string_decoder** allows for converting buffers to strings
 - **util** is an all-encompassing module with a bunch of properties
 - **zlib** allows for compression & decompression of content
+
+## Build An HTTP Server
+
+[Here](/http-server/about) is a brief rundown on building an http server using node. Listen for requests and serve up some content!
+
+## Coming Soon
+
+- CRUD operations on a filesystem
+- async workflows using callbacks, promises, and async/await syntax
+- Buffer exploration
