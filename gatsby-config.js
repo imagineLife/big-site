@@ -4,6 +4,22 @@ module.exports = {
     description: 'A Place for some content',
   },
   plugins: [
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          'gatsby-remark-mermaid',
+          `gatsby-remark-autolink-headers`,
+          `gatsby-remark-copy-linked-files`,
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 400,
+            },
+          },
+        ],
+      },
+    },
     `gatsby-plugin-sass`,
     'gatsby-plugin-react-helmet',
     'gatsby-transformer-sharp',
@@ -15,30 +31,12 @@ module.exports = {
         defaultLayouts: {
           default: require.resolve('./src/components/layout'),
         },
-        gatsbyRemarkPlugins: ['gatsby-remark-images'],
-        plugins: ['gatsby-remark-images'],
-      },
-    },
-    {
-      resolve: `gatsby-transformer-remark`,
-      options: {
-        plugins: [
-          `gatsby-remark-autolink-headers`,
-          `gatsby-remark-copy-linked-files`,
-          `gatsby-remark-prismjs`,
+        gatsbyRemarkPlugins: [
           {
-            resolve: `gatsby-remark-images`,
-            options: {
-              maxWidth: 400,
-            },
+            resolve: 'gatsby-remark-mermaid',
           },
         ],
-      },
-    },
-    {
-      resolve: 'gatsby-transformer-remark',
-      options: {
-        plugins: ['gatsby-remark-mermaid'],
+        plugins: ['gatsby-remark-images'],
       },
     },
     {
@@ -74,6 +72,13 @@ module.exports = {
       options: {
         name: `febs`,
         path: `content/febs`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `node`,
+        path: `content/node`,
       },
     },
     {
