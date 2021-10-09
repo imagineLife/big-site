@@ -62,8 +62,10 @@ Starting From an HTTP Server
   BROWSER-APIS[Browser APIs]
 
 %% JS nodes
-  ASYNC[async]
-  INHER[protoypical inheritance]
+  ASYNC[async];
+  INHER[protoypical inheritance];
+  BIND-CALL[Bind,Call,Apply];
+
 
 
 %%  HTTP server sub-graph
@@ -118,6 +120,13 @@ Starting From an HTTP Server
   end;
 
 
+%% JS
+  subgraph JS-SUBGRAPH[JavaScript In Depth]
+    direction TB;
+      ASYNC;
+      INHER;
+      BIND-CALL;
+  end;
 
 
 
@@ -125,9 +134,10 @@ Starting From an HTTP Server
 %%  Putting It All Together
 %%
   HTTP_SERVER_SETUP --> OPTS;
-  OPTS --> |Server-Curious| SERVER_CURIOUS;
-  OPTS --> |Browser-Curious| BROWSER_CURIOUS;
-  NODE --> |Node-Deets| NODE-SUBGRAPH;
+  OPTS --> |Server-Curious|SERVER_CURIOUS;
+  OPTS --> |Browser-Curious|BROWSER_CURIOUS;
+  NODE --> |Node-Deets|NODE-SUBGRAPH;
+  JS --> |In Depth| JS-SUBGRAPH;
 
   %% NOTE: single-node-to-section
   SCALING-NODE --> |Server Scaling| NODE-SCALING-SUBGRAPH;
