@@ -39,6 +39,7 @@ Starting From an HTTP Server
   GRAPH-DATA[graphed data];
   WEBSOCKETS[Websockets];
   NODE[node];
+  DOCKER[Containerizing Servers with Docker];
 
 %% nodeJS nodes
   SCALING-NODE[scaling an HTTP Server];
@@ -84,13 +85,15 @@ Starting From an HTTP Server
 %%
 
 %% Server-Curious SubGraph
-  subgraph SERVER_CURIOUS[Dig In to the Server]
+  subgraph SERVER_CURIOUS[Serving Content]
     direction TB;
     REST-API;
     GRAPH-DATA;
     WEBSOCKETS;
     NODE;
+    DOCKER;
   end;
+
 
 %% Client-Curious SubGraph
   subgraph BROWSER_CURIOUS[Dig In to the Client]
