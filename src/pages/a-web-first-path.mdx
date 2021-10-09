@@ -53,14 +53,38 @@ Starting From the Http Server
 %% List of nodes at top
 %% Composition of nodes into Sub-Graphs & flow layout in graph below
 
+
+
+
+
+%%
 %% NODES
+%%
+
+%% initial nodes
   HTTPSERVER[Build an HTTP Server];
   FIRSTUI[Serving First UI Content];
-  OPTS{Some Options}
+  OPTS{Some Next Step Options}
 
 %% server nodes
   REST-API[RESTful API];
   GRAPH-DATA[graphed data];
+  NODE[node];
+
+%% nodeJS nodes
+  SCALING-NODE[scaling an HTTP Server];
+  STREAMS[streams];
+  EVENTS[events];
+  DEBUGGING[debugging];
+  BUFFERS[buffers];
+  ERRORS[Errors];
+
+
+
+%% scaling nodeJS nodes
+  MULTI-CORE-CLUSTERING[Cluster for multi-core];
+  CHILD-PROCESS[Child Processes for spawning long-running processes];
+
 
 %% client nodes
   HTML[HTML]
@@ -71,32 +95,68 @@ Starting From the Http Server
 
 %%  HTTP server sub-graph
 
-  subgraph SG1[HTTP Server Setup]
+  subgraph HTTP_SERVER_SETUP[HTTP Server Setup]
     direction LR
     HTTPSERVER --> FIRSTUI;
   end;
 
-%% HTTP sub-graph to options
-    SG1 --> OPTS;
+
+
+
+
+%%
+%% Sub-Graph Groupings
+%%
 
 %% Server-Curious SubGraph
-  subgraph SG2[Dig In to the Server]
-    direction TB
+  subgraph SERVER_CURIOUS[Dig In to the Server]
+    direction TB;
     REST-API;
     GRAPH-DATA;
+    NODE;
   end;
 
 %% Client-Curious SubGraph
-  subgraph SG3[Dig In to the Client]
-    direction TB
-    HTML;
-    CSS;
-    JS;
-    BROWSER-APIS;
+  subgraph BROWSER_CURIOUS[Dig In to the Client]
+      direction TB;
+      HTML;
+      CSS;
+      JS;
+      BROWSER-APIS;
   end;
 
+%% Node Sub-Categories
+  subgraph NODE-SUBGRAPH[NodeJS Details]
+      direction TB;
+      SCALING-NODE;
+      STREAMS;
+      EVENTS;
+      DEBUGGING;
+      BUFFERS;
+      ERRORS;
+  end;
+
+%% Node Scaling
+  subgraph NODE-SCALING-SUBGRAPH[Scaling an HTTP Server]
+      direction TB;
+      MULTI-CORE-CLUSTERING;
+      CHILD-PROCESS;
+  end;
+
+
+
+
+
 %%
-  OPTS --> |Server-Curious| SG2;
-  OPTS --> |Browser-Curious| SG3;
+%%  Putting It All Together
+%%
+  HTTP_SERVER_SETUP --> OPTS;
+  OPTS --> |Server-Curious| SERVER_CURIOUS;
+  OPTS --> |Browser-Curious| BROWSER_CURIOUS;
+  NODE --> |Node-Deets| NODE-SUBGRAPH;
+
+  %% NOTE: single-node-to-section
+  SCALING-NODE --> |HTTP Server Scaling| NODE-SCALING-SUBGRAPH;
+
 
 ```
