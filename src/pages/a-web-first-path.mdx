@@ -10,7 +10,130 @@ order: 1
 # A Web-First Path
 
 The UI of a website and a web "app" are visually rewarding to work on - changing item colors, shapes, functionalities for the end-user...  
-There are a lot of nuances in a lot of technologies involved in building web-based tools, though. This is the beginning of a set of tech to
+There are a lot of nuances in a lot of technologies involved in building web-based tools, though. This is the beginning...
+
+## A Visual Path
+
+Starting From an HTTP Server
+
+```mermaid
+  flowchart TB
+%% List of nodes at top
+%% Composition of nodes into Sub-Graphs & flow layout in graph below
+
+
+
+
+
+%%
+%% NODES
+%%
+
+%% initial nodes
+  HTTPSERVER[Build an HTTP Server];
+  FIRSTUI[Serving First UI Content];
+  OPTS{Some Next Step Options}
+
+%% server nodes
+  REST-API[RESTful API];
+  GRAPH-DATA[graphed data];
+  WEBSOCKETS[Websockets];
+  NODE[node];
+
+%% nodeJS nodes
+  SCALING-NODE[scaling an HTTP Server];
+  STREAMS[streams];
+  EVENTS[events];
+  DEBUGGING[debugging];
+  BUFFERS[buffers];
+  ERRORS[Errors];
+
+
+
+%% scaling nodeJS nodes
+  MULTI-CORE-CLUSTERING[Cluster for multi-core];
+  CHILD-PROCESS[Child Processes for spawning long-running processes];
+
+
+%% client nodes
+  HTML[HTML]
+  CSS[CSS]
+  JS[JavaScript*]
+  BROWSER-APIS[Browser APIs]
+
+%% JS nodes
+  ASYNC[async]
+  INHER[protoypical inheritance]
+
+
+%%  HTTP server sub-graph
+
+  subgraph HTTP_SERVER_SETUP[HTTP Server Setup]
+    direction LR;
+    HTTPSERVER --> FIRSTUI;
+  end;
+
+
+
+
+
+%%
+%% Sub-Graph Groupings
+%%
+
+%% Server-Curious SubGraph
+  subgraph SERVER_CURIOUS[Dig In to the Server]
+    direction TB;
+    REST-API;
+    GRAPH-DATA;
+    WEBSOCKETS;
+    NODE;
+  end;
+
+%% Client-Curious SubGraph
+  subgraph BROWSER_CURIOUS[Dig In to the Client]
+      direction TB;
+      HTML;
+      CSS;
+      JS;
+      BROWSER-APIS;
+  end;
+
+%% Node Sub-Categories
+  subgraph NODE-SUBGRAPH[NodeJS Details];
+    direction TB;
+      SCALING-NODE;
+      STREAMS;
+      EVENTS;
+      DEBUGGING;
+      BUFFERS;
+      ERRORS;
+    end;
+
+%% Node Scaling
+  subgraph NODE-SCALING-SUBGRAPH[Scaling an HTTP Server]
+      direction TB;
+      MULTI-CORE-CLUSTERING;
+      CHILD-PROCESS;
+  end;
+
+
+
+
+
+%%
+%%  Putting It All Together
+%%
+  HTTP_SERVER_SETUP --> OPTS;
+  OPTS --> |Server-Curious| SERVER_CURIOUS;
+  OPTS --> |Browser-Curious| BROWSER_CURIOUS;
+  NODE --> |Node-Deets| NODE-SUBGRAPH;
+
+  %% NOTE: single-node-to-section
+  SCALING-NODE --> |Server Scaling| NODE-SCALING-SUBGRAPH;
+
+
+```
 
 ## Frontend
 
@@ -43,120 +166,3 @@ HTTP(s) server can serve many "types" of content:
 ### Vertical Scaling
 
 Node provides some handy apis for scaling node.
-
-## A Visual Path
-
-Starting From the Http Server
-
-```mermaid
-  flowchart TB
-%% List of nodes at top
-%% Composition of nodes into Sub-Graphs & flow layout in graph below
-
-
-
-
-
-%%
-%% NODES
-%%
-
-%% initial nodes
-  HTTPSERVER[Build an HTTP Server];
-  FIRSTUI[Serving First UI Content];
-  OPTS{Some Next Step Options}
-
-%% server nodes
-  REST-API[RESTful API];
-  GRAPH-DATA[graphed data];
-  NODE[node];
-
-%% nodeJS nodes
-  SCALING-NODE[scaling an HTTP Server];
-  STREAMS[streams];
-  EVENTS[events];
-  DEBUGGING[debugging];
-  BUFFERS[buffers];
-  ERRORS[Errors];
-
-
-
-%% scaling nodeJS nodes
-  MULTI-CORE-CLUSTERING[Cluster for multi-core];
-  CHILD-PROCESS[Child Processes for spawning long-running processes];
-
-
-%% client nodes
-  HTML[HTML]
-  CSS[CSS]
-  JS[JavaScript]
-  BROWSER-APIS[Browser APIs]
-
-
-%%  HTTP server sub-graph
-
-  subgraph HTTP_SERVER_SETUP[HTTP Server Setup]
-    direction LR
-    HTTPSERVER --> FIRSTUI;
-  end;
-
-
-
-
-
-%%
-%% Sub-Graph Groupings
-%%
-
-%% Server-Curious SubGraph
-  subgraph SERVER_CURIOUS[Dig In to the Server]
-    direction TB;
-    REST-API;
-    GRAPH-DATA;
-    NODE;
-  end;
-
-%% Client-Curious SubGraph
-  subgraph BROWSER_CURIOUS[Dig In to the Client]
-      direction TB;
-      HTML;
-      CSS;
-      JS;
-      BROWSER-APIS;
-  end;
-
-%% Node Sub-Categories
-  subgraph NODE-SUBGRAPH[NodeJS Details]
-      direction TB;
-      SCALING-NODE;
-      STREAMS;
-      EVENTS;
-      DEBUGGING;
-      BUFFERS;
-      ERRORS;
-  end;
-
-%% Node Scaling
-  subgraph NODE-SCALING-SUBGRAPH[Scaling an HTTP Server]
-      direction TB;
-      MULTI-CORE-CLUSTERING;
-      CHILD-PROCESS;
-  end;
-
-
-
-
-
-%%
-%%  Putting It All Together
-%%
-  HTTP_SERVER_SETUP --> OPTS;
-  OPTS --> |Server-Curious| SERVER_CURIOUS;
-  OPTS --> |Browser-Curious| BROWSER_CURIOUS;
-  NODE --> |Node-Deets| NODE-SUBGRAPH;
-
-  %% NOTE: single-node-to-section
-  SCALING-NODE --> |HTTP Server Scaling| NODE-SCALING-SUBGRAPH;
-
-
-```
