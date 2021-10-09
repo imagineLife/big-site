@@ -124,6 +124,23 @@ exports.createPages = async ({
           }
         }
       }
+      node: allMarkdownRemark(
+        sort: { fields: frontmatter___order }
+        filter: {
+          frontmatter: { order: { gt: 0 }, slug: { regex: "/^node/" } }
+        }
+      ) {
+        pages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              excerpt
+              parentDir
+            }
+          }
+        }
+      }
       httpserver: allMarkdownRemark(
         sort: { fields: frontmatter___order }
         filter: {
@@ -157,6 +174,7 @@ exports.createPages = async ({
       febs: { pages: febsPages },
       strengths: { pages: strengthsPages },
       mongo: { pages: mongoPages },
+      node: { pages: nodePages },
       httpserver: { pages: httpServerPages },
     },
   } = res;
@@ -168,6 +186,7 @@ exports.createPages = async ({
     ...febsPages,
     ...strengthsPages,
     ...mongoPages,
+    ...nodePages,
     ...httpServerPages,
   ].forEach(({ page }) => {
     createPage({
