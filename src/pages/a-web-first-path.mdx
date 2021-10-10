@@ -67,6 +67,7 @@ Starting From an HTTP Server
   ASYNC[async];
   INHER[protoypical inheritance];
   BIND-CALL[Bind,Call,Apply];
+  DATA-STRUCTS[Data Structures with Objects and Arrays];
 
 %% Browser nodes
   LOCAL-STORAGE[Local Storage];
@@ -75,6 +76,12 @@ Starting From an HTTP Server
   CLIPBOARD[Clipboard];
   GEOLOC[GeoLocation];
 
+%% Docker nodes
+  IMAGES[Image Management ]
+  CONTAINERS[Container Management]
+  CONTAINER-NETWORKS[Networking]
+  MULTI-CONTAINER[Multi-Container Projects with Compose]
+  VOLUMES[Extracting State with Volumes]
 
 
 
@@ -112,7 +119,7 @@ Starting From an HTTP Server
 
 %% Node Sub-Categories
   subgraph NODE-SUBGRAPH[NodeJS Details];
-    direction TB;
+    direction LR;
       SCALING-NODE;
       STREAMS;
       EVENTS;
@@ -135,6 +142,7 @@ Starting From an HTTP Server
       ASYNC;
       INHER;
       BIND-CALL;
+      DATA-STRUCTS;
   end;
 
 %% Browser
@@ -147,7 +155,15 @@ Starting From an HTTP Server
     GEOLOC;
   end;
 
-
+%% Docker
+  subgraph DOCKER-SUBGRAPH[Docker Details];
+    direction LR;
+    CONTAINERS;
+    VOLUMES;
+    IMAGES;
+    CONTAINER-NETWORKS;
+    MULTI-CONTAINER;
+  end;
 
 
 %%
@@ -162,6 +178,7 @@ Starting From an HTTP Server
   %% NOTE: single-node-to-section
   SCALING-NODE --> |Server Scaling| NODE-SCALING-SUBGRAPH;
   BROWSER-APIS --> |Deets| BROWSER-SUBGRAPH;
+  DOCKER --> |In-Depth| DOCKER-SUBGRAPH;
 
 ```
 
