@@ -1,18 +1,19 @@
 ---
-title: A Web-First Path
+title: A Web-First Approach to Web Development
 slug: a-web-first-path
 author: Jake Laursen
 excerpt: Developing competence for building web-based tech
-tags: http, web, node, react, html, css, js, pedagogy, path
+tags: http, web, node, react, html, css, js, pedagogy, path,
 order: 1
 ---
 
-# A Web-First Path
+# Some Tech Involved in Building A Web App
 
 The UI of a website and a web "app" are visually rewarding to work on - changing item colors, shapes, functionalities for the end-user...  
-There are a lot of nuances in a lot of technologies involved in building web-based tools, though. This is the beginning...
+There are a lot of nuances in a lot of technologies involved in building web-based tools, though.  
+Here are a bunch of technologies that may or may not be involved in a web-app.
 
-## A Visual Path
+## A Visual
 
 Starting From an HTTP Server
 
@@ -50,8 +51,6 @@ Starting From an HTTP Server
   BUFFERS[buffers];
   ERRORS[Errors];
 
-
-
 %% scaling nodeJS nodes
   MULTI-CORE-CLUSTERING[Cluster for multi-core];
   CHILD-PROCESS[Child Processes for spawning long-running processes];
@@ -62,6 +61,9 @@ Starting From an HTTP Server
   CSS[CSS]
   JS[JavaScript*]
   BROWSER-APIS[Browser APIs]
+  WEBPACK[Webpack]
+  BABEL[Babel]
+  LIBRARIES[JS Libraries like react, vue, angular]
 
 %% JS nodes
   ASYNC[async];
@@ -115,6 +117,9 @@ Starting From an HTTP Server
       CSS;
       JS;
       BROWSER-APIS;
+      WEBPACK;
+      BABEL;
+      LIBRARIES;
   end;
 
 %% Node Sub-Categories
@@ -170,8 +175,8 @@ Starting From an HTTP Server
 %%  Putting It All Together
 %%
   HTTP_SERVER_SETUP --> OPTS;
-  OPTS --> |Server-Curious|SERVER_CURIOUS;
   OPTS --> |Browser-Curious|BROWSER_CURIOUS;
+  OPTS --> |Server-Curious|SERVER_CURIOUS;
   NODE --> |Node-Deets|NODE-SUBGRAPH;
   JS --> |In Depth| JS-SUBGRAPH;
 
@@ -182,34 +187,14 @@ Starting From an HTTP Server
 
 ```
 
-## Frontend
+## A Frontend-First Path
 
-- html
-- css
-- js
-- [the browser & its APIs](https://developer.mozilla.org/en-US/docs/Web/API)
+Learn...
 
-## The HTTP Server
+- HTML: Documents, document elements, element attributes...
+- CSS: The requirements with the cascade, selectors, the box model, positioning, layout mechanisms, pseudo-selectors, `@` tooling...
+- JS: Interacting with the dom first,
 
-- Building an http server using node & express
+## Starting with A WebServer
 
-### Serving content
-
-HTTP(s) server can serve many "types" of content:
-
-- serving data through restful data endpoints
-  - getting data to serve
-    - from the server host machine file-system
-    - from another db server
-  - building restful endpoints
-    - considering resources & sub-resources
-    - leveraging http methods for performing several "actions" on a resource
-
-### Serving Pages and Docs
-
-- Serving a Single-Page App from an api
-- Serving Server-Side Render
-
-### Vertical Scaling
-
-Node provides some handy apis for scaling node.
+Starting by serving some simple content from a server to a browser can be quick and rewarding.
