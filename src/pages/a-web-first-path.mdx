@@ -78,20 +78,16 @@ Starting From an HTTP Server
 
 
 
-%%  HTTP server sub-graph
-
-  subgraph HTTP_SERVER_SETUP[HTTP Server Setup]
-    direction LR;
-    HTTPSERVER --> FIRSTUI;
-  end;
-
-
-
-
 
 %%
 %% Sub-Graph Groupings
 %%
+
+%%  HTTP server sub-graph
+  subgraph HTTP_SERVER_SETUP[HTTP Server Setup]
+    direction LR;
+    HTTPSERVER --> FIRSTUI;
+  end;
 
 %% Server-Curious SubGraph
   subgraph SERVER_CURIOUS[Serving Content]
@@ -135,11 +131,22 @@ Starting From an HTTP Server
 
 %% JS
   subgraph JS-SUBGRAPH[JavaScript In Depth]
-    direction TB;
+    direction LR;
       ASYNC;
       INHER;
       BIND-CALL;
   end;
+
+%% Browser
+  subgraph BROWSER-SUBGRAPH[Brower APIs]
+    direction LR;
+    LOCAL-STORAGE;
+    SESSION-STORAGE;
+    FETCH;
+    CLIPBOARD;
+    GEOLOC;
+  end;
+
 
 
 
@@ -154,7 +161,7 @@ Starting From an HTTP Server
 
   %% NOTE: single-node-to-section
   SCALING-NODE --> |Server Scaling| NODE-SCALING-SUBGRAPH;
-
+  BROWSER-APIS --> |Deets| BROWSER-SUBGRAPH;
 
 ```
 
