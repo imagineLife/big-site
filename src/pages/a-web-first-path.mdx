@@ -47,6 +47,7 @@ Starting From an HTTP Server
   AUTH[Authentication];
   DATA-CACHE-LAYER[Data-Caching API Layer];
 
+
 %% Database nodes;
   MONGODB[Mongo];
 
@@ -115,6 +116,12 @@ Starting From an HTTP Server
     DOCKER;
     LINUX;
   end;
+
+%% DB-Curious
+  subgraph DATABASE_CURIOUS[Dealing with Data];
+    direction TB;
+      MONGODB;
+    end;
 
 %% Networking & System-Design
   subgraph SYSTEM_DESIGN[System Design]
@@ -188,6 +195,7 @@ Starting From an HTTP Server
   HTTP_SERVER_SETUP --> OPTS;
   OPTS --> |Browser-Curious|BROWSER_CURIOUS;
   OPTS --> |Server-Curious|SERVER_CURIOUS;
+  OPTS --> |Data-Curious|DATABASE_CURIOUS;
   NODE --> |Node-Deets|NODE-SUBGRAPH;
   JS --> |In Depth| JS-SUBGRAPH;
 
