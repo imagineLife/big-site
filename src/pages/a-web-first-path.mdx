@@ -51,7 +51,20 @@ Starting From an HTTP Server
 %% Database nodes;
   MONGODB[NoSQL and MongoDB];
   DATA-MODELING[Modeling Data];
-  SQL[SQL and Relational Data];
+
+%% Data-Modeling Nodes;
+  AAPROX[Approximation];
+  ATTR[Attribute];
+  BUCKET[Bucket];
+  COMPUTED[Computed];
+  DOC-VER[Document Versioning];
+  SCHEM-VER[Schema Versioning];
+  EXT-REF[Extended Reference];
+  OUTLIER[Outlier];
+  PRE-ALLOC[Pre-Allocation];
+  POLYMORPH[Polymorphic];
+  SUBSET[Subset];
+  TREE[Tree];
 
 %% nodeJS nodes
   SCALING-NODE[scaling an HTTP Server];
@@ -124,7 +137,23 @@ Starting From an HTTP Server
     direction TB;
       MONGODB;
       DATA-MODELING;
-      SQL;
+    end;
+
+%% Modeling Data
+  subgraph MODELING_DATA_SG[Data Modeling];
+    direction LR;
+      AAPROX;
+      ATTR;
+      BUCKET;
+      COMPUTED;
+      DOC-VER;
+      SCHEM-VER;
+      EXT-REF;
+      OUTLIER;
+      PRE-ALLOC;
+      POLYMORPH;
+      SUBSET;
+      TREE;
     end;
 
 %% Networking & System-Design
@@ -207,6 +236,7 @@ Starting From an HTTP Server
   SCALING-NODE --> |Server Scaling| NODE-SCALING-SUBGRAPH;
   BROWSER-APIS --> |Deets| BROWSER-SUBGRAPH;
   DOCKER --> |In-Depth| DOCKER-SUBGRAPH;
+  DATA-MODELING --> |Data Design Patterns| MODELING_DATA_SG;
 
 ```
 
