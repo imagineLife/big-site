@@ -1,0 +1,17 @@
+[
+  {
+    "title": "Gauge",
+    "snippet": "A value within a range",
+    "image": "./chartimages/Arc & Gauge.jpg"
+  },
+  {
+    "title": "Density",
+    "snippet": "Distribution ova variable",
+    "image": "./chartimages/Area.jpg"
+  },
+  {
+    "title": "Bar + Trend",
+    "snippet": "Trendlines across Categorical Values",
+    "image": "./chartimages/Bar + Trend.jpg"
+  }
+]
