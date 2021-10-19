@@ -23,8 +23,9 @@ module.exports = {
     },
     `gatsby-plugin-sass`,
     'gatsby-plugin-react-helmet',
-    'gatsby-transformer-sharp',
+    'gatsby-plugin-image',
     'gatsby-plugin-sharp',
+    'gatsby-transformer-sharp',
     'gatsby-transformer-json',
     {
       resolve: 'gatsby-plugin-mdx',
