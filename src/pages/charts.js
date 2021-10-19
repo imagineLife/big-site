@@ -1,16 +1,18 @@
 import React from 'react';
 import getCharts from './../hooks/get-charts';
-import PostPreview from './../components/PostPreview';
+import BlogSectionPreview from './../components/BlogSectionPreview';
 export default function Charts() {
-  const charts = getCharts();
+  const chartsArr = getCharts();
+  console.log('chartsArr');
+  console.log(chartsArr);
 
   return (
     <main id="chart-page">
       <h1>Charts</h1>
-      <p>Some Chart Types</p>
+      <p>Here, A Brief overview of some Chart Types</p>
       <ul>
-        {charts?.map((ch, idx) => (
-          <PostPreview key={`chart-${ch.slug}`} {...ch} />
+        {chartsArr?.map((ch, idx) => (
+          <BlogSectionPreview key={`charts-${idx}`} {...ch} />
         ))}
       </ul>
     </main>
