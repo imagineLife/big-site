@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'gatsby';
 import './BlogSectionPreview.scss';
 import GatsbyImage from 'gatsby-image';
@@ -12,8 +12,8 @@ function BlogSectionPreview({
   to,
 }) {
   let sectionsImgStr = `images/sections/`;
-  return (
-    <Link id={`content-link ${title}`} to={to} className="blog-section">
+  let ChildBox = () => (
+    <Fragment>
       {fluid && (
         <GatsbyImage alt="alt-img" className="full-size-img" fluid={fluid} />
       )}
@@ -21,8 +21,23 @@ function BlogSectionPreview({
         <h1>{title || 'Title Here'}</h1>
         <p className="animate-text">{snippet || 'snippet goes here'}</p>
       </div>
-    </Link>
+    </Fragment>
   );
+  let Elm;
+  if (to) {
+    Elm = () => (
+      <Link id={`content-link ${title}`} to={to} className="blog-section">
+        <ChildBox />
+      </Link>
+    );
+  } else {
+    Elm = () => (
+      <div className="blog-section">
+        <ChildBox />
+      </div>
+    );
+  }
+  return <Elm />;
 }
 
 export default BlogSectionPreview;
