@@ -1,6 +1,8 @@
 import React from 'react';
 import getCharts from './../hooks/get-charts';
 import BlogSectionPreview from './../components/BlogSectionPreview';
+import './charts.scss';
+
 export default function Charts() {
   const chartsArr = getCharts();
   console.log('chartsArr');
@@ -10,9 +12,11 @@ export default function Charts() {
     <main id="chart-page">
       <h1>Charts</h1>
       <p>Here, A Brief overview of some Chart Types</p>
-      <ul>
+      <ul className="alternating">
         {chartsArr?.map((ch, idx) => (
-          <BlogSectionPreview key={`charts-${idx}`} {...ch} />
+          <li key={`charts-${idx}`}>
+            <BlogSectionPreview {...ch} />
+          </li>
         ))}
       </ul>
     </main>
