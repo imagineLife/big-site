@@ -18,5 +18,10 @@
     "title": "Histogram",
     "snippet": "Distribution of numerical values across values.",
     "image": "./chartimages/Bar.jpg"
+  },
+  {
+    "title": "Boxplot",
+    "snippet": "Median, Upper & Lower Quartiles, Interquartile Range... lotta values",
+    "image": "./chartimages/Box Plot.jpg"
   }
 ]
