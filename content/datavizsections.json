@@ -6,12 +6,17 @@
   },
   {
     "title": "Density",
-    "snippet": "Distribution ova variable",
+    "snippet": "Distribution of a variable",
     "image": "./chartimages/Area.jpg"
   },
   {
-    "title": "Bar + Trend",
+    "title": "Histogram + Trend",
     "snippet": "Trendlines across Categorical Values",
     "image": "./chartimages/Bar + Trend.jpg"
+  },
+  {
+    "title": "Histogram",
+    "snippet": "Distribution of numerical values across values.",
+    "image": "./chartimages/Bar.jpg"
   }
 ]
