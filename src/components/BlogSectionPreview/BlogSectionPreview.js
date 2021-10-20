@@ -31,11 +31,7 @@ function BlogSectionPreview({
       </Link>
     );
   } else {
-    Elm = () => (
-      <div className="blog-section">
-        <ChildBox />
-      </div>
-    );
+    Elm = () => <ChildBox />;
   }
   return <Elm />;
 }
