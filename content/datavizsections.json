@@ -10,18 +10,53 @@
     "image": "./chartimages/Area.jpg"
   },
   {
-    "title": "Histogram + Trend",
+    "title": "Bar + Trend",
     "snippet": "Trendlines across Categorical Values",
     "image": "./chartimages/Bar + Trend.jpg"
   },
   {
-    "title": "Histogram",
-    "snippet": "Distribution of numerical values across values.",
+    "title": "Bar",
+    "snippet": "Distribution of numerical values across subjects.",
     "image": "./chartimages/Bar.jpg"
   },
   {
     "title": "Boxplot",
     "snippet": "Median, Upper & Lower Quartiles, Interquartile Range... lotta values",
     "image": "./chartimages/Box Plot.jpg"
+  },
+  {
+    "title": "Bubble",
+    "snippet": "Distribution of numerical values across subjects.",
+    "image": "./chartimages/Bubble.jpg"
+  },
+  {
+    "title": "Diverging Histogram",
+    "snippet": "Comparing & contrasting a few categorical values",
+    "image": "./chartimages/Diverging Bar.jpg"
+  },
+  {
+    "title": "Donut",
+    "snippet": "Parts of a whole, with a 'missing' center.",
+    "image": "./chartimages/Donut.jpg"
+  },
+  {
+    "title": "Grouped Bar",
+    "snippet": "Comparing distinct categories across several variable types and values.",
+    "image": "./chartimages/Grouped Bar.jpg"
+  },
+  {
+    "title": "Grouped Stacked Bar",
+    "snippet": "Comparing categorical values, revealing the total at each category.",
+    "image": "./chartimages/Grouped Stacked Bar.jpg"
+  },
+  {
+    "title": "Heatmap",
+    "snippet": "Color-Encoded value comparison across 2 categories.",
+    "image": "./chartimages/HeatMap.jpg"
+  },
+  {
+    "title": "Line",
+    "snippet": "An ordered and joined change-of-value across a continuum.",
+    "image": "./chartimages/Line.jpg"
   }
 ]
