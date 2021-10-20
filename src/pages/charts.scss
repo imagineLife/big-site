@@ -1,0 +1,55 @@
+main#chart-page{
+  $min-width: 15rem;
+
+  > .alternating {
+    li {
+      display: flex;
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: -1em; // 1
+      margin-left: -3.5em; // 1
+      align-items: center;
+
+      .full-size-img {
+        width: 250px;
+        height: 250px;
+      }
+
+      &:nth-child(even) {
+        flex-direction: row-reverse; // 3
+      }
+
+      &__item {
+        padding-top: 1em; // 1
+        padding-left: 3.5em; // 1
+
+        &--body {
+          flex-grow: 9999; // 4
+          flex-basis: $min-width; // 5
+        }
+
+        &--figure {
+          margin-right: auto; // 6
+          flex-grow: 1; // 7
+
+          // By using `max-content` we can get a little
+          // nicer responsive behavior because the image
+          // automatically shrinks if not enough space is
+          // available, but also the column is not getting
+          // to large than the image if a lot of space
+          // is available.
+          @supports (
+            ((max-width: -webkit-max-content) or (max-width: -moz-max-content) or (max-width: max-content))
+          ) {
+            min-width: $min-width; // 5
+            max-width: -webkit-max-content;
+            max-width: -moz-max-content;
+            max-width: max-content;
+            flex-basis: $min-width; // 5
+            flex-grow: 99999;
+          }
+        }
+      }
+    }
+  }
+}
