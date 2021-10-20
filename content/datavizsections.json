@@ -58,5 +58,25 @@
     "title": "Line",
     "snippet": "An ordered and joined change-of-value across a continuum.",
     "image": "./chartimages/Line.jpg"
+  },
+  {
+    "title": "Multi-Line",
+    "snippet": "Comparing multiple line plots",
+    "image": "./chartimages/Multi-Line.jpg"
+  },
+  {
+    "title": "Packed Circles",
+    "snippet": "Hierarchical architecture revealed.",
+    "image": "./chartimages/Packed Circles.jpg"
+  },
+  {
+    "title": "Pie",
+    "snippet": "Parts of a whole",
+    "image": "./chartimages/Pie.jpg"
+  },
+  {
+    "title": "Pie",
+    "snippet": "Parts of a whole",
+    "image": "./chartimages/Pie.jpg"
   }
 ]
