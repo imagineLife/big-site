@@ -75,8 +75,28 @@
     "image": "./chartimages/Pie.jpg"
   },
   {
-    "title": "Pie",
-    "snippet": "Parts of a whole",
-    "image": "./chartimages/Pie.jpg"
+    "title": "Stacked Area",
+    "snippet": "Distribution of several values, revealing the each value uniquely as well as the combined total of both values at each point in a series.",
+    "image": "./chartimages/Stacked Area.jpg"
+  },
+  {
+    "title": "Sunburst",
+    "snippet": "Hierarchical relationships and values revealed through a radial layout.",
+    "image": "./chartimages/Sunburst.jpg"
+  },
+  {
+    "title": "Timeline",
+    "snippet": "Points revealed across a time series.",
+    "image": "./chartimages/Timeline.jpg"
+  },
+  {
+    "title": "Dendogram",
+    "snippet": "Networked nodes with a root, branches, and leaves.",
+    "image": "./chartimages/Dendogram.jpg"
+  },
+  {
+    "title": "Tree",
+    "snippet": "Hierarchical Structure and values represented as nested rectangles.",
+    "image": "./chartimages/Tree.jpg"
   }
 ]
