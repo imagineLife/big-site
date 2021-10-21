@@ -108,5 +108,10 @@
     "title": "Ridgeline",
     "snippet": "Comparing the distribution of a value between several groups.",
     "image": "./chartimages/Ridgeline.jpg"
+  },
+  {
+    "title": "Lollipop",
+    "snippet": "Similar to a barplot - reducing the visual space taken by a bar.",
+    "image": "./chartimages/Lollipop.jpg"
   }
 ]
