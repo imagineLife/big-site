@@ -4,11 +4,11 @@ main#chart-page{
   > .alternating {
     li {
       display: flex;
-      display: flex;
       flex-wrap: wrap;
-      margin-top: -1em; // 1
+      margin: 2em 0;
       margin-left: -3.5em; // 1
       align-items: center;
+      justify-content: space-around;
 
       .full-size-img {
         width: 250px;
