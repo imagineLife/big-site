@@ -98,5 +98,15 @@
     "title": "Tree",
     "snippet": "Hierarchical Structure and values represented as nested rectangles.",
     "image": "./chartimages/Treemap.jpg"
+  },
+  {
+    "title": "Slope",
+    "snippet": "Comparing changes in value between two discrete points across several elements.",
+    "image": "./chartimages/Slope.jpg"
+  },
+  {
+    "title": "Ridgeline",
+    "snippet": "Comparing the distribution of a value between several groups.",
+    "image": "./chartimages/Ridgeline.jpg"
   }
 ]
