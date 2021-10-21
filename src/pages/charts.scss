@@ -2,13 +2,23 @@ main#chart-page{
   $min-width: 15rem;
 
   > .alternating {
+    margin: 0 auto;
+    max-width: 800px;
     li {
       display: flex;
       flex-wrap: wrap;
       margin: 2em 0;
       margin-left: -3.5em; // 1
       align-items: center;
-      justify-content: space-around;
+
+      .image-overlay{
+        margin-left: 1em;
+        max-width: 40%;
+      }
+
+      h1{
+        text-align: left;
+      }
 
       .full-size-img {
         width: 250px;
@@ -17,6 +27,15 @@ main#chart-page{
 
       &:nth-child(even) {
         flex-direction: row-reverse; // 3
+
+        h1{
+          text-align: right;
+        }
+
+        .image-overlay {
+          margin-right: 1em;
+        }
+
       }
 
       &__item {
