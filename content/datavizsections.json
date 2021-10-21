@@ -46,12 +46,12 @@
   },
   {
     "title": "Grouped Stacked Bar",
-    "snippet": "Comparing categorical values, revealing the total at each category.",
+    "snippet": "Comparing categorical values, revealing the total of each group of values within a category.",
     "image": "./chartimages/Grouped Stacked Bar.jpg"
   },
   {
     "title": "Heatmap",
-    "snippet": "Color-Encoded value comparison across 2 categories.",
+    "snippet": "Color-Encoded value comparison across 2 'axis' or categories.",
     "image": "./chartimages/HeatMap.jpg"
   },
   {
