@@ -23,7 +23,7 @@ export default function Charts() {
         <i>Stakeholders, End-Users,</i>)? These questions should be articulated
         among those developing hte content.
       </p>
-      <h2>Consider The Effectivity of A Chosen Visualization</h2>
+      <h2>Consider The Effectivity of A Given Visualization</h2>
       <p>
         Some questions allude to other questions & follow-up questions can be
         worth considering. When a bar chart is showing the number of deliveries
