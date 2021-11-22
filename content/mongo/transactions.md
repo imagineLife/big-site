@@ -83,3 +83,17 @@ try {
 
 **v4.0** introduced multi-document transactions across replica sets.  
 **v4.2** introduces distributed transactions, multi-doc transactions on sharded clusters
+
+## Boundaries of Transactions
+
+During transactions, the app cannot...
+
+- write to capped collections (_starting in v4.2_)
+- use the _"snapshot"_ read concern while reading from a capped collection (_starting in v5_)
+- read/write to 3 dbs
+  - config
+  - admin
+  - local
+- write to any `system.*` collections
+- run explain
+- `kilCursors` as the first op (_starting in v4.2_)
