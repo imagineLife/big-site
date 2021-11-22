@@ -4,6 +4,17 @@
 
 Ops on a single data doc are atomic. Single-Doc atomicity can make multi-document operations less necessary.
 
+## The ATOMIC Nature
+
+All changes made in a transaction are saved.  
+Transactions do not commit SOME changes while rolling back SOME changes - it's all or nothing.  
+Data changes made _during the transaction_ are only made _on commit_, not throughout the code workflow.  
+Changes can be aborted. When this type of abortion happens, _all changes are lost_, none are committed. This is useful to protect against "partial" data operations when 1 of several expected transactions fails.
+
+## Design Good Schemas
+
+Multi-Doc Transactions should not be a replacement for poor schema design.
+
 ## Transaction-Level Concerns
 
 ### Read Concerns
@@ -67,3 +78,8 @@ try {
   await client.close();
 }
 ```
+
+## Mongo Versions and Transactions
+
+**v4.0** introduced multi-document transactions across replica sets.  
+**v4.2** introduces distributed transactions, multi-doc transactions on sharded clusters
