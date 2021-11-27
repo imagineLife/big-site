@@ -1,5 +1,5 @@
 ---
-slug: mongo/roles/db-admin-roles
+slug: mongo/roles/db-admin
 parentSlug: mongo/roles
 title: 'Roles: Db Admin'
 excerpt: dbAdmin, dbOwner, userAdmin
