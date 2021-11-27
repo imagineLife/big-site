@@ -22,15 +22,35 @@ const IndexPage = () => (
             }
           }
         }
+        allDirectory(
+          filter: {
+            relativePath: { regex: "/mongo/" }
+            relativeDirectory: { eq: "mongo" }
+          }
+        ) {
+          dirs: edges {
+            node {
+              name
+            }
+          }
+        }
       }
     `}
-    render={({ mongo: { pages } }) => {
+    render={({ mongo: { pages }, allDirectory: { dirs } }) => {
+      console.log({ dirs });
+
       return (
-        <Toc
-          title="MongoDB"
-          sub="A Brief collection of writings"
-          pages={pages}
-        />
+        <Toc title="MongoDB" sub="A Brief collection of writings" pages={pages}>
+          <section id="coming-soon">
+            <h2> Coming Soon </h2>
+            <p>Docs organized into categories</p>
+            <ul>
+              {dirs.map(({ node: { name } }) => (
+                <li key={`mongo-dir-${name}`}>{name}</li>
+              ))}
+            </ul>
+          </section>
+        </Toc>
       );
     }}
   />
