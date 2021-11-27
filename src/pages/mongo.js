@@ -43,12 +43,15 @@ const IndexPage = () => (
         <Toc title="MongoDB" sub="A Brief collection of writings" pages={pages}>
           <section id="coming-soon">
             <h2> Coming Soon </h2>
-            <p>Docs organized into categories</p>
-            <ul>
-              {dirs.map(({ node: { name } }) => (
-                <li key={`mongo-dir-${name}`}>{name}</li>
+            <p>
+              Docs organized into categories:{' '}
+              {dirs.map(({ node: { name } }, idx) => (
+                <span key={`mongo-dir-${name}`}>
+                  {name}
+                  {idx !== dirs.length - 1 && ', '}
+                </span>
               ))}
-            </ul>
+            </p>
           </section>
         </Toc>
       );
