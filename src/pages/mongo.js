@@ -39,7 +39,12 @@ const IndexPage = () => (
       console.log({ dirs });
 
       return (
-        <Toc title="MongoDB" sub="A Brief collection of writings" pages={pages}>
+        <Toc
+          title="MongoDB"
+          sub="A Brief collection of writings"
+          pages={pages}
+          childrenTop
+        >
           <section id="coming-soon">
             <h2> Coming Soon </h2>
             <p>
