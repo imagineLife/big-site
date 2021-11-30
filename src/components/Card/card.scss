@@ -1,0 +1,17 @@
+.card {
+  padding: 15px;
+  border: 1px solid rgba(0, 0, 0, 12%);
+  border-radius: 4px;
+  margin: 0 10px;
+  &.section {
+    width: 350px;
+
+    h3 {
+      font-size: 16px;
+    }
+
+    p {
+      font-size: 12px;
+    }
+  }
+}
