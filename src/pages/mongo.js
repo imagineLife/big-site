@@ -6,7 +6,7 @@ const IndexPage = () => (
   <StaticQuery
     query={graphql`
       query MongoToc {
-        mongo: allMarkdownRemark(
+        mongopages: allMarkdownRemark(
           sort: { fields: frontmatter___order }
           filter: {
             frontmatter: { order: { gt: 0 }, slug: { regex: "/mongo/" } }
@@ -22,21 +22,20 @@ const IndexPage = () => (
             }
           }
         }
-        allDirectory(
-          filter: {
-            relativePath: { regex: "/mongo/" }
-            relativeDirectory: { eq: "mongo" }
-          }
+        mongodirs: allMarkdownRemark(
+          filter: { frontmatter: { parentDir: { regex: "/mongo/" } } }
         ) {
-          dirs: edges {
-            node {
-              name
+          dirs: nodes {
+            overview: frontmatter {
+              excerpt
+              title
+              slug
             }
           }
         }
       }
     `}
-    render={({ mongo: { pages }, allDirectory: { dirs } }) => {
+    render={({ mongopages: { pages }, mongodirs: { dirs } }) => {
       console.log({ dirs });
 
       return (
@@ -45,9 +44,9 @@ const IndexPage = () => (
             <h2> Coming Soon </h2>
             <p>
               Docs organized into categories:{' '}
-              {dirs.map(({ node: { name } }, idx) => (
-                <span key={`mongo-dir-${name}`}>
-                  {name}
+              {dirs.map(({ overview: { title } }, idx) => (
+                <span key={`mongo-dir-${title}`}>
+                  {title}
                   {idx !== dirs.length - 1 && ', '}
                 </span>
               ))}
