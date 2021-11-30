@@ -1,6 +1,8 @@
 import React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import Toc from './../components/TOC';
+import Card from './../components/Card';
+import './mongo.scss';
 
 const IndexPage = () => (
   <StaticQuery
@@ -45,17 +47,15 @@ const IndexPage = () => (
           pages={pages}
           childrenTop
         >
-          <section id="coming-soon">
-            <h2> Coming Soon </h2>
-            <p>
-              Docs organized into categories:{' '}
-              {dirs.map(({ overview: { title } }, idx) => (
-                <span key={`mongo-dir-${title}`}>
-                  {title}
-                  {idx !== dirs.length - 1 && ', '}
-                </span>
-              ))}
-            </p>
+          <section id="sections-wrapper">
+            {dirs.map(({ overview: { title, excerpt } }, idx) => (
+              <Card
+                key={`mongo-dir-${title}`}
+                title={title}
+                content={excerpt}
+                className="section"
+              ></Card>
+            ))}
           </section>
         </Toc>
       );
