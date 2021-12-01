@@ -1,4 +1,19 @@
+---
+title: Indexes
+slug: mongo/performance/indexes
+parentDir: mongo/performance
+author: Jake Laursen
+excerpt: Optimizing queries with various index types
+tags: db, mongodb, performance, indexes
+---
+
 # Indexes
+
+[What problem do they solve](#what-problem-do-they-solve)  
+[What indexes provide](#what-indexes-provide)  
+[BTree](#mongodb-uses-a-btree)  
+[Some Overhead](#indexes-have-overhead)  
+[Indexes and Sorting](#indexes-and-sorting-and-performance)
 
 ## What problem do they solve
 
@@ -38,7 +53,7 @@ Captures the keys on a single field.
 Basically, a query without an index scans a whole collection.  
 A query WITH an index only scans the indexes, then based on the matching index results, pulls the data-by-index from the collection.
 
-```bash
+```js
 db.people.find({ssn: "720-38-5636"}).explain("executionStats")
 
 # Returns...
@@ -112,7 +127,7 @@ db.people.find({ssn: "720-38-5636"}).explain("executionStats")
 A lot of output.  
 In summary, the winningPlan involved a collection scan, scanning 50K+ docs, taking an estimated 45ms.
 
-```bash
+```js
 # notable details
 "nReturned" : 1,
 "executionTimeMillis" : 45,
@@ -124,26 +139,26 @@ In summary, the winningPlan involved a collection scan, scanning 50K+ docs, taki
 
 add an index to the people table on the `ssn` field.
 
-```bash
-db.people.createIndex({ssn: 1})
+```js
+db.people.createIndex({ ssn: 1 });
 ```
 
 prepare an explain statement on the people collection.
 This creates "an explainable object on the `people` collection".
 
-```bash
-exp = db.people.explain("executionStats")
+```js
+exp = db.people.explain('executionStats');
 ```
 
 explain the same select statement on the people collection
 
-```bash
-exp.find({ssn: '720-38-5636'})
+```js
+exp.find({ ssn: '720-38-5636' });
 ```
 
 review the explain output a bit
 
-```bash
+```js
 # ...
 "winningPlan" : {
   "stage" : "FETCH",`
@@ -163,13 +178,13 @@ Slow.
 
 #### single field indexes with aggregate queries
 
-```bash
-exp.find({ssn: { $gte: '555-00-0000', $lt: "556-00-0000" }})
+```js
+exp.find({ ssn: { $gte: '555-00-0000', $lt: '556-00-0000' } });
 ```
 
 perusing the explain output
 
-```bash
+```js
 "executionStats" : {
   "executionSuccess" : true,
   "nReturned" : 49,
@@ -182,13 +197,13 @@ perusing the explain output
 
 #### single field indexes with select set queries
 
-```bash
-exp.find({ssn: { $in: ["001-29-9184", "177-45-0930"] }})
+```js
+exp.find({ ssn: { $in: ['001-29-9184', '177-45-0930'] } });
 ```
 
 peruse the results
 
-```bash
+```js
 "executionStats" : {
   "executionSuccess" : true,
   "nReturned" : 2,
@@ -203,7 +218,7 @@ Notice here the 3 keys examined: apparently the mongo query planner is not perfe
 
 ### ways of running explain
 
-```bash
+```js
 # directly on a query
 db.people.find({"address.city":"Lake Meaganton"});
 
@@ -494,7 +509,7 @@ badSort = { employer: 1, job: 1 };
 
 ### leverage indexes in sort when not in query
 
-```bash
+```js
 # this will STILL use an index to fetch the data
 # even though the FIND QUERY ITSELF doesn't use an index
 db.people.find({email:: "frank@gmail.com"}).sort({job: 1})
@@ -508,7 +523,7 @@ db.people.find({email:: "frank@gmail.com"}).sort({job: 1})
 
 When the index prefixes are spread across the query && the sort, as long as they are in order, the query planner will leverage all indexes!
 
-```bash
+```js
 # WILL filter AND sort docs using indexes
 
 db.people.find({job: "therapist", employer: "the state"}).sort({last_name: 1})
@@ -521,7 +536,7 @@ The query has to be equality checks.
 
 In order to walk the index backwards in a compound index, **all keys present in the sort** have to be either in original sort order or reversed.
 
-```bash
+```js
 # create indexes
 db.coll.createIndex({apple: 1, banana: -1, crunchy: 1})
 
@@ -547,11 +562,16 @@ var badQTwo = {apple: 1, banana: 1}
 
 Here are some examples describing how the filter + sort both use or don't use the indexes
 
-```bash
-db.stores.createIndex({ "name": 1, "address.state": -1, "address.city": -1, "ssn": 1 })
+```js
+db.stores.createIndex({
+  name: 1,
+  'address.state': -1,
+  'address.city': -1,
+  ssn: 1,
+});
 ```
 
-```bash
+```js
 # LEVERAGE INDEXES
 # 1
 db.stores.find({ "name": "Apple" }).sort({ "address.state": 1, "address.city": 1 })
@@ -614,7 +634,7 @@ From the [mongo docs](https://docs.mongodb.com/v4.4/tutorial/sort-results-with-i
 "_the specified sort direction for all keys in the `cursor.sort()` document must match the index key pattern or match the inverse of the index key pattern._"  
 "_the sort keys must be listed in the same order as they appear in the index_" AND the sort orders must all either align or all be inverse.
 
-```bash
+```js
 # example index prefix
 idxPrefix = {a:1, b:1, c:1 , d:1}
 db.coll.createIndex(idxPrefix)
@@ -691,7 +711,7 @@ db.coll.find({ b: 3, a: 4 }).sort({ c: 1 });
 
 Here is the condition that does not require equality in the query predicate:
 
-```bash
+```js
 #  a = 5, b NOT EQUAL
 db.coll.find( { a: 5, b: { $lt: 3} } ).sort( { b: 1 } )
 # the index fields in the SORT over-write the equality demand in the FIND
