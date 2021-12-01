@@ -124,6 +124,21 @@ exports.createPages = async ({
           }
         }
       }
+      mongosectioncontent: allMarkdownRemark(
+        sort: { fields: frontmatter___order }
+        filter: { frontmatter: { slug: { regex: "/^mongo//" } } }
+      ) {
+        pages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              excerpt
+              parentDir
+            }
+          }
+        }
+      }
       node: allMarkdownRemark(
         sort: { fields: frontmatter___order }
         filter: {
@@ -176,6 +191,7 @@ exports.createPages = async ({
       mongo: { pages: mongoPages },
       node: { pages: nodePages },
       httpserver: { pages: httpServerPages },
+      mongosectioncontent: { pages: mongoSectionContent },
     },
   } = res;
 
@@ -188,9 +204,10 @@ exports.createPages = async ({
     ...mongoPages,
     ...nodePages,
     ...httpServerPages,
+    ...mongoSectionContent,
   ].forEach(({ page }) => {
     createPage({
-      path: page.overview.slug,
+      path: page?.overview?.slug,
       component: mdTemplate,
       context: {
         slug: page.overview.slug,
