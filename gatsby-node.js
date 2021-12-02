@@ -207,7 +207,7 @@ exports.createPages = async ({
     ...mongoSectionContent,
   ].forEach(({ page }) => {
     createPage({
-      path: page?.overview?.slug,
+      path: page.overview.slug || null,
       component: mdTemplate,
       context: {
         slug: page.overview.slug,
