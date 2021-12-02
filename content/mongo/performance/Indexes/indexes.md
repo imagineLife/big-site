@@ -22,7 +22,8 @@ tags: db, mongodb, performance, indexes
 [Sort direction across fields](#sort-direction-across-fields)  
 [Index Prefix across find and sort](#index-prefixes-across-selection-and-sort)  
 [MultiKey Indexes & Performance](#multikey-indexes-and-performance)  
-[Compound Indexes On Arrays](#compound-indexes-on-arrays)
+[Compound Indexes On Arrays](#compound-indexes-on-arrays)  
+[Reading the Explain & Sort output](#understanding-sort-and-index-usage)
 
 ## What problem do they solve
 
