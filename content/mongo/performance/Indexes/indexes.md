@@ -13,7 +13,16 @@ tags: db, mongodb, performance, indexes
 [What indexes provide](#what-indexes-provide)  
 [BTree](#mongodb-uses-a-btree)  
 [Some Overhead](#indexes-have-overhead)  
-[Indexes and Sorting](#indexes-and-sorting-and-performance)
+[Sorting, & Performance](#indexes-and-sorting-and-performance)  
+[Finding](#finding-with-index)  
+[Forcing with \$hint](#forcing-indexes-with-hint)  
+[Dot Notation](#indexes-and-dot-notation)  
+[Index Prefixes](#use-an-index-prefix)
+[Leveraging in Sorts when not in find](#leverage-indexes-in-sort-when-not-in-query)  
+[Sort direction across fields](#sort-direction-across-fields)  
+[Index Prefix across find and sort](#index-prefixes-across-selection-and-sort)  
+[MultiKey Indexes & Performance](#multikey-indexes-and-performance)  
+[Compound Indexes On Arrays](#compound-indexes-on-arrays)
 
 ## What problem do they solve
 
