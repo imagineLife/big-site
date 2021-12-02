@@ -1,12 +1,27 @@
+---
+title: Projection
+slug: mongo/aggregations/project
+parentDir: mongo/aggregations
+author: Jake Laursen
+excerpt: Shape the output content of a query using the projections
+tags: db, mongodb, aggregation, projection
+---
+
 # project
 
-Like map in js.  
+[Removing vals](#remove-values)  
+[Keeping vals](#keep-vals)  
+[Keeping Subfields](#keep-subfields)  
+[Re-Assign Fields](#reassigning-fields)
+[Making New Fields](#creating-an-entirely-new-field)
+
+Project can be thought of like map in js.  
 Project shapes a new output in this step of the pipeline.
 Project can be re-used in a bunch in pipelines.
 
 Basic project syntax is...
 
-```bash
+```js
 db.solarSystem.aggregate([{$project: {...aggExpressionshere...}}])
 ```
 
@@ -14,8 +29,10 @@ db.solarSystem.aggregate([{$project: {...aggExpressionshere...}}])
 
 Project can remove fields from being presented after this pipeline step.
 
-```bash
-{fieldName: 0}
+```js
+{
+  fieldName: 0;
+}
 ```
 
 ## Keep Values
@@ -23,13 +40,15 @@ Project can remove fields from being presented after this pipeline step.
 Project can explicitly keep values to keep after this pipeline step.
 Once a single filed is identified in this projection field, ALL DESIRED FIELDS must be included in the project stage. Leaving out a field means the field will not appear in the output (_access for the '\_id' field_).
 
-```bash
-{ fieldname: 1}
+```js
+{
+  fieldname: 1;
+}
 ```
 
 an example of keeping 1 field, and even removing the `_id` field:
 
-```bash
+```js
 db.solarSystem.aggregate([
   {
    $project: {_id:0, name:1}
@@ -54,7 +73,7 @@ NOTE: the `_id` field STAYS in project unless explicitly removed.
 
 With subfields, the key(s) containing the subfields must be a string with dot notation, `parentObj.childKey`:
 
-```bash
+```js
 db.solarSystem.aggregate([{$project: {_id:0, name:1, 'gravity.value': 1}}])
 { "name" : "Sun", "gravity" : { "value" : 274 } }
 { "name" : "Mercury", "gravity" : { "value" : 3.24 } }
@@ -76,7 +95,7 @@ The new field gets declared as a key. The value that the project uses to assign 
 
 The aggregation expression must prefix the field (_& subfield combo if present, like below_) with a `$`.
 
-```bash
+```js
 db.solarSystem.aggregate([
   {
     $project: {
@@ -102,7 +121,7 @@ db.solarSystem.aggregate([
 
 The new name of a reassigned field is arbitrary, and does not need to match the original field names at all. Here, the `gravity.value` kub-field gets reassigned to a new `surfaceGravity` key/value pair -
 
-```bash
+```js
 db.solarSystem.aggregate([
   {$project: {
     _id:0,
@@ -130,7 +149,7 @@ With a weight of 140lb, 140 will be multiplied by a new gravityRatio.
 - the gravityRatio will then be multiplied by 140
 - this resulting value will be assigned to `myWeight`
 
-```bash
+```js
 db.solarSystem.aggregate([
   {$project: {
     _id:0,
@@ -161,7 +180,7 @@ db.solarSystem.aggregate([
 
 Pipeline arrays can be saved as vars && inserted into the mongodb query module.
 
-```bash
+```js
 let weightOnPlanetsProjection = [
   {
     $project: {
@@ -180,4 +199,42 @@ let weightOnPlanetsProjection = [
 
 # use it something like this...
 mongoNodeMod.aggregate(weightOnPlanetsProjection)
+```
+
+### Nested objects and arrays
+
+Here, 2 different formats of a `user` object in a collection, where the `stop` field content is either an obj or an arr ->
+
+```js
+{
+  _id: 1,
+  user: "1234",
+  stop: {
+    title: "book1",
+    author: "xyz",
+    page: 32
+  } }
+{
+  _id: 2,
+  user: "7890",
+  stop: [
+    {
+      title: "book2",
+      author: "abc",
+      page: 5
+    }, {
+      title: "book3",
+      author: "ijk",
+      page: 100
+    }
+  ]
+}
+```
+
+A single projection will "work" to project only the book titles ->
+
+```js
+db.bookmarks.aggregate([{ $project: { 'stop.title': 1 } }]);
+// or
+db.bookmarks.aggregate([{ $project: { stop: { title: 1 } } }]);
 ```
