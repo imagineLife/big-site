@@ -1,9 +1,17 @@
 #sections-wrapper {
   display: flex;
+  flex-wrap: wrap;
 
   a {
     text-decoration: none;
     color: black;
+    max-width: 300px;
+    margin: 0 10px 10px 0;
+
+    div {
+      max-width: inherit;
+      min-height: 110px;
+    }
 
     &:hover {
       box-shadow: 0px;
