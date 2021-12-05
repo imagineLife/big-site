@@ -77,3 +77,9 @@ Only 7 members can be voting members during the election process.
 - Replica sets provide high availability
 - We should not, maybe ever?!, use arbiters
 - Replica set nodes do not have fixed roles assigned
+
+### More In Depth
+
+[Set Up A Replica Set](/mongo/replication/setup-a-replica-set)  
+[Replication Configuration](/mongo/replication/replication-config)  
+[Replication Commands](/mongo/replication/repl-commands-intro)
