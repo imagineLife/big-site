@@ -44,6 +44,8 @@ Creating a schema.
   - latency
   - tolerance to staleness
 
+See a more complete write-up on describing the workload [here](/mongo/data-modeling/id-the-workload)
+
 ### ID the relationships between the entities
 
 In a relational database, this could be like `actors` collection, `reviews` collection and `movies` collection.
