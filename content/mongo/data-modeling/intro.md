@@ -51,6 +51,8 @@ See a more complete write-up on describing the workload [here](/mongo/data-model
 In a relational database, this could be like `actors` collection, `reviews` collection and `movies` collection.
 In NoSQL, there is a choice: to embed or relate.
 
+See a more complete write-up on identifying data relationships [here](/mongo/data-modeling/relationships)
+
 ### Apply design patterns or transformations to the current model for performance improvements
 
 Make models more performant or clear, by applying transformations.
