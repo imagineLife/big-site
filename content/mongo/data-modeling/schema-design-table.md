@@ -1,3 +1,12 @@
+---
+title: Schema Designs and Applications
+slug: mongo/data-modeling/schema-design-table
+parentDir: mongo/data-modeling
+author: Jake Laursen
+excerpt: An overview of how schema design patterns apply to several application types
+tags: db, mongodb, data modeling
+---
+
 # Schema Design
 
 A reference to schema design patterns an real-world use cases.
