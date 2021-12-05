@@ -1,7 +1,18 @@
+---
+title: Reconfig a Replica Set
+slug: mongo/replication/reconfig-a-running-set
+parentDir: mongo/replication
+author: Jake Laursen
+excerpt: Update an already-running replica set with minimal downtime
+tags: db, mongodb, replication, replica sets, reconfiguration
+---
+
 # Reconfiguring a running Replica Set
+
 Want to reconfig a running set?
 
 ## Scenario
+
 - a running set has 3 nodes
   - primary
   - 2 secondary
@@ -12,6 +23,7 @@ Want to reconfig a running set?
   - interesting approach!
 
 ## launch new nodes
+
 ```bash
 # in a new term
 
@@ -22,7 +34,9 @@ Want to reconfig a running set?
 mongod -f done4.conf
 mongod -f arbiter.conf
 ```
+
 ## add and validate nodes to the repl set
+
 ```bash
 # in term connected to primary node
 
@@ -36,6 +50,7 @@ rs.isMaster()
 ```
 
 ## new scenario
+
 - remove the arbiter
 - use a hidden node to store backups
 - kill 2 birds with one stone
@@ -69,9 +84,10 @@ rs.conf()
 # should show one of the members as hidden with no voting privileges
 ```
 
-
 ### Final thoughts
+
 updating a replica set with `rs.reconfig()`
+
 - requires the entire config object to be passed as a param
 - does not requile any config file to be directly updated
 - does not require nodes to be restarted
