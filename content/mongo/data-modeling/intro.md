@@ -1,3 +1,12 @@
+---
+title: Data Modeling
+slug: mongo/data-modeling/intro
+parentDir: mongo/data-modeling
+author: Jake Laursen
+excerpt: Consider the ways that data is stored within and across documents
+tags: db, mongodb, data modeling
+---
+
 # introduction to data modeling for mongodb
 
 Some constraints with apps:
