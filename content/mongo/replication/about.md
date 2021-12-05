@@ -83,3 +83,4 @@ Only 7 members can be voting members during the election process.
 [Set Up A Replica Set](/mongo/replication/setup-a-replica-set)  
 [Replication Configuration](/mongo/replication/replication-config)  
 [Replication Commands](/mongo/replication/repl-commands-intro)
+[The Local DB](/mongo/replication/about-the-local-db)
