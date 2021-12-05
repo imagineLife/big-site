@@ -42,7 +42,12 @@ const Index = () => {
             ))} */}
           </section>
           {/* <Link to="">Developing Engineer Competencies toward career growth</Link> */}
-          <Link to="/misc">Miscellaneous</Link>
+          <footer className="flex-col">
+            <Link to="/misc">Miscellaneous: Some less organized thoughts</Link>
+            <Link to="/charts">
+              Charts: A Growing folio of data visualization work
+            </Link>
+          </footer>
         </main>
       </Layout>
     </Fragment>
