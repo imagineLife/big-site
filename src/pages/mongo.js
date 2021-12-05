@@ -39,7 +39,9 @@ const IndexPage = () => (
       }
     `}
     render={({ mongopages: { pages }, mongodirs: { dirs } }) => {
-      console.log({ dirs });
+      dirs.forEach(({ overview: { title, excerpt, slug, parentDir } }) => {
+        console.table({ slug, parentDir, title });
+      });
 
       return (
         <Toc
@@ -50,8 +52,12 @@ const IndexPage = () => (
         >
           <section id="sections-wrapper">
             {dirs.reduce(
-              (resArr, { overview: { title, excerpt, slug } }, idx) => {
-                if (slug && slug.indexOf('/') != slug?.lastIndexOf('/')) {
+              (
+                resArr,
+                { overview: { title, excerpt, slug, parentDir } },
+                idx,
+              ) => {
+                if (parentDir && slug.indexOf('/') === slug.lastIndexOf('/')) {
                   return [
                     ...resArr,
                     <Link to={`/${slug}`} key={`mongo-dir-to-${slug}`}>
