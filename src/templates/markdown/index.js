@@ -11,13 +11,17 @@ export default function Template({
     pageSummaries: { pages },
   },
 }) {
-  const footerLinks = pages.reduce((resArr, itm, pgIdx) => {
-    // get previous, current, && next page details
-    if (pgIdx !== order - 1 && pgIdx !== order + 1) return resArr;
-    else {
-      return [...resArr, itm.details];
-    }
-  }, []);
+  pages.forEach(p => {
+    console.table(p.details);
+  });
+
+  // const footerLinks = pages.reduce((resArr, itm, pgIdx) => {
+  //   // get previous, current, && next page details
+  //   if (pgIdx !== order - 1 && pgIdx !== order + 1) return resArr;
+  //   else {
+  //     return [...resArr, itm.details];
+  //   }
+  // }, []);
 
   return (
     <Fragment>
@@ -26,13 +30,13 @@ export default function Template({
         dangerouslySetInnerHTML={{ __html: content }}
       ></main>
       <footer className="md-footer">
-        <div id="link-wrapper">
+        {/* <div id="link-wrapper">
           {footerLinks?.map(({ slug, title }, idx) => (
             <Link key={`footer-link-${title}`} to={`/${slug}`}>
               {title}
             </Link>
           ))}
-        </div>
+        </div> */}
       </footer>
     </Fragment>
   );
@@ -54,6 +58,7 @@ export const pgQuery = graphql`
         details: frontmatter {
           slug
           title
+          parentDir
         }
       }
     }
