@@ -1,7 +1,7 @@
 ---
 title: Data Modeling
-slug: mongo/data-modeling/intro
-parentDir: mongo/data-modeling
+slug: mongo/data-modeling
+parentDir: mongo
 author: Jake Laursen
 excerpt: Consider the ways that data is stored within and across documents
 tags: db, mongodb, data modeling
@@ -30,8 +30,6 @@ Constraints and their impacts are important to identify as contributors to data 
 The model should get updated as the tech and landscape changes.
 
 ## A method
-
-Creating a schema.
 
 ### Describe the workload
 
@@ -79,3 +77,5 @@ Performance probably leads to a lot of collections.
 ### Simple First, Performance after
 
 It is easier to find optimization later than it is to remove extra complexity.
+
+Schema design patterns can apply to application types. [Here](/mongo/data-modeling/schema-design-table) is an overview of schema design patterns and how/where they could apply to application types.
