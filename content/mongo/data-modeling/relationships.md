@@ -1,3 +1,12 @@
+---
+title: Relating Data
+slug: mongo/data-modeling/relationships
+parentDir: mongo/data-modeling
+author: Jake Laursen
+excerpt: Consider the ways that separate pieces of data are related
+tags: db, mongodb, data modeling
+---
+
 # relationships
 
 **NOTE**: when referencing documents between collections, WATCH OUT for the `_id` field: it is default to the mongodb ObjectId(etc) and may not work as a reference from other document `employee_id` or `job_id` type string or number fields.
