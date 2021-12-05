@@ -1,3 +1,12 @@
+---
+title: Setup a Replication Set
+slug: mongo/replication/setup-a-replica-set
+parentDir: mongo/replication
+author: Jake Laursen
+excerpt: Use 3 Mongo Instances to allow for higher availability
+tags: db, mongodb, replication, replica sets, setup
+---
+
 # Setting up A local replica set
 
 There will be 3 mongod instances.  
