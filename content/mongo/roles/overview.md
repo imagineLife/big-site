@@ -1,6 +1,7 @@
 ---
-title: MongoDB Users and Roles, an Overview
-slug: mongo/roles/overview
+title: Users and Roles
+slug: mongo/roles
+parentDir: mongo
 author: Jake Laursen
 excerpt: Admins, DB users, Custer Admins, Backup users, etc.
 tags: database, javascript, blogpost, overview, tech, users, roles
