@@ -1,3 +1,12 @@
+---
+title: Benchmark Testing
+slug: mongo/performance/benchmarking
+parentDir: mongo/performance
+author: Jake Laursen
+excerpt: Gather performance data
+tags: db, mongodb, performance, benchmarking, testing
+---
+
 # Benchmarking
 
 Can use test suites that may be publicly available.  
