@@ -1,27 +1,41 @@
-# Hardware  
+---
+title: Hardware Performance
+slug: mongo/performance/hardware
+parentDir: mongo/performance
+author: Jake Laursen
+excerpt: How the elements in hardware affect the performance of a DB
+tags: db, mongodb, performance, hardware, ram, cpu
+---
+
+# Hardware
+
 Mongodb is high-performance.  
-Requires adequate hardware.  
+Requires adequate hardware.
 
 ## A Server
+
 [Check out Von Neumann](https://en.wikipedia.org/wiki/John_von_Neumann)  
-The Von Neumann architecture points out 3 parts of a server: Memory, CPU and Disk/IO.  
+The Von Neumann architecture points out 3 parts of a server: Memory, CPU and Disk/IO.
 
 ### Memory
+
 Fast. Performant. 25x faster than an SSD.  
 DBs are designed around memory.  
 In memory...
+
 - aggregation
 - index traversing
 - writes first in ram
 - query engine
-- connections (~1MB per connection)  
+- connections (~1MB per connection)
 
 ### CPU
+
 - Storage Engine
 - Concurrency Model
-Mongo tries to use all cpu cores.  
-WiredTired relies heavily on CPU.  
-Non-Blocking operations use cpu: the more the better - 
+  Mongo tries to use all cpu cores.  
+  WiredTired relies heavily on CPU.  
+  Non-Blocking operations use cpu: the more the better -
 - writing different docs concurrently
 - responding to query requests (_reads_)
 - page compression
@@ -29,10 +43,10 @@ Non-Blocking operations use cpu: the more the better -
 - agg operations
 - map reduce
 
-
 ### Disks
+
 Mongo can use several types of disks.  
-This cal allow distributing IO load of DBs, indexes, journaling and log files across drives.  
+This cal allow distributing IO load of DBs, indexes, journaling and log files across drives.
 
 Types of disks affect performance
 IOPS - input/output operations per sec  
@@ -45,18 +59,20 @@ IOPS - input/output operations per sec
 |FusionIO | ~135K|
 
 #### Disks and Raid
-Recommended raid for Mongo is Raid 10.    
-More redundancy with good performance.  
-Discourage raid 5 & raid 6. These do not provide sufficient performance.    
-Avoid Raid 0. Provides good write, but not high availability.    
 
+Recommended raid for Mongo is Raid 10.  
+More redundancy with good performance.  
+Discourage raid 5 & raid 6. These do not provide sufficient performance.  
+Avoid Raid 0. Provides good write, but not high availability.
 
 ## Blocking Ops
-Not ALL write/reads are non-blocking.  
-Same-doc writing will block other writes.  
 
-### Networking  
+Not ALL write/reads are non-blocking.  
+Same-doc writing will block other writes.
+
+### Networking
+
 The faster and the larger the bandwidth, the better performance will be experienced.  
 Replica sets help with high availability.  
 Different hosts that hold different nodes of the db can affect the overall system.  
-How far apart the cluster nodes are also matters.  
+How far apart the cluster nodes are also matters.
