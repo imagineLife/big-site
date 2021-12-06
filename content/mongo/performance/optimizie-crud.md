@@ -1,3 +1,12 @@
+---
+title: Optimizing CRUD
+slug: mongo/performance/optimizing-crud
+parentDir: mongo/performance
+author: Jake Laursen
+excerpt: Leverage Indexes - build queries following a pattern - make tradeoffs
+tags: db, mongodb, performance, queries, indexes, equality, sort, range, tradeoffs
+---
+
 # Optimizing Crud
 
 - index selectivity
