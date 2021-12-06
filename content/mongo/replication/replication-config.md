@@ -1,5 +1,16 @@
+---
+title: Configure a Replication Set
+slug: mongo/replication/replication-config
+parentDir: mongo/replication
+author: Jake Laursen
+excerpt: Brief highlights of the rs.config output
+tags: db, mongodb, replication, replica sets, setup
+---
+
 # Configuring Replication Sets
+
 A replication set config doc...
+
 - is JSON formatted
 - shared across all nodes in a set
 - can manually set changes to doc with...
@@ -10,6 +21,7 @@ A replication set config doc...
   - rs.config
 
 ## Config Highlights
+
 ```bash
 {
   _id: <string>,
@@ -17,7 +29,8 @@ A replication set config doc...
   members: [...]
 }
 ```
-- **_id**: matches the server-defined replica set. the `--replSet` identifier in the `mongod` clu. AND/OR the `replication: replSetName:` value in the mongod.conf file. These values in these locations cannot conflict. 
+
+- **\_id**: matches the server-defined replica set. the `--replSet` identifier in the `mongod` clu. AND/OR the `replication: replSetName:` value in the mongod.conf file. These values in these locations cannot conflict.
 - **version**: increments when the replicaSet changes
   - like when a new node gets added, or removed, when the topology of the replicaSet
 - **members**: holds "topology" of the replica set
@@ -32,5 +45,6 @@ A replication set config doc...
 There are a lot more details to configure: settings, version, configsvr... these are beyond basic.
 
 ## Final Thoughts
+
 - replication config doc defines the replica set: properties are defined and shared across the set
 - `members` field notes deets about each replSet member
