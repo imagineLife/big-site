@@ -17,16 +17,16 @@ Some common data structures that are complex are trees: airport routes, social n
 
 ## api breakdown
 
-```bash
+```js
 $graphLookup: {
- from: `a collection that this gets results from`
- startWith: `connect-to val(s) to search with`
- connectFromField: `a field in each doc in the FROM coll used to perform the next recursive query`
- connectToField: `sets the field in each doc in the FROM coll that is queried against in each recursive query`
- as: `field in the output doc that holds the resulting arr of results`
- maxDepth: (optional)`max number of recursive depth`
- depthField: (optional)`the field name that holds the number of recursive iterations to REACH this specific node, 0 for first lookup`
- restrictSearchWIthMatch: (optional) `a match condition`
+  from: `a collection that this gets results from`;
+  startWith: `connect-to val(s) to search with`;
+  connectFromField: `a field in each doc in the FROM coll used to perform the next recursive query`;
+  connectToField: `sets the field in each doc in the FROM coll that is queried against in each recursive query`;
+  as: `field in the output doc that holds the resulting arr of results`;
+  maxDepth: optional`max number of recursive depth`;
+  depthField: optional`the field name that holds the number of recursive iterations to REACH this specific node, 0 for first lookup`;
+  restrictSearchWIthMatch: optional`a match condition`;
 }
 ```
 
@@ -49,12 +49,12 @@ A "Tree" structure of data, laid out in a "flat" style:
 
 a look at some mock data for this org would be...
 
-```bash
-# mock show data
+```js
+// mock show data
 db.parent_refs.find()
 
-# mock res
-# each doc has a "parent reference"
+// mock res
+// each doc has a "parent reference"
 {_id: 4, name: "Calros Sangrana", title: "CRO", reports_to: 1 }
 {_id: 5, name: "Henrietta Washington", title: "VP Eng", reports_to: 2 }
 {_id: 6, name: "Sarah Silverstein", title: "VP Web Apps", reports_to: 5 }
@@ -65,30 +65,30 @@ db.parent_refs.find()
 
 Get ALL people who report to the TOP person
 
-```bash
+```js
 db.parent_reference.aggregate([
   {
-# get the doc of interest, the top person is "elliot"
+    // get the doc of interest, the top person is "elliot"
     $match: {
-      name: 'Eliot'
-    }
+      name: 'Eliot',
+    },
   },
   {
-    # get all descendent docs from th eparent doc
+    // get all descendent docs from the parent doc
     $graphLookup: {
-      # same collection, a self-lookup
+      // same collection, a self-lookup
       from: 'parent_reference',
-      # starting with the id
+      // starting with the id
       startWith: '$_id',
-      # searching on the _id field
+      // searching on the _id field
       connectFromField: '_id',
-      # using this to match for subsequent iterations
+      // using this to match for subsequent iterations
       connectToField: 'reports_to',
-      # store res under this field
-      as: 'all_reports'
-    }
-  }
-])
+      // store res under this field
+      as: 'all_reports',
+    },
+  },
+]);
 ```
 
 - `$match` on the document of interest to start with
@@ -98,8 +98,8 @@ db.parent_reference.aggregate([
 
 # getting parent hierarchy from document relational key value
 
-```bash
-# parent reference data
+```js
+// parent reference data
 {
 "_id" : 9,
 "name" : "Shannon",
@@ -155,8 +155,8 @@ db.parent_reference.aggregate([
 
 Perhaps a node STORES it's immediate reports
 
-```bash
-# child-reference data
+```js
+// child-reference data
 {
 "_id" : 5,
 "name" : "Andrew",
@@ -199,7 +199,7 @@ Perhaps a node STORES it's immediate reports
 }
 
 
-# attempt to get all reports
+// attempt to get all reports
 db.child_reference.aggregate([
   {$match: { name: "Dev" }},
   {$graphLookup: {
@@ -222,22 +222,23 @@ The depth represents how "deep" to go:
 - `maxDepth:0` is 1 layers/levels
 - `maxDepth: 1` is 2 layers/levels
 
-```bash
+```js
 db.child_reference.aggregate([
-  {$match: { name: "Dev" }},
-  {$graphLookup: {
-    from: 'child_reference',
-    startWith: '$direct_reports',
-    connectFromField: 'direct_reports',
-    connectToField: 'name',
-    as: 'two_level_reports',
-    maxDepth: 1,
-    # ALSO THIS!
-    # output how many 'levels' deep the doc is
-    depthField: 'hierarchy_level_from_start'
-  }}
-])
-
+  { $match: { name: 'Dev' } },
+  {
+    $graphLookup: {
+      from: 'child_reference',
+      startWith: '$direct_reports',
+      connectFromField: 'direct_reports',
+      connectToField: 'name',
+      as: 'two_level_reports',
+      maxDepth: 1,
+      // ALSO THIS!
+      // output how many 'levels' deep the doc is
+      depthField: 'hierarchy_level_from_start',
+    },
+  },
+]);
 ```
 
 ## Dont Forget Concerns
@@ -265,48 +266,51 @@ Find
   - and which airline services that location
 - there should be 158 results
 
-```bash
-db.air_alliances.aggregate([{
-$match: { name: "OneWorld" }
-}, {
-  $graphLookup: {
-startWith: "$airlines",
-    from: "air_airlines",
-    connectFromField: "name",
-    connectToField: "name",
-    as: "airlines",
-    maxDepth: 0,
-    restrictSearchWithMatch: {
-      country: { $in: ["Germany", "Spain", "Canada"] }
-}
-}
-}, {
-$graphLookup: {
-    startWith: "$airlines.base",
-from: "air_routes",
-connectFromField: "dst_airport",
-connectToField: "src_airport",
-as: "connections",
-maxDepth: 1
-}
-}, {
-$project: {
-    validAirlines: "$airlines.name",
-"connections.dst_airport": 1,
-"connections.airline.name": 1
-}
-},
-{ $unwind: "$connections" },
-{
-$project: {
-    isValid: { $in: ["$connections.airline.name", "$validAirlines"] },
-"connections.dst_airport": 1
-}
-},
-{ $match: { isValid: true } },
-{ $group: { \_id: "\$connections.dst_airport" } }
-])
-
+```js
+db.air_alliances.aggregate([
+  {
+    $match: { name: 'OneWorld' },
+  },
+  {
+    $graphLookup: {
+      startWith: '$airlines',
+      from: 'air_airlines',
+      connectFromField: 'name',
+      connectToField: 'name',
+      as: 'airlines',
+      maxDepth: 0,
+      restrictSearchWithMatch: {
+        country: { $in: ['Germany', 'Spain', 'Canada'] },
+      },
+    },
+  },
+  {
+    $graphLookup: {
+      startWith: '$airlines.base',
+      from: 'air_routes',
+      connectFromField: 'dst_airport',
+      connectToField: 'src_airport',
+      as: 'connections',
+      maxDepth: 1,
+    },
+  },
+  {
+    $project: {
+      validAirlines: '$airlines.name',
+      'connections.dst_airport': 1,
+      'connections.airline.name': 1,
+    },
+  },
+  { $unwind: '$connections' },
+  {
+    $project: {
+      isValid: { $in: ['$connections.airline.name', '$validAirlines'] },
+      'connections.dst_airport': 1,
+    },
+  },
+  { $match: { isValid: true } },
+  { $group: { \_id: '$connections.dst_airport' } },
+]);
 ```
 
 ### NOTE
