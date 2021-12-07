@@ -1,3 +1,12 @@
+---
+title: Accumulators
+slug: mongo/aggregations/acc-with-project
+parentDir: mongo/aggregations
+author: Jake Laursen
+excerpt: Average, count, sum, etc.
+tags: db, mongodb, performance, aggregation, accumulation
+---
+
 # accumulator exps inside project
 
 The accumulator logic in a projection happens on a per-doc basis.
