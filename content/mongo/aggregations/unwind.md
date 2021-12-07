@@ -1,3 +1,12 @@
+---
+title: Accumulators
+slug: mongo/aggregations/unwind
+parentDir: mongo/aggregations
+author: Jake Laursen
+excerpt: Create a new document for each item in an array
+tags: db, mongodb, performance, aggregation, unwind, arrays
+---
+
 # unwind
 
 Unwinds an array.  
@@ -7,7 +16,7 @@ Each item in the arr becomes a document.
 # input
 db.movies.find({title: "Baby's Dinner"}, { _id: 0, cast: 1})
 # returns
-{cast: ["Mrs. Auguste Lumiere","Andr�e Lumire","Auguste Lumire"]}
+{cast: ["Mrs. Auguste Lumiere","Andre Lumire","Auguste Lumire"]}
 
 
 # unwind each cast mmember into its own doc with the title
@@ -19,7 +28,7 @@ db.movies.aggregate([
 
 # returns...
 { "title" : "Baby's Dinner", "cast" : "Mrs. Auguste Lumiere" }
-{ "title" : "Baby's Dinner", "cast" : "Andr�e Lumi�re" }
+{ "title" : "Baby's Dinner", "cast" : "Andre Lumi�re" }
 { "title" : "Baby's Dinner", "cast" : "Auguste Lumi�re" }
 ```
 
@@ -121,7 +130,7 @@ db.movies.aggregate([
 # returns...
 
 { "title" : "Baby's Dinner", "cast" : "Mrs. Auguste Lumiere", idx: 0 }
-{ "title" : "Baby's Dinner", "cast" : "Andr�e Lumi�re", idx: 1 }
+{ "title" : "Baby's Dinner", "cast" : "Andre Lumi�re", idx: 1 }
 { "title" : "Baby's Dinner", "cast" : "Auguste Lumi�re", idx: 2 }
 
 ```
