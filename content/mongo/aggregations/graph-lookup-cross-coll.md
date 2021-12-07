@@ -1,3 +1,12 @@
+---
+title: GraphLookup Across Collections
+slug: mongo/aggregations/graph-lookup-cross-coll
+parentDir: mongo/aggregations
+author: Jake Laursen
+excerpt: recursively parse & merge data between 2 collections leveraging a "target" collection
+tags: db, mongodb, performance, aggregation, unwind, arrays
+---
+
 # using graph lookup across collections
 
 Consider 2 collections
