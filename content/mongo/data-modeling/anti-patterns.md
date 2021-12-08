@@ -1,20 +1,38 @@
+---
+title: Data Modeling Anti-Patterns
+slug: mongo/data-modeling/anti-patterns
+parentDir: mongo/data-modeling
+author: Jake Laursen
+excerpt: Un-needed indexes, bloated documents, huge arrays, storing data strategically
+tags: db, mongodb, data modeling
+---
+
 # Schema Design Anti Patterns
 
-MongoDB Atlas identifies some of these for us!
+- [Schema Design Anti Patterns](#schema-design-anti-patterns)
+  - [Massive Arrays](#massive-arrays)
+    - [The Problem](#the-problem)
+    - [An Example](#an-example)
+    - [Some Solutions](#some-solutions)
+  - [Massive Number Of Collections](#massive-number-of-collections)
+    - [The Problem](#the-problem-1)
+    - [Investigate db stats through cli](#investigate-db-stats-through-cli)
+  - [Unnecessary Indexes](#unnecessary-indexes)
+  - [Bloated Docs](#bloated-docs)
+    - [Data Storage and doc size](#data-storage-and-doc-size)
+  - [Case-Insensitive Queries without Case-Insensitive indexes](#case-insensitive-queries-without-case-insensitive-indexes)
+    - [Collation](#collation)
+  - [Separating Data that is Accessed Together](#separating-data-that-is-accessed-together)
+    - [Summary](#summary)
 
-- Massive Arrays
-- Massive Number of Collections
-- Un-needed indexes
-- bloated docs
-- case-insensitive queries without case-insensitive indexes
-- separating data that is accessed together
+MongoDB Atlas identifies some of these _for us_ if we choose to use that service!
 
 ## Massive Arrays
 
 ### The Problem
 
 Data that is accessed together should be stored together.  
-Subdocs and arrays are some ways of storing relatied together.  
+`Subdocs` and arrays are some ways of storing related together.  
 Arrays, though, can get big:
 
 - can grow to the 16MB doc limit
