@@ -7,6 +7,14 @@ excerpt: Horizontal Scaling by splitting collections
 tags: db, mongodb, replication, sharding, horizontal scaling
 ---
 
+## Blog Posts
+
+[Sharded Collection Architecture & Setup](/mongo/sharding/architecture)  
+[Sharding and the Config DB](/mongo/sharding/config-db)  
+[The Shard Key](/mongo/sharding/the-shard-key)  
+[Hashed Shard Keys](/mongo/sharding/hashed-shard-keys)  
+[Shard Chunks](/mongo/sharding/chunks)
+
 # About Sharding
 
 In Mongo, scaling can be done horizontally.  
@@ -67,11 +75,3 @@ Sharding will help speed up aggregation pipelines.
 
 - disks are full
 - start a new mongo project
-
-### more In-Depth
-
-[Sharded Collection Architecture & Setup](/mongo/sharding/architecture)  
-[Configging DB for Sharding](/mongo/sharding/config-db)  
-[The Shard Key](/mongo/sharding/the-shard-key)  
-[Hashed Shard Keys](/mongo/sharding/hashed-shard-keys)  
-[Shard Chunks](/mongo/sharding/chunks)
