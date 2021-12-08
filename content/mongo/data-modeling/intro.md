@@ -7,6 +7,12 @@ excerpt: Consider the ways that data is stored within and across documents
 tags: db, mongodb, data modeling
 ---
 
+# Data Modeling Posts
+
+[Schema Design Anti-Patterns](/mongo/data-modeling/anti-patterns)  
+[Identifying the Workload](/mongo/data-modeling/id-the-workload)  
+[Data Relationships](/mongo/data-modeling/)
+
 # introduction to data modeling for mongodb
 
 Some constraints with apps:
