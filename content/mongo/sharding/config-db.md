@@ -1,14 +1,28 @@
+---
+title: The Config DB And Sharding
+slug: mongo/sharding/config-db
+parentDir: mongo/sharding
+author: Jake Laursen
+excerpt: A unique db that supports sharded cluster operations
+tags: db, mongodb, replication, sharding, horizontal scaling
+---
+
 # Config DB
+
 Generally, never write data to this.  
 It is maintained by mongo.  
 It DOES have useful in it.
 
 ## Check it out
+
 connect to the mongos instance of a sharded cluster && get some shard deets
+
 ```bash
 sh.status()
 ```
+
 THAT data is in the config db
+
 ```bash
 use config
 show collections
