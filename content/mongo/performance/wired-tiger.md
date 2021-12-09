@@ -1,3 +1,12 @@
+---
+title: About Wired Tiger
+slug: mongo/performance/wired-tiger
+parentDir: mongo/performance
+author: Jake Laursen
+excerpt: The default storage engine since mongo v3.2
+tags: db, mongodb, performance, queries, indexes, equality, sort, range, tradeoffs
+---
+
 # A Bit About Wired Tiger
 
 Wired Tiger is the `default storage engine` since Mongo v3.2.
