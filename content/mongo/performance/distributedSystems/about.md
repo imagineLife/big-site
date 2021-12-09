@@ -1,3 +1,12 @@
+---
+title: About Wired Tiger
+slug: mongo/performance/distributed-systems
+parentDir: mongo/performance
+author: Jake Laursen
+excerpt: Aggregations, Secondary Nodes, Replica Sets, and Shards
+tags: db, mongodb, performance
+---
+
 # Distributed systems
 
 High availability is fundamental to preventing system failure.
@@ -31,11 +40,15 @@ Want to offload data from the primary? Replica sets allow that.
 
 ### before sharding
 
+These questions should be answered appropriately before sharding
+
 - have we reached the vertical scaling limits?
+  - leverage as many resources of a single instance as possible
+  - Sharding is important when the vertical scaling limits have already been reached
 - how does the data grow?! How is it accessed?
   - how will the shard-key make things better?
   - what shard-key will be used?!
-    Sharding is important when the vertical scaling limits have already been reached.
+    - shard keys are the most vital info for separating data in a collection across shards
 
 Sharding is important. Shards as Replica sets are important: if 1 node in a shard were to go down without a replica set, that would be terrible.
 Sharding is horizontally scaling. This is good for large data sets.
