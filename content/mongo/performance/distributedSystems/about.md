@@ -16,6 +16,7 @@ tags: db, mongodb, performance
   - [Sharding and Performance](#sharding-and-performance)
     - [Querying Methods](#querying-methods)
     - [Sorting, limiting, and skipping](#sorting-limiting-and-skipping)
+  - [More In-Depth](#more-in-depth)
 
 High availability is fundamental to preventing system failure.
 
@@ -81,3 +82,7 @@ After querying the `mongos` instance, the query is sent to the designated shards
 - on each shard a local (sort/limit/skip) gets performed
 - then, the primary shard performs a final (sort/limit/skip) + merge of data
 - Then the data gets sent back to the `mongos` client & app client
+
+## More In-Depth
+
+[Aggregation on Sharded Clusters](/mongo/performance/distributed-systems/agg-on-shareded-clusters)

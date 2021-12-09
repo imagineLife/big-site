@@ -1,3 +1,12 @@
+---
+title: Aggregation on Sharded Clusters
+slug: mongo/performance/distributed-systems/agg-on-shareded-clusters
+parentDir: mongo/performance/distributed-systems
+author: Jake Laursen
+excerpt: Aggregations, Secondary Nodes, Replica Sets, and Shards
+tags: db, mongodb, performance
+---
+
 # Aggregations on sharded clusters
 
 ## How it works
