@@ -1,3 +1,12 @@
+---
+title: Reading From Secondary Nodes
+slug: mongo/performance/distributed-systems/reading-from-secondaries
+parentDir: mongo/performance/distributed-systems
+author: Jake Laursen
+excerpt: Secondary nodes can be used to serve lower-frequency data needs
+tags: db, mongodb, performance
+---
+
 # Reading From Secondary Nodes
 
 Reading from secondary nodes can make apps more performance.
