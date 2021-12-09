@@ -16,4 +16,5 @@ tags: db, mongodb, performance, indexes
 [Indexes](/mongo/performance/indexes) are a particularly helpful and specific technical detail to leverage for making queries run faster.  
 [Benchmarking](/mongo/performance/benchmarking)  
 [Hardware](/mongo/performance/hardward)  
-[Optimizing CRUD](/mongo/performance/optimizing-crud)
+[Optimizing CRUD](/mongo/performance/optimizing-crud)  
+[Wired Tiger](/mongo/performance/wired-tiger)
