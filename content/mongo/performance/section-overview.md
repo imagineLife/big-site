@@ -17,4 +17,5 @@ tags: db, mongodb, performance, indexes
 [Benchmarking](/mongo/performance/benchmarking)  
 [Hardware](/mongo/performance/hardward)  
 [Optimizing CRUD](/mongo/performance/optimizing-crud)  
-[Wired Tiger](/mongo/performance/wired-tiger)
+[Wired Tiger](/mongo/performance/wired-tiger)  
+[Particulars to a Distributed System](/mongo/performance/distributed-systems/)
