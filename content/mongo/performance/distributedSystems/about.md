@@ -9,9 +9,17 @@ tags: db, mongodb, performance
 
 # Distributed systems
 
+- [Distributed systems](#distributed-systems)
+  - [When to Shard](#when-to-shard)
+    - [Sharding hardware and service reqs](#sharding-hardware-and-service-reqs)
+    - [Before Sharding](#before-sharding)
+  - [Sharding and Performance](#sharding-and-performance)
+    - [Querying Methods](#querying-methods)
+    - [Sorting, limiting, and skipping](#sorting-limiting-and-skipping)
+
 High availability is fundamental to preventing system failure.
 
-Replica sets are important. Node Failure? Repls have failover.  
+**Replica sets are important.** Node Failure? Repls provide db failover & higher availability than standalone data instances.  
 Want to offload data from the primary? Replica sets allow that.
 
 - consider latency
@@ -19,10 +27,6 @@ Want to offload data from the primary? Replica sets allow that.
 - data spread across nodes
 - read implications
 - write implications
-
-## use replica sets
-
-- leverage high availability
 
 ## When to Shard
 
@@ -38,7 +42,7 @@ Want to offload data from the primary? Replica sets allow that.
   - HERE is where the major work-loads will exist
   - SET THESE UP AS REPLICA SETS!!!!
 
-### before sharding
+### Before Sharding
 
 These questions should be answered appropriately before sharding
 
@@ -55,7 +59,7 @@ Sharding is horizontally scaling. This is good for large data sets.
 Work to understand how the data grows & how the data is being accessed.  
 Work to define good shard keys.
 
-### Sharding and Performance
+## Sharding and Performance
 
 When querying, use the shard key.
 
@@ -64,11 +68,11 @@ Latency & Entropy become part of the setup.
 
 Co-Locating a `mongos` within the same server as the app server is one way to reduce network traffic latency. If app server in Barcelona tries to reach a shard node in texas... there will be latency.
 
-#### Querying Methods
+### Querying Methods
 
 The 2 read types also important regarding performance: scatter/gather, or routed queries. Scatter Gather is usually way more expensive. Without the shard key in the query, the query must perform a scatter gather approach.
 
-#### Sorting, limiting, and skipping
+### Sorting, limiting, and skipping
 
 There are more steps in these types of requests once data is sharded.
 
