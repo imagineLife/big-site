@@ -27,14 +27,17 @@ const techs = {
     'JWT',
     'Mocha',
     'Chai',
+    'Middleware',
+    'Server Scaling',
   ],
-  db: ['MongoDB', 'PostGreSQL', 'MySQL'],
+  db: ['MongoDB', 'PostGreSQL', 'MySQL', 'Data Modeling'],
   people: [
     'Certified Professional Scrum Master',
     'Git',
     'GitLab',
     'StrengthFinder Advocate',
     'INTJ',
+    'How to manage a remote team (Cert: Gitlab + Coursera)',
   ],
 };
 
@@ -207,9 +210,12 @@ export default function Folio() {
         <div className="text-box">
           <b>Welcome</b>
           <p>Friends & Family call me Jake. </p>
-          <p>I make web-based software.</p>
-          <p>I also enjoy making data visualizations.</p>
-          <Link to="/">To My Writings</Link>
+          <p>
+            I enjoy building software and services that solve problems,
+            particularly in the intersections of data and people meet.
+          </p>
+
+          <Link to="/">Back to The Blog</Link>
           <div className="tech-list-box">
             <TechList listName="Frontend" itms={techs.frontend} />
             <TechList listName="Server" itms={techs.backend} />
