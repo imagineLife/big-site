@@ -15,7 +15,6 @@ const techs = {
     'Enzyme',
     'Jest',
     'Cypress',
-    'Travis-CI',
   ],
   backend: [
     'Node (OpenJS Certified Node Application Developer)',
@@ -29,6 +28,8 @@ const techs = {
     'Chai',
     'Middleware',
     'Server Scaling',
+    'Travis-CI',
+    'Docker',
   ],
   db: ['MongoDB', 'PostGreSQL', 'MySQL', 'Data Modeling'],
   people: [
