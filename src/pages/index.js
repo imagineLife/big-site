@@ -25,6 +25,13 @@ const Index = () => {
       <Hero />
       <Layout>
         <main className="centered">
+          <p>
+            <Link className="styled" activeClassName="current-page" to="/folio">
+              A portfolio
+            </Link>{' '}
+            of work including web apps, technologies, and certifications
+          </p>
+          <br />
           <h2>A collection of writings on topics I've been working with</h2>
           <section className="flex-col">
             {sectionRows.map((row, rowIdx) => (
