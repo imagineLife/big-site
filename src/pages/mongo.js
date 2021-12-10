@@ -39,10 +39,6 @@ const IndexPage = () => (
       }
     `}
     render={({ mongopages: { pages }, mongodirs: { dirs } }) => {
-      dirs.forEach(({ overview: { title, excerpt, slug, parentDir } }) => {
-        console.table({ slug, parentDir, title });
-      });
-
       return (
         <Toc
           title="MongoDB"
