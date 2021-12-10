@@ -1,3 +1,12 @@
+---
+title: Notes on Sharding and Write Performance Optimization
+slug: mongo/performance/distributed-systems/shard-writing
+parentDir: mongo/performance/distributed-systems
+author: Jake Laursen
+excerpt: Optimizing for the horizontal-scaling advantage
+tags: db, mongodb, performance, replica sets, secondary nodes, indexes
+---
+
 # Increasing write performance with shards
 
 ## Hz and Vtcl Scaling
