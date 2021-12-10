@@ -11,10 +11,6 @@ export default function Template({
     pageSummaries: { pages },
   },
 }) {
-  pages.forEach(p => {
-    console.table(p.details);
-  });
-
   // const footerLinks = pages.reduce((resArr, itm, pgIdx) => {
   //   // get previous, current, && next page details
   //   if (pgIdx !== order - 1 && pgIdx !== order + 1) return resArr;
