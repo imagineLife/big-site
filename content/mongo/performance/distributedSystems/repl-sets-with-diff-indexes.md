@@ -1,6 +1,15 @@
+---
+title: Replica Sets with Differing Indexes
+slug: mongo/performance/distributed-systems/repl-sets-diff-indexes
+parentDir: mongo/performance/distributed-systems
+author: Jake Laursen
+excerpt: An infrequent use-case
+tags: db, mongodb, performance, replica sets, secondary nodes, indexes
+---
+
 # Replica Sets with Differing Indexes
 
-This is not a normal setup & may be best used for few use-cases:
+This is not a normal setup & may be best used for few use-cases, particularly serving unique data-reading needs separate from the "primary" application needs:
 
 - getting particular analytics from secondary nodes
 - getting reports on delayed consistency data
@@ -8,7 +17,7 @@ This is not a normal setup & may be best used for few use-cases:
 
 Prep for this rare setup:
 
-- don't allow these nodes to become primary
+- don't allow secondary nodes that will be read from to become primary
   - priority = 0
   - hidden
   - delayed secondary
