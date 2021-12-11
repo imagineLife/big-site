@@ -39,7 +39,7 @@ To choose to embed over linking documents, a few questions will be helpful to co
   - the more often the "related" data gets access, the more value the query will serve by having documents embedded
     - if a "book" document contains embedded "summary" data, and the summary is queried often, then the embedded "summary" doc will be directly available through the book doc
     - if a "book"
-- ## **Do queries on the data use the embedded info in the queries?**
+- **Do queries on the data use the embedded info in the queries?**
 - **Does the "related" data change often?**
   - The more often the "related" data changes, the less valuable embedding may be
   - Perhaps the embedded information stores comprehensive representations of "other" data that changes often,
