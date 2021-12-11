@@ -1,6 +1,6 @@
 ---
 slug: mongo/roles/db-user
-parentSlug: mongo/roles
+parentDir: mongo/roles
 order: 1
 title: 'Roles: DB User'
 excerpt: read and readWrite

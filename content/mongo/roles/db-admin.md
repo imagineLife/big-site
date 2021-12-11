@@ -1,6 +1,6 @@
 ---
 slug: mongo/roles/db-admin
-parentSlug: mongo/roles
+parentDir: mongo/roles
 title: 'Roles: Db Admin'
 excerpt: dbAdmin, dbOwner, userAdmin
 order: 2

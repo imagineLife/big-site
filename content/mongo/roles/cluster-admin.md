@@ -1,6 +1,6 @@
 ---
 slug: mongo/roles/cluster-admin
-parentSlug: mongo/roles
+parentDir: mongo/roles
 title: 'Role: Cluster Admin'
 excerpt: hostManager, clusterManager, clusterMonitor, and clusterAdmin
 order: 2
