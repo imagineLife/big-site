@@ -75,6 +75,10 @@ Each doc, when updated with new data, can also get a new `schema_v` value.
 
 ## Computed
 
+**Never re-compute what you can pre-compute**.  
+Optimize when reads are more common than writes.  
+Compute-on-write is less work than compute-on-read.
+
 Similar to a view, but including computational results inside the related document.  
 Example: for each write, we are doing MANY MANY reads.  
 Might be doing the SAME calculations OVER and OVER on read.  
