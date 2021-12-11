@@ -287,8 +287,6 @@ The server reads docs from disk into ram during a sort. The server stops sorting
 
 #### finding with index
 
-A query with a cursor sort on the ssn:
-
 ```js
 db.people
   .find({}, { _id: 0, last_name: 1, first_name: 1, ssn: 1 })
@@ -547,25 +545,25 @@ The query has to be equality checks.
 In order to walk the index backwards in a compound index, **all keys present in the sort** have to be either in original sort order or reversed.
 
 ```js
-# create indexes
-db.coll.createIndex({apple: 1, banana: -1, crunchy: 1})
+// create indexes
+db.coll.createIndex({ apple: 1, banana: -1, crunchy: 1 });
 
-# USING THE INDEX
-var indexObj = {apple: 1, banana: -1, crunchy: 1}
-var revIdxObj = {apple: -1, banana: 1, crunchy: -1}
+// USING THE INDEX
+var indexObj = { apple: 1, banana: -1, crunchy: 1 };
+var revIdxObj = { apple: -1, banana: 1, crunchy: -1 };
 
-# sortable with indexes
-# forward-walking indexes
-var yes1 = { apple: 1}
-var yes1B = { apple: 1, banana: -1}
+// sortable with indexes
+// forward-walking indexes
+var yes1 = { apple: 1 };
+var yes1B = { apple: 1, banana: -1 };
 
-# backward-walking indexes
-var yes2 = { apple: -1}
-var yes2B = { apple: -1, banana: 1}
+// backward-walking indexes
+var yes2 = { apple: -1 };
+var yes2B = { apple: -1, banana: 1 };
 
-# WILL NOT USE INDEX to sort and will cause an in-memory sort
-var badQ = {apple: -1, banana: -1}
-var badQTwo = {apple: 1, banana: 1}
+// WILL NOT USE INDEX to sort and will cause an in-memory sort
+var badQ = { apple: -1, banana: -1 };
+var badQTwo = { apple: 1, banana: 1 };
 ```
 
 ## Examples of queries that use indexes
@@ -582,21 +580,25 @@ db.stores.createIndex({
 ```
 
 ```js
-# LEVERAGE INDEXES
-# 1
-db.stores.find({ "name": "Apple" }).sort({ "address.state": 1, "address.city": 1 })
-# 2
-db.stores.find({ "name": "Dell", "address.state": { $lt: "S"} }).sort({ "address.state": 1 })
-# 3
-db.stores.find({ "address.state": "North Dakota", "name": "Microsoft" }).sort({ "address.city": -1 })
+// LEVERAGE INDEXES
+// 1
+db.stores
+  .find({ name: 'Apple' })
+  .sort({ 'address.state': 1, 'address.city': 1 });
+// 2
+db.stores
+  .find({ name: 'Dell', 'address.state': { $lt: 'S' } })
+  .sort({ 'address.state': 1 });
+// 3
+db.stores
+  .find({ 'address.state': 'North Dakota', name: 'Microsoft' })
+  .sort({ 'address.city': -1 });
 
-
-# DO NOT LEVERAGE INDEXES
-# 4
-db.stores.find({ "name": { $gt: "L" } }).sort({ "address.city": -1 })
-# 5
-db.stores.find({ "address.city": "WestVille" }).sort({ "address.city": -1 })
-
+// DO NOT LEVERAGE INDEXES
+// 4
+db.stores.find({ name: { $gt: 'L' } }).sort({ 'address.city': -1 });
+// 5
+db.stores.find({ 'address.city': 'WestVille' }).sort({ 'address.city': -1 });
 ```
 
 - #1
@@ -645,21 +647,21 @@ From the [mongo docs](https://docs.mongodb.com/v4.4/tutorial/sort-results-with-i
 "_the sort keys must be listed in the same order as they appear in the index_" AND the sort orders must all either align or all be inverse.
 
 ```js
-# example index prefix
+// example index prefix
 idxPrefix = {a:1, b:1, c:1 , d:1}
 db.coll.createIndex(idxPrefix)
 
-# GOOD SORT objs
+// GOOD SORT objs
 {a:1}
 {a:1, b:1}
 {a: -1, b: -1}
-# BAD SORTS
+// BAD SORTS
 
-# cant sort out-of-index-order
+// cant sort out-of-index-order
 {b:1, a:1}
 
-# cant sort in mis-matched directions from original statement
-# not even if the first key is in order
+// cant sort in mis-matched directions from original statement
+// not even if the first key is in order
 {a:1, b:-1}
 ```
 
@@ -722,9 +724,9 @@ db.coll.find({ b: 3, a: 4 }).sort({ c: 1 });
 Here is the condition that does not require equality in the query predicate:
 
 ```js
-#  a = 5, b NOT EQUAL
-db.coll.find( { a: 5, b: { $lt: 3} } ).sort( { b: 1 } )
-# the index fields in the SORT over-write the equality demand in the FIND
+//  a = 5, b NOT EQUAL
+db.coll.find({ a: 5, b: { $lt: 3 } }).sort({ b: 1 });
+// the index fields in the SORT over-write the equality demand in the FIND
 ```
 
 ### Indexes, querying, sorting, and Collation
@@ -801,7 +803,7 @@ db.coll.find({
   Above, elemMatch is not present.
   MongoDB cannot apply the search params to a single element in the search
   MongoDB will returns
-  - at least 1 element greater <= 3 
+  - at least 1 element greater >= 3 
   - at least 1 element <= 6
   - NOT REQUIRED TO BE THE SAME ELEMENT!
 */
