@@ -10,6 +10,12 @@ There are data-management objects:
 - **indexes on collections**, on fields in docs
 - **documents**, atomic units of info, fields & values
 
+## Available Storage Engines
+
+- [WiredTiger](https://docs.mongodb.com/manual/core/wiredtiger/) is the default (_since mongo v3.2_)
+- [In-Memory Storage Engine](https://docs.mongodb.com/manual/core/inmemory/) is another option
+- Deprecated since v4, [MMAPv1](https://docs.mongodb.com/v4.0/core/mmapv1/) was available
+
 ## on db startup
 
 Many files are created.
