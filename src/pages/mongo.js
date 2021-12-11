@@ -8,22 +8,6 @@ const IndexPage = () => (
   <StaticQuery
     query={graphql`
       query MongoToc {
-        mongopages: allMarkdownRemark(
-          sort: { fields: frontmatter___order }
-          filter: {
-            frontmatter: { order: { gt: 0 }, slug: { regex: "/mongo/" } }
-          }
-        ) {
-          pages: edges {
-            page: node {
-              overview: frontmatter {
-                slug
-                title
-                excerpt
-              }
-            }
-          }
-        }
         mongodirs: allMarkdownRemark(
           filter: { frontmatter: { parentDir: { regex: "/mongo/" } } }
         ) {
@@ -38,14 +22,9 @@ const IndexPage = () => (
         }
       }
     `}
-    render={({ mongopages: { pages }, mongodirs: { dirs } }) => {
+    render={({ mongodirs: { dirs } }) => {
       return (
-        <Toc
-          title="MongoDB"
-          sub="A Brief collection of writings"
-          pages={pages}
-          childrenTop
-        >
+        <Toc sub="Topics" title="MongoDB" childrenTop>
           <section id="sections-wrapper">
             {dirs.reduce(
               (
