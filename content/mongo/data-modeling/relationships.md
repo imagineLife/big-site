@@ -27,7 +27,11 @@ Embedding is often compared against "linking" data, as a rdbms does. Embedding..
 - puts fields at the same level
 - puts groups of docs inside of a parent doc
 
+The easiest and quickest way to store data is to embed data in documents. Embedding data will build large and complex documents over time. Luckily, the [maximum BSON document size limit](https://docs.mongodb.com/manual/core/document/#document-size-limit) is 16MB, so there may be plenty of room in a document to store a lot of data and leverage proper indexing to reference document parts quickly.
+
 #### Choosing Embedding over Linking
+
+Linking and embedding can both be done in documents, so there are no clear "rules" for choosing one over the other.
 
 To choose to embed over linking documents, a few questions will be helpful to consider, as their answers can give insight in to the choice to embed over linking:
 
@@ -35,8 +39,12 @@ To choose to embed over linking documents, a few questions will be helpful to co
   - the more often the "related" data gets access, the more value the query will serve by having documents embedded
     - if a "book" document contains embedded "summary" data, and the summary is queried often, then the embedded "summary" doc will be directly available through the book doc
     - if a "book"
-- **Do queries on the "related" data use the related information?**
+- ## **Do queries on the data use the embedded info in the queries?**
 - **Does the "related" data change often?**
+  - The more often the "related" data changes, the less valuable embedding may be
+  - Perhaps the embedded information stores comprehensive representations of "other" data that changes often,
+    - LINK: i.e a "books" collection that embeds "author" data where the author data changes every week due to author blogpost updates, but the book data changes every several years when new releases of the book come out. Perhaps storing a reference ID to an "authors" collection would be better here
+    - EMBED: perhaps a list of "data snapshots" get released weekly related to a pizza-delivery service, and the application shows last 12 weeks of "data highlights" per driver - storing the last 12 "data snapshots" in a "drivers" collection, and even "rotating" them in the drivers collection, makes querying the last-12 weeks tightly connected to driver data
 
 ### Referencing
 
