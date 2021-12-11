@@ -11,7 +11,8 @@ tags: db, mongodb, data modeling
 
 [Schema Design Anti-Patterns](/mongo/data-modeling/anti-patterns)  
 [Identifying the Workload](/mongo/data-modeling/id-the-workload)  
-[Data Relationships](/mongo/data-modeling/)
+[Map out Data Relationships](/mongo/data-modeling/relationships)  
+[Review and Apply Schema Design Patters](/mongo-data-modeling/schema-design-patterns)
 
 # introduction to data modeling for mongodb
 
