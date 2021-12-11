@@ -17,6 +17,8 @@ tags: db, mongodb, data modeling
   - [Computed](#computed)
   - [Subset Pattern](#subset-pattern)
   - [Bucket Pattern](#bucket-pattern)
+    - [A Bucketing Pattern Workflow](#a-bucketing-pattern-workflow)
+    - [Bucketing to the rescue](#bucketing-to-the-rescue)
   - [Patterns in action](#patterns-in-action)
 
 ## Schema Versioning
@@ -113,6 +115,24 @@ An In-between for 1-doc per piece of data and 1 giant doc holding all data:
 - could be 1-bucket per day
 - Could be 1-bucket-per-week
 - could hold aggregates (_data per hour, data per day_)
+
+### A Bucketing Pattern Workflow
+
+**The Problem to solve**:  
+Currently, an org records the time it takes a pizza-delivery driver to pickup and deliver a pizza. This happens on every deliver, and is recorded per-delivery, and is referred to in the data as the delivery `round_trip_time`.  
+Each delivery, and it's data, get recorded to a single document in the `deliveries` collection.
+
+The business teams wants a few "bigger picture" insights beyond each delivery's `round_trip_time`:
+
+- what is the **daily average** of each drivers' `round_trip_time`?
+- what is the **weekly average** of each drivers' `round_trip_time`?
+
+### Bucketing to the rescue
+
+Create new documents per time-duration average
+
+- perhaps a `weekly_averages` collection, where each document is by driver and week number
+- perhaps a `daily_averages` collection where each document is by driver and day number
 
 ## Patterns in action
 
