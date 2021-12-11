@@ -22,8 +22,19 @@ grouping entities within a doc.
 
 ### Embedding
 
-- fields at the same level
-- groups of docs inside doc
+Embedding is often compared against "linking" data, as a rdbms does. Embedding...
+
+- puts fields at the same level
+- puts groups of docs inside of a parent doc
+
+#### Choosing Embedding over Linking
+
+To choose to embed over linking documents, a few questions will be helpful to consider, as their answers can give insight in to the choice to embed over linking:
+
+- **How often does the "related" data get accessed?**
+  - the more often the "related" data gets access, the more value the query will serve by having documents embedded
+    - if a "book" document contains embedded "summary" data, and the summary is queried often, then the embedded "summary" doc will be directly available through the book doc
+    - if a "book"
 
 ### Referencing
 
