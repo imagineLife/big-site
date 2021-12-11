@@ -53,8 +53,12 @@ Each doc, when updated with new data, can also get a new `schema_v` value.
         - add to server-stored `driver` data and pass to the GUI
         - add car highlight data and `schema_v: 2` into the just-queried `driver` document
 - **Data-Updating Option two**: another non-breaking data-updating process can run updates before the client-side consumer uses the new data
-  - create a data-updating process that gathers the driver-to-vehicle-highlight connection && writes updates to each `driver` document
+  - create a data-updating process that
+    - gathers the driver-to-vehicle-highlight connection &&
+    - includes the `schema_v:2` key-val in the new driver document
+    - writes updates to each `driver` document
   - after this data-update runs, update the data-consuming application to leverage the new vehicle-highlight data
+  - **NOTE** the `schema_v: 2` here is not used by the client-side application. It is present, perhaps, more for documentation?!
 
 ### Pros
 
