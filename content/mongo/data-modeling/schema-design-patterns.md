@@ -11,6 +11,9 @@ tags: db, mongodb, data modeling
 
 - [Schema Design Patters](#schema-design-patters)
   - [Schema Versioning](#schema-versioning)
+    - [A Schema-Versioning Workflow](#a-schema-versioning-workflow)
+    - [Pros](#pros)
+    - [Cons](#cons)
   - [Computed](#computed)
   - [Subset Pattern](#subset-pattern)
   - [Bucket Pattern](#bucket-pattern)
@@ -32,12 +35,33 @@ Consider converting a scalar 1:1 relationship between 2 tables to a 1:Many, usin
 
 Each doc, when updated with new data, can also get a new `schema_v` value.
 
-**PROS**
+### A Schema-Versioning Workflow
+
+**The Problem to solve**:
+
+- A Delivery "driver info" CMS is present, and the org wants to include a new piece of driver vehicle summary data in a UI. This data will be shown every time a driver is shown in the UI, so storing the data in a `drivers` document will provide great query performance
+  **The Schema-Versioning Pattern in action**
+- A Schema-version key in each doc
+  - The `driver` collections will either get a new or update an existing key/value called `schema_v` to `2` from the current `1`
+- **Data-Updating Option one**: The client-side application takes all of the workload
+  - the server that queries the driver data can be updated to handle 2 "versions" of the `driver` data - one without the vehicle summary and one with the vehicle summary
+    - check for `schema_v: 2` key/val in `driver` document
+      - when present, pass vehicle highlight data through api to the gui
+      - when _not present_:
+        - this will be the initial workflow during the release
+        - get car highlgiht data from `vehicles` collection
+        - add to server-stored `driver` data and pass to the GUI
+        - add car highlight data and `schema_v: 2` into the just-queried `driver` document
+- **Data-Updating Option two**: another non-breaking data-updating process can run updates before the client-side consumer uses the new data
+  - create a data-updating process that gathers the driver-to-vehicle-highlight connection && writes updates to each `driver` document
+  - after this data-update runs, update the data-consuming application to leverage the new vehicle-highlight data
+
+### Pros
 
 - simplifies DB adjustments
 - NO DOWNTIME!!
 
-**CONS**
+### Cons
 
 - must accommodate the migration somehow from the "old" version to the "new" version
   - could leverage the schema version, and in application code be able to work with both versions
