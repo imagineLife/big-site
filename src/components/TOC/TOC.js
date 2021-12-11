@@ -12,25 +12,26 @@ const TOC = ({ title, pages, children, childrenTop }) => (
         <h1>{title}</h1>
         {/* <p className="subtitle">A Brief collection of writings</p> */}
         {children && childrenTop && children}
-        {pages.map(
-          (
-            {
-              page: {
-                overview: { slug, title, excerpt },
+        {pages &&
+          pages.map(
+            (
+              {
+                page: {
+                  overview: { slug, title, excerpt },
+                },
               },
+              pageIdx,
+            ) => {
+              return (
+                <div className="toc-card" key={`scrum-toc-${pageIdx}`}>
+                  <Link to={`/${slug}`} className="title">
+                    {title}
+                  </Link>
+                  <p className="content">{excerpt}</p>
+                </div>
+              );
             },
-            pageIdx,
-          ) => {
-            return (
-              <div className="toc-card" key={`scrum-toc-${pageIdx}`}>
-                <Link to={`/${slug}`} className="title">
-                  {title}
-                </Link>
-                <p className="content">{excerpt}</p>
-              </div>
-            );
-          },
-        )}
+          )}
       </section>
       {children && !childrenTop && children}
     </Layout>
