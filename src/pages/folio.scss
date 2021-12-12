@@ -638,11 +638,18 @@ div.caption li:last-child::after {
 
 @media only screen and (min-width: 640px) {
   /* caption */
-  .hover-v2 .box .caption {
-    background-color: unset;
-  }
-  .hover-v2 .box:hover .caption {
-    background-color: rgba(0, 0, 0, 0.8);
+  .hover-v2 {
+    .box {
+      .caption {
+        background-color: unset;
+      }
+
+      &:hover {
+        .caption {
+          background-color: rgba(0, 0, 0, 0.8);
+        }
+      }
+    }
   }
 
   /* title */
