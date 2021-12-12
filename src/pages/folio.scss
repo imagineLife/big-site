@@ -657,6 +657,13 @@ div.caption li:last-child::after {
           margin-left: 12.5%;
           transition: width 0.7s, opacity 0.2s;
         }
+
+        /* sub-text */
+        p.sub-text {
+          transition: transform 0.6s, opacity 0.6s;
+          opacity: 0;
+          transform: translateY(15px);
+        }
       }
 
       /* box hover */
@@ -675,23 +682,16 @@ div.caption li:last-child::after {
             opacity: 1;
             width: 75%;
           }
+
+          /* sub-text  hover*/
+          p.sub-text {
+            opacity: 1;
+            transform: translateY(0);
+            margin-top: 5px;
+          }
         }
       }
     }
-  }
-
-  /* sub-text */
-  .box .caption p.sub-text {
-    transition: transform 0.6s, opacity 0.6s;
-    opacity: 0;
-    transform: translateY(15px);
-  }
-
-  /* sub-text  hover*/
-  .box:hover .caption p.sub-text {
-    opacity: 1;
-    transform: translateY(0);
-    margin-top: 5px;
   }
 
   /* tech-list */
