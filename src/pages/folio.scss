@@ -642,40 +642,42 @@ div.caption li:last-child::after {
     .box {
       .caption {
         background-color: unset;
+
+        /* title */
+        p:nth-child(1) {
+          transition: transform 0.3s, opacity 0.3s;
+          transform: translateY(-10px);
+          opacity: 0;
+        }
+
+        /* header row */
+        hr {
+          opacity: 0;
+          width: 0%;
+          margin-left: 12.5%;
+          transition: width 0.7s, opacity 0.2s;
+        }
       }
 
+      /* box hover */
       &:hover {
         .caption {
           background-color: rgba(0, 0, 0, 0.8);
+
+          /* title */
+          p:nth-child(1) {
+            opacity: 1;
+            transform: translateY(0);
+          }
+
+          /* header row */
+          hr {
+            opacity: 1;
+            width: 75%;
+          }
         }
       }
     }
-  }
-
-  /* title */
-  .hover-v2 .caption p:nth-child(1) {
-    transition: transform 0.3s, opacity 0.3s;
-    transform: translateY(-10px);
-    opacity: 0;
-  }
-
-  /* title hover */
-  .box:hover .caption p:nth-child(1) {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* header row */
-  .hover-v2 .caption hr {
-    opacity: 0;
-    width: 0%;
-    margin-left: 12.5%;
-    transition: width 0.7s, opacity 0.2s;
-  }
-  /* header row hover */
-  .box:hover .caption hr {
-    opacity: 1;
-    width: 75%;
   }
 
   /* sub-text */
