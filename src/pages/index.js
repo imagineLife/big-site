@@ -33,7 +33,7 @@ const Index = () => {
           </p>
           <br />
           <h2>A collection of writings on topics I've been working with</h2>
-          <section className="flex-col">
+          <section className="flex-col flex-center">
             {sectionRows.map((row, rowIdx) => (
               <FlexRowDiv key={`section-row-${rowIdx}`}>
                 {row.map((blogSection, bsIdx) => (
