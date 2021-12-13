@@ -20,4 +20,9 @@ section.centered {
     display: flex;
     flex-direction: row;
   }
+
+  &-center {
+    align-items: center;
+    justify-content: center;
+  }
 }
