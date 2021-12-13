@@ -231,6 +231,10 @@ section.welcome * {
   top: 15px;
   padding: 15px;
   color: black;
+
+  section {
+    max-width: 500px;
+  }
 }
 
 .tech-list-box {
@@ -388,12 +392,11 @@ div.box:hover p.overlay-text {
       color: white;
       transition: border 250ms;
       border-style: double;
-      padding: 4px;
       border: none;
       border: 2px solid rgba(235, 235, 255, 0);
       text-decoration: none;
       &:hover {
-        border: 2px solid rgb(235, 235, 255);
+        text-decoration: underline;
       }
     }
   }
