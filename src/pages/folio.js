@@ -210,13 +210,15 @@ export default function Folio() {
       <section className="welcome">
         <div className="text-box">
           <b>Welcome</b>
-          <p>Friends & Family call me Jake. </p>
-          <p>
-            I enjoy building software and services that solve problems,
-            particularly in the intersections of data and people meet.
-          </p>
+          <section id="snippets">
+            <p>Friends & Family call me Jake. </p>
+            <p>
+              I enjoy building software and services that solve problems,
+              particularly in the intersections of data and people meet.
+            </p>
+          </section>
 
-          <Link to="/">Back to The Blog</Link>
+          <Link to="/">See some of my notes</Link>
           <div className="tech-list-box">
             <TechList listName="Frontend" itms={techs.frontend} />
             <TechList listName="Server" itms={techs.backend} />
