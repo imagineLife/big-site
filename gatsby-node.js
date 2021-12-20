@@ -107,6 +107,23 @@ exports.createPages = async ({
           ...chartparts
         }
       }
+      misc: allMarkdownRemark(
+        sort: { fields: frontmatter___order }
+        filter: {
+          frontmatter: { order: { gt: 0 }, slug: { regex: "/^misc/" } }
+        }
+      ) {
+        pages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              excerpt
+              parentDir
+            }
+          }
+        }
+      }
       mongo: allMarkdownRemark(
         sort: { fields: frontmatter___order }
         filter: {
@@ -188,6 +205,7 @@ exports.createPages = async ({
       charts: { data: chartsData },
       febs: { pages: febsPages },
       strengths: { pages: strengthsPages },
+      misc: { pages: miscPages },
       mongo: { pages: mongoPages },
       node: { pages: nodePages },
       httpserver: { pages: httpServerPages },
@@ -201,6 +219,7 @@ exports.createPages = async ({
     ...recipePages,
     ...febsPages,
     ...strengthsPages,
+    ...miscPages,
     ...mongoPages,
     ...nodePages,
     ...httpServerPages,
