@@ -8,7 +8,13 @@ parentDir: misc
 order: 2
 ---
 
-# Know Your Stuff
+# Certifications
+
+- [Certifications](#certifications)
+  - [Know Your Stuff](#know-your-stuff)
+  - [Certification Skeptics In Tech](#certification-skeptics-in-tech)
+
+## Know Your Stuff
 
 Certifications can be great, even in tech. Certs can help:
 
@@ -24,6 +30,11 @@ Reliable work is important.
 Learn more. Do More.  
 Become more than you were yesterday.
 
-## Skeptics In Tech
+## Certification Skeptics In Tech
 
-Technology is always moving, and tech is always changing. Even a single "tool" that is heavily depended on [will probably](https://nodejs.org/tr/blog/uncategorized/10-lts-to-12-lts/) [at some point](https://nextjs.org/docs/upgrading#breaking-changes) [have](https://github.com/facebook/react/blob/main/CHANGELOG.md#1600-september-26-2017) [breaking](https://docs.mongodb.com/v5.0/reference/versioned-api/?_ga=2.5453744.2077386325.1639572064-1242320383.1493999732) [changes](https://jestjs.io/blog/2020/05/05/jest-26#other-breaking-changes-in-jest-26) that
+**The Landscape Is Always Changing**  
+Technology is always moving, and tech is always changing. Even a single "tool" that is heavily depended on [will probably](https://nodejs.org/tr/blog/uncategorized/10-lts-to-12-lts/) [at some point](https://nextjs.org/docs/upgrading#breaking-changes) [have](https://github.com/facebook/react/blob/main/CHANGELOG.md#1600-september-26-2017) [breaking](https://docs.mongodb.com/v5.0/reference/versioned-api/?_ga=2.5453744.2077386325.1639572064-1242320383.1493999732) [changes](https://jestjs.io/blog/2020/05/05/jest-26#other-breaking-changes-in-jest-26), contributing to a valid cert today becoming outdated tomorrow.
+
+**The Test Might Not Be Valuable**  
+Knowing what a certification "tests" is often hidden. Was the test easy enough to google all the answers?
+Was the test deep enough to "really" test for deep knowledge?
