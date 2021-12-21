@@ -41,8 +41,6 @@ First, [download docker](https://www.docker.com/products/docker-desktop). Docker
 
 ### Pulling and Starting a Mongo Instance
 
-Here
-
 - **Pull An Image**: an [officially supported image](https://hub.docker.com/_/mongo) will get pulled as an image onto the host by using the docker cli. Enter this into the terminal
 - **Run The Image as a Container**: with an image stored on your machine, docker can use the image and run it as an [ephemeral container](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#create-ephemeral-containers)
 - **Use the Mongo CLI**: run a few commands to interact with the db
@@ -59,7 +57,7 @@ docker pull mongo:4
 - `pull` is the command we are running with `docker` (_[see the docs](https://docs.docker.com/engine/reference/commandline/pull/) for more on that_)
 - `mongo:4` is the [tagged image](https://docs.docker.com/engine/reference/commandline/tag/) that we are pulling: here, we are pulling the highest ["major"](https://semver.org/) `4.*.*` version of mongo, which at the time of writing looks like it is using `4.4.10`
 
-To inspect that this image is, indeed, downloaded to your machine, run `docker image ls -a` in the terminal and you should see something like:
+**To inspect** that this image is, indeed, downloaded to your machine, run `docker image ls -a` in the terminal and you should see something like:
 
 ```bash
 REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
@@ -84,7 +82,7 @@ Running that will start a docker container that runs a mongo instance on startup
 
 **NOTE:** Another flag is often used to run the mongo instance "in the background" so that the terminal window that ran the above `docker run` command can be used for other terminal commands. the flag here is `-d`, which runs the container in "detached" mode && could be integrated into the run command like `docker run --rm -d --name mongobox mongo:4`. Running the container this way will not output the mongo logs, only the container ID.
 
-To inspect that this container is running without the `-d` flag, the terminal should output the mongo instance logs. This shows the successful startup of the container. Another way to inspect running containers in docker is to use a new terminal window and type `docker container ls -a`. The output should look something like:
+**To inspect** that this container is running without the `-d` flag, the terminal should output the mongo instance logs. This shows the successful startup of the container. Another way to inspect running containers in docker is to use a new terminal window and type `docker container ls -a`. The output should look something like:
 
 ```bash
 CONTAINER ID   IMAGE     COMMAND                  CREATED              STATUS              PORTS       NAMES
