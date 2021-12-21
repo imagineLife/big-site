@@ -82,11 +82,25 @@ Running that will start a docker container that runs a mongo instance on startup
 
 **NOTE:** Another flag is often used to run the mongo instance "in the background" so that the terminal window that ran the above `docker run` command can be used for other terminal commands. the flag here is `-d`, which runs the container in "detached" mode && could be integrated into the run command like `docker run --rm -d --name mongobox mongo:4`. Running the container this way will not output the mongo logs, only the container ID.
 
-**To inspect** that this container is running without the `-d` flag, the terminal should output the mongo instance logs. This shows the successful startup of the container. Another way to inspect running containers in docker is to use a new terminal window and type `docker container ls -a`. The output should look something like:
+**To inspect** that this container is running (_without the `-d` flag_), the terminal should output the mongo instance logs. This shows the successful startup of the container. Another way to inspect running containers in docker is to use a new terminal window and type `docker container ls -a`. The output should look something like:
 
 ```bash
 CONTAINER ID   IMAGE     COMMAND                  CREATED              STATUS              PORTS       NAMES
 a474b4331069   mongo:4   "docker-entrypoint.s…"   About a minute ago   Up About a minute   27017/tcp   mongobox
 ```
 
+this shows the container ID, the image used to run the container, and some more details about the container.
+
 #### Access the DB through the Mongo CLI
+
+Here, we will start a terminal instance _inside the mongo container_ and use the built-in mongo cli to access the `mongod` instance in the same container. In a new terminal, run
+
+```bash
+docker exec -it mongobox bash
+```
+
+- `docker` is the cli tool being used
+- `exec` will run a command in a container
+- `-it` is a cmbo of the `-i` and `-t` flags, where `-i` lets us as devs _interact_ with the container through the stdin, or command-line input, and the `-t` lets us as devs see a terminal shell _of the container_ in our terminal
+- `mongobox` is the friendly name of the container we are using to run this command on
+- `bash` is the command that will be run in the container
