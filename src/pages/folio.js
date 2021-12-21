@@ -214,7 +214,7 @@ export default function Folio() {
             <p>Friends & Family call me Jake. </p>
             <p>
               I enjoy building software and services that solve problems,
-              particularly in the intersections of data and people meet.
+              particularly in the intersections where data and people meet.
             </p>
           </section>
 
