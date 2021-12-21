@@ -42,7 +42,8 @@ Was the test deep enough to "really" test for deep knowledge?
 
 ## Good Certification UX
 
-- **Be alone in a room**, validating there is not a helper. It only takes seeing a single interview of an engineering candidates where the person on video is _clearly not the same person_ that is speaking into a microphone to understand the value of having 1 human to deal with as a test reviewer. As an exam-taker, this requires individual knowledge of the material.
+- **Be alone in a room**, validating there is no extra helping hands. It only takes seeing a single interview of an engineering candidates where the person on video is _clearly not the same person_ that is speaking into a microphone to understand the value of having 1 human to deal with as a test reviewer. As an exam-taker, this requires individual knowledge of the material.
 - **Show an empty workspace**, validating no cheat-sheets. Cheatsheets are easy to find, easy to make, and easy to hide from a camera, until the proctor requires the cert-taker to show the whole room and the whole workspace. As an exam-taker, this ensures that the knowledge of the material is 100% from within.
 - **No Headphones or Hats**, giving an extra 'level' of assurance that the test taker is not taking any audio cues.
 - **No Dual Monitors, sharing the whole screen**, validating that no software cues are being delivered. Savvy software users could come up with many ways to work around security, so requiring 1 monitor with full visibility over the content of the screen validates no software trickery.
+- **No Talking** as to stop from recording the questions aurally during the certification.
