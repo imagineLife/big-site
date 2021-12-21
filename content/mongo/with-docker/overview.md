@@ -93,7 +93,8 @@ this shows the container ID, the image used to run the container, and some more 
 
 #### Access the DB through the Mongo CLI
 
-Here, we will start a terminal instance _inside the mongo container_ and use the built-in mongo cli to access the `mongod` instance in the same container. In a new terminal, run
+**Start a shell in the running mongo container**  
+Start a terminal instance _inside the mongo container_. In a new terminal, run
 
 ```bash
 docker exec -it mongobox bash
@@ -104,3 +105,44 @@ docker exec -it mongobox bash
 - `-it` is a cmbo of the `-i` and `-t` flags, where `-i` lets us as devs _interact_ with the container through the stdin, or command-line input, and the `-t` lets us as devs see a terminal shell _of the container_ in our terminal
 - `mongobox` is the friendly name of the container we are using to run this command on
 - `bash` is the command that will be run in the container
+
+**Use the Mongo CLI to interact with mongo**  
+After that command, the terminal will be a 'virtual' terminal inside the running mongo container. With this 'virtual' terminal instance running, run  
+`mongo`  
+This will start the mongo cli. A handful of lines should print to the terminal, showing that the mongo cli has started, starting with something like
+
+```bash
+MongoDB shell version v4.4.10
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("5ee2c722-2500-4d69-bbd3-17b36ff1347a") }
+MongoDB server version: 4.4.10
+```
+
+Now, mongo commands will interact with mongo db. Try things like
+
+```bash
+show dbs
+# should print 3 dbs that come with a default instance of mongo
+
+use water
+# will tell mongo to "use" a new db called "water"
+
+db
+# will print `db`, showing that commands run against the `db` will run against the `water` db
+
+db.melon.insertOne({juice:'box'})
+# will insert a single document into a "melon" collection in the "water" database
+
+db.melon.find()
+# should return something like
+{ "_id" : ObjectId("61c269050bc2632999960793"), "juice" : "box" }
+
+```
+
+**To exit the mongo cli**, press `Ctrl + C`.  
+**To exit the shell into the docker container**, type `exit` and press enter/return.  
+**To stop the running container**, navigate to the terminal that is running the container & type `Ctrl + C`. A handful of logs will print to the terminal. The last line should read something like
+
+```bash
+{"t":{"$date":"2021-01-01T23:56:53.988+00:00"},"s":"I", "c":"CONTROL", "id":23138, "ctx":"SignalHandler","msg":"Shutting down","attr":{"exitCode":0}}
+```
