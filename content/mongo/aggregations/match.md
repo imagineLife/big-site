@@ -1,3 +1,12 @@
+---
+title: Match
+slug: mongo/aggregations/match
+parentDir: mongo/aggregations
+author: Jake Laursen
+excerpt:
+tags: db, mongodb, performance, aggregation, match
+---
+
 # match
 
 [mongo match docs](https://docs.mongodb.com/manual/reference/operator/aggregation/match/?jmp=university)  
