@@ -1,29 +1,26 @@
-$margin-big: 12px;
+$margin-xbig: 60px;
+$margin-big: 30px;
 $margin-med: 8px;
 $margin-small: 5px;
 
 .md-wrapper {
   margin: 0 auto;
-  max-width: 1000px;
-
-  h2 {
-    margin: $margin-small;
+  max-width: 70vw;
+  h1 {
+    margin: $margin-xbig 0 $margin-med;
   }
-
-  h3 {
-    margin: $margin-med;
-  }
-
+  h2,
+  h3,
   h4 {
-    margin: $margin-big;
+    margin: $margin-xbig 0 $margin-big;
   }
 
   p {
-    margin: 0 20px;
+    margin: $margin-small 0;
     line-height: 1.5rem;
   }
 
-  pre{
+  pre {
     color: #d6deeb;
     background-color: #011627;
     padding: 10px;
@@ -32,7 +29,7 @@ $margin-small: 5px;
     overflow: auto;
   }
 
-  table{
+  table {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
@@ -55,10 +52,9 @@ $margin-small: 5px;
       padding-top: 12px;
       padding-bottom: 12px;
       text-align: left;
-      background-color: rgb(100,100,225);
+      background-color: rgb(100, 100, 225);
       color: white;
     }
-
   }
 }
 
@@ -75,5 +71,3 @@ $margin-small: 5px;
     }
   }
 }
-
-
