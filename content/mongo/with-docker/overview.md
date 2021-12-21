@@ -14,10 +14,11 @@ order: 1
     - ["Decoupled" From The Host](#decoupled-from-the-host)
     - [DB Setup Explicitly Defined in Code](#db-setup-explicitly-defined-in-code)
     - [Freedom to decide on Statefulness](#freedom-to-decide-on-statefulness)
-  - [Running Mongo In Docker](#running-mongo-in-docker)
+- [Running Mongo In Docker](#running-mongo-in-docker)
     - [Pulling and Starting a Mongo Instance](#pulling-and-starting-a-mongo-instance)
       - [Pull An Image](#pull-an-image)
-  - [Run the Image as a Container](#run-the-image-as-a-container)
+      - [Run the Image as a Container](#run-the-image-as-a-container)
+      - [Access the DB through the Mongo CLI](#access-the-db-through-the-mongo-cli)
 
 ### "Decoupled" From The Host
 
@@ -34,7 +35,7 @@ What version of the cli tool are we using? See the code.
 
 Does one person on the team want to retain some data & another person on the team want a "fresh" instance of data? Putting Mongo up in a container allows for some quick-win flexibility between a "stateless" instance and an instance which uses data that is mounted from "outside" the container, making a "stateful" instance more available.
 
-## Running Mongo In Docker
+# Running Mongo In Docker
 
 First, [download docker](https://www.docker.com/products/docker-desktop). Docker unlocks the "magic" for making the [development environment similar across hosts](#why-mongo-with-docker).
 
@@ -65,7 +66,7 @@ REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
 mongo        4         29915542a1ef   4 weeks ago    413MB
 ```
 
-## Run the Image as a Container
+#### Run the Image as a Container
 
 This will start a mongo instance from the docker image `mongo:4`. Run this in a terminal:
 
@@ -89,3 +90,5 @@ To inspect that this container is running without the `-d` flag, the terminal sh
 CONTAINER ID   IMAGE     COMMAND                  CREATED              STATUS              PORTS       NAMES
 a474b4331069   mongo:4   "docker-entrypoint.s…"   About a minute ago   Up About a minute   27017/tcp   mongobox
 ```
+
+#### Access the DB through the Mongo CLI
