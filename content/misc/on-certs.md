@@ -17,7 +17,7 @@ order: 2
 
 ## Know Your Stuff
 
-Certifications can be great, even in tech. Certs can help:
+Certifications can be great, even in tech.
 
 **Validate Competence & Build Trust**  
 Prove a "level" of proficiency in a given technology.  
