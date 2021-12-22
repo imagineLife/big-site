@@ -44,11 +44,11 @@ const About = () => (
 
         <h2>An INTJ</h2>
         <p>
-          The
+          The{' '}
           <Link to="https://www.myersbriggs.org/my-mbti-personality-type/mbti-basics/">
             Meyers Briggs
           </Link>{' '}
-          and even the
+          and even the{' '}
           <Link to="https://www.16personalities.com/">
             16 Personalities Site
           </Link>{' '}
