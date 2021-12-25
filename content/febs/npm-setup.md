@@ -24,11 +24,21 @@ Maybe call it 'frontend-boilerplate'. This will be the folder that will hold the
 ### Initialize as an NPM Repo
 
 Open a terminal, cd in to the newly created repo.,
-From the terminal, run the command `npm init -y`,
+From the terminal, run the command
+
+```bash
+npm init -y
+```
+
 This 'sets up' the repo to leverage npm for the following steps. Now, there will be a package.json file, which acts as the 'config' for npm to know what to do with dependencies, and what files to work with.
 
 ### Install some dependencies
 
-From the cli, run `npm install react@17.0.1 react-dom17.0.1 webpack@5.22.0 webpack-cli@4.5.0`.  
+From the cli, run
+
+```bash
+npm install react@17.0.2 react-dom@17.0.2 webpack@5.65.0 webpack-cli@4.9.1
+```
+
 This will update the `dependencies` section of the package.json, and list the above webpack dependencies that were just installed.  
-The versions are hard-coded to keep in-sync with this guide
+The versions are hard-coded to keep in-sync with this doc
