@@ -57,7 +57,7 @@ const IndexPage = () => (
               )}
               <div className="coming-soon">
                 <p>
-                  Look forward to testing integrations, code-coverage assurance
+                  More to come: testing integrations, code-coverage assurance
                   with pre-push husky checks, linting, and more!
                 </p>
               </div>
