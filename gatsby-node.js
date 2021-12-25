@@ -98,6 +98,7 @@ exports.createPages = async ({
               slug
               title
               excerpt
+              parentDir
             }
           }
         }
