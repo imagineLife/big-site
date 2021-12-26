@@ -17,9 +17,15 @@ As a developer I'd like to populate an HTML file with appropriate 'boilerplate' 
 
 Here, some boilerplate content for an html file. There are great boilerplates that can be found across the world wide web. This includes bits that appear in several boilerplates.
 
-### Set the DocType
+### Start an html file
 
-at the top of the file add a line
+create a new file, enter into a the terminal in the root of the project
+
+```bash
+touch index.html
+```
+
+At the top of this new html file, declare the doc type with
 
 ```html
 <!DOCTYPE html>
