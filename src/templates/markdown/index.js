@@ -11,36 +11,37 @@ export default function Template({
     pageSummaries: { pages },
   },
 }) {
-  const footerLinks =
-    pages.length > 1 &&
-    pages.reduce((resArr, itm, pgIdx) => {
-      // get previous, current, && next page details
-      let prevPage = pages[pgIdx - 1];
-      let nextPage = pages[pgIdx + 1];
-      let isLastPage = pgIdx === resArr.length - 1;
+  console.log({ order });
 
-      // first page
-      // show HOME dir
-      if (order === 1 && pgIdx === 0) {
-        return [
-          ...resArr,
-          ...[
-            {
-              title: 'Start',
-              slug: parentDir,
-            },
-            { ...nextPage.details },
-          ],
-        ];
-      } else {
-        if (order === 1) {
-          return resArr;
-        }
+  let footerLinks = [];
+  // get previous, current, && next page details
+  let prevPage = pages[order - 1 - 1];
+  let nextPage = pages[order];
 
-        if (pgIdx !== order - 1 && pgIdx !== order + 1) return resArr;
-        return [...resArr, itm.details];
-      }
-    }, []);
+  // FIRST page
+  // show HOME dir
+  if (order === 1) {
+    footerLinks = [
+      {
+        title: 'Start',
+        slug: parentDir,
+      },
+      { ...nextPage.details },
+    ];
+  }
+
+  // LAST page
+  else if (order === pages.length - 1) {
+    footerLinks = [{ ...prevPage.details }];
+  }
+
+  //middle pages
+  else {
+    footerLinks = [{ ...prevPage.details }, { ...nextPage.details }];
+  }
+
+  console.log('footerLinks');
+  console.log(footerLinks);
 
   return (
     <Fragment>
