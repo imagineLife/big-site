@@ -5,17 +5,13 @@ parentDir: febs
 order: 3
 ---
 
-## A Gap
+## A Goal and A Strategy
 
-I know which dependencies to use for a frontend boilerplate, but I'm not sure how to setup initial files to work with.
+_I know which dependencies to use for a frontend boilerplate, but I'm not sure how to setup initial files to work with._
 
-## A Hope
+_As a developer I'd like to setup the Contents of a 'Source' Directory, including html, js and scss files._
 
-As a developer I'd like to setup the Contents of a 'Source' Directory, including html, js and scss files.
-
-## A Practice
-
-Here, the beginnings of the application codebase wil be setup,
+Here, the beginnings of the application codebase wil be setup, including a root `html` file, a `js` file and an `scss` file.
 
 ### Create A Directory
 

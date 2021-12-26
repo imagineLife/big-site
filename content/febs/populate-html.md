@@ -5,25 +5,15 @@ parentDir: febs
 order: 4
 ---
 
-## A Gap
+## A Goal and A Strategy
 
-I have an empty html file and I need some boilerplate content for a frontend build system.
+_I have an empty html file and I need some boilerplate content for a frontend build system._
 
-## A Hope
+_As a developer I'd like to populate an HTML file with appropriate 'boilerplate' content for a frontend build system._
 
-As a developer I'd like to populate an HTML file with appropriate 'boilerplate' content for a frontend build system.
+Here, some boilerplate content for an html file. There are great boilerplate options that can be found across the world wide web.
 
-## A Practice
-
-Here, some boilerplate content for an html file. There are great boilerplates that can be found across the world wide web. This includes bits that appear in several boilerplates.
-
-### Start an html file
-
-create a new file, enter into a the terminal in the root of the project
-
-```bash
-touch index.html
-```
+### Describe the doctype in an html file
 
 At the top of this new html file, declare the doc type with
 

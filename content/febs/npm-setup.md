@@ -5,15 +5,11 @@ parentDir: febs
 order: 2
 ---
 
-## A Gap
+## A Goal and A Strategy
 
-I know how to explain what some of the tools do in a frontend build setup, but I don't know where to start when making my own boilerplate.
+_I know how to explain what some of the tools do in a frontend build setup, but I don't know where to start when making my own boilerplate._
 
-## A Hope
-
-As a developer I'd like to know how to setup a project's dependencies as a first step of a frontend boilerplate.
-
-## A Practice
+_As a developer I'd like to know how to setup a project's dependencies as a first step of a frontend boilerplate._
 
 Here, we will leverage npm to initialize a project and install a handful of webpack dependencies. This will not be all dependencies, just enough needed to get the npm consuming, bundling, and storing some code output.
 

@@ -5,21 +5,16 @@ parentDir: febs
 order: 1
 ---
 
-## A Gap
+## A Goal and A Strategy
 
-I Don't know what tools are being used when I build a website using react.
-I can build a project with create-react-app, and I've heard about webpack, but I don't know whats going between them.
+_I Don't know what tools are being used when I build a website using react. I can build a project with create-react-app, and I've heard about webpack, but I don't know whats going between them._
 
-## A Hope
+_As a developer I'd like to understand the tooling_
 
-As a developer I'd like to understand the tooling
-
-- be able to articulate the tolls that I'm using
+- be able to articulate the tools that I'm using
 - be able to give at least an overview of how these tools are working together
 - have my own boilerplate project where I've compiled react/webpack/babel etc.
 - understand and being able to assemble a frontend app using the tools of react, webpack, babel, npm, and node.
-
-## A Practice
 
 Here's a few one-liners to give an overview of the tooling.
 

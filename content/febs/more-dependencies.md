@@ -5,21 +5,14 @@ parentDir: febs
 order: 5
 ---
 
-## A Gap
+## A Goal and A Strategy
 
-I need tools to convert JSX to browser-readable content. React is written in JSX, and browsers can not read JSX.
-
-## A Hope
+_I need tools to convert JSX to browser-readable content. React is written in JSX, and browsers can not read JSX._
 
 As a developer I'd like to...
 
-### Understand Loaders
-
 - Be able to communicate how loaders 'fit' into a frontend build system
 - Include some loaders into a frontend boilerpalte setup
-  - know which loaders to user here and install them in this frontend build system
-
-## A Practice
 
 Here, install loaders.
 

@@ -5,18 +5,14 @@ parentDir: febs
 order: 6
 ---
 
-## A Gap
+## A Goal and A Strategy
 
-I have plugins and an understanding of frontend build system parts, but I don't have a React component setup yet.
+_I have plugins and an understanding of frontend build system parts, but I don't have a React component setup yet._
 
-## A Hope
-
-As a developer I'd like to setup React to manipulate the dom
-
-## A Practice
+_As a developer I'd like to setup React to manipulate the dom_.
 
 Here, setup the root React component of the project.  
-Begin with the JS file & import dependencies:
+Begin with the `js` file & import dependencies:
 
 ```js
 import React from 'react';
@@ -37,7 +33,11 @@ Render the Component to the dom:
 ReactDOM.render(<Title />, document.getElementById('root'));
 ```
 
+This refers to the div with the `root` id that exists in the html file.
+
 ### All Together
+
+Here, the complete `js` file:
 
 ```js
 import React from 'react';
