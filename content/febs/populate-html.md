@@ -2,7 +2,7 @@
 title: Project Setup - Populate an HTML file
 slug: febs/populate-html
 parentDir: febs
-order: 4
+order: 5
 ---
 
 ## A Goal and A Strategy

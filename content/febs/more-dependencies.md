@@ -2,7 +2,7 @@
 title: Project Setup - Install Babel & loader Dependencies,
 slug: febs/more-dependencies
 parentDir: febs
-order: 5
+order: 6
 ---
 
 ## A Goal and A Strategy
