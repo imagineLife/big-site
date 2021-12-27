@@ -32,7 +32,7 @@ transforms all remaining javascript that may not be readable by browsers and mak
 
 converts js 'import' syntax on css files for browsers
 
-### html-webpack=plugin
+### html-webpack-plugin
 
 we'll tell this plugin to use our html template for the html root of our project
 
@@ -51,5 +51,5 @@ puts css into the dom
 ### install script
 
 ```js
-npm i @babel/preset-react@7.12.13 babel-loader@8.2.2 css-loader@5.0.2 html-loader@2.0.0 html-webpack-plugin@5.1.0 sass-loader@11.0.1 style-loader@2.0.0
+npm i --save-dev @babel/preset-react@7.16 babel-loader@8.2 css-loader@6.5 html-loader@3.0 html-webpack-plugin@5.5 sass-loader@12.4 style-loader@3.3
 ```
