@@ -15,6 +15,8 @@ const techs = {
     'Enzyme',
     'Jest',
     'Cypress',
+    'Gatsby',
+    'NextJS',
   ],
   backend: [
     'Node (OpenJS Certified Node Application Developer)',
@@ -30,6 +32,7 @@ const techs = {
     'Server Scaling',
     'Travis-CI',
     'Docker',
+    'NextJS',
   ],
   db: ['MongoDB', 'PostGreSQL', 'MySQL', 'Data Modeling'],
   people: [
@@ -65,6 +68,15 @@ const folioItems = [
     aLink: 'https://www.scrum.org/certificates/519854',
     techList: ['Team Process Framework', 'Servant Leadership'],
     imgClass: `psmi-bg`,
+  },
+  {
+    title: 'How to Manage a Remote Team',
+    subText:
+      'Best Practices, Managing Remote Team Members, Distributed Team Cultures & Values - all through a partnership between Gitlab and Coursera',
+    textContext: '(Certificate)',
+    aLink: 'https://www.coursera.org/learn/remote-team-management',
+    techList: ['Team Process', 'Remote', 'Management'],
+    imgClass: `gitlab-bg`,
   },
   {
     title: 'Slice-n-Dice Times',
@@ -164,7 +176,7 @@ const folioItems = [
     ],
   },
   {
-    title: 'CT Housing Permist, Mapped',
+    title: 'CT Housing Permits, Mapped',
     subText:
       'An interactive choropleth mapping project, representing the range of housing permits issued per town in Connecticut in 2018.',
     aLink: 'https://imaginelife.github.io/stateHousingPermits/',
