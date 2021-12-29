@@ -32,7 +32,7 @@ export default function Template({
       ];
     }
     // LAST page
-    else if (order === pages.length - 1) {
+    else if (order === pages.length) {
       footerLinks = [{ ...prevPage.details }];
     }
 
