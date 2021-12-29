@@ -1,9 +1,9 @@
 ---
 title: Setup An NPM Repo
 slug: http-server/build-it
-parentDir: http-server
 author: Jake Laursen
 excerpt: Get A project started with npm, a package.json file, and some dependencies
+parentDir: http-server
 tags: http, web, server, node, express, npm
 order: 2
 ---

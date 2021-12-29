@@ -1,9 +1,9 @@
 ---
 title: Send HTML with an HTTP server
 slug: http-server/render-docs
-parentDir: http-server
 author: Jake Laursen
 excerpt: With a simple http server, send a webpage to the browser
+parentDir: http-server
 tags: http, web, server, node, express, npm, html
 order: 3
 ---
