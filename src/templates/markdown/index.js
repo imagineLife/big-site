@@ -14,7 +14,11 @@ export default function Template({
   let footerLinks;
 
   // ONLY create footer links when order is explicit in frontmatter
-  if (order !== null) {
+  if (order !== null && parentDir !== null) {
+    // console.log(
+    //   `ORDER: ${order} - - PAGES: ${pages.length} - - - parentDir: ${parentDir}`,
+    // );
+
     footerLinks = [];
     // get previous, current, && next page details
     let prevPage = pages[order - 1 - 1];
@@ -23,13 +27,15 @@ export default function Template({
     // FIRST page
     // show HOME dir
     if (order === 1) {
-      footerLinks = [
-        {
-          title: 'Start',
-          slug: parentDir,
-        },
-        { ...nextPage.details },
-      ];
+      prevPage = {
+        title: 'Start',
+        slug: parentDir,
+      };
+
+      footerLinks = [{ ...prevPage }];
+      if (nextPage) {
+        footerLinks.push({ ...nextPage.details });
+      }
     }
     // LAST page
     else if (order === pages.length) {
@@ -38,7 +44,9 @@ export default function Template({
 
     //middle pages
     else {
-      footerLinks = [{ ...prevPage.details }, { ...nextPage.details }];
+      if (nextPage) {
+        footerLinks = [{ ...prevPage.details }, { ...nextPage.details }];
+      }
     }
   }
 
