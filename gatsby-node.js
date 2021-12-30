@@ -232,6 +232,7 @@ exports.createPages = async ({
       context: {
         slug: page.overview.slug,
         parentDir: page.overview.parentDir || page.overview.slug,
+        className: page.overview.parentDir || '',
       },
     });
   });
