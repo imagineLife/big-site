@@ -13,7 +13,7 @@ order: 1
 
 ![imperfect bars](./imperfect-bars/imperfect-bars.png)
 
-### Ingreients
+### Ingredients
 
 - Peanut Butter
 - Egg White Protein powder
