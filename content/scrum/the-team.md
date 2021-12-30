@@ -15,6 +15,8 @@ order: 3
   - [Roles](#roles)
     - [Scrum Master](#scrum-master)
       - [Serving the Scrum Team](#serving-the-scrum-team)
+      - [Serving the Product Owner](#serving-the-product-owner)
+      - [Serving the Organization](#serving-the-organization)
     - [Product Owner](#product-owner)
     - [Development Team](#development-team)
 
