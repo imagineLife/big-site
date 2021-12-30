@@ -5,15 +5,6 @@ $margin-small: 5px;
 
 /*
 
-  Recipe Vals
-
-*/
-$story-index: 1;
-$ingredients-index: 1;
-$directions-index: 2;
-
-/*
-
 
   Generic styles
 
@@ -92,25 +83,33 @@ $directions-index: 2;
 /*
 
 
+
   Recipe Styles
 
-REVIEW:
-$story-index: 1;
-$ingredients-index: 2;
-$directions-index: 3;
+
 
 */
+// the "order" of the page "sections": story, ingredients, directions
+$story-index: 1;
+$ingredients-index: 1;
+$directions-index: 2;
 
 .md-wrapper.recipes {
-  //  Story section
-  > h2:nth-child(#{$story-index}) {
-  }
+  //  Story
+  // > h2:nth-child(#{$story-index}) {
+  // }
+
   // ingredients
-  > ul:nth-of-type(#{$ingredients-index}) {
-    list-style: square;
+  > h3#ingredients {
+    & + ul {
+      list-style: square;
+    }
   }
+
   // directions
-  > ul:nth-of-type(#{$directions-index}) {
-    list-style: numbers;
+  > h3#directions {
+    & + ul {
+      list-style: numbers;
+    }
   }
 }
