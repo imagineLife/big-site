@@ -6,6 +6,7 @@ excerpt: A crispier take on a refridgerator bar
 tags: recipe, diy, protein, snack, home
 coverImage: ./index.JPG
 coverAlt: imperfect bars
+parentDir: recipes
 order: 1
 ---
 

@@ -5,8 +5,9 @@ author: Jake Laursen
 excerpt: Delicious, sweet, salty, mild spice, fast and easy AirFryer Salmon
 tags: recipe, diy, salmon, maple, soy, sriracha
 coverImage: ./index.JPG
-coverAlt: Salmin
-order: 1
+coverAlt: Salmon
+parentDir: recipes
+order: 2
 ---
 
 ## Maple Soy Sriracha Air-Fryer Salmon
