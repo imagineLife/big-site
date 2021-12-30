@@ -53,7 +53,7 @@ export default function Template({
   return (
     <Fragment>
       <main
-        className="md-wrapper"
+        className={`md-wrapper${parentDir ? ` ${parentDir}` : ''}`}
         dangerouslySetInnerHTML={{ __html: content }}
       ></main>
       <footer className="md-footer">

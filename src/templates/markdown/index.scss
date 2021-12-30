@@ -3,6 +3,22 @@ $margin-big: 30px;
 $margin-med: 8px;
 $margin-small: 5px;
 
+/*
+
+  Recipe Vals
+
+*/
+$story-index: 1;
+$ingredients-index: 1;
+$directions-index: 2;
+
+/*
+
+
+  Generic styles
+
+
+*/
 .md-wrapper {
   margin: 0 auto;
   max-width: 70vw;
@@ -13,6 +29,7 @@ $margin-small: 5px;
   h3,
   h4 {
     margin: $margin-xbig 0 $margin-big;
+    font-weight: lighter;
   }
 
   p {
@@ -69,5 +86,31 @@ $margin-small: 5px;
       position: absolute;
       right: 0;
     }
+  }
+}
+
+/*
+
+
+  Recipe Styles
+
+REVIEW:
+$story-index: 1;
+$ingredients-index: 2;
+$directions-index: 3;
+
+*/
+
+.md-wrapper.recipes {
+  //  Story section
+  > h2:nth-child(#{$story-index}) {
+  }
+  // ingredients
+  > ul:nth-of-type(#{$ingredients-index}) {
+    list-style: square;
+  }
+  // directions
+  > ul:nth-of-type(#{$directions-index}) {
+    list-style: numbers;
   }
 }
