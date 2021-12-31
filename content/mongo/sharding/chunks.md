@@ -33,7 +33,7 @@ As time goes on, the cluster splits the initial chunk into many. This distribute
 
 ## Leveraging Mongos cli to inspect Chunk data
 
-```bash
+```js
 # use a mongos instance/conneciton, mont mongo or mongod
 
 show dbs
@@ -85,7 +85,7 @@ Mongo has a default set to 64MB. This chunk size can be configured to be between
 
 ### Adjusting the Chunk size setting
 
-```bash
+```js
 # adjust the mongos instance chunksize in the config.settings db.collections
 
 use config
@@ -98,7 +98,7 @@ db.settings.save({_id: "chunksize", value: 2})
 
 First, lets add some data so that mongos _has_ a bunch of data to split
 
-```bash
+```js
 # import MORE data into the mongos instance
 mongoimport --username 'csrs_admin' --password 'csrs_admin_pw' --authenticationDatabase 'admin' --db "m103-example" --collection "products" --port 26000 products.part2.json
 # should return...
