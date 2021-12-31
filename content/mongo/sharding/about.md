@@ -14,7 +14,7 @@ tags: db, mongodb, replication, sharding, horizontal scaling
 [The Shard Key](/mongo/sharding/the-shard-key)  
 [Hashed Shard Keys](/mongo/sharding/hashed-shard-keys)  
 [Shard Chunks](/mongo/sharding/chunks)  
-[Balancing Shards](/mongo/sharding/chunks/balancing)  
+[Balancing Shards](/mongo/sharding/balancing)  
 [How the Mongos Server Routes Queries to Shards](/mongo/sharding/how-mongos-routes-queries)
 
 # About Sharding
