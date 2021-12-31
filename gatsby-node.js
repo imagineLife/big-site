@@ -8,32 +8,12 @@ exports.createPages = async ({
     fragment chartparts on ChartsJson {
       slug
       title
-      explanations
       chartdata {
         xdomain
         ydomain
         values {
           x
           y
-        }
-      }
-      sections {
-        box {
-          data
-          itm
-        }
-        column {
-          data
-          itm
-        }
-        className
-        interactiveStateWrapper
-      }
-      footer {
-        text
-        link {
-          text
-          url
         }
       }
     }
