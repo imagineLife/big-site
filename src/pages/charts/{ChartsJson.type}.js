@@ -1,11 +1,15 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+import 'chart-by-type.scss';
+
 export default function ChartName(props) {
   console.log('HUH?!');
   console.log('props');
   console.log(props);
 
-  return <main className="chart">Chart Name Here</main>;
+  return <main className="chart-wrapper">
+    <>
+  </main>;
 }
 
 export const chartQuery = graphql`
@@ -32,41 +36,3 @@ export const chartQuery = graphql`
     }
   }
 `;
-
-/*
-  query ChartBySlug($slug: String) {
-    chartsJson(slug: { eq: $slug }) {
-      slug
-      title
-      usefor
-      excerpt
-      chartdata {
-        xdomain
-        ydomain
-        values {
-          x
-          y
-        }
-      }
-    }
-  }
-
-  query allCharts {
-    allChartsJson {
-      nodes {
-        slug
-        title
-        usefor
-        excerpt
-        chartdata {
-          xdomain
-          ydomain
-          values {
-            x
-            y
-          }
-        }
-      }
-    }
-  }
-*/
