@@ -104,8 +104,14 @@ mongodump --uri mongodb://m121:aggregations@cluster0-shard-00-00-jxeqq.mongodb.n
   - [`$match`](/mongo/aggregations/match)
   - [`$project`](/mongo/aggregations/project)
   - [`$addFields`](/mongo/aggregations/add-fields)
-  - [`$geoNear`](/mongo/aggregations/geo-near)
+- **Cursor-Like Stages**
+  - these are like cursor methods, but instead of calling them `db.coll.find().sort()`, they are called in a pipeline:
+  - sort
+  - skip
+  - limit
+  - count
+  - [Cursor-Like Stages doc](/mongo/aggregations/cursor-like-stages)
 - **Core** - `$group`, `$unwind`, `$lookup` and `$graphLookup`
 - **Facets** - what it is, bucketing, auto bucketing, single & multiple facets
 - **Utilities**
-  - geoNear
+  - [`$geoNear`](/mongo/aggregations/geo-near)
