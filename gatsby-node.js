@@ -216,15 +216,4 @@ exports.createPages = async ({
       },
     });
   });
-
-  // const chartsTemplate = path.resolve('src/templates/chart/index.js');
-  // chartsData.forEach(chartPage => {
-  //   createPage({
-  //     path: chartPage.slug,
-  //     component: chartsTemplate,
-  //     context: {
-  //       slug: chartPage.slug,
-  //     },
-  //   });
-  // });
 };
