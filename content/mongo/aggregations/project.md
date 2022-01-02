@@ -55,7 +55,7 @@ db.solarSystem.aggregate([
   }
 ])
 
-# should return...
+// should return...
 { "name" : "Sun" }
 { "name" : "Mercury" }
 { "name" : "Venus" }
@@ -93,7 +93,8 @@ The new field gets declared as a key. The value that the project uses to assign 
 
 ### Prefix field vals with \$
 
-The aggregation expression must prefix the field (_& subfield combo if present, like below_) with a `$`.
+The aggregation expression must prefix the field (_& subfield combo if present, like below_) with a `$`.  
+Here, assign the `$gravity.value` sub-field from the original doc to a _different field_ in the output called `gravity`. Notice that the original field is written with the prefix `$`:
 
 ```js
 db.solarSystem.aggregate([
@@ -106,6 +107,7 @@ db.solarSystem.aggregate([
   }
 ])
 
+// will return...
 { "name" : "Sun", "gravity" : 274 }
 { "name" : "Mercury", "gravity" : 3.24 }
 { "name" : "Venus", "gravity" : 8.87 }
@@ -119,7 +121,7 @@ db.solarSystem.aggregate([
 
 ### Creating an entirely new field
 
-The new name of a reassigned field is arbitrary, and does not need to match the original field names at all. Here, the `gravity.value` kub-field gets reassigned to a new `surfaceGravity` key/value pair -
+The new name of a reassigned field is arbitrary, and does not need to match the original field names at all. Here, the `gravity.value` sub-field gets reassigned to a new `surfaceGravity` key/value pair -
 
 ```js
 db.solarSystem.aggregate([
@@ -129,6 +131,8 @@ db.solarSystem.aggregate([
     surfaceGravity: '$gravity.value'
   }
 }])
+
+// will return
 { "name" : "Sun", "surfaceGravity" : 274 }
 { "name" : "Mercury", "surfaceGravity" : 3.24 }
 { "name" : "Venus", "surfaceGravity" : 8.87 }
@@ -150,6 +154,22 @@ With a weight of 140lb, 140 will be multiplied by a new gravityRatio.
 - this resulting value will be assigned to `myWeight`
 
 ```js
+// vars up front
+let EARTH_GRAVITY = 9.8;
+let gravityRatio = { $divide: ["$gravity.value",9.8] };
+let MY_WEIGHT = 140;
+let myWeightOnPlanet = { $multiply: [gravityRatio, MY_WEIGHT] };
+
+// passing 'myWeightOnPlanet' as val of `myWeightHere`
+db.solarSystem.aggregate([{
+  $project: {
+    _id:0,
+    planet: "$name",
+    myWeightHere: myWeightOnPlanet
+  }
+}])
+
+// all-in-one
 db.solarSystem.aggregate([
   {$project: {
     _id:0,
@@ -184,21 +204,22 @@ Pipeline arrays can be saved as vars && inserted into the mongodb query module.
 let weightOnPlanetsProjection = [
   {
     $project: {
-      _id:0,
-      name:1,
+      _id: 0,
+      name: 1,
       myWeight: {
         $multiply: [
           {
-            $divide: ["$gravity.value",9.8]
+            $divide: ['$gravity.value', 9.8],
           },
-          140
-        ]
-      }
-    }
-  }]
+          140,
+        ],
+      },
+    },
+  },
+];
 
-# use it something like this...
-mongoNodeMod.aggregate(weightOnPlanetsProjection)
+// use it something like this...
+mongoNodeMod.aggregate(weightOnPlanetsProjection);
 ```
 
 ### Nested objects and arrays

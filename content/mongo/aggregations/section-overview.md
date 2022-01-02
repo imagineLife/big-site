@@ -101,5 +101,6 @@ mongodump --uri mongodb://m121:aggregations@cluster0-shard-00-00-jxeqq.mongodb.n
 
 - **Intro**
   - [`$match`](/mongo/aggregations/match)
+  - [`$project`](/mongo/aggregations/project)
 - **Core** - `$group`, `$unwind`, `$lookup` and `$graphLookup`
 - **Facets** - what it is, bucketing, auto bucketing, single & multiple facets
