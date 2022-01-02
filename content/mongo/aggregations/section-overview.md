@@ -9,6 +9,14 @@ tags: db, mongodb, performance, aggregation
 
 # Mongo Aggregations
 
+This is broken down into parts
+
+- **Intro** - `$match`, `$project`, `$addField` and a few more
+- **Core** - `$group`, `$unwind`, `$lookup` and `$graphLookup`
+- **Facets** - what it is, bucketing, auto bucketing, single & multiple facets
+
+## Intro
+
 [Match](/mongo/aggregations/match): to filter out docs  
 [Project](/mongo/aggregations/project): similar to a `map` in plain js, takes input and can re-shape output
 
@@ -18,3 +26,5 @@ tags: db, mongodb, performance, aggregation
 - [lookup](/mongo/aggregations/lookup): similar to a left outer join, all fields in the 'left table' and the desired fields from the 'right' table
 - [graphLookup](/mongo/aggregations/graph-lookup): most useful for nested hierarchical data structures
 - [graphLookup cross-collections](/mongo/aggregations/graph-lookup-cross-coll)
+
+MongoDB University has a great free online course, [M121](https://university.mongodb.com/courses/M121/about), dedicated to the aggregation framework - great stuff!
