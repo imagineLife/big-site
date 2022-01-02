@@ -1,21 +1,36 @@
+---
+title: GeoNear
+slug: mongo/aggregations/geo-near
+parentDir: mongo/aggregations
+author: Jake Laursen
+excerpt: Work with GeoJSON data
+tags: db, mongodb, aggregation, geoNear, geojson
+---
+
 # geonear
 
 works with geojson data.  
 performs geoqueries in a pipeline.  
 must be the first stage in the pipe.  
-can be used on sharded collections. `$near`, a find operation, cannot.  
+can be used on sharded collections. `$near`, another find operation, cannot.  
 When using 2dSperes, the distance is returned in meters.  
 When using "legacy coordinates" instead of a 2d sphere, the distance is returned in radians.
 
 ## analysis of geonear args
 
-```bash
 # required args
-- near: point searching near
-- distanceField: field will be INSERTED into returned docs, returning the distance fromthe `near` fal
-- spherical: true if index is a 2d sphere index
+
+- **near**: point searching near
+  - `{type: "Point", coordinates: [-28.9346438, 51.2345]}`
+  - a point to search near
+- **distanceField**:
+  - field will be INSERTED into returned docs
+  - returning the distance from the `near` fal
+- **spherical**:
+  - true if index is a 2d sphere index
 
 # optional fields
+
 minDistance
 maxDistance
 query
@@ -23,52 +38,60 @@ includeLocs
 limit
 num
 distanceMultiplier
-```
 
 example
 
-```bash
+```js
+let mongoHQCoords = [-73.98769766092299, 40.757345233626594];
+let nearMongoHQ = {
+  type: 'Point',
+  coordinates: mongoHQCoords,
+};
+
 db.nycFacilities.aggregate([
   {
     $geoNear: {
-      near: {
-        type: "Point",
-        coordinates: [-73.98769766092299, 40.757345233626594]
-      },
-      distanceField: "distanceFromMongoDB",
-      spherical: true
-    }
-  }
-])
+      near: nearMongoHQ,
+      distanceField: 'distanceFromMongoDB',
+      spherical: true,
+    },
+  },
+]);
 ```
 
 adding some restrictions, find 5 nearest hospitals:
 
-- minDistance: closest
-- maxDistance: furthest
-- query: like `$match`
-- includeLocs: ?? huh
-- distanceMultiplier: can convert distance from radians to something else
+- minDistance:
+  - closest result desired
+- maxDistance:
+  - furthest distance desired
+- query
+  - like `$match`
+- includeLocs:
+  - show what location was returned where multiple locations are in a doc
+- distanceMultiplier:
+  - can convert distance from radians to something else
 
 Find the 5-nearest hospitals to the MongoDB Headquarters, which is defined by the coordinates
 
-```bash
+```js
+let mongoHQCoords = [-73.98769766092299, 40.757345233626594];
+let nearMongoHQ = {
+  type: 'Point',
+  coordinates: mongoHQCoords,
+};
+
 db.nycFacilities.aggregate([
   {
     $geoNear: {
-      near: {
-        type: "Point",
-        coordinates: [-73.98769766092299, 40.757345233626594]
-      },
-      distanceField: "distanceFromMongoDB",
+      near: nearMongoHQ,
+      distanceField: 'distanceFromMongoDB',
       spherical: true,
-      query: { type: "Hospital" }
-    }
+      query: { type: 'Hospital' },
+    },
   },
   {
-    $limit: 5
-  }
-])
+    $limit: 5,
+  },
+]);
 ```
-
-S
