@@ -17,12 +17,6 @@ tags: db, mongodb, performance, aggregation
   - [Quick Reference Highlights](#quick-reference-highlights)
     - [A Setup For Aggregation](#a-setup-for-aggregation)
 
-<!-- This will be broken down into parts:
-
-- **Intro** - `$match`, `$project`, `$addField` and a few more
-- **Core** - `$group`, `$unwind`, `$lookup` and `$graphLookup`
-- **Facets** - what it is, bucketing, auto bucketing, single & multiple facets -->
-
 ## Intro
 
 [Match](/mongo/aggregations/match): to filter out docs  
@@ -102,3 +96,10 @@ Sign up for Mongo Atlas.
 mongodump --uri mongodb+srv://cluster0-shard-00-00-jxeqq.mongodb.net/aggregations
 mongodump --uri mongodb://m121:aggregations@cluster0-shard-00-00-jxeqq.mongodb.net/aggregations
 -u m121 -p aggregations
+
+##
+
+- **Intro**
+  - [`$match`](/mongo/aggregations/match)
+- **Core** - `$group`, `$unwind`, `$lookup` and `$graphLookup`
+- **Facets** - what it is, bucketing, auto bucketing, single & multiple facets
