@@ -16,6 +16,7 @@ tags: db, mongodb, performance, aggregation
     - [Operators](#operators)
   - [Quick Reference Highlights](#quick-reference-highlights)
     - [A Setup For Aggregation](#a-setup-for-aggregation)
+  - [A Breakdown of Aggregation Parts](#a-breakdown-of-aggregation-parts)
 
 ## Intro
 
@@ -97,10 +98,14 @@ mongodump --uri mongodb+srv://cluster0-shard-00-00-jxeqq.mongodb.net/aggregation
 mongodump --uri mongodb://m121:aggregations@cluster0-shard-00-00-jxeqq.mongodb.net/aggregations
 -u m121 -p aggregations
 
-##
+## A Breakdown of Aggregation Parts
 
 - **Intro**
   - [`$match`](/mongo/aggregations/match)
   - [`$project`](/mongo/aggregations/project)
+  - [`$addFields`](/mongo/aggregations/add-fields)
+  - [`$geoNear`](/mongo/aggregations/geo-near)
 - **Core** - `$group`, `$unwind`, `$lookup` and `$graphLookup`
 - **Facets** - what it is, bucketing, auto bucketing, single & multiple facets
+- **Utilities**
+  - geoNear
