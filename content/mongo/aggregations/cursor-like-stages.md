@@ -1,4 +1,21 @@
+---
+title: Cursor-Like Stages
+slug: mongo/aggregations/cursor-like-stages
+parentDir: mongo/aggregations
+author: Jake Laursen
+excerpt: Rather than passing logic to the cursor, some logic can be in the aggregation pipeline directly
+tags: db, mongodb, aggregation, sort, limit, skip, count, cursor
+---
+
 # Cursor-Like Stages
+
+- [Cursor-Like Stages](#cursor-like-stages)
+  - [count](#count)
+  - [skip](#skip)
+  - [limit](#limit)
+- [sort](#sort)
+    - [Complex Example I](#complex-example-i)
+    - [Complex Example II](#complex-example-ii)
 
 sort.  
 skip.  
@@ -7,21 +24,25 @@ count.
 
 A basic query
 
-```bash
-# get just the name && numberOfMoons, projecting vals
-db.solarSystem.find(
-  {},
-  {
-    _id: 0,
-    name:1,
-    numberOfMoons:1
-  })
-  .pretty()
+```js
+// get just the name && numberOfMoons, projecting vals
+db.solarSystem
+  .find(
+    {},
+    {
+      _id: 0,
+      name: 1,
+      numberOfMoons: 1,
+    },
+  )
+  .pretty();
 ```
 
-### count the number of docs
+## count
 
-```bash
+count the number of docs
+
+```js
 db.solarSystem.find(
   {},
   {
@@ -30,8 +51,8 @@ db.solarSystem.find(
     numberOfMoons:1
     }).count()
 
-# count where the type is terrestrial planet
-# the $count counts all incoming docs
+// count where the type is terrestrial planet
+// the $count counts all incoming docs
 
 db.solarSystem.aggregate([
   {
@@ -49,11 +70,11 @@ db.solarSystem.aggregate([
   }
 ])
 
-# should return...
+// should return...
 { "terrestrial planets" : 4 }
 
 
-# In the terrestrial planet example, the project is not even necessary. Could be simplified
+// In the terrestrial planet example, the project is not even necessary. Could be simplified
 
 db.solarSystem.aggregate([
   {
@@ -65,65 +86,74 @@ db.solarSystem.aggregate([
 ])
 ```
 
-## skip docs
+## skip
 
-```bash
-# without _sorting_ the results, the order returned is the order at which they were inserted, the `natural order`
-# below, skipping the elements in the order they were inserted into the collection
+Skipping docs to return
 
-db.solarSystem.find(
-  {},
-  {
-    _id: 0,
-    name:1,
-    numberOfMoons:1
-  })
+```js
+// without _sorting_ the results, the order returned is the order at which they were inserted, the `natural order`
+// below, skipping the elements in the order they were inserted into the collection
+
+db.solarSystem
+  .find(
+    {},
+    {
+      _id: 0,
+      name: 1,
+      numberOfMoons: 1,
+    },
+  )
   .skip(1)
-  .pretty()
+  .pretty();
 
-# same output as...
+// same output as...
 db.solarSystem.aggregate([
   {
-    $project:{
-      _id:0,
+    $project: {
+      _id: 0,
       name: 1,
-      numberOfMoons:1
-    }
+      numberOfMoons: 1,
+    },
   },
-  { $skip: 1 }
-])
-
+  { $skip: 1 },
+]);
 ```
 
-### limit the number of results
+## limit
 
-```bash
-db.solarSystem.find(
-  {},
-  {
-    _id: 0,
-    name:1,
-    numberOfMoons:1
-  })
+limit the number of results
+
+```js
+db.solarSystem
+  .find(
+    {},
+    {
+      _id: 0,
+      name: 1,
+      numberOfMoons: 1,
+    },
+  )
   .limit(5)
-  .pretty()
+  .pretty();
 
-# same output as...
+// same output as...
 db.solarSystem.aggregate([
   {
-    $project:{
-      _id:0,
+    $project: {
+      _id: 0,
       name: 1,
-      numberOfMoons:1
-    }
+      numberOfMoons: 1,
+    },
   },
-  {$limit: 5}
-])
+  { $limit: 5 },
+]);
 ```
 
-### sort the docs
+# sort
 
-```bash
+sort the docs
+
+```js
 db.solarSystem.find(
   {},
   {
@@ -136,7 +166,7 @@ db.solarSystem.find(
   })
   .pretty()
 
-# with agg
+// with agg
 db.solarSystem.aggregate([
   {
     $project:{
@@ -152,7 +182,7 @@ db.solarSystem.aggregate([
   }
 ])
 
-# sort can operate on multiple fields in combination:
+// sort can operate on multiple fields in combination:
 db.solarSystem.aggregate([
   {
     $project:{
@@ -170,7 +200,7 @@ db.solarSystem.aggregate([
   }
 ])
 
-# will return...
+// will return...
 { "name" : "Jupiter", "numberOfMoons" : 67, "hasMagneticField" : true }
 { "name" : "Saturn", "numberOfMoons" : 62, "hasMagneticField" : true }
 { "name" : "Uranus", "numberOfMoons" : 27, "hasMagneticField" : true }
@@ -187,7 +217,7 @@ see that the `false` magnetic fields are all under the `true` magnetic fields, i
 When sort is early in the pipeline, it can take advantage of indexes for optimization.  
 Sorts in agg should be paired with `allowDiskUse: true` in the pipeline to accommodate larger sorts.
 
-#### Complex Example I
+### Complex Example I
 
 For movies
 
@@ -199,90 +229,86 @@ For movies
   **QUESTION**: What is the title of the 25th film in the aggregation result?
   **A**: "The Heat". Blam.
 
-```bash
+```js
 myFavs = [
-  "Sandra Bullock",
-  "Tom Hanks",
-  "Julia Roberts",
-  "Kevin Spacey",
-  "George Clooney"
-]
+  'Sandra Bullock',
+  'Tom Hanks',
+  'Julia Roberts',
+  'Kevin Spacey',
+  'George Clooney',
+];
 
-# my approach
+// my approach
 db.movies.aggregate([
   {
     $match: {
-      countries: { $in: ["USA"]},
-      "tomatoes.viewer.rating": {$gte: 3}
-    }
+      countries: { $in: ['USA'] },
+      'tomatoes.viewer.rating': { $gte: 3 },
+    },
   },
   {
     $project: {
       _id: 0,
       title: 1,
-      rating: "$tomatoes.viewer.rating",
+      rating: '$tomatoes.viewer.rating',
       num_favs: {
         $size: {
-          $cond:{
+          $cond: {
             if: {
-              $setIntersection: ['$cast', myFavs]
+              $setIntersection: ['$cast', myFavs],
             },
             then: {
-              $setIntersection: ['$cast', myFavs]
+              $setIntersection: ['$cast', myFavs],
             },
-            else: []
-          }
-        }
-      }
-    }
+            else: [],
+          },
+        },
+      },
+    },
   },
   {
-    $sort: { num_favs: -1, rating: -1, title: -1 }
+    $sort: { num_favs: -1, rating: -1, title: -1 },
   },
-  { $limit: 25 }
-])
+  { $limit: 25 },
+]);
 
-# another more succinct approach
+// another more succinct approach
 db.movies.aggregate([
   {
     $match: {
-      "tomatoes.viewer.rating": { $gte: 3 },
-      countries: "USA",
+      'tomatoes.viewer.rating': { $gte: 3 },
+      countries: 'USA',
       cast: {
-        $in: favorites
-      }
-    }
+        $in: favorites,
+      },
+    },
   },
   {
     $project: {
       _id: 0,
       title: 1,
-      "tomatoes.viewer.rating": 1,
+      'tomatoes.viewer.rating': 1,
       num_favs: {
         $size: {
-          $setIntersection: [
-            "$cast",
-            favorites
-          ]
-        }
-      }
-    }
+          $setIntersection: ['$cast', favorites],
+        },
+      },
+    },
   },
   {
     $sort: {
       num_favs: -1,
-      "tomatoes.viewer.rating": -1,
-      title: -1
-    }
+      'tomatoes.viewer.rating': -1,
+      title: -1,
+    },
   },
   {
-    $skip: 24
+    $skip: 24,
   },
   {
-    $limit: 1
-  }
-])
-
+    $limit: 1,
+  },
+]);
 ```
 
 Differences between my approach and the shorter approach
@@ -296,7 +322,7 @@ Differences between my approach and the shorter approach
   - the shorter approach skipped the first 24 results
   - the shorter approach only returned 1 item
 
-#### Complex Example II
+### Complex Example II
 
 Calculate an average rating for each movie in the `movies` collection
 
@@ -308,23 +334,23 @@ Calculate an average rating for each movie in the `movies` collection
 
 What film has the lowest normalized_rating?
 
-```bash
+```js
 db.movies.aggregate([
   {
     $match: {
-      countries: { $in: ["USA"]},
+      countries: { $in: ['USA'] },
       'imdb.rating': { $gte: 1 },
       'imdb.votes': { $gte: 1 },
-      'year': { $gte: 1990 },
-      'languages': { $in: ["English"] },
-    }
+      year: { $gte: 1990 },
+      languages: { $in: ['English'] },
+    },
   },
   {
     $project: {
       _id: 0,
       title: 1,
-      votes: "$imdb.votes",
-      rating: "$imdb.rating",
+      votes: '$imdb.votes',
+      rating: '$imdb.rating',
       scaled_votes: {
         $add: [
           1,
@@ -333,26 +359,24 @@ db.movies.aggregate([
               9,
               {
                 $divide: [
-                  { $subtract: ["$imdb.votes", 5] },
-                  {$subtract: [1521105
-, 5] }
-                ]
-              }
-            ]
-          }
-        ]
+                  { $subtract: ['$imdb.votes', 5] },
+                  { $subtract: [1521105, 5] },
+                ],
+              },
+            ],
+          },
+        ],
       },
       normailized_rating: {
-        $avg: ["$scaled_votes", "$imdb.rating"]
-      }
-    }
+        $avg: ['$scaled_votes', '$imdb.rating'],
+      },
+    },
   },
   {
-    $sort: { normailized_rating: 1 }
+    $sort: { normailized_rating: 1 },
   },
   {
-    $limit: 1
-  }
-])
-
+    $limit: 1,
+  },
+]);
 ```
