@@ -29,6 +29,39 @@ This is broken down into parts
 
 MongoDB University has a great free online course, [M121](https://university.mongodb.com/courses/M121/about), dedicated to the aggregation framework - great stuff!
 
+## What Are Pipelines
+
+Like an assembly line for data.  
+Data "moves through" the assembly line, the pipeline.  
+The pipeline is a composition of stages.  
+Each stage depends on the previous stage.  
+Each stage provides output to the next stage.  
+The number of stages is based on the needs of the client.
+
+## Pipeline Syntax Overview
+
+`db.coll.aggregate([{stageOne}, {stageTwo}, {...moreStages}], {aggOptions})`
+
+- an `aggregate` keyword/method on the collection
+- aggregate takes an array followed by an object
+  - the array is a list of aggregation stages
+  - the object is a key/val pair of options for the pipeline
+
+## Quick Reference Highlights
+
+Mongo provides a [Quick Reference](https://docs.mongodb.com/manual/meta/aggregation-quick-reference/) for the agg pipeline. Some highlights:
+
+- 30+ aggregation stages with brief definitions
+- 2 db.agg methods on the db level, not colelction level, starting in v3.6
+- which update stages allow for aggregations, and the 3 (_6 with aliases_) stages allowed
+  - fineOneAndUpdate
+  - findAndModify
+  - updateOne
+  - updateMany
+  - Bulk.find.update()
+  - Bulk.find.updateOne()
+  - Bulk.find.upsert()
+
 ### A Setup For Aggregation
 
 Get a Mongo instance up & running.  
@@ -40,3 +73,5 @@ Sign up for Mongo Atlas.
 - install mongodb enterprise on the machine
 - connect to an atlas cluster that is pre-populated with a bunch of data
   - `mongo "mongodb://cluster0-shard-00-00-jxeqq.mongodb.net:27017,cluster0-shard-00-01-jxeqq.mongodb.net:27017,cluster0-shard-00-02-jxeqq.mongodb.net:27017/aggregations?replicaSet=Cluster0-shard-0" --authenticationDatabase admin --ssl -u m121 -p aggregations --norc`
+  - notice the `aggregations` database
+  -
