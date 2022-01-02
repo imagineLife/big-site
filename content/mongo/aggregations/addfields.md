@@ -1,3 +1,12 @@
+---
+title: Add Fields
+slug: mongo/aggregations/add-fields
+parentDir: mongo/aggregations
+author: Jake Laursen
+excerpt: Add fields to the output of a doc
+tags: db, mongodb, aggregation, add fields
+---
+
 # add fields
 
 Like `$project`.  
@@ -16,6 +25,7 @@ This does a few things
 
 - explicitly names the fields to KEEP in the `$project` stage
 - changes the _values_ of those fields in the `addField` stage
+  - addFields will _reassign values of existing fields_ if the field name is already present through a previous pipeline: below, the `gravity` field gets passed through the first `project` stage, and gets reassigned in the `addFields` stage
 
 ```bash
 db.solarSystem.aggregate([
