@@ -1,15 +1,13 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import 'chart-by-type.scss';
+import './chart-by-type.scss';
 
 export default function ChartName(props) {
   console.log('HUH?!');
   console.log('props');
   console.log(props);
 
-  return <main className="chart-wrapper">
-    <>
-  </main>;
+  return <main className="chart-wrapper">water</main>;
 }
 
 export const chartQuery = graphql`
