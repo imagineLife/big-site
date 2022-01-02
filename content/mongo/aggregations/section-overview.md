@@ -9,11 +9,19 @@ tags: db, mongodb, performance, aggregation
 
 # Mongo Aggregations
 
-This is broken down into parts
+- [Mongo Aggregations](#mongo-aggregations)
+  - [Intro](#intro)
+  - [What Are Pipelines](#what-are-pipelines)
+  - [Pipeline Syntax Overview](#pipeline-syntax-overview)
+    - [Operators](#operators)
+  - [Quick Reference Highlights](#quick-reference-highlights)
+    - [A Setup For Aggregation](#a-setup-for-aggregation)
+
+<!-- This will be broken down into parts:
 
 - **Intro** - `$match`, `$project`, `$addField` and a few more
 - **Core** - `$group`, `$unwind`, `$lookup` and `$graphLookup`
-- **Facets** - what it is, bucketing, auto bucketing, single & multiple facets
+- **Facets** - what it is, bucketing, auto bucketing, single & multiple facets -->
 
 ## Intro
 
@@ -46,11 +54,17 @@ The number of stages is based on the needs of the client.
 - aggregate takes an array followed by an object
   - the array is a list of aggregation stages
   - the object is a key/val pair of options for the pipeline
-- each stage has 2 parts: Operator (_operator expressions_) and Arguments. Sometimes this is noted in [expression objects](https://docs.mongodb.com/manual/meta/aggregation-quick-reference/#expression-objects), as well as [operator expressions](https://docs.mongodb.com/manual/meta/aggregation-quick-reference/#operator-expressions).
+- each stage has 2 parts: Operator (_operator expressions_) and Arguments. Sometimes this is noted in [expression objects](https://docs.mongodb.com/manual/meta/aggregation-quick-reference/#expression-objects), as well as [operator expressions](https://docs.mongodb.com/manual/meta/aggregation-quick-reference/#operator-expressions)
 
 ### Operators
 
-Operators are the left key of each stage object. See the [Quick Ref Doc](https://docs.mongodb.com/manual/meta/aggregation-quick-reference/#index-of-expression-operators) for an index of the available expression operators. At the time of writing, there are more than 90
+Operators have 2 uses: one as each stage identifier (_aggregation operators_), and one as each selector in a query (_query operators_)
+
+- **aggregation operators** are the key of each stage object. See the [Quick Ref Doc](https://docs.mongodb.com/manual/meta/aggregation-quick-reference/#index-of-expression-operators) for an index of the available expression operators. At the time of writing, there are more than 90.
+  - `$match` and `$project` are agg operators
+- **query operators** are the key of each query element
+
+  - `$in`, `$gte` and `$lte` are query operators
 
 - **Arithmetic Operators**: Mongo gives built-in [arithmetic expression operators](https://docs.mongodb.com/manual/meta/aggregation-quick-reference/#arithmetic-expression-operators) like `$abs`, `$add`, `$exp`, `$log10`, `$sqrt` and more
 - **Array Operators**: Mongo gives built-in [array expression operators](https://docs.mongodb.com/manual/meta/aggregation-quick-reference/#arithmetic-expression-operators) like `$concatArrays`, `$arrayToObject`, `$filter`, `$last` and more
@@ -84,4 +98,7 @@ Sign up for Mongo Atlas.
 - connect to an atlas cluster that is pre-populated with a bunch of data
   - `mongo "mongodb://cluster0-shard-00-00-jxeqq.mongodb.net:27017,cluster0-shard-00-01-jxeqq.mongodb.net:27017,cluster0-shard-00-02-jxeqq.mongodb.net:27017/aggregations?replicaSet=Cluster0-shard-0" --authenticationDatabase admin --ssl -u m121 -p aggregations --norc`
   - notice the `aggregations` database
-  -
+
+mongodump --uri mongodb+srv://cluster0-shard-00-00-jxeqq.mongodb.net/aggregations
+mongodump --uri mongodb://m121:aggregations@cluster0-shard-00-00-jxeqq.mongodb.net/aggregations
+-u m121 -p aggregations
