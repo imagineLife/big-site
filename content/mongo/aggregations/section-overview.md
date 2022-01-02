@@ -46,13 +46,23 @@ The number of stages is based on the needs of the client.
 - aggregate takes an array followed by an object
   - the array is a list of aggregation stages
   - the object is a key/val pair of options for the pipeline
+- each stage has 2 parts: Operator (_operator expressions_) and Arguments. Sometimes this is noted in [expression objects](https://docs.mongodb.com/manual/meta/aggregation-quick-reference/#expression-objects), as well as [operator expressions](https://docs.mongodb.com/manual/meta/aggregation-quick-reference/#operator-expressions).
+
+### Operators
+
+Operators are the left key of each stage object. See the [Quick Ref Doc](https://docs.mongodb.com/manual/meta/aggregation-quick-reference/#index-of-expression-operators) for an index of the available expression operators. At the time of writing, there are more than 90
+
+- **Arithmetic Operators**: Mongo gives built-in [arithmetic expression operators](https://docs.mongodb.com/manual/meta/aggregation-quick-reference/#arithmetic-expression-operators) like `$abs`, `$add`, `$exp`, `$log10`, `$sqrt` and more
+- **Array Operators**: Mongo gives built-in [array expression operators](https://docs.mongodb.com/manual/meta/aggregation-quick-reference/#arithmetic-expression-operators) like `$concatArrays`, `$arrayToObject`, `$filter`, `$last` and more
+- **Booleans**: Mongo provides 3 [boolean operators](https://docs.mongodb.com/manual/meta/aggregation-quick-reference/#arithmetic-expression-operators): `and`, `not`, and `or`
+- **Comparison** Mongo provides a few [comparison operators](https://docs.mongodb.com/manual/meta/aggregation-quick-reference/#arithmetic-expression-operators)
 
 ## Quick Reference Highlights
 
 Mongo provides a [Quick Reference](https://docs.mongodb.com/manual/meta/aggregation-quick-reference/) for the agg pipeline. Some highlights:
 
 - 30+ aggregation stages with brief definitions
-- 2 db.agg methods on the db level, not colelction level, starting in v3.6
+- 2 db.agg methods on the db level, not collection level, starting in v3.6
 - which update stages allow for aggregations, and the 3 (_6 with aliases_) stages allowed
   - fineOneAndUpdate
   - findAndModify
