@@ -17,13 +17,12 @@ Can be used multiple times.
 Match is MORE LIKE a FILTER than a FIND.  
 Putting match at the beginning of a pipe allows the use of indexes, and the passing of indexed docs to the following pipeline parts.
 
-```bash
-db.solarSystem.aggregate([
-  {$match: { type: { $ne: 'Star' } }
-}])
+```js
+let noStars = { $match: { type: { $ne: 'Star' } } };
+db.solarSystem.aggregate([noStars]);
 
-# will return same results as...
-db.solarSystem.find({type: { $ne: 'Star'}})
+// will return same results as...
+db.solarSystem.find({ type: { $ne: 'Star' } });
 ```
 
 Match uses mongodb `read` operation query syntax.
@@ -39,7 +38,7 @@ Match uses mongodb `read` operation query syntax.
 
 connecting directly to the aggregation db in the atlas cluster
 
-```bash
+```js
 mongo "mongodb://cluster0-shard-00-00-jxeqq.mongodb.net:27017,cluster0-shard-00-01-jxeqq.mongodb.net:27017,cluster0-shard-00-02-jxeqq.mongodb.net:27017/aggregations?replicaSet=Cluster0-shard-0" --authenticationDatabase admin --ssl -u m121 -p aggregations --norc
 ```
 
@@ -47,19 +46,15 @@ mongo "mongodb://cluster0-shard-00-00-jxeqq.mongodb.net:27017,cluster0-shard-00-
 
 Match vs count
 
-```bash
-# get the count of items that are not a star
+```js
+// get the count of items that are not a star
 db.solarSystem.count({type: ${ne: "Star"}})
-# returns "8"
+// returns "8"
 
-# sort-of-same query, with $match agg
-db.solarSystem.aggregate([
-  {
-    $match: { type: {$ne: "Star"}}
-  },
-  {
-    $count: "planets"
-  }
-])
-# returns {count: 8}
+// sort-of-same query, with $match agg
+let noStars = { $match: { type: {$ne: "Star"}} }
+let countPlanets = { $count: "planets" }
+
+db.solarSystem.aggregate([ noStars, countPlanets ])
+// returns {count: 8}
 ```
