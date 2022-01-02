@@ -28,3 +28,15 @@ This is broken down into parts
 - [graphLookup cross-collections](/mongo/aggregations/graph-lookup-cross-coll)
 
 MongoDB University has a great free online course, [M121](https://university.mongodb.com/courses/M121/about), dedicated to the aggregation framework - great stuff!
+
+### A Setup For Aggregation
+
+Get a Mongo instance up & running.  
+Sign up for Mongo Atlas.
+
+- A 64Bit OS
+- Make a TCP Connection to 27017
+  - try visiting `portquiz.net:27017` to see if that port is available on your machine
+- install mongodb enterprise on the machine
+- connect to an atlas cluster that is pre-populated with a bunch of data
+  - `mongo "mongodb://cluster0-shard-00-00-jxeqq.mongodb.net:27017,cluster0-shard-00-01-jxeqq.mongodb.net:27017,cluster0-shard-00-02-jxeqq.mongodb.net:27017/aggregations?replicaSet=Cluster0-shard-0" --authenticationDatabase admin --ssl -u m121 -p aggregations --norc`
