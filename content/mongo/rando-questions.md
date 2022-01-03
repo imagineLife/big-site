@@ -93,6 +93,11 @@ will select results like
 
 The search will find results that include any of the words in the `$search` string.
 
+#### On Deleting Data
+
+Removing all collections in a database _removes the database_.  
+Interesting.
+
 ### Data and Data Modeling
 
 Mongo can represent data relationships like
