@@ -7,12 +7,19 @@ excerpt: Consider the ways that data is stored within and across documents
 tags: db, mongodb, data modeling
 ---
 
-# Data Modeling Posts
+# Intro to Data Modeling
 
-[Schema Design Anti-Patterns](/mongo/data-modeling/anti-patterns)  
-[Identifying the Workload](/mongo/data-modeling/id-the-workload)  
-[Map out Data Relationships](/mongo/data-modeling/relationships)  
-[Review and Apply Schema Design Patters](/mongo-data-modeling/schema-design-patterns)
+- [Intro to Data Modeling](#intro-to-data-modeling)
+- [introduction to data modeling for mongodb](#introduction-to-data-modeling-for-mongodb)
+  - [A method](#a-method)
+    - [Describe the workload](#describe-the-workload)
+    - [ID the relationships between the entities](#id-the-relationships-between-the-entities)
+    - [Apply design patterns or transformations to the current model for performance improvements](#apply-design-patterns-or-transformations-to-the-current-model-for-performance-improvements)
+  - [Modeling for simplicity or performance](#modeling-for-simplicity-or-performance)
+    - [Simplicity](#simplicity)
+    - [Performance](#performance)
+    - [Simple First, Performance after](#simple-first-performance-after)
+- [Other Sections](#other-sections)
 
 # introduction to data modeling for mongodb
 
@@ -86,3 +93,10 @@ Performance probably leads to a lot of collections.
 It is easier to find optimization later than it is to remove extra complexity.
 
 Schema design patterns can apply to application types. [Here](/mongo/data-modeling/schema-design-table) is an overview of schema design patterns and how/where they could apply to application types.
+
+# Other Sections
+
+[Schema Design Anti-Patterns](/mongo/data-modeling/anti-patterns)  
+[Identifying the Workload](/mongo/data-modeling/id-the-workload)  
+[Map out Data Relationships](/mongo/data-modeling/relationships)  
+[Review and Apply Schema Design Patters](/mongo-data-modeling/schema-design-patterns)
