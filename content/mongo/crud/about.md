@@ -124,4 +124,59 @@ BulkWriteResult({
   nRemoved: 0,
   upserted: [],
 });
+
+/*
+  Forcing a duplicate key err on inserting many
+*/
+db.coll.insert([
+  {
+    _id: 123,
+    water: 'melonOne',
+  },
+  {
+    _id: 123,
+    water: 'melonTwo',
+  },
+]);
+
+// returns...
+BulkWriteResult({
+  writeErrors: [
+    {
+      index: 1,
+      code: 11000,
+      errmsg: 'E11000 duplicate key error collection: ...etc',
+      op: {
+        _id: 123,
+        water: melonTwo,
+      },
+    },
+  ],
+  writeConcernErrors: [],
+  nInserted: 1,
+  nUpserted: 0,
+  nMatched: 0,
+  nModified: 0,
+  nRemoved: 0,
+  upserted: [],
+});
+
+/*
+  NOTICE 
+  - the problem doc noted
+  - inserted in order they are listed
+  - insert STOPS at a failed doc
+*/
+
+// with this ORDERED key, another approach will happen
+// when set to true,
+// the insert CONTINUES after a failed doc
+db.asd.insert(
+  [
+    { _id: 1, test: 'oneTwo' },
+    { _id: 1, test: 'twoThree' },
+    { _id: 5, test: 'worksWell' },
+  ],
+  { ordered: false },
+);
 ```
