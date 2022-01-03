@@ -24,3 +24,18 @@ Input as JSON -
 | User Friendly - easy to understand                  | Text-based: Slow parsing                      |
 | Readable: easy to ready                             | Space-Consuming & Inefficient at storing info |
 | Familiar: used on the frontend and json api traffic | Supports only a few data types                |
+
+MongoDB addressed these with BSON: Binary JSON
+
+- Binary rep of json
+- fast
+- flexible
+- less space
+- highly performant
+- handles dates & binary data
+
+|              | JSON                              | BSON                                                                                  |
+| :----------- | :-------------------------------- | :------------------------------------------------------------------------------------ |
+| Encoding     | UTF-8                             | Binary                                                                                |
+| Data Support | Strings, Boolean, Numbers, Arrays | Strings, Boolean, Numbers (_integers, Long, Floats, more_), Arrays, Dates, Raw Binary |
+| Readability  | Humans + Machines                 | Machines                                                                              |
