@@ -66,6 +66,7 @@ db.solarSystem.aggregate([
     }
   },
   {
+    // specify the name of the field here as "terrestrial planets"
     $count: "terrestrial planets"
   }
 ])
@@ -74,7 +75,7 @@ db.solarSystem.aggregate([
 { "terrestrial planets" : 4 }
 
 
-// In the terrestrial planet example, the project is not even necessary. Could be simplified
+// In the terrestrial planet example above, the project is not even necessary. Could be simplified
 
 db.solarSystem.aggregate([
   {

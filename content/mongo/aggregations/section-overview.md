@@ -94,10 +94,6 @@ Sign up for Mongo Atlas.
   - `mongo "mongodb://cluster0-shard-00-00-jxeqq.mongodb.net:27017,cluster0-shard-00-01-jxeqq.mongodb.net:27017,cluster0-shard-00-02-jxeqq.mongodb.net:27017/aggregations?replicaSet=Cluster0-shard-0" --authenticationDatabase admin --ssl -u m121 -p aggregations --norc`
   - notice the `aggregations` database
 
-mongodump --uri mongodb+srv://cluster0-shard-00-00-jxeqq.mongodb.net/aggregations
-mongodump --uri mongodb://m121:aggregations@cluster0-shard-00-00-jxeqq.mongodb.net/aggregations
--u m121 -p aggregations
-
 ## A Breakdown of Aggregation Parts
 
 - **Intro**
