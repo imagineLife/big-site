@@ -225,3 +225,5 @@ db.sdf.updateMany(
 The Only time deleteOne is a good approach is when deleting by the `_id` field: this is the ONLY field we can be 100% sure that the doc is, indeed, unique.
 
 **Collections** can be dropped with `drop()` like `db.coll.drop()`
+
+Delete all docs in a collection can be done with `db.coll.deleteMany({})`
