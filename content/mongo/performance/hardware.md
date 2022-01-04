@@ -93,6 +93,8 @@ Same-doc writing will block other writes.
 ### Networking
 
 The faster and the larger the bandwidth, the better performance will be experienced.  
-Replica sets help with high availability.  
-Different hosts that hold different nodes of the db can affect the overall system.  
-How far apart the cluster nodes are also matters.
+**Replica sets help with high availability.**  
+**Different hosts that hold different nodes** of the db can affect the overall system.  
+**How far apart**, geographically, the cluster nodes are also matters.  
+Load balancers, firewalls, and switches all interact with network speeds.  
+**Concerns**: Write Concerns, Read Concerns, and read preferences all matter as well.
