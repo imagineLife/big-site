@@ -9,54 +9,74 @@ tags: db, mongodb, performance, hardware, ram, cpu
 
 # Hardware
 
-Mongodb is high-performance.  
-Requires adequate hardware.
+- [Hardware](#hardware)
+  - [A Server](#a-server)
+    - [Memory](#memory)
+    - [CPU](#cpu)
+    - [Disks](#disks)
+      - [Disks and Raid](#disks-and-raid)
+  - [Blocking Ops](#blocking-ops)
+    - [Networking](#networking)
+      Mongodb is high-performance.  
+      MongoDB requires adequate hardware.
+      Here, overviews of what & how the hardware impacts mongodb.
 
 ## A Server
 
 [Check out Von Neumann](https://en.wikipedia.org/wiki/John_von_Neumann)  
-The Von Neumann architecture points out 3 parts of a server: Memory, CPU and Disk/IO.
+The Von Neumann architecture points out 3 parts of a server: **Memory, CPU and Disk/IO.**  
+Memory for execution.  
+CPU for processing.  
+Disk & I/O for persistency.
 
 ### Memory
 
 Fast. Performant. 25x faster than an SSD.  
 DBs are designed around memory.  
+Disk-to-ram oriented dbs have been happening in recent years. The continued lowering cost of ram makes this appealing, due to ram's performance improvements.
+
 In memory...
 
 - aggregation
 - index traversing
-- writes first in ram
+- writes
+  - first in ram
 - query engine
-- connections (~1MB per connection)
+  - retrieves query results
+- connections
+  - ~1MB per connection
+
+More ram === more performance.
 
 ### CPU
 
 - Storage Engine
+  - WiredTired relies heavily on CPU
 - Concurrency Model
-  Mongo tries to use all cpu cores.  
-  WiredTired relies heavily on CPU.  
-  Non-Blocking operations use cpu: the more the better -
-- writing different docs concurrently
-- responding to query requests (_reads_)
-- page compression
-- data calculation
-- agg operations
-- map reduce
+- Mongo tries to use all cpu cores
+- Non-Blocking operations use cpu: the more the better -
+  - writing different docs concurrently
+  - responding to query requests (_reads_)
+  - page compression
+  - data calculation
+  - agg operations
+  - map reduce
 
 ### Disks
 
 Mongo can use several types of disks.  
 This cal allow distributing IO load of DBs, indexes, journaling and log files across drives.
 
-Types of disks affect performance
-IOPS - input/output operations per sec  
-|Type|IOPS|
-|--|--|
-|7200 RMP SATA|~75 - 100|
-|15000 RMP SATA|~175 - 210|
-|SSD Intel X25-E (SLC)|~5000|
-|Amazon EBS Provisioned|Up to 2000|
-|FusionIO | ~135K|
+Types of disks affect performance.
+IOPS - input/output operations per sec. The higher the IOPS, the faster the performance of the mongo system.
+
+| Type                   | IOPS       |
+| :--------------------- | :--------- |
+| 7200 RMP SATA          | ~75 - 100  |
+| 15000 RMP SATA         | ~175 - 210 |
+| SSD Intel X25-E (SLC)  | ~5000      |
+| Amazon EBS Provisioned | Up to 2000 |
+| FusionIO               | ~135K      |
 
 #### Disks and Raid
 
