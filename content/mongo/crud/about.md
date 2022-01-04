@@ -9,6 +9,13 @@ tags: db, mongodb, crud
 
 # CRUD
 
+- [CRUD](#crud)
+  - [Data Storage](#data-storage)
+  - [Data Importing & Exporting](#data-importing--exporting)
+  - [On Reading](#on-reading)
+  - [On Creating](#on-creating)
+  - [On Updating](#on-updating)
+
 ## Data Storage
 
 Input as JSON -
@@ -178,5 +185,31 @@ db.asd.insert(
     { _id: 5, test: 'worksWell' },
   ],
   { ordered: false },
+);
+```
+
+## On Updating
+
+- `updateOne`
+  - updates a single doc
+- `updateMany`
+  - updates MANY docs that match a selection query
+- NOTES
+  - when updating a field that does not exist, the filed gets implicitly added to the doc: things like `$push` and `$set` and `$inc` will atuo-create fields
+
+```js
+// db.coll.updateOne({selection_criteria}, {update_val})
+
+db.sdf.updateMany(
+  {
+    water: {
+      $regex: '^m',
+    },
+  },
+  {
+    $set: {
+      sink: 'kitchen',
+    },
+  },
 );
 ```
