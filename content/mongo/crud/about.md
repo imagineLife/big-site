@@ -15,6 +15,7 @@ tags: db, mongodb, crud
   - [On Reading](#on-reading)
   - [On Creating](#on-creating)
   - [On Updating](#on-updating)
+  - [On Deleting](#on-deleting)
 
 ## Data Storage
 
@@ -213,3 +214,14 @@ db.sdf.updateMany(
   },
 );
 ```
+
+## On Deleting
+
+**Docs** can be deleted with
+
+- deleteOne
+- deleteMany
+
+The Only time deleteOne is a good approach is when deleting by the `_id` field: this is the ONLY field we can be 100% sure that the doc is, indeed, unique.
+
+**Collections** can be dropped with `drop()` like `db.coll.drop()`
