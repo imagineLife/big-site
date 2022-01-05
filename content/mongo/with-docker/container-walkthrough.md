@@ -1,10 +1,19 @@
 # Mongo And Docker
 
-- [The First Mongo Box](#the-first-mongo-container)
-- [Moving The Data out of The Container](#moving-data-out)
-- [Allow cli access from the host machine](#allow-cli-access-from-the-host-machine)
-- [Including some db users and roles](#including-some-db-users-and-roles)
-- [Leveraging a config file](#leveraging-a-config-file)
+- [Mongo And Docker](#mongo-and-docker)
+  - [The First Mongo Container](#the-first-mongo-container)
+  - [Moving Data Out](#moving-data-out)
+  - [Allow cli access from the host machine](#allow-cli-access-from-the-host-machine)
+  - [Including some db users and roles](#including-some-db-users-and-roles)
+    - [A db admin user](#a-db-admin-user)
+      - [On Database Creation](#on-database-creation)
+      - [With a Database already existing](#with-a-database-already-existing)
+    - [Including a UserAdmin User](#including-a-useradmin-user)
+    - [Building Custom Roles](#building-custom-roles)
+      - [A Business Analytics Role](#a-business-analytics-role)
+    - [Giving a user this role](#giving-a-user-this-role)
+  - [Leveraging A Config File](#leveraging-a-config-file)
+    - [Config and CLI Overview](#config-and-cli-overview)
 
 ## The First Mongo Container
 
