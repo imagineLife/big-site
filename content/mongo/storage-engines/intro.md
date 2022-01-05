@@ -29,22 +29,32 @@ There are data-management objects:
 
 Many files are created.
 
-- for each collection wiredTiger writes an individual file
-- - for each index wiredTiger writes an individual file
+- **for each collection** wiredTiger writes an individual file
+- **for each index** wiredTiger writes an individual file
 - **\_mdb_catalog.wt**, mongo db catalog
-  - contains catalog of all collections + indexes that the db contains
+  - contains catalog of all collections + indexes that the mongod instance contains
 - these files on startup are configurable...
+
+## Default mongodb data path
+
+Mongo _defaults_ its db path, where it persists data, to `/data/db`.  
+This can be altered during the `mongod` command, which boots up the mongod instance.
+`mongod --dbpath /some/other/dir`.
 
 ## Create a Folder per db
 
-can add a cli flag to change data storage
+can add a cli flag to change data storage architecture.
 
 ```bash
 mongod --dbpath /my/db/path --logpath /my-db/logpath/mongodb.log --directoryperdb
 ```
 
 Notice the `--directoryperdb` flag.  
-new folders on db creation
+new folders on db creation, one _folder_ for each _database_ that the mongod has created.  
+_Inside this database-specific directory_ will appear db-specific wiredTiger files. As an example, creating a single db with a single collection with a single index and a single document, there will be a new directory in the `/data/db` dir, representing the db. Inside the db's directory will be 2 wiredTiger files
+
+- one representing a collection
+- one representing an index
 
 ```bash
 mongo hello --eval 'db.a.insert({a:1}, {writeConcern: {w:1, j:true}})'
