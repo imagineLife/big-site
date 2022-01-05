@@ -1,5 +1,20 @@
 # Write Concerns
 
+- [Write Concerns](#write-concerns)
+
+  - [How it works](#how-it-works)
+  - [Write Concern and acknowledgement levels](#write-concern-and-acknowledgement-levels)
+  - [Does not impact data replication](#does-not-impact-data-replication)
+  - [Config Options](#config-options)
+  - [Scenario](#scenario)
+    - [Default config](#default-config)
+    - [On Primary failure](#on-primary-failure)
+      - [default concern](#default-concern)
+      - [concern of majory](#concern-of-majory)
+  - [Pros and Cons of full write concern](#pros-and-cons-of-full-write-concern)
+  - [A Visual Default WriteConcern Table](#a-visual-default-writeconcern-table)
+  - [Final Thoughts](#final-thoughts)
+
 Write concerns give us, the engineers and consumers of the Mongo Replica set, more assurance that the data is "durable": that the replicability is secure, strong, and complete across replica set members.  
 More durability does take more time.  
 Mongo supports write concerns on all cluster types:
@@ -25,11 +40,10 @@ This is only present for us to track "durability".
 
 ## Config Options
 
-**wtimeout**: set max time the app waits before marking the write as failed. This does not equate to a failed write, but tells the requester that the durability has not been met
-**j**: requires that each rep. member needs to get the write AND commit to the journal
-
-- note, a majority concern includes this **j** by default
-- if j is false, the node only needs to store the data in memory before reporting success
+- **wtimeout**: set max time the app waits before marking the write as failed. This does not equate to a failed write, but tells the requester that the durability has not been met
+- **j**: requires that each rep. member needs to get the write AND commit to the journal
+  - note, a majority concern includes this **j** by default
+  - when j is false, the node only needs to store the data in memory before reporting success
 
 ## Scenario
 
