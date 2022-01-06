@@ -9,6 +9,17 @@ tags: db, mongodb, storage engine, wiredtiger
 
 # Storage Engines
 
+- [Storage Engines](#storage-engines)
+  - [Available Storage Engines](#available-storage-engines)
+  - [on db startup](#on-db-startup)
+  - [Default mongodb data path](#default-mongodb-data-path)
+  - [Create a Folder per db](#create-a-folder-per-db)
+  - [Create Nested folder per index and collection](#create-nested-folder-per-index-and-collection)
+    - [Better io and parallelization](#better-io-and-parallelization)
+    - [Can include compression](#can-include-compression)
+    - [Journaling](#journaling)
+    - [When Data movers from memory to disk](#when-data-movers-from-memory-to-disk)
+
 Storage engines write data using storage engines: MMAPv1, Wired Tiger or other.  
 WiredTiger is the new default storage engine.
 
@@ -69,6 +80,21 @@ The dbpath will reveal different data organization, including a dir called `hell
       - unique files per collection
       - unique files per index
 
+## Create Nested folder per index and collection
+
+In addition to the above `--directoryperdb` flag, another flag can adjust how data is stored to separate indexes from collections into two directories. Here, a new flag `--wiredTigerDirectoryForIndexes` will be added:
+
+`mongod --dbpath /data/db --fork --logpath /data/db/mongod.log --directoryperdb --wiredTigerDirectoryForIndexes`.  
+Creating a new db, collection, and doc will result in a new dir structure. Perhaps a db called `mytestdb`:
+
+```md
+- data
+  - db
+    - mytestdb
+      - collection
+      - index
+```
+
 Why do this?!
 
 ### Better io and parallelization
@@ -81,7 +107,7 @@ Writes will write to the data AND index at the same time.
 ### Can include compression
 
 Data can be compressed.  
-This can make things faster - smaller reads/writes, at the COST of more cpu cycles.
+This can make things faster - smaller reads/writes, at the COST of more cpu cycles during the data decompressions.
 
 Data is also allocated in memory before writing to disk. Users can MAKE the data-write & read assure its presence on disk with the `writeConcern` and `readConcern` flags.  
 Checkpoints, internal processes defined by sync periods, regulate how data needs to be flushed/synced between RAM and disk.
@@ -98,3 +124,10 @@ Users can force acknowledgement that journal has been updated with a `{j:true}` 
 ```bash
 db.coll.insert({a:1}, {writeConcern: {w:1, j:true}})
 ```
+
+### When Data movers from memory to disk
+
+There are 2 ways that data gets written to disk, and moved out of memory
+
+- the db, itself, performs "checkpoints" in "sync periods" ([see docs](https://docs.mongodb.com/manual/core/wiredtiger/#snapshots-and-checkpoints))
+-
