@@ -97,75 +97,6 @@ db.people.find({ssn: "720-38-5636"}).explain("executionStats")
   - 50k docs examined in 'docsExamines'
   - COLLSCAN means the query looked through all ddcs
 */
-
-
-db.people.createIndex({ssn: 1})
-
-// re-run the query, see execution stats
-/*
-  {
-    "executionStats" : {
-      "executionSuccess" : true,
-      "nReturned" : 1,
-      "executionTimeMillis" : 7,
-      "totalKeysExamined" : 1,
-      "totalDocsExamined" : 1,
-      "executionStages" : {
-        "stage" : "FETCH",
-        "nReturned" : 1,
-        "executionTimeMillisEstimate" : 0,
-        "works" : 2,
-        "advanced" : 1,
-        "needTime" : 0,
-        "needYield" : 0,
-        "saveState" : 0,
-        "restoreState" : 0,
-        "isEOF" : 1,
-        "docsExamined" : 1,
-        "alreadyHasObj" : 0,
-        "inputStage" : {
-          "stage" : "IXSCAN",
-          "nReturned" : 1,
-          "executionTimeMillisEstimate" : 0,
-          "works" : 2,
-          "advanced" : 1,
-          "needTime" : 0,
-          "needYield" : 0,
-          "saveState" : 0,
-          "restoreState" : 0,
-          "isEOF" : 1,
-          "keyPattern" : {
-            "ssn" : 1
-          },
-          "indexName" : "ssn_1",
-          "isMultiKey" : false,
-          "multiKeyPaths" : {
-            "ssn" : [ ]
-          },
-          "isUnique" : false,
-          "isSparse" : false,
-          "isPartial" : false,
-          "indexVersion" : 2,
-          "direction" : "forward",
-          "indexBounds" : {
-            "ssn" : [
-              "[\"720-38-5636\", \"720-38-5636\"]"
-            ]
-          },
-          "keysExamined" : 1,
-          "seeks" : 1,
-          "dupsTested" : 0,
-          "dupsDropped" : 0
-        }
-      }
-    }
-  }
-
-
-  NOTICE:
-  - winningPlan is INDEX SCAN!!
-  - execution stats show totalDocs examined as 1
-*/
 ```
 
 ### A Query without Indexes
@@ -268,23 +199,18 @@ This creates "an explainable object on the `people` collection".
 
 ```js
 exp = db.people.explain('executionStats');
-```
 
-explain the same select statement on the people collection
+// explain the same select statement on the people collection
 
-```js
 exp.find({ ssn: '720-38-5636' });
-```
 
-review the explain output a bit
 
-```js
-# ...
+// review the explain output a bit
+
 "winningPlan" : {
   "stage" : "FETCH",`
   "inputStage" : {
     "stage" : "IXSCAN",`
-# ...
 "executionTimeMillis" : 1,
 "totalKeysExamined" : 1,
 "totalDocsExamined" : 1,
@@ -296,15 +222,15 @@ review the explain output a bit
 When the query does NOT include the index, the collection gets scanned.  
 Slow.
 
-#### single field indexes with aggregate queries
+#### single field indexes with range queries
+
+Here, query a range of vals
 
 ```js
-exp.find({ ssn: { $gte: '555-00-0000', $lt: '556-00-0000' } });
-```
+exp.find({ ssn: { $gte: '001-29-9184', $lt: '177-45-0950' } });
 
-perusing the explain output
+// perusing the explain output
 
-```js
 "executionStats" : {
   "executionSuccess" : true,
   "nReturned" : 49,
