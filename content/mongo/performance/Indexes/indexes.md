@@ -58,6 +58,116 @@ Captures the keys on a single field.
 - can _find several distinct vals_ in a single query
 - can _use dot notation_ to index sub-document fields
 
+examples:
+
+```js
+// add a people.json file to a mongo instance
+mongo import -d m201 -c people --drop people.json
+
+// startup mongo shell
+mongo m201
+
+db.people.find({ssn: "720-38-5636"}).explain("executionStats")
+/*
+  {...
+    "executionStages" : {
+      "stage" : "COLLSCAN",
+      "filter" : {
+        "ssn" : {
+          "$eq" : "720-38-5636"
+        }
+      },
+      "nReturned" : 1,
+      "executionTimeMillisEstimate" : 156,
+      "works" : 50476,
+      "advanced" : 1,
+      "needTime" : 50474,
+      "needYield" : 0,
+      "saveState" : 52,
+      "restoreState" : 52,
+      "isEOF" : 1,
+      "direction" : "forward",
+      "docsExamined" : 50474
+    }
+  }
+*/
+
+/*
+  NOTICE
+  - 50k docs examined in 'docsExamines'
+  - COLLSCAN means the query looked through all ddcs
+*/
+
+
+db.people.createIndex({ssn: 1})
+
+// re-run the query, see execution stats
+/*
+  {
+    "executionStats" : {
+      "executionSuccess" : true,
+      "nReturned" : 1,
+      "executionTimeMillis" : 7,
+      "totalKeysExamined" : 1,
+      "totalDocsExamined" : 1,
+      "executionStages" : {
+        "stage" : "FETCH",
+        "nReturned" : 1,
+        "executionTimeMillisEstimate" : 0,
+        "works" : 2,
+        "advanced" : 1,
+        "needTime" : 0,
+        "needYield" : 0,
+        "saveState" : 0,
+        "restoreState" : 0,
+        "isEOF" : 1,
+        "docsExamined" : 1,
+        "alreadyHasObj" : 0,
+        "inputStage" : {
+          "stage" : "IXSCAN",
+          "nReturned" : 1,
+          "executionTimeMillisEstimate" : 0,
+          "works" : 2,
+          "advanced" : 1,
+          "needTime" : 0,
+          "needYield" : 0,
+          "saveState" : 0,
+          "restoreState" : 0,
+          "isEOF" : 1,
+          "keyPattern" : {
+            "ssn" : 1
+          },
+          "indexName" : "ssn_1",
+          "isMultiKey" : false,
+          "multiKeyPaths" : {
+            "ssn" : [ ]
+          },
+          "isUnique" : false,
+          "isSparse" : false,
+          "isPartial" : false,
+          "indexVersion" : 2,
+          "direction" : "forward",
+          "indexBounds" : {
+            "ssn" : [
+              "[\"720-38-5636\", \"720-38-5636\"]"
+            ]
+          },
+          "keysExamined" : 1,
+          "seeks" : 1,
+          "dupsTested" : 0,
+          "dupsDropped" : 0
+        }
+      }
+    }
+  }
+
+
+  NOTICE:
+  - winningPlan is INDEX SCAN!!
+  - execution stats show totalDocs examined as 1
+*/
+```
+
 ### A Query without Indexes
 
 Basically, a query without an index scans a whole collection.  
