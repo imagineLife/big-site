@@ -21,7 +21,20 @@ docker run --rm --name asdf -p 27017:27017 -v /$(pwd)/data:/data/db mongo:4
   -p 27017:27017 "maps" the container port to the host port
   -v /$(pwd)/data:/data/db "maps" the default data dir storage of mongo from inside the container to the hose data dir
   - mongo:4 is the image to source the container from
+
+  the above will start a container in the current terminal, with container logs printing to the console.
+  To interact with that mongo instance, open a new terminal.
 */
 
 
+
+
+
+// import some data, in this example 'humans.json' is the data file
+// in a new terminal run
+mongoimport -d mydb -c people --drop humans.json
+
+/*
+  cli
+*/
 ```
