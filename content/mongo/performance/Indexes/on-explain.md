@@ -9,13 +9,13 @@ tags: db, mongodb, performance, explain
 
 # Explain
 
-Its the best way to understand what is happening when a query is executed.
+Its the best way to understand what is happening when a query is executed - when a query is:
 
-- is it using the index that we expected
-- is the index providing a sort
-- can the index provide a projection
-- how selective is the index
-- what is the most expensive stage in a query plan
+- **using the index that we expected**
+- **leveraging an index in a sort**
+- **suitable to use index in a projection**
+- **leveraging a highly or minimally selective index**
+- **expensive in a specific stage in a query plan**
 
 - [Explain](#explain)
   - [How it works](#how-it-works)
