@@ -1,6 +1,15 @@
+---
+title: Indexes
+slug: mongo/performance/explain-details
+parentDir: mongo/performance
+author: Jake Laursen
+excerpt: Learning the most about query and db performance through an extra command on a query
+tags: db, mongodb, performance, explain
+---
+
 # Explain
 
-Its the best qay to understand what is happening when a query is executed.
+Its the best way to understand what is happening when a query is executed.
 
 - is it using the index that we expected
 - is the index providing a sort
@@ -13,6 +22,9 @@ Its the best qay to understand what is happening when a query is executed.
   - [Passing Params to see more details](#passing-params-to-see-more-details)
   - [Notice memLimit and memUsage](#notice-memlimit-and-memusage)
   - [Its output on a Sharded Cluster](#its-output-on-a-sharded-cluster)
+    - [ways of running explain](#ways-of-running-explain)
+    - [winningPlan](#winningplan)
+    - [winningPlan and stages](#winningplan-and-stages)
 
 ## How it works
 
@@ -75,3 +87,38 @@ db.people.find({last_name: "Johnson", "address.state": "New York"})).explain("ex
 ```
 
 In the output of the explain, the query description includes how each shard handles the query.
+
+### ways of running explain
+
+```js
+// directly on a query
+db.people.find({ 'address.city': 'Lake Meaganton' });
+
+//  with a pre-defined explain object
+exp = db.people.explain();
+exp.find({ 'address.city': 'Lake Meaganton' });
+exp.find({ 'address.city': 'New York' });
+
+// the below two RUN the query, the above version does NOT
+// with parameters
+expStats = db.people.explain('executionStats');
+
+// see all non-winning details
+expStats = db.people.explain('allPlansExecution');
+```
+
+The shell returns what WOULD happen without running the query.
+
+### winningPlan
+
+The `queryPlanner` obj has a `winningPlan` subObject. This tells about the 'winning' query that was used to get data from the collection. This `winningPlan` gives info about the plan that was selected by the [query optimizer](https://docs.mongodb.com/manual/core/query-plans/). The winningPlan is shown as a hierarchy of stages.
+
+### winningPlan and stages
+
+The `winningPlan` has a `stage` key/val. Stages describe the type of db operation & has a few options:
+
+- `COLLSCAN`: scanning an entire collection
+- `IXSCAN`: scanning index keys
+- `FETCH`: getting docs
+- `SHARD_MERGE`: for merging results from sharded collection data
+- `SHARDING_FILTER`: for filtering _orphan docs_ out of shards
