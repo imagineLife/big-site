@@ -7,12 +7,19 @@ excerpt: The Power of an index on a single field
 tags: db, mongodb, performance, indexes
 ---
 
+# Single Field Indexes
+
 - can _find a single val_ of the indexed field
 - can _find a range of vals_ of the indexed field
 - can _find several distinct vals_ in a single query
 - can _use dot notation_ to index sub-document fields
 
-examples:
+- [Single Field Indexes](#single-field-indexes)
+    - [A Query without Indexes](#a-query-without-indexes)
+    - [the impact of a single field index](#the-impact-of-a-single-field-index)
+    - [single field indexes with range queries](#single-field-indexes-with-range-queries)
+    - [single field indexes with select set queries](#single-field-indexes-with-select-set-queries)
+    examples:
 
 ```js
 // add a people.json file to a mongo instance
@@ -21,7 +28,10 @@ mongo import -d m201 -c people --drop people.json
 // startup mongo shell
 mongo m201
 
-db.people.find({ssn: "720-38-5636"}).explain("executionStats")
+// vars for shorthand collection interactions && viewing explain output
+let p = db.people
+let e = p.explain()
+e.find({ssn: "720-38-5636"}).explain("executionStats")
 /*
   {...
     "executionStages" : {
@@ -140,7 +150,7 @@ In summary, the winningPlan involved a collection scan, scanning 50K+ docs, taki
 "totalDocsExamined" : 50474,
 ```
 
-#### the impact of a single field index
+### the impact of a single field index
 
 add an index to the people table on the `ssn` field.
 
@@ -176,7 +186,7 @@ exp.find({ ssn: '720-38-5636' });
 When the query does NOT include the index, the collection gets scanned.  
 Slow.
 
-#### single field indexes with range queries
+### single field indexes with range queries
 
 Here, query a range of vals
 
@@ -195,10 +205,13 @@ exp.find({ ssn: { $gte: '001-29-9184', $lt: '177-45-0950' } });
 
 - examined 49 docs for 49 docs result... purf
 
-#### single field indexes with select set queries
+### single field indexes with select set queries
 
 ```js
-exp.find({ ssn: { $in: ['001-29-9184', '177-45-0930'] } });
+exp.find({
+  ssn: { $in: ['001-29-9184', '177-45-0930'] },
+  last_name: { $gte: 'L' },
+});
 ```
 
 peruse the results
