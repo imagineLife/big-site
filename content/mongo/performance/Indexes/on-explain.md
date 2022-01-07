@@ -20,27 +20,30 @@ Its the best way to understand what is happening when a query is executed - when
 - [Explain](#explain)
   - [How it works](#how-it-works)
   - [Passing Params to see more details](#passing-params-to-see-more-details)
+    - [queryPlanner](#queryplanner)
+    - [executionStats](#executionstats)
+    - [allPlansExecution](#allplansexecution)
   - [Notice memLimit and memUsage](#notice-memlimit-and-memusage)
   - [Its output on a Sharded Cluster](#its-output-on-a-sharded-cluster)
     - [ways of running explain](#ways-of-running-explain)
-    - [winningPlan](#winningplan)
+    - [queryPlanner and explain](#queryplanner-and-explain)
     - [winningPlan and stages](#winningplan-and-stages)
 
 ## How it works
 
 Explain is a method that can be added to the end of a cursor method
 
-```bash
-db.people.find({"address.city": "Lake Meaganton"}).explain()
+```js
+db.people.find({ 'address.city': 'Lake Meaganton' }).explain();
 ```
 
 That, though, is limited.  
 An explain object can be better suited to analyze several queries
 
-```bash
-exp = db.people.explain()
-exp.find({"address.city": "Lake Meaganton"})
-exp.find({"address.city": "Lake Brenda"})
+```js
+exp = db.people.explain();
+exp.find({ 'address.city': 'Lake Meaganton' });
+exp.find({ 'address.city': 'Lake Brenda' });
 ```
 
 The shell returns what _would happen_ without executing the query.  
@@ -48,16 +51,26 @@ This is the default mode of explain.
 
 ## Passing Params to see more details
 
-```bash
-# default, this is what it does built-in
-exp = db.people.explain('queryPlanner')
+### queryPlanner
 
-# executes query && returns stats of the query
-exStats = db.people.explain('executionStats')
+```js
+// default, this is what it does built-in
+exp = db.people.explain('queryPlanner');
+```
 
-# most verbose output
-# useful to consider ALL plans, not just the winning plan that the query planner used
-seePlans = db.people.explain('allPlansExecution')
+### executionStats
+
+```js
+// executes query && returns stats of the query
+exStats = db.people.explain('executionStats');
+```
+
+### allPlansExecution
+
+```js
+// most verbose output
+// useful to consider ALL plans, not just the winning plan that the query planner used
+seePlans = db.people.explain('allPlansExecution');
 ```
 
 ## Notice memLimit and memUsage
@@ -82,7 +95,7 @@ A `find` query can be run against the `mongos` instance.
 - each shard evaluates the query && selects a plan
 - the info gets re-aggregated on the mongos instance
 
-```bash
+```js
 db.people.find({last_name: "Johnson", "address.state": "New York"})).explain("executionStats")
 ```
 
@@ -109,9 +122,10 @@ expStats = db.people.explain('allPlansExecution');
 
 The shell returns what WOULD happen without running the query.
 
-### winningPlan
+### queryPlanner and explain
 
-The `queryPlanner` obj has a `winningPlan` subObject. This tells about the 'winning' query that was used to get data from the collection. This `winningPlan` gives info about the plan that was selected by the [query optimizer](https://docs.mongodb.com/manual/core/query-plans/). The winningPlan is shown as a hierarchy of stages.
+The `queryPlanner` obj has a `winningPlan` subObject.  
+This tells about the 'winning' query that was used to get data from the collection. This `winningPlan` gives info about the plan that was selected by the [query optimizer](https://docs.mongodb.com/manual/core/query-plans/). The winningPlan is shown as a hierarchy of stages.
 
 ### winningPlan and stages
 
