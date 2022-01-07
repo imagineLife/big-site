@@ -84,21 +84,20 @@ See [Single-Field Indexes in depth](/mongo/performance/single-field-indexes)
 ### ways of running explain
 
 ```js
-# directly on a query
-db.people.find({"address.city":"Lake Meaganton"});
+// directly on a query
+db.people.find({ 'address.city': 'Lake Meaganton' });
 
-# with a pre-defined explain object
+//  with a pre-defined explain object
 exp = db.people.explain();
-exp.find({"address.city":"Lake Meaganton"});
-exp.find({"address.city":"New York"});
+exp.find({ 'address.city': 'Lake Meaganton' });
+exp.find({ 'address.city': 'New York' });
 
-# the below two RUN the query, the above version does NOT
-# with parameters
+// the below two RUN the query, the above version does NOT
+// with parameters
 expStats = db.people.explain('executionStats');
 
-# see all non-winning details
+// see all non-winning details
 expStats = db.people.explain('allPlansExecution');
-
 ```
 
 The shell returns what WOULD happen without running the query.
