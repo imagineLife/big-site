@@ -15,6 +15,7 @@ tags: db, mongodb, performance, replica sets, secondary nodes, indexes
   - [Shard Keys and performance](#shard-keys-and-performance)
   - [Bulk Writes in Sharded Cluster](#bulk-writes-in-sharded-cluster)
   - [Sharding Commands](#sharding-commands)
+  - [Explaining a query against a mongos](#explaining-a-query-against-a-mongos)
 
 ## Hz and Vtcl Scaling
 
@@ -123,3 +124,54 @@ mongo
 use m201
 db.people.getShardDistribution()
 ```
+
+## Explaining a query against a mongos
+
+- sends the query to each shard
+- each shard
+  - eval query
+  - select a plan
+- all the resulting info is _aggregated_ on the `mongos` instance
+
+```js
+db.people.find({ last_name: 'Johnson', 'address.state': 'New York' }).explain();
+```
+
+NOTICE in the results, particularly the `winningPlan` key/val:
+
+```json
+{
+  "winningPlan": {
+    "stage": "SHARD_MERGE",
+    "shards": [
+      {
+        "shardName": "shard01",
+        "connectionString": "my-laptopName.local:27018",
+        "serverInfo": {...},
+        "winningPlan": {
+          "stage": "SHARDING_FILTER",
+          "inputStage": {
+            "stage": "COLLSCAN"
+            {...more}
+          }
+        }
+      },
+      {
+        "shardName": "shard02",
+        "connectionString": "my-laptopName.local:27019",
+        "serverInfo": {...},
+        "winningPlan": {
+          "stage": "SHARDING_FILTER",
+          "inputStage": {
+            "stage": "COLLSCAN"
+            {...more}
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
+- 2 shards queried
+- both had winning plans that do collection scans
