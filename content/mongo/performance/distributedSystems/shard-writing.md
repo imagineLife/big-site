@@ -9,6 +9,13 @@ tags: db, mongodb, performance, replica sets, secondary nodes, indexes
 
 # Increasing write performance with shards
 
+- [Increasing write performance with shards](#increasing-write-performance-with-shards)
+  - [Hz and Vtcl Scaling](#hz-and-vtcl-scaling)
+  - [Horizontal scaling and sharding](#horizontal-scaling-and-sharding)
+  - [Shard Keys and performance](#shard-keys-and-performance)
+  - [Bulk Writes in Sharded Cluster](#bulk-writes-in-sharded-cluster)
+  - [Sharding Commands](#sharding-commands)
+
 ## Hz and Vtcl Scaling
 
 Vertical is increasing a current server:
@@ -78,3 +85,35 @@ Server can execute unordered in parallel.
 These are specified if they are ordered or not.  
 With ordered, the server writes them all, waiting for each before writing the next.  
 With unordered, the server does not block writing to multiple locations.
+
+## Sharding Commands
+
+Check out [`mtools`](https://github.com/rueckstiess/mtools) for a ["collection of helper scripts...to parse and filter MongoDB log files"](https://www.mongodb.com/blog/post/introducing-mtools). Mtools has a specific command, [`mlaunch`](http://blog.rueckstiess.com/mtools/mlaunch.html), that "lets you quickly spin up and monitor MongoDB environments on your local machine"
+
+```js
+// spin up a sharded cluster
+mlaunch init --single --sharded 2
+
+// mongo shell into the db
+mongo
+
+// setup the db
+use m201
+
+// enable sharding on the collection
+sh.enableSharding('m201')
+
+// shard the people collection
+//   ON the _id index
+sh.shardCollection('m201.people', {_id: 1})
+// ... should return
+{
+  "collectionsharded": "m201.people",
+  "ok": 1
+}
+
+// add some DATA to the collection
+// from an `allpeeps` doc
+// into the freshly-sharded `people` collection
+mongoimport -d m201 -c people allpeeps.json
+```
