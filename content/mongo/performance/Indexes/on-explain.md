@@ -33,6 +33,7 @@ Its the best way to understand what is happening when a query is executed - when
     - [Data Setup](#data-setup)
     - [Run a slow performing query](#run-a-slow-performing-query)
   - [Execution Stages](#execution-stages)
+  - [Explain Against a Sharded Cluster](#explain-against-a-sharded-cluster)
 
 ## How it works
 
@@ -601,3 +602,8 @@ let gryExecutionStages = qry.explain('executionStats').executionStats
 ```
 
 This will reveal more granular details on queries.
+
+## Explain Against a Sharded Cluster
+
+Running explain against the `mongos` instance of a sharded cluster will give multi-shard insights.  
+See the "Explaining a query against a mongos" section of the [shard writing](mongo/performance/distributed-systems/shard-writing) page for more details.
