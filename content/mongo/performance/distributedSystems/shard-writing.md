@@ -115,5 +115,11 @@ sh.shardCollection('m201.people', {_id: 1})
 // add some DATA to the collection
 // from an `allpeeps` doc
 // into the freshly-sharded `people` collection
+exit
 mongoimport -d m201 -c people allpeeps.json
+
+// Inspect the data across shards
+mongo
+use m201
+db.people.getShardDistribution()
 ```
