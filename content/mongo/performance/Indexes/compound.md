@@ -16,14 +16,14 @@ tags: db, mongodb, performance, indexes, compound
     - [Making and using a compound index](#making-and-using-a-compound-index)
 - [Index Prefixes](#index-prefixes)
     - [Compound Indexes and Sorting](#compound-indexes-and-sorting)
-    - [Index Prefixes and sorting](#index-prefixes-and-sorting)
+    - [Compound Indexes and Sorting](#compound-indexes-and-sorting-1)
     - [Index Prefixes across selection and sort](#index-prefixes-across-selection-and-sort)
     - [Indexes, querying, sorting, and Collation](#indexes-querying-sorting-and-collation)
     - [MultiKey Indexes and Performance](#multikey-indexes-and-performance)
       - [Sorting arrays blocks](#sorting-arrays-blocks)
       - [Tricky GET query syntax](#tricky-get-query-syntax)
       - [Compound Indexes on arrays](#compound-indexes-on-arrays)
-  - [Understanding sort and index usage](#understanding-sort-and-index-usage)
+  - [Understanding sort and compound indexes](#understanding-sort-and-compound-indexes)
   - [Compound Indexes and ranges](#compound-indexes-and-ranges)
 
 Indexes are `btrees`.  
@@ -99,7 +99,7 @@ the ratio of keys-to-docs examined is 1:1, so this is still a great query+indexK
 
 # Index Prefixes
 
-The beginning subset of indexed fields that is always continuous.  
+The beginning subset of indexed fields in a compound index that is always continuous.  
 When a 2-field index is created, like above, the index prefix is the first indexed field, the `last_name` field.
 These can be used like a regular index.  
 The query planner can use the index prefixes of a multi-part index.
@@ -109,6 +109,8 @@ The query planner can use the index prefixes of a multi-part index.
 From the [mongo docs](https://docs.mongodb.com/v4.4/tutorial/sort-results-with-indexes/#sort-on-multiple-fields)...  
 "_the specified sort direction for all keys in the `cursor.sort()` document must match the index key pattern or match the inverse of the index key pattern._"  
 "_the sort keys must be listed in the same order as they appear in the index_" AND the sort orders must all either align or all be inverse.
+
+As a **NOTE**, sorting can leverage indees without the `find` part of a query having _any_ content - the `find` and the `sort` can handle indexes with differences.
 
 ```js
 // example index prefix
@@ -129,7 +131,7 @@ db.coll.createIndex(idxPrefix)
 {a:1, b:-1}
 ```
 
-### Index Prefixes and sorting
+### Compound Indexes and Sorting
 
 Indexes support sorting _uniquely and separately_ than the "find" predicate.
 
@@ -232,6 +234,10 @@ db.coll.find({ score: 5, category: 'cafe' });
 
 ### MultiKey Indexes and Performance
 
+Indexing on a field that is an arr.  
+Each entry in arr gets a unique index-key.  
+See the [multikey doc](/mongo/performance/multi-key-indexes) for more details.
+
 #### Sorting arrays blocks
 
 Querying && sorting on an arrs indexed with a multi-key index _includes a blocking sort_ stage. This can slow down a queries performance.
@@ -314,7 +320,7 @@ db.coll.find( { itm: "XYZ", prices: { $gte: 31 } } )
 { itm: [ [ "XYZ", "XYZ" ] ], prices: [ [ 31, Infinity ] ] }
 ```
 
-## Understanding sort and index usage
+## Understanding sort and compound indexes
 
 The `explain` cli output can give insight into how a query uses indexes.  
 As the [MongoDB Docs say](https://docs.mongodb.com/manual/reference/explain-results/#sort-stage), "_If MongoDB cannot use an index or indexes to obtain the sort order, the results include a SORT stage indicating a blocking sort operation_". The "winningPlan" will either

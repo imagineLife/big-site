@@ -28,8 +28,6 @@ tags: db, mongodb, performance, indexes
       - [Skip monotonically growing fields](#skip-monotonically-growing-fields)
   - [Indexes and dot notation](#indexes-and-dot-notation)
   - [Compound indexes](#compound-indexes)
-    - [use all indexed keys](#use-all-indexed-keys)
-  - [use an index prefix](#use-an-index-prefix)
     - [leverage indexes in sort when not in query](#leverage-indexes-in-sort-when-not-in-query)
     - [spreading index prefixes across query and sort](#spreading-index-prefixes-across-query-and-sort)
     - [sort direction across fields](#sort-direction-across-fields)
@@ -301,39 +299,6 @@ db.examples.explain('executionStats').find({sub.indexed: 'val-here'})
 
 Compound indexes are created and indx multiple fields. `{last_name:1, first_name: 1}` could be a compound index.  
 See the [compound indexes document](/mongo/performance/compound-indexes) for a more detailed write-up of compound indexes.
-
-### use all indexed keys
-
-Easiest & most straight-forward way to use compound indexes in a sort: use the index key pattern as the sort predicate
-
-```js
-var indexObj = { job: 1, employer: 1, last_name: 1, first_name: 1 };
-// create the index
-db.people.createIndex(indexObj);
-
-// build explain obj
-var ex = db.people.explain('executionStats');
-
-// simples leverage of compound index sorting
-ex.find({}).sort(indexObj);
-```
-
-## use an index prefix
-
-```js
-// for THIS compound index
-var indexObj = { job: 1, employer: 1, last_name: 1, first_name: 1 };
-
-// there are a few index prefixes
-ipfx1 = { job: 1 };
-ipfx2 = { job: 1, employer: 1 };
-ipfx3 = { job: 1, employer: 1, last_name: 1 };
-
-// any of those used in a sort will use an index to sort!!
-
-// sorting with the SAME keys but OUT-OF-ORDER will NOT use the indexes:
-badSort = { employer: 1, job: 1 };
-```
 
 ### leverage indexes in sort when not in query
 

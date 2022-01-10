@@ -1,3 +1,12 @@
+---
+title: Compound Indexes
+slug: mongo/performance/multi-key-indexes
+parentDir: mongo/performance
+author: Jake Laursen
+excerpt: Indexing array values of nested documents
+tags: db, mongodb, performance, indexes, multikey
+---
+
 # Indexes on array field keys
 
 [`Multi-Key Indexes`](https://docs.mongodb.com/manual/core/index-multikey/)
