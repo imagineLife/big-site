@@ -13,7 +13,11 @@ tags: db, mongodb, performance, indexes
 
 ## Indexes
 
-[Indexes](/mongo/performance/indexes) are a particularly helpful and specific technical detail to leverage for making queries run faster.  
+[Indexes](/mongo/performance/indexes) are a particularly helpful and specific technical detail to leverage for making queries run faster.
+
+- [Compound](/mongo/performance/compound-indexes) are single-declared indexes across multiple fields in a doc
+- [Multikey](/mongo/performance/multi-key-indexes) are indexes on nested arrays
+
 [Benchmarking](/mongo/performance/benchmarking)  
 [Hardware](/mongo/performance/hardward)  
 [Optimizing CRUD](/mongo/performance/optimizing-crud)  
