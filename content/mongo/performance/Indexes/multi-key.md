@@ -19,7 +19,11 @@ genres: ["Rock", "Pop","Metal"]
 ```
 
 the server would create index keys for each item in the array.  
-For the above example, the db would create indexes on `Rock`, `Pop`, and `Metal`.
+For the above example, the db would create indexes on
+
+- categories + `Rock`
+- categories + `Pop`,
+- categories + `Metal`
 
 With multi-key indexes, Indexes can also deal with nested arrays & nested docs. Could make an index on the below arr of objs, & the db would make index keys on the `color`, `weight`, and `name` keys.
 
@@ -47,15 +51,37 @@ Attempting to insert an array on an indexed object field will throw an error, so
 
 #### Covered Queries
 
-MultiKey Indexes do not support covered queries.
+MultiKey Indexes do not support covered queries.  
+Trying to use covered queries will not work here.
 
 ## MultiKey Indexes from the shell
 
 MongoDB recognizes multi-key indexes where a sub-doc is an array.
 
-### Compount Multi-Key indexes are still ok
+### Compound Multi-Key indexes are still ok
 
 ```bash
 # productName holds a string val
 db.products.createIndex({productName:1, "gear.weight": 1})
 ```
+
+## From the shell
+
+```js
+use m201
+
+// create a document
+db.products.insertOne({name: "Hipster T-Shirt", categories: ["T-Shirt", "Clothing", "Hipster"], stock: { size: "L", color: "gray", quantity: 87 }})
+
+// create nested index
+db.products.createIndex({"stock.quantity": '1'})
+
+// create exp obj
+const e = db.products.explain()
+
+// show query performance
+e.find({"stock.quantity": 87})
+```
+
+- isMultiKey will show false
+- mongoDB only recognizes a multi-key index when the field value is an array in at least 1 doc in the collection
