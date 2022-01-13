@@ -118,6 +118,19 @@ db.restaurants.createIndex(
 In order to USE a partial index, the query must guarantee to match a subset of docs specified by filter expression. Here is a guaranteed query match.
 
 ```js
+// the partial index
+db.restaurants.createIndex(
+  { rating: 1 },
+  { partialFilterExpression: { rating: { $gte: true } } },
+);
+
+// query WITHOUT leveraging the partial index
+db.restaurants.find({
+  'address.city': 'bawstin',
+  cuisine: 'tomato-ish',
+});
+
+// query WITH partial index
 db.restaurants.find({
   'address.city': 'bawstin',
   cuisine: 'tomato-ish',
@@ -125,7 +138,8 @@ db.restaurants.find({
 });
 ```
 
-Queries without the explicit partial field value match will not leverage the indexes in a query, and the query will perform a full collection scan.
+Queries without the explicit partial field value match will not leverage the indexes in a query, and the query will perform a full collection scan.  
+Above, the only difference between the query WITHOUT leveraging the index and WITH leveraging the index is that the query that leverages the index _explicitly requires_ that the rating value is `$gte: 4`, strictly agreeing with the partial index.
 
 ### Partial index restrictions
 
