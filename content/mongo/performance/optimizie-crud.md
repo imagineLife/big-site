@@ -9,12 +9,13 @@ tags: db, mongodb, performance, queries, indexes, equality, sort, range, tradeof
 
 # Optimizing Crud
 
-- index selectivity
-  - minimize the number of INDEXES examined
-- equality, sort, range rule
-  - useful when building indexes
-- tradeoffs
-  - between the first 2 deets
+- [Optimizing Crud](#optimizing-crud)
+  - [Index selectivity](#index-selectivity)
+  - [Equality Sort Range](#equality-sort-range)
+  - [Tradeoffs Between Index Selectivity and Equality Sort Range](#tradeoffs-between-index-selectivity-and-equality-sort-range)
+  - [Covered Queries](#covered-queries)
+    - [Update since v3.6](#update-since-v36)
+    - [Covered query gotchas](#covered-query-gotchas)
 
 ## Index selectivity
 
@@ -29,7 +30,7 @@ Range-based queries are not as preforming as selective queries.
 
 An Example with no indexes:
 
-```bash
+```js
 # explain var
 var e = db .restaurants.explain('executionStats')
 # query var
@@ -49,10 +50,10 @@ explain output shows...
 
 Here, add a "naieve" index
 
-```bash
-db.restaurants.createIndex({"address.zipcode":1, "cuisine":1, "stars": 1})
-# re-run query
-e.find(q).sort({stars: -1})
+```js
+db.restaurants.createIndex({ 'address.zipcode': 1, cuisine: 1, stars: 1 });
+// re-run query
+e.find(q).sort({ stars: -1 });
 ```
 
 explain output shows...
@@ -66,11 +67,11 @@ explain output shows...
 
 Here, a more optimal index. Notice that the ORDER of the index sets up queries to restrict the index keys being reviewed:
 
-```bash
-# new index
+```js
+// new index
 db.createIndex({"cuisine"1, "address.zipcode":1, "rating": 1})
 
-# re-run query
+// re-run query
 e.find(q).sort({stars: -1})
 ```
 
@@ -83,11 +84,11 @@ e.find(q).sort({stars: -1})
 
 Here a quid-pro-quo update for an even better query experience
 
-```bash
-# new index who dis
+```js
+// new index who dis
 db.restaurants.createIndex({"cuisine"1,"stars":1,"address.zipcode": 1}}
 
-# re-run query
+// re-run query
 e.find(q).sort({stars: -1})
 ```
 
@@ -115,16 +116,19 @@ Sometimes it makes sense to be less selective to allow for in-memory sort. Lever
 
 These are fast.  
 Satisfied entirely by indexes, 0 docs outside of indexed content need to be parsed during the query.  
-Covered Queries ONLY DEAL WITH INDEXES, in both query and output.
+Covered Queries ONLY DEAL WITH INDEXES, in both the query and the output.
 
 Example:
 
-```bash
-# create indexes
-db.rest.createIndex({name: 1, cuisine: 1, ratings: 1})
+```js
+// create indexes
+db.rest.createIndex({ name: 1, cuisine: 1, ratings: 1 });
 
-# use them exclusively
-db.find({name: {$gt: 'L'}, cuisine: 'Sushi', rating: {$gt: 4.0}}, {_id:0, name: 1, cuisine:1, ratings: 1})
+// use them exclusively
+db.find(
+  { name: { $gt: 'L' }, cuisine: 'Sushi', rating: { $gt: 4.0 } },
+  { _id: 0, name: 1, cuisine: 1, ratings: 1 },
+);
 ```
 
 - index contains ALL fields in the query
@@ -136,6 +140,35 @@ db.find({name: {$gt: 'L'}, cuisine: 'Sushi', rating: {$gt: 4.0}}, {_id:0, name: 
   - this makes the documents need to be examined
 
 Above, NO data is needed outside of the indexes to get the matching documents. An explain would show that the winningPlan would only require a IDXSCAN followed by a projection.
+
+### Update since v3.6
+
+Since mongo v3.6, an index can cover a query on fields within embedded docs:
+
+```js
+// a doc example
+{
+  _id: 123,
+  user: {
+    login: "test string"
+  }
+}
+
+// an index
+const idxObj = {"user.login": 1}
+db.coll.createIndex(idxObj)
+
+const findObj = {
+  "user.login": "test string"
+}
+
+const wantToReturn = {
+  "user.login":1,
+  _id: 0
+}
+// a covered query!!
+db.coll.find(findObj, wantToReturn)
+```
 
 ### Covered query gotchas
 
