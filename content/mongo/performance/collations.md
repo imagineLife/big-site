@@ -1,7 +1,16 @@
+---
+title: Collations
+slug: mongo/performance/collations
+parentDir: mongo/performance
+author: Jake Laursen
+excerpt: Indexing a restricted set of docs in a collection
+tags: db, mongodb, performance, partial indexes
+---
+
 # collation
 
 [mongo docs](https://docs.mongodb.com/manual/reference/collation/?jmp=university)
-this lets users to specify language-specific rules for text comparison.  
+this lets users to specify language-specific rules for string comparisons - letter-cases && accent-marks.  
 This can be done on a collection, a view, an index, or specific operations that allow collation.
 
 - locale: _mandatory_
@@ -19,19 +28,33 @@ These options/settings are out-of-scope for this details.
 Collations can be defined on...
 
 - collection
-  - all queries + indexees will use collation in the collection
+  - all queries + indexes will use collation in the collection
 
 ## example of collation creation
 
-```bash
-# on a collection
-db.createCollection("foreign_text": {collation: {locale: "pt"}})
-```
+```js
+// on a collection
+db.createCollection(('foreign_text': { collation: { locale: 'pt' } }));
 
-All queries & indexes on that collection will use that collation.
+// All queries & indexes on that collection will use that collation.
+db.foreign_text.insert({ name: 'sally', text: 'Bom dia minha gente!' });
 
-```bash
-db.foreign_text.insert({name: 'sally', text: 'Bom dia minha gente!'})
+
+// explaining on a find will show the locale set on the collection
+db.foreign_text.find({
+  _id: { $exists: 1 }
+}).explain()
+
+// returns...
+{
+  queryPlanner: {
+    {...}
+    collation: {
+      locale: "pt",
+      {...}
+    }
+  }
+}
 ```
 
 Collation details will appear in an explain on that collection.
@@ -40,7 +63,7 @@ Collation details will appear in an explain on that collection.
 
 notice the second query object needs the collation key
 
-```bash
+```js
 db.foreign_text.find({_id: {$exists: 1}).collation({locale: 'it'})
 
 db.foreign_text.aggregate([{$match: { _id: {$exists:1} }}], {collation: {locale: 'es'}}).collation({locale: 'it'})
@@ -52,36 +75,41 @@ Can create _indexes_ that over-ride collations. Indexes can even use a different
 
 Here, creating an index on name that OVERRIDES the default collation AND any collection-level-defined collations.
 
-```bash
-db.foreign_text.createIndex({name:1}, {collation: {locale: 'it'}})
+```js
+db.foreign_text.createIndex({ name: 1 }, { collation: { locale: 'it' } });
 ```
 
 If a query executes using that field, the name, expect to use this custom collation.
 
-```bash
-db.foreign_text.find({name: 'Maximo'}).explain()
+```js
+db.foreign_text.find({ name: 'Maximo' }).explain();
 ```
 
 CAVEAT: enabling the use of that index is one thing. USING the collation is another.
 
-```bash
-db.foreign_text.find({name: 'Maximo'}).collation({locale: 'it'}).explain()
+```js
+db.foreign_text
+  .find({ name: 'Maximo' })
+  .collation({ locale: 'it' })
+  .explain();
 ```
 
 The above query will show that the IXSCAN will be leveraged.
 
 ## leveraging case insensitive indexes with strength
 
-```bash
-# create collection with collation
-db.createCollection("not_sensitive", {collation: {locale: 'en', strength: 1}})
+```js
+// create collection with collation
+db.createCollection('not_sensitive', {
+  collation: { locale: 'en', strength: 1 },
+});
 
-# insert a few case'd docs
-db.not_sensitive.insert({water: 'Melon'})
-db.not_sensitive.insert({water: 'MeLOn'})
-db.not_sensitive.insert({water: 'melON'})
+// insert a few case'd docs
+db.not_sensitive.insert({ water: 'Melon' });
+db.not_sensitive.insert({ water: 'MeLOn' });
+db.not_sensitive.insert({ water: 'melON' });
 
-# sort on water in both directions will make no diff on query results
-db.not_sensitive.find().sort({water: 1})
-db.not_sensitive.find().sort({water: -1})
+// sort on water in both directions will make no diff on query results
+db.not_sensitive.find().sort({ water: 1 });
+db.not_sensitive.find().sort({ water: -1 });
 ```
