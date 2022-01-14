@@ -1,4 +1,26 @@
+---
+title: Wildcard Indexes
+slug: mongo/performance/wildcard-indexes
+parentDir: mongo/performance
+author: Jake Laursen
+excerpt:
+tags: db, mongodb, performance, wildcard indexes
+---
+
 # Wildcard indexes
+
+- [Wildcard indexes](#wildcard-indexes)
+    - [Con of indexes](#con-of-indexes)
+    - [Some data is complex](#some-data-is-complex)
+  - [Wildcards](#wildcards)
+  - [using projections in wildcard indexes](#using-projections-in-wildcard-indexes)
+  - [4 syntaxes](#4-syntaxes)
+  - [Use Cases](#use-cases)
+    - [Unpredictable query shapes](#unpredictable-query-shapes)
+    - [Simplify the Attribute Pattern](#simplify-the-attribute-pattern)
+      - [Opt 1: flat data](#opt-1-flat-data)
+      - [Opt 2: attr array](#opt-2-attr-array)
+      - [Opt 3: wildcard on object keys](#opt-3-wildcard-on-object-keys)
 
 Fields should only index frequently-indexed fields for optimizing query performance.
 Useful for unpredictable workloads.
@@ -8,7 +30,7 @@ Why use em?!
 
 - only index fields that queries frequently index
 - be careful with these, they are not replacements for other indexes
-- some workloads have unpredictable access patterns
+- some workloads have **unpredictable access patterns**
   - I.o.T requests may have arbitrary field requirements, making PLANNING EFFECTIVE INDEXING difficult
 - index "every" field in all docs in a collection
   - prevents unique indexes on each field && field combo
@@ -28,36 +50,39 @@ Without wildcard indexes, this volume of indexes will balloon, & require mainten
 
 ## Wildcards
 
-Wildcard indexes index all fields in a collection.
+**Wildcard indexes index all fields in a collection**.
 
-```bash
-db.sample_data.createIndx({'$**': 1})
+```js
+db.sample_data.createIndx({ '$**': 1 });
 ```
 
 the `&**` is a wildcard operator.
 
 Querying this with a complex query shows some interesting details in an explain plan.
 
-```bash
-db.sample_data.find({waveMeasurement.waves.height: .5, waveMeasurement.seaState.quality: 9})
+```js
+db.sample_data.find({
+  waveMeasurement.waves.height: .5,
+  waveMeasurement.seaState.quality: 9
+})
 ```
 
-will reveal
+will reveal...
 
 - each plan is on a single-field index
-- wildcard index CREATES a virtual single-field index on query
+- wildcard index CREATES a virtual single-field index on-query-time
 
 ## using projections in wildcard indexes
 
 this will wildcard index on all subfields in a `waveMeasurement` object in a document.
 
-```bash
+```js
 db.sample_data.createIndex({$**: 1}, {wildcardProjection: {waveMeasurement: 1}})
 ```
 
 This will create a wildcard index on `waveMeasurement.waves` AND `waveMeasurement.waves.**` subpaths
 
-```bash
+```js
 db.sample_data.createIndex({waveMeasurement.waves.$**: 1}})
 ```
 
@@ -65,17 +90,17 @@ Wildcard indexes only cover queries where the index is on a single field where t
 
 ## 4 syntaxes
 
-```bash
-# index everything
+```js
+// index everything
 db.col.createIndex({$**:1})
 
-# index a.b AND all a.b.sub-paths
+// index a.b AND all a.b.sub-paths
 db.col.createIndex({a.b.$**:1})
 
-# index a AND all a.sub-paths
+// index a AND all a.sub-paths
 db.col.createIndex({$**:1, {wildcardProjection: {a:1}}})
 
-# index everything ACCEPT a
+// index everything ACCEPT a
 db.col.createIndex({$**:1, {wildcardProjection: {a:0}}})
 
 ```
@@ -93,9 +118,9 @@ As mongodb consumer goals change, the data model changes.
   - complex sub-docs
     - maybe with fields that we aren't 100% sure how the fields and vals will be used
 
-```bash
-# data example
-# a db.sales document example
+```js
+// data example
+// a db.sales document example
 {
   _id: <whatevs>,
   sale_amt: 14,764.32,
@@ -124,9 +149,9 @@ Wildcards let easier querying on subdocs that contain meaningful attributes.
 
 #### Opt 1: flat data
 
-```bash
-# a recipes collection, storing recipe ratings across platforms
-# WITHOUT the attribute pattern, attrs in-dc
+```js
+// a recipes collection, storing recipe ratings across platforms
+// WITHOUT the attribute pattern, attrs in-dc
 {
   _id: 'q3ernf98h3',
   title: "Mom's famous Apple Pie",
@@ -138,8 +163,8 @@ Wildcards let easier querying on subdocs that contain meaningful attributes.
 
 #### Opt 2: attr array
 
-```bash
-# WITH the attribute pattern, attrs in sub-doc
+```js
+// WITH the attribute pattern, attrs in sub-doc
 
 {
   _id: 'q3ernf98h3',
@@ -160,13 +185,13 @@ Wildcards let easier querying on subdocs that contain meaningful attributes.
   ]
 }
 
-# index on arr keys/vals for faster query results
+// index on arr keys/vals for faster query results
 db.recipes.createIndex({"ratings.k": 1, "ratings.v": 1})
 ```
 
 #### Opt 3: wildcard on object keys
 
-```bash
+```js
 {
   _id: 'q3ernf98h3',
   title: "Mom's famous Apple Pie",
@@ -177,6 +202,6 @@ db.recipes.createIndex({"ratings.k": 1, "ratings.v": 1})
   }
 }
 
-# create index
+// create index
 db.recipes.createIndex({"ratings.$**": 1})
 ```
