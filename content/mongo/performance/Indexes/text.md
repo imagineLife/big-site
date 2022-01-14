@@ -1,3 +1,12 @@
+---
+title: Text Indexes
+slug: mongo/performance/text-indexes
+parentDir: mongo/performance
+author: Jake Laursen
+excerpt: Indexing based on words in text fields
+tags: db, mongodb, performance, text indexes
+---
+
 # Text Indexes
 
 Text gets stored.  
@@ -10,19 +19,22 @@ Text indexes are similar to multi-key indexes, in that they make a ....lot....of
 
 ## Creating a text index
 
-```bash
-db.products.createIndex({productName: "text"})
+```js
+db.products.createIndex({ productName: 'text' });
 ```
 
 Notice the value of the key is `text`, wherease if the value were a 1 or a -1 the index would expect to be numerical and sorted.
 
 When creating an index like this, _each word in the text field string creates a unique index_...
-...lotta words === lotta indexes.
+...lotta words === lotta indexes
+
+- spaces && hyphens are text delimiters
+- each indexed text, by default, is case insensitive and gets indexed lowercase
 
 This allows leverage of text-searching without collection-scanning -
 
-```bash
-db.products.find({$text: {$search: "some text here"}})
+```js
+db.products.find({ $text: { $search: 'some text here' } });
 ```
 
 ## CONS
@@ -36,30 +48,30 @@ db.products.find({$text: {$search: "some text here"}})
 
 Create a compound index and leverage the compound field to reduce the index scanning going on when leveraging the text field index:
 
-```bash
-# compound index with text 2nd
-db.product.createIndex({category:1, productName: "text"})
+```js
+// compound index with text 2nd
+db.product.createIndex({ category: 1, productName: 'text' });
 
-# a search leveraging the compound index to reduce index scanning
-db.product.find({category: 'drink', $text: {$search: 'soda'} })
+// a search leveraging the compound index to reduce index scanning
+db.product.find({ category: 'drink', $text: { $search: 'soda' } });
 ```
 
-This limits text-keys when querying. the above find query limits text-searches to text string in the `drink` category.
+This limits text-keys searching when querying. The above find query limits text-searches to text string in the `drink` category, ignoring all other index keys in all other categories.
 
 ## Searching for text
 
-```bash
-# insert 2 similar text-field docs
+```js
+// insert 2 similar text-field docs
 db.product.insert({productName: "Tasty clear soda"})
 db.product.insert({productName: "Tasty clear vodka"})
 
-# create text index
+// create text index
 db.product.createIndex({productName: "text"})
 
-# search
+// search
 db..product.find({$text: {$search: {"Tasty soda"}}})
 
-# will return both docs....
+// will return both docs....
 ```
 
 This return may result in confusion:  
@@ -71,15 +83,28 @@ When looking for `tasty soda`, really looking for any doc that includes `tasty` 
 Maybe try getting & projecting the textScore val per results.  
 The `textScore` will show a 0 - to - 1 matching "percentage" result of the query.
 
-```bash
-# search
+```js
+// search
 
-db..product.find({$text: {$search: {"Tasty soda"}}}, {score: {$meta: 'textScore'}})
-# will return a matching score key/val, 0 - 1, for each result
+db..product.find({
+  $text: {
+    $search: {"Tasty soda"}
+  }
+}, {
+  score: { $meta: 'textScore' }
+})
 
-# maybe even sort by matching percentage
-# then the higher matches return first
-db.product.find({$text: {$search: "Tasty soda"}}, {score: {$meta: "textScore"}}).sort({score: {$meta: 'textScore'}})
+/*
+  will return a matching score key/val, 0 - 1, for each result
+  maybe even sort by matching percentage
+  then the higher matches return first
+*/
+
+db.product.find({
+  $text: {
+    $search: "Tasty soda"
+  }
+}, {score: {$meta: "textScore"}}).sort({score: {$meta: 'textScore'}})
 
 ```
 
@@ -90,3 +115,13 @@ Make regex searches as explicit as possible.
 - leverage a starting force `/^kirby/` to match at the beginning of a string
   - this will ignore all "branches of the Index b-tree" that don't start with the `kirby` text
   - `/^.irby/` is not NEARLY as performant as this wildcard regex `/^kirby/`
+
+Mongo has built-in regex support.
+
+### Creating the index
+
+Note, the "text" keyword is used and the order is not described. In other indexes, the order/direction is described in declaring the index.
+
+- allows this special text index
+- allows full-text-search capabilities while _avoiding collection scans_
+- works similar to multi-key indexes

@@ -146,6 +146,7 @@ Above, the only difference between the query WITHOUT leveraging the index and WI
 - cant specify a partial filter expression AND a sparse option
 - the `_id` cannot be partially indexed
   - every doc HAS to have a fully indexed `_id` field
+- shard keys can't be a partial index
 
 #### Partial Index available conditions
 
