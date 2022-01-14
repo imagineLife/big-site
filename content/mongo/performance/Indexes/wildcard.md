@@ -14,6 +14,7 @@ tags: db, mongodb, performance, wildcard indexes
     - [Some data is complex](#some-data-is-complex)
   - [Wildcards](#wildcards)
   - [using projections in wildcard indexes](#using-projections-in-wildcard-indexes)
+  - [On Covered Indexes](#on-covered-indexes)
   - [4 syntaxes](#4-syntaxes)
   - [Use Cases](#use-cases)
     - [Unpredictable query shapes](#unpredictable-query-shapes)
@@ -85,6 +86,8 @@ This will create a wildcard index on `waveMeasurement.waves` AND `waveMeasuremen
 ```js
 db.sample_data.createIndex({waveMeasurement.waves.$**: 1}})
 ```
+
+## On Covered Indexes
 
 Wildcard indexes only cover queries where the index is on a single field where the return is the single field being queried.
 
