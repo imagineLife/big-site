@@ -98,6 +98,8 @@ The above query will show that the IXSCAN will be leveraged.
 
 ## leveraging case insensitive indexes with strength
 
+Strength of one is a "primary" comparison, ignoring case && diacritics ->
+
 ```js
 // create collection with collation
 db.createCollection('not_sensitive', {
@@ -113,3 +115,11 @@ db.not_sensitive.insert({ water: 'melON' });
 db.not_sensitive.find().sort({ water: 1 });
 db.not_sensitive.find().sort({ water: -1 });
 ```
+
+## Finding Content
+
+- a FIND on a collection will return content event when in the find query a different collation is set
+- to USE a collation index on a collection
+  - ignoring the collation in the find query will return in a collection scan
+  - the collation must be defined in the find query: `db.coll.find({the: "find goal here"}).collation({ locale: 'it' })`
+- collations offer a marginally faster index performance increase
