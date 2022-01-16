@@ -57,22 +57,22 @@ const About = () => (
           detail is that this tool reveals our preferences. These are not
           absolute prescriptions of our personalities, and we may not even be
           _good at_ operating in our preferences. What are my preferences?
-          <ul>
-            <li>
-              On interacting with the world around me:{' '}
-              <i>introversion over extroversion</i>
-            </li>
-            <li>
-              On processing information: <i>intuition over sensing</i>
-            </li>
-            <li>
-              On handle emotions: <i>thinking over feeling</i>
-            </li>
-            <li>
-              On approach making decisions: <i>judging over perceiving</i>
-            </li>
-          </ul>
         </p>
+        <ul>
+          <li>
+            On interacting with the world around me:{' '}
+            <i>introversion over extroversion</i>
+          </li>
+          <li>
+            On processing information: <i>intuition over sensing</i>
+          </li>
+          <li>
+            On handle emotions: <i>thinking over feeling</i>
+          </li>
+          <li>
+            On approach making decisions: <i>judging over perceiving</i>
+          </li>
+        </ul>
         <h3>Solitude is Exciting - Introversion over Extroversion</h3>
         <p>
           I can spend days without talking to others, seemingly feeding of my
