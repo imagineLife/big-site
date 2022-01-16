@@ -1,13 +1,48 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import { graphql } from 'gatsby';
 import './chart-by-type.scss';
 
-export default function ChartName(props) {
-  console.log('HUH?!');
-  console.log('props');
-  console.log(props);
+// components
+import Drawer from '@mui/material/Drawer';
 
-  return <main className="chart-wrapper">water</main>;
+function chartReducer(state, action) {
+  const reducerObj = {
+    TOGGLE_DRAWER: () => ({
+      ...state,
+      drawerOpen: action.payload,
+    }),
+  };
+  if (!reducerObj[action.type])
+    throw new Error(`Called reducer with bad type ${action.type}`);
+  return reducerObj[action.type]();
+}
+
+const initialChartState = {
+  drawerOpen: false,
+};
+export default function ChartName({ data: { chartData, chartsSummary } }) {
+  console.log({ chartData, chartsSummary });
+
+  const [{ drawerOpen }, dispatch] = useReducer(
+    chartReducer,
+    initialChartState,
+  );
+
+  return (
+    <main className="chart-wrapper">
+      <Drawer
+        anchor={'left'}
+        open={drawerOpen}
+        onClose={() => dispatch({ type: 'TOGGLE_DRAWER', payload: false })}
+      >
+        sauce
+      </Drawer>
+
+      <h1>{chartData?.title || 'A Chart'}</h1>
+      {chartData?.excerpt && <p>{chartData?.excerpt}</p>}
+      {chartData?.usefor && <p>{chartData?.usefor}</p>}
+    </main>
+  );
 }
 
 export const chartQuery = graphql`
