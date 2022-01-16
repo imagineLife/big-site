@@ -5,18 +5,6 @@ exports.createPages = async ({
   reporter,
 }) => {
   const res = await graphql(`
-    fragment chartparts on ChartsJson {
-      slug
-      title
-      chartdata {
-        xdomain
-        ydomain
-        values {
-          x
-          y
-        }
-      }
-    }
     query {
       scrum: allMarkdownRemark(
         sort: { fields: frontmatter___order }
@@ -84,8 +72,20 @@ exports.createPages = async ({
         }
       }
       charts: allChartsJson {
-        data: nodes {
-          ...chartparts
+        chartList: nodes {
+          title
+          slug
+          type
+          usefor
+          excerpt
+          chartdata {
+            xdomain
+            ydomain
+            values {
+              x
+              y
+            }
+          }
         }
       }
       misc: allMarkdownRemark(
@@ -183,7 +183,7 @@ exports.createPages = async ({
     data: {
       scrum: { pages: scrumPages },
       recipes: { pages: recipePages },
-      charts: { data: chartsData },
+      charts: { chartList: chartsPages },
       febs: { pages: febsPages },
       strengths: { pages: strengthsPages },
       misc: { pages: miscPages },
@@ -195,6 +195,7 @@ exports.createPages = async ({
   } = res;
 
   const mdTemplate = path.resolve(`src/templates/markdown/index.js`);
+
   [
     ...scrumPages,
     ...recipePages,
