@@ -12,7 +12,7 @@ $min-width: 15rem;
     display: flex;
     flex-wrap: wrap;
     margin-top: -1em;
-    align-items: center;
+    align-items: flex-start;
     padding-top: 1em; // 1
 
     &:not(:first-of-type) {
@@ -21,11 +21,16 @@ $min-width: 15rem;
 
     &:nth-child(even) {
       flex-direction: row-reverse; // 3
+      > .text{
+        margin-left: 20px;
+      }
     }
 
     > .text {
       flex-grow: 9999; // 4
       flex-basis: $min-width; // 5
+      text-align:left;
+      margin-right: 20px;
 
       h2 {
         font-size: 2em;

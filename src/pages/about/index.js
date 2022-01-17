@@ -8,7 +8,7 @@ import learnerImg from './learn.jpg';
 import doerImg from './work.jpg';
 import coffeeImg from './coffee.jpg';
 import introvertImg from './introvert.jpg';
-
+import strengthsImg from './strengths.jpg';
 const About = () => (
   <Fragment>
     <Hero />
@@ -162,6 +162,9 @@ const About = () => (
               personality tendencies for the best, and take steps toward
               conflict resolution by pulling out the best in one another.
             </p>
+          </div>
+          <div className="figure">
+            <img src={strengthsImg} />
           </div>
         </section>
       </div>
