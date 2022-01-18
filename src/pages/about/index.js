@@ -42,11 +42,10 @@ const About = () => (
           <div className="text">
             <h2>A Do-er</h2>
             <p>
-              I am restless if I'm not intentionally getting something done, or
-              on my way to doing something. Even my down time is intentional,
-              focused on connecting with my wife and/or friends, considering
-              future plans... solitude and meditaion are task-oriented and
-              achievable for me.
+              I am usually a little restless if I'm not getting something done.
+              Even my down time is intentional, focused on connecting with my
+              wife and/or friends, considering future plans... even solitude and
+              meditation are focused and part of my goals.
             </p>
           </div>
           <div className="figure">
@@ -56,17 +55,17 @@ const About = () => (
 
         <section className="box">
           <div className="text">
-            <h2>A Coffee Fanatic</h2>
+            <h2>A StrengthsFinder Advocate</h2>
             <p>
-              I roast coffee for myself and a few close folks. I love my daily
-              morning ritual of getting up and brewing myself some fresh-roasted
-              coffee. Currently, I'm enjoying Honduran beans, roasted a little
-              beyond first crack in about 8 and a half minutes brewed in a
-              Chemex.
+              I've been enjoying the principles of a strengths-first way of
+              being, both in my own life and when working with others. When
+              conflict arises, we can learn to leverage one anothers'
+              personality tendencies for the best, and take steps toward
+              conflict resolution by pulling out the best in one another.
             </p>
           </div>
           <div className="figure">
-            <img src={coffeeImg} />
+            <img src={strengthsImg} />
           </div>
         </section>
 
@@ -94,17 +93,16 @@ const About = () => (
 
         <section className="box">
           <div className="text">
-            <h2>A StrengthsFinder Advocate</h2>
+            <h2>A Coffee Fanatic</h2>
             <p>
-              I've been enjoying the principles of a strengths-first way of
-              being, both in my own life and when working with others. When
-              conflict arises, we can learn to leverage one anothers'
-              personality tendencies for the best, and take steps toward
-              conflict resolution by pulling out the best in one another.
+              I roast coffee for myself and a few friends. I love my morning
+              ritual of getting up and brewing myself some fresh-roasted coffee.
+              Currently, I'm enjoying light-roasted beans, a little beyond first
+              crack, brewed in a Chemex.
             </p>
           </div>
           <div className="figure">
-            <img src={strengthsImg} />
+            <img src={coffeeImg} />
           </div>
         </section>
       </div>
