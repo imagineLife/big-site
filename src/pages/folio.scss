@@ -128,10 +128,18 @@ main.folio {
   max-width: unset;
   width: 100%;
   background-color: rgb(15, 31, 50);
+
+  h2 {
+    color: white;
+    font-weight: lighter;
+    margin: 40px 0 40px 5%;
+  }
+
 }
 
-#projects-wrapper {
+#projects-wrapper, #certs-wrapper {
   padding: 0 5%;
+  display: inline-block;
 }
 
 h1 {

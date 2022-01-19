@@ -45,7 +45,7 @@ const techs = {
   ],
 };
 
-const folioItems = [
+const certs = [
   {
     title: 'OpenJS Certified Node Application Developer',
     subText:
@@ -78,6 +78,9 @@ const folioItems = [
     techList: ['Team Process', 'Remote', 'Management'],
     imgClass: `gitlab-bg`,
   },
+];
+
+const folioItems = [
   {
     title: 'Slice-n-Dice Times',
     subText:
@@ -111,7 +114,7 @@ const folioItems = [
   {
     title: 'Restaurant Node API',
     subText:
-      'An API using core Node API, no npm: account & cart management (CRUD), a cli, auth, stripe & mailgun api integration, logging & more.',
+      'No NPM - No dependencies - just Node: account & cart management (CRUD), a cli, auth, stripe & mailgun api integration, logging & more.',
     imgClass: 'pizza-bg',
     aLink: 'https://github.com/imagineLife/nodeWork/tree/master/pizzaAPI',
     techList: [
@@ -240,6 +243,14 @@ export default function Folio() {
         </div>
       </section>
 
+      <h2>Certifications</h2>
+      <section id="certs-wrapper">
+        {certs.map((itm, itmIdex) => (
+          <FolioItem key={`folio-item-${itmIdex}`} {...itm} />
+        ))}
+      </section>
+
+      <h2>Projects</h2>
       <section id="projects-wrapper">
         {folioItems.map((itm, itmIdex) => (
           <FolioItem key={`folio-item-${itmIdex}`} {...itm} />
