@@ -96,9 +96,9 @@ const About = () => (
             <h2>A Coffee Fanatic</h2>
             <p>
               I roast coffee for myself and a few friends. I love my morning
-              ritual of getting up and brewing myself some fresh-roasted coffee.
-              Currently, I'm enjoying light-roasted beans, a little beyond first
-              crack, brewed in a Chemex.
+              ritual of brewing myself some fresh-roasted coffee. Currently, I'm
+              enjoying light-roasted beans, a little beyond first crack, brewed
+              in a Chemex.
             </p>
           </div>
           <div className="figure">
