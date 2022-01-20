@@ -31,7 +31,7 @@ export default function FolioItem({
             ></a>
           )}
           <ul>
-            {techList.map((itm, itmIdx) => (
+            {techList?.map((itm, itmIdx) => (
               <li key={`tech-list-${title}-${itmIdx}`}>{itm}</li>
             ))}
           </ul>
