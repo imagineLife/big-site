@@ -45,6 +45,103 @@ const techs = {
   ],
 };
 
+const technologies = [
+  {
+    title: 'HTML',
+    subText: 'Webpage structuring - the core of web content delivery.',
+    imgClass: `html-bg`,
+  },
+  {
+    title: 'CSS',
+    subText: 'Styling HTML',
+    imgClass: `css-bg`,
+  },
+  {
+    title: 'JavaScript',
+    subText: 'Interacting with the dom && server logic',
+    imgClass: `js-bg`,
+  },
+  {
+    title: 'D3',
+    subText: 'Data Driven Documents',
+    imgClass: `d3-bg`,
+  },
+  {
+    title: 'React',
+    subText: 'UI Component & State Management',
+    imgClass: `react-bg`,
+  },
+  {
+    title: 'Storybook',
+    subText: 'Component Playground',
+    imgClass: `storybook-bg`,
+  },
+  {
+    title: 'Babel',
+    subText: 'Transpiling Dev-Friendly code for browsers',
+    imgClass: `babel-bg`,
+  },
+  {
+    title: 'Webpack',
+    subText:
+      'Bundling, minifying, chunking, managing code for production optimization',
+    imgClass: `webpack-bg`,
+  },
+  {
+    title: 'Cypress',
+    subText: 'End-To-End Testing with JavaScript',
+    imgClass: `cypress-bg`,
+  },
+  {
+    title: 'Jest',
+    subText: 'JavaScript Testing',
+    imgClass: `jest-bg`,
+  },
+  {
+    title: 'Enzyme',
+    subText: 'React Component Testing',
+    imgClass: `enzyme-bg`,
+  },
+  {
+    title: 'Analytics',
+    subText: 'Visualization & Analysis Data',
+    imgClass: `dash-bg`,
+  },
+  {
+    title: 'Node',
+    subText: 'Server-Side JavaScript',
+    imgClass: `node-bg`,
+  },
+  {
+    title: 'Express',
+    subText: 'Node Server Framework',
+    imgClass: `express-bg`,
+  },
+  {
+    title: 'MongoDB',
+    subText: 'Document data storage - data for apps.',
+    imgClass: `mongo-bg`,
+  },
+  {
+    title: 'MongoDB',
+    subText: 'Document data storage - data for apps.',
+    imgClass: `mongo-bg`,
+  },
+  {
+    title: 'GitLab',
+    subText: 'All-In-One SaaS Workflow Management & Code Integration',
+    imgClass: `gitlab-bg`,
+  },
+];
+/*
+    ADD:
+    - webpack
+    - babel
+    - docker
+    - bash - when i get some bash chops!
+    - process automation - github actions + gitlab ci
+*/
+
 const certs = [
   {
     title: 'OpenJS Certified Node Application Developer',
@@ -253,6 +350,13 @@ export default function Folio() {
       <h2>Projects</h2>
       <section id="projects-wrapper">
         {folioItems.map((itm, itmIdex) => (
+          <FolioItem key={`folio-item-${itmIdex}`} {...itm} />
+        ))}
+      </section>
+
+      <h2>Technologies</h2>
+      <section id="technologies-wrapper">
+        {technologies.map((itm, itmIdex) => (
           <FolioItem key={`folio-item-${itmIdex}`} {...itm} />
         ))}
       </section>
