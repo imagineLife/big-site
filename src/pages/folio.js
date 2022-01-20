@@ -119,12 +119,7 @@ const technologies = [
   },
   {
     title: 'MongoDB',
-    subText: 'Document data storage - data for apps.',
-    imgClass: `mongo-bg`,
-  },
-  {
-    title: 'MongoDB',
-    subText: 'Document data storage - data for apps.',
+    subText: 'Document data storage - consumer-first schemas.',
     imgClass: `mongo-bg`,
   },
   {
@@ -135,8 +130,6 @@ const technologies = [
 ];
 /*
     ADD:
-    - webpack
-    - babel
     - docker
     - bash - when i get some bash chops!
     - process automation - github actions + gitlab ci
