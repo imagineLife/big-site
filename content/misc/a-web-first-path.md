@@ -1,10 +1,11 @@
 ---
-title: A Web-First Approach to Web Development
-slug: a-web-first-path
+title: An Http-Server Approach to Web Development
 author: Jake Laursen
 excerpt: Developing competence for building web-based tech
 tags: http, web, node, react, html, css, js, pedagogy, path,
-order: 1
+parentDir: misc
+slug: misc/a-web-first-path
+order: 4
 ---
 
 # Some Tech Involved in Building A Web App
