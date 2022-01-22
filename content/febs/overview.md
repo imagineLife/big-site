@@ -7,8 +7,7 @@ order: 1
 
 ## A Video
 
-`video: https://youtu.be/R5JqzAij7gc`
-video: [VideoTitle](https://youtu.be/R5JqzAij7gc) youtube: [Cool Youtube Video](https://youtu.be/R5JqzAij7gc)
+`video: [VideoTitle](https://youtu.be/R5JqzAij7gc) youtube: [Cool Youtube Video](https://youtu.be/R5JqzAij7gc)`
 
 ## A Goal and A Strategy
 
