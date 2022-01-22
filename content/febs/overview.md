@@ -5,6 +5,11 @@ parentDir: febs
 order: 1
 ---
 
+## A Video
+
+`video: https://youtu.be/R5JqzAij7gc`
+video: [VideoTitle](https://youtu.be/R5JqzAij7gc) youtube: [Cool Youtube Video](https://youtu.be/R5JqzAij7gc)
+
 ## A Goal and A Strategy
 
 _I Don't know what tools are being used when I build a website using react. I can build a project with create-react-app, and I've heard about webpack, but I don't know whats going between them._
