@@ -5,9 +5,15 @@ parentDir: febs
 order: 1
 ---
 
-## A Video
-
 `video: [VideoTitle](https://youtu.be/R5JqzAij7gc) youtube: [Cool Youtube Video](https://youtu.be/R5JqzAij7gc)`
+
+- [A Goal and A Strategy](#a-goal-and-a-strategy)
+  - [React](#react)
+  - [Webpack](#webpack)
+  - [Babel](#babel)
+  - [NPM](#npm)
+  - [Node](#node)
+    - [Links](#links)
 
 ## A Goal and A Strategy
 
