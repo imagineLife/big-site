@@ -16,7 +16,7 @@ A few dependencies will be added & a super simple http server will be setup & ru
 
 ## Pre-Requisites
 
-Have [node installed](https://nodejs.org/en/download/) on the machine. Node comes with [npm]
+Have [node installed](https://nodejs.org/en/download/) on the machine. Node comes with [npm](https://www.npmjs.com/)
 
 ## Setup an npm repo dir
 
