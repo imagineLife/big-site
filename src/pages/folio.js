@@ -145,7 +145,7 @@ const certs = [
     title: 'MongoDB Certified Developer Associate',
     subText: 'Through mongodb university',
     textContext: 'cert no. LF-0te91c2whv',
-    aLink: 'https://training.linuxfoundation.org/certification/verify/',
+    aLink: 'https://university.mongodb.com/certification/certificate/330208369',
     techList: [
       'Aggregation',
       'CRUD',
