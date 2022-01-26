@@ -143,6 +143,10 @@ main.folio {
   display: inline-block;
 }
 
+#certs-wrapper{
+  display: flex;
+}
+
 h1 {
   font-size: 2em;
   margin: 0;
@@ -294,6 +298,11 @@ section.welcome * {
 /*
   Box bg images
 */
+
+div.mongo-cert-bg {
+  background-image: url('./../../images/imgs/mongoDB.png');
+  background-size: contain;
+}
 
 div.node-cert-bg {
   background-image: url('./../../images/imgs/node-cert.png');

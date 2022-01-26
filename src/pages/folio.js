@@ -34,7 +34,12 @@ const techs = {
     'Docker',
     'NextJS',
   ],
-  db: ['MongoDB', 'PostGreSQL', 'MySQL', 'Data Modeling'],
+  db: [
+    'MongoDB (Certified Developer Associate)',
+    'PostGreSQL',
+    'MySQL',
+    'Data Modeling',
+  ],
   people: [
     'Certified Professional Scrum Master',
     'Git',
@@ -136,6 +141,21 @@ const technologies = [
 */
 
 const certs = [
+  {
+    title: 'MongoDB Certified Developer Associate',
+    subText: 'Through mongodb university',
+    textContext: 'cert no. LF-0te91c2whv',
+    aLink: 'https://training.linuxfoundation.org/certification/verify/',
+    techList: [
+      'Aggregation',
+      'CRUD',
+      'Data Modeling',
+      'Indexes and Performance',
+      'Replication',
+      'Sharding',
+    ],
+    imgClass: `mongo-cert-bg`,
+  },
   {
     title: 'OpenJS Certified Node Application Developer',
     subText:
