@@ -7,15 +7,19 @@ import PostPreview from './../components/PostPreview';
 
 import './scrum.scss';
 
+/*
+  before filter
+  sort: { fields: frontmatter___order }
+
+  re-introduce in frontmatter when done-zo
+  order: { gt: 0 }
+*/
 const IndexPage = () => (
   <StaticQuery
     query={graphql`
       query FebsTOC {
         febs: allMarkdownRemark(
-          sort: { fields: frontmatter___order }
-          filter: {
-            frontmatter: { order: { gt: 0 }, slug: { regex: "/febs/" } }
-          }
+          filter: { frontmatter: { slug: { regex: "/febs/" } } }
         ) {
           pages: edges {
             page: node {
