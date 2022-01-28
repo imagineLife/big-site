@@ -2,37 +2,37 @@
 title: Project Setup - Webpack Dependencies
 slug: febs/npm-setup
 parentDir: febs
+excerpt: Initialize an npm repo and install webpack
 order: 2
 ---
 
-## A Goal and A Strategy
-
-_I know how to explain what some of the tools do in a frontend build setup, but I don't know where to start when making my own boilerplate._
-
-_As a developer I'd like to know how to setup a project's dependencies as a first step of a frontend boilerplate._
-
-Here, we will leverage npm to initialize a project and install a handful of webpack dependencies. This will not be all dependencies, just enough needed to get the npm consuming, bundling, and storing some code output.
+Here, we will leverage npm to initialize a project and install a handful of webpack dependencies. This will not be all dependencies, just enough needed to get webpack consuming, bundling, and storing some code output.
 
 ### Create A Repo
 
-Maybe call it 'frontend-boilerplate'. This will be the folder that will hold the boilerplate.
+Open a terminal and create a directory that will hold the frontend repo.
+
+```js
+mkdir frontend-repo
+```
 
 ### Initialize as an NPM Repo
 
-Open a terminal, cd in to the newly created repo.,
+In the terminal, cd in to the newly created repo.,
 From the terminal, run the command
 
-```bash
+```js
+cd frontend-repo
 npm init -y
 ```
 
-This 'sets up' the repo to leverage npm for the following steps. Now, there will be a package.json file, which acts as the 'config' for npm to know what to do with dependencies, and what files to work with.
+This 'sets up' the repo to leverage npm for the following steps. In the repo there will be a package.json file, which acts as the 'config' for npm to know what to do with dependencies, and what files to work with.
 
 ### Install some dependencies
 
 From the cli, run
 
-```bash
+```js
 npm install react@17.0.2 react-dom@17.0.2 webpack@5.65.0 webpack-cli@4.9.1
 ```
 
