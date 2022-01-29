@@ -6,6 +6,8 @@ excerpt: How a Frontend Build System can work differently across environments
 order: 2
 ---
 
+`video: [Frontend Build System: Prod Vs Dev Setup](https://youtu.be/U5ChM1R6MAc) youtube: [Frontend Build System: Prod Vs Dev Setup](https://youtu.be/U5ChM1R6MAc)`
+
 # Comparing Development and Production Setups
 
 - [Comparing Development and Production Setups](#comparing-development-and-production-setups)
