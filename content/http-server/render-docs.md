@@ -10,30 +10,59 @@ order: 3
 
 ## Current Server
 
-So far an http server...
+- [Current Server](#current-server)
+  - [Send an HTML File](#send-an-html-file)
+  - [Create and Populate the HTML file](#create-and-populate-the-html-file)
+  - [Next-Step Options](#next-step-options)
+
+So far, an http server...
 
 - can listen on a default port
 - can listen on a port from an env var
 - listens at a root `/` endpoint
 - returns text when a request hits that endpoint
 
-## Set the Server
-
 Here, the server will be updated to serve html.  
 The html file will also be looking for some css && js, and the express server will accommodate those files.
 
 ### Send an HTML File
 
+Update the constants at the top of the `index.js` file to include 3 new variables:
+
+- 1 representing a new `static-contents` directory path
+- 1 representing a new `home.html` file
+- 1 representing the full path to the new `home.html` file
+
+```js
+// line 1 of index.js
+const express = require('express');
+const expressObj = express();
+const port = process.env.API_PORT || 3000;
+const STATIC_DIR_PATH = __dirname + '/static-contents/';
+const HOME_FILE_NAME = 'home.html';
+const HOME_FILE_PATH = STATIC_DIR_PATH + HOME_FILE_NAME;
+```
+
 Update the `helloHandler` function to send an html file
 
 ```javascript
 function helloHandler(req, res) {
-  let filePath = __dirname + '/home.html';
-  return res.sendFile(filePath);
+  return res.sendFile(HOME_FILE_PATH);
 }
 ```
 
-### Populate the HTML file
+### Create and Populate the HTML file
+
+Create a new directory at the root of the repo called `static-contents`.  
+Inside this `static-contents` directory, create an html file called `home.html`:
+
+```js
+mkdir static-contents
+cd static-contents
+touch home.html
+```
+
+Populate the html file with some boilerplate contents
 
 ```html
 <!DOCTYPE html>
