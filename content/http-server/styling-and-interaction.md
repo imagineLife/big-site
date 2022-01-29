@@ -15,7 +15,7 @@ So far an http server...
 - can listen on a default port
 - can listen on a port from an env var
 - listens at a root `/` endpoint
-- returns an html doc when a request (_preferrably a browser_) hits an endpoint
+- returns an html doc when a request (_preferably a browser_) hits an endpoint
 
 ## Including a Stylesheet
 
@@ -66,6 +66,8 @@ const STATIC_DIR_PATH = `${__dirname}/${STATIC_DIR}/`;
 expressObj.use(express.static(STATIC_DIR));
 ```
 
+- the above changes will make the listener on the root irrelevant, so the 2 parts of the file associated with the `helloHandler` will be able to be removed
+
 #### The Complete Server File
 
 ```js
@@ -77,16 +79,11 @@ const STATIC_DIR_PATH = `${__dirname}/${STATIC_DIR}/`;
 const HOME_FILE_NAME = 'index.html';
 const HOME_FILE_PATH = STATIC_DIR_PATH + HOME_FILE_NAME;
 
-function helloHandler(req, res) {
-  return res.sendFile(HOME_FILE_PATH);
-}
-
 function listenCallback() {
   console.log(`Node HTTP Server listening on http://localhost:${port}`);
 }
 
 expressObj.use(express.static(STATIC_DIR));
-expressObj.get('/', helloHandler);
 
 expressObj.listen(port, listenCallback);
 ```
