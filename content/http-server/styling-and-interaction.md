@@ -43,4 +43,50 @@ Check the server sending this to a browser! If the express server is running fro
 API_PORT=9876 node .
 ```
 
-With the html doc pointing to an `./index.css`, the html page in the browser is looking for the css file at `http://localhost:9876/index.css`. This file does not exist, unfortunately.
+With the html doc pointing to an `./index.css`, the html page in the browser is looking for the css file at `http://localhost:9876/index.css`. This file does not exist, according to the express server, unfortunately.
+
+### Migrate to Express Included Middleware
+
+Express has [clear documentation](https://expressjs.com/en/starter/static-files.html) on their static file delivery preference. Next, follow and apply their suggestions to this setup.
+
+The docs suggest `app.use(express.static('public'))`, where the `app`, represents the express Object. In our case, this express object is called `expressObj`.  
+In the example, the directory that hosts the static contents is called `public`, where in our case the directory is called `static-content`.  
+We'll make some adjustments to the `server.js` file. The [complete file](#the-complete-server-file) can be found below. Here's a play-by-play to-do:
+
+- create a new var `STATIC_DIR` var, holding the name of the static dir `static-contents`
+- update the `STATIC_DIR_PATH` var declaration:
+
+```js
+const STATIC_DIR_PATH = `${__dirname}/${STATIC_DIR}/`;
+```
+
+- immediately before the `get` registration on the `/` path, setup the express static middleware:
+
+```js
+expressObj.use(express.static(STATIC_DIR));
+```
+
+#### The Complete Server File
+
+```js
+const express = require('express');
+const expressObj = express();
+const port = process.env.API_PORT || 3000;
+const STATIC_DIR = 'static-contents';
+const STATIC_DIR_PATH = `${__dirname}/${STATIC_DIR}/`;
+const HOME_FILE_NAME = 'index.html';
+const HOME_FILE_PATH = STATIC_DIR_PATH + HOME_FILE_NAME;
+
+function helloHandler(req, res) {
+  return res.sendFile(HOME_FILE_PATH);
+}
+
+function listenCallback() {
+  console.log(`Node HTTP Server listening on http://localhost:${port}`);
+}
+
+expressObj.use(express.static(STATIC_DIR));
+expressObj.get('/', helloHandler);
+
+expressObj.listen(port, listenCallback);
+```
