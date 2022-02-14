@@ -3,12 +3,12 @@ header {
     background: #eee;
     border-bottom: 1px solid #ddd;
     display: flex;
-    justify-content: space-between;
-    padding: 0.5rem calc((100vw - 550px - 0.5rem) / 2);
+    padding: .5rem 10px;
   }
 
   nav {
     margin-top: 0;
+    margin-left: 10px
   }
 
   .styled {
@@ -39,3 +39,27 @@ div.mermaid{
     height: auto;
   }
 }
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  header {
+    &.header{
+      justify-content: space-between;
+      padding: 0.5rem calc((100vw - 550px - 0.5rem) / 2);
+    }
+
+    > nav {
+      margin-left: unset;
+    }
+
+  }
+} 
+
+// /* Medium devices (landscape tablets, 768px and up) */
+// @media only screen and (min-width: 768px) {...} 
+
+// /* Large devices (laptops/desktops, 992px and up) */
+// @media only screen and (min-width: 992px) {...} 
+
+// /* Extra large devices (large laptops and desktops, 1200px and up) */
+// @media only screen and (min-width: 1200px) {...}
