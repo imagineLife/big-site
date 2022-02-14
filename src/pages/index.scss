@@ -1,3 +1,7 @@
+$root-hz-padding: 10px;
+body{
+  box-sizing: border-box;
+}
 h1 {
   font-family: sans-serif;
 }
@@ -20,7 +24,10 @@ section.centered {
     display: flex;
     flex-direction: row;
     max-width: 100%;
-
+  }
+  
+  &-wrap {
+    flex-wrap: wrap;
   }
 
   &-center {
