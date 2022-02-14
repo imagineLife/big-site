@@ -1,25 +1,20 @@
+@import 'src/globals/styles/vars';
+
 .blog-section {
-  width: 380px;
+  
   height: 380px;
+  width: calc(100vw - ($min-hz-padding * 2));
   margin: 2px;
   display: inline-block;
   background-size: cover;
   position: relative;
   cursor: pointer;
-  transition: all 0.4s ease-out;
+  transition: all 0.2s ease-out;
   box-shadow: 0px 35px 77px -17px rgba(0, 0, 0, 0.44);
   overflow: hidden;
   font-family: 'Roboto';
   text-decoration: none;
-
-  &:hover {
-    box-shadow: 0px 35px 77px -17px rgba(0, 0, 0, 0.64);
-    transform: scale(1.05);
-  }
-
-  &:hover img {
-    opacity: 0.2;
-  }
+  box-shadow: 0px 35px 77px -17px rgba(0, 0, 0, 0.64);
 
   .full-size-img{
     height: 100%;
@@ -38,13 +33,9 @@
     top: 0;
     color: white;
     padding: 30px;
-    // height: calc(100% - 60px);
     height: 100%;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.25);
-    &:hover{
-      background-color: rgba(0, 0, 0, 0.6);
-    }
+    background-color: rgba(0, 0, 0, 0.6);
   }
 
    h1 {
@@ -63,20 +54,50 @@
     font-weight: 300;
     margin: 20px 0 0 0;
     line-height: 25px;
-    /*   opacity:0; */
-    transform: translateX(-200px);
     transition-delay: 0.2s;
   }
+}
 
-  &:hover .animate-text {
-    transform: translateX(0);
-    opacity: 1;
+/*
+  Bigger Screens
+*/ 
+@media only screen and (min-width: $screen-sm-min)  {
+  .blog-section{
+    box-shadow: none;
+    width: 380px;
+    
+    &:hover {
+      box-shadow: 0px 35px 77px -17px rgba(0, 0, 0, 0.64);
+      transform: scale(1.02);
+
+      img {
+        opacity: 0.2;
+      }
+    }
+
+    .text{
+      background-color: unset;
+      
+      &:hover{
+      background-color: rgba(0, 0, 0, 0.6);
+      }
+    }
+
+    p {
+      opacity: 0;
+      transform: translateX(-200px);
+      transition-delay: 0.2s;
+    }
+
+    &:hover .animate-text {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .animate-text {
+      opacity: 0;
+      transition: all 0.6s ease-in-out;
+    }
+
   }
-
-  .animate-text {
-    opacity: 0;
-    transition: all 0.6s ease-in-out;
-  }
-
-
 }
