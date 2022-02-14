@@ -4,7 +4,7 @@ import { Link, graphql, useStaticQuery } from 'gatsby';
 import DivWrapper from './../divWrapper';
 import BackgroundImage from 'gatsby-background-image';
 
-function Hero() {
+function Hero({ windowWidth }) {
   const { image } = useStaticQuery(graphql`
     query {
       image: file(relativePath: { eq: "farm.jpg" }) {
@@ -25,7 +25,7 @@ function Hero() {
       style={{
         backgroundPosition: `top 20% center`,
         backgroundSize: 'cover',
-        height: `50vh`,
+        height: windowWidth < 500 ? '30vh' : `50vh`,
       }}
       className="hero"
     >

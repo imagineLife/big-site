@@ -1,3 +1,5 @@
+@import 'src/globals/styles/vars';
+
 .hero {
   // background-image: url('/images/farm.jpg');
   // background-position: top 20% center;
@@ -17,6 +19,8 @@
     flex-direction: column;
     height: 100%;
     justify-content: flex-end;
+    padding: 0 $min-hz-padding;
+
     padding: 0 calc((100vw - 550px) / 2) 1rem;
 
     h1 {
@@ -24,13 +28,12 @@
       color: rgb(215, 215, 215);
     }
 
-    p,
+    p{
+      color: rgb(215, 215, 215);
+      margin: 0 $min-hz-padding;
+    }
     a {
       color: rgb(215, 215, 215);
-      margin-top: 0;
-    }
-
-    a {
       margin-top: 0.5rem;
     }
   }
