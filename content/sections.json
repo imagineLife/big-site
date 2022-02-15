@@ -1,21 +1,9 @@
 [
   {
-    "title": "Scrum & Organizing Engineering Work",
-    "snippet": "Thoughts on the ins-and-outs of this agile framework",
-    "to": "/scrum",
-    "image": "./sections/Scrum.jpg"
-  },
-  {
-    "title": "Personality & Strengths",
-    "snippet": "Understanding and Leveraging our natural tendencies for the best",
-    "to": "/strengths",
-    "image": "./sections/Personality.jpg"
-  },
-  {
-    "title": "Node",
-    "snippet": "JavaScript on the Server",
-    "to": "/node/about",
-    "image": "./sections/Node.jpg"
+    "title": "A Frontend Build System",
+    "snippet": "Leveraging React, Webpack, Babel, and NPM for a hot-reloading frontend dev environment",
+    "to": "/febs",
+    "image": "./sections/febs.jpg"
   },
   {
     "title": "MongoDB",
@@ -24,15 +12,27 @@
     "image": "./sections/Mongo.jpg"
   },
   {
+    "title": "Node",
+    "snippet": "JavaScript on the Server",
+    "to": "/node/about",
+    "image": "./sections/Node.jpg"
+  },
+  {
+    "title": "Personality & Strengths",
+    "snippet": "Understanding and Leveraging our natural tendencies for the best",
+    "to": "/strengths",
+    "image": "./sections/Personality.jpg"
+  },
+  {
+    "title": "Scrum & Organizing Engineering Work",
+    "snippet": "Thoughts on the ins-and-outs of this agile framework",
+    "to": "/scrum",
+    "image": "./sections/Scrum.jpg"
+  },
+  {
     "title": "Recipes",
     "snippet": "Making Food",
     "to": "/recipes",
     "image": "./sections/MakingFood.jpg"
-  },
-  {
-    "title": "A Frontend Build System",
-    "snippet": "Leveraging React, Webpack, Babel, and NPM for a hot-reloading frontend dev environment",
-    "to": "/febs",
-    "image": "./sections/febs.jpg"
   }
 ]
