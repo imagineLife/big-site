@@ -21,8 +21,6 @@ const initialChartState = {
   drawerOpen: false,
 };
 export default function ChartName({ data: { chartData, chartsSummary } }) {
-  console.log({ chartData, chartsSummary });
-
   const [{ drawerOpen }, dispatch] = useReducer(
     chartReducer,
     initialChartState,
