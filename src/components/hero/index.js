@@ -25,17 +25,10 @@ function Hero({ windowWidth }) {
       style={{
         backgroundPosition: `top 20% center`,
         backgroundSize: 'cover',
-        height: windowWidth < 500 ? '30vh' : `50vh`,
+        height: windowWidth < 500 ? '30vh' : `60vh`,
       }}
       className="hero"
-    >
-      <DivWrapper id="text-wrapper">
-        {/* <h1>Blog</h1> */}
-        <p>
-          <Link to="/about">About Me &rarr;</Link>
-        </p>
-      </DivWrapper>
-    </BackgroundImage>
+    />
   );
 }
 
