@@ -10,6 +10,14 @@ order: 4
 
 # Some Tech Involved in Building A Web App
 
+- [Some Tech Involved in Building A Web App](#some-tech-involved-in-building-a-web-app)
+  - [A Visual](#a-visual)
+  - [Starting with A WebServer](#starting-with-a-webserver)
+  - [Browser-Curious](#browser-curious)
+  - [Server-Curious](#server-curious)
+  - [Data-Curious](#data-curious)
+  - [Architecture Curious](#architecture-curious)
+
 The UI of a website and a web "app" are visually rewarding to work on - changing item colors, shapes, functionalities for the end-user...  
 There are a lot of nuances in a lot of technologies involved in building web-based tools, though.  
 Here are a bunch of technologies that may or may not be involved in a web-app.
@@ -250,9 +258,11 @@ With an http server up && serving text to a request, several "directions" can be
 
 ## Browser-Curious
 
-- **HTML**: Documents, document elements, element attributes...
-- **CSS**: The requirements with the cascade, selectors, the box model, positioning, layout mechanisms, pseudo-selectors, `@` tooling...
-- **JavaScript**: Maybe try Interacting with the dom first
+The browser is what users "see": Safari, Chrome, Firefox, Opera, IE, Brave, Tor... These are [ web browsers](https://www.mozilla.org/en-US/firefox/browsers/what-is-a-browser/). Browsers have bunch of tech included in them, separate from internet content:
+
+- **HTML**: Documents, document elements, element attributes... web browsers can most commonly display some HTML to you.
+- **CSS**: CSS is about styling, and styling can be written in a stylesheet. These stylesheets cascade in nature. These are referred to as cascading style sheets (CSS), and involve selectors, the box model, positioning, layout mechanisms, pseudo-selectors and more
+- **JavaScript**: Javascript is most often used to alter the HTML & CSS, ass well as trigger asynchronous events in and from the browser.
   - JavaScript has a slew of details to learn, some more "under the hood" than others: [Prototypical Inheritance](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain), [async functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function), [concurrency and the event loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop)....there's even a [spec available](https://262.ecma-international.org/12.0/) to get into the nitty gritty of JS
   - JavaScript is also the coding langauge of NodeJS, the server-side runtime noted in other parts of this page - learning "ins and outs" of JS can be hugeley impactful on a "full stack" engineer's abilities
 - **Browser APIs**: [Draging & Dropping](https://developer.mozilla.org/en-US/docs/Web/API/DragEvent), [fetching data](https://developer.mozilla.org/en-US/docs/Web/API/DragEvent), [Handing Files](https://developer.mozilla.org/en-US/docs/Web/API/File), [Geolocation](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation)
