@@ -145,6 +145,7 @@ main.folio {
 
 #certs-wrapper{
   display: flex;
+  flex-wrap: wrap;
 }
 
 h1 {
@@ -251,14 +252,11 @@ section.welcome * {
 }
 
 .tech-list-box {
-  // padding: 10px 15px;
-  // margin: 60px 0 0 0;
-  // background-color: rgba(0, 0, 0, 0.8);
-  // border-radius: 5px;
-  position: absolute;
-  width: 100%;
-  margin: auto 0 0 0;
-  bottom: 12px;
+  // position: absolute;
+  // width: 100%;
+  // margin: auto 0 0 0;
+  // bottom: 12px;
+  display: none;
 }
 
 .tech-list {
@@ -491,6 +489,11 @@ div.box:hover p.overlay-text {
 /* Non-mobile, 'responsive' styles */
 
 @media only screen and (min-width: 440px) {
+
+  #certs-wrapper{
+    flex-wrap: unset;
+  }
+  
   section.welcome {
     height: 500px;
   }
