@@ -258,7 +258,9 @@ With an http server up && serving text to a request, several "directions" can be
 
 ## Browser-Curious
 
-The browser is what users "see": Safari, Chrome, Firefox, Opera, IE, Brave, Tor... These are [ web browsers](https://www.mozilla.org/en-US/firefox/browsers/what-is-a-browser/). Browsers have bunch of tech included in them, separate from internet content:
+The browser is the tool that we as website users use to see websites: Safari, Chrome, Firefox, Opera, IE, Brave, Tor...  
+These are [web browsers](https://www.mozilla.org/en-US/firefox/browsers/what-is-a-browser/).  
+Browsers have bunch of tech included in them, and handle some types of content:
 
 - **HTML**: Documents, document elements, element attributes... web browsers can most commonly display some HTML to you.
 - **CSS**: CSS is about styling, and styling can be written in a stylesheet. These stylesheets cascade in nature. These are referred to as cascading style sheets (CSS), and involve selectors, the box model, positioning, layout mechanisms, pseudo-selectors and more
@@ -270,13 +272,17 @@ The browser is what users "see": Safari, Chrome, Firefox, Opera, IE, Brave, Tor.
 
 ## Server-Curious
 
+A server is a computer. Servers, in website and web application development, "serve" data for a browser & the data can be website pages, data, &/or other details...
+
 - **REST APIs**: Manage Data for the web through http methods & C.R.U.D (_create,read,update,delete_) operations
 - **Websockets**: Open Web-Traffic for bi-directional communication in a single connection, helpful for "real-time" data-transfer
-- **Containerizing Servers with Docker**: Change the root "knowledge" of a directory, isolate resources with cGroups, and mangage unique "subtrees" of processec in Linux - use Docker to do all this with an easier interface
+- **Containerizing Servers with Docker**: Change the root "knowledge" of a directory, isolate resources with cGroups, and manage unique "subtrees" of process in Linux - use Docker to do all this with an easier interface
 - **OS with Linux**: The CLI, text editors in the command line, file manipulation, streams, pipes, permissions, networking, package management, shell scripting, automation...
 - **Node**: Deep dive into JS on a server with streams, events, files, paths, scaling, process management, & more
 
 ## Data-Curious
+
+Data is the meat & bones of data-driven applications: e-commerce stores data might include all inventory. Weather apps data might include temperature readings. A trucking delivery system might store details about packages, drivers, & delivery stats.
 
 - **NoSql and MongoDB**: interact with js object (_document_) styled data persisted to disk
 - **Modeling the Data**: Data needs change and the shapes of data can change to suit consuming applications
