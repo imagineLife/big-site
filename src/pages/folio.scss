@@ -252,10 +252,6 @@ section.welcome * {
 }
 
 .tech-list-box {
-  // position: absolute;
-  // width: 100%;
-  // margin: auto 0 0 0;
-  // bottom: 12px;
   display: none;
 }
 
@@ -502,6 +498,9 @@ div.box:hover p.overlay-text {
     padding: 10px 15px;
     margin: 5px 0 0 0;
     background-color: unset;
+    display: block;
+    bottom: 0;
+    position: absolute;
   }
 
   .text-box {
@@ -660,18 +659,6 @@ div.box:hover p.overlay-text {
     line-height: 1.2;
   }
 }
-
-/*
-  BROKEN slow-zooming bg
-*/
-/*div.hover-v2 > a:hover{
-  background-size: 200%;
-  transition: background-size 13s ease-in;
-  -moz-transition: background-size 13s ease-in;
-  -ms-transition: background-size 13s ease-in;
-  -o-transition: background-size 13s ease-in;
-  -webkit-transition: background-size 13s ease-in;
-}*/
 
 .hover-v2 .box .caption {
   border-radius: 0 0 23px 23px;
@@ -856,12 +843,14 @@ div.caption li:last-child::after {
 
   div{
     margin: 5px 0;
-  }
-  div.box{
-    height: 100px;
-    background-size: contain;
-  }
-  div.caption{
-    height: 100px;
+
+    &.box {
+      height: 100px;
+      background-size: contain;
+    }
+    &.caption {
+      height: 100px;
+    }
+
   }
 }
