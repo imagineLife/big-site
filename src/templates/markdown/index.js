@@ -11,6 +11,9 @@ export default function Template({
     pageSummaries: { pages },
   },
 }) {
+  console.log('pages');
+  console.log(pages);
+
   let footerLinks;
 
   // ONLY create footer links when order is explicit in frontmatter
@@ -20,9 +23,9 @@ export default function Template({
     // );
 
     footerLinks = [];
-    // get previous, current, && next page details
+    // get previous, && next page details
     let prevPage = pages[order - 1 - 1];
-    let nextPage = pages[order];
+    let nextPage = pages[order + 1];
 
     // FIRST page
     // show HOME dir
