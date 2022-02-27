@@ -1,5 +1,5 @@
 ---
-title: Project Setup - Enable Webpack Production Bundling
+title: WIP: Enable Webpack Production Bundling
 slug: febs/npm-setup
 parentDir: febs
 excerpt: Initialize an npm repo, install webpack, and setup a build script
