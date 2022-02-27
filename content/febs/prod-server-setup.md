@@ -194,4 +194,4 @@ This will pull express from the web, install the express contents in a new _node
 }
 ```
 
-**NOTE** at the time of updating this webpage, express is at version `4.17.3`.
+**NOTE** at the time of updating this webpage, express is at version `4.17.3`. When the express version updates, running `npm install express` will populate a "higher" version of express.
