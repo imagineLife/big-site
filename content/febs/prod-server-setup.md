@@ -17,8 +17,8 @@ order: 3
 - [Creating The Server Directory and Files](#creating-the-server-directory-and-files)
 - [Setup Some Static Assets](#setup-some-static-assets)
   - [Fill the html file with some boilerplate code](#fill-the-html-file-with-some-boilerplate-code)
-  - [Fill the css with Styling](#fill-the-css-with-styling)
-  - [Fill the js with interactive details](#fill-the-js-with-interactive-details)
+  - [Fill The css With Styling](#fill-the-css-with-styling)
+  - [Fill The js With Interaction](#fill-the-js-with-interaction)
 
 ## Why A "Production" Server
 
@@ -110,7 +110,7 @@ Write this in the `index.html` file:
 </html>
 ```
 
-## Fill the css with Styling
+## Fill The css With Styling
 
 Here, the header text in the html file will be centered and colored. Write this in the `index.css` file:
 
@@ -121,7 +121,7 @@ h1 {
 }
 ```
 
-## Fill the js with interactive details
+## Fill The js With Interaction
 
 ```js
 // create the function that runs on-button-click
