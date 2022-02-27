@@ -15,6 +15,8 @@ order: 3
   - [Why A "Production" Server](#why-a-production-server)
 - [Server Setup Overview](#server-setup-overview)
 - [Creating The Server Directory and Files](#creating-the-server-directory-and-files)
+- [Fill the html file with some boilerplate code](#fill-the-html-file-with-some-boilerplate-code)
+- [Fill the css with a simple style](#fill-the-css-with-a-simple-style)
 
 ## Why A "Production" Server
 
@@ -68,4 +70,37 @@ touch index.js # press enter
 mkdir static # press enter
 cd static # press enter
 touch index.js index.css index.html # press enter
+```
+
+# Fill the html file with some boilerplate code
+
+Online, [several](https://www.freecodecamp.org/news/basic-html5-template-boilerplate-code-example/) [html](https://www.sitepoint.com/a-basic-html5-template/) [boilerplate](https://html5boilerplate.com/) example files can be found. Here's one that includes all that is needed for this particular project. Write this in the `index.html` file:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Server Example</title>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <h1>An Example HTML File here</h1>
+    <p>Congrats, you got this being served by an http server :)</p>
+    <script src="index.js"></script>
+  </body>
+</html>
+```
+
+# Fill the css with a simple style
+
+Here, the header text in the html file will be centered and colored. Write this in the `index.css` file:
+
+```css
+h1 {
+  text-align: center;
+  color: blue;
+}
 ```
