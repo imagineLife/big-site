@@ -9,14 +9,12 @@ order: 3
 <!-- video link here -->
 <!-- `video: [Frontend Build System: Prod Vs Dev Setup](https://youtu.be/U5ChM1R6MAc) youtube: [Frontend Build System: Prod Vs Dev Setup](https://youtu.be/U5ChM1R6MAc)` -->
 
-# Comparing Development and Production Setups
+# Setting Up A Production-Like Server
 
-- [Comparing Development and Production Setups](#comparing-development-and-production-setups)
 - [Setting Up A Production-Like Server](#setting-up-a-production-like-server)
   - [Why A "Production" Server](#why-a-production-server)
-  - [The Production Server Setup](#the-production-server-setup)
-
-# Setting Up A Production-Like Server
+- [Server Setup Overview](#server-setup-overview)
+- [Creating The Server Directory and Files](#creating-the-server-directory-and-files)
 
 ## Why A "Production" Server
 
@@ -27,7 +25,7 @@ Software Engineers who are well-versed in "frontend" development, writing the co
 
 **A Production Setup**, though, is much less complicated. When writing a react project and preparing the project for production, the react JSX code gets transformed into HTML, JS and CSS. The resulting files are the files that, get served through browser url requests (_like www.google.com_) in production. The HTML, CSS, and JS files are commonly referred to as "static assets" in web development.
 
-## The Production Server Setup
+# Server Setup Overview
 
 Here, a production http server will get setup. this will include:
 
@@ -38,3 +36,36 @@ Here, a production http server will get setup. this will include:
 - configuring the node+express server
   - [listen](https://nodejs.org/api/net.html#serverlisten) for requests on a port
   - serve the static assets (HTML file, CSS file and JS file) from the root url of "/"
+
+# Creating The Server Directory and Files
+
+Here, a directory will be created in a "projects" directory on our desktop. The terminal commands below will work on a mac.
+
+```bash
+# navigate to your desktop in a terminal
+# my machine is called "Jakes" & the terminal will read the following when my terminal is at my desktop
+Jakes:Desktop Jake$
+
+# create the projects directory
+mkdir projects # press enter
+
+# navigate into the projects directory
+cd projects # press enter
+
+# make our production server directory
+mkdir prod-server # press enter
+
+# navigate into the prod-server dir
+cd prod-server # press enter
+
+# initialize the dir as a npm repo
+npm init -y # press enter
+
+# create the required files & folders:
+# index.js for the "root" of the server
+# static dir holding an html, css, and js file
+touch index.js # press enter
+mkdir static # press enter
+cd static # press enter
+touch index.js index.css index.html # press enter
+```
