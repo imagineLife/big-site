@@ -1,5 +1,5 @@
 ---
-title: Frontend Build System Tooling Overview
+title: Tooling Overview
 slug: febs/overview
 parentDir: febs
 excerpt: A Brief overview of the tooling involved in a Frontend build System
