@@ -14,6 +14,7 @@ order: 3
 - [Comparing Development and Production Setups](#comparing-development-and-production-setups)
 - [Setting Up A Production-Like Server](#setting-up-a-production-like-server)
   - [Why A "Production" Server](#why-a-production-server)
+  - [The Production Server Setup](#the-production-server-setup)
 
 # Setting Up A Production-Like Server
 
@@ -25,3 +26,13 @@ Software Engineers who are well-versed in "frontend" development, writing the co
 **A Development Setup** for the frontend engineering environment involves "hot reloading", where developers make code changes frequently, press "save" on their code editor, and _see the updated code results in a browser instantly_. This involves specific tools required for this instant-reloading experience when writing frontend projects using tools like react, vue, angular, etc. The code involved in this workflow is not HTML,CSS, & JS - in React, for example, the code is written with [JSX](https://reactjs.org/docs/introducing-jsx.html).
 
 **A Production Setup**, though, is much less complicated. When writing a react project and preparing the project for production, the react JSX code gets transformed into HTML, JS and CSS. The resulting files are the files that, get served through browser url requests (_like www.google.com_) in production. The HTML, CSS, and JS files are commonly referred to as "static assets" in web development.
+
+## The Production Server Setup
+
+Here, a production http server will get setup. this will include:
+
+- creating a directory that will contain all the "guts" of the server
+- [initializing the directory as an npm repo](https://docs.npmjs.com/cli/v8/commands/npm-init)
+- creating a file that [Node](https://nodejs.org/en/) will use to run an http server
+- installing [express](https://expressjs.com/) as a [dependency](https://nodejs.dev/learn/npm-dependencies-and-devdependencies) - express has a lot of "bells & whistles" "under the hood" to make setting up an http server quick & easy
+-
