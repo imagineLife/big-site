@@ -19,9 +19,10 @@ order: 3
   - [Fill the html file with some boilerplate code](#fill-the-html-file-with-some-boilerplate-code)
   - [Fill The css With Styling](#fill-the-css-with-styling)
   - [Fill The js With Interaction](#fill-the-js-with-interaction)
-- [Create a Script That Runs The Server](#create-a-script-that-runs-the-server)
+- [Setup The "package.json" File](#setup-the-packagejson-file)
   - [Overview of the NPM Init command](#overview-of-the-npm-init-command)
-  - [Add The Script](#add-the-script)
+  - [Add A Start Script](#add-a-start-script)
+  - [Depend on Express](#depend-on-express)
 
 ## Why A "Production" Server
 
@@ -145,7 +146,7 @@ const btn = document.getElementById('test-button');
 btn.addEventListener('click', doThisOnClick);
 ```
 
-# Create a Script That Runs The Server
+# Setup The "package.json" File
 
 ## Overview of the NPM Init command
 
@@ -156,7 +157,7 @@ Here, the `package.json` will be updated to:
 - explicitly "depend" on the expressjs module
 - have a [script](https://docs.npmjs.com/cli/v8/using-npm/scripts) that runs the express(node) server
 
-## Add The Script
+## Add A Start Script
 
 The `package.json` file will have a "scripts" section that looks something like this:
 
@@ -176,3 +177,21 @@ Update this "scripts" object to include a new key/value pair that will tell node
 ```
 
 Using the "start" word is [used by npm](https://docs.npmjs.com/cli/v7/commands/npm-start) to run this "start" script when using `npm start` from a terminal.
+
+## Depend on Express
+
+Here, the package.json will be populated from npm. Tell npm to use express as a dependency from the terminal command-line:
+
+```bash
+npm install express
+```
+
+This will pull express from the web, install the express contents in a new _node_modules_ directory in the repo, and update the `package.json` to have a "dependencies" section that looks something like this:
+
+```js
+"dependencies": {
+  "express": "^4.17.3"
+}
+```
+
+**NOTE** at the time of updating this webpage, express is at version `4.17.3`.
