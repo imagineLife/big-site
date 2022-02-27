@@ -1,8 +1,8 @@
 ---
-title: Project Setup - Populate an HTML file
+title: WIP: Project Setup - Populate an HTML file
 slug: febs/populate-html
 parentDir: febs
-order: 5
+order: 99999
 ---
 
 ## A Goal and A Strategy

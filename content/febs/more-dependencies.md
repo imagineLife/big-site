@@ -1,8 +1,8 @@
 ---
-title: Project Setup - Install Babel & loader Dependencies,
+title: WIP: Project Setup - Install Babel & loader Dependencies,
 slug: febs/more-dependencies
 parentDir: febs
-order: 6
+order: 99999
 ---
 
 ## A Goal and A Strategy

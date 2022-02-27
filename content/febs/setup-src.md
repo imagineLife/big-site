@@ -1,8 +1,8 @@
 ---
-title: Initialize a Source Directory
+title: WIP: Initialize a Source Directory
 slug: febs/setup-src
 parentDir: febs
-order: 3
+order: 999
 ---
 
 ## A Goal and A Strategy

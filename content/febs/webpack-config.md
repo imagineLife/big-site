@@ -1,8 +1,8 @@
 ---
-title: Project Setup - Webpack Config
+title: WIP: Project Setup - Webpack Config
 slug: febs/webpack-config
 parentDir: febs
-order: 4
+order: 99
 ---
 
 ## A Goal and A Strategy

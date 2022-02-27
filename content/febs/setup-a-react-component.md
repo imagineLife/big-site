@@ -1,8 +1,8 @@
 ---
-title: Setup A react Component
+title: WIP: Setup A react Component
 slug: febs/setup-a-react-component
 parentDir: febs
-order: 7
+order: 9999
 ---
 
 ## A Goal and A Strategy
