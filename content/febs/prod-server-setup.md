@@ -15,8 +15,10 @@ order: 3
   - [Why A "Production" Server](#why-a-production-server)
 - [Server Setup Overview](#server-setup-overview)
 - [Creating The Server Directory and Files](#creating-the-server-directory-and-files)
-- [Fill the html file with some boilerplate code](#fill-the-html-file-with-some-boilerplate-code)
-- [Fill the css with a simple style](#fill-the-css-with-a-simple-style)
+- [Setup Some Static Assets](#setup-some-static-assets)
+  - [Fill the html file with some boilerplate code](#fill-the-html-file-with-some-boilerplate-code)
+  - [Fill the css with Styling](#fill-the-css-with-styling)
+  - [Fill the js with interactive details](#fill-the-js-with-interactive-details)
 
 ## Why A "Production" Server
 
@@ -72,9 +74,20 @@ cd static # press enter
 touch index.js index.css index.html # press enter
 ```
 
-# Fill the html file with some boilerplate code
+# Setup Some Static Assets
 
-Online, [several](https://www.freecodecamp.org/news/basic-html5-template-boilerplate-code-example/) [html](https://www.sitepoint.com/a-basic-html5-template/) [boilerplate](https://html5boilerplate.com/) example files can be found. Here's one that includes all that is needed for this particular project. Write this in the `index.html` file:
+Here, 3 files will be created to be served by the express(node) server: HTML, JS, and CSS.
+**NOTE** "Real" websites are usually significantly more complicated than this. These static assets are here not to display all of the html + js + css magic that can be accomplished. These static assets are here to show that the express(node) server can send these files to the browser when requested.
+
+## Fill the html file with some boilerplate code
+
+Online, [several](https://www.freecodecamp.org/news/basic-html5-template-boilerplate-code-example/) [html](https://www.sitepoint.com/a-basic-html5-template/) [boilerplate](https://html5boilerplate.com/) example files can be found. Here's one that includes all that is needed for this particular project. This will include:
+
+- Some text displayed, leveraging the `html`
+- Some styles, leveraging the `css`
+- A Button that will have some interaction when clicked
+
+Write this in the `index.html` file:
 
 ```html
 <!DOCTYPE html>
@@ -89,12 +102,15 @@ Online, [several](https://www.freecodecamp.org/news/basic-html5-template-boilerp
   <body>
     <h1>An Example HTML File here</h1>
     <p>Congrats, you got this being served by an http server :)</p>
+    <button id="test-button">
+      Click me to leverage JavaScript to alter the html
+    </button>
     <script src="index.js"></script>
   </body>
 </html>
 ```
 
-# Fill the css with a simple style
+## Fill the css with Styling
 
 Here, the header text in the html file will be centered and colored. Write this in the `index.css` file:
 
@@ -104,3 +120,5 @@ h1 {
   color: blue;
 }
 ```
+
+## Fill the js with interactive details
