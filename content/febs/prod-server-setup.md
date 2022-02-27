@@ -99,7 +99,7 @@ Write this in the `index.html` file:
     <title>Server Example</title>
     <link rel="stylesheet" href="./index.css" />
   </head>
-  <body>
+  <body id="test-body">
     <h1>An Example HTML File here</h1>
     <p>Congrats, you got this being served by an http server :)</p>
     <button id="test-button">
@@ -122,3 +122,22 @@ h1 {
 ```
 
 ## Fill the js with interactive details
+
+```js
+// create the function that runs on-button-click
+function doThisOnClick() {
+  const spanTag = document.createElement('span');
+  const text = document.createTextNode(
+    'This text is added to the html after clicking the button!',
+  );
+  spanTag.appendChild(text);
+  const element = document.getElementById('test-body');
+  element.appendChild(spanTag);
+}
+
+// get the button in a var
+const btn = document.getElementById('test-button');
+
+// register the function on button click event
+btn.addEventListener('click', doThisOnClick);
+```
