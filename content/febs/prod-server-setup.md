@@ -35,4 +35,6 @@ Here, a production http server will get setup. this will include:
 - [initializing the directory as an npm repo](https://docs.npmjs.com/cli/v8/commands/npm-init)
 - creating a file that [Node](https://nodejs.org/en/) will use to run an http server
 - installing [express](https://expressjs.com/) as a [dependency](https://nodejs.dev/learn/npm-dependencies-and-devdependencies) - express has a lot of "bells & whistles" "under the hood" to make setting up an http server quick & easy
--
+- configuring the node+express server
+  - [listen](https://nodejs.org/api/net.html#serverlisten) for requests on a port
+  - serve the static assets (HTML file, CSS file and JS file) from the root url of "/"
