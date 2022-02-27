@@ -19,6 +19,9 @@ order: 3
   - [Fill the html file with some boilerplate code](#fill-the-html-file-with-some-boilerplate-code)
   - [Fill The css With Styling](#fill-the-css-with-styling)
   - [Fill The js With Interaction](#fill-the-js-with-interaction)
+- [Create a Script That Runs The Server](#create-a-script-that-runs-the-server)
+  - [Overview of the NPM Init command](#overview-of-the-npm-init-command)
+  - [Add The Script](#add-the-script)
 
 ## Why A "Production" Server
 
@@ -141,3 +144,35 @@ const btn = document.getElementById('test-button');
 // register the function on button click event
 btn.addEventListener('click', doThisOnClick);
 ```
+
+# Create a Script That Runs The Server
+
+## Overview of the NPM Init command
+
+When initializing the server directory as an npm repo in the [above step](febs/prod-server-setup#creating-the-server-directory-and-files), a `package.json` file gets created. This `package.json` file has many functionalities that npm uses: naming, version definition, keyword registration, a homepage url reference, and many others.
+
+Here, the `package.json` will be updated to:
+
+- explicitly "depend" on the expressjs module
+- have a [script](https://docs.npmjs.com/cli/v8/using-npm/scripts) that runs the express(node) server
+
+## Add The Script
+
+The `package.json` file will have a "scripts" section that looks something like this:
+
+```js
+"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+```
+
+Update this "scripts" object to include a new key/value pair that will tell node to run using the `index.js` as instructions. This new key will be called `start`:
+
+```js
+"scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+```
+
+Using the "start" word is [used by npm](https://docs.npmjs.com/cli/v7/commands/npm-start) to run this "start" script when using `npm start` from a terminal.
