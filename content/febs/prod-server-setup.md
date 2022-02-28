@@ -1,18 +1,18 @@
 ---
-title: Setting Up a Prod-Like Web Server
+title: Setting Up a Web Server
 slug: febs/prod-server-setup
 parentDir: febs
-excerpt:
+excerpt: Serve HTML, JS, and CSS from a Node Web Server
 order: 3
 ---
 
 <!-- video link here -->
 <!-- `video: [Frontend Build System: Prod Vs Dev Setup](https://youtu.be/U5ChM1R6MAc) youtube: [Frontend Build System: Prod Vs Dev Setup](https://youtu.be/U5ChM1R6MAc)` -->
 
-# Setting Up A Production-Like Server
+# Setting Up An HTTP Server
 
-- [Setting Up A Production-Like Server](#setting-up-a-production-like-server)
-  - [Why A "Production" Server](#why-a-production-server)
+- [Setting Up An HTTP Server](#setting-up-an-http-server)
+  - [Why this HTTP Server](#why-this-http-server)
 - [Server Setup Overview](#server-setup-overview)
 - [Creating The Server Directory and Files](#creating-the-server-directory-and-files)
 - [Setup Some Static Assets](#setup-some-static-assets)
@@ -24,9 +24,9 @@ order: 3
   - [Add A Start Script](#add-a-start-script)
   - [Depend on Express](#depend-on-express)
 
-## Why A "Production" Server
+## Why this HTTP Server
 
-TL;DR - Production servers are simpler than developer-friendly environments.
+**TL;DR** - When considering a "frontend build system", an http server serving static html/js/css is most often the "production" setup.
 
 Software Engineers who are well-versed in "frontend" development, writing the code that populates website interfaces (_like this text here!!_) are used to using a "development" setup while writing code, which is fundamentally different tha a production-style setup.  
 **A Development Setup** for the frontend engineering environment involves "hot reloading", where developers make code changes frequently, press "save" on their code editor, and _see the updated code results in a browser instantly_. This involves specific tools required for this instant-reloading experience when writing frontend projects using tools like react, vue, angular, etc. The code involved in this workflow is not HTML,CSS, & JS - in React, for example, the code is written with [JSX](https://reactjs.org/docs/introducing-jsx.html).
