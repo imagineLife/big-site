@@ -23,6 +23,7 @@ order: 3
   - [Overview of the NPM Init command](#overview-of-the-npm-init-command)
   - [Add A Start Script](#add-a-start-script)
   - [Depend on Express](#depend-on-express)
+- [Setup Express to Listen and Serve Static Contents](#setup-express-to-listen-and-serve-static-contents)
 
 ## Why this HTTP Server
 
@@ -195,3 +196,35 @@ This will pull express from the web, install the express contents in a new _node
 ```
 
 **NOTE** at the time of updating this webpage, express is at version `4.17.3`. When the express version updates, running `npm install express` will populate a "higher" version of express.
+
+# Setup Express to Listen and Serve Static Contents
+
+The `index.js` at the root of the server directory is the final piece of the puzzle here. The `index.js` file will
+
+- contain an express server
+- listen on a port, here port 3000
+- serve static contents from the root url
+
+This is what the contents of the `index.js` could look like to accomplish those things:
+
+```js
+// init the express server
+const express = require('express');
+const expressObj = express();
+
+// store the listening port in a variable
+const port = process.env.API_PORT || 3000;
+
+// store the name of the static dir in a variable
+const STATIC_DIR = 'static';
+
+// store a function that will log a string after express is listening
+function listenCallback() {
+  console.log(`Node HTTP Server listening on http://localhost:${port}`);
+}
+
+// leverage express'
+expressObj.use(express.static(STATIC_DIR));
+
+expressObj.listen(port, listenCallback);
+```
