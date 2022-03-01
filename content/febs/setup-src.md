@@ -1,6 +1,6 @@
 ---
 title: WIP: Initialize a Source Directory
-slug: febs/setup-src
+slug: febs/setup-src-old
 parentDir: febs
 order: 999
 ---
