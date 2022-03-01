@@ -16,6 +16,8 @@ order: 4
   - [Add a Build Script](#add-a-build-script)
     - [Build Attempt 1 - Fail](#build-attempt-1---fail)
   - [Add Some Loaders & Parsers](#add-some-loaders--parsers)
+  - [Configure Webpack and Babel to leverage Loaders & Parses](#configure-webpack-and-babel-to-leverage-loaders--parses)
+    - [add babel config file](#add-babel-config-file)
 
 Here, a directory will be setup to contain some "framework" details for a client-side frontend build system.
 A primary goal here is to leverage webpack for "bundling" some react dev code into production-ready static html/js/css.
@@ -127,4 +129,22 @@ npm i --save-dev @babel/core @babel/preset-env @babel/preset-react babel-loader
 - **@babel/preset-env**: a part of babel particular for "modern" js syntax transformation
 - **@babel/preset-react**: a part of babel particular to jsx + react details
 - **babel-loader**: the webpack interface for babel
--
+
+## Configure Webpack and Babel to leverage Loaders & Parses
+
+### add babel config file
+
+```bash
+# at the root of the project, add a babelrc file
+touch .babelrc
+```
+
+```js
+// include these details in the babelrc file
+{
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-react"
+  ]
+}
+```
