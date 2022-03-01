@@ -17,7 +17,8 @@ order: 4
     - [Build Attempt 1 - Fail](#build-attempt-1---fail)
   - [Add Some Loaders & Parsers](#add-some-loaders--parsers)
   - [Configure Webpack and Babel to leverage Loaders & Parses](#configure-webpack-and-babel-to-leverage-loaders--parses)
-    - [add babel config file](#add-babel-config-file)
+    - [Add Babel Config File](#add-babel-config-file)
+    - [Setup Webpack to Leverage Babel](#setup-webpack-to-leverage-babel)
 
 Here, a directory will be setup to contain some "framework" details for a client-side frontend build system.
 A primary goal here is to leverage webpack for "bundling" some react dev code into production-ready static html/js/css.
@@ -60,16 +61,16 @@ The `src/index.js` can look like...
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-function Header(){
-  return <h1>Test Header Here</h1>
+function Header() {
+  return <h1>Test Header Here</h1>;
 }
 
 const rootElement = document.getElementById('root');
 
-if(rootElement){
-  ReactDOM.render(<Header />, rootElement)
+if (rootElement) {
+  ReactDOM.render(<Header />, rootElement);
 }
-export default function Header;
+export default Header;
 ```
 
 # Leverage Webpack to build static assets
@@ -132,7 +133,7 @@ npm i --save-dev @babel/core @babel/preset-env @babel/preset-react babel-loader
 
 ## Configure Webpack and Babel to leverage Loaders & Parses
 
-### add babel config file
+### Add Babel Config File
 
 ```bash
 # at the root of the project, add a babelrc file
@@ -147,4 +148,28 @@ touch .babelrc
     "@babel/preset-react"
   ]
 }
+```
+
+### Setup Webpack to Leverage Babel
+
+```bash
+# create a webpack config file at the root of the project
+touch webpack.config.js
+```
+
+```js
+const path = require('path');
+const ROOT_INDEX_FILE = './src/index.js';
+module.exports = {
+  entry: path.resolve(__dirname, ROOT_INDEX_FILE),
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: ['babel-loader'],
+      },
+    ],
+  },
+};
 ```
