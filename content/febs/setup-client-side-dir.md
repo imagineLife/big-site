@@ -6,9 +6,9 @@ excerpt: Setting up the client directory to build with Webpack
 order: 4
 ---
 
-# Initializing the Client Directory
+# Setting Up A Client to Build For Production
 
-- [Initializing the Client Directory](#initializing-the-client-directory)
+- [Setting Up A Client to Build For Production](#setting-up-a-client-to-build-for-production)
 - [Dependency Installation and Overview](#dependency-installation-and-overview)
 - [Directory setup](#directory-setup)
   - [index.js](#indexjs)
