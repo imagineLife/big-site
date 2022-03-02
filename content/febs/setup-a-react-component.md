@@ -1,6 +1,6 @@
 ---
-title: WIP: Setup A react Component
-slug: febs/setup-a-react-component
+title: Setup A react Component
+slug: fwebs/setup-a-react-component
 parentDir: febs
 order: 9999
 ---
