@@ -1,6 +1,6 @@
 ---
-title: WIP: Project Setup - Populate an HTML file
-slug: febs/populate-html
+title: Project Setup - Populate an HTML file
+slug: fwebs/populate-html
 parentDir: febs
 order: 99999
 ---

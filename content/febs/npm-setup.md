@@ -1,6 +1,6 @@
 ---
-title: WIP: Enable Webpack Production Bundling
-slug: febs/npm-setup
+title: Enable Webpack Production Bundling
+slug: fwebs/npm-setup
 parentDir: febs
 excerpt: Initialize an npm repo, install webpack, and setup a build script
 order: 3

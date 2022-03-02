@@ -1,6 +1,6 @@
 ---
-title: WIP: Project Setup - Webpack Config
-slug: febs/webpack-config
+title: Project Setup - Webpack Config
+slug: fwebs/webpack-config
 parentDir: febs
 order: 99
 ---
