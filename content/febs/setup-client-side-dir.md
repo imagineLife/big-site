@@ -19,6 +19,7 @@ order: 4
   - [Configure Webpack and Babel to leverage Loaders & Parses](#configure-webpack-and-babel-to-leverage-loaders--parses)
     - [Add Babel Config File](#add-babel-config-file)
     - [Setup Webpack to Leverage Babel](#setup-webpack-to-leverage-babel)
+    - [Build Attempt 2 - Success](#build-attempt-2---success)
 
 Here, a directory will be setup to contain some "framework" details for a client-side frontend build system.
 A primary goal here is to leverage webpack for "bundling" some react dev code into production-ready static html/js/css.
@@ -172,4 +173,31 @@ module.exports = {
     ],
   },
 };
+```
+
+### Build Attempt 2 - Success
+
+From a terminal running in the project directory, run `npm run build` -
+
+```bash
+npm run build
+
+# output will look something like...
+> frontend-build-system@1.0.0 build
+> webpack --mode=production
+
+asset main.js 127 KiB [compared for emit] [minimized] (name: main) 1 related asset
+modules by path ./node_modules/react/ 6.48 KiB
+  ./node_modules/react/index.js 190 bytes [built] [code generated]
+  ./node_modules/react/cjs/react.production.min.js 6.3 KiB [built] [code generated]
+modules by path ./node_modules/react-dom/ 119 KiB
+  ./node_modules/react-dom/index.js 1.33 KiB [built] [code generated]
+  ./node_modules/react-dom/cjs/react-dom.production.min.js 118 KiB [built] [code generated]
+modules by path ./node_modules/scheduler/ 4.91 KiB
+  ./node_modules/scheduler/index.js 198 bytes [built] [code generated]
+  ./node_modules/scheduler/cjs/scheduler.production.min.js 4.72 KiB [built] [code generated]
+./src/index.js 337 bytes [built] [code generated]
+./node_modules/object-assign/index.js 2.06 KiB [built] [code generated]
+webpack 5.69.1 compiled successfully in 1206 ms
+Jakes-4:04 - Client-Side Setup Jake$
 ```
