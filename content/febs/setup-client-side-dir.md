@@ -199,5 +199,4 @@ modules by path ./node_modules/scheduler/ 4.91 KiB
 ./src/index.js 337 bytes [built] [code generated]
 ./node_modules/object-assign/index.js 2.06 KiB [built] [code generated]
 webpack 5.69.1 compiled successfully in 1206 ms
-Jakes-4:04 - Client-Side Setup Jake$
 ```
