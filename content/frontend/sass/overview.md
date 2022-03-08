@@ -27,6 +27,27 @@ This gets converted by the sass processor into
 
 ### Nesting
 
+```scss
+// a wrapper component
+.card {
+  // a "child" header
+  h3 {
+    text-align: left;
+    font-weight: bold;
+  }
+}
+```
+
+This gets converted by the sass processor into
+
+```css
+/* a wrapper component && its child header*/
+.card h3 {
+  text-align: left;
+  font-weight: bold;
+}
+```
+
 ### Mixins
 
 ### Inheritance
