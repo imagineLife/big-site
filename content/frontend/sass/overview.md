@@ -48,6 +48,64 @@ This gets converted by the sass processor into
 }
 ```
 
+### Partials
+
+```scss
+// filename: _helpers.scss
+$base-dark: rgb(25, 25, 25);
+$base-mid: rgb(50, 50, 50);
+$base: rgb(75, 75, 75);
+```
+
+A file like the above snippit _has & does_ a few things:
+
+- leading `_`: this signals to the scss pre-processor that the file is indeed a "partial"
+- partials don't get loaded as full css files by the processor
+- the file can be used in other scss files
+
+```scss
+@use 'helpers';
+.base {
+  border: 1px solid $base;
+
+  &-dark {
+    border: 1px solid $base-dark;
+  }
+  &-mid {
+    border: 1px solid $base-mid;
+  }
+}
+```
+
 ### Mixins
+
+```scss
+@mixin theme($theme: White) {
+  background: $theme;
+  box-shadow: 0 0 1px rgba($theme, 0.25);
+  color: white;
+}
+
+.info {
+  @include theme;
+}
+.alert {
+  @include theme($theme: DarkRed);
+}
+.success {
+  @include theme($theme: DarkGreen);
+}
+```
+
+Above, the "theme" mixin...
+
+- looks and acts like a function in js
+- applies 3 styles to an element: background, box-shadow, and color
+- applies the theme prop to the background and the box-shadow values
+- can take values in the fn param
+- gets used in 3 classes
+  - info (default)
+  - alert (passes darkred as the theme color)
+  - success (passes dark green as the theme color)
 
 ### Inheritance
