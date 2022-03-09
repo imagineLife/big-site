@@ -4,9 +4,17 @@ Syntactically Awesome Style Sheets.
 A Cascading Style Sheet extension "language".  
 A Pre-Processor: Work in a `*.scss` file, and the sass preprocessor tool will convert the syntax into browser-usable `*.css`.
 
+- [Sass](#sass)
+  - [Unique Features](#unique-features)
+    - [Variable](#variable)
+    - [Nesting](#nesting)
+    - [Partials](#partials)
+    - [Mixins](#mixins)
+    - [Inheritance](#inheritance)
+
 ## Unique Features
 
-## Variable
+### Variable
 
 ```scss
 // declaring the var
@@ -109,3 +117,34 @@ Above, the "theme" mixin...
   - success (passes dark green as the theme color)
 
 ### Inheritance
+
+```scss
+%tile-shared {
+  text-align: left;
+  border: 1px solid rgb(125, 125, 125);
+  border-radius: 4px;
+}
+
+.card {
+  @extend %tile-shared;
+}
+
+.widget {
+  @extend %tile-shared;
+  box-shadow: none;
+}
+
+.tile {
+  @extend %tile-shared;
+  border-radius: 0;
+}
+```
+
+Inheritance has a few parts in order to work as expected:
+
+- the `%tile-shared` above is the "root" content to be shared
+  - the key detail is the leading `%`
+  - NOTE: if this value does not get used later on in a stylesheet, the contents are not converted into css
+- the `@extend` keyword uses the contents in the `%tile-shared` - each prop in the root is appended to the classes of `card`, `widget`, and `tile`
+- **this reduces the need for repetitive classNames**
+  - one way repetitive contents can be addressed is storing css attr/val pairs in classes && re-using classnames across items. Here, though, the _attributes and values_ of the `tile-shared` get added to the `card` class (_example_) so that only the `card` class is needed to be added to an element to include the "root" contents
