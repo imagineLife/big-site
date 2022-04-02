@@ -11,8 +11,8 @@ export default function Template({
     pageSummaries: { pages },
   },
 }) {
-  console.log('pages');
-  console.log(pages);
+  // console.log('pages');
+  // console.log(pages);
 
   let footerLinks;
 
