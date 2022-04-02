@@ -6,8 +6,9 @@ excerpt: Serve HTML, JS, and CSS from a Node Web Server
 order: 3
 ---
 
-<!-- video link here -->
-<!-- `video: [Frontend Build System: Prod Vs Dev Setup](https://youtu.be/U5ChM1R6MAc) youtube: [Frontend Build System: Prod Vs Dev Setup](https://youtu.be/U5ChM1R6MAc)` -->
+### Part 1
+`video: [Express Server - I](https://youtu.be/2a_coCwZKrg) youtube: [Express Server - I](https://youtu.be/2a_coCwZKrg)`
+
 
 # Setting Up An HTTP Server
 
