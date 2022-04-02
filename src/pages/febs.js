@@ -9,7 +9,6 @@ import './scrum.scss';
 
 /*
   before filter
-  sort: { fields: frontmatter___order }
 
   re-introduce in frontmatter when done-zo
   order: { gt: 0 }
@@ -20,6 +19,7 @@ const IndexPage = () => (
       query FebsTOC {
         febs: allMarkdownRemark(
           filter: { frontmatter: { slug: { regex: "/febs/" } } }
+          sort: { fields: frontmatter___order }
         ) {
           pages: edges {
             page: node {
