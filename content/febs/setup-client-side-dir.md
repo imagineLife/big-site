@@ -1,6 +1,6 @@
 ---
 title: Initialize a Client Source Directory
-slug: febs/setup-src
+slug: fwebs/setup-src
 parentDir: febs
 excerpt: Setting up the client directory to build with Webpack
 order: 4
