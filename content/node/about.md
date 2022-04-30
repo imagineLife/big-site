@@ -1,6 +1,6 @@
 ---
 title: An Overview
-slug: node/x-about
+slug: node/overview
 author: Jake Laursen
 excerpt: JavaScript on the Server and more
 tags: server, node, javascript, overview, idea, backend,
