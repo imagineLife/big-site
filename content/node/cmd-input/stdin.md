@@ -8,7 +8,14 @@ tags: NodeJS, Terminal, cmd
 order: 1
 ---
 # Terminal Input
-
+- [Terminal Input](#terminal-input)
+  - [Starting a REPL](#starting-a-repl)
+  - [Using node as a program entrypoint](#using-node-as-a-program-entrypoint)
+  - [see input options](#see-input-options)
+    - [Expected input order](#expected-input-order)
+  - [see v8 input options](#see-v8-input-options)
+  - [check syntax of a program](#check-syntax-of-a-program)
+    - [Example](#example)
 ## Starting a REPL
 Node can be used as a terminal command-line interface where javascript can be written into a terminal. This can be started by writing into a terminal
 ```bash
@@ -59,7 +66,7 @@ To "cancel" and escape out of this node repl and return to the machine's "native
 ```js
 (To exit, press Ctrl+C again or Ctrl+D or type .exit)
 ```
-## Using node as a CLI
+## Using node as a program entrypoint
 Node has [comprehensive docs](https://nodejs.org/dist/latest-v16.x/docs/api/cli.html) on working as a command-line tool.   
 
 Here's just a few highlights to get the ball rolling:  
@@ -86,7 +93,7 @@ Explaining a few things:
 The node cli (_[Command-line interface](https://en.wikipedia.org/wiki/Command-line_interface)_) expects the order or input words to look something like
 1. `node`: the keyword that tells the machine to run the node [runtime environment](https://en.wikipedia.org/wiki/Runtime_system)
 2. `[options]`: node will accept a [bunch of options](https://nodejs.org/api/cli.html#options) as the next arg - some examples below, maybe some of the first options to consider learning & working with?!
-3. `[script.js]` - the 
+3. `[script.js]` - a file that can be interpreted as a program run by node
 ## see v8 input options
 
 ```bash
