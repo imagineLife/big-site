@@ -13,8 +13,11 @@ order: 1
   - [Using node as a program entrypoint](#using-node-as-a-program-entrypoint)
   - [see input options](#see-input-options)
     - [Expected input order](#expected-input-order)
-  - [see v8 input options](#see-v8-input-options)
-  - [check syntax of a program](#check-syntax-of-a-program)
+  - [CLI examples using flags and files](#cli-examples-using-flags-and-files)
+    - [see v8 input options](#see-v8-input-options)
+    - [evaluate the syntax of an argument](#evaluate-the-syntax-of-an-argument)
+    - [check the syntax of a file](#check-the-syntax-of-a-file)
+    - [print the results of a file](#print-the-results-of-a-file)
     - [Example](#example)
 ## Starting a REPL
 Node can be used as a terminal command-line interface where javascript can be written into a terminal. This can be started by writing into a terminal
@@ -94,13 +97,49 @@ The node cli (_[Command-line interface](https://en.wikipedia.org/wiki/Command-li
 1. `node`: the keyword that tells the machine to run the node [runtime environment](https://en.wikipedia.org/wiki/Runtime_system)
 2. `[options]`: node will accept a [bunch of options](https://nodejs.org/api/cli.html#options) as the next arg - some examples below, maybe some of the first options to consider learning & working with?!
 3. `[script.js]` - a file that can be interpreted as a program run by node
-## see v8 input options
+
+## CLI examples using flags and files
+### see v8 input options
 
 ```bash
 node --v8-options
 ```
+This will show a BUNCH of options that can be used to interact with the v8 js engine, perhaps one level "below" node itself.
 
-## check syntax of a program
+### evaluate the syntax of an argument
+```bash
+node -e "const a = 'horse'"
+```
+Running the above will return... nothing... which means the string is functional javascript!
+
+```bash
+node -e "cons = 'horse'"
+```
+Something like the above could be a typo - instead of `const` there is a `cons`.  
+Running the above will return something like...
+```bash
+[eval]:1
+cons a = 'horse'
+     ^
+
+SyntaxError: Unexpected identifier
+    at new Script (node:vm:100:7)
+    at createScript (node:vm:257:10)
+    at Object.runInThisContext (node:vm:305:10)
+    at node:internal/process/execution:75:19
+    at [eval]-wrapper:6:22
+    at evalScript (node:internal/process/execution:74:60)
+    at node:internal/main/eval_string:27:3
+```
+node...
+- sees the `con` as the declaration of a variable placeholder referred to as `con`
+- "looks for" the assignment of a value to the just-declared `con` holder with something like a function name followed by `()`, or an equals sign...
+- Here, though, another variable `a` is present, which is not a node way of processing code
+- node cant handle this && throws a syntax error
+
+
+### check the syntax of a file
+### print the results of a file
 
 ```bash
 node --check programFile.js
