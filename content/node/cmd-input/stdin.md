@@ -9,6 +9,61 @@ order: 1
 ---
 # Terminal Input
 
+## Starting a REPL
+Node can be used as a terminal command-line interface where javascript can be written into a terminal. This can be started by writing into a terminal
+```bash
+node # then press "return"
+```
+The output will look something like 
+```bash
+$ node
+Welcome to Node.js v16.some.sub.version
+Type ".help" for more information.
+> 
+```
+Notice the `>`, which is the repl that accepts js. For those coming from a frontend-focused environment, this repl space might feel something like a js "playground". JS can be written and quickly inspected. Try something like...
+```js
+> const horse = 'cat';
+undefined
+
+> horse //return
+'cat'
+
+> 2 + 2
+4
+
+> const a = { one: 'first key', two: 'second key'}
+undefined 
+
+> a.two
+'second key'
+
+> Object.keys(a).forEach((k,idx) => console.log(`Key of ${k} is at idx ${idx}`))
+ Key of one is at idx 0
+Key of two is at idx 1
+undefined
+
+```
+This REPL can even store things like functions to run "later":
+```js
+// copy & paste this into the repl and press "return"
+> function add(a, b) { return a + b }
+undefined
+
+// Then try using this function
+> add(2,3)
+5
+```
+
+To "cancel" and escape out of this node repl and return to the machine's "native" terminal environment, I've always pressed `Ctrl + C` 2x. The first time pressing `Ctrl + C` node even prints a message,
+```js
+(To exit, press Ctrl+C again or Ctrl+D or type .exit)
+```
+## Using node as a CLI
+Node has [comprehensive docs](https://nodejs.org/dist/latest-v16.x/docs/api/cli.html) on working as a command-line tool.   
+
+Here's just a few highlights to get the ball rolling:  
+
 [See Input Options](#see-input-options)  
 [See V8 Options](#see-v8-input-options)  
 [Validate Syntax of a file](#check-syntax-of-a-program)
@@ -16,11 +71,22 @@ order: 1
 https://nodejs.org/api/cli.html
 
 ## see input options
-
+Use node, itself, to get a glimpse into what it expects from the command line.
 ```bash
 node --help
 ```
 
+The output that appears in the terminal start like this,
+```bash
+Usage: node [options] [ script.js ] [arguments]
+  node inspect [options] [ script.js | host:port ] [arguments]
+```  
+Explaining a few things:
+### Expected input order
+The node cli (_[Command-line interface](https://en.wikipedia.org/wiki/Command-line_interface)_) expects the order or input words to look something like
+1. `node`: the keyword that tells the machine to run the node [runtime environment](https://en.wikipedia.org/wiki/Runtime_system)
+2. `[options]`: node will accept a [bunch of options](https://nodejs.org/api/cli.html#options) as the next arg - some examples below, maybe some of the first options to consider learning & working with?!
+3. `[script.js]` - the 
 ## see v8 input options
 
 ```bash
