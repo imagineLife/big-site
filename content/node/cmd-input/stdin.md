@@ -1,6 +1,6 @@
 ---
 title: Terminal Input
-slug: node/stdin
+slug: node/terminal-input/stdin
 parentDir: node
 author: Jake Laursen
 excerpt: node with command line args
