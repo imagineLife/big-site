@@ -1,3 +1,12 @@
+---
+title: Terminal Input
+slug: node/stdin
+parentDir: node
+author: Jake Laursen
+excerpt: node with command line args
+tags: NodeJS, Terminal, cmd
+order: 1
+---
 # Terminal Input
 
 [See Input Options](#see-input-options)  

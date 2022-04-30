@@ -1,6 +1,6 @@
 ---
 title: Terminal Input
-slug: node/terminal-input
+slug: node/terminal-input/overview
 parentDir: node
 author: Jake Laursen
 excerpt: Parsing Command-Line input
@@ -9,3 +9,4 @@ order: 1
 ---
 
 # Node Terminal Input
+- **[command line args](/node/stdin)**
