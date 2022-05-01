@@ -9,4 +9,8 @@ order: 1
 ---
 
 # Node Terminal Input
-### [Running Node](/node/terminal-input/stdin)
+### [Running a REPL](/node/terminal-input/repl)
+Use node as a "Read-Evaluate-Print-Loop" environment
+```bash  
+node [options] [V8 options] [<program-entry-point> | -e "script" | -] [--] [arguments]  
+```

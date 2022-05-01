@@ -1,6 +1,6 @@
 ---
 title: Terminal Input
-slug: node/terminal-input/stdin
+slug: node/terminal-input/repl
 parentDir: node
 author: Jake Laursen
 excerpt: node with command line args
@@ -17,8 +17,6 @@ order: 1
     - [see v8 input options](#see-v8-input-options)
     - [evaluate the syntax of an argument](#evaluate-the-syntax-of-an-argument)
     - [check the syntax of a file](#check-the-syntax-of-a-file)
-    - [print the results of a file](#print-the-results-of-a-file)
-    - [Example](#example)
 ## Starting a REPL
 Node can be used as a terminal command-line interface where javascript can be written into a terminal. This can be started by writing into a terminal
 ```bash
@@ -139,7 +137,6 @@ node...
 
 
 ### check the syntax of a file
-### print the results of a file
 
 ```bash
 node --check programFile.js
@@ -148,13 +145,11 @@ node -c programFile.js
 
 - validate that the code 'parses':
   - for sensitive db-affecting code
-  - for auto-generated code, by something else?!
+  - for auto-generated code, maybe code written by others
   - **on success**: no output
   - **on failure**: error gets printed in output
 
-### Example
-
-broken.js
+checking a file with broken syntax, called `broken.js`
 
 ```js
 const wat = "This is a broken string
