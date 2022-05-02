@@ -1,5 +1,5 @@
 ---
-title: Terminal Input
+title: Node REPL
 slug: node/terminal-input/repl
 parentDir: node
 author: Jake Laursen
@@ -7,17 +7,9 @@ excerpt: node with command line args
 tags: NodeJS, Terminal, cmd
 order: 1
 ---
-# Terminal Input
-- [Terminal Input](#terminal-input)
-  - [Starting a REPL](#starting-a-repl)
-  - [Using node as a program entrypoint](#using-node-as-a-program-entrypoint)
-  - [see input options](#see-input-options)
-    - [Expected input order](#expected-input-order)
-  - [CLI examples using flags and files](#cli-examples-using-flags-and-files)
-    - [see v8 input options](#see-v8-input-options)
-    - [evaluate the syntax of an argument](#evaluate-the-syntax-of-an-argument)
-    - [check the syntax of a file](#check-the-syntax-of-a-file)
-## Starting a REPL
+
+- [Starting a REPL](#starting-a-repl)
+# Starting a REPL
 Node can be used as a terminal command-line interface where javascript can be written into a terminal. This can be started by writing into a terminal
 ```bash
 node # then press "return"
