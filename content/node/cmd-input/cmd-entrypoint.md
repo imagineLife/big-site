@@ -8,16 +8,17 @@ tags: NodeJS, Terminal, cmd
 order: 2
 ---
 
-## Using node as a program entrypoint
+# Using node as a program entrypoint
 Node has [comprehensive docs](https://nodejs.org/dist/latest-v16.x/docs/api/cli.html) on working as a command-line tool.   
 
 Here's just a few highlights to get the ball rolling:  
 
-[See Input Options](#see-input-options)  
-[See V8 Options](#see-v8-input-options)  
-[Validate Syntax of a file](#check-syntax-of-a-program)
-
-https://nodejs.org/api/cli.html
+  - [see input options](#see-input-options)
+    - [Expected input order](#expected-input-order)
+  - [CLI examples using flags and files](#cli-examples-using-flags-and-files)
+    - [see v8 input options](#see-v8-input-options)
+    - [evaluate the syntax of an argument](#evaluate-the-syntax-of-an-argument)
+    - [check the syntax of a file](#check-the-syntax-of-a-file)
 
 ## see input options
 Use node, itself, to get a glimpse into what it expects from the command line.
@@ -90,17 +91,22 @@ node -c programFile.js
   - **on success**: no output
   - **on failure**: error gets printed in output
 
-checking a file with broken syntax, called `broken.js`
+#### checking a file with broken syntax
+Node offers a `-c` and/or `--check` flag that [performs a syntax check on the file](https://nodejs.org/dist/latest-v16.x/docs/api/cli.html#-c---check) without executing the code.  
+Here, a broken js syntax gets evaluated:
 
 ```js
+// broken.js
 const wat = "This is a broken string
+// notice the missing closing quote
 ```
 
 ```bash
+
+# check the syntax of that file in a terminal using the "-c" flag
 node -c broken.js
-```
 
-```bash
+
 const wat= "this is a broken string
            ^^^^^^^^^^^^^^^^^^^^^^^^
 
