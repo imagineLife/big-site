@@ -30,6 +30,7 @@ module.exports = {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
+          `gatsby-remark-prismjs`,
           {
             resolve: 'gatsby-remark-embed-video',
             options: {
@@ -42,7 +43,7 @@ module.exports = {
               urlOverrides: [
                 {
                   id: 'youtube',
-                  embedURL: videoId =>
+                  embedURL: (videoId) =>
                     `https://www.youtube-nocookie.com/embed/${videoId}`,
                 },
               ], //Optional: Override URL of a service provider, e.g to enable youtube-nocookie support
@@ -59,7 +60,6 @@ module.exports = {
               maxWidth: 400,
             },
           },
-          'gatsby-remark-prismjs',
         ],
       },
     },
