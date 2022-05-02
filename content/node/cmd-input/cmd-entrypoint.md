@@ -19,6 +19,7 @@ Here's just a few highlights to get the ball rolling:
     - [see v8 input options](#see-v8-input-options)
     - [evaluate the syntax of an argument](#evaluate-the-syntax-of-an-argument)
     - [check the syntax of a file](#check-the-syntax-of-a-file)
+  - [evaluate or check](#evaluate-or-check)
 
 ## see input options
 Use node, itself, to get a glimpse into what it expects from the command line.
@@ -104,14 +105,22 @@ const wat = "This is a broken string
 ```bash
 
 # check the syntax of that file in a terminal using the "-c" flag
-node -c broken.js
-
-
-const wat= "this is a broken string
-           ^^^^^^^^^^^^^^^^^^^^^^^^
+$ node -c a.js 
+a.js:1
+const a = "this is a broken string
+          ^^^^^^^^^^^^^^^^^^^^^^^^
 
 SyntaxError: Invalid or unexpected token
-    at wrapSafe (internal/modules/cjs/loader.js:979:16)
-    at checkSyntax (internal/main/check_syntax.js:66:3)
-    at internal/main/check_syntax.js:39:3
+    at Object.compileFunction (node:vm:352:18)
+    at wrapSafe (node:internal/modules/cjs/loader:1031:15)
+    at checkSyntax (node:internal/main/check_syntax:66:3)
+    at node:internal/main/check_syntax:39:3
+$ 
 ```
+
+### evaluate or check
+These two commands can seem like they do very similar things.  
+**Evaluate**, though, will evaluate, or check, a string as a script.  
+**Check**, on the other hand, will check, or evaluate, a file/program.  
+Passing a file to evaluate will not work.  
+Passing a string to check will not work.  
