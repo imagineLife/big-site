@@ -1,7 +1,6 @@
 import React from 'react';
 import './index.scss';
-import { Link, graphql, useStaticQuery } from 'gatsby';
-import DivWrapper from './../divWrapper';
+import { graphql, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 
 function Hero({ windowWidth }) {
