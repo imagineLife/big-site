@@ -7,6 +7,7 @@
   "scripts": {
     "analyze": "cross-env ANALYZE_BUNDLE_SIZE=true gatsby build",
     "build": "gatsby build",
+    "clean": "gatsby clean",
     "develop": "cross-env GATSBY_GRAPHQL_IDE=playground gatsby develop",
     "format": "prettier --write src/**/*.{js,jsx}",
     "start": "npm run develop",
@@ -34,8 +35,8 @@
     "gatsby-remark-mermaid": "^2.1.0",
     "gatsby-source-filesystem": "^4.7.0",
     "gatsby-transformer-json": "^4.7.0",
-    "gatsby-transformer-remark": "^5.7.0",
-    "gatsby-transformer-sharp": "^4.7.0",
+    "gatsby-transformer-remark": "^5.13.0",
+    "gatsby-transformer-sharp": "^4.13.0",
     "prismjs": "^1.26.0",
     "puppeteer": "^13.3.1",
     "react": "^17.0.0",
