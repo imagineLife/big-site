@@ -34,7 +34,7 @@ const About = () => (
             </p>
           </div>
           <div className="figure">
-            <img src={learnerImg} />
+            <img src={learnerImg} alt="learner" />
           </div>
         </section>
 
@@ -49,7 +49,7 @@ const About = () => (
             </p>
           </div>
           <div className="figure">
-            <img src={doerImg} />
+            <img src={doerImg} alt="do-er" />
           </div>
         </section>
 
@@ -65,7 +65,7 @@ const About = () => (
             </p>
           </div>
           <div className="figure">
-            <img src={strengthsImg} />
+            <img src={strengthsImg} alt="StrengthsFinder advocate" />
           </div>
         </section>
 
@@ -87,7 +87,7 @@ const About = () => (
             </p>
           </div>
           <div className="figure">
-            <img src={introvertImg} />
+            <img src={introvertImg} alt="introvert" />
           </div>
         </section>
 
@@ -102,7 +102,7 @@ const About = () => (
             </p>
           </div>
           <div className="figure">
-            <img src={coffeeImg} />
+            <img src={coffeeImg} alt="coffee fanatic" />
           </div>
         </section>
       </div>

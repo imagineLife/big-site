@@ -9,8 +9,6 @@ import BlogSectionPreview from './../components/BlogSectionPreview';
 import useSections from './../hooks/use-sections';
 import useWindowSize from './../hooks/useWindowSize';
 
-let FlexRowDiv = ({ children }) => <div className="flex-row">{children}</div>;
-
 const Index = () => {
   const windowSize = useWindowSize();
 

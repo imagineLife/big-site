@@ -2,11 +2,8 @@ import React, { Fragment } from 'react';
 import { StaticQuery, graphql, Link } from 'gatsby';
 
 // Components
-import PostPreview from './../../components/PostPreview';
 import Layout from './../../components/layout';
-// import Layout from './../components/layout';
 import Hero from './../../components/hero';
-// import PostPreview from './../components/PostPreview';
 
 // import './scrum.scss';
 

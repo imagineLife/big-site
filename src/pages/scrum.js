@@ -1,6 +1,6 @@
 import React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
-import TOC from './../components/TOC';
+import Toc from './../components/TOC';
 
 const IndexPage = () => (
   <StaticQuery
@@ -26,7 +26,7 @@ const IndexPage = () => (
     `}
     render={({ scrum: { pages } }) => {
       return (
-        <TOC title="Scrum" sub="A Brief collection of writings" pages={pages} />
+        <Toc title="Scrum" sub="A Brief collection of writings" pages={pages} />
       );
     }}
   />
