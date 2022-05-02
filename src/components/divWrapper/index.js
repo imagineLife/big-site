@@ -1,5 +1,5 @@
 import React from 'react';
-import EB from './../ErrorBound';
+import Eb from './../ErrorBound';
 
 function DivWrapper({ id, children }) {
   if (!id) throw 'DivWrapper needs an id!';
@@ -7,9 +7,9 @@ function DivWrapper({ id, children }) {
 }
 
 const WrappedDiv = ({ id, children }) => (
-  <EB>
+  <Eb>
     <DivWrapper id={id} children={children} />
-  </EB>
+  </Eb>
 );
 
 export default WrappedDiv;

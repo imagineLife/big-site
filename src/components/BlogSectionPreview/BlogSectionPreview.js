@@ -11,7 +11,6 @@ function BlogSectionPreview({
   },
   to,
 }) {
-  let sectionsImgStr = `images/sections/`;
   let ChildBox = () => (
     <Fragment>
       {fluid && (
