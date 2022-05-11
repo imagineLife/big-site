@@ -73,8 +73,8 @@ SyntaxError: Unexpected identifier
     at node:internal/main/eval_string:27:3
 ```
 node...
-- sees the `con` as the declaration of a variable placeholder referred to as `con`
-- "looks for" the assignment of a value to the just-declared `con` holder with something like a function name followed by `()`, or an equals sign...
+- sees the `cons` as the declaration of a variable placeholder referred to as `cons`
+- "looks for" the assignment of a value to the just-declared `cons` holder with something like a function name followed by `()`, or an equals sign...
 - Here, though, another variable `a` is present, which is not a node way of processing code
 - node cant handle this && throws a syntax error
 
