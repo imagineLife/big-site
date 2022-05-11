@@ -119,7 +119,7 @@ $
 ```
 
 ### evaluate or check
-These two commands can seem like they do very similar things.  
+These two commands can seem like they do very similar things, `-e` for evaluate and `-c` for check.  
 **Evaluate**, though, will evaluate, or check, a string as a script.  
 **Check**, on the other hand, will check, or evaluate, a file/program.  
 Passing a file to evaluate will not work.  
