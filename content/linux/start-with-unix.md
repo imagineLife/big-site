@@ -20,6 +20,7 @@ order: 1
       - [1987: Posix, OSF1 and UI](#1987-posix-osf1-and-ui)
       - [1989: Motif and the GUI Tooklit](#1989-motif-and-the-gui-tooklit)
       - [1990: Plan 9 and Distributed Computing](#1990-plan-9-and-distributed-computing)
+      - [1991: Linux and the free OS](#1991-linux-and-the-free-os)
   - [Linux is not unix](#linux-is-not-unix)
     - [Unix-Like](#unix-like)
 Unix might be known as the "grandfather" of all current computer operating systems: windows, mac, android, and _linux_.  
@@ -78,8 +79,8 @@ OSF is a variation on unix developed by the [Open Software Foundation](https://e
 #### 1990: Plan 9 and Distributed Computing
 [Plan 9](https://en.wikipedia.org/wiki/Plan_9_from_Bell_Labs), released by [bell labs](https://en.wikipedia.org/wiki/Bell_Labs) (_now nokia_), worked at treating a de-centralized network of computers as a single unit. UIs (rio) would access CPU-intensive servers to do to work. Storage was also de-centralized.   
 
-
-
+#### 1991: Linux and the free OS
+Linus Torvald developed [linux](https://www.linux.org/).
 ## Linux is not unix
 Linux is free, Unix costs $$.  
 A core part of linux is GNU, which stands for "gnu is not unix".  
