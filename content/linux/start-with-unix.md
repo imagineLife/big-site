@@ -17,6 +17,7 @@ order: 1
       - [1982: Several Distributions Released](#1982-several-distributions-released)
       - [1984: TCP/IP Introduction](#1984-tcpip-introduction)
       - [1986: NFS and AIX](#1986-nfs-and-aix)
+      - [1987: Posix, OSF1 and UI](#1987-posix-osf1-and-ui)
   - [Linux is not unix](#linux-is-not-unix)
     - [Unix-Like](#unix-like)
 Unix might be known as the "grandfather" of all current computer operating systems: windows, mac, android, and _linux_.  
@@ -65,6 +66,9 @@ AIX is a version of unix made and sold by IBM.
 4.3 BSD version of unix incorporated the SunOS "NFS" code.  
 NFS, network file system, is a [distributed file system protocol](https://en.wikipedia.org/wiki/Network_File_System).  
 NFS allows users access to files over a network.
+
+#### 1987: Posix, OSF1 and UI 
+OSF is a variation on unix developed by the [Open Software Foundation](https://en.wikipedia.org/wiki/Open_Software_Foundation), a non-profit that created standards for implementing Unix.  
 
 
 ## Linux is not unix
