@@ -16,6 +16,7 @@ order: 1
       - [1979: Bourne Shell Release](#1979-bourne-shell-release)
       - [1982: Several Distributions Released](#1982-several-distributions-released)
       - [1984: TCP/IP Introduction](#1984-tcpip-introduction)
+      - [1986: NFS and AIX](#1986-nfs-and-aix)
   - [Linux is not unix](#linux-is-not-unix)
     - [Unix-Like](#unix-like)
 Unix might be known as the "grandfather" of all current computer operating systems: windows, mac, android, and _linux_.  
@@ -58,6 +59,12 @@ Here, in the BSD release 4.2, a new network protocol suite was introduced, this 
 TCP is the transmission Control Protocol, a byte/stream service abstraction.  
 IP is the internet protocol, an ["un-reliable datagram carriage across the entire internet"](https://gunkies.org/wiki/TCP/IP).  
 
+
+#### 1986: NFS and AIX
+AIX is a version of unix made and sold by IBM.  
+4.3 BSD version of unix incorporated the SunOS "NFS" code.  
+NFS, network file system, is a [distributed file system protocol](https://en.wikipedia.org/wiki/Network_File_System).  
+NFS allows users access to files over a network.
 
 
 ## Linux is not unix
