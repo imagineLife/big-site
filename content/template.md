@@ -1,5 +1,6 @@
 ---
 title: Markdown Template
+parentDir: the-parent-dir
 slug: template
 author: Jake Laursen
 excerpt: building an http server
