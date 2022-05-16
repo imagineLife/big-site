@@ -18,4 +18,4 @@ Ubuntu is one of the many distros. Ubuntu will be the focus in these linux write
 Ubuntu is based on the [Debian](https://www.debian.org) distro of linux.  
 
 ### Others
-[Mint](https://linuxmint.com). [RedHat](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux). [Alpine](https://www.alpinelinux.org), [CentOS](https://www.centos.org)... [there are](https://www.techradar.com/best/best-linux-distros) [many distros](https://en.wikipedia.org/wiki/Linux_distribution).  
+[Mint](https://linuxmint.com). [RedHat](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux). [Alpine](https://www.alpinelinux.org), [CentOS](https://www.centos.org)... [there are](https://www.techradar.com/best/best-linux-distros) [many distros](https://en.wikipedia.org/wiki/Linux_distribution).
