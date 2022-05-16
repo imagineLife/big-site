@@ -1,5 +1,6 @@
 ---
 title: Interacting with Ubuntu
+parentDir: linux
 slug: linux/interacting-with-ubuntu
 author: Jake Laursen
 excerpt: Getting a cli up and running

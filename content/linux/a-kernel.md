@@ -1,5 +1,6 @@
 ---
 title: A Kernel
+parentDir: linux
 slug: linux/a-kernel
 author: Jake Laursen
 excerpt: The glue between the hardware and software

@@ -1,5 +1,6 @@
 ---
 title: Markdown Template
+parentDir: linux
 slug: linux/starting-with-unix
 author: Jake Laursen
 excerpt: building an http server
