@@ -41,7 +41,8 @@ The shell is always "in" a folder - just like the "finder" on a mac or the file 
 Sometimes files are referred to as directories,`dir`, or files. Directories or dir work better as descriptors than "files" - files are often used to describe documents.  
 the "present working directory" is the current directory that the shell is "in" or "at".  
 The shell can be used to "navigate" or browser around files/directories through the "file system" - the "system" of files.  
-
+Each directory and file "lives" at a file system "path". The path looks like a bunch of words, directory names, separated by `/` slashes. 
+A path could be something like `/Users/Jake/Desktop/projects/linux-blog/interacting-with-ubuntu.md`.
 ## FS commands
 ### pwd: where am I
 `pwd` shows the "present working directory" path.  
