@@ -121,6 +121,13 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
+        name: `linux`,
+        path: `content/linux`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
         name: `node`,
         path: `content/node`,
       },
