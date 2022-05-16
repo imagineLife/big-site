@@ -12,6 +12,8 @@ order: 3
     - [A Repl](#a-repl)
     - [A Shell](#a-shell)
     - [A FileSystem](#a-filesystem)
+  - [FS commands](#fs-commands)
+    - [pwd: where am I](#pwd-where-am-i)
 
 Try [multipass](https://multipass.run) from the folks who make ubuntu. This allows us to ["Get an instant Ubuntu VM with a single command"](https://multipass.run).
 - download that
@@ -34,4 +36,14 @@ Bash is also a scripting language.
 Mac now comes with zsh, a different type of shell.  
 Windows come with PowerShell, another type of shell.  
 
-### A FileSystem
+### A FileSystem  
+The shell is always "in" a folder - just like the "finder" on a mac or the file explorer on a windows machine.  
+Sometimes files are referred to as directories,`dir`, or files. Directories or dir work better as descriptors than "files" - files are often used to describe documents.  
+the "present working directory" is the current directory that the shell is "in" or "at".  
+The shell can be used to "navigate" or browser around files/directories through the "file system" - the "system" of files.  
+
+## FS commands
+### pwd: where am I
+`pwd` shows the "present working directory" path.  
+Typing `pwd` and pressing `<Enter>` will tell the terminal to Read the input, evaluate the direction, and print the result.  
+In a ubuntu environment, the default "location" of the shell is at `/home/ubuntu` and the `pwd` command should return that!  
