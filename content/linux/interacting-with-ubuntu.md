@@ -14,6 +14,7 @@ order: 3
     - [A FileSystem](#a-filesystem)
   - [FS commands](#fs-commands)
     - [pwd: where am I](#pwd-where-am-i)
+    - [ls: show me a list](#ls-show-me-a-list)
 
 Try [multipass](https://multipass.run) from the folks who make ubuntu. This allows us to ["Get an instant Ubuntu VM with a single command"](https://multipass.run).
 - download that
@@ -48,3 +49,10 @@ A path could be something like `/Users/Jake/Desktop/projects/linux-blog/interact
 `pwd` shows the "present working directory" path.  
 Typing `pwd` and pressing `<Enter>` will tell the terminal to Read the input, evaluate the direction, and print the result.  
 In a ubuntu environment, the default "location" of the shell is at `/home/ubuntu` and the `pwd` command should return that!  
+The current directory represents the `ubuntu` user in the `home` directory.  
+Every user gets a directory && the default user is the `ubuntu` user - hence `home/ubuntu`.  
+
+### ls: show me a list
+`ls` is like `show me a list of files in the pwd`.  
+Typing `ls` in the terminal should show 2 things that look like `Home  snap`.  
+
