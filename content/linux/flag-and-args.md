@@ -9,9 +9,13 @@ order: 4
 ---
 
 #  Commands, Args, and Flags
-[Commands, Args, and Flags](#commands-args-and-flags)
+- [Commands, Args, and Flags](#commands-args-and-flags)
   - [Args in action](#args-in-action)
+    - [args with echo](#args-with-echo)
   - [Flags in action](#flags-in-action)
+    - [flags with ls](#flags-with-ls)
+  - [Combining flags](#combining-flags)
+  - [Combining flags and params](#combining-flags-and-params)
 
 
 The Command line runs commands.  
