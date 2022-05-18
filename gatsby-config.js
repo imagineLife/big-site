@@ -30,7 +30,6 @@ module.exports = {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
-          `gatsby-remark-prismjs`,
           {
             resolve: 'gatsby-remark-embed-video',
             options: {
@@ -60,6 +59,7 @@ module.exports = {
               maxWidth: 400,
             },
           },
+          `gatsby-remark-prismjs`,
         ],
       },
     },
