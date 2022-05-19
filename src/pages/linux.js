@@ -64,10 +64,29 @@ const IndexPage = () => (
                   with pre-push husky checks, linting, and more!
                 </p>
               </div> */}
+              <section>
+                <h3>Coming soon...</h3>
+                <ul>
+                  <li>nano</li>
+                  <li>vim</li>
+                  <li>file interaction</li>
+                  <li>Wildcards</li>
+                  <li>streams</li>
+                  <li>pipes</li>
+                  <li>Users</li>
+                  <li>Groups</li>
+                  <li>Permissions</li>
+                  <li>Environments</li>
+                  <li>Processes</li>
+                  <li>Exit Codes</li>
+                  <li>Networking, Package Management, "scripting"...</li>
+                </ul>
+              </section>
               <sub>
                 Thanks to{' '}
                 <Link to={'https://github.com/btholt'}>Brian Holt</Link> and{' '}
-                <Link to={'https://frontendmasters.com'}>FrontendMasters</Link> for sparking some curiosity here!
+                <Link to={'https://frontendmasters.com'}>FrontendMasters</Link>{' '}
+                for sparking some curiosity here!
               </sub>
             </section>
           </Layout>
