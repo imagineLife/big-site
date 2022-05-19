@@ -39,7 +39,7 @@ const IndexPage = () => (
           <Layout>
             <section className="toc-wrapper">
               <h1>Linux</h1>
-              {/* {pages.map(
+              {pages.map(
                 (
                   {
                     page: {
@@ -57,7 +57,7 @@ const IndexPage = () => (
                     </div>
                   );
                 },
-              )} */}
+              )}
               {/* <div className="coming-soon">
                 <p>
                   More to come: testing integrations, code-coverage assurance
