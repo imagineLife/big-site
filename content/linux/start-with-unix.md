@@ -1,9 +1,9 @@
 ---
-title: Markdown Template
+title: Starting With Unix
 parentDir: linux
 slug: linux/starting-with-unix
 author: Jake Laursen
-excerpt: building an http server
+excerpt: Unix and Linux as unix-like
 tags: http, web, server, node, express
 order: 1
 ---
