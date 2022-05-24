@@ -15,6 +15,13 @@ order: 7
     - [cat](#cat)
     - [head](#head)
     - [tail](#tail)
+  - [Creating and Removing Files and Directories](#creating-and-removing-files-and-directories)
+    - [Make a Directory with mkdir](#make-a-directory-with-mkdir)
+    - [Make a File with touch](#make-a-file-with-touch)
+    - [Remove Files and Folders with rm](#remove-files-and-folders-with-rm)
+      - [Watch out](#watch-out)
+      - [Remove a File](#remove-a-file)
+      - [Remove a file and ask](#remove-a-file-and-ask)
 
 ## Reading Files
 ### less  
@@ -27,7 +34,38 @@ With a linux terminal `pwd` at `/home/ubuntu`, and a text file in the directory 
 `cat` reads the file && prints its contents to the screen.  
 `cat newfile.txt` will print the entire newfile.txt to the terminal output.  
 
-### head 
+### head  
+`head` takes the first bunch of lines of a files && prints them to the termial. By default, `head` prints 10 lines.   
+### tail  
+`tail` takes the last bunch of lines of a files && prints them to the termial. By default, `tail` prints 10 lines.  
+This `tail` command can be useful for inspecting a file that captures application log activity. `tail -f the-log-file.txt` will aid in reviewing application logs as the logs are occuring in real-time.  
+The `-f` flag means "follow", and using `tail -f the-log-file.txt` will "follow" new contents being added to said log file and print the new contents, as they appear, in the terminal output.  
 
-### tail
+## Creating and Removing Files and Directories
 
+### Make a Directory with mkdir
+`mkdir` makes a directory.  
+`mkdir this-new-dir` will make a new directory called `this-new-dir`.  
+
+`mkdir -p one/two/three` leverage the "-p" flag, which represents "parent", to create all subdirectories needed.  
+Here, directory `one` is a parent of `two`, `two` is a child of `one` and a parenet of `three`, and `three` is a child of `two`.  
+
+### Make a File with touch
+`touch` can be used to create a file.  
+`touch new-file-who-dis.txt` will create the file `new-file-who-dis.txt`.  
+**NOTE**: running `touch` on a file that already exists updates the last-modified date and last-accessed date.  
+
+### Remove Files and Folders with rm
+
+#### Watch out
+We might be used to the `are you sure` type messages when deleting content from apps.  \
+Here, though, watch out. Those types of alerts usually need to be manually triggered, and running `rm` will most likely delete everything without a confirmation request unless you tell the command to ask you for permission.  
+
+#### Remove a File
+With the terminal at the directory of `/home/ubuntu` where `ls` reveals a file called `newfile.txt`,  
+run `rm newfile.txt`.  
+Notice nothing seems to happen.  
+Run `ls` and see that the `newfile.txt` is gone. Forever. No `whoops I forgot do to that` here.  
+
+#### Remove a file and ask
+Create a new file called `asdf.txt`by using `touch asdf.txt`. We will use this to delete the file.  
