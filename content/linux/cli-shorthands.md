@@ -14,6 +14,8 @@ order: 8
     - [Finding Any Character matches with The Asterisk](#finding-any-character-matches-with-the-asterisk)
     - [Finding Specific Count on Character Matches with the Question Mark](#finding-specific-count-on-character-matches-with-the-question-mark)
   - [Creating Many Things with Curly Braces](#creating-many-things-with-curly-braces)
+    - [Duplication](#duplication)
+    - [Nested Duplication](#nested-duplication)
 ## Wildcards
 Wildcards are special characters that linux uses to "replace" a wildcard character with....anything...?!  
 To start messing with wildcards, create a few files in the current directory -
@@ -46,6 +48,7 @@ abcd.txt  abce.txt  abcf.txt  abcg.txt  abch.txt
 ```  
 
 ## Creating Many Things with Curly Braces
+### Duplication
 ```bash
 ubuntu@primary:~$ echo this-{one,two,three,four}
 
@@ -65,4 +68,16 @@ ubuntu@primary:~$ touch index{.scss,.js,.test.js}
 ubuntu@primary:~$ ls index*
 # should return...
 index.js  index.scss  index.test.js
+
 ```
+
+### Nested Duplication
+```bash
+ubuntu@primary:~$ touch Dockerfile.{dev{.blue,.green}.,qa{.blue,.green}.,}yaml
+
+ubuntu@primary:~$ ls 
+# should show...
+Dockerfile.dev.blue.yaml   Dockerfile.qa.blue.yaml   Dockerfile.yaml
+Dockerfile.dev.green.yaml  Dockerfile.qa.green.yaml
+```
+
