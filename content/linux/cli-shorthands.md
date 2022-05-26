@@ -54,14 +54,15 @@ this-one this-two this-three this-four
 
 
 # can be useful for something like "bulk" file creation
-touch Dockerfile.{dev.,qa.,}yaml
+ubuntu@primary:~$ touch Dockerfile.{dev.,qa.,}yaml
 
 # should return...
 Dockerfile.dev.yaml  Dockerfile.qa.yaml  Dockerfile.yaml
 
 # or something like
-touch index{.scss,.js,.test.js}
-
+ubuntu@primary:~$ touch index{.scss,.js,.test.js}
+# see the results
+ubuntu@primary:~$ ls index*
 # should return...
 index.js  index.scss  index.test.js
 ```
