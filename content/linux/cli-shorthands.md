@@ -58,4 +58,10 @@ touch Dockerfile.{dev.,qa.,}yaml
 
 # should return...
 Dockerfile.dev.yaml  Dockerfile.qa.yaml  Dockerfile.yaml
+
+# or something like
+touch index{.scss,.js,.test.js}
+
+# should return...
+index.js  index.scss  index.test.js
 ```
