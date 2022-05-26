@@ -67,10 +67,6 @@ const IndexPage = () => (
               <section>
                 <h3>Coming soon...</h3>
                 <ul>
-                  <li>nano</li>
-                  <li>vim</li>
-                  <li>file interaction</li>
-                  <li>Wildcards</li>
                   <li>streams</li>
                   <li>pipes</li>
                   <li>Users</li>
