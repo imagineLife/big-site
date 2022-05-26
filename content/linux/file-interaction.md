@@ -24,6 +24,11 @@ order: 7
       - [Remove a file and ask](#remove-a-file-and-ask)
     - [Copying with cp](#copying-with-cp)
     - [Moving with mv](#moving-with-mv)
+  - [Bundling with tar](#bundling-with-tar)
+    - [tar flags](#tar-flags)
+    - [uncompressed bundling](#uncompressed-bundling)
+    - [compressed bundling](#compressed-bundling)
+    - [Extracting a Compressed tar file](#extracting-a-compressed-tar-file)
 
 ## Reading Files
 ### less  
@@ -86,3 +91,49 @@ rm: remove regular empty file 'asdf.txt'?
 ### Moving with mv
 `mv this.txt that.txt` will "move" the `this.txt` to a new file called `that.txt`. This is sort of like re-naming the file here.  
 Maybe a more common use could be `mv this.txt dir/this.txt`.  
+
+## Bundling with tar
+`tar` is used to put files together.  
+### tar flags
+Tar has a lot of flags. Here's some more common ones for the infrequent tar users:
+- `-c`: create a tar archive, short for `--create`  
+- `-f`: use an archive file, short for `--file=ARCHIVE`  
+- `-z`: put the tar archive through gzip compression  
+Those 3 flags together are often used as `-cfz` to bundle a file in a compressed format.  
+- `-x`: extract files from an archive
+
+The `-x` flag is often combined with other flags to decompress and "untar" a compressed + tarred file.  
+
+### uncompressed bundling
+Lets bundle 3 things:
+- a file called `qwer.txt`
+- a directory called `dir`
+- a file in the `dir` directory called `asdf.txt`
+This will get bundled into a tar filed called `uncompressed.tar`.  
+
+The command to do this looks like  
+```bash
+tar -cf uncompressed.tar qwer.txt dir
+```
+Revealing the file using `ls` will show `uncompressed.tar`.  
+
+### compressed bundling
+Noted above is a single flag to add, the `-z` flag.  
+The name of the bundled tarfile here will change to `compressed.tar.gz`.  The `gz` is common to allude to the compressed nature of the file.  
+
+The command to do this looks like  
+```bash
+tar -cfz compressed.tar.gz qwer.txt dir
+```
+Revealing the file using `ls` will show `compressed.tar.gz`.  
+
+### Extracting a Compressed tar file
+```bash
+# create the new location
+mkdir untarred
+
+# un-tar the compressed file
+tar -xfz compressed.tar.gz -C untarred/
+```
+Notice that the 3 flags to _tar+compress_ the compressed file are `-cfz` and the 3 flags to _untar+uncompress_ the file are `-xfz`.  
+These are nearly identical. the `-c` and the `-x` are exchanged, `-c` for compressing and `-x` for extracting
