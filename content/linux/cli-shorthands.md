@@ -16,6 +16,7 @@ order: 8
   - [Creating Many Things with Curly Braces](#creating-many-things-with-curly-braces)
     - [Duplication](#duplication)
     - [Nested Duplication](#nested-duplication)
+    - [Spread Syntax Duplication](#spread-syntax-duplication)
 ## Wildcards
 Wildcards are special characters that linux uses to "replace" a wildcard character with....anything...?!  
 To start messing with wildcards, create a few files in the current directory -
@@ -81,3 +82,15 @@ Dockerfile.dev.blue.yaml   Dockerfile.qa.blue.yaml   Dockerfile.yaml
 Dockerfile.dev.green.yaml  Dockerfile.qa.green.yaml
 ```
 
+### Spread Syntax Duplication
+For those more familiar with javascript spread, `{...val}`,  
+the bash spread has 2 dots instead of 3 dots AND fills in values from the first-to-last spread elements
+```bash
+ubuntu@primary:~$ echo Dockerfile.{A..D}.yml
+# should return 
+Dockerfile.A.yml Dockerfile.B.yml Dockerfile.C.yml Dockerfile.D.yml
+
+ubuntu@primary:~$ echo Dockerfile.{5..12}.yml
+# should return
+Dockerfile.5.yml Dockerfile.6.yml Dockerfile.7.yml Dockerfile.8.yml Dockerfile.9.yml Dockerfile.10.yml Dockerfile.11.yml Dockerfile.12.yml
+```
