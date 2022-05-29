@@ -1,10 +1,10 @@
 ---
-title: Nano
+title: Text Editors
 parentDir: linux
-slug: linux/nano
+slug: linux/text-editors
 author: Jake Laursen
-excerpt: Vintage text editor
-tags: linux, kernel, cli, nano, text
+excerpt: Classic text editors
+tags: linux, kernel, cli, nano, text, vim
 order: 6
 ---
 
