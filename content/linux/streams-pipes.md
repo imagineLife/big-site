@@ -17,6 +17,7 @@ order: 9
       - [Replaces only](#replaces-only)
     - [Piping with 1>> to add](#piping-with-1-to-add)
   - [Error output with stderr](#error-output-with-stderr)
+    - [Piping errors with 1>> to add](#piping-errors-with-1-to-add)
 ## CLI Output with stdout
 `stdout` (_standard outputput, standard out_) is where "output" goes. In [NodeJS](https://nodejs.org/dist/latest-v16.x/docs/api/) `console.log()`, which "logs" a statement to the console, goes to the `stdout`.  
 ```bash
@@ -84,7 +85,6 @@ second string of text here
 
 
 ```bash
-
 # this produces an error
 ubuntu@primary:~$ cat fake-file.txt
 cat: fake-file.txt: No such file or directory
@@ -96,4 +96,22 @@ ubuntu@primary:~$ cat fake-file.txt 2> errors.txt
 # prove it
 ubuntu@primary:~$ cat errors.txt 
 cat: fake-file.txt: No such file or directory
+```
+
+### Piping errors with 1>> to add
+```bash
+
+# get the date
+ubuntu@primary:~$ date
+Mon May 30 05:00:12 EDT 1492
+
+# store the date in a var "D"
+ubuntu@primary:~$ D=$(date)
+
+# use that, and concat an err to the error text file
+ubuntu@primary:~$ cat "$D: fake-file.txt" 2>> errors.txt
+ubuntu@primary:~$ cat errors.txt 
+cat: fake-file.txt: No such file or directory
+cat: 'Mon May 30 09:31:24 EDT 2022: fake-file.txt': No such file or directory
+
 ```
