@@ -11,10 +11,11 @@ order: 9
 # Streams
 - [Streams](#streams)
   - [CLI Output with stdout](#cli-output-with-stdout)
-    - [Piping with 1>](#piping-with-1)
+    - [Piping with 1> to overwrite](#piping-with-1-to-overwrite)
       - [from stdout](#from-stdout)
       - [from cat](#from-cat)
       - [Replaces only](#replaces-only)
+    - [Piping with 1>> to add](#piping-with-1-to-add)
   - [CLI Input with stdin](#cli-input-with-stdin)
 ## CLI Output with stdout
 `stdout` (_standard outputput, standard out_) is where "output" goes. In [NodeJS](https://nodejs.org/dist/latest-v16.x/docs/api/) `console.log()`, which "logs" a statement to the console, goes to the `stdout`.  
@@ -23,7 +24,7 @@ ubuntu@primary:~$ echo "This was written and will go to stdout"
 This was written and will go to stdout
 ```
 
-### Piping with 1>  
+### Piping with 1> to overwrite
 #### from stdout
 `stdout` contents, like the string above, can be redirected, or piped.  
 `1>` will redirecto `stdout` to a file.
@@ -60,5 +61,21 @@ ubuntu@primary:~$ echo "lkjhg lkjhg" 1> zxcv.txt
 ubuntu@primary:~$ cat zxcv.txt 
 lkjhg lkjhg
 ```  
+
+### Piping with 1>> to add
+`1>>` will _append_ to a file rather than overwriting contents like `1>`.  
+
+```bash
+# write to poiu.txt
+ubuntu@primary:~$ echo "new string of text here" 1>> poiu.txt
+ubuntu@primary:~$ cat poiu.txt 
+new string of text here
+
+# run same command on same file with different contents
+ubuntu@primary:~$ echo "second string of text here" 1>> poiu.txt
+ubuntu@primary:~$ cat poiu.txt 
+new string of text here
+second string of text here
+```
 
 ## CLI Input with stdin
