@@ -14,6 +14,7 @@ order: 9
     - [Piping with 1>](#piping-with-1)
       - [from stdout](#from-stdout)
       - [from cat](#from-cat)
+      - [Replaces only](#replaces-only)
   - [CLI Input with stdin](#cli-input-with-stdin)
 ## CLI Output with stdout
 `stdout` (_standard outputput, standard out_) is where "output" goes. In [NodeJS](https://nodejs.org/dist/latest-v16.x/docs/api/) `console.log()`, which "logs" a statement to the console, goes to the `stdout`.  
@@ -45,5 +46,19 @@ ubuntu@primary:~$ cat qwer.txt
 this string here
 ```
 The `this string here` was cloned from `stdout-pipe.txt` into `qwer.txt`.  
+
+#### Replaces only
+`1>` replaces/overwriters contents of a file and does not add to an existing file:
+```bash
+# write to zxcv.txt
+ubuntu@primary:~$ echo "poiuy poiuy" 1> zxcv.txt
+ubuntu@primary:~$ cat zxcv.txt 
+poiuy poiuy
+
+# run same command on same file with different contents
+ubuntu@primary:~$ echo "lkjhg lkjhg" 1> zxcv.txt
+ubuntu@primary:~$ cat zxcv.txt 
+lkjhg lkjhg
+```  
 
 ## CLI Input with stdin
