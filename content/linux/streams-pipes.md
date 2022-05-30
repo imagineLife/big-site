@@ -16,7 +16,7 @@ order: 9
       - [from cat](#from-cat)
       - [Replaces only](#replaces-only)
     - [Piping with 1>> to add](#piping-with-1-to-add)
-  - [CLI Input with stdin](#cli-input-with-stdin)
+  - [Error output with stderr](#error-output-with-stderr)
 ## CLI Output with stdout
 `stdout` (_standard outputput, standard out_) is where "output" goes. In [NodeJS](https://nodejs.org/dist/latest-v16.x/docs/api/) `console.log()`, which "logs" a statement to the console, goes to the `stdout`.  
 ```bash
@@ -78,4 +78,22 @@ new string of text here
 second string of text here
 ```
 
-## CLI Input with stdin
+## Error output with stderr
+`2>` can deal with `stderr` in the same way that `1>` deals with `stdout`.  
+`stderr` is where error info goes.  
+
+
+```bash
+
+# this produces an error
+ubuntu@primary:~$ cat fake-file.txt
+cat: fake-file.txt: No such file or directory
+# the above line is the error output describing the error
+
+# pipe the err message to an errors.txt file
+ubuntu@primary:~$ cat fake-file.txt 2> errors.txt
+
+# prove it
+ubuntu@primary:~$ cat errors.txt 
+cat: fake-file.txt: No such file or directory
+```
