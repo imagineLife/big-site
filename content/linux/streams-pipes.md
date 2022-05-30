@@ -11,7 +11,9 @@ order: 9
 # Streams
 - [Streams](#streams)
   - [CLI Output with stdout](#cli-output-with-stdout)
-    - [Piping stdout with 1>](#piping-stdout-with-1)
+    - [Piping with 1>](#piping-with-1)
+      - [from stdout](#from-stdout)
+      - [from cat](#from-cat)
   - [CLI Input with stdin](#cli-input-with-stdin)
 ## CLI Output with stdout
 `stdout` (_standard outputput, standard out_) is where "output" goes. In [NodeJS](https://nodejs.org/dist/latest-v16.x/docs/api/) `console.log()`, which "logs" a statement to the console, goes to the `stdout`.  
@@ -20,7 +22,8 @@ ubuntu@primary:~$ echo "This was written and will go to stdout"
 This was written and will go to stdout
 ```
 
-### Piping stdout with 1>  
+### Piping with 1>  
+#### from stdout
 `stdout` contents, like the string above, can be redirected, or piped.  
 `1>` will redirecto `stdout` to a file.
 ```bash
@@ -30,5 +33,17 @@ ubuntu@primary:~$ echo "this string here" 1> stdout-pipe.txt
 ubuntu@primary:~$ cat stdout-pipe.txt
 this string here
 ```
+
+#### from cat
+`cat` can take a file content an con`cat`enate it to `stdout`.  
+`>` can take the file content, from `cat`, and pipe the content to another file -  
+
+```bash
+ubuntu@primary:~$ cat stdout-pipe.txt 1> qwer.txt
+
+ubuntu@primary:~$ cat qwer.txt
+this string here
+```
+The `this string here` was cloned from `stdout-pipe.txt` into `qwer.txt`.  
 
 ## CLI Input with stdin
