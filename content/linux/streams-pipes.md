@@ -20,6 +20,9 @@ order: 9
     - [Piping errors with 2>> to add](#piping-errors-with-2-to-add)
   - [Multiple outputs with Multiple Commands](#multiple-outputs-with-multiple-commands)
   - [Directing contents to a program with stdin](#directing-contents-to-a-program-with-stdin)
+- [Pipes](#pipes)
+  - [pass cat to grep](#pass-cat-to-grep)
+  - [pass ps to grep](#pass-ps-to-grep)
 ## CLI Output with stdout
 `stdout` (_standard outputput, standard out_) is where "output" goes. In [NodeJS](https://nodejs.org/dist/latest-v16.x/docs/api/) `console.log()`, which "logs" a statement to the console, goes to the `stdout`.  
 ```bash
@@ -147,3 +150,24 @@ A complex example:
 ```bash
 grep "Mon May 30" < errors.txt < ls.txt 1> ls2.txt 2> /dev/null
 ```
+
+
+# Pipes
+Pipes, compared to streams, pass _programs_ to one another, not just data.  
+
+## pass cat to grep
+```bash
+cat ls.txt | grep "errors.txt"
+```
+- `cat` the `ls.txt` file
+- `pipe` the outputs from the cat TO `grep`
+- `grep` the output from the `cat` command
+
+
+## pass ps to grep
+```bash
+ps aux | grep "ps aux"
+```
+- run `ps aux`: `ps` is "process status", listing currently running processes  && some info about them
+- `pipe` the output from the `ps` command to the next command, `grep`
+- `grep` the output for the "ps aux" string
