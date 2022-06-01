@@ -125,7 +125,7 @@ cat: 'Mon May 30 09:31:24 EDT 2022: fake-file.txt': No such file or directory
 `1>` for stdout and `2>` for stderr can be combined in a single command:  
 
 ```bash
-ls -lsah `> stdout.txt 2> stderr.txt
+ubuntu@primary:~$ ls -lsah `> stdout.txt 2> stderr.txt
 ```  
 
 ## Directing contents to a program with stdin  
@@ -134,4 +134,16 @@ This is sort-of like a reverse from the previous commands.
 The previous commands can take output from one command, something like `cat file.txt`, and pipe to an output.  
 
 ```bash
+# a trivial example
+# passing errors.txt to the "cat" command
+ubuntu@primary:~$ cat < errors.txt
+
+# another, grepping for a specific string
+ubuntu@primary:~$ grep "Mon May 30" < errors.txt
+cat: 'Mon May 30 09:31:24 EDT 2022: fake-file.txt': No such file or directory
+```
+
+A complex example:
+```bash
+grep "Mon May 30" < errors.txt < ls.txt 1> ls2.txt 2> /dev/null
 ```
