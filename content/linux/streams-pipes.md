@@ -19,6 +19,7 @@ order: 9
   - [Error output with stderr](#error-output-with-stderr)
     - [Piping errors with 2>> to add](#piping-errors-with-2-to-add)
   - [Multiple outputs with Multiple Commands](#multiple-outputs-with-multiple-commands)
+  - [Directing contents to a program with stdin](#directing-contents-to-a-program-with-stdin)
 ## CLI Output with stdout
 `stdout` (_standard outputput, standard out_) is where "output" goes. In [NodeJS](https://nodejs.org/dist/latest-v16.x/docs/api/) `console.log()`, which "logs" a statement to the console, goes to the `stdout`.  
 ```bash
@@ -125,4 +126,12 @@ cat: 'Mon May 30 09:31:24 EDT 2022: fake-file.txt': No such file or directory
 
 ```bash
 ls -lsah `> stdout.txt 2> stderr.txt
+```  
+
+## Directing contents to a program with stdin  
+`<` can be used to pipe contents TO a program.  
+This is sort-of like a reverse from the previous commands.  
+The previous commands can take output from one command, something like `cat file.txt`, and pipe to an output.  
+
+```bash
 ```
