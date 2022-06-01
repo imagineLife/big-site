@@ -17,7 +17,8 @@ order: 9
       - [Replaces only](#replaces-only)
     - [Piping with 1>> to add](#piping-with-1-to-add)
   - [Error output with stderr](#error-output-with-stderr)
-    - [Piping errors with 1>> to add](#piping-errors-with-1-to-add)
+    - [Piping errors with 2>> to add](#piping-errors-with-2-to-add)
+  - [Multiple outputs with Multiple Commands](#multiple-outputs-with-multiple-commands)
 ## CLI Output with stdout
 `stdout` (_standard outputput, standard out_) is where "output" goes. In [NodeJS](https://nodejs.org/dist/latest-v16.x/docs/api/) `console.log()`, which "logs" a statement to the console, goes to the `stdout`.  
 ```bash
@@ -98,7 +99,7 @@ ubuntu@primary:~$ cat errors.txt
 cat: fake-file.txt: No such file or directory
 ```
 
-### Piping errors with 1>> to add
+### Piping errors with 2>> to add
 ```bash
 
 # get the date
@@ -110,8 +111,18 @@ ubuntu@primary:~$ D=$(date)
 
 # use that, and concat an err to the error text file
 ubuntu@primary:~$ cat "$D: fake-file.txt" 2>> errors.txt
+
+# see the output
 ubuntu@primary:~$ cat errors.txt 
 cat: fake-file.txt: No such file or directory
 cat: 'Mon May 30 09:31:24 EDT 2022: fake-file.txt': No such file or directory
 
+```
+
+
+## Multiple outputs with Multiple Commands
+`1>` for stdout and `2>` for stderr can be combined in a single command:  
+
+```bash
+ls -lsah `> stdout.txt 2> stderr.txt
 ```
