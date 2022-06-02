@@ -15,7 +15,6 @@ Groups give "shared" privileges to all users assigned to a group.
 - [Groups](#groups)
   - [See all groups](#see-all-groups)
   - [Switching a users group](#switching-a-users-group)
-  - [Command Legend](#command-legend)
 
 ## See all groups
 A few ways to see groups:
@@ -112,6 +111,3 @@ jake sudo
 $ exit
 ubuntu@primary:~$ 
 ```
-
-## Command Legend
-...
