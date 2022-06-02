@@ -9,17 +9,26 @@ order: 10
 ---
 
 # Users
-- [Streams](#streams)
-  - [CLI Output with stdout](#cli-output-with-stdout)
-    - [Piping with 1> to overwrite](#piping-with-1-to-overwrite)
-      - [from stdout](#from-stdout)
-      - [from cat](#from-cat)
-      - [Replaces only](#replaces-only)
-    - [Piping with 1>> to add](#piping-with-1-to-add)
-  - [Error output with stderr](#error-output-with-stderr)
-    - [Piping errors with 2>> to add](#piping-errors-with-2-to-add)
-  - [Multiple outputs with Multiple Commands](#multiple-outputs-with-multiple-commands)
-  - [Directing contents to a program with stdin](#directing-contents-to-a-program-with-stdin)
-- [Pipes](#pipes)
-  - [pass cat to grep](#pass-cat-to-grep)
-  - [pass ps to grep](#pass-ps-to-grep)
+Linux has users of its os.  
+The multipass app gives a default user of `ubuntu`.  
+
+- [Users](#users)
+  - [Detecting the current user with whoami](#detecting-the-current-user-with-whoami)
+  - [see all users with cat](#see-all-users-with-cat)
+  - [Users have permissions](#users-have-permissions)
+
+## Detecting the current user with whoami
+`whoami` is a command that returns the currently-logged-in user.  
+```bash
+ubuntu@primary:~$ whoami
+ubuntu
+```
+Again, `ubuntu` is the name of the user that multipass gives.  
+
+
+## see all users with cat
+```bash
+# show ALL users on the machine
+ubuntu@primary:~$ cat /etc/passwd
+```
+## Users have permissions  
