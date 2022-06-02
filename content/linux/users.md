@@ -17,6 +17,9 @@ The multipass app gives a default user of `ubuntu`.
   - [see all users with cat](#see-all-users-with-cat)
     - [Users have permissions](#users-have-permissions)
   - [The super user and sudo](#the-super-user-and-sudo)
+  - [An Example](#an-example)
+    - [Creating A User](#creating-a-user)
+    - [Deleting a User](#deleting-a-user)
 
 ## Detecting the current user with whoami
 `whoami` is a command that returns the currently-logged-in user.  
@@ -56,4 +59,56 @@ root@primary:/home/ubuntu# exit
 exit
 ubuntu@primary:~$ whoami
 ubuntu
+```
+
+## An Example 
+### Creating A User
+Only certain users can create other users:  
+
+```bash
+# start as the ubuntu user (in a multipass prompt)
+ubuntu@primary:~$ whoami
+ubuntu
+
+# try adding a user
+ubuntu@primary:~$ useradd thisisme
+useradd: Permission denied.
+useradd: cannot lock /etc/passwd; try again later.
+
+# switch to the root user
+ubuntu@primary:~$ sudo su
+root@primary:/home/ubuntu# whoami
+root
+
+# try adding the new user as the root user
+root@primary:/home/ubuntu# useradd thisisme
+# it worked!
+
+# leave the root user
+root@primary:/home/ubuntu# exit
+```
+### Deleting a User  
+Only certain users can create other users:  
+
+```bash
+# start as the ubuntu user (in a multipass prompt)
+ubuntu@primary:~$ whoami
+ubuntu
+
+# try deleting a user
+ubuntu@primary:~$ userdel thisisme
+userdel: Permission denied.
+userdel: cannot lock /etc/passwd; try again later.
+
+# switch to the root user
+ubuntu@primary:~$ sudo su
+root@primary:/home/ubuntu# whoami
+root
+
+# try deleting the new user as the root user
+root@primary:/home/ubuntu# userdel thisisme
+# it worked!
+
+# leave the root user
+root@primary:/home/ubuntu# exit
 ```
