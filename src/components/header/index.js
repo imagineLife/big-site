@@ -2,30 +2,39 @@ import './index.scss';
 import React from 'react';
 import { Link } from 'gatsby';
 
+const headerLinks = [
+  {
+    txt: 'Folio',
+    to: '/folio',
+  },
+  {
+    txt: 'About',
+    to: '/about',
+  },
+  {
+    txt: 'Scrum',
+    to: '/scrum',
+  },
+  {
+    txt: 'Mongo',
+    to: '/mongo',
+  },
+  {
+    txt: 'Node',
+    to: '/node',
+  }
+];
 const Header = () => (
   <header className="header">
     <Link className="styled bold" to="/">
       Home
     </Link>
     <nav>
-      <Link className="styled" activeClassName="current-page" to="/folio">
-        Folio
-      </Link>
-      <Link className="styled" activeClassName="current-page" to="/about">
-        About
-      </Link>
-      {/* <Link className="styled" activeClassName="current-page" to="/posts">
-        Posts
-      </Link> */}
-      <Link className="styled" activeClassName="current-page" to="/scrum">
-        Scrum
-      </Link>
-      <Link className="styled" activeClassName="current-page" to="/mongo">
-        Mongo
-      </Link>
-      {/* <Link className="styled" activeClassName="current-page" to="/strengths">
-  strengths
-</Link> */}
+      {headerLinks.map(({ txt, to }, idx) => (
+        <Link key={`${txt}-header-link`} className="styled" activeClassName="current-page" to={to}>
+          {txt}
+        </Link>
+      ))}
     </nav>
   </header>
 );
