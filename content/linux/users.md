@@ -20,6 +20,7 @@ The multipass app gives a default user of `ubuntu`.
   - [An Example](#an-example)
     - [Creating A User](#creating-a-user)
     - [Deleting a User](#deleting-a-user)
+  - [One-Line User switching](#one-line-user-switching)
 
 ## Detecting the current user with whoami
 `whoami` is a command that returns the currently-logged-in user.  
@@ -111,4 +112,37 @@ root@primary:/home/ubuntu# userdel thisisme
 
 # leave the root user
 root@primary:/home/ubuntu# exit
+```
+
+## One-Line User switching
+Running a command with the `sudo` prefix is a one-line way to be the root user.  
+```bash
+ubuntu@primary:~$ whoami
+ubuntu
+ubuntu@primary:~$ sudo whoami
+root
+
+# sudo add a user + pwd
+ubuntu@primary:~$ sudo useradd jake
+ubuntu@primary:~$ sudo passwd jake
+New password: 
+Retype new password: 
+passwd: password updated successfully
+
+# change to 'jake' user
+ubuntu@primary:~$ whoami
+ubuntu
+ubuntu@primary:~$ su jake
+Password: 
+$ whoami
+jake
+
+# notice the prompt prefix changed! interesting
+$ pwd
+/home/ubuntu
+
+# attempt to sudo su
+$ sudo su
+[sudo] password for jake: 
+jake is not in the sudoers file.  This incident will be reported.
 ```
