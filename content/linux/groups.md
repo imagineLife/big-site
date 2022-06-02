@@ -14,6 +14,8 @@ Groups give "shared" privileges to all users assigned to a group.
 
 - [Groups](#groups)
   - [See all groups](#see-all-groups)
+  - [Switching a users group](#switching-a-users-group)
+  - [Command Legend](#command-legend)
 
 ## See all groups
 A few ways to see groups:
@@ -95,3 +97,21 @@ Password:
 $ groups
 jake
 ```
+
+## Switching a users group
+Here, `jake` will be added to the `sudo` group - this gives `jake` superpower privileges. `jake` will also be able to use the `sudo` prefix to run a superuser command.   
+```bash
+# the magic command
+ubuntu@primary:~$ sudo usermod -aG sudo jake
+
+# switch to jake and see the new group!
+ubuntu@primary:~$ su jake
+Password: 
+$ groups
+jake sudo
+$ exit
+ubuntu@primary:~$ 
+```
+
+## Command Legend
+...
