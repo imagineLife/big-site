@@ -23,6 +23,7 @@ Since the "core" of linux is a file system accessed and used by users, files hav
     - [Everyone Elses Permissions with the next 3 Characters](#everyone-elses-permissions-with-the-next-3-characters)
   - [Changing Things](#changing-things)
     - [Changing owner with chown](#changing-owner-with-chown)
+      - [Use-Cases](#use-cases)
     - [Changing permissions with chmod](#changing-permissions-with-chmod)
 
 
@@ -97,7 +98,16 @@ Linux allows the changing of owner && permissions of things.
 - `usr`: the group name of the new owner
 - `item-to-change`: the name of the item that is being changed
 
-Here, `chown` in action
+#### Use-Cases
+chown has been useful when dealing with systems && users, like in "dockerland".  
+When docker is running on a linux machine, as an example....
+- a node api docker container is running and is writing to a log file
+- the log file path is mounted to the host linux os, so when node is writing to a logfile in a container, docker is passing-along the log-file contents to the host machine
+- the _host_ os, which contains docker and is running the container, has a user in-use
+- the _container_ os, which is "inside" "dockerland", has a user in-use (_and in the supported node image the default user is "node"_)
+- the _host_ os user may not have permission to create or write to this log file, so this `chown` command can make the logfile creat-able and writable by docker
+
+Here, `chown` in action ->
 ```bash
 # Using chown without permission
 ubuntu@primary:~$ whoami
