@@ -16,7 +16,7 @@ Since the "core" of linux is a file system accessed and used by users, files hav
 - [Permissions](#permissions)
   - [An Example of denied permissions](#an-example-of-denied-permissions)
   - [How Linux Describes Permissions](#how-linux-describes-permissions)
-    - [Type with the First Character](#type-with-the-first-character)
+    - [Item Type with the First Character](#item-type-with-the-first-character)
     - [Read Write and Execute with RWX](#read-write-and-execute-with-rwx)
     - [Owner Permissions with the next 3 Characters](#owner-permissions-with-the-next-3-characters)
     - [Group Permissions with the next 3 Characters](#group-permissions-with-the-next-3-characters)
@@ -68,13 +68,13 @@ Linux describes permissions with the first column, the `drwxr-xr-x` column. Each
 The string is a 10-character description.  
 The first line, the `drwxr-xr-x` `Home` line, will be explored below.  
 
-### Type with the First Character
+### Item Type with the First Character
 The `d` or `-` here represent the "type" of item:
 - `d` for directory
 - `-` for file  
 
 ### Read Write and Execute with RWX  
-The next 9 characters are variations on
+The next 9 characters are variations on these 4 characters:
 - `r` for read
 - `w` for write
 - `x` for execute
@@ -92,4 +92,48 @@ The next 3 characters, `r-x`, represent the permissions that "everyone else" has
 ## Changing Things
 Linux allows the changing of owner && permissions of things.  
 ### Changing owner with chown
+`chown` means "change owner". When `chown` is run against a directory or file, the owner of the item changes. The `chown` syntax can be something like `chown grp:usr item-to-change`:
+- `grp`: the group name of the new owner
+- `usr`: the group name of the new owner
+- `item-to-change`: the name of the item that is being changed
+
+Here, `chown` in action
+```bash
+# Using chown without permission
+ubuntu@primary:~$ whoami
+ubuntu
+ubuntu@primary:~$ pwd
+/home/ubuntu
+
+# attempt to make a dir in a dir that ubuntu does not have permission to
+ubuntu@primary:~$ cd /
+ubuntu@primary:/$ mkdir new-dir
+mkdir: cannot create directory ‘new-dir’: Permission denied
+
+# make the dir with sudo
+ubuntu@primary:/$ sudo mkdir new-dir
+ubuntu@primary:/$ ls
+bin   dev  home  lost+found  mnt      opt   root  sbin  srv  tmp  var
+boot  etc  lib   media       new-dir  proc  run   snap  sys  usr
+
+ubuntu@primary:/$ ls -l | grep "new-dir"
+drwxr-xr-x   2 root root  4096 Jun  3 08:45 new-dir
+# the above line shows that root:root is the owner of the new-dir
+
+# fail attempt to make a file in 
+ubuntu@primary:/$ touch new-dir/new-file.txt
+touch: cannot touch 'new-dir/new-file.txt': Permission denied
+
+# update the owner of new-dir
+ubuntu@primary:/$ sudo chown ubuntu:ubuntu new-dir
+ubuntu@primary:/$ ls -l | grep "new-dir"
+drwxr-xr-x   2 ubuntu ubuntu  4096 Jun  3 08:45 new-dir
+
+# succeed now
+ubuntu@primary:/$ touch new-dir/new-file.txt
+ubuntu@primary:/$ ls -l new-dir/new-file.txt
+-rw-rw-r-- 1 ubuntu ubuntu 0 Jun  3 08:49 new-dir/new-file.txt
+
+```
+
 ### Changing permissions with chmod
