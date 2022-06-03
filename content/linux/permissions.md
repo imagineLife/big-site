@@ -21,6 +21,9 @@ Since the "core" of linux is a file system accessed and used by users, files hav
     - [Owner Permissions with the next 3 Characters](#owner-permissions-with-the-next-3-characters)
     - [Group Permissions with the next 3 Characters](#group-permissions-with-the-next-3-characters)
     - [Everyone Elses Permissions with the next 3 Characters](#everyone-elses-permissions-with-the-next-3-characters)
+  - [Changing Things](#changing-things)
+    - [Changing owner with chown](#changing-owner-with-chown)
+    - [Changing permissions with chmod](#changing-permissions-with-chmod)
 
 
 ## An Example of denied permissions
@@ -86,5 +89,7 @@ The next 3 characters, `r-x`, represent the "group permissions" on the directory
 ### Everyone Elses Permissions with the next 3 Characters
 The next 3 characters, `r-x`, represent the permissions that "everyone else" has on the directory. This has `read`, and `execute` permissions for the anyone other than the owner or in the group.  
 
-
-
+## Changing Things
+Linux allows the changing of owner && permissions of things.  
+### Changing owner with chown
+### Changing permissions with chmod
