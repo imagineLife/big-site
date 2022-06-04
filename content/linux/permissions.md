@@ -22,9 +22,9 @@ Since the "core" of linux is a file system accessed and used by users, files hav
     - [Group Permissions with the next 3 Characters](#group-permissions-with-the-next-3-characters)
     - [Everyone Elses Permissions with the next 3 Characters](#everyone-elses-permissions-with-the-next-3-characters)
   - [Changing Things](#changing-things)
-    - [Changing owner with chown](#changing-owner-with-chown)
+    - [Changing item owner with chown](#changing-item-owner-with-chown)
       - [Use-Cases](#use-cases)
-    - [Changing permissions with chmod](#changing-permissions-with-chmod)
+    - [Changing item permissions with chmod](#changing-item-permissions-with-chmod)
 
 
 ## An Example of denied permissions
@@ -92,7 +92,7 @@ The next 3 characters, `r-x`, represent the permissions that "everyone else" has
 
 ## Changing Things
 Linux allows the changing of owner && permissions of things.  
-### Changing owner with chown
+### Changing item owner with chown
 `chown` means "change owner". When `chown` is run against a directory or file, the owner of the item changes. The `chown` syntax can be something like `chown grp:usr item-to-change`:
 - `grp`: the group name of the new owner
 - `usr`: the group name of the new owner
@@ -146,4 +146,39 @@ ubuntu@primary:/$ ls -l new-dir/new-file.txt
 
 ```
 
-### Changing permissions with chmod
+### Changing item permissions with chmod  
+`chmod` can be used to change permission on a file.  
+This is different from `chown` in that `chown` changes a file's owner, and `chmod` changes a file's read-write-execute permissions.  
+
+chmod in action:
+```bash
+# assure the 'ubuntu' user is being used
+ubuntu@primary:~$ whoami
+ubuntu
+
+# navigate
+ubuntu@primary:~$ cd ~
+ubuntu@primary:~$ pwd
+/home/ubuntu
+
+# create a file as root
+ubuntu@primary:~$ sudo touch only-sudo.txt
+
+# inspect the permissions
+ubuntu@primary:~$ ls -l only-sudo.txt
+-rw-r--r-- 1 root root 0 Jun  3 20:50 only-sudo.txt
+
+# fail at writing to file
+ubuntu@primary:~$ echo "test string" >> only-sudo.txt 
+-bash: only-sudo.txt: Permission denied
+
+# chmod in action on only-sudo.txt
+ubuntu@primary:~$ sudo chmod u=rw,g=rw,o=rw only-sudo.txt 
+
+# inspect new permissions
+ubuntu@primary:~$ ls -l only-sudo.txt 
+-rw-rw-rw- 1 root root 0 Jun  3 20:50 only-sudo.txt  
+
+# try again
+ubuntu@primary:~$ echo "test string" >> only-sudo.txt 
+```
