@@ -10,10 +10,10 @@ order: 12
 
 # Permissions
 Linux has the concept of permissions.  
-Since the "core" of linux is a file system accessed and used by users, files have permissions that can be assigned/delegated to users.  
-
+Since the "core" of linux is a file system accessed and used by users, files have permissions that can be assigned/delegated to users.    
 
 - [Permissions](#permissions)
+  - [Principle of least permissions](#principle-of-least-permissions)
   - [An Example of denied permissions](#an-example-of-denied-permissions)
   - [How Linux Describes Permissions](#how-linux-describes-permissions)
     - [Item Type with the First Character](#item-type-with-the-first-character)
@@ -28,7 +28,8 @@ Since the "core" of linux is a file system accessed and used by users, files hav
       - [long-form syntax](#long-form-syntax)
       - [short form](#short-form)
 
-
+## Principle of least permissions
+Linux starts with, and works best when users + groups have the least privilege needed to do their job. If a user needs to do something to a file, that user should have the right to do that thing and that thing only. 
 ## An Example of denied permissions
 ```bash
 # switch user to'jake'
@@ -215,3 +216,7 @@ In practice, these numbers can look like...
 - `660` is read+write on user+group and no rights for anyone else
 - `760` is read+write on group, all rights as owner, and no rights for anyone else
 
+Using these in a `chmod` command looks like
+```bash
+ubuntu@primary:~$ chmod 760 the-file.txt
+```
