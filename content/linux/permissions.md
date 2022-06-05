@@ -25,6 +25,8 @@ Since the "core" of linux is a file system accessed and used by users, files hav
     - [Changing item owner with chown](#changing-item-owner-with-chown)
       - [Use-Cases](#use-cases)
     - [Changing item permissions with chmod](#changing-item-permissions-with-chmod)
+      - [long-form syntax](#long-form-syntax)
+      - [short form](#short-form)
 
 
 ## An Example of denied permissions
@@ -150,7 +152,8 @@ ubuntu@primary:/$ ls -l new-dir/new-file.txt
 `chmod` can be used to change permission on a file.  
 This is different from `chown` in that `chown` changes a file's owner, and `chmod` changes a file's read-write-execute permissions.  
 
-chmod in action:
+#### long-form syntax
+Here's chmod in action
 ```bash
 # assure the 'ubuntu' user is being used
 ubuntu@primary:~$ whoami
@@ -182,3 +185,33 @@ ubuntu@primary:~$ ls -l only-sudo.txt
 # try again
 ubuntu@primary:~$ echo "test string" >> only-sudo.txt 
 ```
+An overview of the chmod command
+- `chmod` is the command, change the "mode" if the item
+- `u=rw` is the user permissions of the item, `rw` for read+write
+- `g=rw` is the group permission of the item, `rw` for read+write
+- `o=rw` is the owner permission of the item, `rw` for read+write
+
+#### short form
+The short form of setting permissioins with chmod involves numbers.  
+- `4` for read
+- `2` for write
+- `1` for execute
+- `0` for ...zero permissions
+
+These numbers get added up:
+- `1` for execute
+- `3 (1 + 2)` for execute + write
+- `5 (1 + 4)` for execute + read
+- `6 (4 + 2)` for read + write
+- `7 (4 + 2 + 1)` for all rights 
+
+These numbers get put in an order, 1 number for each "level" of permissions. 3 numbers in order _(1)(2)(3)_.  
+- the 1st digit for `user`
+- the 2nd digit for `group`
+- the 3rd digit for `other`  
+
+In practice, these numbers can look like...
+
+- `660` is read+write on user+group and no rights for anyone else
+- `760` is read+write on group, all rights as owner, and no rights for anyone else
+
