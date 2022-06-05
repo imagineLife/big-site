@@ -67,11 +67,6 @@ const IndexPage = () => (
               <section>
                 <h3>Coming soon...</h3>
                 <ul>
-                  <li>streams</li>
-                  <li>pipes</li>
-                  <li>Users</li>
-                  <li>Groups</li>
-                  <li>Permissions</li>
                   <li>Environments</li>
                   <li>Processes</li>
                   <li>Exit Codes</li>
