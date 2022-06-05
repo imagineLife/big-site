@@ -27,6 +27,7 @@ Since the "core" of linux is a file system accessed and used by users, files hav
     - [Changing item permissions with chmod](#changing-item-permissions-with-chmod)
       - [long-form syntax](#long-form-syntax)
       - [short form](#short-form)
+      - [super short form](#super-short-form)
 
 ## Principle of least permissions
 Linux starts with, and works best when users + groups have the least privilege needed to do their job. If a user needs to do something to a file, that user should have the right to do that thing and that thing only. 
@@ -219,4 +220,17 @@ In practice, these numbers can look like...
 Using these in a `chmod` command looks like
 ```bash
 ubuntu@primary:~$ chmod 760 the-file.txt
+```
+
+
+#### super short form
+```bash
+# add executable to a file permission
+ubuntu@primary:~$ chmod +x the-file.txt
+
+# add write to a file permission
+ubuntu@primary:~$ chmod +w the-file.txt
+
+# remove write to a file permission
+ubuntu@primary:~$ chmod -w the-file.txt
 ```
