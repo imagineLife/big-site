@@ -36,6 +36,7 @@ These are often referred to as `environment variables`.
 
 In the web-development javascript space this is maybe most often similar to the differences between how an app might run in `dev`,`qa`,`staging`, `production`, `blue`, `green`, `@next`, etc. The `dev,qa,prod` values are often the environment variables. In a node api these might be accessed through `process.env.NODE_ENV`.  
 
+Interesting notes found [here](https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html) and [here](https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html), starting with `variable expansion`.  
 
 ### See all variables with printenv
 Environment variables are stored with a name and a value, like `NAME=value`.  
@@ -71,14 +72,4 @@ ubuntu@primary:~$ ANOTHER_ONE=not-here-yet && echo here is $ANOTHER_ONEhere is n
 There are a few files on a linux os that store environment variables.  
 
 ### System-Wide with /etc/environment
-`/etc/environment` is a file that stores contents that can be used in any shell any time.  
-Store one var per line:
-```bash
-# /etc/environment
-
-VAR_ONE="I want this to be available all the time"
-# can be accessed with $VAR_ONE
-
-VAR_TWO="This one too"
-# can be accessed with $VAR_TWO
-```
+`/etc/environment` is a file that stores contents that can be used in any shell any time. Store one var per line in this file, not many-variables in a single line.  
