@@ -12,6 +12,15 @@ order: 13
 The Linux shell (or terminal or cmd line) runs in "environments".  
 There is something like a "global" environment and also a "local" environment.  
 
+- [Environments](#environments)
+  - [Terminals are Temporary Sessions](#terminals-are-temporary-sessions)
+  - [The Host Machine is a Global Session](#the-host-machine-is-a-global-session)
+  - [Environments Have Variables](#environments-have-variables)
+    - [See all variables with printenv](#see-all-variables-with-printenv)
+  - [See a single variable with echo](#see-a-single-variable-with-echo)
+  - [Set a Temporary Variable](#set-a-temporary-variable)
+  - [Set System-Wide Permanent Variables](#set-system-wide-permanent-variables)
+    - [System-Wide with /etc/environment](#system-wide-with-etcenvironment)
 ## Terminals are Temporary Sessions
 Every time a terminal/cmd window is open, it is a bash "session".  
 Each session can "remember" information. 
@@ -58,5 +67,18 @@ here is
 ubuntu@primary:~$ ANOTHER_ONE=not-here-yet && echo here is $ANOTHER_ONEhere is not-here-yet
 ```
 
-## Set Permanent Variables  
+## Set System-Wide Permanent Variables  
 There are a few files on a linux os that store environment variables.  
+
+### System-Wide with /etc/environment
+`/etc/environment` is a file that stores contents that can be used in any shell any time.  
+Store one var per line:
+```bash
+# /etc/environment
+
+VAR_ONE="I want this to be available all the time"
+# can be accessed with $VAR_ONE
+
+VAR_TWO="This one too"
+# can be accessed with $VAR_TWO
+```
