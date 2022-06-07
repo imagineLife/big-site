@@ -30,7 +30,7 @@ ubuntu@primary:~$ echo $USER
 ubuntu
 ```
 
-## Set a Temporary variable 
+## Set a Temporary Variable 
 ```bash
 # set & use a var in 2 commands
 ubuntu@primary:~$ WHAT=is-this
@@ -44,3 +44,5 @@ here is
 # NEED the '&&' to declare 2 commands in one line
 ubuntu@primary:~$ ANOTHER_ONE=not-here-yet && echo here is $ANOTHER_ONEhere is not-here-yet
 ```
+
+## Set Permanent Variables
