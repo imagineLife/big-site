@@ -29,3 +29,18 @@ ubuntu@primary:~$ printenv
 ubuntu@primary:~$ echo $USER
 ubuntu
 ```
+
+## Set a Temporary variable 
+```bash
+# set & use a var in 2 commands
+ubuntu@primary:~$ WHAT=is-this
+ubuntu@primary:~$ echo $WHAT
+is-this
+
+# cant set a var in the same command as the attempted use
+ubuntu@primary:~$ ANOTHER_ONE=not-here-yet echo here is $ANOTHER_ONE
+here is
+
+# NEED the '&&' to declare 2 commands in one line
+ubuntu@primary:~$ ANOTHER_ONE=not-here-yet && echo here is $ANOTHER_ONEhere is not-here-yet
+```
