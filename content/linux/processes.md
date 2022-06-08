@@ -64,3 +64,9 @@ ubuntu@primary:~$ ps
   58274 pts/0    00:00:00 ps
 [1]+  Killed                  sleep 100
 ```
+A brief overview of the command `kill -s SIGKILL 58271`:
+- `kill` is the command to send a signal
+- `-s` is the flag to send a signal _name_
+  - `-n` can be used instead, and pass the signal _number_
+- `SIGKILL` is the signal being sent 
+- `58271` is the signal number that is recieving the `SIGKILL` signal
