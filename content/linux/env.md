@@ -3,7 +3,7 @@ parentDir: linux
 title: Env and Env Vars
 slug: linux/env
 author: Jake Laursen
-excerpt: 
+excerpt: Linux runs in environments
 tags: linux, kernel, cli, environment, variables
 order: 13
 ---
