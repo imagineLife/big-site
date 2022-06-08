@@ -105,7 +105,7 @@ I'm still learning, but the "login shell" seems to be run when starting the mach
 This "instance" is like a custom config for every time a "local" shell is instantiated.  
 
 ### telling bash_profile to refer to bashrc
-It looks like people prefer the `.bashrc` so much that there's a commin script to make even the `.bash_profile` _look to_ the `.bashrc` for what to do. In the `.bash_profile` doc:  
+It looks like people prefer the `.bashrc` so much that there's a commin script to make even the `.bash_profile` _look to_ the `.bashrc` for how to configure the environment. In the `.bash_profile` doc:  
 ```bash
 if [ -f ~/.bashrc ]; then
     source ~/.bashrc
