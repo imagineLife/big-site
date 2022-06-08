@@ -15,6 +15,9 @@ Opening a terminal is running a process.
 - [Processes](#processes)
   - [See processes with ps](#see-processes-with-ps)
   - [Kill a running process with Kill](#kill-a-running-process-with-kill)
+  - [Running in the Foreground or Background](#running-in-the-foreground-or-background)
+    - [The Foreground](#the-foreground)
+    - [The Background](#the-background)
 
 ## See processes with ps
 `ps` will output processes that are running.  
@@ -70,3 +73,23 @@ A brief overview of the command `kill -s SIGKILL 58271`:
   - `-n` can be used instead, and pass the signal _number_
 - `SIGKILL` is the signal being sent 
 - `58271` is the signal number that is recieving the `SIGKILL` signal
+
+## Running in the Foreground or Background
+Processes run either the foreground or background.  
+
+
+### The Foreground
+In the foreground, processes run and the output appears in the shell.  
+In the foreground, the shell is consumed by the running process && no other processes can be run whil the foreground is consumed.  
+The foreground is where processes run by default: if you see it, its probably in the foreground. That's why running `ps` shows 2 processes: the shell and the `ps` that was just run:
+```bash
+ubuntu@primary:~$ ps
+    PID TTY          TIME CMD
+  43759 pts/0    00:00:00 bash
+  58518 pts/0    00:00:00 ps
+```
+There _are a lot of other processes running_, but those are in the background.  
+
+### The Background
+In the bg, processes can be run that "free up" the shell. The terminal/cmd prompt can be used while processes run in the bg.  
+
