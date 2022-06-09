@@ -22,6 +22,7 @@ Opening a terminal is running a process.
     - [The Foreground](#the-foreground)
     - [The Background](#the-background)
       - [Working With Background Jobs](#working-with-background-jobs)
+  - [Run Processes Synchronously If Previous Process Succeeds](#run-processes-synchronously-if-previous-process-succeeds)
 
 
 ## Processes Start and Exit
@@ -195,3 +196,11 @@ sleep 20
 
 # cant do anything till the 20s passes
 ```
+
+
+## Run Processes Synchronously If Previous Process Succeeds
+`&&` can be used to run a program when a previous program succeeds...
+```bash
+ubuntu@primary:~$ touch this-file.txt && ls >> this-file.txt && ps >> this-file.txt
+```
+That command uses the `&&` operator a few times so that if any program fails the following program(s) will not run.
