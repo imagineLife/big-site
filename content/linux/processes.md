@@ -18,6 +18,7 @@ Opening a terminal is running a process.
   - [Running in the Foreground or Background](#running-in-the-foreground-or-background)
     - [The Foreground](#the-foreground)
     - [The Background](#the-background)
+      - [Working With Background Jobs](#working-with-background-jobs)
 
 ## See processes with ps
 `ps` will output processes that are running.  
@@ -40,7 +41,7 @@ ubuntu@primary:~$ sleep 5 & ps
   58266 pts/0    00:00:00 sleep
   58267 pts/0    00:00:00 ps
 ```
-**note**: `sleep 5` creates a process that waits 5 sec. and then exits.  
+**note**: `sleep 5` creates a process that waits 5 sec. and then exits. `sleep` will be used throughout this doc as `sleep` is a low-impact command that consumes a process.    
 
 ## Kill a running process with Kill
 ```bash
@@ -92,4 +93,42 @@ There _are a lot of other processes running_, but those are in the background.
 
 ### The Background
 In the bg, processes can be run that "free up" the shell. The terminal/cmd prompt can be used while processes run in the bg.  
+Working with background processes feels to me a little mysteryious. To "see" them running is not as clear, obviously, as what is in the terminal, making process-management... a whole new world.  
 
+```bash
+# start a short-lived process in the bg
+ubuntu@primary:~$ sleep 2 &
+[1] 58543
+
+# wait a few seconds till after that is done
+# just press enter
+ubuntu@primary:~$ 
+[1]+  Done                    sleep 2
+```
+It looks like linux will "tell" the shell that the bg process is done on any command run after the bg process finished. Interesting Detail
+
+#### Working With Background Jobs
+- `jobs` is a command that shows background processes
+-  `CTRL + Z` can be used to "move" a process from the running foreground to the background
+```bash
+# make a foreground "sleep"
+ubuntu@primary:~$ sleep 20
+
+# can't do anything with the current terminal, waiting 20....
+
+# quick press CTRL+Z
+^Z
+[1]+  Stopped                 sleep 20
+ubuntu@primary:~$ jobs
+[1]+  Stopped                 sleep 20
+ubuntu@primary:~$ bg 1
+[1]+ sleep 20 &
+ubuntu@primary:~$ ps
+    PID TTY          TIME CMD
+  43759 pts/0    00:00:01 bash
+  71857 pts/0    00:00:00 sleep
+  71858 pts/0    00:00:00 ps
+ubuntu@primary:~$ fg 1
+sleep 20
+
+```
