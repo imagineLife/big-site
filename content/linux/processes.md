@@ -22,7 +22,11 @@ Opening a terminal is running a process.
     - [The Foreground](#the-foreground)
     - [The Background](#the-background)
       - [Working With Background Jobs](#working-with-background-jobs)
-  - [Run Processes Synchronously If Previous Process Succeeds](#run-processes-synchronously-if-previous-process-succeeds)
+  - [Run Processes Synchronously](#run-processes-synchronously)
+    - [If Previous Process Succeeds](#if-previous-process-succeeds)
+    - [If Previous Process Fails](#if-previous-process-fails)
+    - [Regardless of Previous Command output](#regardless-of-previous-command-output)
+  - [Subcommands](#subcommands)
 
 
 ## Processes Start and Exit
@@ -198,9 +202,54 @@ sleep 20
 ```
 
 
-## Run Processes Synchronously If Previous Process Succeeds
+## Run Processes Synchronously 
+### If Previous Process Succeeds
 `&&` can be used to run a program when a previous program succeeds...
 ```bash
 ubuntu@primary:~$ touch this-file.txt && ls >> this-file.txt && ps >> this-file.txt
 ```
 That command uses the `&&` operator a few times so that if any program fails the following program(s) will not run.
+
+### If Previous Process Fails
+`||` can be used to catch when the previous program fails.  
+
+```bash
+# typo, forcing a failure that the || will catch
+ubuntu@primary:~$ touc bad-command.txt || echo "dang"
+
+Command 'touc' not found, did you mean:
+
+  command 'touch' from deb coreutils (8.30-3ubuntu2)
+
+Try: sudo apt install <deb name>
+
+dang
+
+# notice the "dang" above!
+```
+
+### Regardless of Previous Command output
+`;` can be used to run commands regardless of previous command's output status.
+```bash
+ubuntu@primary:~$ touc bad-command.txt; echo "echo string"; echo "runs no matter what"
+
+Command 'touc' not found, did you mean:
+
+  command 'touch' from deb coreutils (8.30-3ubuntu2)
+
+Try: sudo apt install <deb name>
+
+echo string
+runs no matter what
+```
+
+## Subcommands
+These.  
+Run commands in commands.  
+Inception.  
+Use this: `$(sub-command here)`:
+
+```bash
+ubuntu@primary:~$ echo Hi, my name is $(whoami)
+Hi, my name is ubuntu
+```
