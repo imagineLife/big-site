@@ -109,26 +109,39 @@ It looks like linux will "tell" the shell that the bg process is done on any com
 
 #### Working With Background Jobs
 - `jobs` is a command that shows background processes
--  `CTRL + Z` can be used to "move" a process from the running foreground to the background
+-  `CTRL + Z` can be used to stop a process from completing
+-  `bg` can be used to "move" a process from the running foreground to the background
+-  `fg` can be used to "move" a process from the background to the running foreground
+   -  NOTE: `bg` && `fg` get a number added after the command - here the number will be `1` && is incremental by the number of jobs in.... the job line...?
+
 ```bash
 # make a foreground "sleep"
 ubuntu@primary:~$ sleep 20
 
 # can't do anything with the current terminal, waiting 20....
 
-# quick press CTRL+Z
+# quickly press CTRL+Z to stop the running process
 ^Z
 [1]+  Stopped                 sleep 20
+
+# inspect the process, see that it is stopped
 ubuntu@primary:~$ jobs
 [1]+  Stopped                 sleep 20
+# NOTE: use the -l flag to get the pid, why not!
+ubuntu@primary:~$ jobs -l
+[1]+ 71862 Running                 sleep 20 &
+
+# "move" the stopped job to the gb
 ubuntu@primary:~$ bg 1
 [1]+ sleep 20 &
-ubuntu@primary:~$ ps
-    PID TTY          TIME CMD
-  43759 pts/0    00:00:01 bash
-  71857 pts/0    00:00:00 sleep
-  71858 pts/0    00:00:00 ps
+
+# see the status of the bg process, "job"
+ubuntu@primary:~$ jobs
+[1]+  Running                 sleep 20 &
+
+# bring the running job back to the foreground
 ubuntu@primary:~$ fg 1
 sleep 20
 
+# cant do anything till the 20s passes
 ```
