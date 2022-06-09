@@ -13,12 +13,60 @@ A process is a command that is running.
 Opening a terminal is running a process.  
 
 - [Processes](#processes)
+  - [Processes Start and Exit](#processes-start-and-exit)
+    - [View a previous process exit code](#view-a-previous-process-exit-code)
+    - [Exit Codes Rundown](#exit-codes-rundown)
   - [See processes with ps](#see-processes-with-ps)
   - [Kill a running process with Kill](#kill-a-running-process-with-kill)
   - [Running in the Foreground or Background](#running-in-the-foreground-or-background)
     - [The Foreground](#the-foreground)
     - [The Background](#the-background)
       - [Working With Background Jobs](#working-with-background-jobs)
+
+
+## Processes Start and Exit
+They start.  
+They stop, which is also referred to as `exit`.  
+When processes exit, they return an "exit code" which can be useful. The exit code gives info about the "success" or "failure" of the process. 
+### View a previous process exit code
+
+```bash
+# run a process, a small one here, "ps"
+ubuntu@primary:~$ ps
+    PID TTY          TIME CMD
+  43759 pts/0    00:00:01 bash
+  71881 pts/0    00:00:00 ps
+
+# check out the exit code
+ubuntu@primary:~$ echo $?
+0
+
+# try a process that doesn't exist, "horse"
+ubuntu@primary:~$ horse
+
+Command 'horse' not found, did you mean:
+
+  command 'morse' from deb bsdgames (2.17-28build1)
+  command 'morse' from deb morse (2.5-1build1)
+  command 'morse' from deb morse-simulator (1.4-6build1)
+  command 'hose' from deb netpipes (4.2-8build1)
+  command 'horst' from deb horst (5.1-2)
+
+Try: sudo apt install <deb name>
+
+ubuntu@primary:~$ echo $?
+127
+```
+
+### Exit Codes Rundown
+- `0`: success
+- `1`: there was an err
+- `2`: a bash error: the process & program tried to use bash, itself, and a bash err happened
+- `126`: permission err
+- `127`: command not found  
+- `128`: the exit command, itself, threw an err
+- `130`: program was ended with `CTRL + C`
+- `137`: program was ended with `SIGKILL`
 
 ## See processes with ps
 `ps` will output processes that are running.  
@@ -108,6 +156,8 @@ ubuntu@primary:~$
 It looks like linux will "tell" the shell that the bg process is done on any command run after the bg process finished. Interesting Detail
 
 #### Working With Background Jobs
+Some processes might be "long-running": things like installing dependencies, updating dependencies, etc. Using the background can be helpful when working with a long-running job and using the background to run other processes at the same time.
+
 - `jobs` is a command that shows background processes
 -  `CTRL + Z` can be used to stop a process from completing
 -  `bg` can be used to "move" a process from the running foreground to the background
