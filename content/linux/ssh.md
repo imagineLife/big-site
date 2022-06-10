@@ -19,6 +19,11 @@ This doc will use multipass to
 - create a server
 - build & use all the tooling needed to ssh from the client into the server
 
+- [SSH](#ssh)
+  - [Start and Use a Secondary VM with Multipass](#start-and-use-a-secondary-vm-with-multipass)
+  - [Create a user in the Secondary vm](#create-a-user-in-the-secondary-vm)
+  - [Connect to the Secondary From Primary using SSH and Keys](#connect-to-the-secondary-from-primary-using-ssh-and-keys)
+    - [Generate a Public key on the Primary Instance](#generate-a-public-key-on-the-primary-instance)
 
 ## Start and Use a Secondary VM with Multipass
 This can be run from the terminal of the host machine (_my laptop, your laptop, etc._). Although almost all of the previous docs in this linux post series was intended to be used inside a multipass linux instance, this command is not.  
@@ -72,3 +77,37 @@ ubuntu@secondary:~$
 
 ```
 Notice the now-running bash against `ubuntu@secondary`: `secondary` was the name that was assigned to the vm. 
+
+## Create a user in the Secondary vm
+
+```bash
+ubuntu@secondary:~$ sudo useradd -s /bin/bash -m -g ubuntu auser
+ubuntu@secondary:~$ sudo passwd auser
+# apassword
+New password: 
+Retype new password: 
+```
+
+## Connect to the Secondary From Primary using SSH and Keys
+SSH Keys. Sorta complicated.  
+**The Client** gets an SSH Key. This one is public. The client initates an SSH connection with the server.   
+**The Server** get an SSH Key.  This is private.  This is not meant to be shared with anyone. The SSH protocol uses these keys to authenticate client requests and data traffic between the client and server.  
+
+### Generate a Public key on the Primary Instance
+``` bash
+ubuntu@primary:~$ ssh-keygen -t rsa
+Generating public/private rsa key pair.
+
+# a few prompts, I press "enter" at each for ease of learning
+Enter file in which to save the key (/home/ubuntu/.ssh/id_rsa): 
+
+# 
+Enter passphrase (empty for no passphrase): 
+
+# 
+Enter same passphrase again: 
+
+Your identification has been saved in /home/ubuntu/.ssh/id_rsa
+Your public key has been saved in /home/ubuntu/.ssh/id_rsa.pub
+# results will show here...
+```
