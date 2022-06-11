@@ -24,6 +24,9 @@ This doc will use multipass to
   - [Create a user in the Secondary vm](#create-a-user-in-the-secondary-vm)
   - [Connect to the Secondary From Primary using SSH and Keys](#connect-to-the-secondary-from-primary-using-ssh-and-keys)
     - [Generate a Public key on the Primary Instance](#generate-a-public-key-on-the-primary-instance)
+    - [Save the Primary public key in the Secondary vm](#save-the-primary-public-key-in-the-secondary-vm)
+    - [Adjust the key permissions](#adjust-the-key-permissions)
+    - [Use the Secondary IP to SSH from Primary](#use-the-secondary-ip-to-ssh-from-primary)
 
 ## Start and Use a Secondary VM with Multipass
 This can be run from the terminal of the host machine (_my laptop, your laptop, etc._). Although almost all of the previous docs in this linux post series was intended to be used inside a multipass linux instance, this command is not.  
@@ -94,6 +97,9 @@ SSH Keys. Sorta complicated.
 **The Server** get an SSH Key.  This is private.  This is not meant to be shared with anyone. The SSH protocol uses these keys to authenticate client requests and data traffic between the client and server.  
 
 ### Generate a Public key on the Primary Instance
+The Primary ubuntu vm will generate an ID and public key using the `ssh-keygen` program.  
+**NOTE**: below opts out of adding a "passphrase". In a more "serious" environment, passphrases make it so that anytime the ssh key is used the passphrase is needed to be entered - adds a little more security.  
+
 ``` bash
 ubuntu@primary:~$ ssh-keygen -t rsa
 Generating public/private rsa key pair.
@@ -110,4 +116,55 @@ Enter same passphrase again:
 Your identification has been saved in /home/ubuntu/.ssh/id_rsa
 Your public key has been saved in /home/ubuntu/.ssh/id_rsa.pub
 # results will show here...
+```  
+The `~/.ssh/id_rsa.pub` is the public key needed!  
+
+
+### Save the Primary public key in the Secondary vm
+Copy the `~/.ssh/id_rsa.pub` value. It will be used in the secondary machine.  
+
+Go to the secondary vm terminal. Use the user created in a previous post:
+```bash
+ubuntu@secondary:~$ su auser
+Password: 
+auser@secondary:/home/ubuntu$ whoami
+auser
 ```
+
+Store the key from the primary in a new dir:
+```bash
+auser@secondary:~$ mkdir ~/.ssh
+auser@secondary:~$ vi ~/.ssh/authorized_keys 
+
+# paste in copied ssh id_rsa.pub from primary, write, and quit
+```
+
+### Adjust the key permissions
+```bash
+# 700 = no priv on anyone but this user, the 'auser', who can do all
+auser@secondary:~$ chmod 700 ~/.ssh
+
+# 600 = only editable by this user, the `auser`
+auser@secondary:~$ chmod 600 ~/.ssh/authorized_keys
+```
+
+### Use the Secondary IP to SSH from Primary
+Get the secondary IP Address using `ifconfig`. Note here, I had to install ifconfig following the directions in the shell ->
+```bash
+# in the secondary shell...
+
+ifconfig
+# may need to install, then run this again after it is installed
+# ...get the XXX.XXX.XX.X
+#  ...mine is 192.168.64.4
+```
+Copy that ip.  
+Get to the shell instance of the primary vm.  
+ssh into the secondary:
+```bash
+ssh horse@192.168.64.4
+# will prompt to asure that you want to do this
+```
+Now, the "primary" shell is talking over the host "internet" (_in this case the host machine's "internal" network_) and is running a shell instance of the secondary machine logged in ash the `horse` user.  
+
+Epic.  
