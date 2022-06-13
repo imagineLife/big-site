@@ -73,7 +73,26 @@ exports.createPages = async ({
       }
       linux: allMarkdownRemark(
         sort: { fields: frontmatter___order }
-        filter: { frontmatter: { order: { gt: 0 }, slug: { regex: "/linux/" } } }
+        filter: {
+          frontmatter: { order: { gt: 0 }, slug: { regex: "/linux/" } }
+        }
+      ) {
+        pages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              excerpt
+              parentDir
+            }
+          }
+        }
+      }
+      py: allMarkdownRemark(
+        sort: { fields: frontmatter___order }
+        filter: {
+          frontmatter: { order: { gt: 0 }, slug: { regex: "/py/" } }
+        }
       ) {
         pages: edges {
           page: node {
@@ -201,6 +220,7 @@ exports.createPages = async ({
       charts: { chartList: chartsPages },
       febs: { pages: febsPages },
       linux: { pages: linuxPages },
+      py: { pages: pythonPages },
       strengths: { pages: strengthsPages },
       misc: { pages: miscPages },
       mongo: { pages: mongoPages },
@@ -217,6 +237,7 @@ exports.createPages = async ({
     ...recipePages,
     ...febsPages,
     ...linuxPages,
+    ...pythonPages,
     ...strengthsPages,
     ...miscPages,
     ...mongoPages,

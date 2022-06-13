@@ -101,6 +101,13 @@ const pluginsArr = [
   {
     resolve: `gatsby-source-filesystem`,
     options: {
+      name: `py`,
+      path: `content/py`,
+    },
+  },
+  {
+    resolve: `gatsby-source-filesystem`,
+    options: {
       name: `node`,
       path: `content/node`,
     },
@@ -126,7 +133,7 @@ const pluginsArr = [
       path: `${__dirname}/content/http-server`,
     },
   },
-]
+];
   
 if (process.env.NODE_ENV === 'production') {
   pluginsArr.push({

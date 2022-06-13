@@ -15,8 +15,11 @@ order: 1
 - open a command prompt && `cd` into your desktop
 - run `python first-script.py`
 
+
+## TOC
 - [Creating A Python Program](#creating-a-python-program)
   - [TL;DR](#tldr)
+  - [TOC](#toc)
   - [Prerequesites](#prerequesites)
   - [Steps](#steps)
     - [Open a Terminal and Navigate to your Desktop](#open-a-terminal-and-navigate-to-your-desktop)
