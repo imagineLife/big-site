@@ -13,3 +13,11 @@ Whereas ssh is about conncting 2 machine together through a terminal, sfpt is ab
 SFTP stands for "Secure File Transfer Protocol".  
 
 
+```bash
+# install smtp
+
+sudo apt install opensmtpd
+# in the PRIMARY instance,
+# sftp into secondary by the secondary ip
+sftp horse@192.168.64.4
+```
