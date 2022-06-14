@@ -8,16 +8,32 @@ tags: linux, kernel, cli, ssh, sftp
 order: 16
 ---
 
-# SFTP
+# Manage Files Remotely with SFTP
 Whereas ssh is about conncting 2 machine together through a terminal, sfpt is about sharing files.  
 SFTP stands for "Secure File Transfer Protocol".  
+SFTP allows for very similar abilities as ssh.
 
-
+## SFTP is active in Both Locations
+When using sftp, one shell connects to another machine. In this case, sftp connects from one vm to another, both running on the host machine (_the laptop_). The Primary instance will sftp into the secondary instance:
 ```bash
-# install smtp
-
-sudo apt install opensmtpd
 # in the PRIMARY instance,
 # sftp into secondary by the secondary ip
 sftp horse@192.168.64.4
+```
+
+Now, the primary shell can run commans against both the primary vm and the secondary vm. This might be the primary difference between sftp and ssh: ssh is _only_ in the "remote" machine, whereas sftp is active in both:
+```bash
+# sftp into secondary
+ubuntu@primary:~$ sftp horse@192.168.64.4
+Connected to 192.168.64.4.
+
+# notice the shell prefix changes to "sftp>"
+sftp> ls
+
+# prefix a command with an "l" for "local"
+# this runs "ls" in the primary instance
+sftp> lls
+Home		 dock	     sauce	 snap
+bad-command.txt  errors.txt  secret.txt  this-file.txt
+sftp> 
 ```
