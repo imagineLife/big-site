@@ -50,3 +50,24 @@ sftp>
 ```
 
 ## Moving Files with get and put
+```bash
+# sftp into secondary
+ubuntu@primary:~$ sftp horse@192.168.64.4
+Connected to 192.168.64.4.
+
+# notice the shell prefix changes to "sftp>"
+# look at files in current machine working dir
+sftp> lls
+Home		 dock	     sauce	 snap
+bad-command.txt  errors.txt  secret.txt  this-file.txt
+
+# move the this-file.txt to the other machine as that-file.txt
+sftp> put this-file.txt that-file.txt
+Uploading this-file.txt to /home/horse/that-file.txt
+this-file.txt                                                      100%  147    56.7KB/s   00:00  
+
+# GET a file from the remote
+sftp> get that-file.txt got-file.txt
+Fetching /home/horse/that-file.txt to got-file.txt
+/home/horse/that-file.txt                                                                                                                                                 100%  147    67.7KB/s   00:00    
+```
