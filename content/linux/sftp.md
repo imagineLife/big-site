@@ -13,6 +13,9 @@ Whereas ssh is about conncting 2 machine together through a terminal, sfpt is ab
 SFTP stands for "Secure File Transfer Protocol".  
 SFTP allows for very similar abilities as ssh.
 
+- [Manage Files Remotely with SFTP](#manage-files-remotely-with-sftp)
+  - [SFTP is active in Both Locations](#sftp-is-active-in-both-locations)
+  - [Moving Files with get and put](#moving-files-with-get-and-put)
 ## SFTP is active in Both Locations
 When using sftp, one shell connects to another machine. In this case, sftp connects from one vm to another, both running on the host machine (_the laptop_). The Primary instance will sftp into the secondary instance:
 ```bash
@@ -35,5 +38,15 @@ sftp> ls
 sftp> lls
 Home		 dock	     sauce	 snap
 bad-command.txt  errors.txt  secret.txt  this-file.txt
+
+# in secondary
+sftp> pwd
+Remote working directory: /home/horse
+
+# in primary
+sftp> lpwd
+Local working directory: /home/ubuntu
 sftp> 
 ```
+
+## Moving Files with get and put
