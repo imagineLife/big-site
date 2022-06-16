@@ -31,5 +31,27 @@ horse@secondary:~$ chmod 700 bash2048.sh
 # run it, 2048 in the shell!
 horse@secondary:~$. bash2048.sh
 ```   
-
+One interesting thing about `wget`: it will crawl & download any contents in a document it gets from the web, sort of "recursively".  
 ## using curl
+cUrl is used a bunch.
+
+### Spin Up an http server with python
+Luckily, ubuntu comes with python.  
+Python has a built-in http server.  
+This will turn on an http server.
+
+```bash
+# FIRST, get the ip of the multipass vm on my machine
+ubuntu@primary:~$ ifconfig
+# mine returned 192.168.64.2
+
+# NEXT, look for files &/or create a text file in the root dir
+# of the multipass vm to serve through an endpoint
+
+# turn on an http server, and make the http server accessible from the host machine
+ubuntu@primary:~$ python3 -m http.server 8000 --bind 0.0.0.0
+
+# now, the server is available through the browser: try
+# http://192.168.64.2:8000/this-file.txt
+
+```
