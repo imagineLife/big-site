@@ -80,9 +80,17 @@ Use curl to fetch the contents of a file from the python http server:
 ubuntu@primary:~$ curl http://192.168.64.2:8000/this-file.txt
 # NOTE: the contents of the file you pick will appear in the terminal
 ```
+
+Making a request to the multipass vm without a file attached to the url (_for me the http://192.168.64.2:8000_) will also work, and will return a list of files/folders that are available.  
 #### curl works on macs too
 curl can be used from a terminal instance in a mac shell session.  
 If you have a mac, you can open a terminal instance and use curl without needed to open a multipass instance into the primary vm.  
+
+```bash
+ubuntu@primary:~$ curl http://192.168.64.2:8000
+# NOTE: this should return a string that represents an html doc.  
+
+```
 
 #### curl works on windows
 I don't have a windows machine.  
