@@ -9,9 +9,13 @@ order: 17
 ---
 
 # Request info from the web 
+`wget` and `curl` are 2 tools that can be used to "fetch" info from the web.  
 
+- [Request info from the web](#request-info-from-the-web)
+  - [Using wget](#using-wget)
+  - [using curl](#using-curl)
+    - [Spin Up an http server with python](#spin-up-an-http-server-with-python)
 ## Using wget
-`wget` can be used to get info from the world wide web in bash. `wget` will be used to pull a file from the web.
 ```bash
 horse@secondary:~$ wget https://raw.githubusercontent.com/btholt/bash2048/master/bash2048.sh
 --2022-06-15 20:57:17--  https://raw.githubusercontent.com/btholt/bash2048/master/bash2048.sh
@@ -36,9 +40,11 @@ One interesting thing about `wget`: it will crawl & download any contents in a d
 cUrl is used a bunch.
 
 ### Spin Up an http server with python
+In this case, the files in the `primary` multipass instance will be available through a browser (_chrome_).  
 Luckily, ubuntu comes with python.  
 Python has a built-in http server.  
-This will turn on an http server.
+This will turn on an http server.  
+The server will make files on the os available through something like a browser url.  
 
 ```bash
 # FIRST, get the ip of the multipass vm on my machine
@@ -53,5 +59,4 @@ ubuntu@primary:~$ python3 -m http.server 8000 --bind 0.0.0.0
 
 # now, the server is available through the browser: try
 # http://192.168.64.2:8000/this-file.txt
-
 ```
