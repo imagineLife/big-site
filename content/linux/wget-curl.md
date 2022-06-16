@@ -15,6 +15,10 @@ order: 17
   - [Using wget](#using-wget)
   - [using curl](#using-curl)
     - [Spin Up an http server with python](#spin-up-an-http-server-with-python)
+    - [use curl](#use-curl)
+      - [use curl in a multipash bash shell](#use-curl-in-a-multipash-bash-shell)
+      - [curl works on macs too](#curl-works-on-macs-too)
+      - [curl works on windows](#curl-works-on-windows)
 ## Using wget
 ```bash
 horse@secondary:~$ wget https://raw.githubusercontent.com/btholt/bash2048/master/bash2048.sh
@@ -60,3 +64,26 @@ ubuntu@primary:~$ python3 -m http.server 8000 --bind 0.0.0.0
 # now, the server is available through the browser: try
 # http://192.168.64.2:8000/this-file.txt
 ```
+
+### use curl
+With an http server up & running to use as target practice,  `cUrl` can be used in bash to get info from the multipass+python server (_somewhat like a browser getting info from 192.168..._).  
+#### use curl in a multipash bash shell
+Open a new terminal session into the multipass primary instance:
+```bash
+# open a new terminal on your laptop/machine
+# open a new terminal session connected to the primary multipass vm
+multipass shell primary
+```
+
+Use curl to fetch the contents of a file from the python http server:
+```bash
+ubuntu@primary:~$ curl http://192.168.64.2:8000/this-file.txt
+# NOTE: the contents of the file you pick will appear in the terminal
+```
+#### curl works on macs too
+curl can be used from a terminal instance in a mac shell session.  
+If you have a mac, you can open a terminal instance and use curl without needed to open a multipass instance into the primary vm.  
+
+#### curl works on windows
+I don't have a windows machine.  
+Word-on-the-street is that curl works on every windows instance with windows 10 or newwer!
