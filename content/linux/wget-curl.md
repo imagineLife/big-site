@@ -19,6 +19,9 @@ order: 17
       - [use curl in a multipash bash shell](#use-curl-in-a-multipash-bash-shell)
       - [curl works on macs too](#curl-works-on-macs-too)
       - [curl works on windows](#curl-works-on-windows)
+    - [Pipe curl output to a file](#pipe-curl-output-to-a-file)
+    - [Request only metadata from a server](#request-only-metadata-from-a-server)
+    - [Others](#others)
 ## Using wget
 ```bash
 horse@secondary:~$ wget https://raw.githubusercontent.com/btholt/bash2048/master/bash2048.sh
@@ -94,4 +97,86 @@ ubuntu@primary:~$ curl http://192.168.64.2:8000
 
 #### curl works on windows
 I don't have a windows machine.  
-Word-on-the-street is that curl works on every windows instance with windows 10 or newwer!
+Word-on-the-street is that curl works on every windows instance with windows 10 or newwer!   
+
+### Pipe curl output to a file
+This will request to the server & put the resulting contents in a file called `localhost-output.txt`:
+```bash
+ubuntu@primary:~$ curl http://localhost:8000 > localhost-output.txt
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  1158  100  1158    0     0  89076      0 --:--:-- --:--:-- --:--:-- 89076
+
+```
+
+### Request only metadata from a server
+This will make a "head" request (_there's a bit to learn about http here_) rather than a "regular" request:
+```bash
+ubuntu@primary:~$ curl -I http://localhost:8000
+# or
+ubuntu@primary:~$ curl --head http://localhost:8000
+
+# will return something like...
+HTTP/1.0 200 OK
+Server: SimpleHTTP/0.6 Python/3.8.10
+Date: Thu, 16 Jun 2022 12:17:40 GMT
+Content-type: text/html; charset=utf-8
+Content-Length: 1158
+```
+Sometimes this can be helpful.  
+
+### Others
+use http verbs.  
+pass cookies in the request.  
+follow redirects.  
+pass headers to the request.  
+```bash
+# use a verb
+# NOTE: the http server is not setup to deal with verbs, 
+# this request is just to show that curl can do it!
+ubuntu@primary:~$ curl -X PUT http://localhost:8000
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <title>Error response</title>
+    </head>
+    <body>
+        <h1>Error response</h1>
+        <p>Error code: 501</p>
+        <p>Message: Unsupported method ('PUT').</p>
+        <p>Error code explanation: HTTPStatus.NOT_IMPLEMENTED - Server does not support this operation.</p>
+    </body>
+</html>
+
+
+# pass a cookie
+# here with the -b flag and a "key=value" pair 
+ubuntu@primary:~$ curl -b "name=qwer" http://localhost:8000
+
+
+
+
+# 
+# follow redirects...
+# 
+ubuntu@primary:~$ curl http://bit.ly/linux-cli
+<html>
+<head><title>Bitly</title></head>
+<body><a href="https://btholt.github.io/complete-intro-to-linux-and-the-cli/">moved here</a></body>
+# THAT "redirects" to a different url
+# passing the -L flag to curl will tell curl to notice && follow the redirect url
+
+ubuntu@primary:~$ curl -L http://bit.ly/linux-cli
+
+
+# 
+# include headers in a curl request
+# 
+# the -H flag allows for a single header
+# curl can take a lot of -H flags, one per header
+ubuntu@primary:~$ curl -H "'accept-language: en-US" -H "Authorization: Bearer tokenvaluehere" http://localhost:8000
+
+ubuntu@primary:~$ 
+```
