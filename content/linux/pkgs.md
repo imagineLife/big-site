@@ -13,6 +13,13 @@ Ubuntu comes with tools.
 Tools are like "packages", bundled bits of useful commands.  
 Packages get managed: updated, bugs reported, versioned, etc. There are a lot of packages, as well as package managers.  
 
+- [Packages and Package Management](#packages-and-package-management)
+  - [There are many package managers](#there-are-many-package-managers)
+    - [APT-GET](#apt-get)
+    - [APT](#apt)
+      - [install lolcat](#install-lolcat)
+      - [install node](#install-node)
+      - [More Commands](#more-commands)
 ## There are many package managers
 - `dpkg` is the package manager for Debian (_the "parent" of ubuntu_)
 - `APT` is _based on_ `dpkg` && is available is debian linux distrobutions
@@ -82,4 +89,26 @@ ubuntu@primary:~$ sudo apt install nodejs
 # try it out!
 ubuntu@primary:~$ node -e "console.log(12 * 4)"
 48
+```
+
+
+#### More Commands
+A brief overview of some more `apt` commands:
+```bash
+# remove unused dependencies
+ubuntu@primary:~$ apt --help
+
+Most used commands:
+  list - list packages based on package names
+  search - search in package descriptions
+  show - show package details
+  install - install packages
+  reinstall - reinstall packages
+  remove - remove packages
+  autoremove - Remove automatically all unused packages
+  update - update list of available packages
+  upgrade - upgrade the system by installing/upgrading packages
+  full-upgrade - upgrade the system by removing/installing/upgrading packages
+  edit-sources - edit the source information file
+  satisfy - satisfy dependency strings
 ```
