@@ -14,7 +14,9 @@ The program is the file that has all the bash code in it.
 
 - [Using Bash to Write Scripts](#using-bash-to-write-scripts)
   - [Create a dir and some files](#create-a-dir-and-some-files)
-    - [Making File-Creator A Runnable Command](#making-file-creator-a-runnable-command)
+    - [Making File-Creator A Runnable Command with #!](#making-file-creator-a-runnable-command-with-)
+      - [#!](#)
+      - [Update the File Permissions to be executable](#update-the-file-permissions-to-be-executable)
 ## Create a dir and some files
 ```bash
 
@@ -53,6 +55,65 @@ As a brief recap:
 - the program creates a dir, creates a few files, and echos a string to the terminal
 - the program gets run by bash with one of the keywords `bash` or `.` or `source`
 
-### Making File-Creator A Runnable Command
+### Making File-Creator A Runnable Command with #!
 Many built-in programs are runnable without the `bash` or `.` or `source` keyword.  
 Programs like `cp` or `ls` or `mv`... all of these may be a "no duh" that they don't need any other keyword to run.  
+Interestingly, the `file-creator.sh` file can include a simple one-liner that makes bash look at the file and run it without the requirement of the keyword `bash` or `.` or `source`.  
+
+```bash
+#! /bin/bash
+```
+Thats it.  
+Put that as the first line in a file.  
+The file will be runnable without a keyword before the file name.  
+
+I'll do this one way
+```bash
+# copy the file to a new file, similarly named
+ubuntu@primary:~$ cp file-creator.sh runnable-file-creator.sh
+
+# edit with vi
+ubuntu@primary:~$ vi runnable-file-creator.sh
+
+# ...vi opens...
+
+
+#! /bin/bash
+mkdir -p ~/script-created
+cd ~/script-created
+touch file{1..10}.txt
+cd ..
+echo "done creating files in script-created"
+
+# ...exit vi with :wq
+
+# see the new file
+ubuntu@primary:~$ cat runnable-file-creator.sh 
+#! /bin/bash
+mkdir -p ~/script-created
+cd ~/script-created
+touch file{1..10}.txt
+cd ..
+echo "done creating files in script-created"
+```
+This is the _same exact file_, accept with a different name and only 1 line difference - the first line.  
+
+#### #!
+pronounced Hashbang.  
+I learned it as "shebang" (_pronounced something like shi-bang_).  
+Has to be the first line in the file.  
+Then gets followed by an absolute path. In this case by `/bin/bash`.  
+
+#### Update the File Permissions to be executable
+```bash
+# see current permissions
+ubuntu@primary:~$ ls -lah runnable-file-creator.sh 
+-rw-rw-r-- 1 ubuntu ubuntu 132 Jun 17 09:27 runnable-file-creator.sh
+
+# NOTICE: nobody has the x, so the file is not executable.
+
+# update the permissions && see the results
+ubuntu@primary:~$ chmod 700 runnable-file-creator.sh 
+ubuntu@primary:~$ ls -lah runnable-file-creator.sh 
+-rwx------ 1 ubuntu ubuntu 132 Jun 17 09:27 runnable-file-creator.sh
+```
