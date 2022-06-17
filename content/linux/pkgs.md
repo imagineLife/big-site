@@ -20,6 +20,10 @@ Packages get managed: updated, bugs reported, versioned, etc. There are a lot of
       - [install lolcat](#install-lolcat)
       - [install node](#install-node)
       - [More Commands](#more-commands)
+    - [More Recent Package Management with Snaps](#more-recent-package-management-with-snaps)
+      - [Sandboxed](#sandboxed)
+      - [Delta-Driven Updates](#delta-driven-updates)
+      - [auto updates](#auto-updates)
 ## There are many package managers
 - `dpkg` is the package manager for Debian (_the "parent" of ubuntu_)
 - `APT` is _based on_ `dpkg` && is available is debian linux distrobutions
@@ -113,3 +117,35 @@ Most used commands:
   edit-sources - edit the source information file
   satisfy - satisfy dependency strings
 ```
+
+
+### More Recent Package Management with Snaps
+Linux packages get packaged in several ways with several tools.  
+`APT` is a little unsafe - bad code can be introduced.  
+People try to install untrusted code and/or make code installable.  
+`APT` code is reviewed by open-source devs: this is fallable, not scalable, and not really "secure".  
+This happens with `npm`, the node package manager.  
+
+There are several initiatives to approach this problem & `snaps` is officially supported by canonical that is for ubuntu. These can also run on any linux distro, not just ubuntu.  
+`APT`, though, is just for ubuntu.
+
+GUI tools, in ubuntu, are installed with `snap`.  
+
+Mint & Redhat (_distros of linux_) need snaps installed - they don't come with it.  
+
+```bash
+# use snap to download a module
+# NOTE: REVIEW THESE FLAGS if you want
+sudo snap install --channel=16/stable --classic node
+```
+[Here's a q&a](https://askubuntu.com/questions/866511/what-are-the-differences-between-snaps-appimage-flatpak-and-others) comparing some nuts & bolts of packaging tools for reference.  
+
+#### Sandboxed
+Packages are enclosed && include all the code needed to run it. Code doesn't have the ability to do anything beyond its own codebase.  
+
+#### Delta-Driven Updates
+Apparently, `apt`, when updating a package, throws away the old version and downloads the new version.  
+`snaps`, though, can only ship the changes - less code over the web and less code to update.  
+
+#### auto updates
+`snaps` auto-update: browsers auto-update... interesting parallel.  
