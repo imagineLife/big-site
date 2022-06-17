@@ -117,3 +117,15 @@ ubuntu@primary:~$ chmod 700 runnable-file-creator.sh
 ubuntu@primary:~$ ls -lah runnable-file-creator.sh 
 -rwx------ 1 ubuntu ubuntu 132 Jun 17 09:27 runnable-file-creator.sh
 ```
+
+Now, run it:
+```bash
+ubuntu@primary:~$ ls
+# ...might show more stuff, but should definitely include
+runnable-file-creator.sh 
+# ...
+
+ubuntu@primary:~$ ./runnable-file-creator.sh 
+done creating files in script-created
+
+```
