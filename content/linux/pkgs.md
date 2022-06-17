@@ -97,6 +97,7 @@ A brief overview of some more `apt` commands:
 ```bash
 # remove unused dependencies
 ubuntu@primary:~$ apt --help
+# ...shows more, here's a brief rundown...
 
 Most used commands:
   list - list packages based on package names
