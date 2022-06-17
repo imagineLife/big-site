@@ -21,5 +21,21 @@ Packages get managed: updated, bugs reported, versioned, etc. There are a lot of
 - `Pacman` is for the Arch distro
 - `APK` is the manager of alpine
 
-## APT
-`APT` stands for "advanced package tooling". 
+### APT-GET
+The `APT` in `APT-GET` stands for "advanced package tooling".   
+`APT-GET` is older than apt.  
+
+
+### APT 
+`apt install` is the command to download packages.   
+
+#### install lolcat
+Here, download a tool that turns cli output into a rainbow: 
+`lolcat`.  
+`sudo apt install lolcat`.  
+Then send some content to lolcat with `ls -lah | lolcat`
+
+#### install node
+```bash
+
+```
