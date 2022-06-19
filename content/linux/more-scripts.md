@@ -36,6 +36,8 @@ echo "done creating files in script-created"
     - [Making File-Names Flexible through Reading Parameters](#making-file-names-flexible-through-reading-parameters)
   - [Adding Defaults](#adding-defaults)
   - [Collecting User Input at Start](#collecting-user-input-at-start)
+  - [Conditionally set a Default Directory with If](#conditionally-set-a-default-directory-with-if)
+    - [If Syntax](#if-syntax)
 ## Add Flexibility through Reading Parameters
 `read` is a program that takes "user input" parameters: `read` will wait till you, the person in from of the terminal in this case, enter something _after running a program_. Then, read will "use" the input you've entered in the rest of the program. 
 
@@ -167,3 +169,19 @@ ubuntu@primary:~$ ls ~/custom-dir/
 qwer1.txt   qwer2.txt  qwer4.txt  qwer6.txt  qwer8.txt
 qwer10.txt  qwer3.txt  qwer5.txt  qwer7.txt  qwer9.txt
 ```
+
+## Conditionally set a Default Directory with If
+Perhaps the user of the program, you in this moment, does not provide a directory to store the new files.  
+Bash can be used to help simplify this by looking for user input and running a _condition_, where `if the user did not give a value` for the directory path, the bash program will use something we tell it to - lets call it `new-dir`.  
+### If Syntax
+```bash
+# if not there
+if [ -z $THE_VALUE_HERE ]; then
+  echo "do something here"
+fi
+```
+- `if` starts the conditional logic
+- `[];` is where the conditional "test" lives, the meat of the condition
+- `-z` is a zero-length string (_not there in our case_)
+- `then` leaves room for what the program should do when the if condition is true
+- `fi` finishes the if condition and what-to-do when the `if [];` condition is true: everything after the `fi` runs regardless of the `if [];` condition truthyness
