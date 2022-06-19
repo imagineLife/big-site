@@ -97,3 +97,32 @@ ubuntu@primary:~$ ls ~/script-created/
 horse1.txt   horse2.txt  horse4.txt  horse6.txt  horse8.txt
 horse10.txt  horse3.txt  horse5.txt  horse7.txt  horse9.txt
 ```
+## Adding Defaults to User Input
+Perhaps a "default" value is required when creating a file, in our example. If/when the user does NOT enter a file-name prefix but you want your `file-creator` program to _use a default file-prefix name_, that is do-able.    
+Lets update the above script again:  
+```bash
+#! /bin/bash
+
+read -p "enter a file-name prefix for your new files: " FILENAME_PREFIX
+
+F_OR_THIS="${FILENAME_PREFIX:-default}"
+
+mkdir -p ~/script-created
+cd ~/script-created
+
+touch ${F_OR_THIS}{1..10}.txt
+
+cd ..
+echo "done creating files in script-created"
+```
+When setting a default here
+- get the user input in a var called `FILENAME_PREFIX`
+- create a new var called `F_OR_THIS`
+- set the value of `F_OR_THIS` to either the user input OR `default`
+
+Running this with no user input will add a bunch of files with new `default` names:
+```bash
+ubuntu@primary:~$ ls ~/script-created/
+default1.txt   default2.txt  default4.txt  default6.txt  default8.txt
+default10.txt  default3.txt  default5.txt  default7.txt  default9.txt
+```
