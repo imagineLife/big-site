@@ -29,6 +29,13 @@ cd ..
 echo "done creating files in script-created"
 ```
 
+
+- [Beefing Up Bash Programs](#beefing-up-bash-programs)
+  - [Add Flexibility through Reading Parameters](#add-flexibility-through-reading-parameters)
+    - [Prompt for User Input with the Prompt Flag](#prompt-for-user-input-with-the-prompt-flag)
+    - [Making File-Names Flexible through Reading Parameters](#making-file-names-flexible-through-reading-parameters)
+  - [Adding Defaults](#adding-defaults)
+  - [Collecting User Input at Start](#collecting-user-input-at-start)
 ## Add Flexibility through Reading Parameters
 `read` is a program that takes "user input" parameters: `read` will wait till you, the person in from of the terminal in this case, enter something _after running a program_. Then, read will "use" the input you've entered in the rest of the program. 
 
@@ -97,7 +104,7 @@ ubuntu@primary:~$ ls ~/script-created/
 horse1.txt   horse2.txt  horse4.txt  horse6.txt  horse8.txt
 horse10.txt  horse3.txt  horse5.txt  horse7.txt  horse9.txt
 ```
-## Adding Defaults to User Input
+## Adding Defaults
 Perhaps a "default" value is required when creating a file, in our example. If/when the user does NOT enter a file-name prefix but you want your `file-creator` program to _use a default file-prefix name_, that is do-able.    
 Lets update the above script again:  
 ```bash
@@ -125,4 +132,38 @@ Running this with no user input will add a bunch of files with new `default` nam
 ubuntu@primary:~$ ls ~/script-created/
 default1.txt   default2.txt  default4.txt  default6.txt  default8.txt
 default10.txt  default3.txt  default5.txt  default7.txt  default9.txt
+```
+
+## Collecting User Input at Start
+In the above example, the `read` program is used _during the program_ to collect user input to affect what the program does.  
+User input can also be collected at the same time of "calling" or running the program, like `file-creator this-dir` could be used to name the directory where the new files go.  
+In the `file-creator` file, the "hard-coded" destination directory of `script-created` will be replaced with a variable. User-Input "arguments" of a program are referenced by the order they are entered, referenced by number, starting with 1, as `$1`, `$2`, etc.  
+
+Here's the adjusted `file-creator` file:  
+```bash
+#! /bin/bash
+
+DEST=$1
+
+read -p "enter a file-name prefix for your new files: " FILENAME_PREFIX
+F_OR_THIS="${FILENAME_PREFIX:-default}"
+
+mkdir -p ~/$DEST
+cd ~/$DEST
+
+touch ${F_OR_THIS}{1..10}.txt
+
+cd ..
+echo "done creating files in ~/${DEST}"
+```
+
+give that a run-through:
+```bash
+ubuntu@primary:~$ file-creator custom-dir
+enter a file-name prefix for your new files: qwer
+done creating files in ~/custom-dir
+
+ubuntu@primary:~$ ls ~/custom-dir/
+qwer1.txt   qwer2.txt  qwer4.txt  qwer6.txt  qwer8.txt
+qwer10.txt  qwer3.txt  qwer5.txt  qwer7.txt  qwer9.txt
 ```
