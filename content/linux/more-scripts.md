@@ -59,3 +59,41 @@ here's a program, write a person you'd like to say hello to: frank
 
 hello frankubuntu@primary:~$ 
 ```
+
+### Making File-Names Flexible through Reading Parameters
+This `file-creator` program can be updated with `read` to take some params and make the program more flexible:  
+
+```bash
+ubuntu@primary:~$ cat ~/bin/file-creator
+
+#! /bin/bash
+mkdir -p ~/script-created
+cd ~/script-created
+touch file{1..10}.txt
+cd ..
+echo "done creating files in script-created"
+```
+
+Lets set the filenames to be based on a prompted user-input variable with `read`:
+```bash
+#! /bin/bash
+
+read -p "enter a file-name prefix for your new files: " FILENAME_PREFIX
+
+mkdir -p ~/script-created
+cd ~/script-created
+touch ${FILENAME_PREFIX}{1..10}.txt
+cd ..
+echo "done creating files in script-created"
+```
+
+Try it out - here's I'll prefix each file with "horse":  
+```bash
+ubuntu@primary:~$ file-creator 
+enter a file-name prefix for your new files: horse
+done creating files in script-created
+
+ubuntu@primary:~$ ls ~/script-created/
+horse1.txt   horse2.txt  horse4.txt  horse6.txt  horse8.txt
+horse10.txt  horse3.txt  horse5.txt  horse7.txt  horse9.txt
+```
