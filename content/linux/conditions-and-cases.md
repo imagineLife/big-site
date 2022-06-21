@@ -19,6 +19,7 @@ A brief intro into bash conditional details are covered in the [more-scripts](/m
     - [Numbers are Greater or Less Than](#numbers-are-greater-or-less-than)
     - [Files exists](#files-exists)
   - [Conditions with If and Else](#conditions-with-if-and-else)
+  - [Conditions that Match One of Many Cases](#conditions-that-match-one-of-many-cases)
 
 ## Conditions and Test
 `test`, according to `man test` says...
@@ -106,4 +107,40 @@ elif [ test 10 -gt 12]; then
 else 
   echo neither
 fi
+```
+
+## Conditions that Match One of Many Cases
+Create a file: `feeling-face.sh`.  
+This will illustrate the case statement by taking an argument & putting the argument through a "case" statement, and depending on the argument the program will return something:
+
+```bash
+case $1 in
+  "happy")
+    echo ":)"
+  ;;
+  "sad")
+    echo ":("
+  ;;
+  "silly")
+    echo ":D"
+  ;;
+  "angry")
+    echo "o()xxx[{::::::::::::::>"
+  ;;
+  "surprised")
+    echo "O_o"
+  ;;
+*)
+  echo "I don't understand $1 as a face yet"
+  ;;
+esac
+```  
+
+This program works like
+```bash
+ubuntu@primary:~$ bash faces.sh happy
+:)
+
+ubuntu@primary:~$ bash faces.sh angry
+o()xxx[{::::::::::::::>
 ```
