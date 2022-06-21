@@ -99,13 +99,17 @@ ubuntu@primary:~$ test -w ~/existing-file.txt; echo $?
 ```
 
 ## Conditions with If and Else
+Create a file: `to-ten.sh`.  
+This will illustrate an if/else block.  
+This will expect an argument that is a number & will give a result based on th args value as it relates to the number 10.  
+
 ```bash
-if [ test 10 -gt 14]; then
-  echo first
-elif [ test 10 -gt 12]; then
-  echo second
-else 
-  echo neither
+if [ $1 -gt 10 ]; then
+  echo "greater than 10"
+elif [ $1 -lt 10 ]; then
+  echo "less than 10"
+else
+  echo "equals 10"
 fi
 ```
 
