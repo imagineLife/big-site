@@ -1,10 +1,10 @@
 ---
 parentDir: linux
-title: Doing More With Scripts
+title: Doing More With Bash
 slug: linux/more-scripts
 author: Jake Laursen
-excerpt: Scripts, bash, variables, args, and more
-tags: linux, bash, scripts, variablese
+excerpt: Conditional logic, collecting variable input, and more
+tags: linux, bash, scripts, variables
 order: 20
 ---
 
@@ -185,3 +185,23 @@ fi
 - `-z` is a zero-length string (_not there in our case_)
 - `then` leaves room for what the program should do when the if condition is true
 - `fi` finishes the if condition and what-to-do when the `if [];` condition is true: everything after the `fi` runs regardless of the `if [];` condition truthyness
+
+Here, the creat-file program will be adjusted to conditionally set a default destination directory:
+```bash
+#! /bin/bash
+
+DEST=$1
+
+read -p "enter a file-name prefix for your new files: " FILENAME_PREFIX
+
+if [ -z $DEST ]; then
+  echo "no destination dir provided, defaulting to new-files"
+fi
+
+F_OR_THIS="${FILENAME_PREFIX:-default}"
+mkdir -p ~/$DEST
+cd ~/$DEST
+touch ${F_OR_THIS}{1..10}.txt
+cd ..
+echo "done creating files in ~/${DEST}"
+```
