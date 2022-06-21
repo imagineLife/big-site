@@ -18,6 +18,7 @@ A brief intro into bash conditional details are covered in the [more-scripts](/m
     - [2 Strings are Equal](#2-strings-are-equal)
     - [Numbers are Greater or Less Than](#numbers-are-greater-or-less-than)
     - [Files exists](#files-exists)
+  - [Conditions with If and Else](#conditions-with-if-and-else)
 
 ## Conditions and Test
 `test`, according to `man test` says...
@@ -94,4 +95,15 @@ ubuntu@primary:~$ test -e ~/some-file.txt; echo $?
 
 # file exists AND I can write to it
 ubuntu@primary:~$ test -w ~/existing-file.txt; echo $?
+```
+
+## Conditions with If and Else
+```bash
+if [ test 10 -gt 14]; then
+  echo first
+elif [ test 10 -gt 12]; then
+  echo second
+else 
+  echo neither
+fi
 ```
