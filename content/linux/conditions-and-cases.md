@@ -15,6 +15,7 @@ A brief intro into bash conditional details are covered in the [more-scripts](/m
   - [Conditions and Test](#conditions-and-test)
     - [Testing That a String has a length](#testing-that-a-string-has-a-length)
     - [Testing that 2 numbers equal](#testing-that-2-numbers-equal)
+    - [Test that 2 Strings are Equal](#test-that-2-strings-are-equal)
 
 ## Conditions and Test
 `test`, according to `man test` says...
@@ -55,4 +56,12 @@ ubuntu@primary:~$ test 15 -eq 2 ; echo $?
 1
 ubuntu@primary:~$ test 15 -eq 15 ; echo $?
 0
+```
+
+### Test that 2 Strings are Equal
+```bash
+ubuntu@primary:~$ test horse = horse; echo $?
+0
+ubuntu@primary:~$ test horse = dog; echo $?
+1
 ```
