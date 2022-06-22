@@ -14,8 +14,14 @@
   {
     "title": "Node",
     "snippet": "JavaScript on the Server",
-    "to": "/node/about",
+    "to": "/node",
     "image": "./sections/Node.jpg"
+  },
+  {
+    "title": "Linux & Bash",
+    "snippet": "A focus on bash and an intro to linux",
+    "to": "/linux",
+    "image": "./sections/bash.jpg"
   },
   {
     "title": "Personality & Strengths",
