@@ -58,19 +58,6 @@ const IndexPage = () => (
                   );
                 },
               )}
-              {/* <div className="coming-soon">
-                <p>
-                  More to come: testing integrations, code-coverage assurance
-                  with pre-push husky checks, linting, and more!
-                </p>
-              </div> */}
-              <section>
-                <h3>Coming soon...</h3>
-                <ul>
-                  <li>Networking: SFTP, wget, and curl</li>
-                  <li>Package Management, "scripting", and other bits</li>
-                </ul>
-              </section>
               <sub>
                 Thanks to{' '}
                 <Link to={'https://github.com/btholt'}>Brian Holt</Link> and{' '}
