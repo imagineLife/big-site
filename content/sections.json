@@ -7,13 +7,13 @@
   },
   {
     "title": "MongoDB",
-    "snippet": "JavaScript Document Data Store",
+    "snippet": "JavaScript Document Data Store - an application-first style of storing data",
     "to": "/mongo",
     "image": "./sections/Mongo.jpg"
   },
   {
     "title": "Node",
-    "snippet": "JavaScript on the Server",
+    "snippet": "JavaScript on the Server - interacting with files, network requests, operating system tooling, sync & async, and more",
     "to": "/node",
     "image": "./sections/Node.jpg"
   },
