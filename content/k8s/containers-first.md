@@ -32,3 +32,17 @@ Managing several containers across a system is called container orchestration.
 ## Beyond a Single Host
 Docker and docker compose are great.  
 In my experience they have primarily been used on a single host machine, running all the containers in 1 piece of hardware.  
+
+## Containers vs Virtual Machines
+VMs have their own OS, whereas docker containers don't.  
+VMs are bigger than docker containers.  
+
+## Containers are available
+Dockerhub.  
+Containers (_images_) are available on dockerhub.  
+Images are like containers, but images are not running. An image can be used to create many containers.  
+
+Images are available on dockerhub for things like...
+- data stores (mysql, mongodb, redis, etc)
+- programming-languages (python, node, etc)
+- ...many more things
