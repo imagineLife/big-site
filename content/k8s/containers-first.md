@@ -26,9 +26,13 @@ Containers share a single parent OS.
 
 ## Containers get Orchestrated
 [Docker Compose](https://docs.docker.com/compose/), as noted above, helps in a few ways - primarily probably running several containers at once with little development effort.  
-Managing several containers across a system is called container orchestration.  
 
+### Orchestration Helps
+Containers will probably rely on other containers.  
+Scaling can become a concern:
+- Can the containers "handle the workload"? what if containers could be "scaled up" and/or "scaled down" 
 
+Container orchestration is a tool that orchestrates containers to address scaling and resource management.  
 ## Beyond a Single Host
 Docker and docker compose are great.  
 In my experience they have primarily been used on a single host machine, running all the containers in 1 piece of hardware.  
@@ -37,7 +41,7 @@ In my experience they have primarily been used on a single host machine, running
 VMs have their own OS, whereas docker containers don't.  
 VMs are bigger than docker containers.  
 
-## Containers are available
+## Containers are available for all
 Dockerhub.  
 Containers (_images_) are available on dockerhub.  
 Images are like containers, but images are not running. An image can be used to create many containers.  
