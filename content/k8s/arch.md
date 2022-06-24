@@ -20,6 +20,7 @@ order: 2
     - [Container Runtime](#container-runtime)
     - [Controllers](#controllers)
     - [Scheduler](#scheduler)
+  - [Kubectl](#kubectl)
 ## Nodes
 A node is a machine, physical or virtual, where K8s is installed. Nodes might be known as minions.  
 
@@ -58,3 +59,16 @@ Installing Kubernetes is installing some "components".
 ### Scheduler
 - Distributes work & containers across nodes
 
+## Kubectl
+A kube command-line tool.  
+Used to deploy + manage kubernetes apps on a K8s cluster.
+```bash
+# deploy an app on a cluster
+kubectl run hello-minikub
+
+# see info about the cluster
+kubectl cluster-info
+
+# list the nodes in the cluster
+kubectl get nodes
+```
