@@ -20,6 +20,7 @@ There are many tools around for running Kubernetes - so many that [special inter
   - [Hosted](#hosted)
   - [Browser-Ready](#browser-ready)
   - [Minikube In-Depth](#minikube-in-depth)
+    - [Minikube on an M1 with Docker](#minikube-on-an-m1-with-docker)
 ## Clusters On A Single Host
 A Laptop. A VM.  
 [Here's](https://shipit.dev/posts/minikube-vs-kind-vs-k3s.html) one comparison of cluster tools.  
@@ -80,7 +81,42 @@ Requires:
 - kubectl
 - minikube.exe  
 
-Tools to download:
+Some Tools to checkout && potentially download:
 - [VirtualBox](https://www.virtualbox.org/wiki/Downloads)  
 - [MiniKube](https://kubernetes.io/docs/tasks/tools/install-minikube/)  
   - when using minikube with a virtualization tech, use a flag on startup: `minikube start --vm-driver=<driver-name>` ([docs here](https://kubernetes.io/docs/setup/learning-environment/minikube/#specifying-the-vm-driver))
+
+
+### Minikube on an M1 with Docker
+Install Docker.  
+Download && install minikube:
+```bash
+# download
+# ~73MB for me
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-darwin-arm64
+# NOTE: the -L flag tells curl to follow any url relocation 
+# NOTE: the -O flag tells curl to save the output to a similarly-named file that it found
+
+# install 
+sudo install minikube-darwin-arm64 /usr/local/bin/minikube
+```
+
+Run minikube
+```bash
+minikube start --driver=docker --alsologtostderr
+# this took some time...with a bunch of logs
+```
+
+See a new docker container running!
+```bash
+docker container ls -a
+```
+should show 1 with
+- image of `gcr.io/k8s-minikube/kicbase:vX.X.XX`
+- name of `minikube`
+- ports... a bunch of ports...
+  - `0.0.0.0:57832->22/tcp` 
+  - `0.0.0.0:57828->2376/tcp`
+  - `0.0.0.0:57830->5000/tcp`
+  - `0.0.0.0:57831->8443/tcp`
+  - `0.0.0.0:57829->32443/tcp`
