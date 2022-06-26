@@ -21,6 +21,16 @@ order: 2
     - [Controllers](#controllers)
     - [Scheduler](#scheduler)
   - [Kubectl](#kubectl)
+
+With Kubernetes, one of the primary goals is to...
+- deploy app(s)
+- in containers
+- on machines
+- configured as "worker nodes" in a cluster
+
+K8s does not deploy containers directly on a worker node, though.  
+Containers are encapsulated in [pods](/k8s/on-pods): single instances of an app or suite of tightly-coupled apps. Pods are the smallest object that can be created/managed in K8s.  
+
 ## Nodes
 A node is a machine, physical or virtual, where K8s is installed. Nodes might be known as minions.  
 
