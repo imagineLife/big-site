@@ -29,6 +29,7 @@ order: 4
     - [Describing a Pod in Detail](#describing-a-pod-in-detail)
     - [Describing a pod in one-line](#describing-a-pod-in-one-line)
   - [Deploying a Pod using a yaml definition](#deploying-a-pod-using-a-yaml-definition)
+  - [Delete a pod](#delete-a-pod)
   - [Some Big-Picture Takeaways](#some-big-picture-takeaways)
 ## Pods
 Pods are [_"...the smallest deployable units of computing..."_](https://kubernetes.io/docs/concepts/workloads/) that can be made and "managed" by k8s.  
@@ -325,7 +326,51 @@ nginx   1/1     Running   0          42m   172.17.0.5   minikube   <none>       
 
 
 ## Deploying a Pod using a yaml definition
+Pod yaml definitions have 4 "top" level keys:
+- `apiVersion`
+  - version of K8s api
+  - for pod & service definitions, could be `v1`
+  - for replica set and deployment definitions, could be `apps/v1`
+- `kind`
+  - the "type" of object the file is for
+    - pod
+    - replicaSEt
+    - Service
+    - deployment
+- `medatada`
+  - a dictionary with name, labels, etc
+  - must be k8s-expected fields
+    - LABELS, though, can be pretty customizable
+- `spec`
+  - some container specs
+  - this is "kind" specific
 
+
+```yaml
+# name this ngix-pod.yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: trial-pod
+  labels:
+    app: my-trial-pod
+spec:
+  containers:
+    - name: nginx-box
+      image: nginx
+```
+Use this with
+```bash
+kubectl create -f ngix-pod.yml
+```
+
+
+## Delete a pod
+Here, we'll delete the pod we made through the cli.  
+Then, we'll create a pod using a yaml file definition, like above.
+```bash
+kubectl delete pod nginx
+```
 ## Some Big-Picture Takeaways
 - The "smallest" unit manageable directly by K8s is the pod: not the container
 - A pod maybe "usually" has 1 container
