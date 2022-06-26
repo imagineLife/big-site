@@ -26,6 +26,7 @@ order: 4
     - [See Pods available](#see-pods-available)
     - [Deploying with minikube in docker](#deploying-with-minikube-in-docker)
     - [Checking Pod "status"](#checking-pod-status)
+    - [Describing a Pod in Detail](#describing-a-pod-in-detail)
 ## Pods
 Pods are [_"...the smallest deployable units of computing..."_](https://kubernetes.io/docs/concepts/workloads/) that can be made and "managed" by k8s.  
 Pods may look & feel like a composed network of docker containers that, in dockerland, are all working together under a single `docker-compose.yml` file.  
@@ -230,4 +231,63 @@ nginx   0/1     ContainerCreating   0          18s
 Jakes-4:projects Jake$ kubectl get pods
 NAME    READY   STATUS    RESTARTS   AGE
 nginx   1/1     Running   0          24s
+```
+
+### Describing a Pod in Detail
+kubectl comes with a utility called `describe`. per `kubectl describe --help`, the describe command will...`Show details of a specific resource or group of resources.`  
+describe can be used here with a pod, and the named pod we just started called `nginx`:  
+
+```bash
+# describe in action
+Jakes-4:k8s Jake$ kubectl describe pod nginx
+Name:         nginx
+Namespace:    default
+Priority:     0
+Node:         minikube/192.168.49.2
+Start Time:   Sun, 26 Jun 2022 11:36:24 -0400
+Labels:       run=nginx
+Annotations:  <none>
+Status:       Running
+IP:           172.17.0.5
+IPs:
+  IP:  172.17.0.5
+Containers:
+  nginx:
+    Container ID:   docker://7b8a0d0643e0a9750fde14bd0f6e791e7dca6ec54dda6e85db4c5fe5ba898f46
+    Image:          nginx
+    Image ID:       docker-pullable://nginx@sha256:10f14ffa93f8dedf1057897b745e5ac72ac5655c299dade0aa434c71557697ea
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Sun, 26 Jun 2022 11:36:45 -0400
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-k9q6r (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  kube-api-access-k9q6r:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  32m   default-scheduler  Successfully assigned default/nginx to minikube
+  Normal  Pulling    32m   kubelet            Pulling image "nginx"
+  Normal  Pulled     32m   kubelet            Successfully pulled image "nginx" in 19.706368092s
+  Normal  Created    32m   kubelet            Created container nginx
+  Normal  Started    32m   kubelet            Started container nginx
 ```
