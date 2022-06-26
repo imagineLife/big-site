@@ -22,12 +22,14 @@ order: 4
     - [Scalability with Nodes](#scalability-with-nodes)
   - [One Pod with Many Containers](#one-pod-with-many-containers)
   - [Parallels to Docker](#parallels-to-docker)
-  - [Deploying a pod](#deploying-a-pod)
+  - [Deploying a pod using the cli](#deploying-a-pod-using-the-cli)
     - [See Pods available](#see-pods-available)
     - [Deploying with minikube in docker](#deploying-with-minikube-in-docker)
     - [Checking Pod "status"](#checking-pod-status)
     - [Describing a Pod in Detail](#describing-a-pod-in-detail)
     - [Describing a pod in one-line](#describing-a-pod-in-one-line)
+  - [Deploying a Pod using a yaml definition](#deploying-a-pod-using-a-yaml-definition)
+  - [Some Big-Picture Takeaways](#some-big-picture-takeaways)
 ## Pods
 Pods are [_"...the smallest deployable units of computing..."_](https://kubernetes.io/docs/concepts/workloads/) that can be made and "managed" by k8s.  
 Pods may look & feel like a composed network of docker containers that, in dockerland, are all working together under a single `docker-compose.yml` file.  
@@ -160,7 +162,7 @@ PODS, comparatively, solve the container-linking resource-sharing needs:
 
 
 
-## Deploying a pod
+## Deploying a pod using the cli
 Here, deploying an nginx container
 kubectl...
 - deploys a container
@@ -320,3 +322,16 @@ Jakes-4:k8s Jake$ kubectl get pods -o wide
 NAME    READY   STATUS    RESTARTS   AGE   IP           NODE       NOMINATED NODE   READINESS GATES
 nginx   1/1     Running   0          42m   172.17.0.5   minikube   <none>           <none>
 ```
+
+
+## Deploying a Pod using a yaml definition
+
+## Some Big-Picture Takeaways
+- The "smallest" unit manageable directly by K8s is the pod: not the container
+- A pod maybe "usually" has 1 container
+  - more-than-one container in a pod should expect the pods to be "tightly-coupled"
+- Scaling an application can look like...
+  - first, replicate a pod when the pod resources are getting over-consumed. This will replicate a container in a one-container-per-pod setup
+  - second, replicate a node when the node and it's pods are all getting over-consumed
+    - start with a new node with one pod, leaving room for more pods in the new node
+    - 
