@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: trial-pod
+  labels:
+    app: my-trial-pod
+spec:
+  containers:
+    - name: nginx-box
+      image: nginx
