@@ -27,6 +27,7 @@ order: 4
     - [Deploying with minikube in docker](#deploying-with-minikube-in-docker)
     - [Checking Pod "status"](#checking-pod-status)
     - [Describing a Pod in Detail](#describing-a-pod-in-detail)
+    - [Describing a pod in one-line](#describing-a-pod-in-one-line)
 ## Pods
 Pods are [_"...the smallest deployable units of computing..."_](https://kubernetes.io/docs/concepts/workloads/) that can be made and "managed" by k8s.  
 Pods may look & feel like a composed network of docker containers that, in dockerland, are all working together under a single `docker-compose.yml` file.  
@@ -290,4 +291,32 @@ Events:
   Normal  Pulled     32m   kubelet            Successfully pulled image "nginx" in 19.706368092s
   Normal  Created    32m   kubelet            Created container nginx
   Normal  Started    32m   kubelet            Started container nginx
+```
+Interesting notes in the `describe` output:
+- the name of the pod
+- a label assigned to the pod
+- the "node" name and the i.p address with `Node:`
+- the ip of the pod with `IP:`
+- Container info
+  - here 1 container named `nginx`
+  - where the image was pulled from
+- pod (_& container_) event info 
+  - list of events happening since pod creation
+    - scheduled
+    - pulling
+    - pulled
+    - created
+    - started
+
+
+### Describing a pod in one-line
+The `get pods` can be used for a one-liner of the pods, as seen above.  
+A "wide" output flag can be added to that command that gives more info in the one-line output.   
+Here's a comparison of the `get pods` with and without the `wide` flag:  
+```bash
+NAME    READY   STATUS    RESTARTS   AGE
+nginx   1/1     Running   0          42m
+Jakes-4:k8s Jake$ kubectl get pods -o wide
+NAME    READY   STATUS    RESTARTS   AGE   IP           NODE       NOMINATED NODE   READINESS GATES
+nginx   1/1     Running   0          42m   172.17.0.5   minikube   <none>           <none>
 ```
