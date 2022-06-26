@@ -22,6 +22,8 @@ order: 4
     - [Scalability with Nodes](#scalability-with-nodes)
   - [One Pod with Many Containers](#one-pod-with-many-containers)
   - [Parallels to Docker](#parallels-to-docker)
+  - [Deploying a pod](#deploying-a-pod)
+    - [See Pods available](#see-pods-available)
 ## Pods
 Pods are [_"...the smallest deployable units of computing..."_](https://kubernetes.io/docs/concepts/workloads/) that can be made and "managed" by k8s.  
 Pods may look & feel like a composed network of docker containers that, in dockerland, are all working together under a single `docker-compose.yml` file.  
@@ -152,3 +154,23 @@ PODS, comparatively, solve the container-linking resource-sharing needs:
   - network
   - up & down coordination
 
+
+
+## Deploying a pod
+Here, deploying an nginx container
+kubectl...
+- deploys a container
+- creates a pod
+
+```bash
+# nginx getes downloaded from dockerhub here
+kubectl run nginx --image nginx
+```  
+### See Pods available
+```bash
+kubectl get pods
+```
+- see pods
+- see a "status"
+  - containerCreating
+  - Running
