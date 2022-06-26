@@ -32,6 +32,7 @@ order: 4
     - [Steps](#steps)
   - [Delete a pod](#delete-a-pod)
   - [Some Big-Picture Takeaways](#some-big-picture-takeaways)
+  - [Using VSCode](#using-vscode)
 ## Pods
 Pods are [_"...the smallest deployable units of computing..."_](https://kubernetes.io/docs/concepts/workloads/) that can be made and "managed" by k8s.  
 Pods may look & feel like a composed network of docker containers that, in dockerland, are all working together under a single `docker-compose.yml` file.  
@@ -404,4 +405,13 @@ No resources found in default namespace.
   - first, replicate a pod when the pod resources are getting over-consumed. This will replicate a container in a one-container-per-pod setup
   - second, replicate a node when the node and it's pods are all getting over-consumed
     - start with a new node with one pod, leaving room for more pods in the new node
-    - 
+
+
+## Using VSCode
+The [vscode k8s extension](https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools) does great stuff:
+- autocomplete suggestions in yaml definitions
+  - after `apiVersion: v1`, the extension "figures out" whats going on and has epic auto-complete suggestions
+  - on `spec`, an autopop of `containers: - name:` - NICE!
+- formatting syntax
+- error-finding & underlining
+
