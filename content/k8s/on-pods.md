@@ -20,6 +20,8 @@ order: 4
   - [On Scaling](#on-scaling)
     - [Scalability with Pods](#scalability-with-pods)
     - [Scalability with Nodes](#scalability-with-nodes)
+  - [One Pod with Many Containers](#one-pod-with-many-containers)
+  - [Parallels to Docker](#parallels-to-docker)
 ## Pods
 Pods are [_"...the smallest deployable units of computing..."_](https://kubernetes.io/docs/concepts/workloads/) that can be made and "managed" by k8s.  
 Pods may look & feel like a composed network of docker containers that, in dockerland, are all working together under a single `docker-compose.yml` file.  
@@ -64,6 +66,8 @@ kubectl apply -f https://k8s.io/examples/pods/simple-pod.yaml
 Scale horizontally === more pods, one per instance of an app.  
 _Replication_.  
 A Replicated pod or set of pods [_"are usually created and managed as a group"_](https://kubernetes.io/docs/concepts/workloads/pods/#workload-resources-for-managing-pods) by a workload resource and its controller.  
+
+One pod, one container (_maybe a norm here_).  
 
 ## On Scaling
 ### Scalability with Pods
@@ -115,3 +119,36 @@ When the number of users grows to introduce a scaling problem where the number o
         - E21: a single instance of an app
 
 Above, the "B2" node can be introduces with even a single pod in it, where room to grow can be introduced into this new pod.  
+
+
+## One Pod with Many Containers
+A Single pod _can have multiple containers_.  
+Multiple containers in a single pod are best used when the containers are _tightly coupled_: supporting containers of a primary use-case container.  
+
+Containers in a single pod can all access one another through `localhost`.  
+
+
+## Parallels to Docker
+- deploy an app in a container
+  - `docker run api-app`
+- **need more resource?** deploy more instances, here 3 will run total
+  - `docker run api-app`
+  - `docker run api-app`
+- **app has introduced a new "service"**?
+  - add new "helper containers that link to the primary apps. Here, 3 "helper" container services are added, 1 per primary instance of the app
+    - `docker run helper-box -link api-app-1`
+    - `docker run helper-box -link api-app-2`
+    - `docker run helper-box -link api-app-3`
+    - THIS
+      - would require shared...
+        - networking
+        - volumes
+        - monitoring of container management
+
+PODS, comparatively, solve the container-linking resource-sharing needs:
+- put a primary & helper container in a pod
+- containers have same...
+  - storage
+  - network
+  - up & down coordination
+
