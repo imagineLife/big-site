@@ -29,6 +29,7 @@ order: 4
     - [Describing a Pod in Detail](#describing-a-pod-in-detail)
     - [Describing a pod in one-line](#describing-a-pod-in-one-line)
   - [Deploying a Pod using a yaml definition](#deploying-a-pod-using-a-yaml-definition)
+    - [Steps](#steps)
   - [Delete a pod](#delete-a-pod)
   - [Some Big-Picture Takeaways](#some-big-picture-takeaways)
 ## Pods
@@ -347,7 +348,7 @@ Pod yaml definitions have 4 "top" level keys:
 
 
 ```yaml
-# name this ngix-pod.yml
+# name this nginx-pod.yml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -363,13 +364,36 @@ Use this with
 ```bash
 kubectl create -f ngix-pod.yml
 ```
+NOTE:
+- the `spec:containers:image` is where the full path can go for images sourced from somewhere other than dockerhub - interesting
 
+### Steps
+- Create a yaml file with the config above
+  - I put mine in a relative dir `<pwd>/configs/pods/nginx-pod.yml`
+- run it && check that it is up && running:
+```bash
+Jakes-4:k8s Jake$ kubectl apply -f configs/pods/nginx-pod.yml
+pod/nginx-pod created
+Jakes-4:k8s Jake$ kubectl get pods
+NAME        READY   STATUS    RESTARTS   AGE
+```
 
 ## Delete a pod
 Here, we'll delete the pod we made through the cli.  
 Then, we'll create a pod using a yaml file definition, like above.
 ```bash
 kubectl delete pod nginx
+```
+
+Here, we'll delete the pod that was made through the yaml way:
+```bash
+Jakes-4:k8s Jake$ kubectl get pods
+NAME        READY   STATUS    RESTARTS   AGE
+nginx-pod   1/1     Running   0          86s
+Jakes-4:k8s Jake$ kubectl delete pod nginx-pod
+pod "nginx-pod" deleted
+Jakes-4:k8s Jake$ kubectl get pods
+No resources found in default namespace.
 ```
 ## Some Big-Picture Takeaways
 - The "smallest" unit manageable directly by K8s is the pod: not the container
