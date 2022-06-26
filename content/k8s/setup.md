@@ -21,6 +21,7 @@ There are many tools around for running Kubernetes - so many that [special inter
   - [Browser-Ready](#browser-ready)
   - [Minikube In-Depth](#minikube-in-depth)
     - [Minikube on an M1 with Docker](#minikube-on-an-m1-with-docker)
+    - [The Download Docs Approach](#the-download-docs-approach)
 ## Clusters On A Single Host
 A Laptop. A VM.  
 [Here's](https://shipit.dev/posts/minikube-vs-kind-vs-k3s.html) one comparison of cluster tools.  
@@ -88,7 +89,11 @@ Some Tools to checkout && potentially download:
 
 
 ### Minikube on an M1 with Docker
+[Some Download Docs](https://minikube.sigs.k8s.io/docs/start/) at the time of writing.  
+
 Install Docker.  
+Install kubectl, then install minikube.  
+
 Download && install minikube:
 ```bash
 # download
@@ -101,7 +106,7 @@ curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-darwin
 sudo install minikube-darwin-arm64 /usr/local/bin/minikube
 ```
 
-Run minikube
+Run minikube:
 ```bash
 minikube start --driver=docker --alsologtostderr
 # this took some time...with a bunch of logs
@@ -120,3 +125,55 @@ should show 1 with
   - `0.0.0.0:57830->5000/tcp`
   - `0.0.0.0:57831->8443/tcp`
   - `0.0.0.0:57829->32443/tcp`
+
+
+
+### The Download Docs Approach
+1. install + prep kubectl tool
+    1. curl from storage.googleapis.com etc
+    2. make it executable 
+        1. chmod +X ./kubectl
+    3. move the util it to the user local bin
+        1. sudeomv ./kubectl /usr/local/bun/kubectl
+2. test it! 
+    1. kubectl version
+3. install + setup minikube
+    1. MAKE SURE VIRTUALIZATION IS ENABLED ON MY MACHINE
+
+Run minikube:
+```bash
+minikube start --driver=docker --alsologtostderr
+# this took some time...with a bunch of logs
+```
+
+See a new docker container running!
+```bash
+docker container ls -a
+```
+should show 1 with
+- image of `gcr.io/k8s-minikube/kicbase:vX.X.XX`
+- name of `minikube`
+- ports... a bunch of ports...
+  - `0.0.0.0:57832->22/tcp` 
+  - `0.0.0.0:57828->2376/tcp`
+  - `0.0.0.0:57830->5000/tcp`
+  - `0.0.0.0:57831->8443/tcp`
+  - `0.0.0.0:57829->32443/tcp`
+
+See that things have been setup correctly:
+
+```bash
+# start the minikube cluster
+Jakes-4:k8s Jake$ minkube start
+
+# interact with the cluster
+Jakes-4:k8s Jake$ kubectl get po -A
+NAMESPACE     NAME                               READY   STATUS    RESTARTS      AGE
+kube-system   coredns-6d4b75cb6d-82746           1/1     Running   3 (30h ago)   32h
+kube-system   etcd-minikube                      1/1     Running   3 (24h ago)   32h
+kube-system   kube-apiserver-minikube            1/1     Running   3 (30h ago)   32h
+kube-system   kube-controller-manager-minikube   1/1     Running   3 (30h ago)   32h
+kube-system   kube-proxy-rsnhm                   1/1     Running   3 (30h ago)   32h
+kube-system   kube-scheduler-minikube            1/1     Running   2 (24h ago)   32h
+kube-system   storage-provisioner                0/1     Error     4 (24h ago)   32h
+```
