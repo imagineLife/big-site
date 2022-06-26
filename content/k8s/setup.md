@@ -176,4 +176,9 @@ kube-system   kube-controller-manager-minikube   1/1     Running   3 (30h ago)  
 kube-system   kube-proxy-rsnhm                   1/1     Running   3 (30h ago)   32h
 kube-system   kube-scheduler-minikube            1/1     Running   2 (24h ago)   32h
 kube-system   storage-provisioner                0/1     Error     4 (24h ago)   32h
+
+
+
+# 
+kubectl get nodes
 ```
