@@ -373,6 +373,7 @@ NOTE:
 - run it && check that it is up && running:
 ```bash
 Jakes-4:k8s Jake$ kubectl apply -f configs/pods/nginx-pod.yml
+# apparently a pod can also be created with kubectl create -f configs/pods/nginx-pod.yml
 pod/nginx-pod created
 Jakes-4:k8s Jake$ kubectl get pods
 NAME        READY   STATUS    RESTARTS   AGE
