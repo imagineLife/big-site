@@ -11,6 +11,15 @@ order: 4
 # Workloads and Pods
 ([K8s docs on this](https://kubernetes.io/docs/concepts/workloads/))  
 
+- [Workloads and Pods](#workloads-and-pods)
+  - [Pods](#pods)
+    - [One or more Containers](#one-or-more-containers)
+    - [Linux under the Hood](#linux-under-the-hood)
+    - [A Pod Definition](#a-pod-definition)
+    - [One Pod for One Application Instance](#one-pod-for-one-application-instance)
+  - [On Scaling](#on-scaling)
+    - [Scalability with Pods](#scalability-with-pods)
+    - [Scalability with Nodes](#scalability-with-nodes)
 ## Pods
 Pods are [_"...the smallest deployable units of computing..."_](https://kubernetes.io/docs/concepts/workloads/) that can be made and "managed" by k8s.  
 Pods may look & feel like a composed network of docker containers that, in dockerland, are all working together under a single `docker-compose.yml` file.  
@@ -55,4 +64,54 @@ kubectl apply -f https://k8s.io/examples/pods/simple-pod.yaml
 Scale horizontally === more pods, one per instance of an app.  
 _Replication_.  
 A Replicated pod or set of pods [_"are usually created and managed as a group"_](https://kubernetes.io/docs/concepts/workloads/pods/#workload-resources-for-managing-pods) by a workload resource and its controller.  
-### Pod Creation with Deployments or Jobs
+
+## On Scaling
+### Scalability with Pods
+One hierarchical look a this:
+- A: A cluster, wraps
+  - B: a single-node k8s cluster, wraps
+    - C: a pod, wraps
+      - D: a single instance of a docker container, running
+        - E: a single instance of an app
+
+When the number of users grows to introduce a scaling problem? With K8s, a new pod gets created, multiplying the "C" layer and below:
+
+- A: A cluster, wraps
+  - B: a single-node k8s node, wraps
+    - C1: a pod, wraps
+      - D1: a single instance of a docker container, running
+        - E1: a single instance of an app
+    - C2: a pod, wraps
+      - D2: a single instance of a docker container, running
+        - E2: a single instance of an app
+
+
+### Scalability with Nodes
+In the previous scaling example, 2 pods are present:
+When the number of users grows to introduce a scaling problem? With K8s, a new pod gets created, multiplying the "C" layer and below:
+
+- A: A cluster, wraps
+  - B: a single-node k8s node, wraps
+    - C1: a pod, wraps
+      - D1: a single instance of a docker container, running
+        - E1: a single instance of an app
+    - C2: a pod, wraps
+      - D2: a single instance of a docker container, running
+        - E2: a single instance of an app
+
+When the number of users grows to introduce a scaling problem where the number of pods is making the parent "node" stretched thin? Add a node:
+
+- A: A cluster, wraps
+  - B1: a single-node k8s node, wraps
+    - C1: a pod, wraps
+      - D1: a single instance of a docker container, running
+        - E1: a single instance of an app
+    - C2: a pod, wraps
+      - D2: a single instance of a docker container, running
+        - E2: a single instance of an app
+  - B2: a single-node k8s node, wraps
+    - C21: a pod, wraps
+      - D21: a single instance of a docker container, running
+        - E21: a single instance of an app
+
+Above, the "B2" node can be introduces with even a single pod in it, where room to grow can be introduced into this new pod.  
