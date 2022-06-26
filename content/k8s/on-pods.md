@@ -24,6 +24,8 @@ order: 4
   - [Parallels to Docker](#parallels-to-docker)
   - [Deploying a pod](#deploying-a-pod)
     - [See Pods available](#see-pods-available)
+    - [Deploying with minikube in docker](#deploying-with-minikube-in-docker)
+    - [Checking Pod "status"](#checking-pod-status)
 ## Pods
 Pods are [_"...the smallest deployable units of computing..."_](https://kubernetes.io/docs/concepts/workloads/) that can be made and "managed" by k8s.  
 Pods may look & feel like a composed network of docker containers that, in dockerland, are all working together under a single `docker-compose.yml` file.  
@@ -164,7 +166,7 @@ kubectl...
 
 ```bash
 # nginx getes downloaded from dockerhub here
-kubectl run nginx --image nginx
+kubectl run nginx --image=nginx
 ```  
 ### See Pods available
 ```bash
@@ -174,3 +176,58 @@ kubectl get pods
 - see a "status"
   - containerCreating
   - Running
+
+### Deploying with minikube in docker
+A brief overview:
+- k8s can be running in a docker container
+- minikube && kubectl are installed on the host machine (my laptop)
+
+With the command noted above, run that on the host machine && it will start a pod in the k8s cluster that is running in docker
+```bash
+# again, on host laptop, not in the container
+kubectl run nginx --image=nginx
+```
+
+### Checking Pod "status"
+Immediately after starting this pod, k8s will pull the image from dockerhub.  
+This will delay the start of the pod.  
+To see the pod status, use this on host machine. This is an example where I checked the status frequently until the status changed from `ContainerCreating` to `Running`:
+```bash
+
+# the run command
+Jakes-4:projects Jake$ kubectl run nginx --image=nginx
+pod/nginx created
+
+# getting the status...
+Jakes-4:projects Jake$ kubectl get pods
+NAME    READY   STATUS              RESTARTS   AGE
+nginx   0/1     ContainerCreating   0          2s
+Jakes-4:projects Jake$ kubectl get pods
+NAME    READY   STATUS              RESTARTS   AGE
+nginx   0/1     ContainerCreating   0          3s
+Jakes-4:projects Jake$ kubectl get pods
+NAME    READY   STATUS              RESTARTS   AGE
+nginx   0/1     ContainerCreating   0          5s
+Jakes-4:projects Jake$ kubectl get pods
+NAME    READY   STATUS              RESTARTS   AGE
+nginx   0/1     ContainerCreating   0          6s
+Jakes-4:projects Jake$ 
+Jakes-4:projects Jake$ kubectl get pods
+NAME    READY   STATUS              RESTARTS   AGE
+nginx   0/1     ContainerCreating   0          8s
+Jakes-4:projects Jake$ kubectl get pods
+NAME    READY   STATUS              RESTARTS   AGE
+nginx   0/1     ContainerCreating   0          10s
+Jakes-4:projects Jake$ kubectl get pods
+NAME    READY   STATUS              RESTARTS   AGE
+nginx   0/1     ContainerCreating   0          13s
+Jakes-4:projects Jake$ kubectl get pods
+NAME    READY   STATUS              RESTARTS   AGE
+nginx   0/1     ContainerCreating   0          16s
+Jakes-4:projects Jake$ kubectl get pods
+NAME    READY   STATUS              RESTARTS   AGE
+nginx   0/1     ContainerCreating   0          18s
+Jakes-4:projects Jake$ kubectl get pods
+NAME    READY   STATUS    RESTARTS   AGE
+nginx   1/1     Running   0          24s
+```
