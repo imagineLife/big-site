@@ -58,7 +58,6 @@ The replication controller can even scale to add more pods across multiple nodes
 ### Different than a Replica Set
 A Controller is the "older" tech being replaced by replica sets.  
 
-
 #### Creating a Replication Controller
 ```yml
 # replication-controller.yml
@@ -81,6 +80,7 @@ spec:
       containers:
         - name: nginx-container
           image: nginx
+  replicas: 3
     
 ```
 Notes:
@@ -88,3 +88,4 @@ Notes:
 - the `template` contents are nearly identical to the pod definition file that the replication controller is "watching"
   - two of the four required root-level yaml config fields are present: `metadata` and `spec`
   - two fields are missing: `apiVersion` and `kind`
+- the `replicas` tells the ReplicationController how many pods to make
