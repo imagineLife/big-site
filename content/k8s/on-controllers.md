@@ -188,3 +188,13 @@ say more pods are needed.
 - `kubectl scale --replicas=6 -f repl-def.yml`
   - updates a running replica set
   - does not alter the replica set difinition file
+
+One more:
+```bash
+Jakes-4:k8s Jake$ kubectl get replicationcontrollers
+NAME       DESIRED   CURRENT   READY   AGE
+first-rc   3         3         3       115m
+Jakes-4:k8s Jake$ kubectl get replicationcontrollers -o wide
+NAME       DESIRED   CURRENT   READY   AGE    CONTAINERS        IMAGES   SELECTOR
+first-rc   3         3         3       115m   nginx-container   nginx    app=nginx-app,type=front-end
+```
