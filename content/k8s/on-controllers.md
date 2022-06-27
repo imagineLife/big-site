@@ -104,4 +104,19 @@ first-rc   3         3         3       30s
 Jakes-4:k8s Jake$ kubectl get replicationcontroller/first-rc -o wide
 NAME       DESIRED   CURRENT   READY   AGE   CONTAINERS        IMAGES   SELECTOR
 first-rc   3         3         3       47s   nginx-container   nginx    app=nginx-app,type=front-end
+
+# see the pods
+Jakes-4:k8s Jake$ kubectl get pods
+NAME             READY   STATUS    RESTARTS   AGE
+first-rc-gp5fk   1/1     Running   0          75s
+first-rc-jrwzd   1/1     Running   0          75s
+first-rc-t6r45   1/1     Running   0          75s
+
+# see the pods, wider
+Jakes-4:k8s Jake$ kubectl get pods -o wide
+NAME             READY   STATUS    RESTARTS   AGE   IP           NODE       NOMINATED NODE   READINESS GATES
+first-rc-gp5fk   1/1     Running   0          95s   172.17.0.5   minikube   <none>           <none>
+first-rc-jrwzd   1/1     Running   0          95s   172.17.0.6   minikube   <none>           <none>
+first-rc-t6r45   1/1     Running   0          95s   172.17.0.7   minikube   <none>           <none>
+
 ```
