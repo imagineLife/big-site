@@ -7,7 +7,20 @@ excerpt: Controllers, ans Replicas
 tags: Kubernetes, K8s, controllers, replicas
 order: 5
 ---
-
+- [Controllers](#controllers)
+- [Replicas](#replicas)
+  - [Replication Controllers](#replication-controllers)
+  - [Different than a Replica Set](#different-than-a-replica-set)
+    - [Creating a Replication Controller](#creating-a-replication-controller)
+- [Replica Set](#replica-set)
+- [Labels and Selectors](#labels-and-selectors)
+- [Updating a replica set](#updating-a-replica-set)
+- [Takeaways](#takeaways)
+- [Creating a Replica Set from yaml](#creating-a-replica-set-from-yaml)
+  - [Messing with replica sets](#messing-with-replica-sets)
+  - [Create a new pod in a replicaset](#create-a-new-pod-in-a-replicaset)
+  - [Update a replica set](#update-a-replica-set)
+- [TakeAways](#takeaways-1)
 ## Controllers
 The "brain" behind k8s.  
 Processes.  
@@ -256,7 +269,78 @@ Jakes-4:rc Jake$ kubectl delete pod first-replica-set-6vx5t
 # see the updates
 Jakes-4:rc Jake$ kubectl get pods
 NAME                      READY   STATUS    RESTARTS   AGE
+# this one is new!!
 first-replica-set-ddp57   1/1     Running   0          3s
 first-replica-set-mrs27   1/1     Running   0          4m30s
 first-replica-set-t7fhg   1/1     Running   0          4m30s
+
+# see stats on the replica set
+Jakes-4:rc Jake$ kubectl describe replicaset 
+Name:         first-replica-set
+Namespace:    default
+Selector:     app=replica-set-app
+Labels:       app=replica-set-app
+Annotations:  <none>
+Replicas:     3 current / 3 desired
+Pods Status:  3 Running / 0 Waiting / 0 Succeeded / 0 Failed
+Pod Template:
+  Labels:  app=replica-set-app
+  Containers:
+   nginx-container:
+    Image:        nginx
+    Port:         <none>
+    Host Port:    <none>
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Events:
+  Type    Reason            Age    From                   Message
+  ----    ------            ----   ----                   -------
+  Normal  SuccessfulCreate  5m57s  replicaset-controller  Created pod: first-replica-set-mrs27
+  Normal  SuccessfulCreate  5m57s  replicaset-controller  Created pod: first-replica-set-6vx5t
+  Normal  SuccessfulCreate  5m57s  replicaset-controller  Created pod: first-replica-set-t7fhg
+  Normal  SuccessfulCreate  90s    replicaset-controller  Created pod: first-replica-set-ddp57
 ```
+
+### Create a new pod in a replicaset
+- add a new pod from cli
+  - make sure the pod's label matches the app in the replica set
+```bash
+kubectl create -f clone-pod.yml
+
+# 
+kubctl get pods
+```
+The `get pods` will show the pod in a terminated state.  
+The replica set controller "kills" the pod.  
+
+
+### Update a replica set
+```bash
+kubectl edit replicaset
+```
+That will open a replicaset yaml-looking-file in the terminal.  
+This file is temporary. In memory. Made by k8s.  
+Changes here will apply on-save.  
+Epic.  
+Here, one could do things like change the `replicas` value, here from 3 to 4.  
+Then, kubectl get pods, and see the 4th pod added.  
+
+```bash
+# one-liner, changing replicas in the cli
+kubectl scale replicaset first-replica-set --replicas=2
+```
+
+## TakeAways
+- get how many pods on a node
+  - `kubectl get pods`
+- get how many replicasets on a node
+  - `kubectl get replicasets`
+- see how many pods are part of a replica set
+  - `kubectl get pods -o wide`
+- make sure `metadata:labels:<label+val>` match `spec:selector:matchLabels:<label+val>`
+- update a replica set
+  - in real-time, edit the replica set
+  - change the template image
+  - remove each pod 1-by-1 so that k8s can auto-recreate them using the new image
+  - 
