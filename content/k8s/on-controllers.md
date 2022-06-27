@@ -198,3 +198,65 @@ Jakes-4:k8s Jake$ kubectl get replicationcontrollers -o wide
 NAME       DESIRED   CURRENT   READY   AGE    CONTAINERS        IMAGES   SELECTOR
 first-rc   3         3         3       115m   nginx-container   nginx    app=nginx-app,type=front-end
 ```
+
+
+## Creating a Replica Set from yaml
+See `configs/rc/replica-set.yml` for an example of a replicaSEt yaml file. Here it is:  
+```yaml
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  # no upper-case letters here!
+  name: first-replica-set
+  labels:
+     app: replica-set-app
+spec:
+  selector:
+    matchLabels:
+      app: replica-set-app
+  replicas: 3
+  template:
+    metadata:
+      name: nginx-from-replica-set
+      labels:
+        app: replica-set-app
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
+```
+Run it: 
+```bash
+# create it
+Jakes-4:rc Jake$ kubectl create -f replica-set.yml
+replicaset.apps/first-replica-set created
+
+# see the rs
+Jakes-4:rc Jake$ kubectl get replicaset
+NAME                DESIRED   CURRENT   READY   AGE
+first-replica-set   3         3         3       10s
+
+# see the pods
+Jakes-4:rc Jake$ kubectl get pods
+NAME                      READY   STATUS    RESTARTS   AGE
+first-replica-set-6vx5t   1/1     Running   0          118s
+first-replica-set-mrs27   1/1     Running   0          118s
+first-replica-set-t7fhg   1/1     Running   0          118s
+```
+
+### Messing with replica sets
+- see the pods
+- pick one & delete it
+- watch the replica watcher spin up another pod instantaneously
+
+```bash
+# delete a pod then check on it
+Jakes-4:rc Jake$ kubectl delete pod first-replica-set-6vx5t
+
+# see the updates
+Jakes-4:rc Jake$ kubectl get pods
+NAME                      READY   STATUS    RESTARTS   AGE
+first-replica-set-ddp57   1/1     Running   0          3s
+first-replica-set-mrs27   1/1     Running   0          4m30s
+first-replica-set-t7fhg   1/1     Running   0          4m30s
+```
