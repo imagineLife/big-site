@@ -31,6 +31,7 @@ order: 4
   - [Deploying a Pod using a yaml definition](#deploying-a-pod-using-a-yaml-definition)
     - [Steps](#steps)
   - [Delete a pod](#delete-a-pod)
+  - [Things to Be Able To Do](#things-to-be-able-to-do)
   - [Some Big-Picture Takeaways](#some-big-picture-takeaways)
   - [Using VSCode](#using-vscode)
 ## Pods
@@ -397,6 +398,31 @@ pod "nginx-pod" deleted
 Jakes-4:k8s Jake$ kubectl get pods
 No resources found in default namespace.
 ```
+
+## Things to Be Able To Do
+SKills this doc covers:
+- figure out "how many pods are there in the default cluster?"
+    - kubectl get pods
+- Create a new NGINX pod
+    - kubectl run nginx —image=nginx
+- figure out "What Images are used in the containers?"
+    - controlplane ~ ✖ kubectl get pods -o jsonpath={.items[*].spec.containers[*].image}
+    - SHOULD SHOW nginx busybox busybox busybox
+- figure out "what nodes are pods placed on"
+    - dig around
+- delete a pod
+    - kubectl delete pod webapp
+- start a pod from a yaml file
+  - kubectl apply -f configs/pods/nginx-pod.yml
+- edit a running pods yaml file
+  - something like change the image that the pod container is based on
+- figure out the status of all pods && containers
+- figure out why containers might be busted
+    - a bad image name
+- be able to “fix” a pod with a bad image name
+
+
+
 ## Some Big-Picture Takeaways
 - The "smallest" unit manageable directly by K8s is the pod: not the container
 - A pod maybe "usually" has 1 container
@@ -414,4 +440,4 @@ The [vscode k8s extension](https://marketplace.visualstudio.com/items?itemName=m
   - on `spec`, an autopop of `containers: - name:` - NICE!
 - formatting syntax
 - error-finding & underlining
-
+- the `outline` sidebar section shows a gui hierarchy of the yaml file
