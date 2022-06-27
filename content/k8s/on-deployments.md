@@ -215,3 +215,18 @@ kubectl rollout history deployment/<dep-name>
 # go to previous rollout
 kubectl rollout undo deployment/<dep-name>
 ```
+
+
+## An Example
+```bash
+# create a deployment
+Jakes-4:k8s Jake$ kubectl create -f configs/deps/nx-dep.yml
+
+# check out the rollout
+# NOTE: this needs to be ran FAST to see the output
+Jakes-4:k8s Jake$ kubectl rollout status deployment.apps/first-deployment
+Waiting for deployment "first-deployment" rollout to finish: 0 of 3 updated replicas are available...
+Waiting for deployment "first-deployment" rollout to finish: 1 of 3 updated replicas are available...
+Waiting for deployment "first-deployment" rollout to finish: 2 of 3 updated replicas are available...
+deployment "first-deployment" successfully rolled out
+```
