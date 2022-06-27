@@ -15,7 +15,7 @@ Curiosity has led me to stumble through some process automation details.
   - [Common Tasks in the SDLC](#common-tasks-in-the-sdlc)
     - [Coding](#coding)
     - [Testing](#testing)
-    - [Workflow Tracking](#workflow-tracking)
+    - [Workflow Tracking System Integrations](#workflow-tracking-system-integrations)
     - [Deploying App Updates](#deploying-app-updates)
 
 There are _many many_ common tasks during the software-development lifecycle (_sometimes referred to as the SDLC_).  
@@ -34,10 +34,14 @@ Here's a few loosely-defined tasks grouped into broad categories -
 - requiring tests to be written
 - requiring tests to pass
 
-### Workflow Tracking
-- developing a workflow-tracking system
-- using the workflow tracking system
-- making the workflow tracking system "better" or more well-suited per team needs
+### Workflow Tracking System Integrations
+- Ensuring the work of develop hands aligns well with workflow tracking systems (WTS)
+- Ensuring WTS rules are in place, being developed, evaluated, and used during the SDLC
+- Examples
+  - **Bugs** are reported & tagged appropriately
+  - **New Features** are documented, prioritized, prepared for devs, tested, and released
+  - **Alerting Mechanisms** are in place and utilized for tasks like failed tests, failed deployments, errors
+  - **These Processes**, themselves, are reviewed often - teams change, expertise waxes and wanes, tools & tech get introduced and removed
 
 ### Deploying App Updates
 For "simplicity", lets consider a single http server machine that has access to an in-machine database as well as in-machine front-end assets:
@@ -54,5 +58,3 @@ For "simplicity", lets consider a single http server machine that has access to 
   - production
   - canary
   - a/b &/or blue/green deployments
-
-
