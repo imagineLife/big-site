@@ -96,6 +96,10 @@ Jakes-4:k8s Jake$ kubectl create -f configs/rc/rc.yml
 replicationcontroller/first-rc created
 
 # check status
+Jakes-4:k8s Jake$ kubectl get replicationcontroller
+NAME       DESIRED   CURRENT   READY   AGE
+first-rc   3         3         3       25s
+
 Jakes-4:k8s Jake$ kubectl get replicationcontroller/first-rc
 NAME       DESIRED   CURRENT   READY   AGE
 first-rc   3         3         3       30s
@@ -120,3 +124,67 @@ first-rc-jrwzd   1/1     Running   0          95s   172.17.0.6   minikube   <non
 first-rc-t6r45   1/1     Running   0          95s   172.17.0.7   minikube   <none>           <none>
 
 ```
+
+## Replica Set
+A definition file
+```yaml
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: rs
+  labels:
+    app: rs-app
+    type: front-end
+spec:
+  template:
+    metadata:
+      name: rs-pod
+      labels:
+        app: myapp-here
+        type: front-end
+    spec:
+      containers:
+        - name: nginx-box
+          image: nginx
+  replicas: 3
+  selector:
+    matchLabels:
+      type: front-end
+```
+Note:
+- `selector` 
+  - describe "what pods apply here" - replica sets can manage other pods not explicitly describe in the definition file - epic
+  - assumes to be the same as the spec template
+  - MAJOR DIFFERENCE betweeen replica set and replication controller
+  - hmm, the matchLabels - hmm
+- Replica Sets can be spun up to monitor existing already-running pods
+  - CAN create pods if they are not already present
+  - on pod failure, re-create the busted pod
+  - 
+
+
+## Labels and Selectors
+Labels are the "shorthand" that replica set "monitors" use to "watch" pods.  
+When pods are already up && running, the `spec:template` section of the replSet def file still is required. Interesting and redundant perhaps.  
+
+## Updating a replica set 
+say more pods are needed.  
+- Update the yaml
+- `kubectl replace -f repl-def-file.yml`
+- OR
+- `kubectl scale --replicas=6 repl-def-file.yml`
+- OR
+- another "advanced" way based on load
+
+
+## Takeaways
+- `kubectl create -f replicated-def.yml`
+- `kubectl get replicaset`
+  - see repl sets
+  - `replicaset` should be the name of the set
+- `kubectl delete replicaset` 
+  - `replicaset` should be the name of the set
+- `kubectl replace -f replicated-def.yml`
+- `kubectl scale --replicas=6 -f repl-def.yml`
+  - updates a running replica set
+  - does not alter the replica set difinition file
