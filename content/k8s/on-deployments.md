@@ -175,5 +175,43 @@ The default deployment strategy.
 - `kubectlk set image deployment/<deployment-name> containername=new:image:tag`
   - NOTE: this does not update the config file, only the running deployment
 
+```bash
+kubectl describe deployment <deployment-name>
+```
+NOTE: depending on the rollout strategy, the event log will look different.  
+
+### Under The hood
+- deployment object creates a replica set
+  - which creates expected pod count
+- takes down the old rs one-by-one
+
 
 ## Rolling Back
+```bash
+kubectl rollout undo deployment<deployment-name>
+```
+- deployment will destroy pods
+- deployment will spin up pods in old/previous replica set
+
+## Commands
+```bash
+# make a deployment
+kubectl create -f dep-file.yml
+
+# see deployment deets
+kubectl get deployments
+
+# update a deployment in real time!! with a file
+kubectl apply -f new-file-who-dis.yml
+
+# update a deployment in real time!! with the cli
+kubectl set image deployment/<dep-name> imagename:new:image:tag
+kubectl set image deployment/init-deployment nginx=nginx:1.9.1
+
+# check rollout status & history
+kubectl rollout status deployment/<dep-name>
+kubectl rollout history deployment/<dep-name>
+
+# go to previous rollout
+kubectl rollout undo deployment/<dep-name>
+```
