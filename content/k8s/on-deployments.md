@@ -24,6 +24,20 @@ Deployments are 1 "layer" "above" replica sets:
 - **Approaches**
   - rolling downgrades
 
+
+- [Deployments](#deployments)
+  - [K8s Deployment](#k8s-deployment)
+    - [Deployment config](#deployment-config)
+      - [An example](#an-example)
+  - [Updating, Rollouts, and Versioning](#updating-rollouts-and-versioning)
+    - [Two Strategies](#two-strategies)
+      - [Destroy and Create](#destroy-and-create)
+      - [One At A Time](#one-at-a-time)
+      - [Updating in action](#updating-in-action)
+    - [Under The hood](#under-the-hood)
+  - [Rolling Back](#rolling-back)
+  - [Commands](#commands)
+  - [An Example](#an-example-1)
 ## K8s Deployment
 K8s deployments can handle all of those issues: scaling, rolling upgrades, rollbacks, etc.  
 
