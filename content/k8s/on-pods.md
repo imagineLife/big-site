@@ -406,16 +406,19 @@ SKills this doc covers:
 - Create a new NGINX pod
     - kubectl run nginx —image=nginx
 - figure out "What Images are used in the containers?"
-    - controlplane ~ ✖ kubectl get pods -o jsonpath={.items[*].spec.containers[*].image}
+  - `kubectl get pods -o jsonpath={.items[*].spec.containers[*].image}`
     - SHOULD SHOW nginx busybox busybox busybox
+  - OR another way: `kubectl describe pod a-pod-name | grep -i image`
 - figure out "what nodes are pods placed on"
-    - dig around
+    - `kubectl get pods -o wide` will include the node name in the output
 - delete a pod
     - kubectl delete pod webapp
 - start a pod from a yaml file
   - kubectl apply -f configs/pods/nginx-pod.yml
 - edit a running pods yaml file
   - something like change the image that the pod container is based on
+  - INTERESING:
+    - `edit pod pod-name-here` is like an in-terminal editor
 - figure out the status of all pods && containers
 - figure out why containers might be busted
     - a bad image name
