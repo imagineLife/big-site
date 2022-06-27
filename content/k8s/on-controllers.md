@@ -89,3 +89,19 @@ Notes:
   - two of the four required root-level yaml config fields are present: `metadata` and `spec`
   - two fields are missing: `apiVersion` and `kind`
 - the `replicas` tells the ReplicationController how many pods to make
+  - the `replicas` is a sibling of `template`
+- run it
+```bash
+Jakes-4:k8s Jake$ kubectl create -f configs/rc/rc.yml
+replicationcontroller/first-rc created
+
+# check status
+Jakes-4:k8s Jake$ kubectl get replicationcontroller/first-rc
+NAME       DESIRED   CURRENT   READY   AGE
+first-rc   3         3         3       30s
+
+# wider
+Jakes-4:k8s Jake$ kubectl get replicationcontroller/first-rc -o wide
+NAME       DESIRED   CURRENT   READY   AGE   CONTAINERS        IMAGES   SELECTOR
+first-rc   3         3         3       47s   nginx-container   nginx    app=nginx-app,type=front-end
+```
