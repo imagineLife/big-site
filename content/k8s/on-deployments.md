@@ -1,0 +1,179 @@
+---
+title: On Deployments
+parentDir: k8s
+slug: /k8s/deployments
+author: Jake Laursen
+excerpt: Deploying the Cluster
+tags: Kubernetes, K8s, ddeployments
+order: 6
+---
+
+# Deployments
+Deployments are 1 "layer" "above" replica sets:
+
+- take 1 web-server
+- use many instances of the web-server
+- **Opportunities**
+  - the web-server dependencies incerease
+  - a container has a new version
+  - need more instaces to address scaling needs
+- **Approaches**
+  - rolling upgrades, 1 instance at a time
+- **Problems**
+  - an error occurs during an upgrade
+- **Approaches**
+  - rolling downgrades
+
+## K8s Deployment
+K8s deployments can handle all of those issues: scaling, rolling upgrades, rollbacks, etc.  
+
+- container
+  - encapsulated in a **pod**
+    - multiple pods are in replica sets or **replication controllers**
+      - deployments manage replica sets & thus pods
+
+### Deployment config
+A yaml file.  
+Looks nearly identitcal to a replica-set file, all bu thte `kind` should be `Deployment`.  
+
+
+#### An example
+see 
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+  labels:
+    tier: frontend
+    app: nginx-deployment
+spec:
+  selector:
+    matchLabels:
+      app: myapp
+  replicas: 3
+  template:
+    metadata:
+      name: nginx-pod
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: nginx-box
+          image: nginx
+```
+
+run it
+```bash
+Jakes-4:k8s Jake$ kubectl create -f configs/deps/nx-dep.yml
+deployment.apps/first-deployment created
+
+# check it out
+Jakes-4:k8s Jake$ kubectl get deployments
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+first-deployment   3/3     3            3           21s
+
+Jakes-4:k8s Jake$ kubectl get pods
+NAME                               READY   STATUS    RESTARTS   AGE
+first-deployment-7c76b75db-8wcpk   1/1     Running   0          34s
+first-deployment-7c76b75db-w9q5s   1/1     Running   0          34s
+first-deployment-7c76b75db-z6q86   1/1     Running   0          34s
+
+# describe it
+Jakes-4:k8s Jake$ kubectl describe deployment first-deployment
+Name:                   first-deployment
+Namespace:              default
+CreationTimestamp:      Mon, 27 Jun 2022 18:01:09 -0400
+Labels:                 app=nginx
+                        tier=frontend
+Annotations:            deployment.kubernetes.io/revision: 1
+Selector:               app=myapp
+Replicas:               3 desired | 3 updated | 3 total | 3 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=myapp
+  Containers:
+   nginx-box:
+    Image:        nginx
+    Port:         <none>
+    Host Port:    <none>
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   first-deployment-7c76b75db (3/3 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  73s   deployment-controller  Scaled up replica set first-deployment-7c76b75db to 3
+
+```
+
+Commands review:
+```bash
+kubectl create -f deployment-def.yml
+
+kubectl get deployments
+kubectl get replicaset
+kubectl get pods
+
+# a fancy version of the get command
+kubectl get all
+
+# on my host machine, this returns...
+Jakes-4:k8s Jake$ kubectl get all
+NAME                                   READY   STATUS    RESTARTS   AGE
+pod/first-deployment-7c76b75db-8wcpk   1/1     Running   0          107s
+pod/first-deployment-7c76b75db-w9q5s   1/1     Running   0          107s
+pod/first-deployment-7c76b75db-z6q86   1/1     Running   0          107s
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   3d3h
+
+NAME                               READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/first-deployment   3/3     3            3           107s
+
+NAME                                         DESIRED   CURRENT   READY   AGE
+replicaset.apps/first-deployment-7c76b75db   3         3         3       107s
+```
+
+## Updating, Rollouts, and Versioning
+Deployments trigger rollouts with revisions.  
+When, say, a container version is updated, a new rollout is created. A new revision is made.  
+
+```bash
+# see status of a follout
+kubectl rollout status <depoloyment-name>
+
+# see history of a rollout
+kubectl rollout history <depoloyment-name>
+```
+
+### Two Strategies
+#### Destroy and Create
+First, detroy all.  
+Then, deploy all.  
+Application downtime.  
+The `Recreate` strategy.  
+Not the default.  
+
+#### One At A Time
+The `Rolling` update.  
+The default deployment strategy.  
+
+#### Updating in action
+- update a deployment config file
+- apply the changes with `kubectl apply -f deploy-file.yml`
+- OR
+- `kubectlk set image deployment/<deployment-name> containername=new:image:tag`
+  - NOTE: this does not update the config file, only the running deployment
+
+
+## Rolling Back
