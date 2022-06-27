@@ -229,4 +229,38 @@ Waiting for deployment "first-deployment" rollout to finish: 0 of 3 updated repl
 Waiting for deployment "first-deployment" rollout to finish: 1 of 3 updated replicas are available...
 Waiting for deployment "first-deployment" rollout to finish: 2 of 3 updated replicas are available...
 deployment "first-deployment" successfully rolled out
+
+# check out the history
+Jakes-4:k8s Jake$ kubectl rollout history deployment.apps/first-deployment
+deployment.apps/first-deployment 
+REVISION  CHANGE-CAUSE
+1         <none>
+
+
+# interesting:
+# delete and do this
+Jakes-4:k8s Jake$ kubectl create -f configs/deps/nx-dep.yml --record
+Flag --record has been deprecated, --record will be removed in the future
+deployment.apps/first-deployment created
+
+# then check it out
+Jakes-4:k8s Jake$ kubectl rollout history deployment.apps/first-deployment
+deployment.apps/first-deployment 
+REVISION  CHANGE-CAUSE
+1         kubectl create --filename=configs/deps/nx-dep.yml --record=true
+
+
+# edit the config file
+Jakes-4:k8s Jake$ kubectl edit deployments first-deployment --record
+# set the image to nginx:1.18
+
+# check out the status
+Jakes-4:k8s Jake$ kubectl rollout status deployment.apps/first-deployment
+
+# check out the rollout history, see a new line
+Jakes-4:k8s Jake$ kubectl rollout history deployment.apps/first-deployment
+deployment.apps/first-deployment 
+REVISION  CHANGE-CAUSE
+1         kubectl create --filename=configs/deps/nx-dep.yml --record=true
+2         kubectl edit deployments first-deployment --record=true
 ```
