@@ -17,6 +17,16 @@ I.E. - groups of pods where...
 - some connect to data sources
 Services help with communication, with loose coupling between components.  
 
+- [Services](#services)
+  - [Types of Services](#types-of-services)
+    - [Node Port](#node-port)
+    - [Cluster IP](#cluster-ip)
+    - [Load Balancer](#load-balancer)
+  - [External Communicaton](#external-communicaton)
+    - [Node Port in depth](#node-port-in-depth)
+      - [Handling Multiple  Pods](#handling-multiple--pods)
+      - [Creating a Node Port from yaml](#creating-a-node-port-from-yaml)
+    - [NodePort Service in action](#nodeport-service-in-action)
 ## Types of Services
 ### Node Port
 - an object
@@ -60,6 +70,19 @@ Get access to the pods webpage
 - the port on the node, **the node port**
   - example range between 30000-32767
 
+#### Handling Multiple  Pods
+A single Node can have multiple pods, instances, of an app. The pods have the same labels.  
+The service finds X number of pods.  
+The service uses them all.  
+The service uses
+- `random` algorithm
+- `sessionAffinity` too
+
+Multiple Nodes can each have a pod.  
+K8s will create the service to span multiple nodes.  
+The app in pods in separate nodes will be accessible.  
+
+Basically, the service-creation process is the same wether many pods in a node or many nodes each with a pod.  
 #### Creating a Node Port from yaml
 ```yaml
 apiVersion: v1
@@ -86,3 +109,34 @@ NOTES:
   - with no `nodePort`, k8s picks arbitrarily between 30000-32767
 - labels & selectors link services to pods
   - `selector:<label>:<val>` where label + val are exactly the smae as pod labels+values
+
+```bash
+# Run it
+kubectl create -f service-def.yml
+
+# check it
+kubectl get services
+
+# get the app!
+# use the ip of the node
+curl 
+```
+
+### NodePort Service in action
+The scenarion:  
+A deployment is up and running.  
+There are many pods up & running, as part of the `replicas` definition in the deployment.  
+See & use the [services definition file above](#creating-a-node-port-from-yaml).  
+
+```bash
+# Run it  
+Jakes-4:k8s Jake$ kubectl create -f configs/services/nodeport.yml 
+service/node-port-service created
+
+# new, check on services
+# NOTE: one service is k8s itself on the host laptop
+Jakes-4:k8s Jake$ kubectl get svc
+NAME                TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+kubernetes          ClusterIP   10.96.0.1       <none>        443/TCP        3d17h
+node-port-service   NodePort    10.100.158.27   <none>        80:30008/TCP   27s
+```
