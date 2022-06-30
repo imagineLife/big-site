@@ -17,6 +17,8 @@ Opening a terminal is running a process.
     - [View a previous process exit code](#view-a-previous-process-exit-code)
     - [Exit Codes Rundown](#exit-codes-rundown)
   - [See processes with ps](#see-processes-with-ps)
+  - [Monitor Processes with top](#monitor-processes-with-top)
+    - [Using top in a mac](#using-top-in-a-mac)
   - [Kill a running process with Kill](#kill-a-running-process-with-kill)
   - [Running in the Foreground or Background](#running-in-the-foreground-or-background)
     - [The Foreground](#the-foreground)
@@ -95,6 +97,40 @@ ubuntu@primary:~$ sleep 5 & ps
   58267 pts/0    00:00:00 ps
 ```
 **note**: `sleep 5` creates a process that waits 5 sec. and then exits. `sleep` will be used throughout this doc as `sleep` is a low-impact command that consumes a process.    
+
+## Monitor Processes with top
+According to `man top`,
+```bash
+top – display sorted information about processes
+```
+Top stands for "table of processes", and shows an analysis of a bunch of data about running processes on a linux machine.  
+
+### Using top in a mac
+`top` will work on a mac shell, and I have node installed on my machine, so I'm going to use my mac, node, and the shell to illustrate top:
+```bash
+# in one terminal, start a node process
+node
+
+# in another terminal 
+# get all the processes
+Jakes-4:content Jake$ ps
+  PID TTY           TIME CMD
+  280 ttys000    0:00.09 -bash
+  722 ttys000    0:00.10 node
+89470 ttys001    0:00.08 /bin/bash -l
+  726 ttys002    0:00.05 -bash
+
+# NOTICE: node pid = 722
+Jakes-4:content Jake$ top -pid 722
+
+
+Processes: 404 total, 3 running, 401 sleeping, 2413 threads                                                              20:00:06
+# 
+# ...a bunch of other stuff...
+# 
+PID  COMMAND      %CPU TIME     #TH  #WQ  #POR MEM  PURG CMPR PGRP PPID STATE    BOOSTS    %CPU_ME %CPU_OTHRS UID  FAUL COW  MSGS
+722  node         0.0  00:00.09 11   0    33   12M  0B   11M  722  280  sleeping *0[1]     0.00000 0.00000    501  2252 113  57 
+```
 
 ## Kill a running process with Kill
 ```bash
