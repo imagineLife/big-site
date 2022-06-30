@@ -9,13 +9,12 @@ order: 8
 ---
 
 # Services
-K8s services enable communication between components.  
-Inside and outside and single.  
+K8s services enable communication between components within and outside of K8s apps.    
 I.E. - groups of pods where...
 - some are frontends
 - some are "backends"
 - some connect to data sources
-Services help with communication, with loose coupling between components.  
+**Services help with communication, with loose coupling between components.**   
 
 - [Services](#services)
   - [Types of Services](#types-of-services)
@@ -25,29 +24,35 @@ Services help with communication, with loose coupling between components.
   - [External Communicaton](#external-communicaton)
 ## Types of Services
 ### Node Port
-- an object
+A NodePort service...
+- is an object
 - lives in a  node
 - listens to ports on the node
 - fwds req from a port to a port the pod
 - allows for pod-access from "outside" the k8s world
 
 ### Cluster IP 
+The ClusterIP Service...
 - creates a virtual ip in a cluster
 - lives in a cluster
 - enables communication between services
 
 ### Load Balancer
-- provisions a load-balancer
+LoadBalancer services...
+- provision a load-balancer
 - distribute load across servers
 
 ## External Communicaton
-- a container, in
-- a pod, with an internal pod network and IP (_lets say 10.244.0.2 that is in a range of 10.244.0.0-2XX or something_) in
-- a node with an IP (_lets say 192.168.1.2_)
+Lets take...
+- **a container**, in
+- **a pod**, with an internal pod network and IP (_lets say 10.244.0.2 that is in a range of 10.244.0.0-2XX or something_) in
+- **a node** with an IP (_lets say 192.168.1.2_)
 - **a service** in the node, the node port service
   - the service is an object
   - listens to ports on the node
   - fwds req from a port to a port the pod
-  - **its a node port service**
-- my laptop with an ip (_lets say 192.168.1.10_)
+  - **its a node port service** (see [A Page on NodePorts](/k8s/node-port-service))
+- **my laptop** with an ip (_lets say 192.168.1.10_)
 - NOTE: the laptop and the node have the same network
+
+A K8s service, specifically the NodePort service, can "map" the outside world request to internal objects - pods.
