@@ -15,5 +15,6 @@ spec:
     # same label(s) as the pod
     app: myapp
     # type: front-end
+  # THIS needs more research
   externalIPs:
     - 1.2.3.110
