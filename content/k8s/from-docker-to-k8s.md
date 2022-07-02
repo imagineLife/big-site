@@ -21,7 +21,9 @@ Lets take an example codebase.
     - [One more app for Docker](#one-more-app-for-docker)
   - [Managing Across Hosts From Docker to Kubernetes](#managing-across-hosts-from-docker-to-kubernetes)
     - [Identifying Kubernetes Services](#identifying-kubernetes-services)
-      - [Starting with 1 Pod Per Service](#starting-with-1-pod-per-service)
+    - [Starting with 1 Pod Per Service](#starting-with-1-pod-per-service)
+      - [Understand the Connectivity Reqs](#understand-the-connectivity-reqs)
+      - [Understanding services and ports](#understanding-services-and-ports)
 
 ## A Traditional Small Client to Server to DataStore
 A small and functional "Full-Stack" application can include:
@@ -73,6 +75,28 @@ An "analytics" ui is requested by the client. This will serve management within 
 The above 5 parts 
 - will get deployed in containers
 - will leverage connectivity
-- will allow access where needed
+- will allow access to services & pods where needed
 
-#### Starting with 1 Pod Per Service
+### Starting with 1 Pod Per Service
+#### Understand the Connectivity Reqs
+- **redis**
+  - accessed by voting & worker app
+  - voting app saves the vote to redis
+  - worker reads from redis
+- **postgres**
+  - accessed by worker and results app
+  - worker updates the total count of votes
+  - results app reads from it for display
+- **worker**
+  - not accessed by any other service
+  - only accesses other apps
+
+#### Understanding services and ports
+- voting-app on 80
+- redis on 6379
+- results-app on 80
+- postgres on 5432
+- worker... no ports available by others!
+
+Note, the services should not refer to one another by I.P address. The services should....use other services... to talk to one another.  
+ 
