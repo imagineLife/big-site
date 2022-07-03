@@ -45,10 +45,10 @@
     "sass": "^1.53.0"
   },
   "devDependencies": {
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.7",
     "babel-preset-gatsby": "^1.1.0",
     "cross-env": "^6.0.3",
     "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.6",
     "gatsby-remark-autolink-headers": "^5.17.0",
     "gatsby-remark-copy-linked-files": "^5.17.0",
     "gatsby-remark-images": "^6.17.0",
