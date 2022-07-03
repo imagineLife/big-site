@@ -24,6 +24,7 @@ Lets take an example codebase.
     - [Starting with 1 Pod Per Service](#starting-with-1-pod-per-service)
       - [Understand the Connectivity Reqs](#understand-the-connectivity-reqs)
       - [Understanding services and ports](#understanding-services-and-ports)
+      - [Leveraging Services to Enable Pod Connections](#leveraging-services-to-enable-pod-connections)
 
 ## A Traditional Small Client to Server to DataStore
 A small and functional "Full-Stack" application can include:
@@ -100,3 +101,21 @@ The above 5 parts
 
 Note, the services should not refer to one another by I.P address. The services should....use other services... to talk to one another.  
  
+#### Leveraging Services to Enable Pod Connections
+Services are only required for a pod when the pod needs to be accessed by another pod:  
+- **for the redis pod**
+  - to allow the redis pod to be accessed by voting app && worker app
+  - redis won't be accessed outside the cluster
+  - the service type will be **clusterIP**
+- **for postgres pod**
+  - accessed by worker
+  - accessed by one of the frontent apps
+  - db connection credentials will be "known" by those two pods
+  - type ClusterIP
+- **enabling external access**
+  - NodePort type
+  - 1 service for voting app
+  - 1 service for result analytics dashboard app
+- No service for the worker pod
+  - reads from a db, updates another db
+- 
