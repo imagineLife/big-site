@@ -13,12 +13,7 @@ export default function Template({
   },
 }) {
   
-  console.log({
-    title,
-    excerpt,
-  });
-  
-  
+
   /*
     get footer links
     - figure out parent dir
