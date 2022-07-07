@@ -94,6 +94,13 @@ const pluginsArr = [
   {
     resolve: `gatsby-source-filesystem`,
     options: {
+      name: `k8s`,
+      path: `content/k8s`,
+    },
+  },
+  {
+    resolve: `gatsby-source-filesystem`,
+    options: {
       name: `linux`,
       path: `content/linux`,
     },

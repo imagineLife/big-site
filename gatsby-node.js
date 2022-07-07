@@ -71,6 +71,23 @@ exports.createPages = async ({
           }
         }
       }
+      k8s: allMarkdownRemark(
+        sort: { fields: frontmatter___order }
+        filter: {
+          frontmatter: { order: { gt: 0 }, slug: { regex: "/k8s/" } }
+        }
+      ) {
+        pages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              excerpt
+              parentDir
+            }
+          }
+        }
+      }
       linux: allMarkdownRemark(
         sort: { fields: frontmatter___order }
         filter: {
@@ -90,9 +107,7 @@ exports.createPages = async ({
       }
       py: allMarkdownRemark(
         sort: { fields: frontmatter___order }
-        filter: {
-          frontmatter: { order: { gt: 0 }, slug: { regex: "/py/" } }
-        }
+        filter: { frontmatter: { order: { gt: 0 }, slug: { regex: "/py/" } } }
       ) {
         pages: edges {
           page: node {
@@ -219,6 +234,7 @@ exports.createPages = async ({
       recipes: { pages: recipePages },
       charts: { chartList: chartsPages },
       febs: { pages: febsPages },
+      k8s: { pages: k8sPages },
       linux: { pages: linuxPages },
       py: { pages: pythonPages },
       strengths: { pages: strengthsPages },
@@ -233,17 +249,18 @@ exports.createPages = async ({
   const mdTemplate = path.resolve(`src/templates/markdown/index.js`);
 
   [
-    ...scrumPages,
-    ...recipePages,
     ...febsPages,
+    ...httpServerPages,
+    ...k8sPages,
     ...linuxPages,
-    ...pythonPages,
-    ...strengthsPages,
     ...miscPages,
     ...mongoPages,
-    ...nodePages,
-    ...httpServerPages,
     ...mongoSectionContent,
+    ...nodePages,
+    ...pythonPages,
+    ...recipePages,
+    ...scrumPages,
+    ...strengthsPages,
   ].forEach(({ page }) => {
     createPage({
       path: page.overview.slug || null,
