@@ -8,7 +8,7 @@ metadata:
 spec:
   containers:
     - name: pg-box
-      image: postgres
+      image: postgres:9.4
       ports:
         # default
         - containerPort: 5432

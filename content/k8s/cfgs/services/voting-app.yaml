@@ -16,3 +16,6 @@ spec:
     # match the pod labels from the pg yaml
     name: voting-app-pod
     app: demo-voting-app
+  # makes it available through docker...
+  externalIPs:
+    - 1.2.3.110
