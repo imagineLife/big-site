@@ -3,6 +3,7 @@ const pluginsArr = [
     resolve: `gatsby-transformer-remark`,
     options: {
       plugins: [
+        `gatsby-plugin-react-helmet-async`,
         {
           resolve: 'gatsby-remark-embed-video',
           options: {
