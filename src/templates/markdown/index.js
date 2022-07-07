@@ -1,23 +1,38 @@
 import React, { Fragment } from 'react';
 import { graphql, Link } from 'gatsby';
+import { Helmet } from 'react-helmet';
 import './index.scss';
 
 export default function Template({
   data: {
     pageData: {
       content,
-      overview: { order, parentDir },
+      overview: { order, parentDir, title, excerpt, slug },
     },
     pageSummaries: { pages },
   },
 }) {
-  // console.log('pages');
-  // console.log(pages);
+  
+  console.log({
+    title,
+    excerpt,
+  });
+  
+  
+  /*
+    get footer links
+    - figure out parent dir
+  */ 
+  
 
   let footerLinks;
 
   // ONLY create footer links when order is explicit in frontmatter
   if (order !== null && parentDir !== null) {
+    //   console.log('pages.details');
+    //   console.log(pages.map((d) => d.details));
+    //   console.log('parentDir');
+    //   console.log(parentDir);
     // console.log(
     //   `ORDER: ${order} - - PAGES: ${pages.length} - - - parentDir: ${parentDir}`,
     // );
@@ -25,7 +40,7 @@ export default function Template({
     footerLinks = [];
     // get previous, && next page details
     let prevPage = pages[order - 1 - 1];
-    let nextPage = pages[order + 1];
+    let nextPage = pages[order];
 
     // FIRST page
     // show HOME dir
@@ -55,6 +70,12 @@ export default function Template({
 
   return (
     <Fragment>
+      <Helmet>
+        <title>{title || 'Jake Laursen Blog'}</title>
+        <meta name="description" content={excerpt} />
+        <meta property="og:title" content={title} />
+        <meta property="og:url" content={`http://laursen.tech${slug}`} />
+      </Helmet>
       <main
         className={`md-wrapper${parentDir ? ` ${parentDir}` : ''}`}
         dangerouslySetInnerHTML={{ __html: content }}
@@ -90,6 +111,9 @@ export const pgQuery = graphql`
       overview: frontmatter {
         order
         parentDir
+        title
+        excerpt
+        slug
       }
     }
     pageSummaries: allMarkdownRemark(
