@@ -16,3 +16,5 @@ spec:
     # match the pod labels from the pg yaml
     name: result-app-pod
     app: demo-voting-app
+  externalIPs:
+    - 1.2.3.111
