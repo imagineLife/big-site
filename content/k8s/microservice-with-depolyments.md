@@ -17,6 +17,9 @@ In a [previous post](/k8s/microservice-demo), a k8s cluster manages a handful of
 
 This style of deployment is great for illustrating one "simple" way of deploying apps with pods, services, and kubernetes - for me specifically using minukube and k8s in docker, due to my current M1 mac restrictions and some online suggestions!  
 
+- [From Sensitive Single-Pod Deployments to Replica Set Resilliancy](#from-sensitive-single-pod-deployments-to-replica-set-resilliancy)
+  - [More Pods for Frontend Apps](#more-pods-for-frontend-apps)
+  - [Comparing Pod-Based Deployments to Deployment-Managed Deployemnts](#comparing-pod-based-deployments-to-deployment-managed-deployemnts)
 ## More Pods for Frontend Apps
 Here, The frontend-facing apps (_voting-app and result-app_) will get replica-sets through deployments. Deployments will "manage" the replica sets of the pods.  
 
