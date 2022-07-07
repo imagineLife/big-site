@@ -144,6 +144,8 @@ const pluginsArr = [
 ];
   
 if (process.env.NODE_ENV === 'production') {
+  console.log('Adding Google Gtag to gatsby plugins')
+  
   pluginsArr.push({
     resolve: `gatsby-plugin-google-gtag`,
     options: {
