@@ -1,0 +1,18 @@
+# NOTE: no ports as this is not available to other apps
+apiVersion: v1
+kind: Service
+metadata:
+  name: result-service
+  labels:
+    name: result-service
+    app: demo-voting-app
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30004
+  selector:
+    # match the pod labels from the pg yaml
+    name: result-app-pod
+    app: demo-voting-app
