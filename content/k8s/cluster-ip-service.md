@@ -1,5 +1,5 @@
 ---
-title: 
+title: Allow Communication Within A Cluster with the ClusterIP Service
 parentDir: k8s
 slug: /k8s/node-port-service
 author: Jake Laursen
