@@ -1,5 +1,5 @@
 ---
-title: A Microservice Case-Study, from App to Docker to Kubernetes
+title: A Microservice Case-Study from App to Docker to Kubernetes
 parentDir: k8s
 slug: /k8s/microservice-case-study
 author: Jake Laursen
