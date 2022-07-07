@@ -22,7 +22,9 @@ Each service will get a pod.
 
 - [The Microservices](#the-microservices)
   - [Definition File Directory Structure](#definition-file-directory-structure)
+  - [The Definition Files](#the-definition-files)
   - [Building The Services with Kubectl](#building-the-services-with-kubectl)
+    - [Seeing the Voting App](#seeing-the-voting-app)
 
 
 ## Definition File Directory Structure
@@ -41,6 +43,8 @@ Each service will get a pod.
     pg.yaml           # internal service
 ```
 
+## The Definition Files
+Note: the externalIps key/val pair are to publicize the nodes through docker - some detail I'm not 1000% sure about
 ## Building The Services with Kubectl
 ```bash
 # the voting-app pod
@@ -59,4 +63,22 @@ pod/voting-app-pod   1/1     Running   0          108s
 NAME                     TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
 service/kubernetes       ClusterIP   10.96.0.1      <none>        443/TCP        12d
 service/voting-service   NodePort    10.101.11.48   <none>        80:30005/TCP   35s
+
+# 
+# see em, differently
+# 
+Jakes-4:k8s Jake$ kubectl get pods,svc
+NAME                 READY   STATUS    RESTARTS   AGE
+pod/voting-app-pod   1/1     Running   0          3m9s
+
+NAME                     TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
+service/kubernetes       ClusterIP   10.96.0.1      <none>        443/TCP        12d
+service/voting-service   NodePort    10.101.11.48   <none>        80:30005/TCP   116s
 ```
+
+### Seeing the Voting App
+```bash
+Jakes-4:k8s Jake$ minikube service voting-service --url
+http://127.0.0.1:51286
+```
+go there!
