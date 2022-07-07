@@ -25,13 +25,21 @@ const About = () => (
               or ideas I've recently learned. I also always enjoy communicating
               my understanding of new ideas I've learned to someone else.
             </p>
-            <p>
-              Some topics I'm currently learning about: graphQL, microservices
-              and service registration and discovery, front-end caching for
-              faster UI delivery of data-intensive web applications, leadership
-              and methods for categorizing and approaching 'types' of problems
-              in an org...
-            </p>
+            <p>Some topics I'm currently learning about:</p>
+            <ul>
+              <li>
+                {' '}
+                <b>kubernetes</b>: controllers, deployments, pods, services,
+                more
+              </li>
+              <li>
+                <b>CI/CD Automated pipelines</b>: building & deploying automated
+                ci/cd "pipelines"
+              </li>
+              <li>
+                <b>keeping up on some node chops</b>: some small projects on "scaling" a node http server
+              </li>
+            </ul>
           </div>
           <div className="figure">
             <img src={learnerImg} alt="learner" />
