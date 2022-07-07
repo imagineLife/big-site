@@ -23,6 +23,8 @@ Each service will get a pod.
 - [The Microservices](#the-microservices)
   - [Definition File Directory Structure](#definition-file-directory-structure)
   - [The Definition Files](#the-definition-files)
+    - [Pods](#pods)
+    - [Services](#services)
   - [Building The Services with Kubectl](#building-the-services-with-kubectl)
     - [The Voting-App Services](#the-voting-app-services)
       - [See the Voting App with minikube](#see-the-voting-app-with-minikube)
@@ -49,7 +51,192 @@ Each service will get a pod.
 ```
 
 ## The Definition Files
-Note: the externalIps key/val pair are to publicize the nodes through docker - some detail I'm not 1000% sure about
+Note: the externalIps key/val pair are to publicize the nodes through docker - some detail I'm not 1000% sure about...
+
+### Pods
+Postgres:
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pg-pod
+  labels:
+    name: pg-pod
+    app: demo-voting-app
+spec:
+  containers:
+    - name: pg-box
+      image: postgres:9.4
+      ports:
+        # default
+        - containerPort: 5432
+      # hard-coded for p.o.c here
+      # these are hard-coded in other pod code
+      env:
+        - name: POSTGRES_USER
+          value: "postgres"
+        - name: POSTGRES_PASSWORD
+          value: "postgres"
+```
+redis:
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: redis-pod
+  labels:
+    name: redis-pod
+    app: demo-voting-app
+spec:
+  containers:
+    # hard-coded per service codebase
+    - name: redis
+      image: redis
+      ports:
+        # default
+        - containerPort: 6379
+```
+
+results App:
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: result-app-pod
+  labels:
+    name: result-app-pod
+    app: demo-voting-app
+spec:
+  containers:
+    - name: result-app-box
+      image: kodekloud/examplevotingapp_result:v1
+      ports:
+        # app listens on port 80
+        - containerPort: 80
+```
+
+voting app:
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: voting-app-pod
+  labels:
+    name: voting-app-pod
+    app: demo-voting-app
+spec:
+  containers:
+    - name: voting-app-box
+      image: kodekloud/examplevotingapp_vote:v1
+      ports:
+        # app listens on port 80
+        - containerPort: 80
+```
+
+worker service:
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: worker-pod
+  labels:
+    name: worker-pod
+    app: demo-voting-app
+spec:
+  containers:
+    - name: worker-box
+      image: kodekloud/examplevotingapp_worker:v1
+```
+### Services
+Postgres Service:
+```yaml
+# NOTE: no ports as this is not available to other apps
+apiVersion: v1
+kind: Service
+metadata:
+  # this is hard-coded in the worker code
+  name: db
+  labels:
+    name: db-service
+    app: demo-voting-app
+spec:
+  ports:
+    - port: 5432
+      targetPort: 5432
+  selector:
+    # match the pod labels from the pg yaml
+    name: pg-pod
+    app: demo-voting-app
+```
+
+Redis Service:
+```yaml
+# NOTE: no ports as this is not available to other apps
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  labels:
+    name: redis-service
+    app: demo-voting-app
+spec:
+  ports:
+    - port: 6379
+      targetPort: 6379
+  selector:
+    # match the pod labels from the redis yaml
+    name: redis-pod
+    app: demo-voting-app
+```
+
+Results Service:
+```yaml
+# NOTE: no ports as this is not available to other apps
+apiVersion: v1
+kind: Service
+metadata:
+  name: result-service
+  labels:
+    name: result-service
+    app: demo-voting-app
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30004
+  selector:
+    # match the pod labels from the pg yaml
+    name: result-app-pod
+    app: demo-voting-app
+  externalIPs:
+    - 1.2.3.111
+```
+
+Voting Service:
+```yaml
+# NOTE: no ports as this is not available to other apps
+apiVersion: v1
+kind: Service
+metadata:
+  name: voting-service
+  labels:
+    name: voting-service
+    app: demo-voting-app
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30005
+  selector:
+    # match the pod labels from the pg yaml
+    name: voting-app-pod
+    app: demo-voting-app
+  # makes it available through docker...
+  externalIPs:
+    - 1.2.3.110
+```
 ## Building The Services with Kubectl
 ### The Voting-App Services
 ```bash
