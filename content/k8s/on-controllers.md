@@ -1,7 +1,7 @@
 ---
 title: On Pods
 parentDir: k8s
-slug: /k8s/replica-controllers
+slug: k8s/replica-controllers
 author: Jake Laursen
 excerpt: Controllers, ans Replicas
 tags: Kubernetes, K8s, controllers, replicas

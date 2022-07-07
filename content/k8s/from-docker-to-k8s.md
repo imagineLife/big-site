@@ -1,7 +1,7 @@
 ---
 title: A Microservice Case-Study from App to Docker to Kubernetes
 parentDir: k8s
-slug: /k8s/microservice-case-study
+slug: k8s/microservice-case-study
 author: Jake Laursen
 excerpt: Microservices are great candidates for adopting containerization and kubernetes
 tags: Kubernetes, K8s, microservice

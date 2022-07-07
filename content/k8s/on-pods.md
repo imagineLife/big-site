@@ -1,7 +1,7 @@
 ---
 title: On Pods
 parentDir: k8s
-slug: /k8s/on-pods
+slug: k8s/on-pods
 author: Jake Laursen
 excerpt: A "wrapper" around
 tags: Kubernetes, K8s, pods, services, workloads

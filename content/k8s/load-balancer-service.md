@@ -1,7 +1,7 @@
 ---
 title: Balancing Network Traffic across many Pods with the LoadBalancer Service
 parentDir: k8s
-slug: /k8s/load-balancer-service
+slug: k8s/load-balancer-service
 author: Jake Laursen
 excerpt: Not much here
 tags: Kubernetes, K8s, services, load balancer

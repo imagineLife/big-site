@@ -1,7 +1,7 @@
 ---
 title: Containers First
 parentDir: k8s
-slug: /k8s/containers-first
+slug: k8s/containers-first
 author: Jake Laursen
 excerpt: Containers before Kubernetes
 tags: Kubernetes, K8s, containers, pre-requisites
