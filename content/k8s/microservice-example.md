@@ -22,12 +22,13 @@ Each service will get a pod.
 
 - [The Microservices](#the-microservices)
   - [Definition File Directory Structure](#definition-file-directory-structure)
+  - [Building The Services with Kubectl](#building-the-services-with-kubectl)
 
 
 ## Definition File Directory Structure
 ```bash
-# all configs go in a "configs" dir
-/configs
+# all configs go in a "cfgs" dir
+/cfgs
   # config "types" get broken into sub-directories
   /pods
     pg.yaml           # postgres
@@ -38,4 +39,24 @@ Each service will get a pod.
   /services
     redis.yaml        # internal service
     pg.yaml           # internal service
+```
+
+## Building The Services with Kubectl
+```bash
+# the voting-app pod
+Jakes-4:k8s Jake$ kubectl create -f cfgs/pods/voting-app.yaml 
+pod/voting-app-pod created
+
+# the voting-app service
+Jakes-4:k8s Jake$ kubectl create -f cfgs/services/voting-app.yaml 
+service/voting-service created
+
+# see em
+Jakes-4:k8s Jake$ kubectl get all
+NAME                 READY   STATUS    RESTARTS   AGE
+pod/voting-app-pod   1/1     Running   0          108s
+
+NAME                     TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
+service/kubernetes       ClusterIP   10.96.0.1      <none>        443/TCP        12d
+service/voting-service   NodePort    10.101.11.48   <none>        80:30005/TCP   35s
 ```
