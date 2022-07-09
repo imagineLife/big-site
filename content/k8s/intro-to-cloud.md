@@ -152,3 +152,8 @@ Notice:
 - select a sidebar item, the `Services & Ingress` option
 Notice:
 - this is a nice gui option to view & click through the config - similar to the cli
+- poke around ,see the pods, deployments, and services!
+
+### Check the app
+Find the service `EXTERNAL-IP` addresses for the `result-service` and the `voting-service`: note, they are not shown above but they are present in the GKE.  
+Go to those in the browser!! Crazy. K8s deployed in the cloud.  
