@@ -124,4 +124,31 @@ mretfaster@cloudshell:~/configs/k8s$ kubectl create -f services/result-app.yaml
 W0709 20:07:21.348944    1075 gcp.go:120] WARNING: the gcp auth plugin is deprecated in v1.22+, unavailable in v1.25+; use gcloud instead.
 To learn more, consult https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke
 service/result-service created
+
+
+# see it all!
+NAME                                READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/pg-deploy           0/1     1            0           2m38s
+deployment.apps/redis-deploy        1/1     1            1           3m27s
+deployment.apps/result-app-deploy   0/2     2            0           78s
+deployment.apps/voting-app-deploy   1/1     1            1           4m47s
+deployment.apps/worker-deploy       0/1     1            0           106s
+
+NAME                     TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)        AGE
+service/db               ClusterIP      10.83.130.157   <none>          5432/TCP       2m33s
+service/kubernetes       ClusterIP      10.83.128.1     <none>          443/TCP        32m
+service/redis            ClusterIP      10.83.131.6     <none>          6379/TCP       3m19s
+service/result-service   LoadBalancer   10.83.129.126   <not-show-u>    80:31255/TCP   74s
+service/voting-service   LoadBalancer   10.83.129.138   <not-show-u>    80:31652/TCP   4m4s
 ```
+
+Notice: 
+- the worker app takes a bit to deploy
+- the LoadBalancer services have external ips! these are accessible from the www!
+
+
+### Inspect Some Cluster Contents with GKE GUI
+- go back to the browser view, and if the cluster is not selected from the cluster list, select it :)
+- select a sidebar item, the `Services & Ingress` option
+Notice:
+- this is a nice gui option to view & click through the config - similar to the cli
