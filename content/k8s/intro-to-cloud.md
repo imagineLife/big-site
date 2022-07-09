@@ -9,6 +9,15 @@ order: 15
 ---
 
 # An Introduction to Kubernetes in the Cloud
+- [An Introduction to Kubernetes in the Cloud](#an-introduction-to-kubernetes-in-the-cloud)
+  - [GKE](#gke)
+    - [The Free Trial](#the-free-trial)
+    - [Setting Up K8s in GKE](#setting-up-k8s-in-gke)
+    - [Create a Cluster](#create-a-cluster)
+    - [Connect to the Cluster](#connect-to-the-cluster)
+    - [Setup Pods & Services on the Cluster](#setup-pods--services-on-the-cluster)
+    - [Inspect Some Cluster Contents with GKE GUI](#inspect-some-cluster-contents-with-gke-gui)
+    - [Check the app](#check-the-app)
 ## GKE
 Google Kubernetes Engine.  
 Google Cloud Account - get a free one [here](https://cloud.google.com/free/docs/gcp-free-tier).  
