@@ -48,6 +48,80 @@ Nice: "Ccreate an Autopilot Cluster"
 - Notice!
   - `Cloud Shell comes with Cloud SDK gcloud, Cloud Code, an online Code Editor and other utilities pre-installed, fully authenticated and up-to-date.` ([Cloud Shell Docs](https://cloud.google.com/shell/docs/))
 
-### Interact with the Cluster
+### Setup Pods & Services on the Cluster
 - run the copied scrip in the in-browser shell
-- 
+- try `kubectl get nodes` && see some nodes
+- try `kubectl get services` and see the `kubernetes` `ClusterIP` service - this should feel similar to the previous posts about setting up k8s locally in docker + minikube
+- Clone _my_ git repo with all of the config files in it into the gke env shell
+  - if you are reading this, find me & ask me... or... see previous posts & do some config work :) 
+- Adjust the configs of the voting-app service && the result-app service
+  - set the type to `LoadBalancer`
+  - remove the `nodePort` line
+  - remove the `externalIps` line
+
+Create the services:
+```bash
+# voting app deployment
+mretfaster@cloudshell:~/configs/k8s$ kubectl create -f deployments/voting-app.yaml
+W0709 20:03:45.787401     998 gcp.go:120] WARNING: the gcp auth plugin is deprecated in v1.22+, unavailable in v1.25+; use gcloud instead.
+To learn more, consult https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke
+Warning: Autopilot set default resource requests for Deployment default/voting-app-deploy, as resource requests were not specified. See http://g.co/gke/autopilot-defaults.
+deployment.apps/voting-app-deploy created
+
+# voting app service
+mretfaster@cloudshell:~/configs/k8s$ kubectl create -f services/voting-app.yaml
+W0709 20:04:29.643591    1009 gcp.go:120] WARNING: the gcp auth plugin is deprecated in v1.22+, unavailable in v1.25+; use gcloud instead.
+To learn more, consult https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke
+service/voting-service created
+
+
+
+# Redis deployment
+mretfaster@cloudshell:~/configs/k8s$ kubectl create -f deployments/redis.yaml
+W0709 20:05:07.662490    1018 gcp.go:120] WARNING: the gcp auth plugin is deprecated in v1.22+, unavailable in v1.25+; use gcloud instead.
+To learn more, consult https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke
+Warning: Autopilot set default resource requests for Deployment default/redis-deploy, as resource requests were not specified. See http://g.co/gke/autopilot-defaults.
+deployment.apps/redis-deploy created
+
+# redis service
+mretfaster@cloudshell:~/configs/k8s$ kubectl create -f services/redis.yaml
+W0709 20:05:16.189782    1029 gcp.go:120] WARNING: the gcp auth plugin is deprecated in v1.22+, unavailable in v1.25+; use gcloud instead.
+To learn more, consult https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke
+service/redis created
+
+
+
+# pg deployment
+mretfaster@cloudshell:~/configs/k8s$ kubectl create -f deployments/pg.yaml
+W0709 20:05:56.479457    1038 gcp.go:120] WARNING: the gcp auth plugin is deprecated in v1.22+, unavailable in v1.25+; use gcloud instead.
+To learn more, consult https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke
+Warning: Autopilot set default resource requests for Deployment default/pg-deploy, as resource requests were not specified. See http://g.co/gke/autopilot-defaults.
+deployment.apps/pg-deploy created
+
+# pg service
+mretfaster@cloudshell:~/configs/k8s$ kubectl create -f services/pg.yaml
+W0709 20:06:02.529071    1047 gcp.go:120] WARNING: the gcp auth plugin is deprecated in v1.22+, unavailable in v1.25+; use gcloud instead.
+To learn more, consult https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke
+service/db created
+
+
+
+# worker deployment
+mretfaster@cloudshell:~/configs/k8s$ kubectl create -f deployments/worker.yaml
+W0709 20:06:46.012595    1057 gcp.go:120] WARNING: the gcp auth plugin is deprecated in v1.22+, unavailable in v1.25+; use gcloud instead.
+To learn more, consult https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke
+Warning: Autopilot set default resource requests for Deployment default/worker-deploy, as resource requests were not specified. See http://g.co/gke/autopilot-defaults.
+deployment.apps/worker-deploy created
+
+
+# results deployment + service
+mretfaster@cloudshell:~/configs/k8s$ kubectl create -f deployments/result-app.yaml
+W0709 20:07:16.549460    1066 gcp.go:120] WARNING: the gcp auth plugin is deprecated in v1.22+, unavailable in v1.25+; use gcloud instead.
+To learn more, consult https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke
+Warning: Autopilot set default resource requests for Deployment default/result-app-deploy, as resource requests were not specified. See http://g.co/gke/autopilot-defaults.
+deployment.apps/result-app-deploy created
+mretfaster@cloudshell:~/configs/k8s$ kubectl create -f services/result-app.yaml
+W0709 20:07:21.348944    1075 gcp.go:120] WARNING: the gcp auth plugin is deprecated in v1.22+, unavailable in v1.25+; use gcloud instead.
+To learn more, consult https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke
+service/result-service created
+```
