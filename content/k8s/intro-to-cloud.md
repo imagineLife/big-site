@@ -192,3 +192,4 @@ Another post [here](/misc/aws-setup) attempts to get K8s setup in aws. The doc d
 
 
 ## Azure
+Azure also offers K8s tooling.  
