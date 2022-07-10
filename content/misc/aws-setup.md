@@ -8,6 +8,8 @@ slug: misc/aws-k8s-prereqs
 order: 7
 ---
 
+**NOTE**: I put this down, incomplete for now.  
+Setting K8s up on Amazon, compared to setting up on [google](k8s/intro-to-k8s-in-the-cloud), is significatnly more complicated: keys, roles, permissions... maybe great details, but in execution it seems to be done significantly less transparently && the docs are not much help.  
 # Prepare AWS EKS For Kubernetes Deployments
 This post is meant to follow [these docs](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-console.html) directly from Amazon. These directions, unfortunately, do not cover all the pre-reqs to make it happen. Those are covered below!  
 
