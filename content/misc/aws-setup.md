@@ -27,6 +27,7 @@ Then, running `aws configure` requires an `AWS Access Key ID [None]`.
     - [Create A VPC](#create-a-vpc)
     - [Create a cluster IAM role](#create-a-cluster-iam-role)
     - [Use the Console to create the cluster](#use-the-console-to-create-the-cluster)
+    - [Create an SSH KeyPair](#create-an-ssh-keypair)
     - [Use the Console to Create A Node Group](#use-the-console-to-create-a-node-group)
   - [Some docs and References](#some-docs-and-references)
 ## Create an Amazon AWS Account
@@ -118,12 +119,25 @@ Follow the [AWS eks clusters gui directions](https://console.aws.amazon.com/eks/
 - go through the next several promtpts and click `Create`
 - the cluster will appear with the status `Creating`: use the in-page refresh button to check until the cluster is up && running
 
+
+### Create an SSH KeyPair
+This will allow ssh access to the K8s cluster. this step was only discovered in later steps where an SSH key pair will be required...
+- go [here](https://us-east-2.console.aws.amazon.com/ec2/home?region=us-east-2#KeyPairs:)
+- click "create key pair"
+- name it: **k8s-key-pair**
+- use rsa type
+- use `.pem` file format
+- should trigger the creation of the key pair, represented in the "key pairs" list view
+  - a fingerprint
+  - and ID
+  - a file will be requested to be downloaded :) 
+
 ### Use the Console to Create A Node Group
 The cluster will get a node!
 - in the cluster detail view (_EKS > Clusters > <your-cluster-name>_), there is a row of tabs where one says "Compute". Click that one
 - In the Compute contents are a handful of parts, and the particular one of interest here is the "Node groups" section. In that section is a "Add node group" button - click that
 - Assign a name, demo-node-group
-- Create a new role, perhaps
+- Create a new role
   - in AIM console
     - This one did not appear after creating, the NodeGroup use case
       - AWS service
@@ -133,9 +147,23 @@ The cluster will get a node!
       - AmazonEKSServiceRolePolicy policy name
     - Trying again, the Cluster permission
       - named EKSClusterRole
-  - well, after 3 failed attempts, clicking the info icon to reveal [a doc on how to do just this](https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html#create-worker-node-role) appeared: following this
+  - well, after several failed attempts, clicking the info icon to reveal [a doc on how to do just this](https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html#create-worker-node-role) appeared: following this
     - use case = EC2
     - named **AmazonEKSNodeRole**
+    - **this role will show up in the "Configure node group section!**
+- Follow several prompts for defaults until reaching the "Node group network configuration" page
+- Enable a toggle reading **"Configure SSH access to nodes"**
+  - A modal appeared reading `When enabling this option, managed node groups will create a security group on your behalf with port 22 inbound access. If launching your worker in a public subnet, it’s strongly recommended to restrict the source IP address ranges.`
+  - Enable ssh if you want to ssh into the nodes :) 
+- Create the k8s nodes!!
+  - This takes some time
+  - The node group cofig might be in "Creting" state for a few minutes
+  - There's a refresh button in the gui - press that to update the ui with the node group state as it develops
+  - a next state will show 2 nodes in the "Nodes" tab, where each node is in a status "Not ready"
+  - ...5 minutes and counting
+  - ...9 minutes and counting
+  - ...19 minutes and counting
+  - ...27 minutes and counting
 
 
 
