@@ -8,4 +8,34 @@ tags: Kubernetes, K8s, configuration
 order: 1
 ---
 
+## Config
 Config Maps, SecurityContexts, Resource Requirements, Secrets, Service Accounts, and more. 
+
+## Multi-Container Pods
+There are patterns:
+- ambassador
+- adapter
+- sidecar
+
+## Observability
+- readiness probes
+- liveness proves
+- container logging
+- monitoring
+- debugging
+
+## Pod Design
+- labels
+- selectors
+- annotations
+- rolling deployment deets
+- jobs & cronJobs
+
+## Services
+- in depth
+- network policies
+
+## Persistent Volumes 
+- volumes
+- persistent volume claims
+
