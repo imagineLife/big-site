@@ -56,8 +56,6 @@ As the [Amazon docs read](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_us
 
 
 ## Create an Amazon EKS Cluster
-Note: this is not the k8s cluster. This is different.  
-
 ### Create Access Keys for the New Administrator User
 - Go to the IAM user page [here](https://console.aws.amazon.com/iam/?&state=hashArgs%23)
 - go to "Users"
