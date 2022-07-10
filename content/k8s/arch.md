@@ -82,7 +82,10 @@ Installing Kubernetes is installing some "components".
 
 ## Kubectl
 A kube command-line tool.  
-Used to deploy + manage kubernetes apps on a K8s cluster.
+Used to deploy + manage kubernetes apps on a K8s cluster: 
+- get cluster info
+- get info about pods, services, etc
+
 ```bash
 # deploy an app on a cluster
 kubectl run hello-minikub
