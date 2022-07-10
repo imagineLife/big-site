@@ -27,6 +27,8 @@ Then, running `aws configure` requires an `AWS Access Key ID [None]`.
     - [Create A VPC](#create-a-vpc)
     - [Create a cluster IAM role](#create-a-cluster-iam-role)
     - [Use the Console to create the cluster](#use-the-console-to-create-the-cluster)
+    - [Use the Console to Create A Node Group](#use-the-console-to-create-a-node-group)
+  - [Some docs and References](#some-docs-and-references)
 ## Create an Amazon AWS Account
 I already had one setup :/ 
 
@@ -116,3 +118,29 @@ Follow the [AWS eks clusters gui directions](https://console.aws.amazon.com/eks/
 - go through the next several promtpts and click `Create`
 - the cluster will appear with the status `Creating`: use the in-page refresh button to check until the cluster is up && running
 
+### Use the Console to Create A Node Group
+The cluster will get a node!
+- in the cluster detail view (_EKS > Clusters > <your-cluster-name>_), there is a row of tabs where one says "Compute". Click that one
+- In the Compute contents are a handful of parts, and the particular one of interest here is the "Node groups" section. In that section is a "Add node group" button - click that
+- Assign a name, demo-node-group
+- Create a new role, perhaps
+  - in AIM console
+    - This one did not appear after creating, the NodeGroup use case
+      - AWS service
+      - Use-Cases: EKS - NodeGroup
+      - policy name is AWSServiceRoleForAmazonEKSNodeGroup
+    - Trying again, the EKS use case - no dice - already created
+      - AmazonEKSServiceRolePolicy policy name
+    - Trying again, the Cluster permission
+      - named EKSClusterRole
+  - well, after 3 failed attempts, clicking the info icon to reveal [a doc on how to do just this](https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html#create-worker-node-role) appeared: following this
+    - use case = EC2
+    - named **AmazonEKSNodeRole**
+
+
+
+## Some docs and References
+Along the way, there are a ton of other docs that could be referenced:
+- Roles can have [Tags](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html)
+- [Configure the Amazon VPC CNI plugin for K8s...](https://docs.aws.amazon.com/eks/latest/userguide/cni-iam-role.html)
+- 
