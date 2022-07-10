@@ -35,16 +35,19 @@ Containers are encapsulated in [pods](/k8s/on-pods): single instances of an app 
 A node is a machine, physical or virtual, where K8s is installed. Nodes might be known as minions.  
 
 ## Clusters
-A cluster is a set of nodes. Clusters are helpful for load management and replication during node failure.  
+A cluster is a set of nodes. Clusters are helpful for load management, replication, and handling single-node failure.  
 
 ## A Master Node
 A Node with K8s installed.  
 This node "watches" && manages other nodes in a cluster.  
-The master server has the kube API server on it.  
+The master server has the kube API server on it. This "talks to" the kubelet tool on the worker nodes.
 All info about the worker nodes is stored on the master with the etcd component/service.  
 THe master has both the controller and scheduler on it.
 
 ## Worker Nodes
+- contain the container runtime, docker here
+- contain containers
+
 Minions. These host the container runtimes and containers. 
 These have the kubelet agent on them, which is used to interact with the master node.  
 
@@ -53,21 +56,29 @@ Installing Kubernetes is installing some "components".
 ### API Server
 - the "frontend" for K8s
 - allows interaction w/ k8s cluster
+- cli talks to api server to talk to the cluster
 ### ETCD Key Store
 - stores data to manage the cluster
-- a key-value store
+- a distributed reliable key-value store
 - responsible for implementing logs within clusters to alleviate any potential conflicts between master nodes
+- etcd stores info in ALL NODES IN THE CLUSTER
 
 ### Kubelet
 - the agent that runs on each node in a cluster
+- makes sure the containers are running as expected
+
 ### Container Runtime
 - will prob be docker
+- others exist!
+
 ### Controllers
 - the "brain" behind orchestration
 - "notice" when containers stop working
 - starts new containers
+
 ### Scheduler
 - Distributes work & containers across nodes
+- looks for new containers && assigns them to notes
 
 ## Kubectl
 A kube command-line tool.  
