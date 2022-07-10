@@ -18,6 +18,9 @@ order: 15
     - [Setup Pods & Services on the Cluster](#setup-pods--services-on-the-cluster)
     - [Inspect Some Cluster Contents with GKE GUI](#inspect-some-cluster-contents-with-gke-gui)
     - [Check the app](#check-the-app)
+  - [AWS](#aws)
+    - [Pre Requisites](#pre-requisites)
+  - [Azure](#azure)
 ## GKE
 Google Kubernetes Engine.  
 Google Cloud Account - get a free one [here](https://cloud.google.com/free/docs/gcp-free-tier).  
@@ -166,3 +169,26 @@ Notice:
 ### Check the app
 Find the service `EXTERNAL-IP` addresses for the `result-service` and the `voting-service`: note, they are not shown above but they are present in the GKE.  
 Go to those in the browser!! Crazy. K8s deployed in the cloud.  
+
+## AWS
+Kubernetes can be deployed on AWS. A bunch of pre-reqs, though:  
+### Pre Requisites
+See [this link](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-console.html) for more deets...  
+
+- AWS Account
+  - I already had one setup! #win
+- EKS Setup
+  - I searched for eks & the service appeared
+  - there's an option to "Add Cluster"
+- Kubectl util on my machine
+  - got that
+- Some AWS "General Knowledge"
+  - config a cluster role for eks
+  - configure an iam role for a node group
+  - config a vpc
+  - config a ec2 key pair used to ssh in to the worker node(s)
+
+Another post [here](/misc/aws-setup) attempts to get K8s setup in aws. The doc does not complete the task. AWS is significantly more complex to setup than  GKE.  
+
+
+## Azure
