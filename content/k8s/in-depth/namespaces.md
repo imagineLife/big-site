@@ -22,9 +22,12 @@ Pods, deployments, replica sets... these all happen in a namespace.
   - [Using the CLI](#using-the-cli)
     - [See Objects By Namespace](#see-objects-by-namespace)
     - [Create Objects by Namespace](#create-objects-by-namespace)
+    - [Switch kubectl to a different namespace](#switch-kubectl-to-a-different-namespace)
+    - [View objects in All Namespaces](#view-objects-in-all-namespaces)
   - [Specify Namespace During Object Creation](#specify-namespace-during-object-creation)
     - [Specify the Namespace of an Object](#specify-the-namespace-of-an-object)
     - [Create a Namespace with yaml](#create-a-namespace-with-yaml)
+  - [Limit Resources in A Namespace](#limit-resources-in-a-namespace)
 ## A Few Namespaces By Default
 - `Default`
   - created when the cluster is first setup
@@ -91,7 +94,17 @@ kubectl create -f def-file.yaml
 # create in a new Namespace, titled "horse"
 kubectl create -f dev-file.yml --namespace=horse
 ```
+### Switch kubectl to a different namespace
+Here, switching kubectl to operate in the namespace titled `horse`:
+```bash
+kubectl config set-context $(kubectl config current-context) --namespace=horse
+```
+Then, kubectl commands operate in the `horse` namespace.  
 
+### View objects in All Namespaces
+```bash
+kubectl get pods --all-namespaces
+```
 
 ## Specify Namespace During Object Creation 
 ### Specify the Namespace of an Object
@@ -124,3 +137,23 @@ Then
 ```bash
 kubectl create -f configs/ns/horse.yaml
 ```
+
+
+## Limit Resources in A Namespace
+[ResourceQuotas](https://kubernetes.io/docs/concepts/policy/resource-quotas/) is an object that provides constraints, limits, to resources that objects can use.  
+
+```yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: dev-team-quota
+  namespace: dev
+spec:
+  hard:
+    pods: "10"
+    requests.cpu: "4"
+    requests.memory: 5Gi
+    limits.cpu: "10"
+    limits.memory: 10Gi
+```
+
