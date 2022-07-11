@@ -28,6 +28,6 @@ spec:
     - name: ubuntu
       image: ubuntu
     # THIS can get added to make the machine sleep for 10,000 seconds
-      commands: ["sleep", "10000"]
+      command: ["sleep", "10000"]
 ```
 
