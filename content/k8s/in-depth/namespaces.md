@@ -156,4 +156,3 @@ spec:
     limits.cpu: "10"
     limits.memory: 10Gi
 ```
-
