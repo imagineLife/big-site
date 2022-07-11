@@ -441,6 +441,8 @@ kubectl get pods -o wide
 ```
 
 ## Replica Sets
+Interesting note, replica sets can be created against already-running pods.  
+Replica sets will create pods that match the `spec:template` definition if the pods are not running.  
 ```yaml
 apiVersion: apps/v1
 kind: ReplicaSet
@@ -449,6 +451,11 @@ metadata:
   type: front-end
 spec:
   replicas: 3
+  # only in replicaSet, not in ReplicationControl
+  # assumedly the label as the pod defined below
+  selector:
+    matchLabels:
+      type: front-end
   template:
     metadata:
       name: app-pod
