@@ -6,6 +6,9 @@ metadata:
      app: rc-app
      type: front-end
 spec:
+  # define the replica count
+  replicas: 3
+  # pod template: using metadata + spec of a pod
   template:
     metadata:
       name: nginx-pod
@@ -16,4 +19,3 @@ spec:
       containers:
         - name: nginx-container
           image: nginx
-  replicas: 3
