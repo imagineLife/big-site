@@ -22,7 +22,9 @@ Pods, deployments, replica sets... these all happen in a namespace.
   - [Using the CLI](#using-the-cli)
     - [See Objects By Namespace](#see-objects-by-namespace)
     - [Create Objects by Namespace](#create-objects-by-namespace)
-  - [Specify Namespace in a Definition File](#specify-namespace-in-a-definition-file)
+  - [Specify Namespace During Object Creation](#specify-namespace-during-object-creation)
+    - [Specify the Namespace of an Object](#specify-the-namespace-of-an-object)
+    - [Create a Namespace with yaml](#create-a-namespace-with-yaml)
 ## A Few Namespaces By Default
 - `Default`
   - created when the cluster is first setup
@@ -91,7 +93,8 @@ kubectl create -f dev-file.yml --namespace=horse
 ```
 
 
-## Specify Namespace in a Definition File
+## Specify Namespace During Object Creation 
+### Specify the Namespace of an Object
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -106,4 +109,18 @@ spec:
   containers:
     - name: redis-box
       image: redis
+```
+
+### Create a Namespace with yaml
+here, create the horse namespace with a file!
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: horse
+```
+
+Then 
+```bash
+kubectl create -f configs/ns/horse.yaml
 ```
