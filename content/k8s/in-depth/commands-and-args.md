@@ -15,6 +15,10 @@ A node server might run `npm run server` if it were using npm to run the server,
 **Arguments**, here, will refer to any, well, arguments passed to the command(s) that are run when a docker container is run.  
 A node server may expect a db connection name as `DB_NAME=<db-name-here>` and will be expecting it after the node run command, like this -> `node index.js DB_NAME="pg-box"`.  
 
+- [Commands and Arguments](#commands-and-arguments)
+  - [Modify a pod definition file to have a new command](#modify-a-pod-definition-file-to-have-a-new-command)
+    - [Use a list to describe commands in a pod definition](#use-a-list-to-describe-commands-in-a-pod-definition)
+  - [Mapping between Pod Definitions and COntainer Definitions](#mapping-between-pod-definitions-and-container-definitions)
 ## Modify a pod definition file to have a new command
 Make this ubuntu image sleep for 10K seconds
 ```yaml
@@ -44,5 +48,19 @@ spec:
       image: ubuntu
       command: 
         - "sleep"
+        # NOTE these must be strings, not numbers
         - "10000"
 ```
+
+## Mapping between Pod Definitions and COntainer Definitions
+- Containers use 
+  - `ENTRYPOINT` to define the command that is run
+    - i.e `ENTRYPOINT ["node", "."]`
+  - `CMD` to define arguments passed to the entrypoint command
+  - i.e `CMD ["DB_NAME", "PG_DB", "REDIS_NAME", "REDIS_BOX"]`
+- K8s Pod Def files, though, use different words to override the same things...
+  - `command` to override the `ENTRYPOINT` of a dockerfile
+    - i.e `command: npm run start` instead of `node .` above
+  - `args` to override the `CMD` of a dockerfile
+    - i.e `args: ["DB_NAME", "HORSE", "REDIS_NAME", "DOG"]` instead of above `CMD` args
+  
