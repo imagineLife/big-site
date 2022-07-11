@@ -9,7 +9,12 @@ order: 3
 ---
 
 # Imperative One-Liners
-
+- [Imperative One-Liners](#imperative-one-liners)
+  - [Imperative Pod Handling](#imperative-pod-handling)
+  - [Imperative Deployment Handling](#imperative-deployment-handling)
+  - [Imperative Service Handling](#imperative-service-handling)
+    - [Imperative Namespace Handling](#imperative-namespace-handling)
+    - [Imperative 2-in-1](#imperative-2-in-1)
 ## Imperative Pod Handling
 ```bash
 # deploy a pod named "nginx" with the "nginx:alpine" image
@@ -20,6 +25,13 @@ kubectl run nginx --image=nginx:alpine
 # from image redis:alpine
 # with labels tier: db
 kubectl run redis --image=redis:alpine --labels="tier=db"
+
+
+# create a pod
+# named horse
+# using nginx image
+# expose it on container port 8080
+kubectl run horse --image=nginx --port=8080
 ```
 
 ## Imperative Deployment Handling
@@ -35,6 +47,21 @@ kubectl create deployment nginx --image=nginx --replicas=4
 
 # scale an existing deployment named nginx to 5 ppods
 kubectl scale deployment nginx --replicas=5
+
+
+# create a deployment
+# named webapp
+# with image demo:webapp
+# with 3 replicas
+kubectl create deployment --name=webapp --image=demo:webapp --replicas=3
+
+
+# create a deployment
+# called mock-dep
+# in horse-ns namespace
+# with redis image
+# and 4 replicas
+kubectl create deployment mock-dep --namespace=horse-ns --replicas=4 --image=redis
 ```
 
 ## Imperative Service Handling
@@ -64,4 +91,23 @@ kubectl create service nodeport nginx --tcp=80:80 --node-port=30080
 # exposing an existing app called redis
 # on port 6379
 kubectl expose pod redis --name=redis-service --port=6379 --target-port=6379
+```
+
+### Imperative Namespace Handling
+```bash
+# create a namespace
+# named horse-ns
+kubectl create namespace horse-ns
+```
+
+### Imperative 2-in-1
+```bash
+# Create a pod
+# called http
+# using image httpd:alpine
+# AND also create a service 
+# of type ClusterIP
+# with same name as the pod, http
+# with a terget port of 80
+kubectl run httpd --image=httpd:alpine --port=80 --expose
 ```
