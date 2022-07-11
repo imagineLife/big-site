@@ -32,6 +32,9 @@ order: 4
     - [Steps](#steps)
   - [Delete a pod](#delete-a-pod)
   - [Things to Be Able To Do](#things-to-be-able-to-do)
+    - [edit a running pod](#edit-a-running-pod)
+    - [Get pod status](#get-pod-status)
+  - [Replica Sets](#replica-sets)
   - [Some Big-Picture Takeaways](#some-big-picture-takeaways)
   - [Using VSCode](#using-vscode)
 ## Pods
@@ -337,7 +340,7 @@ Pod yaml definitions have 4 "top" level keys:
 - `kind`
   - the "type" of object the file is for
     - pod
-    - replicaSEt
+    - replicaSet
     - Service
     - deployment
 - `medatada`
@@ -415,15 +418,48 @@ SKills this doc covers:
     - kubectl delete pod webapp
 - start a pod from a yaml file
   - kubectl apply -f configs/pods/nginx-pod.yml
-- edit a running pods yaml file
-  - something like change the image that the pod container is based on
-  - INTERESING:
-    - `edit pod pod-name-here` is like an in-terminal editor
+
+### edit a running pod
+- do something like change the image that the pod container is based on
+
+```bash
+# this will open a terminal editor to edit a pod
+kubectl edit pod <pod-name>
+
+# this will create a pod def file from a running pod
+kubectl get opd <pod-name-here> -o yaml > pod-def.yaml
+```
+
+### Get pod status
 - figure out the status of all pods && containers
 - figure out why containers might be busted
     - a bad image name
 - be able to “fix” a pod with a bad image name
+```bash
+kubectl get pods 
+kubectl get pods -o wide
+```
 
+## Replica Sets
+```yaml
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: my-rs
+  type: front-end
+spec:
+  replicas: 3
+  template:
+    metadata:
+      name: app-pod
+      labels:
+        app: nginx-app
+        type: front-end
+    spec:
+      containers:
+        - name: nginx-box
+          image: nginx
+```
 
 
 ## Some Big-Picture Takeaways
