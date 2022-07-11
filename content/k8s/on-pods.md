@@ -320,13 +320,6 @@ Interesting notes in the `describe` output:
 
 
 ### Describing a pod in one-line
-#### The o Flag
-The [`-o` flag](https://kubernetes.io/docs/reference/kubectl/#output-options) of a `kubectl get <item> -o wide` allows for a bunch of adjusting of the output: 
-- `-o custom-columns=<cols,here,scv>` can be explicitly described
-- `-o json` returns a json format
-- `-o yaml`
-- `-o wide` returns with a few more columns
-
 The `get pods` can be used for a one-liner of the pods, as seen above.  
 A "wide" output flag can be added to that command that gives more info in the one-line output.   
 Here's a comparison of the `get pods` with and without the `wide` flag:  
@@ -338,6 +331,27 @@ NAME    READY   STATUS    RESTARTS   AGE   IP           NODE       NOMINATED NOD
 nginx   1/1     Running   0          42m   172.17.0.5   minikube   <none>           <none>
 ```
 
+#### The o Flag
+The [`-o` flag](https://kubernetes.io/docs/reference/kubectl/#output-options) of a `kubectl <do-something> -o wide` allows for a bunch of adjusting of the output: 
+- `-o custom-columns=<cols,here,scv>` can be explicitly described
+- `-o json` returns a json format
+- `-o yaml`
+- `-o wide` returns with a few more columns
+
+The output flag can be used during `get` commands, as well as `create` commands! Crazy.
+```bash
+kubectl create namespace test-123 --dry-run -o json
+{
+    "kind": "Namespace",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "test-123",
+        "creationTimestamp": null
+    },
+    "spec": {},
+    "status": {}
+}
+```
 
 ## Deploying a Pod using a yaml definition
 Pod yaml definitions have 4 "top" level keys:
