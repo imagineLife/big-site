@@ -30,4 +30,19 @@ spec:
     # THIS can get added to make the machine sleep for 10,000 seconds
       command: ["sleep", "10000"]
 ```
-
+### Use a list to describe commands in a pod definition
+Same def file as above, just expressed differently
+```yaml
+# pod-def-1.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tired-ubuntu
+spec:
+  containers:
+    - name: ubuntu
+      image: ubuntu
+      command: 
+        - "sleep"
+        - "10000"
+```
