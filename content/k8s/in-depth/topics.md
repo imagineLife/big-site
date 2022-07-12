@@ -39,3 +39,10 @@ There are patterns:
 - volumes
 - persistent volume claims
 
+## Imperative and Declarative Syntax
+K8s docs cover, in more depth, [Imperative Management](https://kubernetes.io/docs/tasks/manage-kubernetes-objects/imperative-config/) and [Declarative Management](https://kubernetes.io/docs/tasks/manage-kubernetes-objects/declarative-config/) styles.  
+In summary - 
+- Imperative is sort of like "do what I say"
+- Declarative is sort of like "do what I say... but look to a declaration explanation for what to do"...
+
+Declarative & Imperative topics span software engineering, and K8s joins the fun!  
