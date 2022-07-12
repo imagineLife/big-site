@@ -17,6 +17,7 @@ Say, for an example, a docker container is running that just .... runs sleep for
   - [Root Users Can Do Anything](#root-users-can-do-anything)
   - [Docker Containers Relate to the Host](#docker-containers-relate-to-the-host)
   - [Setting Docker Container Security Settings](#setting-docker-container-security-settings)
+  - [Things to be able to do](#things-to-be-able-to-do)
 
 ## Root Users Can Do Anything
 Linux has users.  
@@ -94,3 +95,30 @@ spec:
           add: ["MAC_ADMIN"]
 ```
 
+
+## Things to be able to do
+- figure out what pod-level user runs a command
+- be abled to edit a pod's user ID
+- be able to parse settings set at bot the container and pod level:
+  - in the below yaml...
+    - the "web" container runs as user 1002
+    - the "sidecar" container runs as user 1001
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: multi-pod
+spec:
+  securityContext:
+    runAsUser: 1001
+  containers:
+  -  image: ubuntu
+     name: web
+     command: ["sleep", "5000"]
+     securityContext:
+      runAsUser: 1002
+
+  -  image: ubuntu
+     name: sidecar
+     command: ["sleep", "5000"]
+```
