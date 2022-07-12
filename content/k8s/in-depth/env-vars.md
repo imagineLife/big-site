@@ -9,6 +9,28 @@ order: 5
 ---
 
 # Env Vars
+Here, ConfigMaps and Secrets!
+
+- [Env Vars](#env-vars)
+  - [Plain Key Value Pair Format](#plain-key-value-pair-format)
+  - [ConfigMap Format](#configmap-format)
+    - [Reference ConfigMap file for all Env Var Keys and Values](#reference-configmap-file-for-all-env-var-keys-and-values)
+    - [Using ConfigMaps in Pod Definition files](#using-configmaps-in-pod-definition-files)
+    - [An Example ConfigMap file](#an-example-configmap-file)
+    - [Creating configmaps Imperatively](#creating-configmaps-imperatively)
+    - [Creating ConfigMaps Declaratively](#creating-configmaps-declaratively)
+    - [Inspecting Config Maps](#inspecting-config-maps)
+    - [ConfigMap Tasks](#configmap-tasks)
+  - [SecretKey Format](#secretkey-format)
+    - [Why Secrets Instead of ConfigMaps](#why-secrets-instead-of-configmaps)
+    - [Creating Secrets Imperatively](#creating-secrets-imperatively)
+    - [Creating Secrets Declaratively](#creating-secrets-declaratively)
+      - [Encoding and Decoding Values with linux](#encoding-and-decoding-values-with-linux)
+      - [A Secrets yaml def](#a-secrets-yaml-def)
+    - [See Secret Obejcts](#see-secret-obejcts)
+    - [Config a Secrets Object with a Pod](#config-a-secrets-object-with-a-pod)
+    - [Secrets and Security](#secrets-and-security)
+
 Start with a pod definition file
 ```yaml
 # cfgs/pods/webapp.yaml
@@ -205,12 +227,78 @@ kubectl get pod horse-pod -o yaml > horse.yaml
 ```
 - see how many configmaps are running in an env from the cli
 - see a configMap value set from the cli: `kubectl describe configmaps the-config-map-name`
-- create a configmap from the cli, without a file, with one env var value: `kubectl create configmap webapp-config-map --from-literal=APP_COLOR=darkblue`
+- create a configmap from the cli, without a file, with one env var value: `kubectl create configmap webapp-config-map --from-literal=ENV_KEY_NAME=env-key-value --from-literal=ANOTHER_VAR=another-val`
 - understand and get env var keys & values from a running pod: `kubectl describe pod <pod-name-here>` && find the env var section
 
 
 ## SecretKey Format
-This is similar to the ConfigMap format, where the values of each env var are pulled out of the (pod/rs/deployment) definition file and stored elsewhere. The env file is again referenced in the object definiton file:  
+
+### Why Secrets Instead of ConfigMaps
+Config Maps are cleartext.  
+Secrets are encoded!  
+
+### Creating Secrets Imperatively
+This syntax is very similar to the configmap syntax:  
+```bash
+kubectl creat secret generic my-secrets \
+  --from-literal=DB_HOST=db_name_here
+  --from-literal=DB_USER=db_user_here
+
+# another in-between imperadeclarative
+kubectl create secret generic my-secrets \
+  --from-file=app-secrets.yaml
+```
+
+### Creating Secrets Declaratively
+Create a yaml file.
+
+A Pre-requisite, though - the data values must be encoded (_not sure how it "knows" that the contents are encoded though!_)  
+
+#### Encoding and Decoding Values with linux
+The Linux cli can be used to encode values:
+
+```bash
+echo -n 'my_db_name' | base64
+bXlfZGJfbmFtZQ==
+```
+Run this for all the env vars needed (_maybe make a bash script file as a side-project?_) and then the resulting garbly-gook encoded strings can be used in the yaml file.  
+
+To decode these, use the same command, but with the encoded value and a `--decode` flag:
+```bash
+echo -n 'bXlfZGJfbmFtZQ==' | base64 --decode
+```
+#### A Secrets yaml def
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: my-secrets
+
+# NOTE: no spec here! just data
+data:
+  # value taken from linux base64 output example aboce
+  DB_NAME: bXlfZGJfbmFtZQ==
+```
+
+
+### See Secret Obejcts
+```bash
+# summary
+kubectl get secrets
+NAME          TYPE    DATA     AGE
+horse-secret  Opaque  3         10m
+
+# details with key names
+kubectl describe secrets
+
+# details with keys + values
+kubect get secret horse-secret -o yaml
+# will return the yaml output
+```
+
+### Config a Secrets Object with a Pod
+Seems like secrets first, then pods:
+here, with the envFrom approach:
 ```yaml
 # cfgs/pods/webapp.yaml
 apiVersion: v1
@@ -223,9 +311,52 @@ spec:
       image: simple-webapp-color
       ports:
         - containerPort: 8080
-      # HERE! are env vars
-      env:
-        - name: APP_COLOR
-          valueFrom:
-            secretKeyRef: file.here.yaml
+      envFrom:
+        - secretRef:
+          # use the secret name here
+          name: horse-secret
 ```
+
+here, with the single-val approach:
+```yaml
+# cfgs/pods/webapp.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demo-pod-webapp
+spec:
+  containers:
+    - name: simple-webapp
+      image: simple-webapp-color
+      ports:
+        - containerPort: 8080
+      env:
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: horse-secret
+              key: DB_HOST
+```
+
+here, with the volume approach - note that each secret attr is created as a file with the value of the secret as its content:  `/opt/horse-secret-vol/DB_HOST` will have a value of something like `bXlfZGJfbmFtZQ==` in it:  
+
+```yaml
+# cfgs/pods/webapp.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demo-pod-webapp
+spec:
+  containers:
+    - name: simple-webapp
+      image: simple-webapp-color
+      ports:
+        - containerPort: 8080
+      volumes:
+        - name: app-secret-vol
+          secret:
+            secretName: horse-secret
+```
+
+
+### Secrets and Security
