@@ -196,6 +196,14 @@ kubectl get configmaps
 # list config details & values
 kubectl describe configmaps
 ```
+
+### ConfigMap Tasks
+```bash
+# get running pod def
+# save to a file
+kubectl get pod horse-pod -o yaml > horse.yaml
+```
+
 ## SecretKey Format
 This is similar to the ConfigMap format, where the values of each env var are pulled out of the (pod/rs/deployment) definition file and stored elsewhere. The env file is again referenced in the object definiton file:  
 ```yaml
