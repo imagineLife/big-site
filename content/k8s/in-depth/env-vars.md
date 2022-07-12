@@ -29,6 +29,7 @@ Here, ConfigMaps and Secrets!
       - [A Secrets yaml def](#a-secrets-yaml-def)
     - [See Secret Obejcts](#see-secret-obejcts)
     - [Config a Secrets Object with a Pod](#config-a-secrets-object-with-a-pod)
+    - [Secreet Things To Be Able To Do](#secreet-things-to-be-able-to-do)
     - [Secrets and Security](#secrets-and-security)
 
 Start with a pod definition file
@@ -314,7 +315,7 @@ spec:
       envFrom:
         - secretRef:
           # use the secret name here
-          name: horse-secret
+            name: horse-secret
 ```
 
 here, with the single-val approach:
@@ -358,5 +359,11 @@ spec:
             secretName: horse-secret
 ```
 
-
+### Secreet Things To Be Able To Do
+- find how many secret objects in an env
+- find how many secret vals are in a secret obj
+- fix a busted pod due to secrets
+  - get a yaml file from a running pod
+  - edit the yaml to include secrets from a k8s secrets object
+  - stop + start the "same" pod with the env vars
 ### Secrets and Security
