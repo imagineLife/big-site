@@ -360,10 +360,46 @@ spec:
 ```
 
 ### Secreet Things To Be Able To Do
-- find how many secret objects in an env
-- find how many secret vals are in a secret obj
+Find how many secret objects in an env:
+```bash
+kubect get secrets
+```
+Find how many secret vals are in a secret obj:
+```bash
+kubect describe secret <secret-object-name>
+# for a more detailed expression of the secret obj
+```
 - fix a busted pod due to secrets
+  - create a secret
+    - named secret-horse
+    - pass a few env vars
   - get a yaml file from a running pod
   - edit the yaml to include secrets from a k8s secrets object
   - stop + start the "same" pod with the env vars
+```bash
+# create a secret
+kubectl create secret generic secret-horse \
+  --from-literal=HOST=water \
+  --from-literal=UN=juice \
+  --from-literal=PW=box \
+
+# create a yaml from a running pod name busted
+# writing to a file called "qwer.yaml"
+kubectl get pod busted -o yaml > qwer.yaml  
+
+
+# update the pod def file to source env vars from the above k8s secret object
+vi qwer.yaml
+
+# basically, append this 
+spec:
+  containers:
+  #  ... the rest of the container definition
+    envFrom:
+    - secretRef:
+        name: secret-horse
+
+# then, connect this to the pod
+kubectl apply -f qwer.yaml
+```
 ### Secrets and Security
