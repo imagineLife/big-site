@@ -198,11 +198,16 @@ kubectl describe configmaps
 ```
 
 ### ConfigMap Tasks
+Be able to do things like...
+- create a pod definition file from a running pod && save to a yaml file
 ```bash
-# get running pod def
-# save to a file
 kubectl get pod horse-pod -o yaml > horse.yaml
 ```
+- see how many configmaps are running in an env from the cli
+- see a configMap value set from the cli: `kubectl describe configmaps the-config-map-name`
+- create a configmap from the cli, without a file, with one env var value: `kubectl create configmap webapp-config-map --from-literal=APP_COLOR=darkblue`
+- understand and get env var keys & values from a running pod: `kubectl describe pod <pod-name-here>` && find the env var section
+
 
 ## SecretKey Format
 This is similar to the ConfigMap format, where the values of each env var are pulled out of the (pod/rs/deployment) definition file and stored elsewhere. The env file is again referenced in the object definiton file:  
