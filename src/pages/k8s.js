@@ -17,7 +17,7 @@ const IndexPage = () => (
     query={graphql`
       query k8sTOC {
         k8s: allMarkdownRemark(
-          filter: { frontmatter: { slug: { regex: "/k8s/" } } }
+          filter: { frontmatter: { slug: { regex: "/k8s/" }, parentDir: { regex: "/k8s$/" } } }
           sort: { fields: frontmatter___order }
         ) {
           pages: edges {
