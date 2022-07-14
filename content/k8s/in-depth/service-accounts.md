@@ -215,9 +215,9 @@ eyJhbGciOiJSUzI1NiIsImtpZCI6Il8tOTNrdTloSUpLSEZmazg2NE40enBHZUYxTXJQM1hrbERscTMw
 
 
 ## Things to be able to do
-- identify which service accounts are un an env
-- identify which secret is associated with a service account
-- identify an image that was used in a deployment
+1. identify which service accounts are un an env
+2. identify which secret is associated with a service account
+3. identify an image that was used in a deployment
 - 
 ```bash
 # 1
@@ -229,4 +229,5 @@ kubect describe serviceaccount <s.a.name>
 
 # 3
 kubectl describe deployment <d.name>
+
 ```
