@@ -42,6 +42,7 @@ Here, the service account would be used by the app to "talk to" the cluster and 
   - [Hosting A K8s App In A Cluster That Uses A Service Account](#hosting-a-k8s-app-in-a-cluster-that-uses-a-service-account)
     - [Leverage the Default Service Account and Default Secret](#leverage-the-default-service-account-and-default-secret)
   - [An Example Of A Dashboard App Pod And A Service Account](#an-example-of-a-dashboard-app-pod-and-a-service-account)
+  - [Things to be able to do](#things-to-be-able-to-do)
 ## Create a Service Account
 ```yaml
 kubectl create service account dashboard-sa
@@ -210,4 +211,22 @@ kubectl exec my-kubernetes-dashboard -- cat /var/run/secrets/kubernetesviceaccou
 # returns
 eyJhbGciOiJSUzI1NiIsImtpZCI6Il8tOTNrdTloSUpLSEZmazg2NE40enBHZUYxTXJQM1hrbERscTMwb0hINWsifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWwiXSwiZXhwIjoxNjg5MzQwOTYyLCJpYXQiOjE2NTc4MDQ5NjIsImlzcyI6Imh0dHBzOi8va3ViZXJuZXRlcy5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJkZWZhdWx0IiwicG9kIjp7Im5hbWUiOiJteS1rdWJlcm5ldGVzLWRhc2hib2FyZCIsInVpZCI6IjZhMjQ1NDJkLWQ4YTEtNDk0Yy1hZGI1LTA5ZThiNDA0MjA5MyJ9LCJzZXJ2aWNlYWNjb3VudCI6eyJuYW1lIjoiZGVmYXVsdCIsInVpZCI6ImI0YThhY2VlLWUyOTItNGZiMi05NmE3LTE5YmVhYmViMWExYSJ9LCJ3YXJuYWZ0ZXIiOjE2NTc4MDg1Njl9LCJuYmYiOjE2NTc4MDQ5NjIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpkZWZhdWx0OmRlZmF1bHQifQ...more...
 
+```
+
+
+## Things to be able to do
+- identify which service accounts are un an env
+- identify which secret is associated with a service account
+- identify an image that was used in a deployment
+- 
+```bash
+# 1
+kubectl get serviceaccounts
+
+# 2 
+kubect describe serviceaccount <s.a.name>
+# find the Tokens: <val-here>
+
+# 3
+kubectl describe deployment <d.name>
 ```
