@@ -175,3 +175,39 @@ NOTE:
   - lists `/var/run/secrets/kubernetes.io/serviceaccount`: this is where the secret is!
 - the `Volumes:kube-api-access-17lgz` section
   - thats a volume that contains the secret :) 
+
+See the secret content inside the pod:  
+```bash
+kubectl exec my-kubernetes-dashboard -- ls /var/run/secrets/kubernetes.io/serviceaccount
+
+# should return
+ca.crt
+namespace
+token
+```
+Note:
+- the secret for the service account has 3 part
+  - ca.crt
+  - namespace
+  - token
+
+Inspecting the namespace:
+```bash
+kubectl exec my-kubernetes-dashboard -- cat /var/run/secrets/kubernetes.io/serviceaccount/namespace
+# returns
+default
+```
+Note:
+- k8s automatically uses the ` default ` service account
+- the default service account only has authz to run K8s api queries
+- other service accounts can be used, but need to be defined in the pod def file
+  - `serviceAccountName: new-account-who-dis` as a sibling of `spec:containers`
+  - This can be done with a deployment :) not directly against a running pod - don't forget!
+
+Inspecting the token:
+```bash
+kubectl exec my-kubernetes-dashboard -- cat /var/run/secrets/kubernetesviceaccount/token
+# returns
+eyJhbGciOiJSUzI1NiIsImtpZCI6Il8tOTNrdTloSUpLSEZmazg2NE40enBHZUYxTXJQM1hrbERscTMwb0hINWsifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWwiXSwiZXhwIjoxNjg5MzQwOTYyLCJpYXQiOjE2NTc4MDQ5NjIsImlzcyI6Imh0dHBzOi8va3ViZXJuZXRlcy5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJkZWZhdWx0IiwicG9kIjp7Im5hbWUiOiJteS1rdWJlcm5ldGVzLWRhc2hib2FyZCIsInVpZCI6IjZhMjQ1NDJkLWQ4YTEtNDk0Yy1hZGI1LTA5ZThiNDA0MjA5MyJ9LCJzZXJ2aWNlYWNjb3VudCI6eyJuYW1lIjoiZGVmYXVsdCIsInVpZCI6ImI0YThhY2VlLWUyOTItNGZiMi05NmE3LTE5YmVhYmViMWExYSJ9LCJ3YXJuYWZ0ZXIiOjE2NTc4MDg1Njl9LCJuYmYiOjE2NTc4MDQ5NjIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpkZWZhdWx0OmRlZmF1bHQifQ...more...
+
+```
