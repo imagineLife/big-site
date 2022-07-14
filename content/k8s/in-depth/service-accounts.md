@@ -25,6 +25,7 @@ An Example:
 - gets a list of pods in the cluster
 - displays pods on a webpage
 - Uses a service account
+- Uses the [token](#comes-with-a-token) that comes along with the service account to make REST calls to the k8s api for dashboard info
 
 Here, the service account would be used by the app to "talk to" the cluster and get cluster details to show in the resulting app webpage.  <br/><br/>
 
@@ -32,26 +33,36 @@ Here, the service account would be used by the app to "talk to" the cluster and 
 - [Kubernetes Service Accounts](#kubernetes-service-accounts)
   - [Create a Service Account](#create-a-service-account)
     - [Comes with a Token](#comes-with-a-token)
-  - [Inspect All Service Accounts](#inspect-all-service-accounts)
-  - [Inspect One Service Account](#inspect-one-service-account)
+    - [Comes with a Secret Object](#comes-with-a-secret-object)
+  - [Inspect The Elemens](#inspect-the-elemens)
+    - [All Service Accounts](#all-service-accounts)
+    - [One Service Account](#one-service-account)
+    - [One Secret](#one-secret)
+  - [Using the Secret Token During a K8s REST API Request](#using-the-secret-token-during-a-k8s-rest-api-request)
+  - [Hosting A K8s App In A Cluster That Uses A Service Account](#hosting-a-k8s-app-in-a-cluster-that-uses-a-service-account)
+    - [Leverage the Default Service Account and Default Secret](#leverage-the-default-service-account-and-default-secret)
+  - [An Example Of A Dashboard App Pod And A Service Account](#an-example-of-a-dashboard-app-pod-and-a-service-account)
 ## Create a Service Account
 ```yaml
 kubectl create service account dashboard-sa
 ```
 ### Comes with a Token
-Creating a service account builds a token.  
-This token is a secret k8s object.  
-This token K8s object name can be inspected by [inspecting a service account](#inspect-one-service-account)
+Creating a service account also builds a token for the account.  
+
+### Comes with a Secret Object
+The token is stored in a k8s secret object.  
+This K8s secret object name can be inspected by [inspecting a service account](#inspect-one-service-account).
 
 
-## Inspect All Service Accounts
+## Inspect The Elemens 
+### All Service Accounts
 ```bash
 # show 1-liners, 1 for each account
 kubectl get serviceaccount
 ```
 
 
-## Inspect One Service Account
+### One Service Account
 ```bash
 # kubectl describe serviceaccount <account-name>
 kubectl describe serviceaccount cicd-user
@@ -60,7 +71,107 @@ Namespace:                  default
 Labels:                     <none>
 Annotations:                <none>
 Image pull secrets:         <none>
-Mountable secrets:          some-string-here
-Tokens:                     some-string-here
+Mountable secrets:          some-string-here-qwer
+Tokens:                     some-string-here-qwer
 Events:                     <none>
 ```
+
+### One Secret
+The above service account includes a token, which is stored in a K8s secret object, for the service account `cicd-user`. The k8s secret object is named `some-string-here-qwer`. This object can be inspected to reveal the token stored within it:  
+```bash
+kubectl describe secret some-string-here-qwer
+
+Name:           some-string-here-qwer
+Namespace:      default
+Labels:         <none>
+
+Type:           kubernetes.io/service-account-token
+
+Data
+===
+ca.cart:        1025 bytes
+namespace:      7 bytes
+token:
+eyONUGNlugnuyfv5bjy8gB*&Gbkubg.TVI^&FKUbkyugvj6vfb 
+```
+
+## Using the Secret Token During a K8s REST API Request
+```bash
+curl https://k8s.ip.addr:6443/api -insecure --header "Authorization: Bearer <token-goes-here>"
+```
+
+## Hosting A K8s App In A Cluster That Uses A Service Account
+Say the dashboard app is hosted in the same K8s cluster that is being dashboarded. This setup means that the secret token can be more-easily managed, because the dashboard app is within the cluster:
+- the secret object can be stored as/in a volume
+- the volume can be mounted to the dashboard pod
+- the token can be used, more directly, by the app - rather than passing the token as a rest api auth bearer header above
+
+### Leverage the Default Service Account and Default Secret
+There is a default service account made for every namespace called ` default `.  
+The default service account and token are automatically mounted to the pod as a volume mount.  
+
+## An Example Of A Dashboard App Pod And A Service Account
+Pull this "dashboard" image && build a pod:
+```yaml
+apiVersion: v1
+kind: Pod
+medatada:
+  name: my-kubernetes-dashboard
+spec:
+  containers:
+    - name: my-kubernetes-dashboard
+      image: kodekloud/my-kubernetes-dashboard
+```
+
+The pod should be running! Inspect the pod to see some details about the secret & the volume mount:  
+```yaml
+kk describe pod my-kubernetes-dashboard
+
+Name:         my-kubernetes-dashboard
+Namespace:    default
+Priority:     0
+Node:         minikube/192.168.49.2
+Start Time:   Thu, 14 Jul 2022 09:22:42 -0400
+Labels:       <none>
+Annotations:  <none>
+Status:       Running
+IP:           172.17.0.2
+IPs:
+  IP:  172.17.0.2
+Containers:
+  my-kubernetes-dashboard:
+    Container ID:   docker://9af545727333c7a77fd7016b4926194e9401b353c76b14d9c50f4bd2a8b0ed99
+    Image:          kodekloud/my-kubernetes-dashboard
+    Image ID:       docker-pullable://kodekloud/my-kubernetes-dashboard@sha256:51261309eebea4f4d2224fe95dcbb664e0fea03bbaecb4ec930fb972c475d927
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Thu, 14 Jul 2022 09:22:51 -0400
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-l7lgz (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  kube-api-access-l7lgz:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+```
+NOTE:
+- the `Containers:my-kubernetes-dashboard:Mounts` section
+  - lists `/var/run/secrets/kubernetes.io/serviceaccount`: this is where the secret is!
+- the `Volumes:kube-api-access-17lgz` section
+  - thats a volume that contains the secret :) 
