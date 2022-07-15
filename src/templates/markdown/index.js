@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { graphql, Link } from 'gatsby';
 import { Helmet } from 'react-helmet';
 import './index.scss';
+import Header from './../../components/header'
 
 export default function Template({
   data: {
@@ -71,10 +72,10 @@ export default function Template({
         <meta property="og:title" content={title} />
         <meta property="og:url" content={`http://laursen.tech${slug}`} />
       </Helmet>
-      <main
-        className={`md-wrapper${parentDir ? ` ${parentDir}` : ''}`}
-        dangerouslySetInnerHTML={{ __html: content }}
-      ></main>
+      <main className={`md-wrapper${parentDir ? ` ${parentDir}` : ''}`}>
+        <Header className="md" />
+        <section dangerouslySetInnerHTML={{ __html: content }}></section>
+      </main>
       <footer className="md-footer">
         <div id="link-wrapper">
           {pages.length > 1 &&
