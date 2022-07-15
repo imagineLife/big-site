@@ -3,7 +3,7 @@ import { StaticQuery, graphql, Link } from 'gatsby';
 
 import Layout from './../components/layout';
 import Hero from './../components/hero';
-
+import { Helmet } from 'react-helmet';
 import './scrum.scss';
 
 /*
@@ -39,6 +39,7 @@ const IndexPage = () => (
           <Layout>
             <section className="toc-wrapper">
               <h1>K8s</h1>
+              <h2 title="Thanks to Brian Holt from Frontend Masters for Sparking some Curiosity here!">An Introduction</h2>
               {pages.map(
                 (
                   {
@@ -58,12 +59,6 @@ const IndexPage = () => (
                   );
                 },
               )}
-              <sub>
-                Thanks to{' '}
-                <Link to={'https://github.com/btholt'}>Brian Holt</Link> and{' '}
-                <Link to={'https://frontendmasters.com'}>FrontendMasters</Link>{' '}
-                for sparking some curiosity here!
-              </sub>
             </section>
           </Layout>
         </Fragment>
