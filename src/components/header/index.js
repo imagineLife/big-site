@@ -24,8 +24,8 @@ const headerLinks = [
     to: '/node',
   }
 ];
-const Header = () => (
-  <header className="header">
+const Header = ({className}) => (
+  <header className={`header ${className}`}>
     <Link className="styled bold" to="/">
       Home
     </Link>

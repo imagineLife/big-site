@@ -6,6 +6,13 @@ header {
     padding: .5rem 10px;
   }
 
+  &.md{
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
   nav {
     margin-top: 0;
     margin-left: 10px
