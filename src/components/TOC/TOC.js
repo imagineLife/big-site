@@ -9,7 +9,6 @@ const TOC = ({ title, pages, children, childrenTop }) => (
     <Layout>
       <section className="toc-wrapper">
         <h1>{title}</h1>
-        {/* <p className="subtitle">A Brief collection of writings</p> */}
         {children && childrenTop && children}
         {pages &&
           pages.map(
