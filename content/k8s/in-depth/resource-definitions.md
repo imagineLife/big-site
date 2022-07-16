@@ -26,15 +26,15 @@ Here is a memory LimitRange example for a pod. [K8s Memory units](https://kubern
 - E 
 - P
 - T
-- G
-- M
-- k 
+- G for gigabytes (1,000,000,000 bytes)
+- M for Megabytes (1,000,000 bytes)
+- k for kilobytes (1,000 bytes)
 - Ei
 - Pi
 - Ti
-- Gi
-- Mi
-- Ki
+- Gi for gibibyte (1,073,741,824 bytes)
+- Mi for Mebibyte (1,048,576 bytes)
+- Ki for Kibibyte (1,024 bytes)
 
 in This def file is described
 - requesting 256MiB of memory
