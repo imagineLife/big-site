@@ -41,3 +41,21 @@ Here is an example:
 # kubectl taint nodes a-node-name key=value:taint-effect
 kubectl taint nodes primary app=frontend:NoSchedule
 ```
+
+## Set Matching Tolerations on Pods
+Pod definition files can include a `tolerations` object as a sibling to `containers` and key within the `spec` field:
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mock-pod
+spec:
+  containers:
+    - name: nxinx-box
+      image: nxing
+  tolerations:
+    - key: "app"
+      operator: "Equal"
+      value: frontend
+      effect: NoSchedule
+```
