@@ -15,7 +15,6 @@ Pods can use the same.
 ## Scheduler Considers these hardware resources
 Kubernetes schedulers "decide" which node that a pod gets allocated to. The Scheduler considers resources that are required by a pod. The scheduler also considers resources "left available" on the host(s) environmnets.  
 
-## 
 ## Resource Maximums Can Be Configured
 According to [the k8s docs](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/) on configuring memory limits,
 `A Kubernetes cluster can be divided into namespaces. Once you have a namespace that has a default memory limit, and you then try to create a Pod with a container that does not specify its own memory limit, then the control plane assigns the default memory limit to that container.`  
@@ -63,7 +62,7 @@ kubectl apply -f mem-limits.yaml --namespace=default
 
 
 #### CPU
-Here is a CPU LimitRange example for a pod. K8s CPU units of measurement are equivelant to 1 physical cpu core, or 1 virtual core - depending on the host env type. The below def file describes:
+Here is a CPU LimitRange example for a pod. [K8s CPU units of measurement](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-units-in-kubernetes) are equivelant to 1 physical cpu core, or 1 virtual core - depending on the host env type. The below def file describes:
 - requesting 256MiB of memory
 - setting a max mem limit of 512 MiB
 
@@ -86,3 +85,48 @@ This can be applied to a namespace for all pods in the namespace, here the `defa
 ```bash
 kubectl apply -f cpu-limits.yaml --namespace=default
 ```
+
+
+## Resources Can Be Configured by Pod Definition
+Here, an example of a pod that includes explicity memory & cpu request sizes. here,
+- 2 containers, both with similar resource descriptions
+    - requested ammounts
+      - .25 CPU units
+      - 64MiB of memory
+    - max limits
+      - .5 CPU units
+      - 128MiB of memory
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: frontend
+spec:
+  containers:
+    - name: api-app
+      image: some-api-image:v2
+      # here!
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+    - name: hidden-worker
+      image: some-worker-image:v2
+      # here!
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+```
+
+### Pod Resource Requests and Kubernetes Scheduler Impacts
+Pods get created.  
+K8s scheduler selects a node for the pod to run on.  
+Each node, itself, has a maximum capacity of resources that the node can allocate to pods.  
+The scheduler asserts that the maximum available resources of the node are always larger than the sum of the resource requests of the containers (_inside pods_).  
