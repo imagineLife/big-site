@@ -125,8 +125,16 @@ spec:
           cpu: "500m"
 ```
 
+### Understanding Resource Allocation on Running Pods
+```bash
+kubectl get pod pod-name-here -o yaml
+```
+This command will reveal `containers:-resource:(limits + request)` details.  
+
 ### Pod Resource Requests and Kubernetes Scheduler Impacts
 Pods get created.  
 K8s scheduler selects a node for the pod to run on.  
 Each node, itself, has a maximum capacity of resources that the node can allocate to pods.  
 The scheduler asserts that the maximum available resources of the node are always larger than the sum of the resource requests of the containers (_inside pods_).  
+Resource Limit Description Without Request Definition
+Pod resource limits can be described without describing the resource request.  
