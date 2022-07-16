@@ -12,6 +12,15 @@ order: 8
 Nodes can use memory, disk, and cpu.  
 Pods can use the same.  
 
+- [Kubernetes Objects Consume Hardware Resources](#kubernetes-objects-consume-hardware-resources)
+  - [Scheduler Considers these hardware resources](#scheduler-considers-these-hardware-resources)
+  - [Resource Maximums Can Be Configured](#resource-maximums-can-be-configured)
+    - [Resource Limits can Be describe in LimitRange definition files](#resource-limits-can-be-describe-in-limitrange-definition-files)
+      - [Memory](#memory)
+      - [CPU](#cpu)
+  - [Resources Can Be Configured by Pod Definition](#resources-can-be-configured-by-pod-definition)
+    - [Understanding Resource Allocation on Running Pods](#understanding-resource-allocation-on-running-pods)
+    - [Pod Resource Requests and Kubernetes Scheduler Impacts](#pod-resource-requests-and-kubernetes-scheduler-impacts)
 ## Scheduler Considers these hardware resources
 Kubernetes schedulers "decide" which node that a pod gets allocated to. The Scheduler considers resources that are required by a pod. The scheduler also considers resources "left available" on the host(s) environmnets.  
 
