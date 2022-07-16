@@ -13,6 +13,16 @@ Taints apply to nodes.
 Taints allow nodes to "repel" a pod from being deployed on the node.  
 Taints are interpreted by the K8s scheduler, and the scheduler takes into account node taints as well as pod tolerations (_below_) when scheduling pods for deployments onto nodes.  
 
+- [Taints and Nodes](#taints-and-nodes)
+    - [Taint Effects](#taint-effects)
+      - [The NoSchedule Effect](#the-noschedule-effect)
+      - [The PreferNoSchedule Effect](#the-prefernoschedule-effect)
+      - [The NoExecute Effect](#the-noexecute-effect)
+- [Tolerants and Pods](#tolerants-and-pods)
+- [Taints and Tolerations Working Together](#taints-and-tolerations-working-together)
+  - [Set a Taint on a Node](#set-a-taint-on-a-node)
+  - [Set Matching Tolerations on Pods](#set-matching-tolerations-on-pods)
+
 ### Taint Effects
 There are 3 "types" of taints, describe by kubernetes as "effects": NoSchedule, PreferNoSchedule, and NoExecute.  
 The NoSchedule and PreferNoSchedule are taints that apply to pods that may or may not be deployed to nodes in the future. The NoExecute taint will affect existing running pods on nodes.  
@@ -25,6 +35,10 @@ This is perhaps the most strict taint.
 This is, perhaps, a gentler version of the NoScheudle effect.  
 The scheduler "tries to avoid" putting a pod in the node if the pod does not tolerate the node.  
 This "trying" does not explicitly mean that a pod will not be deployed on a node with mismatched taint(s).  
+
+#### The NoExecute Effect
+When a node gets the NoExecute effect, any pod in the node that does not tolerate the taint will be evicted from the node immediately.  
+
 
 
 # Tolerants and Pods
