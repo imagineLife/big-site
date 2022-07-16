@@ -56,6 +56,6 @@ spec:
   tolerations:
     - key: "app"
       operator: "Equal"
-      value: frontend
-      effect: NoSchedule
+      value: "frontend"
+      effect: "NoSchedule"
 ```
