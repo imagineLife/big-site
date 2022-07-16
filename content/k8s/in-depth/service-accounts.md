@@ -5,7 +5,7 @@ slug: k8s/in-depth/service-accounts
 author: Jake Laursen
 excerpt: 
 tags: Kubernetes, K8s, Security, Docker, Users, Privileges
-order: 6
+order: 7
 ---
 
 # Kubernetes Service Accounts
