@@ -22,6 +22,10 @@ Taints are interpreted by the K8s scheduler, and the scheduler takes into accoun
 - [Taints and Tolerations Working Together](#taints-and-tolerations-working-together)
   - [Set a Taint on a Node](#set-a-taint-on-a-node)
   - [Set Matching Tolerations on Pods](#set-matching-tolerations-on-pods)
+  - [Taints Only Prevent Tainted Nodes From Accepting Pods](#taints-only-prevent-tainted-nodes-from-accepting-pods)
+  - [Master Nodes Are Tainted](#master-nodes-are-tainted)
+  - [Things to be able to do](#things-to-be-able-to-do)
+    - [In Action](#in-action)
 
 ### Taint Effects
 There are 3 "types" of taints, describe by kubernetes as "effects": NoSchedule, PreferNoSchedule, and NoExecute.  
@@ -72,4 +76,84 @@ spec:
       operator: "Equal"
       value: "frontend"
       effect: "NoSchedule"
+```
+
+## Taints Only Prevent Tainted Nodes From Accepting Pods
+Pods can end up on any node by the k8s scheduler.  
+Pods cannot end up on tainted mis-matched nodes by the scheduler.   
+Taints do not explicitly "match" pods to nodes. Tains are more "preventative", in that they block non-matching pods from entering a node.  
+Even the taint+toleration combo, which explicitly allows a pod to be deployed on a node, does not require the tolerant pod to be deployed on the tainted node in the case where other untainted nodes exist.
+
+## Master Nodes Are Tainted
+K8s sets this up out-of-the-box.  
+Application workloads are not intended to be deployed on master nodes.  
+```bash
+# see the tain on the master node
+kubectl describe node kubemaster | grep Taint
+```
+
+## Things to be able to do
+1. see now many nodes are running
+2. see if any taints are present on node qwer
+3. taint a node
+   1. node123, 
+   2. with key of asdf
+   3. val of poiu
+   4. effect of NoSchedule
+4. create a pod named lkjh with image nginx
+5. understand why a created pod is in "Pending" state
+   1. the pod cannot tolerate the node taint
+6. Create a pod that...
+   1. has a name of lkjh
+   2. image nginx
+   3. a toleration set to taint mortein
+7. remove a taint from a node
+8. identitify which node a pod is running on
+### In Action
+```bash
+# 1
+kubectl get nodes
+# 2
+kubectl describe nodes qwer | grep Taint
+# 3
+kubectl taint nodes node123 asdf=poiu:NoSchedule
+# 4 
+kubectl run lkjh --image=nginx
+# 6
+# create a pod def file
+kubectl run bee --image=nginx --restart=Never --dry-run=client -o yaml > asdf.yaml
+# update the config file
+vi asdf.yaml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: bee
+  name: bee
+spec:
+  containers:
+  - image: nginx
+    name: bee
+    resources: {}
+  tolerations:
+    - effect: NoSchedule
+      key: spray
+      operator: Equal
+      value: mortein
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+status: {}
+
+
+# 7
+# remove taint from controlplane
+kk describe nodes controlplane | grep Taint
+# shows....
+Taints:             node-role.kubernetes.io/master:NoSchedule
+# remove it
+# NOTICE the - at the end of the taint - thats the key!
+kk taint node controlplane node-role.kubernetes.io/master:NoSchedule-
+node/controlplane untainted
 ```
