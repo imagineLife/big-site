@@ -13,18 +13,51 @@ According to the [Node Docs](https://nodejs.org/api/events.html#events)...
 "_Much of the Node.js core API is built around an idiomatic asynchronous event-driven architecture in which certain kinds of objects (called "emitters") emit named events that cause Function objects ("listeners") to be called._"
 
 - [Event Emitters](#event-emitters)
+  - [TLDR: A Trivial Example](#tldr-a-trivial-example)
   - [An Overview of the Events Module](#an-overview-of-the-events-module)
   - [Creating Event Emitters](#creating-event-emitters)
-  - [Emitting Events](#emitting-events)
   - [Listening For Events](#listening-for-events)
     - [On](#on)
     - [prependListener](#prependlistener)
     - [once](#once)
+  - [Emitting Events](#emitting-events)
   - [Removing Event Listeners](#removing-event-listeners)
     - [removeListener](#removelistener)
     - [removeAllListeners](#removealllisteners)
   - [Error Events](#error-events)
   - [Some Take-Aways](#some-take-aways)
+
+## TLDR: A Trivial Example
+A trivial non-functional example, briefly illustrating the eventEmitter in action
+
+```js
+const { EventEmitter } = require("events");
+
+// initialize
+const dataHandler = new EventEmitter();
+
+/*
+  two functions
+*/ 
+function cleanUpTheData(arr){
+  const cleaned = arr.filter(d => d)
+  dataHandler.emit('sendData',cleaned)
+}
+
+function sendData(arr){
+  console.log('do something with the data here')
+  console.log(arr)
+}
+
+/*
+  register some events to handle
+*/ 
+dataHandler.on('cleanUp', cleaUpTheData)
+dataHandler.on('sendData', sendData)
+
+// kick off the logic here!
+dataHandler.emit('cleanUp', [1,'apple',null,undefined,321])
+```
 
 ## An Overview of the Events Module
 There is a core node module called `events` which is the source for making events. This module includes a few parts:
@@ -51,7 +84,14 @@ The parts of the events module to start with -
 - `EventEmitter`: the heart of the consumable event module
 - `on`: creating event "handlers"
 - `emit`: calling an event by name
+
+The primary goals that this doc will cover are to
+- create an Event-Managing object that 
+  - registers events, within a program, to "listen" for other parts of the program to emit the same event
+  - emit events, by name, with data passed along, to trigger the event listener to respond
+
 ## Creating Event Emitters
+The EventEmitter itself can be used to create an instance of its event-managing object
 
 ```js
 const { EventEmitter } = require("events");
@@ -66,12 +106,6 @@ class dataHandler extends EventEmitter {
     this.name = opts.name;
   }
 }
-```
-
-## Emitting Events
-
-```js
-dataHandler.emit("event-name", { ...eventParams });
 ```
 
 ## Listening For Events
@@ -110,6 +144,17 @@ dataHandler.emit("single-event-instance-handler");
 
 - the event removes itself after it is called once
 - emitting the even _again_ will do nothing && throw no error
+
+## Emitting Events
+Emitting events might be the "easiest" part.  
+- use the eventEmitter instance
+- use the `emit` method
+- pass the emit method 2 things:
+  - a string of the event name
+  - an optional payload of data for the event handler to use
+```js
+dataHandler.emit("event-name", { ...eventParams });
+```
 
 ## Removing Event Listeners
 
