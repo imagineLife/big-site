@@ -1,19 +1,35 @@
 ---
 title: EventEmitters Are A Beautiful API in Node
-slug: node/event-loop/overview
+slug: node/event-loop/event-emitters
 author: Jake Laursen
 excerpt: Register event listeners, call events with payloads, and express a program through events fundamentally
 tags: server, node, events, eventEmitters, registering, calling, workflow
-parentDir: node/event-emitters
+parentDir: node/event-loop
 order: 3
 ---
 
 # Event Emitters 
-According to the [Node Docs](https://nodejs.org/api/events.html#events)...
-` Much of the Node.js core API is built around an idiomatic asynchronous event-driven architecture in which certain kinds of objects (called "emitters") emit named events that cause Function objects ("listeners") to be called. `  
+According to the [Node Docs](https://nodejs.org/api/events.html#events)...  
+"_Much of the Node.js core API is built around an idiomatic asynchronous event-driven architecture in which certain kinds of objects (called "emitters") emit named events that cause Function objects ("listeners") to be called._"
 
-There is a core node module called `events`. This module includes a few parts:
+- [Event Emitters](#event-emitters)
+  - [An Overview of the Events Module](#an-overview-of-the-events-module)
+  - [Creating Event Emitters](#creating-event-emitters)
+  - [Emitting Events](#emitting-events)
+  - [Listening For Events](#listening-for-events)
+    - [On](#on)
+    - [prependListener](#prependlistener)
+    - [once](#once)
+  - [Removing Event Listeners](#removing-event-listeners)
+    - [removeListener](#removelistener)
+    - [removeAllListeners](#removealllisteners)
+  - [Error Events](#error-events)
+  - [Some Take-Aways](#some-take-aways)
+
+## An Overview of the Events Module
+There is a core node module called `events` which is the source for making events. This module includes a few parts:
 ```bash
+# in a node repl
 > const e = require('events')
 Object.keys(e)
 [
@@ -31,20 +47,10 @@ Object.keys(e)
   'listenerCount'
 ]
 ```
-
-- [Event Emitters](#event-emitters)
-  - [Creating Event Emitters](#creating-event-emitters)
-  - [Emitting Events](#emitting-events)
-  - [Listening For Events](#listening-for-events)
-    - [On](#on)
-    - [prependListener](#prependlistener)
-    - [once](#once)
-  - [Removing Event Listeners](#removing-event-listeners)
-    - [removeListener](#removelistener)
-    - [removeAllListeners](#removealllisteners)
-  - [Error Events](#error-events)
-  - [Some Take-Aways](#some-take-aways)
-
+The parts of the events module to start with - 
+- `EventEmitter`: the heart of the consumable event module
+- `on`: creating event "handlers"
+- `emit`: calling an event by name
 ## Creating Event Emitters
 
 ```js

@@ -12,3 +12,4 @@ order: 2
 The event loop matters for process synchronicity, asynchronicity, program workflow management, process availability (_normally discussed in the context of a web api_), and more.  
 
 ## The Basis of Node is an EventEmitter
+I wrote more on the EventEmitter module and some examples [in another post](/node/event-loop/event-emitters)
