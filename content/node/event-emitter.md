@@ -177,9 +177,10 @@ dataHandler.removeAllListeners("event-name");
 
 ## Error Events
 
-As the [node docs say](https://nodejs.org/docs/latest-v16.x/api/events.html#error-events), "_As a best practice, listeners should always be added for the 'error' events._"  
+As the [node docs read](https://nodejs.org/docs/latest-v16.x/api/events.html#error-events), "_...If an EventEmitter does not have at least one listener registered for the 'error' event, and an 'error' event is emitted, the error is thrown, a stack trace is printed, and the Node.js process exits....As a best practice, listeners should always be added for the 'error' events._"  
 
-- when an event gets emitted with an error, the error event gets triggered/emitted
+Writing Events? Write an error event handler.  
+
 ```js
 const { EventEmitter } = require("events");
 const thisTry = new EventEmitter();
