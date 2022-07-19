@@ -30,3 +30,10 @@ spec:
   nodeSelector:
     size: large
 ```
+
+## Useful For Simple Use-Cases
+This Pod-to-Node label matching node-selector works for clear goals for deploying a specific pod to a specific node.  
+The pod gets a `nodeSelector` and the node gets a label.  
+
+## More Flexibility Comes With Node Affinity
+[Node Affinity](/k8s/in-depth/node-affinity)
