@@ -10,6 +10,11 @@ order: 10
 
 # A simple solution for matching pod deployments to nodes
 
+- [A simple solution for matching pod deployments to nodes](#a-simple-solution-for-matching-pod-deployments-to-nodes)
+  - [Useful For Simple Use-Cases](#useful-for-simple-use-cases)
+  - [More Flexibility Comes With Node Affinity](#more-flexibility-comes-with-node-affinity)
+
+
 Set a label on a node:
 ```bash
 # kubectl label nodes <node-name> key=val
@@ -34,6 +39,6 @@ spec:
 ## Useful For Simple Use-Cases
 This Pod-to-Node label matching node-selector works for clear goals for deploying a specific pod to a specific node.  
 The pod gets a `nodeSelector` and the node gets a label.  
-
+The pod with the nodeSelector will get deployed to the node with the matching label.   
 ## More Flexibility Comes With Node Affinity
-[Node Affinity](/k8s/in-depth/node-affinity)
+See [Node Affinity](/k8s/in-depth/node-affinity).  
