@@ -27,7 +27,6 @@ This doc will be in the context of an http REST API:
   - [TL;DR](#tldr)
   - [T.O.C](#toc)
   - [Everything Runs In The Event Loop](#everything-runs-in-the-event-loop)
-    - [Get Close to the loop with nextTick](#get-close-to-the-loop-with-nexttick)
   - [It Relies On EventEmitters](#it-relies-on-eventemitters)
   - [It Is a Queue](#it-is-a-queue)
   - [On Blocking The Event Loop](#on-blocking-the-event-loop)
@@ -42,34 +41,28 @@ This doc will be in the context of an http REST API:
       - [Identify and Adjust Long-Running Logic Tidbits](#identify-and-adjust-long-running-logic-tidbits)
 
 ## Everything Runs In The Event Loop
-In the "background" of a node process, a REST API server in this case, is a loop that node is running.  
+In the "background" of a node process, like a REST API, is a loop that node is running.  
 Node is waiting for events to happen, then processing the events, and returning to the waiting state - restarting this loop.  
 This loop of events is what folks talk about when referencing the event loop.  
 Talking about the event loop, and paying attention to the event loop, might feel like being a fish talking about the water - for devs unfamiliar with the eventloop, this might feel unfamiliar, unimportant, and a waste of time.  
-
-### Get Close to the loop with nextTick
-[` process.nextTick `](https://nodejs.org/docs/latest-v16.x/api/process.html#processnexttickcallback-args) might be the smallest unit that a developer can interact with in the event loop.  
-
 
 ## It Relies On EventEmitters
 [In another post](/node/event-loop/event-emitters) are more details on the EventEmitter, but in a summary:
 - Much of the core node apis (modules) are built using events
 - An instance of an EventEmitter, from the _events_ module, returns are objects
-- An instance of an EventEmitter, in fundamental use, provide us with 2 primary features
-  - named event registration: we tell an event emitter what to do when the even emitter gets called with _named events_
-  - event emission: we tell an event emitter when to "call", or emit, an event - and we can pass along some data too!
+- An instance of an EventEmitter, in fundamental use, provide us with 2 primary features: named event registration, and event emission
 
 ## It Is a Queue
 When there is a lot going on in a node process, there is a line of events waiting to be called.  
 Managing the list of events is a major part of what node does.  
 
 ## On Blocking The Event Loop
-Check out the [Node Doc](https://nodejs.org/en/docs/guides/dont-block-the-event-loop/) on this topic, well written!  
-Blocking the event loop is a thing.  
-Blocking might also be thought of as "consuming". Some code "consumes" node's "brain" and takes up its ability to do other things.  
-As an example, loops block the event loop. "For" loops, "while" loops, "forEach" loops, etc.  
+Check out the [Node Doc](https://nodejs.org/en/docs/guides/dont-block-the-event-loop/) on this topic, as it is well written.  
+Blocking the event loop is a thing. Blocking could also be thought of as "consuming". Some code "consumes" node's "brain" and takes up its ability to do other things.  
+As an example of blocking the event loop, loops do the trick. "For" loops, "while" loops, "forEach" loops, etc.  
 Put a bunch of loops in a rest api and then fire a bunch of requests at the api and watch the whole thing seem sluggish.  
-Some things don't block the eventloop, and these things are node's saving grace. I/O work, in general, is what node passes off easily: fs and network efforts as an example.  
+Some things don't block the eventloop, and these things are node's saving grace. I/O work, in general, is what node passes off easily.  
+Also, node offers a pretty robust [stream system](https://nodejs.org/docs/latest-v16.x/api/stream.html#stream) for dealing with chunks of data instead of waiting for large pieces of data to be passed around. Great stuff there.  
 
 ### Blocking The Event Loop Is A Scaling Problem
 When the EventLoop is "blocked", or consumed by logic, no other process can happen in the node server.  
