@@ -58,6 +58,15 @@ dataHandler.on('sendData', sendData)
 // kick off the logic here!
 dataHandler.emit('cleanUp', [1,'apple',null,undefined,321])
 ```
+The parts of the events module to start with - 
+- `EventEmitter`: the heart of the consumable event module
+- `on`: creating event "handlers"
+- `emit`: calling an event by name
+
+The primary goals that this doc will cover are to
+- create an Event-Managing object that 
+  - registers events, within a program, to "listen" for other parts of the program to emit the same event
+  - emit events, by name, with data passed along, to trigger the event listener to respond
 
 ## An Overview of the Events Module
 There is a core node module called `events` which is the source for making events. This module includes a few parts:
@@ -80,15 +89,6 @@ Object.keys(e)
   'listenerCount'
 ]
 ```
-The parts of the events module to start with - 
-- `EventEmitter`: the heart of the consumable event module
-- `on`: creating event "handlers"
-- `emit`: calling an event by name
-
-The primary goals that this doc will cover are to
-- create an Event-Managing object that 
-  - registers events, within a program, to "listen" for other parts of the program to emit the same event
-  - emit events, by name, with data passed along, to trigger the event listener to respond
 
 ## Creating Event Emitters
 The EventEmitter itself can be used to create an instance of its event-managing object
@@ -119,7 +119,7 @@ dataHandler.on("event-name", handleParamsFnTwo);
 
 - the ORDER of emitting && listening matters...
   - if emit is written before the listener, the listener will not catch the emit
-- multiple fns can happen on an even, above the `handleParamsFn` and `handleParamsFnTwo` both happen
+- multiple fns can happen on an even, above the ` handleParamsFn ` and ` handleParamsFnTwo ` both happen
 
 ### prependListener
 
@@ -177,8 +177,9 @@ dataHandler.removeAllListeners("event-name");
 
 ## Error Events
 
-- when an event gets emitted with an error, the error event gets triggered/emitted
+As the [node docs say](https://nodejs.org/docs/latest-v16.x/api/events.html#error-events), "_As a best practice, listeners should always be added for the 'error' events._"  
 
+- when an event gets emitted with an error, the error event gets triggered/emitted
 ```js
 const { EventEmitter } = require("events");
 const thisTry = new EventEmitter();
