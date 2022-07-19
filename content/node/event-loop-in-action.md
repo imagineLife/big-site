@@ -177,7 +177,8 @@ timeout 2
 immediate
 immediate 2
 ```
-This is also interesting! A take-away:
+This is also interesting! A take-away:  
+(_note: A [complete collection of the take-aways](#some-take-aways) is at the end of this doc_)  
 - managing timeouts + immediates can be complicated: managing the priority and order of those two seem interchangable (_at least at this trivial scale_)
 
 ### Including an I/O call
@@ -222,8 +223,7 @@ readFile: immediate
 readFile: timeout
 ```
 
-A few take-aways to consider here so far:  
-(_note: A [complete collection of the take-aways](#some-take-aways) is at the end of this doc_)  
+A few take-aways to consider here:  
 - node "parses" the whole file(s) before "running" the files
 - node will complete the "require"(s) functionality before parsing the rest of the file
 - in the I/O callback, node ran setImmediate before setTimeout, even with timeout value of 0 - looks like node FORCES immediates to run before timeouts SPECIFICALLY IN I/O Callbacks
