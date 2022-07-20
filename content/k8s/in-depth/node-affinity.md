@@ -15,6 +15,7 @@ Node Affinity help match pods to nodes more flexibly than node selectors.
   - [Match Pods to Any Nodes With Matching Node Label Values](#match-pods-to-any-nodes-with-matching-node-label-values)
   - [Match Pods to Any Nodes Without a Specific Label Value](#match-pods-to-any-nodes-without-a-specific-label-value)
   - [Match Pods to Any Nodes With a Specific Label Present](#match-pods-to-any-nodes-with-a-specific-label-present)
+  - [NodeAffinity Types](#nodeaffinity-types)
 
 
 Set a label on a node:
@@ -91,3 +92,11 @@ spec:
             - key: size
               operator: Exists
 ```  
+
+## NodeAffinity Types
+- **requiredDuringSchedulingIgnoredDuringExecution** 
+  - the affinity rule must be met for the pod to be deployed
+  - the pod will continue to run on a node if the node label changes
+- **preferredDuringSchedulingIgnoredDuringExecution**
+  - the pod will be deployed even if a node with a matching label is not present
+  - the pod will continue to run on a node if the node label changes
