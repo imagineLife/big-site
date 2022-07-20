@@ -13,6 +13,31 @@ A Microservice-Style set of apps might work for multi-container pods.
 A web server might need a logging service. Ba-Da-Bing Ba-da-boom.  
 When 2 containers are in the same pod, the containers can "know" about each other as "localhost" - a nice little tidbit.  
 
+## Both Containers Must Stay Alive
+It is expected that both containers in a multi-container pod stay alive for the lifecycle of the pod.  
+### initContainers Are the Exception
+Sometimes a container may be a completion-based container: a container may just pull data or images from a repo and then no longer be needed.  
+initContainers are how K8s allows for these limitied-up-time containers to run.  
+initContainers run before the "regular" container runs.  
+initContainers run in a sequential order.  
+initContainers that _fail_ will trigger k8s to kill & restart the whole pod - unti the initContainer succeeds.  
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata: sauce
+spec:
+  containers:
+  - name: myapp-container
+    image: busybox:1.28
+    command: ['sh', '-c', 'echo The app is running! && sleep 3600']
+  initContainers:
+  - name: init-myservice
+    image: busybox
+    command: ['sh', '-c', 'git clone <some-repository-that-will-be-used-by-application> ;']
+    
+```
+
 ## Extend a Primary Function with the Sidecar Pattern
 - No intervention required of the primary container
 - The second container is independent of the primary
