@@ -219,9 +219,13 @@ kubectl create -f dep-file.yml
 kubectl get deployments
 
 # update a deployment in real time!! with a file
+# update the deployment file
+# run this
 kubectl apply -f new-file-who-dis.yml
 
 # update a deployment in real time!! with the cli
+# NOTE: if a deployment definition file was used, 
+#   the file will not have the current deployment iteration details included
 kubectl set image deployment/<dep-name> imagename:new:image:tag
 kubectl set image deployment/init-deployment nginx=nginx:1.9.1
 
@@ -281,3 +285,9 @@ REVISION  CHANGE-CAUSE
 1         kubectl create --filename=configs/deps/nx-dep.yml --record=true
 2         kubectl edit deployments first-deployment --record=true
 ```
+Also!  
+Rollouts can be checked by the "revision" number - use the `--revision` flag in kubectl:
+```bash
+kubectl rollout history deployment.apps/first-deployment --revision=2
+```
+
