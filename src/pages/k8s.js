@@ -39,7 +39,7 @@ const IndexPage = () => (
           <Layout>
             <section className="toc-wrapper">
               <h1>K8s</h1>
-              <h2 title="Thanks to Brian Holt from Frontend Masters for Sparking some Curiosity here!">An Introduction</h2>
+              <h2 title="Thanks to Brian Holt from Frontend Masters for Sparking some Curiosity here!">Getting Started</h2>
               {pages.map(
                 (
                   {
