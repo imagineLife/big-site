@@ -30,7 +30,7 @@ Deployments are 1 "layer" "above" replica sets:
     - [Deployment config](#deployment-config)
       - [An example](#an-example)
   - [Updating, Rollouts, and Versioning](#updating-rollouts-and-versioning)
-    - [Two Strategies](#two-strategies)
+    - [Two Deployment Strategies](#two-deployment-strategies)
       - [Destroy and Create](#destroy-and-create)
       - [One At A Time](#one-at-a-time)
       - [Updating in action](#updating-in-action)
@@ -161,6 +161,7 @@ replicaset.apps/first-deployment-7c76b75db   3         3         3       107s
 ## Updating, Rollouts, and Versioning
 Deployments trigger rollouts with revisions.  
 When, say, a container version is updated, a new rollout is created. A new revision is made.  
+Rollouts & revisions can help for tracking deployment version history.  
 
 ```bash
 # see status of a follout
@@ -170,17 +171,19 @@ kubectl rollout status <depoloyment-name>
 kubectl rollout history <depoloyment-name>
 ```
 
-### Two Strategies
+### Two Deployment Strategies
 #### Destroy and Create
 First, detroy all.  
 Then, deploy all.  
-Application downtime.  
-The `Recreate` strategy.  
-Not the default.  
+This causes application downtime.  
+This is the `Recreate` strategy.  
+This is **not the default strategy**.  
 
 #### One At A Time
 The `Rolling` update.  
-The default deployment strategy.  
+This is the default deployment strategy.  
+Take down 1-at-a-time.  
+Replace 1-by-1.  
 
 #### Updating in action
 - update a deployment config file
