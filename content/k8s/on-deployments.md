@@ -38,6 +38,7 @@ Deployments are 1 "layer" "above" replica sets:
   - [Rolling Back](#rolling-back)
   - [Commands](#commands)
   - [An Example](#an-example-1)
+  - [Things To Do](#things-to-do)
 ## K8s Deployment
 K8s deployments can handle all of those issues: scaling, rolling upgrades, rollbacks, etc.  
 
@@ -291,3 +292,32 @@ Rollouts can be checked by the "revision" number - use the `--revision` flag in 
 kubectl rollout history deployment.apps/first-deployment --revision=2
 ```
 
+
+## Things To Do
+- get the number of pods deployed in a deployment
+  - `kubectl get deployments`, see the "Ready" numerator/denominator
+- get the image of pods deployed by a deployment
+- get a deployment strategy
+```bash
+controlplane ~ ✖ kk describe deployment | grep Strategy
+StrategyType:           RollingUpdate
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+```
+- edit a deployment: change the image of the containers in a running deployment without taking down any pods && check the deployment status
+```bash
+ kubectl edit deployments first-deployment --record
+#  edit the deployment
+
+kk rollout status deployment.apps/frontend
+kk rollout history deployment.apps/frontend
+```
+- get the allowed pod down percentage of the deployment
+
+```bash
+kk describe deployments frontend | grep RollingUpdateStrategy
+```
+- change the strategy of a running deployment
+  - kk describe -o yaml to a yaml file
+  - edit the yaml file
+    - NOTE: a rollingUpdate strategy changing to a recreate strategy requires removing some extra fields besides the strategy field value
+  - 
