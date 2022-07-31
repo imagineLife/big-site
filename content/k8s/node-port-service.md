@@ -38,14 +38,14 @@ Take an example:
 - NOTE: the laptop and the node have the same network
 
 ## Node Port Overview
-3 ports are involved
-- the pod port, **the target port**
+3 ports are involved: the target port, the port, and the node port
+- **the target port**, the pod port
   - where a web-server could be running
   - where the service forward the req to
-- the port on the service, **the port**
+- **the port**, the port on the service
   - has its own ip address, the **cluster ip of the service**
-- the port on the node, **the node port**
-  - example range between 30000-32767
+- **the node port**, the port on the node
+  - the only allowed valid range for these node ports is between 30000-32767
 
 ### Handling Multiple  Pods
 A single Node can have multiple pods, instances, of an app. The pods have the same labels.  
@@ -77,11 +77,12 @@ spec:
       # service
       # 30000-32767 is the "allowed" range
       nodePort: 30008
+  # THIS identifies the pod that the service should connect to
+  # same labels as the pod
   selector:
-    # same labels as the pod
     app: myapp
     type: front-end
-  # THIS needs more research
+  # THIS is to deal with k8s in docker with minikube
   externalIPs:
     - 1.2.3.110
 ```
@@ -93,7 +94,9 @@ NOTES:
   - `selector:<label>:<val>` where label + val are exactly the smae as pod labels+values
   - **THIS is what associates a service with pods** directly - the pod and service have matching labels
 - `ports` is an array
-  - can have a bunch of port mappings in a single service 
+  - can have a bunch of port mappings in a single service
+- the `externalIPs` was a note to get the service available through docker
+
 
 ```bash
 # Run it
