@@ -240,5 +240,5 @@ flowchart TD
   
 
   USER -...- |"www.demo-app.com (port 80)"| DNS
-  GCP --> NPS
+  GCPLB -..-> NPS
 ```
