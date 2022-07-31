@@ -215,8 +215,8 @@ flowchart TD
   DB[(Database Pod)]
 
   subgraph RTNGL["routing logic"]
-    DNS
-    GCPLB 
+    direction TB
+    DNS --> GCPLB 
   end
 
   subgraph RS [ReplicaSet]
@@ -239,6 +239,6 @@ flowchart TD
   
   
 
-  USER -- "www.demo-app.com (port 80)" --> GCP
+  USER -...- |"www.demo-app.com (port 80)"| DNS
   GCP --> NPS
 ```
