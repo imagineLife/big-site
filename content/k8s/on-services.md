@@ -11,9 +11,10 @@ order: 8
 # Services
 K8s services enable communication between components within and outside of K8s apps.    
 I.E. - groups of pods where...
-- some are frontends
-- some are "backends"
+- some might be "frontends"
+- some might be "backends"
 - some connect to data sources
+- some might be service-oriented
 **Services help with communication, with loose coupling between components.**   
 
 - [Services](#services)
@@ -31,6 +32,7 @@ A NodePort service...
 - listens to ports on the node
 - fwds req from a port to a port the pod
 - allows for pod-access from "outside" the k8s world
+- makes the pod available via a port on the node
 
 ### Cluster IP 
 The ClusterIP Service...
@@ -41,7 +43,7 @@ The ClusterIP Service...
 ### Load Balancer
 LoadBalancer services...
 - provision a load-balancer
-- distribute load across servers
+- i.e distribute load across servers
 
 ## External Communicaton
 Lets take...
@@ -57,7 +59,6 @@ Lets take...
 - NOTE: the laptop and the node have the same network
 
 A K8s service, specifically the NodePort service, can "map" the outside world request to internal objects - pods.
-
 
 ## A Method For Setting Up A Cluster And Services
 Here's one way to go about developing pods, replica sets, deployments, and services:  
