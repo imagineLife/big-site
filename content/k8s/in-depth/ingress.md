@@ -163,8 +163,6 @@ flowchart TD
   APP3((Web-App Pod))
   DBS[[ClusterIP Service - Inner-Node-Communication]]
   DB[(Database Pod)]
-  
-  
 
   subgraph RL["(routing logic)"]
     PXY --> DNS
@@ -187,4 +185,60 @@ flowchart TD
 
   USER -- "www.demo-app.com (port 80)" --> RL
   RL --> NPS
+```
+
+### Host K8s In A Cloud Platform
+Take GCP as an example. A few things get updated:
+- the NodePort service can be converted to a `LoadBalancer` service type, which ...
+  - allows NodePort service details to exist (_make the node available through a port_)
+  - K8s sends req to GCP to provision a network load-balancer for the service: where GCP deploys a load-balancer to split traffic across multiple nodes (_if that ever happens_)
+  - the GCP load-balancer comes with an external ip
+- The DNS needs to be updated to change my-app-url to the gcp-ip-addr
+
+```mermaid
+flowchart TD
+  %%
+  %%  Nodes
+  %%
+  USER[End-User]
+  
+  DNS[[DNS: demo-app to gcp-provided LoadBalancer IP]]
+  GCPLB["GCP LoadBalancer:
+    - IP Provided + port proxying included
+    - fwd req from 80 to 38080 (K8s LoadBalancer Service Port)"]
+
+  NPS[[LoadBalancer Service: port 38080]]
+  APP((Web-App Pod))
+  APP2((Web-App Pod))
+  APP3((Web-App Pod))
+  DBS[[ClusterIP Service - Inner-Node-Communication]]
+  DB[(Database Pod)]
+
+  subgraph RTNGL["routing logic"]
+    DNS
+    GCPLB 
+  end
+
+  subgraph RS [ReplicaSet]
+    direction TB
+    APP
+    APP2
+    APP3
+  end
+
+  subgraph K8N["K8s Node"]
+    NPS --> RS
+    RS --> DBS
+    DBS --> DB
+  end
+
+  subgraph GCP["google cloud platform"]
+    RTNGL 
+    K8N
+  end
+  
+  
+
+  USER -- "www.demo-app.com (port 80)" --> GCP
+  GCP --> NPS
 ```
