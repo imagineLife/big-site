@@ -1,10 +1,10 @@
 ---
-title: 
+title: Ingress Requires a ServiceAccount, a Deployment, a ConfigMap, a Service, and and Ingress
 parentDir: k8s/in-depth
 slug: k8s/in-depth/ingress
 author: Jake Laursen
-excerpt: 
-tags: Kubernetes, K8s, ingress, networking, dns, proxy
+excerpt: Kubernetes helps manage traffic, load-balancing, routing, and more through its ingress implementation
+tags: Kubernetes, K8s, ingress, networking, dns, proxy, load balancing
 order: 19
 ---
 
@@ -21,11 +21,14 @@ Without ingress, a reverse-proxy might be useful as a type of  "ingress controll
   - [K8s Clusters Require a 3rd-Party Ingress Controller](#k8s-clusters-require-a-3rd-party-ingress-controller)
     - [Roles of the Controller](#roles-of-the-controller)
     - [Options for the Controllers](#options-for-the-controllers)
-  - [Ingress Deployed as Another Object In the Cluster](#ingress-deployed-as-another-object-in-the-cluster)
+  - [Ingress Controller as Another Object In the Cluster](#ingress-controller-as-another-object-in-the-cluster)
     - [Configuration Requirements](#configuration-requirements)
     - [Deployment Config File](#deployment-config-file)
     - [ConfigMap Object](#configmap-object)
     - [Service Exposing Ingress Controller to the World](#service-exposing-ingress-controller-to-the-world)
+    - [Service Account Config](#service-account-config)
+  - [Ingress Resources](#ingress-resources)
+    - [A Trivial definition File](#a-trivial-definition-file)
 
 ## Ingress Requires Rules and A Controller  
 With Ingress, 2 parts are required. A Controller/reverse-proxy like nginx, haproxy or traefik. Config, rules, is also required. 
@@ -50,7 +53,7 @@ A number of solutions exist:
 
 Per K8s Docs, ["_Kubernetes as a project supports and maintains AWS, GCE and nginx ingress controllers._"](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/).  
 
-## Ingress Deployed as Another Object In the Cluster
+## Ingress Controller as Another Object In the Cluster
 ### Configuration Requirements
 A few things are required:
 - **A ConfigMap**, full of env vars: path to store logs, session timeouts, keep-alive threshold, and more
@@ -132,3 +135,30 @@ spec:
     # matches the deployment metadata.name field in deployment config file
     name: nginx-ingress
 ```
+
+### Service Account Config
+```yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: nginx-ingress-serviceaccount
+```
+
+
+## Ingress Resources
+Rules + Config on the Ingress Controller: route traffic to different apps (_pods_) based on urls, and/or domain doman.
+
+### A Trivial definition File
+Here, an ingress resource def file:
+```yaml
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-wear-app
+spec:
+  # where traffic gets routed to
+  backend:
+    serviceName: wear-service
+    servicePort: 80
+```
+
