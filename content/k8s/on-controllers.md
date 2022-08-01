@@ -1,5 +1,5 @@
 ---
-title: On Pods
+title: On Controllers
 parentDir: k8s
 slug: k8s/replica-controllers
 author: Jake Laursen
