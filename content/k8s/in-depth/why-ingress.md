@@ -8,18 +8,16 @@ tags: Kubernetes, K8s, ingress, networking, dns, proxy
 order: 18
 ---
 
-# Ingress
-- [Ingress](#ingress)
-  - [An Example Of A Growing Tech Stack](#an-example-of-a-growing-tech-stack)
-    - [An App](#an-app)
-    - [A DB And A Service To Allow the Two to Talk](#a-db-and-a-service-to-allow-the-two-to-talk)
-    - [Make it Available with a NodePort Service](#make-it-available-with-a-nodeport-service)
-    - [Address App Scaling Needs With ReplicaSets](#address-app-scaling-needs-with-replicasets)
-    - [Allow For Friendly URL with DNS Config](#allow-for-friendly-url-with-dns-config)
-    - [Remove the Need For the Port in the URL with A Proxy Server](#remove-the-need-for-the-port-in-the-url-with-a-proxy-server)
-    - [Host K8s In A Cloud Platform](#host-k8s-in-a-cloud-platform)
-  - [The Product Grows And A new Application Gets Introduced](#the-product-grows-and-a-new-application-gets-introduced)
-  - [This is where Ingress Helps](#this-is-where-ingress-helps)
+- [An Example Of A Growing Tech Stack](#an-example-of-a-growing-tech-stack)
+  - [An App](#an-app)
+  - [A DB And A Service To Allow the Two to Talk](#a-db-and-a-service-to-allow-the-two-to-talk)
+  - [Make it Available with a NodePort Service](#make-it-available-with-a-nodeport-service)
+  - [Address App Scaling Needs With ReplicaSets](#address-app-scaling-needs-with-replicasets)
+  - [Allow For Friendly URL with DNS Config](#allow-for-friendly-url-with-dns-config)
+  - [Remove the Need For the Port in the URL with A Proxy Server](#remove-the-need-for-the-port-in-the-url-with-a-proxy-server)
+  - [Host K8s In A Cloud Platform](#host-k8s-in-a-cloud-platform)
+- [The Product Grows And A new Application Gets Introduced](#the-product-grows-and-a-new-application-gets-introduced)
+- [This is where Ingress Helps](#this-is-where-ingress-helps)
 ## An Example Of A Growing Tech Stack
 ### An App
 An app, maybe an online e-commerce platform.  
