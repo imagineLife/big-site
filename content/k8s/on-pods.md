@@ -3,7 +3,7 @@ title: On Pods
 parentDir: k8s
 slug: k8s/on-pods
 author: Jake Laursen
-excerpt: A "wrapper" around
+excerpt: A "wrapper" around Containers
 tags: Kubernetes, K8s, pods, services, workloads
 order: 4
 ---
