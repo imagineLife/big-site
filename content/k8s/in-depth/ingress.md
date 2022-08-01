@@ -64,7 +64,7 @@ A few things are required:
 - **A Service Account** with permissions for the ingress controller to do its job
 
 ### Deployment Config File
-Here, a yaml for an nginx ingress controller. Here, the image is specially built for k8s.
+Here, a yaml for an nginx ingress controller. Here, the image is [specially built for k8s](https://github.com/kubernetes/ingress-nginx/blob/main/README.md#readme).
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
