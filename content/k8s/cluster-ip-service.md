@@ -11,7 +11,7 @@ order: 10
 # ClusterIP
 The ClusterIP service is...
 - an object
-- acts as a "middleman" between replica pods and others
+- acts as a "middleman" between replica pods and other pods 
 
 - [ClusterIP](#clusterip)
   - [A Situation](#a-situation)
