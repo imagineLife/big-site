@@ -29,6 +29,12 @@ Without ingress, a reverse-proxy might be useful as a type of  "ingress controll
     - [Service Account Config](#service-account-config)
   - [Ingress Resources](#ingress-resources)
     - [A Trivial definition File](#a-trivial-definition-file)
+    - [Rules](#rules)
+      - [Domain Or HostName](#domain-or-hostname)
+      - [Path](#path)
+  - [Consider Re-Writing Urls](#consider-re-writing-urls)
+  - [Useful Commands & References](#useful-commands--references)
+  - [Things To Be Able To Do](#things-to-be-able-to-do)
 
 ## Ingress Requires Rules and A Controller  
 With Ingress, 2 parts are required. A Controller/reverse-proxy like nginx, haproxy or traefik. Config, rules, is also required. 
@@ -151,7 +157,7 @@ Rules + Config on the Ingress Controller: route traffic to different apps (_pods
 ### A Trivial definition File
 Here, an ingress resource def file:
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-wear-app
@@ -162,3 +168,115 @@ spec:
     servicePort: 80
 ```
 
+### Rules
+Rules are explicit to deal with routing.  
+
+#### Domain Or HostName 
+Traffic can be dealt with by domain or host:
+- home.store.com
+- learn.store.com
+
+All paths for each domain get routed to the same service, perhaps a single-page app or something like that!  
+
+A Domain-Name Config File:
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-wear-app
+spec:
+  rules:
+  - host: watch.store.com
+    http:
+      paths:
+        - backend:
+            service:
+              name: watch-service
+              port: 
+                number: 80
+  - host: learn.store.com
+    http:
+      paths:
+        - backend: 
+            service:
+              name: learn-service
+              port: 
+                number: 80
+```
+
+#### Path 
+- store.com/watch
+- store.com/cart
+
+
+A look at an ingress def file with rules.  
+NOTE: No host field in the rules - this applies to all "*" host paths.
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-wear-app
+spec:
+  rules:
+  - http:
+      # path-based routing
+      paths:
+        # each path gets its own backend section
+      - path: /watch
+        pathType: Prefix
+        backend: 
+          service: 
+            name: watch-service
+            port: 
+              number: 80
+      - path: /learn
+        pathType: Prefix
+        backend: 
+          service: 
+            name: learn-service
+            port: 
+              number: 80
+```
+Inspect these with `kubectl describe ingress instress-wear-app`. Notice a "default backend"! Deploy that one, default-http-backend or whatever it is called.  
+
+## Consider Re-Writing Urls
+
+```yaml
+
+```
+## Useful Commands & References
+See [k8s ingress docs](https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types).  
+See [Kubectl Commands Docs](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#-em-ingress-em-) for more, but here's a short list:
+```bash
+# create an ingress
+# kubectl create ingress <ing-name> --rule="host/path=service:port"
+kubectl create ingress ing-test --rule="learn.store.com/videos*=videos-service:80"
+
+# create a "catch-all", perhoaps for error handling
+kubectl create ingress all-else --class=otheringress --rule="/path=error-service:80"
+```
+
+## Things To Be Able To Do  
+- Inspect a k8s setup
+  - kk get namespaces, find a bunch of namespaces
+- get deployments across namespaces
+  - `kkg deployments.app --all-namespaces -o wide`
+- know that ingress might use a Deployment object
+- figure out what namespace...
+  - an ingress controller is deployed to
+  - a bunch of pods/apps are deployed to
+  - an ingress resource is deployed to
+- Which namespace is an ingress resource deployed in
+  - `kkg ingress --all-namespaces`
+- which hosts are configured on an ingress resource
+- whats the name of an ingress resource
+- what is the backend of an ingress resource
+  - `kkd -n <the-namespace> ingress <the-ingress-name>`
+- what paths are each service available on
+- what services are available at what path
+- what service(s) are served on requests to funky backends
+- Change an ingress config, serve a service from another route
+  - get ingress config into yaml
+  - edit yaml per requirement
+  - kk delete current ingress -n namespace
+  - kk apply -f ingress-def-file.yaml
