@@ -280,3 +280,13 @@ kubectl create ingress all-else --class=otheringress --rule="/path=error-service
   - edit yaml per requirement
   - kk delete current ingress -n namespace
   - kk apply -f ingress-def-file.yaml
+- create a namespace
+- for nginx ingress controller: create a configmap and assign it to a namespace
+- for nginx ingress controller: create a service-account and assign it to a namespace
+- create a service that...
+  - lives in a specified namespace
+  - exposes a deployment by name
+  - named "ingress"
+  - exposes port 80 from the pod port 80
+  - is of type NodePort for public accessibility
+`kk -n ingress-space expose deployment ingress-controller --name ingress --port=80 --target-port=80 --type=NodePort --dry-run=client -o yaml > svc.yaml`
