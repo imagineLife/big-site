@@ -18,12 +18,20 @@ order: 4
   - [Some Take-Aways](#some-take-aways)
 
 
-Start with a simple node file.
+Start with a simple node file - lets call it something like "eventloop.js" -
 ```js
 console.log('start')
 console.log('end')
 ```
-The output will read  the 'start' then the 'end'.  
+Run the file in a terminal:
+```bash
+# run it
+node eventloop.js
+
+# output here
+start
+end
+```
 
 ## setImmediate to do it later
 Add in a setImmediate call:
@@ -35,12 +43,20 @@ setImmediate(() => {
 console.log('end')
 ```
 
-Now, the output will read
+Run the file in a terminal:
 ```bash
+# run it
+node eventloop.js
+
+# output here
 start
 end
 set immediate
 ```
+ALERT!  
+
+The ` end ` string logs before the setImmediate string. This is due to node's parsing of the entire "program", here the file. Node parses the entire file before finishing the event-loop logic of `setImmediate`.  
+If you're reading this and "new" to event loop logic, this is officially the end of the beginning.
 
 ## Compare setImmediate to setTimeout
 Throw in a setTimeout:  
@@ -54,14 +70,19 @@ setTimeout(() => {
 }, 0);
 console.log('end');
 ```
-This will return
+Run it:
 ```bash
+# run it
+node eventloop.js
+
+# output here
 start
 end
 set immediate
 timeout
 ```
-Let's put the timeout + immediate in vice-cersa order:
+
+Let's put the timeout + immediate in vice-versa order:
 ```js
 console.log('start');
 setTimeout(() => {
@@ -72,14 +93,16 @@ setImmediate(() => {
 });
 console.log('end');
 ```
-This will return
+
+Run it:
 ```bash
 start
 end
 set immediate
 timeout
 ```
-Maybe not that interesting so far!
+
+Maybe not that interesting so far.  
 
 ### Introduce Multiple timeouts for further inspection
 ```js
@@ -102,8 +125,13 @@ setTimeout(() => {
 }, 0);
 console.log('end');
 ```
-This returns...
+
+Run it:
 ```bash
+# run it
+node eventloop.js
+
+# output
 start
 end
 immediate
@@ -145,7 +173,8 @@ timeout 2
 immediate
 immediate 2
 ```
-Interesting! Node processed the timeouts first!  
+Interesting! Node processed the timeouts first here.  
+
 Next, put the immediates first:  
 ```js
 console.log('start');
