@@ -17,3 +17,5 @@ flowchart LR
     A -- 1. Request --> B
     B -- 2. Response --> A
 ```
+## Kubernetes default allow-all policy
+Kubernetes applies an "allow-all" networking policy between objects.  
