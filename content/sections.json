@@ -24,6 +24,12 @@
     "image": "./sections/bash.jpg"
   },
   {
+    "title": "Kubernetes",
+    "snippet": "Covering some beyond-the-frontend details of pods, services, networking, and more",
+    "to": "/k8s",
+    "image": "./sections/k8s.jpg"
+  },
+  {
     "title": "Personality & Strengths",
     "snippet": "Understanding and Leveraging our natural tendencies for the best",
     "to": "/strengths",
@@ -34,11 +40,5 @@
     "snippet": "Thoughts on the ins-and-outs of this agile framework",
     "to": "/scrum",
     "image": "./sections/Scrum.jpg"
-  },
-  {
-    "title": "Recipes",
-    "snippet": "Making Food",
-    "to": "/recipes",
-    "image": "./sections/MakingFood.jpg"
   }
 ]
