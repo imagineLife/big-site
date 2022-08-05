@@ -32,6 +32,7 @@ flowchart LR
     - [Allow Traffic from non-pod I.P addresses](#allow-traffic-from-non-pod-ip-addresses)
   - [Network Policies are Enforced by the networking solutions](#network-policies-are-enforced-by-the-networking-solutions)
     - [Egress Definitions](#egress-definitions)
+  - [Things to do](#things-to-do)
 
 ## Kubernetes default allow-all policy
 Kubernetes applies an "allow-all" networking policy between objects.  
@@ -202,4 +203,42 @@ spec:
     ports:  
       - protocol: TCP
         port: 80
+```
+
+
+## Things to do
+Create a network policy that...
+- allows traffic from an "internal" app
+- to the "payroll-service" and the "db-service"
+  - payroll on port 8080
+  - db-service on 3306
+
+Something like this...  
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: internal-policy
+spec:
+  podSelector:
+    matchLabels:
+      name: internal
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          name: payroll
+    ports:
+    - protocol: TCP
+      port:  8080
+  - to:
+    - podSelector:
+        matchLabels:
+          name: mysql
+    ports:
+    - protocol: TCP
+      port: 3306
 ```
