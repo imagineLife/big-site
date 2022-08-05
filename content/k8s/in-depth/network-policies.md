@@ -17,5 +17,59 @@ flowchart LR
     A -- 1. Request --> B
     B -- 2. Response --> A
 ```
+
+
+- [Network Traffic Is Though Of From Where The Request Starts](#network-traffic-is-though-of-from-where-the-request-starts)
+  - [Kubernetes default allow-all policy](#kubernetes-default-allow-all-policy)
+  - [A 3-Pod Networking Example](#a-3-pod-networking-example)
+    - [Ingress and Inbound traffic](#ingress-and-inbound-traffic)
+    - [Egress and Outbound Traffic](#egress-and-outbound-traffic)
+    - [Ingress and Egress as Rules](#ingress-and-egress-as-rules)
+      - [Frontend Server](#frontend-server)
+      - [API Server](#api-server)
+      - [DB](#db)
+
 ## Kubernetes default allow-all policy
 Kubernetes applies an "allow-all" networking policy between objects.  
+Network policies are used to restrict network activity to & from k8s objects.   
+
+## A 3-Pod Networking Example
+3 Servers. Example Ports. What happens when the users wants to use a page that gets data from a db through an api:  
+
+```mermaid
+sequenceDiagram
+  user ->> FrontendServer: Req. on port 80
+  FrontendServer ->> API_Server: Req. on port 3001
+  API_Server ->> DB_Server: Req on port 27017
+
+  DB_Server ->> API_Server : Response
+  API_Server ->> FrontendServer : Response
+  FrontendServer ->> user : Response
+```
+
+### Ingress and Inbound traffic
+Ingress and Egress notes specifically about where dataflow _starts_.  
+**Ingress** referrs to inbound traffic, like how ...
+- **the frontend** server recieves ingress traffic from the user
+- **the api** server recieves ingress traffic from the frontend server
+- - **the db** recieves ingress traffic from the api server
+
+### Egress and Outbound Traffic
+Egress represents an object _making an outbound request_, like how...
+- **the frontend** server creates egress traffic to the api
+- **the api** server creates egress traffic to the db
+
+
+### Ingress and Egress as Rules
+Here, ingress and egress traffic are describes by each object in this 3-object diagram in 6 bullet points:
+#### Frontend Server
+- allow ingress on port 80
+- allow egress on port 5000
+
+#### API Server
+- allow ingress on port 5000
+- allow egress on port 27017
+
+#### DB
+- allow ingress on port 27017
+
