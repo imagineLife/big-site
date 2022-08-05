@@ -29,6 +29,7 @@ flowchart LR
       - [API Server](#api-server)
       - [DB](#db)
     - [Ingress, Pods, and Services Through Network Policies](#ingress-pods-and-services-through-network-policies)
+    - [Allow Traffic from non-pod I.P addresses](#allow-traffic-from-non-pod-ip-addresses)
   - [Network Policies are Enforced by the networking solutions](#network-policies-are-enforced-by-the-networking-solutions)
 
 ## Kubernetes default allow-all policy
@@ -94,7 +95,47 @@ ingress:
       port: 27017
 ```
 
-in context of a more complete network policy def file:
+in context of a more complete network policy def file: the db is being "protected" and assured that _only traffic on a specific port from a specific pod_ is allowed
+```yaml
+# db-policy.yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: db-network-policy
+spec:
+  # the pod(s) this will apply to, via matched labels
+  podSelector:
+    matchLabels:
+      role: db
+  policyTypes:
+  # only incoming data 
+  - Ingress
+  # the ingress description
+  ingress:
+  # where data can come from
+  - from:
+    # traffic source pod by "name" label
+    - podSelector:
+        matchLabels:
+          name: api-pod
+      # only pods from the "prod" namespace
+      namespaceSelector:
+        matchLabels:
+          name: prod
+    # traffic source port(s)
+    ports:
+      - protocol: TCP
+        port: 27017
+```
+
+`kubectl create -f db-policy.yaml`
+
+
+### Allow Traffic from non-pod I.P addresses
+Perhaps network traffic is desired to this example db pod _from a machine that is not managed by kubernetes_.  
+Perhaps a backup server will talk to the db and create backups.  
+This will be an ingress connection on for the db network policy:  
+
 ```yaml
 # db-policy.yaml
 apiVersion: networking.k8s.io/v1
@@ -105,19 +146,24 @@ spec:
   podSelector:
     matchLabels:
       role: db
-  policyTypes: 
+  policyTypes:
   - Ingress
   ingress:
   - from:
+    # api traffic
     - podSelector:
         matchLabels:
           name: api-pod
+      namespaceSelector:
+        matchLabels:
+          name: prod
+    # db backup machine
+    - ipBlock:
+        cider: 192.168.99.10/32
     ports:
       - protocol: TCP
         port: 27017
 ```
-
-`kubectl create -f db-policy.yaml`
 
 ## Network Policies are Enforced by the networking solutions
 [K8s Has more docs on the details](https://kubernetes.io/docs/tasks/administer-cluster/network-policy-provider/):  
