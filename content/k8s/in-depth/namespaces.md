@@ -3,7 +3,7 @@ title: Kubernetes Namespaces
 parentDir: k8s/in-depth
 slug: k8s/in-depth/namespaces
 author: Jake Laursen
-excerpt: Kubernetes, Identifying
+excerpt: Separate groups of Kubernetes objects with Namespaces for maby users across teams
 tags: Kubernetes, K8s, configuration
 order: 2
 ---
