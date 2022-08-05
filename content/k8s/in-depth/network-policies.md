@@ -31,6 +31,7 @@ flowchart LR
     - [Ingress, Pods, and Services Through Network Policies](#ingress-pods-and-services-through-network-policies)
     - [Allow Traffic from non-pod I.P addresses](#allow-traffic-from-non-pod-ip-addresses)
   - [Network Policies are Enforced by the networking solutions](#network-policies-are-enforced-by-the-networking-solutions)
+    - [Egress Definitions](#egress-definitions)
 
 ## Kubernetes default allow-all policy
 Kubernetes applies an "allow-all" networking policy between objects.  
@@ -151,6 +152,7 @@ spec:
   ingress:
   - from:
     # api traffic
+    #  matching pod label AND namespace label
     - podSelector:
         matchLabels:
           name: api-pod
@@ -158,8 +160,9 @@ spec:
         matchLabels:
           name: prod
     # db backup machine
+    # matching pi address block
     - ipBlock:
-        cider: 192.168.99.10/32
+        cidr: 192.168.99.10/32
     ports:
       - protocol: TCP
         port: 27017
@@ -175,3 +178,28 @@ spec:
 |[weave-net](https://www.weave.works/docs/net/latest/kubernetes/kube-addon/)||
 |Antrea||
 |Cilium||
+
+
+### Egress Definitions
+A trivial egress-only example:  
+
+```yaml
+# db-policy.yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: db-network-policy
+spec:
+  podSelector:
+    matchLabels:
+      role: db
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - ipBlock:
+        cidr: 192.168.99.10/32
+    ports:  
+      - protocol: TCP
+        port: 80
+```
