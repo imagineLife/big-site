@@ -28,6 +28,8 @@ flowchart LR
       - [Frontend Server](#frontend-server)
       - [API Server](#api-server)
       - [DB](#db)
+    - [Ingress, Pods, and Services Through Network Policies](#ingress-pods-and-services-through-network-policies)
+  - [Network Policies are Enforced by the networking solutions](#network-policies-are-enforced-by-the-networking-solutions)
 
 ## Kubernetes default allow-all policy
 Kubernetes applies an "allow-all" networking policy between objects.  
@@ -61,15 +63,69 @@ Egress represents an object _making an outbound request_, like how...
 
 
 ### Ingress and Egress as Rules
-Here, ingress and egress traffic are describes by each object in this 3-object diagram in 6 bullet points:
+Here, ingress and egress traffic are describes by each object in this 3-object diagram in 6 bullet points.  
+These rules will translate to the K8s world.  
+Also notice - indirectly, the frontend does not "need" to talk to the db server. 
+
 #### Frontend Server
-- allow ingress on port 80
-- allow egress on port 5000
+- allow ingress on port 80 from the world
+- allow egress on port 5000 to the api pod
 
 #### API Server
-- allow ingress on port 5000
-- allow egress on port 27017
+- allow ingress on port 5000 from the frontend server
+- allow egress on port 27017 to the db 
 
 #### DB
-- allow ingress on port 27017
+- allow ingress on port 27017 from the api server
 
+
+### Ingress, Pods, and Services Through Network Policies
+Here, a look at the db networking policy details:
+```yaml
+policyTypes: 
+- Ingress
+ingress:
+- from:
+  - podSelector:
+      matchLabels:
+        name: api-pod
+  ports:
+    - protocol: TCP
+      port: 27017
+```
+
+in context of a more complete network policy def file:
+```yaml
+# db-policy.yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: db-network-policy
+spec:
+  podSelector:
+    matchLabels:
+      role: db
+  policyTypes: 
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          name: api-pod
+    ports:
+      - protocol: TCP
+        port: 27017
+```
+
+`kubectl create -f db-policy.yaml`
+
+## Network Policies are Enforced by the networking solutions
+[K8s Has more docs on the details](https://kubernetes.io/docs/tasks/administer-cluster/network-policy-provider/):  
+| SUPPORTING network policies | NOT supporting network policies |
+|:--|:--|
+|[Kube-router](https://www.kube-router.io/)|Flannel|
+|[Calico](https://projectcalico.docs.tigera.io/getting-started/kubernetes/)||
+|[Romana](https://kubernetes.io/docs/tasks/administer-cluster/network-policy-provider/romana-network-policy/)||
+|[weave-net](https://www.weave.works/docs/net/latest/kubernetes/kube-addon/)||
+|Antrea||
+|Cilium||
