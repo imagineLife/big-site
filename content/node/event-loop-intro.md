@@ -102,5 +102,5 @@ Some logic may need to be in the node server or be best-fit for the node server.
 For parts of an api that are consistently long running
 
 # See It In Action
-- [How setImmediate and setTimeout](node/event-loop/in-action) might affect logic in node
-- [An IO call to fs](node/event-loop/in-action#including-an-io-call) might affect the event loop
+- [How setImmediate and setTimeout](/node/event-loop/in-action) might affect logic in node
+- [An IO call to fs](/node/event-loop/in-action#including-an-io-call) might affect the event loop
