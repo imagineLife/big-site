@@ -1,11 +1,11 @@
 ---
-title: An Overview of the NodeJS Event Loop
-slug: node/event-loop/overview
+title: The Event Loop
+slug: node/event-loop
 author: Jake Laursen
-excerpt: The power of the Event Loop can lead devs to build faster more reliable node processes
+excerpt: The power of the Event Loop can lead devs to build faster more reliable node systems
 tags: server, node, event loop, overview, call stack, queue, process
-parentDir: node/event-loop
-order: 2
+parentDir: node
+order: 3
 ---
 
 # The Event Loop
@@ -30,7 +30,7 @@ This doc will be in the context of an http REST API:
   - [It Relies On EventEmitters](#it-relies-on-eventemitters)
   - [It Is a Queue](#it-is-a-queue)
   - [On Blocking The Event Loop](#on-blocking-the-event-loop)
-    - [Blocking The Event Loop Is A Scaling Problem](#blocking-the-event-loop-is-a-scaling-problem)
+    - [Blocking The Event Loop Might Be A Scaling Problem](#blocking-the-event-loop-might-be-a-scaling-problem)
   - [The Single Thread to Help Manage Request Volume](#the-single-thread-to-help-manage-request-volume)
     - [Some Tips Learned Along The Way to Keep Node Fast](#some-tips-learned-along-the-way-to-keep-node-fast)
       - [Monitor The Event Loop](#monitor-the-event-loop)
@@ -39,6 +39,7 @@ This doc will be in the context of an http REST API:
         - [Child Processes](#child-processes)
         - [Worker Threads](#worker-threads)
       - [Identify and Adjust Long-Running Logic Tidbits](#identify-and-adjust-long-running-logic-tidbits)
+  - [See It In Action](#see-it-in-action)
 
 ## Everything Runs In The Event Loop
 In the "background" of a node process, like a REST API, is a loop that node is running.  
@@ -64,7 +65,7 @@ Put a bunch of loops in a rest api and then fire a bunch of requests at the api 
 Some things don't block the eventloop, and these things are node's saving grace. I/O work, in general, is what node passes off easily.  
 Also, node offers a pretty robust [stream system](https://nodejs.org/docs/latest-v16.x/api/stream.html#stream) for dealing with chunks of data instead of waiting for large pieces of data to be passed around. Great stuff there.  
 
-### Blocking The Event Loop Is A Scaling Problem
+### Blocking The Event Loop Might Be A Scaling Problem
 When the EventLoop is "blocked", or consumed by logic, no other process can happen in the node server.  
 
 ## The Single Thread to Help Manage Request Volume
@@ -99,3 +100,6 @@ A primary difference
 #### Identify and Adjust Long-Running Logic Tidbits
 Some logic may need to be in the node server or be best-fit for the node server. This should not be the norm, though. Finding oursellves in a place where we think node is slow might reveal our misuse of its strongest assets.  
 For parts of an api that are consistently long running
+
+## See It In Action
+Check out [how etImmediate and setTimeout](node/event-loop/in-action) might affect logic in node.  

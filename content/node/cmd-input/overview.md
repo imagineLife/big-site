@@ -5,7 +5,7 @@ parentDir: node
 author: Jake Laursen
 excerpt: Parsing Command-Line input & flags
 tags: NodeJS, Terminal, cmd
-order: 1
+order: 2
 ---
 
 # Node Terminal Input
