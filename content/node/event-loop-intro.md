@@ -39,7 +39,7 @@ This doc will be in the context of an http REST API:
         - [Child Processes](#child-processes)
         - [Worker Threads](#worker-threads)
       - [Identify and Adjust Long-Running Logic Tidbits](#identify-and-adjust-long-running-logic-tidbits)
-  - [See It In Action](#see-it-in-action)
+- [See It In Action](#see-it-in-action)
 
 ## Everything Runs In The Event Loop
 In the "background" of a node process, like a REST API, is a loop that node is running.  
@@ -101,5 +101,6 @@ A primary difference
 Some logic may need to be in the node server or be best-fit for the node server. This should not be the norm, though. Finding oursellves in a place where we think node is slow might reveal our misuse of its strongest assets.  
 For parts of an api that are consistently long running
 
-## See It In Action
-Check out [how etImmediate and setTimeout](node/event-loop/in-action) might affect logic in node.  
+# See It In Action
+- [How setImmediate and setTimeout](node/event-loop/in-action) might affect logic in node
+- [An IO call to fs](node/event-loop/in-action#including-an-io-call) might affect the event loop
