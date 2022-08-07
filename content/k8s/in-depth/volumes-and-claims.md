@@ -246,3 +246,9 @@ More Topics related to storage:
   - see some docs [here](https://kubernetes.io/docs/concepts/storage/#types-of-volumes)  
 - know that the vol type used to mount a dir on the node of the pod is 
   - `hostPath`
+- be able to
+  - bind volumes to pods
+  - bind persistentVolumeClaims to pods
+  - create persistentVolumes
+  - create persistentVolumeClaims
+  - bind pvcs to pvs
