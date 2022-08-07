@@ -33,6 +33,7 @@ order: 20
   - [Delete a PVC](#delete-a-pvc)
   - [Apply a PVC To A Pod](#apply-a-pvc-to-a-pod)
 - [References](#references)
+  - [Random Take-Aways](#random-take-aways)
 
 ## A Workflow For Creating a Volume to Persist Data Of A Pod
 - ID the data persistence needs of the pod
@@ -119,8 +120,8 @@ spec:
     - ReadWriteOnce
   capacity:
     storage: 1Gi
-  hostPath:
-    # the 'path' option may not be nest in a prod en
+  # the 'hostPath:path' option may not be nest in a prod en    
+  # hostPath:
     # path: /tmp/data
     # something like this might be better for a prod env
     awsElasticBlockStore:
@@ -189,6 +190,7 @@ NOTE:
 ```yaml
 # config options for deleting a vol
 # RETAIN: until manually deleted
+# I THINK THIS IS DEFAULT?!
 persistentVolumeReclaimPolicy: Retain
 
 # delete with a claim deletion
@@ -237,3 +239,10 @@ More Topics related to storage:
 - Node-Specific Volume Limits
 - Volume Health Monitoring
 - Windows Storage
+
+
+## Random Take-Aways
+- know that a Microsoft Azure Data Disk mounted to a pod uses the volume type `azureDisk`
+  - see some docs [here](https://kubernetes.io/docs/concepts/storage/#types-of-volumes)  
+- know that the vol type used to mount a dir on the node of the pod is 
+  - `hostPath`
