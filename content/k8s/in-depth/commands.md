@@ -1,35 +1,21 @@
 ---
-title: Kubernetes Kubectl Commands and Configuration Examples
+title: Kubernetes Kubectl Commands Through A Working Example
 parentDir: k8s/in-depth
 slug: k8s/in-depth/commands
 author: Jake Laursen
-excerpt: Create objects, alter objects, and more
-tags: Kubernetes, K8s, Commands, CLI
+excerpt: Create objects, alter objects, and more through configuration files and imperative kubectl commands
+tags: Kubernetes, K8s, Commands, CLI, config, imperative example
 order: 98
 ---
 
 - [Creating Objects Imperatively](#creating-objects-imperatively)
   - [An Overview](#an-overview)
-  - ["Core" Objects](#core-objects)
-    - [Pods](#pods)
-    - [Replica Sets](#replica-sets)
-    - [Deployments](#deployments)
-  - [Networking Services](#networking-services)
-  - [Accounts](#accounts)
-    - [Service Accounts](#service-accounts)
-- [Inspect Objects](#inspect-objects)
-  - ["Core" Objects](#core-objects-1)
-    - [Pods](#pods-1)
-    - [Replica Sets](#replica-sets-1)
-    - [Deployments](#deployments-1)
-  - [Accounts](#accounts-1)
-    - [Service Accounts](#service-accounts-1)
-  - [Secrets](#secrets)
   - [Terminal Ninja Commands](#terminal-ninja-commands)
-    - [Common Command Aliases](#common-command-aliases)
+    - [Bash Aliases](#bash-aliases)
 # Creating Objects Imperatively
 This is intended to be a brief collection of commands. Read the other posts for more deets.  
 [Kubectl docs](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#create) cover imperative commands in extensive details.  
+Here, a mock use-case to setup a kuberenetes set of objects will be used as an example to illustrate a bunch of commands used to create & inspect k8s objects.
 
 ## An Overview
 Perhaps A use-case:  
@@ -50,61 +36,27 @@ We are given several images to deploy and a handful of instructions:
   - the db server will 
     - accept requests from the api server on port 27017
     - **should not** be allowed to talk to or accept requests from anything else
-- accept requests from the world with an ingress setup - the engineer already setup an nginx ingress controller && we need to config the ingress details to make ingress work
+- **accept requests from the world using an ingress setup** - the engineer already setup an nginx ingress controller && we need to config the ingress details to make ingress work
 
-## "Core" Objects
-### Pods
-### Replica Sets
-### Deployments
 
-## Networking Services
-
-## Accounts
-### Service Accounts
-Used by machines to do K8s work.
-```bash
-# kubectl create serviceaccount <service-account-name>
-kubectl create serviceaccount cicd-user
-```
-
-# Inspect Objects
-## "Core" Objects
-### Pods
-### Replica Sets
-### Deployments
-
-## Accounts
-### Service Accounts
-```bash
-# show 1-liners for all each account
-kubectl get serviceaccount
-
-# inspect one in-depth
-# kubectl describe serviceaccount <account-name>
-kubectl describe serviceaccount cicd-user
-Name:                       cicd-user
-Namespace:                  default
-Labels:                     <none>
-Annotations:                <none>
-Image pull secrets:         <none>
-Mountable secrets:          some-string-here
-Tokens:                     some-string-here
-Events:                     <none>
-```
-
-## Secrets
-```bash
-# show 1-liner, 1 per secret
-kubectl get secrets
-
-# show a secret in depth
-# kubectl describe secret <secret-name>
-kubectl describe secret cicd-user-sa-token-qwer
-```
 
 ## Terminal Ninja Commands
 Using the bash cmd prompt can be cumbersome. Here are shome things to consider
-### Common Command Aliases
+### Bash Aliases
+Save Millions of Keystrokes.  
+Millions.  
+  
+Consider using something like these to shortcut the ammount of times we need to wiggle our fingers.  
+
+**Remember:** 8 keystrokes saved, which is from `kubectl get` to `kkg`... 
+- at 100x in a day is 800 keystrokes saved
+- over 5 days is 4,000 keystrokes
+- over 1 month, lets say 15 days at the previous rate, is 60,000 keystrokes
+- do this for 6 months and we save 360,000 keystrokes. 
+
+Write a few aliases to save a few keystrokes. save ourselves millions of finger-wiggles.  
+
+
 ```bash
 alias kk=kubectl
 alias kkg"kubectl get"
