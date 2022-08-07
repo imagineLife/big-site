@@ -215,3 +215,5 @@ spec:
       persistentVolumeClaim:
         claimName: pvc-claim-for-me
 ```
+
+[Some K8s Docs](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#claims-as-volumes) on applying persistent vols to pods as volumes.
