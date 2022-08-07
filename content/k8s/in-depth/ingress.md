@@ -17,7 +17,7 @@ Ingress helps with load-balancing, auth, ssl, url-based routing config on the in
 Without ingress, a reverse-proxy might be useful as a type of  "ingress controller" to configure them to route traffic based on urls.  
 
 - [Ingress](#ingress)
-  - [Ingress Requires Rules and A Controller](#ingress-requires-rules-and-a-controller)
+  - [Ingress Requires 2 Things: Rules and A Controller](#ingress-requires-2-things-rules-and-a-controller)
   - [K8s Clusters Require a 3rd-Party Ingress Controller](#k8s-clusters-require-a-3rd-party-ingress-controller)
     - [Roles of the Controller](#roles-of-the-controller)
     - [Options for the Controllers](#options-for-the-controllers)
@@ -36,8 +36,8 @@ Without ingress, a reverse-proxy might be useful as a type of  "ingress controll
   - [Useful Commands & References](#useful-commands--references)
   - [Things To Be Able To Do](#things-to-be-able-to-do)
 
-## Ingress Requires Rules and A Controller  
-With Ingress, 2 parts are required. A Controller/reverse-proxy like nginx, haproxy or traefik. Config, rules, is also required. 
+## Ingress Requires 2 Things: Rules and A Controller  
+With Ingress, 2 parts are required. A Controller/reverse-proxy like nginx, haproxy or traefik. Configuration, aka "ingress rules", is also required. 
 
 ## K8s Clusters Require a 3rd-Party Ingress Controller
 K8s does not come with an Ingress controller by default.  
