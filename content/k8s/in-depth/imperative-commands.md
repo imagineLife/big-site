@@ -71,7 +71,7 @@ kubectl create deployment mock-dep --namespace=horse-ns --replicas=4 --image=red
 # exposing a pod named "redis" 
 # on port 6379
 
-kubectl expose pod redis --port=6379 --name redis-service --dry-run=client -o yaml
+kubectl expose pod redis --port=6379 --name redis-service --dry-run=client -o yaml > redis-service.yaml
 
 # Create a service
 # - names redis-service

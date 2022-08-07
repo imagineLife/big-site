@@ -33,6 +33,7 @@ flowchart LR
     - [Allow Traffic from non-pod I.P addresses](#allow-traffic-from-non-pod-ip-addresses)
   - [Network Policies are Enforced by the networking solutions](#network-policies-are-enforced-by-the-networking-solutions)
     - [Egress Definitions](#egress-definitions)
+  - [Some Takeaways](#some-takeaways)
   - [Things to do](#things-to-do)
 
 ## Kubernetes default allow-all policy
@@ -243,6 +244,11 @@ spec:
         port: 80
 ```
 
+
+## Some Takeaways
+- Network Policies are enforced by the networking tool (see above)
+- Networking Policies are to prevent unwanted network activity - not to enable 
+- Networking policies consider _pods_, not replicasets or deployments: this is interesting!
 
 ## Things to do
 Create a network policy that...
