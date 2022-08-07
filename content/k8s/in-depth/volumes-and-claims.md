@@ -3,7 +3,7 @@ title: Persist Data Created By Pods By Using Volumes and Claims in Kubernetes
 parentDir: k8s/in-depth
 slug: k8s/in-depth/vols-and-claims
 author: Jake Laursen
-excerpt: 
+excerpt: PersistentVolumes, and PersistentVolumeClaims are K8s objects to manage data in the semi-ephemeral state of K8s Pods
 tags: Kubernetes, K8s, data, persistence, volumes
 order: 20
 ---
