@@ -33,6 +33,7 @@ flowchart LR
   - [Network Policies are Enforced by the networking solutions](#network-policies-are-enforced-by-the-networking-solutions)
     - [Egress Definitions](#egress-definitions)
   - [Things to do](#things-to-do)
+  - [Another View](#another-view)
 
 ## Kubernetes default allow-all policy
 Kubernetes applies an "allow-all" networking policy between objects.  
@@ -241,4 +242,42 @@ spec:
     ports:
     - protocol: TCP
       port: 3306
+```
+
+
+## Another View
+Here, actors and request ports.  
+Requests, **ingress traffic**, are solid lines with port labels.  
+Responses are dotted lines.  
+
+```mermaid
+flowchart TD
+ %%
+ %% NODES
+ %%
+
+ USR["End-User"]
+ FE["Frontend"]
+ API["API"]
+ DB["DB"]
+
+ USR --":80
+  Frontend Ingress"
+  --> FE
+ 
+ FE -.-> USR
+
+ FE --":5000
+  Frontend Egress
+  API Ingress
+ " --> API
+ 
+ API -.-> FE
+
+ API --":27017
+  API Egress
+  DB Ingress
+ " --> DB
+ DB -.-> API
+
 ```
