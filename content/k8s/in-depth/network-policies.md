@@ -22,6 +22,7 @@ flowchart LR
 - [Network Traffic Is Though Of From Where The Request Starts](#network-traffic-is-though-of-from-where-the-request-starts)
   - [Kubernetes default allow-all policy](#kubernetes-default-allow-all-policy)
   - [A 3-Pod Networking Example](#a-3-pod-networking-example)
+      - [Another View](#another-view)
     - [Ingress and Inbound traffic](#ingress-and-inbound-traffic)
     - [Egress and Outbound Traffic](#egress-and-outbound-traffic)
     - [Ingress and Egress as Rules](#ingress-and-egress-as-rules)
@@ -33,7 +34,6 @@ flowchart LR
   - [Network Policies are Enforced by the networking solutions](#network-policies-are-enforced-by-the-networking-solutions)
     - [Egress Definitions](#egress-definitions)
   - [Things to do](#things-to-do)
-  - [Another View](#another-view)
 
 ## Kubernetes default allow-all policy
 Kubernetes applies an "allow-all" networking policy between objects.  
@@ -51,6 +51,43 @@ sequenceDiagram
   DB_Server ->> API_Server : Response
   API_Server ->> FrontendServer : Response
   FrontendServer ->> user : Response
+```
+
+#### Another View
+Here, actors and request ports.  
+Requests, **ingress traffic**, are solid lines with port labels.  
+Responses are dotted lines.  
+
+```mermaid
+flowchart TD
+ %%
+ %% NODES
+ %%
+
+ USR["End-User"]
+ FE["Frontend"]
+ API["API"]
+ DB["DB"]
+
+ USR --":80
+  Frontend Ingress"
+  --> FE
+ 
+ FE -.-> USR
+
+ FE --":5000
+  Frontend Egress
+  API Ingress
+ " --> API
+ 
+ API -.-> FE
+
+ API --":27017
+  API Egress
+  DB Ingress
+ " --> DB
+ DB -.-> API
+
 ```
 
 ### Ingress and Inbound traffic
@@ -242,42 +279,4 @@ spec:
     ports:
     - protocol: TCP
       port: 3306
-```
-
-
-## Another View
-Here, actors and request ports.  
-Requests, **ingress traffic**, are solid lines with port labels.  
-Responses are dotted lines.  
-
-```mermaid
-flowchart TD
- %%
- %% NODES
- %%
-
- USR["End-User"]
- FE["Frontend"]
- API["API"]
- DB["DB"]
-
- USR --":80
-  Frontend Ingress"
-  --> FE
- 
- FE -.-> USR
-
- FE --":5000
-  Frontend Egress
-  API Ingress
- " --> API
- 
- API -.-> FE
-
- API --":27017
-  API Egress
-  DB Ingress
- " --> DB
- DB -.-> API
-
 ```
