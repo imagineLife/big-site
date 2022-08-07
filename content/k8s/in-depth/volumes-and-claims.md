@@ -32,6 +32,7 @@ order: 20
   - [A PVC Def File](#a-pvc-def-file)
   - [Delete a PVC](#delete-a-pvc)
   - [Apply a PVC To A Pod](#apply-a-pvc-to-a-pod)
+- [References](#references)
 
 ## A Workflow For Creating a Volume to Persist Data Of A Pod
 - ID the data persistence needs of the pod
@@ -216,4 +217,23 @@ spec:
         claimName: pvc-claim-for-me
 ```
 
-[Some K8s Docs](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#claims-as-volumes) on applying persistent vols to pods as volumes.
+# References
+[Some K8s Docs](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#claims-as-volumes) on applying persistent vols to pods as volumes.  
+There are [many different types of volumes supported by k8s](https://kubernetes.io/docs/concepts/storage):
+- Volumes
+- Persistent Volumes
+- Projected Volumes
+  - mapping _several volume sources_ into the same direcotry - crazy
+- Ephemeral Volumes
+  - Can be used for a memory store that moves less-used data to "slower" data stores 
+  - can be used for some read-only input data (config data, secrets, etc)
+
+More Topics related to storage:
+- Storage Classes
+- Dynamic Volume Provisioning
+- Volume Snapshot Classes
+- CSI Volume Cloning
+- Storage Capacity
+- Node-Specific Volume Limits
+- Volume Health Monitoring
+- Windows Storage
