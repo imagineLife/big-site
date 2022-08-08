@@ -169,7 +169,7 @@ There are many providers for data volumes:
 Disk Type, replication Type, etc.  
 
 # An Example, StorageClasses By "Tier"
-Here, 3 "tiers" of storage class could be developed, with varying attributes to "match" the tier.
+Here, 3 "tiers" of storage class could be developed, with varying attributes to "match" the tier. Then, some less-cumbersome language can be used to describe the storage obejcts (_bronze, silver, and gold_).  
 ## Bronze
 A standard disk.  
 ```yaml
