@@ -9,6 +9,24 @@ order: 22
 ---
 
 # Define a Data-Storage Solution Dynamically with Storage Classes
+
+- [Define a Data-Storage Solution Dynamically with Storage Classes](#define-a-data-storage-solution-dynamically-with-storage-classes)
+  - [A Change Data-Creation In Order](#a-change-data-creation-in-order)
+  - [A Pod With A Persistent Volume Claim](#a-pod-with-a-persistent-volume-claim)
+    - [Pod Definition](#pod-definition)
+    - [PVC Definition](#pvc-definition)
+    - [PV Definition](#pv-definition)
+  - [Migrating to a Storage Class Solution](#migrating-to-a-storage-class-solution)
+    - [Storage Class Definition](#storage-class-definition)
+    - [Adjust the Persistent Volume Claim to Point To The Storage Class](#adjust-the-persistent-volume-claim-to-point-to-the-storage-class)
+  - [Data Volume Provisioners](#data-volume-provisioners)
+  - [Other Storage Class Parameter To Consider](#other-storage-class-parameter-to-consider)
+- [An Example, StorageClasses By "Tier"](#an-example-storageclasses-by-tier)
+  - [Bronze](#bronze)
+  - [Silver](#silver)
+  - [Gold](#gold)
+
+
 ## A Change Data-Creation In Order
 **With Persistent Volumes**, a data-storage **disk** must be created prior to creating the Persistent Volume.  
 This is **static provisioning**.  
@@ -26,14 +44,19 @@ metadata:
 provisioner: kubernetes.io/gce-pd
 ```  
 
-## A Pod With A Persistent Volume Moves to a Storage Class
+## A Pod With A Persistent Volume Claim
 Here's an example of a pod that uses a volume. The volume, here, is a persistent Volume. Here,
 - the pod definition 
   - includes a volume mount set of args for the container
   - includes a volume description inside the spec
   - includes a reference to the persistent volume claim (_pvc_) name
-- the pvc   
+- the pvc definition
+  - has a name in the metadata, used by the pod above
+  - has an accessMode and storage amount, where both are like requested attrs to the Persistent Volume (_pv_) gods
+- the pv definition
+  - has an accessMode and capacity:storage which both allow for the prior pvc def file to "work" with this pv definition
 
+### Pod Definition
 ```yaml
 # pod.yaml
 apiVersion: v1
@@ -49,4 +72,137 @@ spec:
     volumeMounts:
       - mountPath: /opt
         name: opt-vol
+  volumes:
+  - name: opt-vol
+    persistentVolumeClaim:
+      claimName: my-pvc
+```
+
+### PVC Definition
+```yaml
+# pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Mi
+```
+### PV Definition
+```yaml
+# pv.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-a
+spec:
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 500Mi
+  gcePersistentDisk:
+    pdName: pd-disk
+    fsType: ext4
+```
+
+## Migrating to a Storage Class Solution
+To Migrate from a PVC to a storage class..
+- a storageClass def file needs to be created
+- the pv def can be removed, in place of the storage class
+  - the pv still gets created - rather than manually with a def file, through the storage class
+- the pvc needs to reference the storage class instead of the pv
+
+### Storage Class Definition
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: gce-storage-class
+provisioner: kubernetes.io/gce-pd
+```
+
+### Adjust the Persistent Volume Claim to Point To The Storage Class
+```yaml
+# pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  # storageClass adjustment/addition here!!
+  storageClassName: google-storage
+  resources:
+    requests:
+      storage: 500Mi
+```
+
+## Data Volume Provisioners
+There are many providers for data volumes:
+ - AWSElasticBlockStore
+ - AzureFile
+ - AzureDisk
+ - CephFS
+ - Cinder
+ - FC
+ - FlexVolume
+ - Flocker
+ - GCEPersistentDisk
+ - Glusterfs
+ - ISCSI
+ - Quobyte
+ - NFS
+ - RBD
+ - VshpereVolume
+ - PortworxVolume
+ - ScaleIO
+ - StorageOS
+ - Local
+(_more or less_)
+
+## Other Storage Class Parameter To Consider
+Disk Type, replication Type, etc.  
+
+# An Example, StorageClasses By "Tier"
+Here, 3 "tiers" of storage class could be developed, with varying attributes to "match" the tier.
+## Bronze
+A standard disk.  
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: gce-storage-class
+provisioner: kubernetes.io/gce-pd
+parameters:
+  type: pd-standard
+  replication-type: none
+```
+## Silver
+An SSD Drive.  
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: gce-storage-class
+provisioner: kubernetes.io/gce-pd
+parameters:
+  type: pd-ssd
+  replication-type: none
+```
+## Gold
+An SSD with replication.  
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: gce-storage-class
+provisioner: kubernetes.io/gce-pd
+parameters:
+  type: pd-ssd
+  replication-type: regional-pd
 ```
