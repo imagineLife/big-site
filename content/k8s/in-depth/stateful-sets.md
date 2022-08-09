@@ -64,3 +64,131 @@ spec:
   # unique to StatefulSets, not deployments
   serviceName: mongodb-h
 ```
+
+## Storage in Stateful Sets
+### All pods share the same vol
+Here, all pods in the stateful set will try to use the same volume:
+```yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: db-ss
+  labels:
+    app: db
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: db
+  # pod def template section
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - name: mongodb
+        image: mongodb:5
+        volumeMounts:
+        - mountPath: /data-root-dir-i-forgot
+          name: db-vol
+      volumes:
+      - name: db-vol
+        persistentVolumeClaim:
+          claimName: db-vol-claim
+```
+```mermaid
+  flowchart LR
+  
+  %%
+  %%  Nodes
+  %%
+  SC["StorageClass"]
+  PV["Persistent Vol"]
+  PVC["Persistent Vol Claim"]
+  Pd1["Pod 1"]
+  Pd2["Pod 2"]
+  Pd3["Pod 3"]
+
+  SC --> PV
+  PV --> PVC
+  PVC --> Pd1
+  PVC --> Pd2
+  PVC --> Pd3
+```
+
+### Each Pod Gets Its Own PVC + PV
+Here, a stateful set can deploy pods that each reference their own pvc, which each is bound to their own pv. Here, what looks nearly identical to a pvc definition file gets added to the statefulset def file under `spec.volumeClaimTemplates`. Note:
+- stateful set creates the first pod
+  - A Pvc is created for each pod
+  - the pvc is connected to a storageClass
+  - the storageClass provisions a vol on the storage provider, here google
+  - the storageClass creates a pv
+  - the storageClass binds the pv to the pvc
+- those steps repeat for each pod in the replica set, in order
+- **stateful sets** dont delete pvcs during pod failure/recreation - stateful sets maintain "stable storage" for pods
+
+```yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: db-ss
+  labels:
+    app: db
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: db
+  # pod def template section
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - name: mongodb
+        image: mongodb:5
+        volumeMounts:
+        - mountPath: /data-root-dir-i-forgot
+          name: db-vol
+  volumeClaimTemplates:
+  - metadata:
+      name: db-vol
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      storageClassName: google-storage
+      resources:
+        requests:
+          storage: 500Mi
+```
+
+```mermaid
+  flowchart LR
+  
+  %%
+  %%  Nodes
+  %%
+  SC["StorageClass"]
+  PV1["Persistent Vol1"]
+  PV2["Persistent Vol2"]
+  PV3["Persistent Vol3"]
+  PVC1["Persistent Vol Claim1"]
+  PVC2["Persistent Vol Claim2"]
+  PVC3["Persistent Vol Claim3"]
+  Pd1["Pod 1"]
+  Pd2["Pod 2"]
+  Pd3["Pod 3"]
+
+  SC --> PV1
+  SC --> PV2
+  SC --> PV3
+  PV1 --> PVC1
+  PV2 --> PVC2
+  PV3 --> PVC3
+
+  PVC1 --> Pd1
+  PVC2 --> Pd2
+  PVC3 --> Pd3
+```
