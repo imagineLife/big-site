@@ -146,10 +146,9 @@ const About = () => (
           <div className="text">
             <h2>A Coffee Fanatic</h2>
             <p>
-              I roast coffee for myself and a few friends. I love my morning
-              ritual of brewing myself some fresh-roasted coffee. Currently, I'm
-              enjoying light-roasted beans, a little beyond first crack, brewed
-              in a Chemex.
+              I roast coffee & I love my morning ritual of brewing myself some
+              fresh-roasted coffee. Currently, I'm enjoying light-roasted beans,
+              a little beyond first crack, brewed in a Chemex.
             </p>
           </div>
           <div className="figure">
