@@ -7,22 +7,22 @@ import IngredientList from './../../components/ingredientList';
 
 import './recipe.scss';
 
-export const recipeQuery = graphql`
-  query RecipeBySlug($slug: String!) {
-    recipesJson(slug: { eq: $slug }) {
-      title
-      tags
-      excerpt
-      ingredients {
-        ingredient
-        amt
-      }
-      directions {
-        txt
-      }
-    }
-  }
-`;
+// export const recipeQuery = graphql`
+//   query RecipeBySlug($slug: String!) {
+//     recipesJson(slug: { eq: $slug }) {
+//       title
+//       tags
+//       excerpt
+//       ingredients {
+//         ingredient
+//         amt
+//       }
+//       directions {
+//         txt
+//       }
+//     }
+//   }
+// `;
 
 // gets the post data as a prop
 // { data: { mdx: post } }

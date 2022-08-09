@@ -2,14 +2,14 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import Layout from './../../components/layout';
 
-export const postQuery = graphql`
-  query PostBySlug($slug: String!) {
-    postsJson(slug: { eq: $slug }) {
-      title
-      excerpt
-    }
-  }
-`;
+// export const postQuery = graphql`
+//   query PostBySlug($slug: String!) {
+//     postsJson(slug: { eq: $slug }) {
+//       title
+//       excerpt
+//     }
+//   }
+// `;
 
 const PostTemplate = data => {
   const {
