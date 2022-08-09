@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import './index.scss';
 // Components
+import { Helmet } from 'react-helmet';
 import { Link } from 'gatsby';
 import Layout from './../../components/layout';
 import Hero from './../../components/hero';
@@ -11,6 +12,15 @@ import introvertImg from './introvert.jpg';
 import strengthsImg from './strengths.jpg';
 const About = () => (
   <Fragment>
+    <Helmet>
+      <title>About Me</title>
+      <meta
+        name="description"
+        content="I'm a do-er, a learner, and I enjoy working with people, data, and tech!"
+      />
+      <meta property="og:title" content="Eric Laursen" />
+      <meta property="og:url" content="http://laursen.tech" />
+    </Helmet>
     <Hero />
     <Layout>
       <div className="md-wrapper alternating">
@@ -44,9 +54,7 @@ const About = () => (
             <ul>
               <li>
                 {' '}
-                <a href="/k8s"
-                  target="_blank"
-                  rel="noreferrer">
+                <a href="/k8s" target="_blank" rel="noreferrer">
                   <b>kubernetes</b>:
                 </a>{' '}
                 controllers, deployments, pods, replicasets, ingress &
@@ -56,7 +64,8 @@ const About = () => (
                 {' '}
                 <a
                   href="https://github.com/imagineLife/frontendpipeline"
-                  target="_blank" rel="noreferrer"
+                  target="_blank"
+                  rel="noreferrer"
                 >
                   <b>CI/CD Automated pipelines</b>:
                 </a>{' '}
@@ -92,6 +101,28 @@ const About = () => (
         <section className="box">
           <div className="text">
             <h2>An INTJ</h2>
+            <p>
+              Per{' '}
+              <a
+                href="https://www.myersbriggs.org/my-mbti-personality-type/mbti-basics/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                The MeyersBriggs
+              </a>{' '}
+              personality assessment, I'm an INTJ.
+            </p>
+            <p>
+              Check out the{' '}
+              <a
+                href="https://www.16personalities.com/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                16 personalities site
+              </a>{' '}
+              for a more friendly breakdown of the assessment.
+            </p>
             <p>
               <b>Solitude is Exciting</b> - Introversion over Extroversion
             </p>
