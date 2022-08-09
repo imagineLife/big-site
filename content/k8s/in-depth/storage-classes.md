@@ -11,7 +11,7 @@ order: 22
 # Define a Data-Storage Solution Dynamically with Storage Classes
 
 - [Define a Data-Storage Solution Dynamically with Storage Classes](#define-a-data-storage-solution-dynamically-with-storage-classes)
-  - [A Change Data-Creation In Order](#a-change-data-creation-in-order)
+  - [Leverage StorageClasses To Consume Data Resources Before Data Resources Are Available](#leverage-storageclasses-to-consume-data-resources-before-data-resources-are-available)
   - [A Pod With A Persistent Volume Claim](#a-pod-with-a-persistent-volume-claim)
     - [Pod Definition](#pod-definition)
     - [PVC Definition](#pvc-definition)
@@ -27,7 +27,7 @@ order: 22
   - [Gold](#gold)
 
 
-## A Change Data-Creation In Order
+## Leverage StorageClasses To Consume Data Resources Before Data Resources Are Available
 **With Persistent Volumes**, a data-storage **disk** must be created prior to creating the Persistent Volume.  
 This is **static provisioning**.  
 
