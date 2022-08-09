@@ -33,7 +33,27 @@ This is **static provisioning**.
 
 **With Storage Classes**, though, and **dynamic provisioning**
 - a data provisioner can be made (_like google or amazon or whatever_)
-- the provisioner can _automatically create storage_ and attach the storage to pods when a claim is made
+- the provisioner can _automatically create storage_ and attach the storage to pods when a claim is made.
+
+```mermaid
+flowchart LR
+  DRV["Data Drive"]
+  SC["StorageClass"]
+  PVC["Persistent Volume Claim"]
+  PD["Pod"]
+
+  subgraph K8s
+    direction LR
+    SC --> PVC
+    PVC --> PD
+  end
+
+  subgraph Cloud-Provider
+    DRV
+  end
+
+  Cloud-Provider --> K8s
+```
 
 A StorageClass Def File:  
 ```yaml
