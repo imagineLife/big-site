@@ -16,6 +16,21 @@ const About = () => (
       <div className="md-wrapper alternating">
         <section className="box">
           <div className="text">
+            <h2>A Do-er</h2>
+            <p>
+              I am usually a little restless if I'm not getting something done.
+              Even my down time is intentional, focused on connecting with my
+              wife and/or friends, considering future plans... even solitude and
+              meditation are focused and part of my goals.
+            </p>
+          </div>
+          <div className="figure">
+            <img src={doerImg} alt="do-er" />
+          </div>
+        </section>
+
+        <section className="box">
+          <div className="text">
             <h2>A Learner</h2>
             <p>
               I feel like I love the journey of traversing from casual interest
@@ -29,35 +44,32 @@ const About = () => (
             <ul>
               <li>
                 {' '}
-                <b>kubernetes</b>: controllers, deployments, pods, services,
-                more
+                <a href="/k8s"
+                  target="_blank"
+                  rel="noreferrer">
+                  <b>kubernetes</b>:
+                </a>{' '}
+                controllers, deployments, pods, replicasets, ingress &
+                networking, ConfigMaps...
               </li>
               <li>
-                <b>CI/CD Automated pipelines</b>: building & deploying automated
-                ci/cd "pipelines"
+                {' '}
+                <a
+                  href="https://github.com/imagineLife/frontendpipeline"
+                  target="_blank" rel="noreferrer"
+                >
+                  <b>CI/CD Automated pipelines</b>:
+                </a>{' '}
+                building & deploying automated ci/cd "pipelines"
               </li>
               <li>
-                <b>keeping up on some node chops</b>: some small projects on "scaling" a node http server
+                <b>keeping up on some node chops</b>: some small projects on
+                "scaling" a node http server
               </li>
             </ul>
           </div>
           <div className="figure">
             <img src={learnerImg} alt="learner" />
-          </div>
-        </section>
-
-        <section className="box">
-          <div className="text">
-            <h2>A Do-er</h2>
-            <p>
-              I am usually a little restless if I'm not getting something done.
-              Even my down time is intentional, focused on connecting with my
-              wife and/or friends, considering future plans... even solitude and
-              meditation are focused and part of my goals.
-            </p>
-          </div>
-          <div className="figure">
-            <img src={doerImg} alt="do-er" />
           </div>
         </section>
 
