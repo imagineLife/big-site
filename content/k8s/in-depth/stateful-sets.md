@@ -32,8 +32,14 @@ With StatefuSets, pods are...
 - assigned indexes, 0-first, by the stateful set
 - get unique names (db-0, db-1, db-2, etc)
   - **these names can be relied on!!**
+- given a stable, unique dns record that any app can use to access the pod
+
+Scaling can be helped here because new pods are cloned from previous instances.  
+Also, on pod termination, the latest pod is deleted first.  
 
 ## Definition file
+This is similar to a deployment definition file.  
+
 ```yaml
 # ss.yaml
 apiVersion: apps/v1
@@ -55,4 +61,6 @@ spec:
         containers:
           - name: mongodb
             image: mongodb:5
+  # unique to StatefulSets, not deployments
+  serviceName: mongodb-h
 ```
