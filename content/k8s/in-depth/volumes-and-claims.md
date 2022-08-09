@@ -153,6 +153,14 @@ PVCs are 1-to-1 to a PV.
 K8s tries to find a vol that matches requested criteria requested by the claim.  
 PVCs might be in a "pending" state if a volume is not "ready", or does not match the claim's desired crieteria.  
 
+```mermaid
+flowchart LR
+  PV["Persistent Volume"]
+  PVC["Persistent Volume Claim"]
+  PD["Pod"]
+  PV --> PVC
+  PVC --> PD
+```
 ## A PVC Def File
 ```yaml
 apiVersion: v1
@@ -242,6 +250,7 @@ More Topics related to storage:
 
 
 ## Random Take-Aways
+- know that PVs and PVCs are examples of **static provisioning**
 - know that a Microsoft Azure Data Disk mounted to a pod uses the volume type `azureDisk`
   - see some docs [here](https://kubernetes.io/docs/concepts/storage/#types-of-volumes)  
 - know that the vol type used to mount a dir on the node of the pod is 
