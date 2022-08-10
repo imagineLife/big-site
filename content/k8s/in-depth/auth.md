@@ -29,6 +29,7 @@ Access to hosts should only be used with ssh keys: no un+pw.
       - [KubeConfig File Used By Kubectl](#kubeconfig-file-used-by-kubectl)
       - [KubeConfig Can Be Updated](#kubeconfig-can-be-updated)
       - [Config Default Namespaces In The KubeConfig File](#config-default-namespaces-in-the-kubeconfig-file)
+      - [Options for Cert Data](#options-for-cert-data)
 
 ## The First Line Of Defense: Protect the Kube-Apiserver
 The kube-apiserver can perform almost all functions. This must be protected.
@@ -192,3 +193,16 @@ contexts:
     # a default namespace
     namespace: the-namespace
 ```
+
+#### Options for Cert Data
+Two ways can be used to leverage cert authority in this KubeConfig file:
+```yaml
+clusters:
+  - name: demo-cluster
+    # FIRST EXAMPLE
+    certificate-authority: /abs/path/to/the/cert/file/ca.crt
+    # SECOND EXAMPLE
+    certificate-authority-data: the-cert-data-itself-converted-to-base64-1234qwfajzufl
+```
+For the second example, first convert the cert contents to base64 with something like this in the shell: `cat ca.crt | base64`.   
+NOTE: An encoded val can also be decoded with `encodedstring | base64 --decode`.  
