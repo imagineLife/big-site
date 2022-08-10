@@ -1,7 +1,7 @@
 ---
 title: An Overview of Security in K8s
 parentDir: k8s/in-depth
-slug: k8s/in-depth/security-primitives
+slug: k8s/in-depth/auth
 author: Jake Laursen
 excerpt: Different User Types and Different Authorization require different auth configurations
 tags: Kubernetes, K8s, authentication, authorization
