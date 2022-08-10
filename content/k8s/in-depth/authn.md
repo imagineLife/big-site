@@ -1,13 +1,12 @@
 ---
-title: An Overview of Security in K8s
+title: Working with Users, Clusters, and Contexts For Authentication
 parentDir: k8s/in-depth
-slug: k8s/in-depth/auth
+slug: k8s/in-depth/authentication
 author: Jake Laursen
-excerpt: Different User Types and Different Authorization require different auth configurations
-tags: Kubernetes, K8s, authentication, authorization
+excerpt: Users Can Gain Access to Clusters Through Kubeconfig Files and Contexts
+tags: Kubernetes, K8s, authentication, users, clusters, certs, 
 order: 25
 ---
-
 
 # Security In K8s
 Access to hosts should only be used with ssh keys: no un+pw.   
