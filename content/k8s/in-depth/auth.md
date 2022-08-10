@@ -28,6 +28,7 @@ Access to hosts should only be used with ssh keys: no un+pw.
       - [Contexts](#contexts)
       - [KubeConfig File Used By Kubectl](#kubeconfig-file-used-by-kubectl)
       - [KubeConfig Can Be Updated](#kubeconfig-can-be-updated)
+      - [Config Default Namespaces In The KubeConfig File](#config-default-namespaces-in-the-kubeconfig-file)
 
 ## The First Line Of Defense: Protect the Kube-Apiserver
 The kube-apiserver can perform almost all functions. This must be protected.
@@ -176,4 +177,18 @@ Available Commands:
   unset             Unset an individual value in a kubeconfig file
   use-context       Set the current-context in a kubeconfig file
   view              Display merged kubeconfig settings or a specified kubeconfig file
+```
+
+#### Config Default Namespaces In The KubeConfig File
+Update the Context section:
+```yaml
+contexts:
+- name: my-k8s-admin@my-playground
+  context:
+    # matches clusters[x].name
+    cluster: my-playground
+    # matches users[x].name
+    user: my-k8s-admin
+    # a default namespace
+    namespace: the-namespace
 ```
