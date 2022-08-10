@@ -152,17 +152,9 @@ A field could be added to the file as the "default", `current-context: my-k8s-ad
 
 #### KubeConfig Can Be Updated
 - `kubectl config use-context new-user@new-context`
-Note the `kubectl config` cli output describes a bunch of cli's that can be used:
+Note: running the `kubectl config` command shows some output describing a bunch of options that can be used with kubectl config:
 ```bash
-Modify kubeconfig files using subcommands like "kubectl config set current-context my-context"
-
- The loading order follows these rules:
-
-  1.  If the --kubeconfig flag is set, then only that file is loaded. The flag may only be set once and no merging takes place.
-  2.  If $KUBECONFIG environment variable is set, then it is used as a list of paths (normal path delimiting rules for your system). These paths are merged. When a value is modified, it is modified in the file that defines the stanza. When a value is created, it is created in the first file that exists. If no files in the chain exist, then it creates the last file in the list.
-  3.  Otherwise, ${HOME}/.kube/config is used and no merging takes place.
-
-Available Commands:
+...
   current-context   Display the current-context
   delete-cluster    Delete the specified cluster from the kubeconfig
   delete-context    Delete the specified context from the kubeconfig
