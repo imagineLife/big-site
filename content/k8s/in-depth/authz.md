@@ -27,6 +27,8 @@ Other User Accounts can be made for other types of users. These can have restric
     - [A Developer Role Example](#a-developer-role-example)
       - [Create The Role](#create-the-role)
       - [Bind The Role To A User](#bind-the-role-to-a-user)
+  - [Cluster-Wide Objects ANd Cluster-Wide Roles](#cluster-wide-objects-and-cluster-wide-roles)
+    - [ClusterRoles and ClusterRoleBindings](#clusterroles-and-clusterrolebindings)
   - [See my own access](#see-my-own-access)
 ## Authorization On Objects
 ### Internal Access of the K8s Cluster
@@ -135,6 +137,58 @@ kubectl describe role developer
 # more deets on a rolebinding
 kubectl describe rolebinding dev-to-role-binding
 ```
+
+## Cluster-Wide Objects ANd Cluster-Wide Roles
+Many objects are namespace-scoped:
+- pods
+- replicasets
+- jobs
+- deployments
+- services
+- secrets
+- roles
+- rolebindings
+- configmaps
+- persistent volume claims
+
+Some Objects are "broader" than a namespace, and more-so fit in the cluster scope:
+- nodes
+-  clusterroles
+-  clusterrolebindings
+-  certificatesigningrequests
+-  namespaces
+-  persistent volumes
+
+### ClusterRoles and ClusterRoleBindings
+allow actions on nodes, pvs, etc.  
+Call this something like cluster-admin-role.yaml
+```yaml
+apiVersion: rbac.authorization.l8s.io/v1
+kind: ClusterRole
+metadata:
+  name: cluster-administrator
+rules:
+- apiGroups: [""]
+  resources: ["nodes"]
+  verbs: ["list", "get", "create", "delete"]
+```
+
+Bind the role to a user with a culsterRoleBinding:
+```yaml
+apiVersion: rbac.authorization.kubernetes.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: cluster-admin-role-binding
+subjects:
+- kind: User
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: cluster-administrator
+  apiGroup: rbac.authorization.k8s.io
+```
+
 
 ## See my own access
 ```bash
