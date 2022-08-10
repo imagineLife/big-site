@@ -1,9 +1,9 @@
 ---
-title: 
+title: Get Info About The K8s Environment Through the K8s Api-Server
 parentDir: k8s/in-depth
 slug: k8s/in-depth/api-server
 author: Jake Laursen
-excerpt: 
+excerpt: A built-in api can allow for api-driven discovery and config
 tags: Kubernetes, K8s, authentication, authorization
 order: 26
 ---
