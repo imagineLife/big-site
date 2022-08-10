@@ -161,6 +161,7 @@ Some Objects are "broader" than a namespace, and more-so fit in the cluster scop
 
 ### ClusterRoles and ClusterRoleBindings
 allow actions on nodes, pvs, etc.  
+K8s comes with cluster roles.  
 Call this something like cluster-admin-role.yaml
 ```yaml
 apiVersion: rbac.authorization.l8s.io/v1
@@ -188,6 +189,7 @@ roleRef:
   name: cluster-administrator
   apiGroup: rbac.authorization.k8s.io
 ```
+
 
 
 ## See my own access
