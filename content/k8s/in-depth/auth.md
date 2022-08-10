@@ -20,7 +20,9 @@ Access to hosts should only be used with ssh keys: no un+pw.
   - [AuthZ](#authz)
   - [Kubernetes leverages TLS for its built-in object communication](#kubernetes-leverages-tls-for-its-built-in-object-communication)
   - [Kubeconfig and Security](#kubeconfig-and-security)
-    - [KubeConfig File Contents](#kubeconfig-file-contents)
+    - [KubeConfig File](#kubeconfig-file)
+      - [Location](#location)
+      - [Contents](#contents)
       - [Clusters](#clusters)
       - [Users](#users)
       - [Contexts](#contexts)
@@ -100,9 +102,14 @@ The default location of this kubeconfig file is `$HOME/.kube/config` & can be ov
 kubectl get pod
 ```
 
-### KubeConfig File Contents
+### KubeConfig File
+#### Location
+#### Contents
 The Config file has 3 "sections": Clusters, Users, and Contexts.  
+The file can be viewed with redacted contents with `kubectl config view`.  
+The file can be `cat` with `cat $HOME/.kube/config`. This one will show full cert auth contents.  
 
+Here, a dummy kubeconfig file: 
 ```yaml
 apiVersion: v1
 kind: Config
