@@ -36,7 +36,7 @@ These requests are handled by the node authoriser.
 There is a "system node" group that contains users that are authorized by the node authoriser.  
 
 ### External Access Outside of the Cluster 
-There are a few auth mechanisms and "modes": abacv, rbac, webhooks, alwaysAllow and alwaysDeny here.  
+There are a few auth mechanisms and "modes": abac, rbac, webhooks, alwaysAllow and alwaysDeny here.  
 The modes are set using authorization-mode option on the kubeapi-server. It is default set to alwaysAllow. 
 ### ABAC
 Users get associated with permissions: CRUD pods, etc.  
