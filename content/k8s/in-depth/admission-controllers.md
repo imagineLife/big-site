@@ -11,27 +11,33 @@ order: 28
 # Admission Controllers
 Every time a request goes through the kubectl cli...
 - the req. goes to api server
-- the req. gets authenticated, usually through certificates
+- the req. gets **authenticated**, usually through certificates
   - kubectl uses the kubeconfig file, which has certs configured
-- the req is authorized
+- the req is **authorized**
   - does the user have the permission to do what they are trying to? RBAC check, usually
-- the object is handle
+- the api serve runs **mutation admissionControllers**
+- the api serve runs **validation admissionControllers**
 - info is persistent in the etcd database
 
 ```mermaid
 flowchart LR
 
-  KTL["Kubectl"]
-  KTLNOTE>"Kubectl gets user authN from $HOME/.kube/config"]
-  KUBEAPI["Kube ApiServer"]
-  AUTHZNOTE>"Kube ApiServer Checks for RBAC via roles and roleBindings"]
+  KTL["Kubectl gui"]
+  AUTHN["Authentication"]
+  AUTHNOTE>"Kubectl gets user authN \n from $HOME/.kube/config"]
+  AUTHZ["Authorization"]
+  AUTHZNOTE>"Kube ApiServer Checks for RBAC \n via roles and roleBindings"]
   WRK["Do The Work"]
+  MTC["Mutation AdmissionControllers"]
+  VDC["Validation AdmissionControllers"]
 
-  KTL --> KUBEAPI
-  KTL --> KTLNOTE
-  
-  KUBEAPI --> AUTHZNOTE
-  KUBEAPI --> WRK
+  KTL --> AUTHN
+  AUTHN -.-> AUTHNOTE
+  AUTHN --> AUTHZ
+  AUTHZ -.-> AUTHZNOTE
+  AUTHZ --> MTC
+  MTC --> VDC
+  VDC --> WRK
 ```
 
 
