@@ -67,7 +67,10 @@ tokenval4,un4,pw4,grp1
 ```
 These can be passed to the kubeapi server `--token-auth-file=the-toke-csv-file.csv`.  
 This can be used during a curl to the k8s api server:
-`curl -v -k https://master-node-ip-here:6443/api/v1/pods --header "Authorization: Bearer <a-user-token-here>"`
+`curl -v -k https://master-node-ip-here:6443/api/v1/pods --header "Authorization: Bearer <a-user-token-here>"`.
+
+The Kube-apiserver is located at `/etc/kubernetes/manifests/kube-apiserver.yaml`.  
+
 
 ## AuthZ
 What can these people do?  
