@@ -34,6 +34,15 @@ flowchart LR
   KUBEAPI --> WRK
 ```
 
+
+- [Admission Controllers](#admission-controllers)
+  - [Permissions can be more granular than user RBAC with Admission Controllers](#permissions-can-be-more-granular-than-user-rbac-with-admission-controllers)
+    - [Why We Need Admission Controllers](#why-we-need-admission-controllers)
+    - [AdmissionControllers Validate and Mutate](#admissioncontrollers-validate-and-mutate)
+    - [Some Built-In AdmissionControllers](#some-built-in-admissioncontrollers)
+    - [View All Enabled Admission Controllers](#view-all-enabled-admission-controllers)
+    - [Add An Admission Controller](#add-an-admission-controller)
+
 ## Permissions can be more granular than user RBAC with Admission Controllers
 Some use-cases for different authz checks:
 - review pod config for specifics
@@ -57,7 +66,32 @@ Also, these controllers can perform side-effects on non-request objects.
 
 During the request lifecycle, if either of the controllers reject the request due to some missed mutation or validation, the entire request is rejected with an err.  
 
-### AdmissionController Options
-- AlwaysPullImages
-- DefaultStorageClass
-- EventRateLimit
+### Some Built-In AdmissionControllers
+- `AlwaysPullImages`
+  - ensures images are pulled prior to pod creation
+- `DefaultStorageClass`
+  - observes creation of pvcs and sets a default storage class if none is present
+- `EventRateLimit`
+  - sets limit on requests to prevent the api server from flooding with req
+- `NamespaceExists`, deprecated
+  - rejects requests to namespaces that don't exist
+- `NamespaceAutoProvision`
+  - **not automatically enabled, and deprecated** but present and allowed to be enabled
+  - when a new namespace is referenced, but the namespaces is not created first, the namespace is created on-the-fly
+- `NamespaceLifecycle`
+  - replaces the above 2 admission controllers
+  - default namespace cant be deleted
+  - auto-rejects object handling in namespaces that are not present
+- ...there are a more
+
+### View All Enabled Admission Controllers
+```bash
+kube-apiserver -h | grep enable-admission-plugins
+```  
+### Add An Admission Controller
+Edit the kube-apiserver.service file.  
+```bash
+# add this flag, here with example vals
+--enable-admission-plugins=NodeRestriction,NamespaceAutoProvision
+
+```
