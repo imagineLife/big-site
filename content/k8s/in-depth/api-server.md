@@ -31,6 +31,9 @@ There are a bunch of endpoints that can be accessed at `curl https://kube-master
   - [A Visual](#a-visual)
   - [APIs might be versioned](#apis-might-be-versioned)
     - [APIs can be enabled and disabled](#apis-can-be-enabled-and-disabled)
+    - [APIs Get Deprecated](#apis-get-deprecated)
+      - [Removing Endpoint by excluding in new verisons](#removing-endpoint-by-excluding-in-new-verisons)
+      - [Prior Version Maintenance SChedules](#prior-version-maintenance-schedules)
 
 
 ## Use Auth When requesting to the api
@@ -210,3 +213,26 @@ ETCDCTL_API=3 etcdctl
 ### APIs can be enabled and disabled
 The version must be added to the runtime config parameter of the kube-apiserver service with new lines like this mock: `--rintime-config=<api/version>`
 - `--runtime-config=batch/v2alpha1`
+
+### APIs Get Deprecated
+API deprecation policies express when to stop supporting apis.  
+As an example, say we make an api for k8s called `/imaginelife` with sub-routes at `/imaginelife/courses` and `/imaginelife/webinar`.  
+When its ready to be merged to k8s, it gets merged as `/imaginelife/v1alpha1/courses`, etc.  
+This can now be used with something like
+```yaml
+apiVersion: imaginelife/v1alpha1
+kind: Course
+metadata:
+  name: first-course-here
+spec:
+# specs....
+```
+
+#### Removing Endpoint by excluding in new verisons
+To "remove" an endpoint really only works by NOT INCLUDING the deprecated enpoint in a new version of the api. To "remove" the `webinar` endpoint, per say, that endpoint would just not be included in a `v1alpha2` release alongside the `imaginelife/v1alpha2/courses` release.  
+
+#### Prior Version Maintenance SChedules
+Other than the most recent API version of each endpoint, co-inciding with kubernetes version releases, prior API versions are required to be supported after their "announced deprecation" for a min duration of ....
+- `GA`: 12 months or 3 releases, the longer of the two
+- `beta`: 9mo or 3 releases, the longer of the two
+- `alpha` none-zo!
