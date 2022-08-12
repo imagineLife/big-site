@@ -34,6 +34,7 @@ There are a bunch of endpoints that can be accessed at `curl https://kube-master
     - [APIs Get Deprecated](#apis-get-deprecated)
       - [Removing Endpoint by excluding in new verisons](#removing-endpoint-by-excluding-in-new-verisons)
       - [Prior Version Maintenance SChedules](#prior-version-maintenance-schedules)
+      - [Use Kubectl Convert to get new apis](#use-kubectl-convert-to-get-new-apis)
 
 
 ## Use Auth When requesting to the api
@@ -236,3 +237,20 @@ Other than the most recent API version of each endpoint, co-inciding with kubern
 - `GA`: 12 months or 3 releases, the longer of the two
 - `beta`: 9mo or 3 releases, the longer of the two
 - `alpha` none-zo!
+  - must announce api version changes in k8s release notes
+
+Api Version can only deprecate same-"level" of availability or lower: 
+- new alpha releases can deprecate prior alpha releases
+- new beta releases can deprecate prior alpha AND beta releases
+- new GA releases can deprecate prior alpha, beta, and GA releases
+- new alpha CANNOT deprecate beta or GA releases
+- new beta CANNOT deprecate GA releases
+
+
+#### Use Kubectl Convert to get new apis
+When an api is deprecated, the `kubectl convert` command can be used to help migrate a k8s config file to a new api version:
+
+```bash
+# kubectl convert -f old-config-file.yaml --output-version new-version-here
+kubectl convert -f app-deployment.yaml --output-version apps/v1
+```  
