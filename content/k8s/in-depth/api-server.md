@@ -35,6 +35,7 @@ There are a bunch of endpoints that can be accessed at `curl https://kube-master
       - [Removing Endpoint by excluding in new verisons](#removing-endpoint-by-excluding-in-new-verisons)
       - [Prior Version Maintenance SChedules](#prior-version-maintenance-schedules)
       - [Use Kubectl Convert to get new apis](#use-kubectl-convert-to-get-new-apis)
+  - [Todo](#todo)
 
 
 ## Use Auth When requesting to the api
@@ -248,9 +249,32 @@ Api Version can only deprecate same-"level" of availability or lower:
 
 
 #### Use Kubectl Convert to get new apis
+[K8s docs on kubectl-convert](https://kubernetes.io/docs/reference/using-api/deprecation-guide/#migrate-to-non-deprecated-apis).  
+
 When an api is deprecated, the `kubectl convert` command can be used to help migrate a k8s config file to a new api version:
 
 ```bash
-# kubectl convert -f old-config-file.yaml --output-version new-version-here
-kubectl convert -f app-deployment.yaml --output-version apps/v1
+# kubectl-convert -f old-config-file.yaml --output-version new-version-here
+kubectl-convert -f app-deployment.yaml --output-version apps/v1
 ```  
+
+
+## Todo
+- show the "short names" of resources in k8s, say deployments and cronjobs
+  - `kubectl api-resources | grep 'deployments\|replicasets'`
+- identify parts of a semver
+- id wich api "group" (_version_) a given resource is part of, say the `job` resource
+  - `kubectl explain job`
+- id the preferred version for `authorization.k8s.io` api group
+- enable a `v1alpha1` version for `rbac.authorization.k8s.io` api group on the `controlplane` node
+  - edit the `/etc/kubernetes/manifests/kube-apiserver.yaml` file
+  - include a new line, `--runtime-config=rbac.authorization.k8s.io/v1alpha1`
+- install kubectl convert
+  - `curl -LO https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl-convert`
+  - verify it is installed with `ls`: should include `kubectl-convert`
+  - change the permission of the file with `chmod +x kubectl-convert`
+  - move the file to `/usr/local/bin` with `mv kubectl-convert /usr/local/bin/kubectl-convert`
+- convert a resource to use an updated api version
+  - `kubectl-convert -f old-file.yaml --output-version v1`
+  - take the cli output, put it in a new file
+  - run the file `kubectl create the-new-file.yaml`
