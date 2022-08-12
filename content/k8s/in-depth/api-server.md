@@ -29,6 +29,8 @@ There are a bunch of endpoints that can be accessed at `curl https://kube-master
     - [Note Differences Between Kube Proxy and Kubectl Proxy](#note-differences-between-kube-proxy-and-kubectl-proxy)
   - [Apis Responsible For Cluster Functionality](#apis-responsible-for-cluster-functionality)
   - [A Visual](#a-visual)
+  - [APIs might be versioned](#apis-might-be-versioned)
+    - [APIs can be enabled and disabled](#apis-can-be-enabled-and-disabled)
 
 
 ## Use Auth When requesting to the api
@@ -174,3 +176,37 @@ flowchart TD
   V13 --> CRTSR
   CRTSR --> VRBS
 ```
+
+## APIs might be versioned
+Each API can have versions: 
+- `v1Alpha1`
+  - can implement in an object def file with `apiVersion: internal.apiserver.k8s.io/v1alpha1`
+  - first developed + merged to k8s codebase
+  - may have bugs
+  - may be dropped
+  - experts can use it and give feedback
+  - these alpha apis are not enabled by default
+- `v1Beta1`, `v1Beta2`
+  - once major bugs are fixed, anbd e2e tests are built, alpha apis move here
+  - not GA
+  - may have minor bugs
+  - commitment that the api may be moved to GA
+- `v1` is the GA stable verison 
+  - expected to be highly reliable
+- **multiple versions might be supported at a time**
+  - **the preferred** version is set in `cluster/apis/<api-here>`, like `batch`
+  - **the storage** is which the object is STORED: may be different than the explicitly defined in an object definition file
+    - the stored version of an object, and its api-version can be discovered by querying the etcd db, where the object is at - an example get query for a deployment named `blue`
+
+```bash
+ETCDCTL_API=3 etcdctl
+ --endpoints=https://[127.0.0.1]:2379
+ --cacert=/etc/kubernetes/pki/etcd/ca.crt
+ --cert=/etc/kubernetes/pki/etcd/server.crt
+ --key=/etc/kubernetes/pki/etcd/server.key
+ get "/registry/deployments/default/blue" --print-value-only
+```
+
+### APIs can be enabled and disabled
+The version must be added to the runtime config parameter of the kube-apiserver service with new lines like this mock: `--rintime-config=<api/version>`
+- `--runtime-config=batch/v2alpha1`
