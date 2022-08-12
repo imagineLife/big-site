@@ -71,6 +71,18 @@ export default function Template({
         <meta name="description" content={excerpt} />
         <meta property="og:title" content={title} />
         <meta property="og:url" content={`http://laursen.tech${slug}`} />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "http://laursen.tech/",
+            "@type": "Blog",
+            "name": title,
+            "author": {
+              "@type": "Person",
+              "name": "Eric (Jake) Laursen"
+            },
+          "description": excerpt,
+          })}
+          </script>
       </Helmet>
       <main className={`md-wrapper${parentDir ? ` ${parentDir}` : ''}`}>
         <Header className="md" />
