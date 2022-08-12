@@ -27,21 +27,16 @@ const Index = () => {
     <Fragment>
       <Helmet>
         <title>Eric (Jake) Laursen</title>
-        <meta name="description" content="Come check out some examples of webapps, and some writing about tech, personality, team development, and more!" />
+        <meta
+          name="description"
+          content="Come check out some examples of webapps, and some writing about tech, personality, team development, and more!"
+        />
         <meta property="og:title" content="Eric Laursen" />
         <meta property="og:url" content="http://laursen.tech" />
       </Helmet>
       <Hero windowWidth={windowSize?.width} />
       <Layout>
         <main className="centered">
-          <p>
-            <Link className="styled" activeClassName="current-page" to="/folio">
-              A portfolio
-            </Link>{' '}
-            of work including web apps, technologies, and certifications
-          </p>
-          <br />
-          <h2>A collection of writings on topics I've been working with</h2>
           <section className="flex-row flex-center flex-wrap">
             {sections.map((blogSection, rowIdx) => (
               <BlogSectionPreview
@@ -50,9 +45,15 @@ const Index = () => {
               />
             ))}
           </section>
+          <p>
+            <Link className="styled" activeClassName="current-page" to="/folio">
+              A portfolio
+            </Link>{' '}
+            of work including web apps, technologies, and certifications
+          </p>
           {/* <Link to="">Developing Engineer Competencies toward career growth</Link> */}
           <footer className="flex-col">
-            <Link to="/misc">Miscellaneous: Some less organized thoughts</Link>
+            <Link to="/misc">Miscellaneous</Link>
             {/* <Link to="/charts">
               Charts: A Growing folio of data visualization work
             </Link> */}

@@ -2,6 +2,7 @@ import React from 'react';
 import './folio.scss';
 import FolioItem from './../components/folioItem';
 import TechList from './../components/techList';
+import { Helmet } from 'react-helmet'
 import { Link } from 'gatsby';
 
 const techs = {
@@ -333,48 +334,59 @@ const folioItems = [
 
 export default function Folio() {
   return (
-    <main role="main" className="folio">
-      <section className="welcome">
-        <div className="text-box">
-          <b>Welcome</b>
-          <section id="snippets">
-            <p>Friends & Family call me Jake. </p>
-            <p>
-              I enjoy building software and services that solve problems,
-              particularly in the intersections where data and people meet.
-            </p>
-          </section>
+    <React.Fragment>
+      <Helmet>
+        <title>Eric (Jake) Laursen Portfolio</title>
+        <meta
+          name="description"
+          content="Come check out some examples of webapps, and some writing about tech, personality, team development, and more!"
+        />
+        <meta property="og:title" content="Jake (Eric) Laursen Portfolio" />
+        <meta property="og:url" content="http://laursen.tech" />
+      </Helmet>
+      <main role="main" className="folio">
+        <section className="welcome">
+          <div className="text-box">
+            <b>Welcome</b>
+            <section id="snippets">
+              <p>Friends & Family call me Jake. </p>
+              <p>
+                I enjoy building software and services that solve problems,
+                particularly in the intersections where data and people meet.
+              </p>
+            </section>
 
-          <Link to="/">See some of my notes</Link>
-          <div className="tech-list-box">
-            <TechList listName="Frontend" itms={techs.frontend} />
-            <TechList listName="Server" itms={techs.backend} />
-            <TechList listName="DataBase" itms={techs.db} />
-            <TechList listName="Teams & People" itms={techs.people} />
+            <Link to="/">See some of my notes</Link>
+            <div className="tech-list-box">
+              <TechList listName="Frontend" itms={techs.frontend} />
+              <TechList listName="Server" itms={techs.backend} />
+              <TechList listName="DataBase" itms={techs.db} />
+              <TechList listName="Teams & People" itms={techs.people} />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <h2>Certifications</h2>
-      <section id="certs-wrapper">
-        {certs.map((itm, itmIdex) => (
-          <FolioItem key={`folio-item-${itmIdex}`} {...itm} />
-        ))}
-      </section>
+        <h2>Certifications</h2>
+        <section id="certs-wrapper">
+          {certs.map((itm, itmIdex) => (
+            <FolioItem key={`folio-item-${itmIdex}`} {...itm} />
+          ))}
+        </section>
 
-      <h2>Projects</h2>
-      <section id="projects-wrapper">
-        {folioItems.map((itm, itmIdex) => (
-          <FolioItem key={`folio-item-${itmIdex}`} {...itm} />
-        ))}
-      </section>
+        <h2>Projects</h2>
+        <section id="projects-wrapper">
+          {folioItems.map((itm, itmIdex) => (
+            <FolioItem key={`folio-item-${itmIdex}`} {...itm} />
+          ))}
+        </section>
 
-      <h2>Technologies</h2>
-      <section id="technologies-wrapper">
-        {technologies.map((itm, itmIdex) => (
-          <FolioItem key={`folio-item-${itmIdex}`} {...itm} />
-        ))}
-      </section>
-    </main>
+        <h2>Technologies</h2>
+        <section id="technologies-wrapper">
+          {technologies.map((itm, itmIdex) => (
+            <FolioItem key={`folio-item-${itmIdex}`} {...itm} />
+          ))}
+        </section>
+      </main>
+    </React.Fragment>
   );
 }
