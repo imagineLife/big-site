@@ -16,8 +16,12 @@ Every time a request goes through the kubectl cli...
 - the req is **authorized**
   - does the user have the permission to do what they are trying to? RBAC check, usually
 - the api serve runs **mutation admissionControllers**
+  - these change the reques
 - the api serve runs **validation admissionControllers**
+  - these allow/deny events from happening
 - info is persistent in the etcd database
+
+NOTE: built-in admission controllers run in an order. The order makes logical sense in order of applicability.  
 
 ```mermaid
 flowchart LR
@@ -48,6 +52,11 @@ flowchart LR
     - [Some Built-In AdmissionControllers](#some-built-in-admissioncontrollers)
     - [View All Enabled Admission Controllers](#view-all-enabled-admission-controllers)
     - [Add An Admission Controller](#add-an-admission-controller)
+  - [Custom External Admission Controllers with Webhooks](#custom-external-admission-controllers-with-webhooks)
+    - [Deplying a webhook server](#deplying-a-webhook-server)
+    - [Create a Webhook in k8s](#create-a-webhook-in-k8s)
+    - [MutatingAdmission Webhook](#mutatingadmission-webhook)
+    - [ValidatingAdmission Webhook](#validatingadmission-webhook)
 
 ## Permissions can be more granular than user RBAC with Admission Controllers
 Some use-cases for different authz checks:
@@ -99,5 +108,17 @@ Edit the kube-apiserver.service file.
 ```bash
 # add this flag, here with example vals
 --enable-admission-plugins=NodeRestriction,NamespaceAutoProvision
-
 ```
+
+
+## Custom External Admission Controllers with Webhooks
+Webhooks can be configured to point to a server. The server can be hosted _within or outside of the kubernetes cluster_. The server has custom admission services.  
+After the built-in admission controllers finish, the webhook admission functions het hit & applied.   
+A json blob, a "admission review object", gets passed to the admission webhook server, and returns a result object depending on the success/failure of the hook applied.  
+### Deplying a webhook server
+[Heres an example of a webhook](https://github.com/kubernetes/kubernetes/blob/v1.13.0/test/images/webhook/main.go).  
+This can 
+### Create a Webhook in k8s
+
+### MutatingAdmission Webhook
+### ValidatingAdmission Webhook
