@@ -9,6 +9,8 @@ order: 30
 ---
 
 # Deploying Apps Through a Few Strategies
+A Service like [istio](https://istio.io/) is  developed to help address networking issues that may be "beyond the scope" of kubernetes. Istio, or something like it, can help manage network traffic for things like canary deployments.    
+
 - [Deploying Apps Through a Few Strategies](#deploying-apps-through-a-few-strategies)
   - [Recreate with Downtime](#recreate-with-downtime)
   - [Rolling Update without Downtime](#rolling-update-without-downtime)
@@ -265,3 +267,15 @@ spec:
 ```
 
 ## Canary
+- Canary, like blue-green, deploys both current + "future" instances of the app
+- Canary, unlike blue-green, routes traffic to _both_ the "current" and "future" version of the app && the "future" version is referred to as the canary version
+- Canary routes a _little bit of traffic_ to the new version for a time, retaining traffic to the current version as well
+
+
+A Point of Knowledge here: Services distribute traffic "evenly" across pods: 4 pods, each get 25% of the traffic - 5 pods, each get 20%, etc.  
+
+- spin up the current version deployment, the current service, and a new deployment with the new canary version of the pods/apps
+- Add a common label to both deployments, something like `midCanary: true` or something
+- here, if both deployments have the same number of pods, the service will route 50/50 to each deployment
+  - One way to do this: leverage the "natural order" of how services route traffic by having something like 4 pods in the "current" deployment and 1 pod in the "canary" deployment
+  - Another way, 
