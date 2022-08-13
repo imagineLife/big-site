@@ -9,7 +9,7 @@ order: 28
 ---
 
 # Admission Controllers
-Every time a request goes through the kubectl cli...
+Every time a _request goes through_ the kubectl cli...
 - the req. goes to api server
 - the req. gets **authenticated**, usually through certificates
   - kubectl uses the kubeconfig file, which has certs configured
