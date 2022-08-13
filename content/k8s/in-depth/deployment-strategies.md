@@ -16,6 +16,12 @@ order: 30
     - [Understand the Current state](#understand-the-current-state)
     - [Include labels to the Deployment and the service](#include-labels-to-the-deployment-and-the-service)
     - [Create A New Deployment With The New App Version](#create-a-new-deployment-with-the-new-app-version)
+    - [Adjust the Label Selector on the Production Service](#adjust-the-label-selector-on-the-production-service)
+    - [See This In Code](#see-this-in-code)
+      - [App Deployment Def V1](#app-deployment-def-v1)
+      - [App Service Def V1](#app-service-def-v1)
+      - [App Deployment Def V2](#app-deployment-def-v2)
+      - [Change Label On Service Def](#change-label-on-service-def)
   - [Canary](#canary)
 
 ## Recreate with Downtime
@@ -89,7 +95,7 @@ flowchart
   DP2["Deployment Object"]
   SVC2["Service Object"]
 
-  subgraph DPG2["Deployment"]
+  subgraph DPG2[" QA/Test Deployment"]
     LB3V2
     DP2
   end
@@ -99,7 +105,7 @@ flowchart
     SVC2
   end
 
-  
+
   %%
   %%  first section
   %%
@@ -108,7 +114,7 @@ flowchart
   DP["Deployment Object"]
   SVC["Service Object"]
 
-  subgraph Deployment
+  subgraph PRDP["Prod Deployment"]
     LB1
     DP
   end
@@ -119,9 +125,143 @@ flowchart
   end
 
   SVCG2 --> DPG2
-  SVC1 --> Deployment
-  
+  SVC1 --> PRDP
 ```
 
+### Adjust the Label Selector on the Production Service
+Tell the Production service to matchLabels for the new version.  
+This will leave...
+- the qa service talking to the qa/latest instance of the app stil
+- the prod service talking to the latest instance of the app
+- the previous deployment of the app "dangling" without incoming traffic
+
+```mermaid
+flowchart 
+  direction TB
+  
+  %%
+  %%  second section
+  %%
+  LB3V2>"version:2"]
+  LB4V2>"version:2"]
+  DP2["Deployment Object"]
+  SVC2["Service Object"]
+
+  subgraph DPG2[" (was) QA/Test Deployment"]
+    LB3V2
+    DP2
+  end
+
+  subgraph SVCG2["QA/Test Service"]
+    LB4V2
+    SVC2
+  end
+
+
+  %%
+  %%  first section
+  %%
+  LB1>"version:1"]
+  LB2>"version:1"]
+  DP["Deployment Object"]
+  SVC["Service Object"]
+
+  subgraph PRDP["(was) Prod Deployment"]
+    LB1
+    DP
+  end
+
+  subgraph SVC1["Prod Service"]
+    LB2
+    SVC
+  end
+
+  SVCG2 --> DPG2
+  SVC1 --> DPG2
+```
+
+### See This In Code
+#### App Deployment Def V1
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-deployment
+  labels:
+    app: webapp
+    type: frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      version: 1
+  template:
+    metadata:
+      name: webapp-pod
+      labels:
+        version: 1
+    spec:
+      containers:
+        - name: webapp-box
+          image: web-api:1
+```
+
+#### App Service Def V1
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-service
+spec:
+  selector:
+    version: 1
+```
+
+#### App Deployment Def V2
+This would be the new version of the deployment.  
+Here, Colors can be used to decipher the deployments from one-another. ROYGBIV might be useful for matching colors to objects in "order".  
+The differences here from the first version are:
+- the dpeloyment name
+- the deployment selector label value
+- the pod label
+- the container image version
+
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-deployment-green
+  labels:
+    app: webapp
+    type: frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      version: 2
+  template:
+    metadata:
+      name: webapp-pod
+      labels:
+        version: 2
+    spec:
+      containers:
+        - name: webapp-box
+          image: web-api:2
+```
+
+#### Change Label On Service Def
+Same file as v1 above, just a new `spec:selector:version` value.  
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-service
+spec:
+  selector:
+    version: 2
+```
 
 ## Canary
