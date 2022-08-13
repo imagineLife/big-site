@@ -22,7 +22,7 @@ This is complex - especially in application suites where many parts are involved
   - [Use the Helm Repo](#use-the-helm-repo)
     - [Consider alternative helm repositories](#consider-alternative-helm-repositories)
     - [Install a chart](#install-a-chart)
-    - [Download without installing](#download-without-installing)
+  - [Helm Commands](#helm-commands)
 
 
 ## Yaml Files Are Everywhere
@@ -111,9 +111,14 @@ helm install release-2 bitnami/wordpress
 helm install release-3 bitnami/wordpress
 ```
 
-### Download without installing 
-untar extracts the contents from a tar file that is downloaded.  
-
+## Helm Commands
 ```bash
+# show installed packages
+helm list
+
+# remove a package
+helm uninstall package-here
+
+# untar extracts the contents from a tar file that is downloaded.  
 helm pull --untar bitnami/wordpress
 ```
