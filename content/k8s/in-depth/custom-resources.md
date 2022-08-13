@@ -1,5 +1,5 @@
 ---
-title: Create Custom Resources For Your Own Specific Needs In Kubernetes
+title: Create Custom Resources To Meet Your Own Specific Needs In Kubernetes
 parentDir: k8s/in-depth
 slug: k8s/in-depth/custom-resources
 author: Jake Laursen
@@ -20,6 +20,7 @@ We, as devs, can kuse kubectl against the kubeapi-server to do things like creat
     - [Tell K8s To Learn A New Resource Type](#tell-k8s-to-learn-a-new-resource-type)
     - [Create One Of These Custom Resources](#create-one-of-these-custom-resources)
     - [Create A Custom Controller To Work With The Resource](#create-a-custom-controller-to-work-with-the-resource)
+    - [Use The Operator Framework to Deploy All Custom Resources In One](#use-the-operator-framework-to-deploy-all-custom-resources-in-one)
 
 
 ## An Example Mock Custom Resource, A Vacation Agreement Resource
@@ -89,8 +90,35 @@ This controller, this **custom controller** would...
 - would make api calls to rental sites, with params
 
 ### Create A Custom Controller To Work With The Resource
-Creating a custom Controller requires, you guessed it, a config file: 
-```yaml
+The Controller will...
+- monitor the etcd for `VacationSearch` objects, monitoring in a loop
+- perform actions based on the `VacationSearch` objects
+- be allowed to be in any code - python, node, go... K8s has a go client, and several other "supported" libraries
 
-```
+One example of a sample-controller is [in the kubernetes github repo](https://github.com/kubernetes/sample-controller). To build this sample controller,
+- install go on my machine
+- clone the github repo with the sample controller
+- cd into it
+- customize `controller.go` to do the work!  
+- build the code with go, `go build -o sample-controller .`
+- run the code! `./sample-controller -kubeconfig=$HOME/.kube/config`
+  - this tells k8s to use this new controller :) 
+
+This controller can be packed for distribution, by something like containerizing it.  
+The controller can even be deployed as a pod in the k8s world. Crazy!  
+
+### Use The Operator Framework to Deploy All Custom Resources In One
+The Operator Framework can be used to deply the custom resource definition file and the custom controller all-in-one. The Operator Framework is intended to do what human operators do.  
+There are many operators already built and available at [OperatorHub](https://operatorhub.io/).   
+Operators are complex: there's a lot going on - it is intended to do automation of automation.  
+
+The Operator Framework can do things like...
+- Deal With Custom Resource Definitions
+  - i.e the `etcdCluster`
+  - etcdBackup - take backups
+  - etcdRestore - restore backups
+- Deal With Custom Controllers
+  - i.e the `etcdController`
+  - backup operator
+  - restoreOperator
 
