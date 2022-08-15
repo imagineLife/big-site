@@ -1,33 +1,14 @@
 ---
-title: K8s Example - Create An NginX Volume Alongside A Volume for logging
-parentDir: k8s/in-depth
-slug: practice-k8s/
+title: 
+parentDir: k8s/examples
+slug: k8s/examples/debugging-a-network-error
 author: Jake Laursen
-excerpt: Create a PV, a PVC, and a pod to all work together
+excerpt: 
 tags: Kubernetes, K8s
 order: 1
 ---
-
-## ToDo
-### Create A PV
-Create a Persistent Volume called log-volume.  
-It should make use of a storage class name manual.  
-It should use RWX as the access mode and have a size of 1Gi.  
-The volume should use the hostPath /opt/volume/nginx.  
-
-Next, create a PVC called log-claim requesting a minimum of 200Mi of storage. This PVC should bind to log-volume.
-
-Mount this in a pod called logger at the location /var/www/nginx. This pod should use the image nginx:alpine.
-
-#### How
-- Seach the docs for a pv yaml example
-- create pv.yaml
-- copy/paste the example from the docs into the pv.yaml
-
-
-
-### Debug A Pod And A Service Error
-Deployed are two things: 
+# Debug A Pod And A Service Error
+Deployed on a cluster & node are two things: 
 - a pod called secure-pod 
 - a service called secure-service 
 
@@ -36,7 +17,7 @@ Troubleshoot why this is happening.
 
 Make sure that incoming connection from the pod webapp-color are successful.  
 
-#### How
+## Steps To Debug And Fix
 - Review pods with `kubectl get pods`
 - Review services with `kubectl get svc`
 - Debug a pod-to-service connection: 
