@@ -11,10 +11,10 @@ order: 3
 # Solve a problem with a pod
 Create a pod
 - named `check-time`
-- in a namespace `bg-processes`
+- in a namespace `bgprocesses`
 - run a container called `time-check` which uses the `busybox` image
 - run a command `while true; do date; sleep $TIME_FREQ;done`
-- sound write results to `/opt/time/time-check.log`
+- should write results to `/opt/time/time-check.log`
 - mount a vol so that `/opt/time` in the pod writes to this vol
 
 Create a config map
@@ -23,9 +23,39 @@ Create a config map
 - same namespace
 
 ## How
-Create the configmap
-`kubectl create configmap -n bg-processes time-config --from-literal=TIME_FREQ=10`  
+First, create the namespace: `kubectl create namespace bgprocesses`.  
+### Create a configmap
+`kubectl create configmap -n bgprocesses time-config --from-literal=TIME_FREQ=10`  
 
-Create the pod 
-- `kubectl run time-check --image=busybox --dry-run=client -o yaml > pod.yaml`
+### Create A Pod
+- `kubectl run time-check --image=busybox --namespace=bgprocesses --dry-run=client -o yaml > pod.yaml`
+Edit the yaml to look something like...
 
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: check-time
+  namespace: bgprocesses
+spec:
+  # create a volume
+  volumes:
+    - name: this-vol
+  containers:
+    - image: busybox
+      name: check-time
+      # set && 'pass' the env var to the container
+      env:
+      - name: TIME_FREQ
+        valueFrom:
+          configMapKeyRef:
+            name: time-config
+            key: TIME_FREQ
+      # set the running command
+      command: [ "/bin/sh", "-c", "while true; do date; sleep $TIME_FREQ; done > /opt/time/time-check.log" ]
+      # mount the vol
+      volumeMounts:
+      - mountPath: /opt/time
+        name: this-vol
+
+```
