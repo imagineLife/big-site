@@ -42,7 +42,7 @@ spec:
 # ...
 ```
 
-The whole yaml could look like
+The whole yaml might end up looking something...
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
