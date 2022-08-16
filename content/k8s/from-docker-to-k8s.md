@@ -25,6 +25,7 @@ Lets take an example codebase.
       - [Understand the Connectivity Reqs](#understand-the-connectivity-reqs)
       - [Understanding services and ports](#understanding-services-and-ports)
       - [Leveraging Services to Enable Pod Connections](#leveraging-services-to-enable-pod-connections)
+  - [A Visual](#a-visual)
 
 ## A Traditional Small Client to Server to DataStore
 A small and functional "Full-Stack" application can include:
@@ -118,4 +119,44 @@ Services are only required for a pod when the pod needs to be accessed by anothe
   - 1 service for result analytics dashboard app
 - No service for the worker pod
   - reads from a db, updates another db
-- 
+
+
+## A Visual
+```mermaid
+flowchart
+  direction TB
+  
+  
+  %%  
+  %% NODES
+  %% 
+  FEPOD["Voting Frontend"]
+  RDPOD["Redis"]
+  WKPOD["Worker"]
+  DBPOD["Postgres"]
+  F2POD["Analytics Frontend"]
+  WRLD["World"]
+
+  %%  
+  %% Services
+  %% 
+  PGS[["PostGres Service (ClusterIP)"]]
+  RDS[["Redis Service (ClusterIP)"]]
+  RSS[["Analytics Service (NodePort)"]]
+  VTS[["Voting Service (NodePort)"]]
+
+  WRLD ----> VTS
+  WRLD ----> RSS
+
+  VTS -.-> FEPOD
+  RSS -.-> F2POD
+
+  FEPOD ----> RDS
+  F2POD ----> RDS
+
+  RDS -.-> RDPOD
+
+  RDPOD ---> PGS
+  PGS -.- DBPOD
+
+```
