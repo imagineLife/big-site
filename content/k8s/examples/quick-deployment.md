@@ -41,3 +41,33 @@ spec:
       maxUnavailable: 2
 # ...
 ```
+
+The whole yaml could look like
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: frontend-dep
+  name: frontend-dep
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: frontend-dep
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 2
+  template:
+    metadata:
+      labels:
+        app: frontend-dep
+    spec:
+      containers:
+      - image: nginx:1.16
+        name: nginx
+        resources: {}
+status: {}
+```
