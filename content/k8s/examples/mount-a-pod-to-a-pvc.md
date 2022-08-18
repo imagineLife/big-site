@@ -39,8 +39,9 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/mnt/data"
+    path: /mnt/data
 ```
+NOTE: no quotes around the path string.  
 
 
 pvc
