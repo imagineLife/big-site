@@ -57,22 +57,21 @@ Switch those details to
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: allow-webapp
-  namespace: default
+  name: my-ingress
 spec:
   podSelector:
     matchLabels:
-      run: secure-pod
+            run: secure-pod
   policyTypes:
   - Ingress
   ingress:
-  - from:
-    - podSelector:
-      matchLabels:
-        name: webapp-color
-    ports:
-      protocol: TCP
-      port: 80
+    - from:
+        - podSelector:
+            matchLabels:
+              name: webapp-color
+      ports:
+              - protocol: TCP
+                port: 80
 
 ```
 
