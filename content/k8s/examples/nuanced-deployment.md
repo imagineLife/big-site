@@ -24,26 +24,47 @@ order: 5
     - at path `/redis-master`
 - expose port `6379`
 
+
+### How
+Start with an imperative command:  
+`kubectl create deployment redis --image=redis:alpine --replicas=1 --port=6379 --dry-run=client -o yaml > rdp.yaml`
+
 ```yaml
 apiVersion: v1
-kind: Pod
+kind: Deployment
 metadata:
   name: redis
   labels:
     app: redis
 spec:
-  containers:
-  - image: redis:alpine
-    name: redis
-    resources:
-      requests:
-        cpu: "0.2"
-  volumes:
-    - name: data
-      emptyDir: {}
-    - name: redis-config
-      configMap:
-        name: redis-config
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - image: redis:alpine
+          name: redis
+          resources:
+            requests:
+              cpu: "0.2"
+          ports:
+          - containerPort: 6379
+          volumeMounts:
+          - mountPath: /redis-master-data
+            name: data
+          - mountPath: /redis-master
+            name: redis-config
+      volumes:
+        - name: data
+          emptyDir: {}
+        - name: redis-config
+          configMap:
+            name: redis-config
 
         
 
