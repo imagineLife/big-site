@@ -6,11 +6,8 @@ excerpt: Serve HTML, JS, and CSS from a Node Web Server
 order: 3
 ---
 
-### Part 1
-`video: [Express Server - I](https://youtu.be/2a_coCwZKrg) youtube: [Express Server - I](https://youtu.be/2a_coCwZKrg)`
-
-
 # Setting Up An HTTP Server
+`video: [Express Server - I](https://youtu.be/2a_coCwZKrg) youtube: [Express Server - I](https://youtu.be/2a_coCwZKrg)`
 
 - [Setting Up An HTTP Server](#setting-up-an-http-server)
   - [Why this HTTP Server](#why-this-http-server)
