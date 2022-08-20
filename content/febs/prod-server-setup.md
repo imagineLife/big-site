@@ -199,6 +199,7 @@ This will pull express from the web, install the express contents in a new _node
 **NOTE** at the time of updating this webpage, express is at version `4.17.3`. When the express version updates, running `npm install express` will populate a "higher" version of express.
 
 # Setup Express to Listen and Serve Static Contents
+`video: [Express Server - III](https://youtu.be/t1f80fuYDU4) youtube: [Express Server - III](https://youtu.be/t1f80fuYDU4)`
 
 The `index.js` at the root of the server directory is the final piece of the puzzle here. The `index.js` file will
 
