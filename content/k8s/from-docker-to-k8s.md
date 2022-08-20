@@ -157,6 +157,6 @@ flowchart
   RDS -.-> RDPOD
 
   RDPOD ---> PGS
-  PGS -.- DBPOD
+  PGS -.-> DBPOD
 
 ```
