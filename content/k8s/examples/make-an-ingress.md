@@ -7,10 +7,12 @@ excerpt: Route Traffic from multiple backend services to multiple urls
 tags: Kubernetes, K8s, ingress, routing
 order: 6
 ---
-Create a single ingress resource called ingress-vh-routing. The resource should route HTTP traffic to multiple hostnames as specified below:
-The service video-service should be accessible on http://watch.ecom-store.com:30093/video
-The service apparels-service should be accessible on http://apparels.ecom-store.com:30093/wear
-Here 30093 is the port used by the Ingress Controller
+Create an ingress resource 
+- called `watch-and-buy`
+- routes HTTP traffic to multiple hostnames
+  - a service `video-service` should be accessible on `http://watch.ecom-store.com:30093/video`
+  - a service `apparels-service` should be accessible on `http://apparels.ecom-store.com:30093/wear`
+  - NOTE: `30093` is the port used by the Ingress Controller
 
 # 
 ```yaml
