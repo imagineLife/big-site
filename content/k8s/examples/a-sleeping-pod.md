@@ -23,3 +23,22 @@ Build an image:
 
 
 `kubectl run my-sleeper --namespace=sleepspace --image=busybox --command=sleep 3600 --dry-run=client -o yaml > sleeper.yaml`
+
+Update the pod yaml to include the volume:
+```yaml
+spec:
+  volumes:
+    - name: secret-volume
+      secret:
+        secretName: dotfile-secret
+  containers:
+  # ...the rest of the container lines
+    - command:
+      - sleep
+      - "3600"
+    volumeMounts:
+    - mountPath: /etc/secret-volume
+      name: secret-volume
+      readOnly: true
+    
+```
