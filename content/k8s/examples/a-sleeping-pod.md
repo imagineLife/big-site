@@ -27,6 +27,7 @@ Build an image:
 Update the pod yaml to include the volume:
 ```yaml
 spec:
+  nodeName: master
   volumes:
     - name: secret-volume
       secret:
@@ -40,5 +41,4 @@ spec:
     - mountPath: /etc/secret-volume
       name: secret-volume
       readOnly: true
-    
 ```
