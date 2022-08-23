@@ -30,7 +30,6 @@ This doc will be in the context of an http REST API:
   - [It Relies On EventEmitters](#it-relies-on-eventemitters)
   - [It Is a Queue](#it-is-a-queue)
   - [On Blocking The Event Loop](#on-blocking-the-event-loop)
-    - [Blocking The Event Loop Might Be A Scaling Problem](#blocking-the-event-loop-might-be-a-scaling-problem)
   - [The Single Thread to Help Manage Request Volume](#the-single-thread-to-help-manage-request-volume)
     - [Some Tips Learned Along The Way to Keep Node Fast](#some-tips-learned-along-the-way-to-keep-node-fast)
       - [Monitor The Event Loop](#monitor-the-event-loop)
@@ -58,18 +57,8 @@ When there is a lot going on in a node process, there is a line of events waitin
 Managing the list of events is a major part of what node does.  
 
 ## On Blocking The Event Loop
-`video: [Blocking The Event Loop](https://youtu.be/WaUshOoEHd4) youtube: [Blocking The Event Loop](https://youtu.be/WaUshOoEHd4)`  
-
 Check out the [Node Doc](https://nodejs.org/en/docs/guides/dont-block-the-event-loop/) on this topic, as it is well written.  
-Blocking the event loop is a thing. Blocking could also be thought of as "consuming". Some code "consumes" node's "brain" and takes up its ability to do other things.  
-As an example of blocking the event loop, loops do the trick. "For" loops, "while" loops, "forEach" loops, etc.  
-Put a bunch of loops in a rest api and then fire a bunch of requests at the api and watch the whole thing seem sluggish.  
-Some things don't block the eventloop, and these things are node's saving grace. I/O work, in general, is what node passes off easily.  
-Also, node offers a pretty robust [stream system](https://nodejs.org/docs/latest-v16.x/api/stream.html#stream) for dealing with chunks of data instead of waiting for large pieces of data to be passed around. Great stuff there.  
-
-### Blocking The Event Loop Might Be A Scaling Problem
-When the EventLoop is "blocked", or consumed by logic, no other process can happen in the node server.  
-
+Check out [this other post I wrote](/node/event-loop/blocking), too!
 ## The Single Thread to Help Manage Request Volume
 A detail about node is how it is "single-threaded". The single-thread that everyone talks about is this event loop.  
 
@@ -105,4 +94,4 @@ For parts of an api that are consistently long running
 
 # See It In Action
 - [How setImmediate and setTimeout](/node/event-loop/in-action) might affect logic in node
-- [An IO call to fs](/node/event-loop/in-action#including-an-io-call) might affect the event loop
+- [Blocking The Event Loop](/node/event-loop/blocking)
