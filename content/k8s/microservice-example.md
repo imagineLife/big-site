@@ -32,6 +32,7 @@ Each service will get a pod.
     - [The Postgres Services](#the-postgres-services)
     - [The Worker Service](#the-worker-service)
     - [The Results Services](#the-results-services)
+  - [Some Consistent Details to Remember](#some-consistent-details-to-remember)
 
 
 ## Definition File Directory Structure
@@ -328,3 +329,13 @@ pod/result-app-pod created
 Jakes-4:k8s Jake$ kubectl create -f cfgs/services/result-app.yaml 
 service/result-service created
 ```
+
+## Some Consistent Details to Remember
+Pay.  
+Attention.  
+To details.  
+To spelling.  
+To port numbers.  
+To Directions.  
+Pod names, deployment names, service names, namespace names.  
+These things, although they don't take up a lot of code (_perhaps compared to a backend system or a complex single-page app_), these _details_ make-or-break the kubernetes world.  
