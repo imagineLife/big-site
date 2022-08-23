@@ -8,16 +8,20 @@ parentDir: node/event-loop
 order: 4
 ---
 
-# How A Few Functions Interact With The Event Loop
-
-- [How A Few Functions Interact With The Event Loop](#how-a-few-functions-interact-with-the-event-loop)
-  - [setImmediate to do it later](#setimmediate-to-do-it-later)
-  - [Compare setImmediate to setTimeout](#compare-setimmediate-to-settimeout)
-    - [Introduce Multiple timeouts for further inspection](#introduce-multiple-timeouts-for-further-inspection)
-    - [Including an I/O call](#including-an-io-call)
+# The Event Loop - An Introducion
+- [The Event Loop - An Introducion](#the-event-loop---an-introducion)
+  - [Node Parses Some of the File For Errors](#node-parses-some-of-the-file-for-errors)
+  - [How A Few Functions Interact With The Event Loop](#how-a-few-functions-interact-with-the-event-loop)
+    - [setImmediate to do it later](#setimmediate-to-do-it-later)
+    - [Compare setImmediate to setTimeout](#compare-setimmediate-to-settimeout)
+      - [Introduce Multiple timeouts for further inspection](#introduce-multiple-timeouts-for-further-inspection)
+      - [Including an I/O call](#including-an-io-call)
   - [Some Take-Aways](#some-take-aways)
 
 
+## Node Parses Some of the File For Errors
+The first thing node does with a file is "parse" 
+## How A Few Functions Interact With The Event Loop
 Start with a simple node file - lets call it something like "eventloop.js" -
 ```js
 console.log('start')
@@ -33,7 +37,7 @@ start
 end
 ```
 
-## setImmediate to do it later
+### setImmediate to do it later
 Add in a setImmediate call:
 ```js
 console.log('start')
@@ -58,7 +62,7 @@ ALERT!
 The ` end ` string logs before the setImmediate string. This is due to node's parsing of the entire "program", here the file. Node parses the entire file before finishing the event-loop logic of `setImmediate`.  
 If you're reading this and "new" to event loop logic, this is officially the end of the beginning.
 
-## Compare setImmediate to setTimeout
+### Compare setImmediate to setTimeout
 Throw in a setTimeout:  
 ```js
 console.log('start');
@@ -104,7 +108,7 @@ timeout
 
 Maybe not that interesting so far.  
 
-### Introduce Multiple timeouts for further inspection
+#### Introduce Multiple timeouts for further inspection
 ```js
 console.log('start');
 
@@ -210,7 +214,7 @@ This is also interesting! A take-away:
 (_note: A [complete collection of the take-aways](#some-take-aways) is at the end of this doc_)  
 - managing timeouts + immediates can be complicated: managing the priority and order of those two seem interchangable (_at least at this trivial scale_)
 
-### Including an I/O call
+#### Including an I/O call
 Here, a moderately more complex event loop + setImmediate example:
 - parse the file (_start + end logs_)
 - setImmediate
