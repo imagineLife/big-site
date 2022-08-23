@@ -58,6 +58,8 @@ When there is a lot going on in a node process, there is a line of events waitin
 Managing the list of events is a major part of what node does.  
 
 ## On Blocking The Event Loop
+`video: [Blocking The Event Loop](https://youtu.be/WaUshOoEHd4) youtube: [Blocking The Event Loop](https://youtu.be/WaUshOoEHd4)`  
+
 Check out the [Node Doc](https://nodejs.org/en/docs/guides/dont-block-the-event-loop/) on this topic, as it is well written.  
 Blocking the event loop is a thing. Blocking could also be thought of as "consuming". Some code "consumes" node's "brain" and takes up its ability to do other things.  
 As an example of blocking the event loop, loops do the trick. "For" loops, "while" loops, "forEach" loops, etc.  
