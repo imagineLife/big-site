@@ -53,8 +53,10 @@ spec:
   - name: secret-volume
     secret:
       secretName: dotfile-secret
+  # THIS!
   nodeSelector:
     kubernetes.io/hostname: controlplane
+  # ... and this!
   tolerations:
   - key: "node-role.kubernetes.io/master"
     operator: "Exists"

@@ -59,3 +59,7 @@ spec:
         name: this-vol
 
 ```
+
+# Add some Checks To A Pod
+Use K8s to...
+- determine when the pod is ready
