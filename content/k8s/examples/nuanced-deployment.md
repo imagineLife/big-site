@@ -65,8 +65,4 @@ spec:
         - name: redis-config
           configMap:
             name: redis-config
-
-        
-
-
 ```
