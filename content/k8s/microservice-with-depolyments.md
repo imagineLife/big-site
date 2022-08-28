@@ -4,7 +4,7 @@ parentDir: k8s
 slug: k8s/microservice-with-deployments
 author: Jake Laursen
 excerpt: Use Kubernetes Deployment Objects to deploy replica sets of each service in a microservice-style application
-tags: Kubernetes, K8s, Microservices, deployments
+tags: Kubernetes, K8s, Microservices, deployments, diagram
 order: 14
 ---
 
