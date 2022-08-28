@@ -30,6 +30,7 @@ This style of deployment is great for illustrating one "simple" way of deploying
     - [results app](#results-app)
   - [Scaling Up Live!](#scaling-up-live)
     - [Edit The Results App Config File](#edit-the-results-app-config-file)
+  - [A Diagram](#a-diagram)
 ## More Pods for Frontend Apps
 Here, The frontend-facing apps (_voting-app and result-app_) will get replica-sets through deployments. Deployments will "manage" the replica sets of the pods.  
 
@@ -306,3 +307,87 @@ voting-app-deploy   1/1     1            1           25h
 worker-deploy       1/1     1            1           25h
 ```
 
+
+
+## A Diagram
+```mermaid
+flowchart
+  direction TB
+  
+
+
+  %%
+  %% "raw" objects
+  %%
+  ACCESS["User Access"]
+  PG1(("PostGres"))
+  PG2(("PostGres"))
+  PG3(("PostGres"))
+  RDS(("Redis"))
+  VTG1(("Voting-App"))
+  VTG2(("Voting-App"))
+  RSL1(("Results-App"))
+  RSL2(("Results-App"))
+  WRKR(("Worker"))
+
+
+
+  %%
+  %% Services
+  %%
+  SVCPG[["ClusterIP Service: Postgres"]]
+  SVCRD[["ClusterIP Service: Redis"]]
+  SVCRSL[["NodePort Service: Results-App"]]
+  SVCVTG[["NodePort Service: Voting-App"]]
+
+
+
+  %%
+  %% Deployments
+  %%
+
+  subgraph DPPG["Deployment: PostGres"]
+    PG1
+    PG2
+    PG3
+  end
+
+  subgraph DPVTG["Deployment: Voting-App"]
+    VTG1
+    VTG2
+  end
+  
+  subgraph DPRSL["Deployment: Results-App"]
+    RSL1
+    RSL2
+  end
+
+  subgraph DPRDS["Deployment: Redis"]
+    RDS
+  end
+
+
+
+  %%
+  %% All In The Node
+  %%
+  subgraph NODE
+    direction TB
+
+      %% services-to-deployments
+      SVCPG -.-> DPPG
+      SVCVTG -.-> DPVTG
+      SVCRSL -.-> DPRSL
+      SVCRD -.-> DPRDS
+      WRKR
+
+      %% deployment-dependencies
+      DPVTG -.-> SVCRD
+      DPRSL -.-> SVCRD
+
+      DPRDS -.-> SVCPG
+  end
+
+  ACCESS -..-> SVCVTG
+  ACCESS -..-> SVCRSL
+```
