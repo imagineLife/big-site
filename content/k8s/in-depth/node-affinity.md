@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/node-affinity
 author: Jake Laursen
 excerpt: Affinities applied to Nodes push nodes to prefer Specific K8s Nodes to be deployed to
-tags: Kubernetes, K8s, nodes, node affinity
+tags: Kubernetes, K8s, nodes, node affinity, visualization, diagram
 order: 11
 ---
 
@@ -19,6 +19,7 @@ Node Affinity help match pods to nodes more flexibly than node selectors.
     - [An Affinity Table](#an-affinity-table)
   - [Combining Taints, Tolerations, and NodeAffinity](#combining-taints-tolerations-and-nodeaffinity)
   - [Things To Be Able To Do](#things-to-be-able-to-do)
+  - [A Visualization](#a-visualization)
 
 
 Set a label on a node:
@@ -129,15 +130,15 @@ How?!
 - add nodeAffinity rules to our pods to match the pods to nodes for specific deployments
 
 ## Things To Be Able To Do
-- get the number of labels on a node
-- add a label to a running node
-- create a deployment
+1. get the number of labels on a node
+2. add a label to a running node
+3. create a deployment
   - named blue
   - with a postgres image
   - 3 replicas
-- check which nodes will allow pods to be deployed on them, inspecting node taints
-- adjust nodeAffinity of a deployment
-- create a deployment so that the pods get deployed on a specific node, using pod nodeAffinity specs
+4.  check which nodes will allow pods to be deployed on them, inspecting node taints
+5. adjust nodeAffinity of a deployment
+6. create a deployment so that the pods get deployed on a specific node, using pod nodeAffinity specs
 ```bash
 # 1
 kubectl describe nodes node-name --showlabels
@@ -149,9 +150,6 @@ kubectl label nodes horse wild=mustang
 # 3
 kubectl create deployment blue --image=nginx --replicas=3
 
-# 4
-
-
 # 5
 # get the deployment
 kubectl get depolyments <deployment-name> -o yaml > asdf.yaml
@@ -160,4 +158,31 @@ kubectl get depolyments <deployment-name> -o yaml > asdf.yaml
 # re-deploy the deployment
 kubectl create -f asdf.yaml
 # may need to wait 
+```
+
+## A Visualization
+```mermaid
+  flowchart 
+    direction TB
+
+  %%
+  %% Objects
+  %%
+  DP(("Deployment
+    affinity: 
+    size:in:Large
+  "))
+  LBLG[["label: LARGE"]]
+  LBSM[["label: SMALL"]]
+
+  subgraph NDA["node A"]
+    LBLG
+  end
+
+  subgraph NDB["node B"]
+    LBSM
+  end
+
+  DP --"X: Does not match affinity + label"--> NDB
+  DP -.-> NDA
 ```
