@@ -5,7 +5,7 @@ slug: k8s/examples/a-cronjob
 author: Jake Laursen
 excerpt: Set a backoffLimit, a number of task completions, maximum time to completion, and more
 tags: Kubernetes, K8s, cronjob, cron
-order: 7
+order: 10
 ---
 
 Create a CronJob:
