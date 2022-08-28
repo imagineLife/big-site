@@ -4,7 +4,7 @@ parentDir: k8s
 slug: k8s/microservice-case-study
 author: Jake Laursen
 excerpt: Microservices are great candidates for adopting containerization and kubernetes
-tags: Kubernetes, K8s, microservice
+tags: Kubernetes, K8s, microservice, visualization, diagram
 order: 12
 ---
 
@@ -145,18 +145,24 @@ flowchart
   RSS[["Analytics Service (NodePort)"]]
   VTS[["Voting Service (NodePort)"]]
 
-  WRLD ----> VTS
-  WRLD ----> RSS
 
-  VTS -.-> FEPOD
-  RSS -.-> F2POD
+  subgraph NODE
+    direction TB
+    WRLD ----> VTS
+    WRLD ----> RSS
 
-  FEPOD ----> RDS
-  F2POD ----> RDS
+    VTS -.-> FEPOD
+    RSS -.-> F2POD
 
-  RDS -.-> RDPOD
+    FEPOD ----> RDS
+    F2POD ----> RDS
 
-  RDPOD ---> PGS
-  PGS -.-> DBPOD
+    RDS -.-> RDPOD
+
+    RDPOD ---> PGS
+    PGS -.-> DBPOD
+
+    WKPOD
+  end
 
 ```
