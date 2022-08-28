@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/admission-controllers
 author: Jake Laursen
 excerpt: A properly configured k8s server leverages admissionControllers for automated request processing
-tags: Kubernetes, K8s, admission controllers, requests, mutations, validations
+tags: Kubernetes, K8s, admission controllers, requests, mutations, validations, visualization, diagram
 order: 28
 ---
 
