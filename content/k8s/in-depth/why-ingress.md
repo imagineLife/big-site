@@ -90,6 +90,7 @@ flowchart TD
   DB[(Database Pod)]
 
   subgraph RS [ReplicaSet]
+    direction TB
     APP
     APP2
     APP3
@@ -118,7 +119,7 @@ flowchart TD
   %%
   USER[End-User]
   
-  DNS[[DNS: demo-app to k8s-node-ip]]
+  DNS[[demo-app to k8s-node-ip]]
 
   NPS[[NodePort Service: port 38080]]
   APP((Web-App Pod))
@@ -129,11 +130,12 @@ flowchart TD
   
   
 
-  subgraph RL["(routing logic)"]
+  subgraph RL["(DNS Server: routing logic)"]
     DNS
   end
 
   subgraph RS [ReplicaSet]
+    direction TB
     APP
     APP2
     APP3
@@ -163,7 +165,7 @@ flowchart TD
   USER[End-User]
   
   PXY[[Proxy-Server: port 80 to 38080]]
-  DNS[[DNS: demo-app to k8s-node-ip]]
+  DNS[[demo-app to k8s-node-ip]]
 
   NPS[[NodePort Service: port 38080]]
   APP((Web-App Pod))
