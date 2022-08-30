@@ -169,8 +169,9 @@ kubectl create -f asdf.yaml
   %% Objects
   %%
   DP(("Deployment
-    affinity: 
-    size:in:Large
+    affinity:
+    size:
+    in:Large
   "))
   LBLG[["label: LARGE"]]
   LBSM[["label: SMALL"]]
@@ -184,5 +185,5 @@ kubectl create -f asdf.yaml
   end
 
   DP --"X: Does not match affinity + label"--> NDB
-  DP -.-> NDA
+  DP --"YES!"--> NDA
 ```
