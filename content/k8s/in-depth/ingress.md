@@ -62,7 +62,11 @@ Per K8s Docs, ["_Kubernetes as a project supports and maintains AWS, GCE and ngi
 ## Ingress Controller as Another Object In the Cluster
 ### Configuration Requirements
 A few things are required:
-- **A ConfigMap**, full of env vars: path to store logs, session timeouts, keep-alive threshold, and more
+- **A ConfigMap**, full of env vars - storing config vars in a configMap allows for toggling congif vars _only_ in this configMap file, not deep in some other pod or deployment def file
+  - path to store logs 
+  - session timeouts 
+  - keep-alive threshold
+  - .... more config vars are available
 - **A Deployment Definition file**, describing the deployment of the nginx-ingress pod
 - **Env Vars** passed to the def file: the pod name and the namespace that it is deployed to
 - **Ports used by the ingress controller**, here 80 (_http_) and 443 (_https_)
@@ -105,6 +109,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
+      # ports used by this ingress controller
       ports:
         - name: http
           containerPort: 80
@@ -121,6 +126,7 @@ metadata:
 ```
 
 ### Service Exposing Ingress Controller to the World
+Exposing this new ingress object to the world with a NodePort Service:
 ```yaml
 apiVersion: v1
 kind: Service
@@ -138,11 +144,15 @@ spec:
       port: 443
       targetPort: 443
   selector:
-    # matches the deployment metadata.name field in deployment config file
+    # matches the deployment metadata.name field in ingress deployment config file - above
     name: nginx-ingress
 ```
 
 ### Service Account Config
+The Ingress controllers have intelligence.  
+The Ingress controllers monitor the K8s cluster for ingress resources.  
+The Ingress controllers configure the underlying nginx server when something changes.  
+The ingress controller requires a service account with "correct" permissions.  
 ```yaml
 apiVersion: v1
 kind: ServiceAccount
@@ -186,6 +196,7 @@ metadata:
   name: ingress-wear-app
 spec:
   rules:
+  # two hosts, 1 service per host
   - host: watch.store.com
     http:
       paths:
