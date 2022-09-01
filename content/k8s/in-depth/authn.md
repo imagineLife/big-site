@@ -22,7 +22,6 @@ Access to hosts should only be used with ssh keys: no un+pw.
   - [Kubernetes leverages TLS for its built-in object communication](#kubernetes-leverages-tls-for-its-built-in-object-communication)
   - [Kubeconfig and Security](#kubeconfig-and-security)
     - [KubeConfig File](#kubeconfig-file)
-      - [Location](#location)
       - [Contents](#contents)
       - [Clusters](#clusters)
       - [Users](#users)
@@ -118,7 +117,6 @@ kubectl get pod
 ```
 
 ### KubeConfig File
-#### Location
 #### Contents
 The Config file has 3 "sections": Clusters, Users, and Contexts.  
 The file can be viewed with redacted contents with `kubectl config view`.  
@@ -128,6 +126,9 @@ Here, a dummy kubeconfig yaml definition:
 ```yaml
 apiVersion: v1
 kind: Config
+# THIS current-context defines the "default" context 
+# when a mult-context config is present
+current-context: my-k8s-admin@my-playground
 clusters:
 - name: my-playground
   cluster:
@@ -148,6 +149,7 @@ contexts:
 ```
 #### Clusters
 The K8s Clusters that I need access to - might be like dev/qa/prod, or cloud-provider specific...   
+Server Specs go here.  
 
 #### Users
 The users with wich I have access to the clusters.  
@@ -155,7 +157,7 @@ Users might have different privileges across different clusters.
 Kubernetes, itself, does not deal with user accounts.  
 Kubernetes gets user data from other places: files, files with certs, ldap services, etc.  
 Service accounts, though, are dealt with and managed by k8s.  
-
+User Keys + Certs data go here.  
 
 #### Contexts
 Define which user account uses which cluster - something like `admin@prod` could be admin user on prod server.  
