@@ -16,6 +16,8 @@ Access to hosts should only be used with ssh keys: no un+pw.
   - [AuthN](#authn)
     - [Focusing On Devs, Admins, and Apps that Get Access](#focusing-on-devs-admins-and-apps-that-get-access)
       - [Leverage Static Files To Hold User AuthN Details](#leverage-static-files-to-hold-user-authn-details)
+        - [Static User Details](#static-user-details)
+        - [Static Token Files](#static-token-files)
   - [AuthZ](#authz)
   - [Kubernetes leverages TLS for its built-in object communication](#kubernetes-leverages-tls-for-its-built-in-object-communication)
   - [Kubeconfig and Security](#kubeconfig-and-security)
@@ -48,16 +50,18 @@ Kubernetes can create and manage serviceaccounts. Those can be used.
 All user access is managed by the apiserver.  
 The kube-apiserver authenticates requests prior to processing the request.  
 #### Leverage Static Files To Hold User AuthN Details
+##### Static User Details
 **Even though these static-file approaches are possible, this is not recommended.**  
 
 Consider using a csv file with 3 cols: pw,un,uid.  
-The filename can be passed as an option to the kube-apiserver....hmm...  
+A 4th column can also exist to assign users to groups.  
+
+The filename can be passed as an option to the kube-apiserver - 
+
 To auth with one of those users:  
 `curl -v -k https://master-node-ip-here:6443/api/v1/pods -u "un:pw"`  
 
-
-A 4th column can exist to assign users to groups.
-
+##### Static Token Files
 Static Token Files can also work:
 ```csv
 tokenval,un1,pw1,grp1
