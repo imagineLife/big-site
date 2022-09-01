@@ -31,6 +31,13 @@ Access to hosts should only be used with ssh keys: no un+pw.
       - [KubeConfig Can Be Updated](#kubeconfig-can-be-updated)
       - [Config Default Namespaces In The KubeConfig File](#config-default-namespaces-in-the-kubeconfig-file)
       - [Options for Cert Data](#options-for-cert-data)
+  - [How To Setup User Auth: Steps](#how-to-setup-user-auth-steps)
+    - [Basic Auth Style](#basic-auth-style)
+      - [Create The Credential File](#create-the-credential-file)
+      - [Edit The Kube-ApiServer Pod Definition File](#edit-the-kube-apiserver-pod-definition-file)
+      - [Create The Role for the user](#create-the-role-for-the-user)
+      - [Create the Role Binding for the user](#create-the-role-binding-for-the-user)
+      - [Authenticate with the cred](#authenticate-with-the-cred)
 
 ## The First Line Of Defense: Protect the Kube-Apiserver
 The kube-apiserver can perform almost all functions. This must be protected.
@@ -210,3 +217,82 @@ For the second example, first convert the cert contents to base64 with something
 NOTE: An encoded val can also be decoded with `encodedstring | base64 --decode`.  
 
 
+
+## How To Setup User Auth: Steps
+### Basic Auth Style
+#### Create The Credential File
+Create a user credential csv file called `user-creds.csv`, with the columns password,username,userId. This goes at `/tmp/users/user-details.csv`:
+```csv
+pw123,userFirst1,u0001
+pw123,userSecond2,u0002
+pw123,userThird3,u0003
+pw123,userFourth4,u0004
+pw123,userFifth5,u0005
+```
+
+#### Edit The Kube-ApiServer Pod Definition File
+The Kube-ApiServer works with a pod def file at `/etc/kubernetes/manifests/kube-apiserver.yaml`. Add the command to the command list to include the user-auth csv created above:
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kube-apiserver
+  namespace: kube-system
+spec:
+  containers:
+  - command:
+    - kube-apiserver
+    # ...more here...
+    # ...more here...
+    # ...more here...
+     - --basic-auth-file=/tmp/users/user-details.csv
+    image: k8s.gcr.io/kube-apiserver-amd64:v1.11.3
+    name: kube-apiserver
+    volumeMounts:
+    - mountPath: /tmp/users
+      name: usr-details
+      readOnly: true
+  volumes:
+  - hostPath:
+      path: /tmp/users
+      type: DirectoryOrCreate
+    name: usr-details
+```
+
+
+#### Create The Role for the user
+```yaml
+apiVersion: rbac/authorization.k8s.io/v1
+kind: Role
+metadtata:
+  namespace: default
+  name: pod-reader
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "watch", "list"]
+```
+
+#### Create the Role Binding for the user
+this will allow the/a user to use the role:
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: read-pods-rb
+  namespace: default
+subjects:
+- kind: User
+  # user HERE MATCHES one of the users from the csv
+  name: userSecond2
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  #one of Role or ClusterRole
+  kind: Role
+  # HERE MATCHES the name of the Role or ClusterRole
+  name: pod-reader bind to
+  apiGroup: rbac.authorization.k8s.io
+```
+
+#### Authenticate with the cred
+`curl -v -k https://localhost:6443/api/v1/pods -u "userSecond2:pw123"`
