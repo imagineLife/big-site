@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/authentication
 author: Jake Laursen
 excerpt: Users Can Gain Access to Clusters Through Kubeconfig Files and Contexts
-tags: Kubernetes, K8s, authentication, users, clusters, certs, 
+tags: Kubernetes, K8s, authentication, users, clusters, certs, diagram
 order: 25
 ---
 
@@ -113,7 +113,7 @@ The Config file has 3 "sections": Clusters, Users, and Contexts.
 The file can be viewed with redacted contents with `kubectl config view`.  
 The file can be `cat` with `cat $HOME/.kube/config`. This one will show full cert auth contents.  
 
-Here, a dummy kubeconfig file: 
+Here, a dummy kubeconfig yaml definition: 
 ```yaml
 apiVersion: v1
 kind: Config
@@ -141,6 +141,10 @@ The K8s Clusters that I need access to - might be like dev/qa/prod, or cloud-pro
 #### Users
 The users with wich I have access to the clusters.  
 Users might have different privileges across different clusters.  
+Kubernetes, itself, does not deal with user accounts.  
+Kubernetes gets user data from other places: files, files with certs, ldap services, etc.  
+Service accounts, though, are dealt with and managed by k8s.  
+
 
 #### Contexts
 Define which user account uses which cluster - something like `admin@prod` could be admin user on prod server.  
@@ -200,3 +204,5 @@ clusters:
 ```
 For the second example, first convert the cert contents to base64 with something like this in the shell: `cat ca.crt | base64`.   
 NOTE: An encoded val can also be decoded with `encodedstring | base64 --decode`.  
+
+
