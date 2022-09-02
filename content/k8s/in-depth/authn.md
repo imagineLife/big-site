@@ -27,9 +27,9 @@ Access to hosts should only be used with ssh keys: no un+pw.
       - [Users](#users)
       - [Contexts](#contexts)
       - [KubeConfig File Used By Kubectl](#kubeconfig-file-used-by-kubectl)
-      - [KubeConfig Can Be Updated](#kubeconfig-can-be-updated)
+      - [Current Context Can Be Updated Through Kubectl and the KubeConfig File](#current-context-can-be-updated-through-kubectl-and-the-kubeconfig-file)
       - [Config Default Namespaces In The KubeConfig File](#config-default-namespaces-in-the-kubeconfig-file)
-      - [Options for Cert Data](#options-for-cert-data)
+      - [Options for Declaring Certificate Data In KubeConfig](#options-for-declaring-certificate-data-in-kubeconfig)
   - [How To Setup User Auth: Steps](#how-to-setup-user-auth-steps)
     - [Basic Auth Style](#basic-auth-style)
       - [Create The Credential File](#create-the-credential-file)
@@ -146,6 +146,8 @@ contexts:
     cluster: my-playground
     # matches users[x].name above
     user: my-k8s-admin
+  # THIS FIELD, namespace, can scope a context to a namespace
+  namespace: dev-space
 ```
 #### Clusters
 The K8s Clusters that I need access to - might be like dev/qa/prod, or cloud-provider specific...   
@@ -169,11 +171,14 @@ Kubectl reads that file.
 Kubectl "knows" which context, from the list, to use.  
 A field could be added to the file as the "default", `current-context: my-k8s-admin@my-playground`, at the root level of the dir.  
 
-#### KubeConfig Can Be Updated
-- `kubectl config use-context new-user@new-context`
+#### Current Context Can Be Updated Through Kubectl and the KubeConfig File
+After updating the kubeconfig file with something like a new context, use kubectl to adjust the "current" context of the cluster:
+- `kubectl config use-context new-user@new-context`  
+This will change the `current-context` field in the kubeconfig yaml file.  
+
 Note: running the `kubectl config` command shows some output describing a bunch of options that can be used with kubectl config:
+
 ```bash
-...
   current-context   Display the current-context
   delete-cluster    Delete the specified cluster from the kubeconfig
   delete-context    Delete the specified context from the kubeconfig
@@ -205,7 +210,7 @@ contexts:
     namespace: the-namespace
 ```
 
-#### Options for Cert Data
+#### Options for Declaring Certificate Data In KubeConfig
 Two ways can be used to leverage cert authority in this KubeConfig file:
 ```yaml
 clusters:
