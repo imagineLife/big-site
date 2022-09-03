@@ -26,8 +26,8 @@ This doc will be in the context of an http REST API:
 - [The Event Loop](#the-event-loop)
   - [TL;DR](#tldr)
   - [T.O.C](#toc)
+  - [Node Parses Files (A Precursor)](#node-parses-files-a-precursor)
   - [Everything Runs In The Event Loop](#everything-runs-in-the-event-loop)
-  - [It Relies On EventEmitters](#it-relies-on-eventemitters)
   - [It Is a Queue](#it-is-a-queue)
   - [On Blocking The Event Loop](#on-blocking-the-event-loop)
   - [The Single Thread to Help Manage Request Volume](#the-single-thread-to-help-manage-request-volume)
@@ -40,17 +40,16 @@ This doc will be in the context of an http REST API:
       - [Identify and Adjust Long-Running Logic Tidbits](#identify-and-adjust-long-running-logic-tidbits)
 - [See It In Action](#see-it-in-action)
 
+
+## Node Parses Files (A Precursor)
+`video: [Node Parses Js Files](https://youtu.be/__QLnreYEYM) youtube: [Node Parses Js Files](https://youtu.be/__QLnreYEYM)`
+Node parses javascript files. That video is reviewing a bit of what happens when node reads a js file.
+
 ## Everything Runs In The Event Loop
 In the "background" of a node process, like a REST API, is a loop that node is running.  
 Node is waiting for events to happen, then processing the events, and returning to the waiting state - restarting this loop.  
 This loop of events is what folks talk about when referencing the event loop.  
 Talking about the event loop, and paying attention to the event loop, might feel like being a fish talking about the water - for devs unfamiliar with the eventloop, this might feel unfamiliar, unimportant, and a waste of time.  
-
-## It Relies On EventEmitters
-[In another post](/node/event-loop/event-emitters) are more details on the EventEmitter, but in a summary:
-- Much of the core node apis (modules) are built using events
-- An instance of an EventEmitter, from the _events_ module, returns are objects
-- An instance of an EventEmitter, in fundamental use, provide us with 2 primary features: named event registration, and event emission
 
 ## It Is a Queue
 When there is a lot going on in a node process, there is a line of events waiting to be called.  
