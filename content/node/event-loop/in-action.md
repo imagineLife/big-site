@@ -19,6 +19,8 @@ order: 4
   - [Some Take-Aways](#some-take-aways)
 
 
+`video: [Intro to the Event Loop](https://youtu.be/3o8pU6cLUNA) youtube: [Intro to the Event Loop](https://youtu.be/3o8pU6cLUNA)`
+
 ## Node Parses Some of the File For Errors
 The first thing node does with a file is "parse" 
 ## How A Few Functions Interact With The Event Loop
