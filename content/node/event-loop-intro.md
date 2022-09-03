@@ -56,6 +56,8 @@ When there is a lot going on in a node process, there is a line of events waitin
 Managing the list of events is a major part of what node does.  
 
 ## On Blocking The Event Loop
+`video: [The Event Loop Can Be Blocked](https://youtu.be/7VuIjsvF0dE) youtube: [The Event Loop Can Be Blocked](https://youtu.be/7VuIjsvF0dE)`  
+
 Check out the [Node Doc](https://nodejs.org/en/docs/guides/dont-block-the-event-loop/) on this topic, as it is well written.  
 Check out [this other post I wrote](/node/event-loop/blocking), too!
 ## The Single Thread to Help Manage Request Volume
