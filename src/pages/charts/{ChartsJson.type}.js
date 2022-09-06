@@ -25,6 +25,10 @@ export default function ChartName({ data: { chartData, chartsSummary } }) {
     chartReducer,
     initialChartState,
   );
+  console.log('drawerOpen')
+  console.log(drawerOpen)
+  
+  if(!chartData) return <p>loading...</p>
 
   return (
     <main className="chart-wrapper">
@@ -36,9 +40,9 @@ export default function ChartName({ data: { chartData, chartsSummary } }) {
         sauce
       </Drawer>
 
-      <h1>{chartData?.title || 'A Chart'}</h1>
-      {chartData?.excerpt && <p>{chartData?.excerpt}</p>}
-      {chartData?.usefor && <p>{chartData?.usefor}</p>}
+      <h1>{chartData.title || 'A Chart'}</h1>
+      {chartData.excerpt && <p>{chartData.excerpt}</p>}
+      {chartData.usefor && <p>{chartData.usefor}</p>}
     </main>
   );
 }

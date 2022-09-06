@@ -4,6 +4,12 @@ import Toc from '../components/TOC';
 import Card from '../components/Card';
 // import './mongo.scss';
 
+/*
+  CONTENTS ARE PICKY HERE
+  the pages that appear as blocks in this node "table of contents" must be ...
+  - markdown
+  - with parentDir as `node/<something-here>`
+*/ 
 const IndexPage = () => (
   <StaticQuery
     query={graphql`

@@ -164,10 +164,10 @@ See that things have been setup correctly:
 
 ```bash
 # start the minikube cluster
-Jakes-4:k8s Jake$ minkube start
+minkube start
 
 # interact with the cluster
-Jakes-4:k8s Jake$ kubectl get po -A
+kubectl get po -A
 NAMESPACE     NAME                               READY   STATUS    RESTARTS      AGE
 kube-system   coredns-6d4b75cb6d-82746           1/1     Running   3 (30h ago)   32h
 kube-system   etcd-minikube                      1/1     Running   3 (24h ago)   32h
@@ -176,8 +176,6 @@ kube-system   kube-controller-manager-minikube   1/1     Running   3 (30h ago)  
 kube-system   kube-proxy-rsnhm                   1/1     Running   3 (30h ago)   32h
 kube-system   kube-scheduler-minikube            1/1     Running   2 (24h ago)   32h
 kube-system   storage-provisioner                0/1     Error     4 (24h ago)   32h
-
-
 
 # 
 kubectl get nodes
