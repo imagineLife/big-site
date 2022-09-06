@@ -77,9 +77,7 @@ tokenval4,un4,pw4,grp1
 ```
 These can be passed to the kubeapi server `--token-auth-file=the-toke-csv-file.csv`.  
 This can be used during a curl to the k8s api server:
-`curl -v -k https://master-node-ip-here:6443/api/v1/pods --header "Authorization: Bearer <a-user-token-here>"`.
-
-The Kube-apiserver is located at `/etc/kubernetes/manifests/kube-apiserver.yaml`.  
+`curl -v -k https://master-node-ip-here:6443/api/v1/pods --header "Authorization: Bearer <a-user-token-here>"`. 
 
 
 ## AuthZ
@@ -238,7 +236,11 @@ pw123,userFifth5,u0005
 ```
 
 #### Edit The Kube-ApiServer Pod Definition File
-The Kube-ApiServer works with a pod def file at `/etc/kubernetes/manifests/kube-apiserver.yaml`. Add the command to the command list to include the user-auth csv created above:
+The Kube-ApiServer works with a pod def file at `/etc/kubernetes/manifests/kube-apiserver.yaml`.  
+The Kube-apiserver is located at `/etc/kubernetes/manifests/kube-apiserver.yaml`.  
+The Kube-apiserver is located at `/etc/kubernetes/manifests/kube-apiserver.yaml`.  
+
+Add the command to the command list to include the user-auth csv created above:
 ```yaml
 apiVersion: v1
 kind: Pod
