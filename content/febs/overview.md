@@ -14,6 +14,7 @@ order: 1
   - [Babel](#babel)
   - [NPM](#npm)
   - [Node](#node)
+- [A Development Approach](#a-development-approach)
     - [Links](#links)
 
 ## A Goal and A Strategy
@@ -48,6 +49,17 @@ NPM hosts a bunch of code (repositiories) that are writtend and 'packaged' up fo
 ### Node
 
 With the node runtime, JS can run on a server. Node is used here to develop an http server. Node is an underlying tech, and a frontend build system hardly writes any core node code.
+
+## A Development Approach
+- build a node server
+- have the node server serve "static content" - html/js/css, a frontend repo
+- build a frontend "system", react + babel + webpack
+  - the "build" step: leveraging webpack to convert react to "production ready" static assets
+  - the "development-friendly" setup, incorporating webpack-dev-server
+  - more options:
+    - react-router "deeper dive" for frontend routing & its impact on serving the app from node
+    - lazy-loading & it's impact on bundle size, performance, etc
+    - integrating typescript (webpack, babel, react, ts)
 
 #### Links
 
