@@ -13,6 +13,8 @@ order: 2
   - [Clusters](#clusters)
   - [A Master Node](#a-master-node)
   - [Worker Nodes](#worker-nodes)
+    - [Worker Kubelets Manage Pod Resource Access](#worker-kubelets-manage-pod-resource-access)
+    - [Worker Kube Proxy Manages Networking](#worker-kube-proxy-manages-networking)
   - [Components](#components)
     - [API Server](#api-server)
     - [ETCD Key Store](#etcd-key-store)
@@ -25,6 +27,7 @@ order: 2
     - [Control Plane Node](#control-plane-node)
     - [Watch Loops](#watch-loops)
     - [DaemonSet](#daemonset)
+    - [Cluster-Wide Tooling Not Available](#cluster-wide-tooling-not-available)
     - [Kube-ApiServer](#kube-apiserver)
     - [Kube-Scheduler](#kube-scheduler)
   - [A Diagram](#a-diagram)
@@ -38,6 +41,7 @@ With Kubernetes, one of the primary goals is to...
 K8s does not deploy containers directly on a worker node, though.  
 Containers are encapsulated in [pods](/k8s/on-pods): single instances of an app or suite of tightly-coupled apps. Pods are the smallest object that can be created/managed in K8s.  
 
+Containers in a pod run in parallel by defaylt.  
 ## Nodes
 A node is a machine, physical or virtual, where K8s is installed. Nodes might be known as minions.  
 
@@ -54,9 +58,18 @@ THe master has both the controller and scheduler on it.
 ## Worker Nodes
 - contain the container runtime, docker here
 - contain containers
+- run the kubelet && kube-proxy
 
 Minions. These host the container runtimes and containers. 
 These have the kubelet agent on them, which is used to interact with the master node.  
+
+### Worker Kubelets Manage Pod Resource Access
+When a pod requires access to `storage`, or `secrets`, or `configMaps`, kubelet makes the access happen.  
+Kubelet also "talks to" the kube-apiserver for registering the pod's state.  
+
+### Worker Kube Proxy Manages Networking
+Manages networking by using IpTables entries.  
+Monitors services & endpoints wuth the userspace mode.  
 
 ## Components
 Installing Kubernetes is installing some "components".
@@ -166,7 +179,9 @@ spec:
           path: /var/lib/docker/containers
 ```
 
-
+### Cluster-Wide Tooling Not Available
+Fluentd, a CNCF project, is used for cluster-wide logging.  
+Prmetheus is often used to gather metrics from nodes & sometimes apps.  
 
 ### Kube-ApiServer
 Central to a K8s Cluster.  
