@@ -30,3 +30,33 @@ A `NodePort` service is used to allow access into a node from the "outside world
 A `LoadBalancer` helps balance the network traffic across recievers.  
 
 Check out [This slide deck](https://speakerdeck.com/thockin/illustrated-guide-to-kubernetes-networking) for another much more verbose look into networking.  
+
+## CNI Config
+K8s is standardizing on the [Container Network Interface](https://github.com/containernetworking/cni) (_CNI_) spec for container networking.  
+This spec
+- relates to other librariers that write plugins
+- configure container networking 
+- remove allocated resources when containers are deleted
+- aims to provide a common interface between networking oclutions + container runtimes
+
+Something like this
+```json
+{
+  "cniVersion": "0.2.0",
+  "name": "this-network",
+  "type": "bridge",
+  "bridge": "cni0",
+  "isGateway": true,
+  "ipMasq": true,
+  "ipam": {
+    "type": "host-local",
+    "subnet": "10.22.0.0/16",
+    "routes": [
+      { "dst": "0.0.0.0/0" }
+    ] 
+  }
+}
+```
+- a linux bridge network
+- named `cni0`
+- gives out an IP in a subnet range `10.22.0.0./16`
