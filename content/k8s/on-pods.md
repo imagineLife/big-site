@@ -43,6 +43,9 @@ order: 4
 Pods are [_"...the smallest deployable units of computing..."_](https://kubernetes.io/docs/concepts/workloads/) that can be made and "managed" by k8s.  
 Pods may look & feel like a composed network of docker containers that, in dockerland, are all working together under a single `docker-compose.yml` file.  
 
+From a networking perspective, a pod can be seen as a VM of physical hosts. The network needs to assign IPs to pods. Kubernetes does not enable pod-to-pod communication availability: "you" have to do that with network config.  
+
+
 ### One or more Containers
 Pods run containers.  
 Pods share storage.  
