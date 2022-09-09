@@ -60,3 +60,14 @@ Something like this
 - a linux bridge network
 - named `cni0`
 - gives out an IP in a subnet range `10.22.0.0./16`
+
+## Pod-To-Pod networking
+CNI does not help across nodes, unfortunately.  
+Tools like GKE, Weave, Flannel, Calico, and Cilium help with making all IPs routable without Network Address Translation (NAT).  
+
+## References
+https://research.google/pubs/pub43438/  
+
+https://www.gcppodcast.com/post/episode-46-borg-and-k8s-with-john-wilkes/  
+
+https://github.com/kubernetes/community
