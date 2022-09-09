@@ -4,7 +4,7 @@ parentDir: k8s
 slug: k8s/architecture-overview
 author: Jake Laursen
 excerpt: Parts of Kubernets - Nodes, Clusters, API Server, and more!
-tags: Kubernetes, K8s, nodes, clusters
+tags: Kubernetes, K8s, nodes, clusters, diagram
 order: 2
 ---
 # Kubernetes Concepts
@@ -21,6 +21,10 @@ order: 2
     - [Controllers](#controllers)
     - [Scheduler](#scheduler)
   - [Kubectl](#kubectl)
+  - [Other Terminology](#other-terminology)
+    - [Watch Loops](#watch-loops)
+    - [DaemonSet](#daemonset)
+  - [A Diagram](#a-diagram)
 
 With Kubernetes, one of the primary goals is to...
 - deploy app(s)
@@ -95,4 +99,99 @@ kubectl cluster-info
 
 # list the nodes in the cluster
 kubectl get nodes
+```
+
+## Other Terminology
+### Watch Loops
+another name for controllers.  
+
+### DaemonSet
+Ensures that all nodes run a copy of a pod.  
+Interesting!  
+An example DaemonSet config file, lifted from the [K8s Docs](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/):   
+```yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: fluentd-elasticsearch
+  namespace: kube-system
+  labels:
+    k8s-app: fluentd-logging
+spec:
+  selector:
+    matchLabels:
+      name: fluentd-elasticsearch
+  template:
+    metadata:
+      labels:
+        name: fluentd-elasticsearch
+    spec:
+      tolerations:
+      # these tolerations are to have the daemonset runnable on control plane nodes
+      # remove them if your control plane nodes should not run pods
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/master
+        operator: Exists
+        effect: NoSchedule
+      containers:
+      - name: fluentd-elasticsearch
+        image: quay.io/fluentd_elasticsearch/fluentd:v2.5.2
+        resources:
+          limits:
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
+        volumeMounts:
+        - name: varlog
+          mountPath: /var/log
+        - name: varlibdockercontainers
+          mountPath: /var/lib/docker/containers
+          readOnly: true
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: varlog
+        hostPath:
+          path: /var/log
+      - name: varlibdockercontainers
+        hostPath:
+          path: /var/lib/docker/containers
+```
+
+
+
+## A Diagram
+```mermaid
+flowchart
+  direction LR
+  KCM["kube-controller-manager"]
+  KSC["kube-scheduler"]
+  KAS["kube-apiserver"]
+  KLT[["kubelet"]]
+  KPX["kube-proxy"]
+  ETC["etcd"]
+
+  KLT2[["kubelet"]]
+  KPX2["kube-proxy"]
+  DCK["docker/cri-o"]
+  IPT["iptables/ipvs"]
+
+  subgraph CPN["control plane (cp) node"]
+    KLT -.->KPX 
+    
+    KAS --> KCM
+    KAS --> KSC
+    KAS --> KLT
+    KAS --> ETC
+  end
+
+  subgraph WKN1["worker node 1"]
+    KAS -..-> KLT2
+    KAS -..-> KPX2
+
+    KLT2 --> DCK
+    KPX2 --> IPT
+  end
 ```
