@@ -36,6 +36,7 @@ order: 4
     - [edit a running pod](#edit-a-running-pod)
     - [Get pod status](#get-pod-status)
   - [Replica Sets](#replica-sets)
+  - [The hidden docker pause container](#the-hidden-docker-pause-container)
   - [Some Big-Picture Takeaways](#some-big-picture-takeaways)
   - [Using VSCode](#using-vscode)
 ## Pods
@@ -491,6 +492,10 @@ spec:
 ```
 
 
+## The hidden docker pause container
+In a pod is a `Docker Pause` container.  
+This is only visible, not "directly" by k8s, but can be seen running `sudo docker ps`.  
+This container is used to get an IP address.  
 ## Some Big-Picture Takeaways
 - The "smallest" unit manageable directly by K8s is the pod: not the container
 - A pod maybe "usually" has 1 container
@@ -499,7 +504,6 @@ spec:
   - first, replicate a pod when the pod resources are getting over-consumed. This will replicate a container in a one-container-per-pod setup
   - second, replicate a node when the node and it's pods are all getting over-consumed
     - start with a new node with one pod, leaving room for more pods in the new node
-
 
 ## Using VSCode
 The [vscode k8s extension](https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools) does great stuff:
