@@ -22,8 +22,11 @@ order: 2
     - [Scheduler](#scheduler)
   - [Kubectl](#kubectl)
   - [Other Terminology](#other-terminology)
+    - [Control Plane Node](#control-plane-node)
     - [Watch Loops](#watch-loops)
     - [DaemonSet](#daemonset)
+    - [Kube-ApiServer](#kube-apiserver)
+    - [Kube-Scheduler](#kube-scheduler)
   - [A Diagram](#a-diagram)
 
 With Kubernetes, one of the primary goals is to...
@@ -102,6 +105,9 @@ kubectl get nodes
 ```
 
 ## Other Terminology
+
+### Control Plane Node
+The K8s master runs servers and manager processes for the cluster: the kube-apiserver, etc. 
 ### Watch Loops
 another name for controllers.  
 
@@ -161,6 +167,15 @@ spec:
 ```
 
 
+
+### Kube-ApiServer
+Central to a K8s Cluster.  
+Handles all calls, actions, validations, etc, both internally and externally.  
+This is the only agent connected to the etcd db.  
+
+### Kube-Scheduler
+Determines which node(s) host which pod(s).  
+Tries to view resource availability.  
 
 ## A Diagram
 ```mermaid
