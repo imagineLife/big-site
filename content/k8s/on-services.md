@@ -24,6 +24,7 @@ I.E. - groups of pods where...
     - [Load Balancer](#load-balancer)
   - [External Communicaton](#external-communicaton)
   - [A Method For Setting Up A Cluster And Services](#a-method-for-setting-up-a-cluster-and-services)
+  - [Services Use Selectors](#services-use-selectors)
   - [Things To Do](#things-to-do)
 ## Types of Services
 ### Node Port
@@ -67,6 +68,14 @@ Here's one way to go about developing pods, replica sets, deployments, and servi
 2. Create [ClusterIP Services](/k8s/cluster-ip-service) to manage communication between nodes
 3. Create [LoadBalancer Services](/k8s/load-balancer-service)
 
+
+## Services Use Selectors
+Services use selectors to "know" which k8s objects to connect to.  
+Two types of selectors work:
+- equality-based
+  - by label key/value pair
+- set-based
+  - like `in`, `notin`, `exists`
 
 ## Things To Do
 - get how many services exist in a namespace
