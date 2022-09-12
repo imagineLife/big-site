@@ -33,12 +33,14 @@ echo "I have ${#hobbies[*]} hobbies"
 Run the file with `. friends.sh`  
 
 ## A While Loop
-make a file `guess-it.sh`:
+Here, a while loop inside a runnable bash script.  
+
+make a file `guess-it.sh`, where the script will live:  
+
 ```bash
-# let syntax
-# let "NUM_TO_GUESS = ${RANDOM} % 10 + 1"
-# shorthand, note the $(())
+# like "let" syntax in js -> let "NUM_TO_GUESS = ${RANDOM} % 10 + 1"
 # NUM_TO_GUESS=$(( $RANDOM % 10 + 1 ))
+# note the $(()), thats a shorthand syntax
 NUM_TO_GUESS=$(( $RANDOM % 10 + 1 ))
 GUESSED_NUM=0
 
@@ -52,9 +54,9 @@ done
 echo "you got it!"
 ```
 
-run it like this...
+run the bash script file like this...
 ```bash
-ubuntu@primary:~$ . guess-it.sh 
+$ . guess-it.sh 
 guess a number between 1 and 10
 your guess: 3
 your guess: 8
