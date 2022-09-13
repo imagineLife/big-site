@@ -23,7 +23,7 @@ hobbies=(coding reading learning writing "hanging with dena")
 echo My third hobby is ${hobbies[2]}
 
 # loop with for-in
-for h in ${hobbies[*]}
+for h in ${hobbies[@]}
   do
 	  echo hobby: $h
   done
