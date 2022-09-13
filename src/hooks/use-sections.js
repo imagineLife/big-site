@@ -12,9 +12,7 @@ const useSections = () => {
           to
           image {
             childImageSharp {
-              fluid {
-                ...GatsbyImageSharpFluid
-              }
+              gatsbyImageData(layout: FULL_WIDTH)
             }
           }
         }
