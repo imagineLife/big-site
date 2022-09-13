@@ -1,20 +1,24 @@
 import React, { Fragment } from 'react';
 import { Link } from 'gatsby';
 import './BlogSectionPreview.scss';
-import GatsbyImage from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 
 function BlogSectionPreview({
   title,
   snippet,
   image: {
-    childImageSharp: { fluid },
+    childImageSharp: { gatsbyImageData },
   },
   to,
 }) {
   let ChildBox = () => (
     <Fragment>
-      {fluid && (
-        <GatsbyImage alt="alt-img" className="full-size-img" fluid={fluid} />
+      {gatsbyImageData && (
+        <GatsbyImage
+          alt="alt-img"
+          className="full-size-img"
+          image={gatsbyImageData}
+        />
       )}
       <div className="text image-overlay">
         <h1>{title || 'Title Here'}</h1>
@@ -22,15 +26,17 @@ function BlogSectionPreview({
       </div>
     </Fragment>
   );
-  let Elm;
+
+  // default
+  let Elm = () => <ChildBox />
+
+  // if a link
   if (to) {
     Elm = () => (
       <Link id={`content-link ${title}`} to={to} className="blog-section">
         <ChildBox />
       </Link>
     );
-  } else {
-    Elm = () => <ChildBox />;
   }
   return <Elm />;
 }
