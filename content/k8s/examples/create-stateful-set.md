@@ -9,11 +9,10 @@ order: 13
 ---
 
 ## The Goal
-2 nodes will be setup - one controlplane and 1 worker.   
-
-In summary -
-- create 6 persistent volumes, named `redis{0-6}`, and put these on the "worker" node
-- create redis persistent volumes
+With 2 nodes setup - one controlplane and 1 worker, put a statefulSet together:  
+- create 6 directories on a worker node, named `redis{0-6}`
+- create pvs connected to the directories created above
+- create pvcs
 - create a service to support this work
 - create the statefulSet
 - perhaps one more redis-specific detail
