@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { StaticQuery, graphql } from 'gatsby';
+import { Helmet } from 'react-helmet';
 import Toc from './../components/TOC';
+
 
 const ScrumChild = () => (
   <>
@@ -57,13 +59,21 @@ const IndexPage = () => (
     `}
     render={({ scrum: { pages } }) => {
       return (
-        <Toc
-          title="Scrum"
-          sub="A Brief collection of writings"
-          pages={pages}
-          childrenTop
-          children={<ScrumChild />}
-        />
+        <Fragment>
+          <Helmet>
+            <title>Thoughts On Scrum</title>
+            <meta name="description" content="A Lightweight Framework" />
+            <meta property="og:title" content="Eric Laursen" />
+            <meta property="og:url" content="http://laursen.tech" />
+          </Helmet>
+          <Toc
+            title="Scrum"
+            sub="A Brief collection of writings"
+            pages={pages}
+            childrenTop
+            children={<ScrumChild />}
+          />
+        </Fragment>
       );
     }}
   />
