@@ -37,7 +37,10 @@ const IndexPage = () => (
         <Fragment>
           <Helmet>
             <title>Linux & Bash Blog</title>
-            <meta name="description" content="A Blog on Learning A Little Bit of Linux and Bash" />
+            <meta
+              name="description"
+              content="A Blog on Learning A Little Bit of Linux and Bash"
+            />
             <meta property="og:title" content="Linux & Bash Blog" />
             <meta property="og:url" content="http://laursen.tech/linux" />
           </Helmet>
@@ -69,6 +72,15 @@ const IndexPage = () => (
                 <Link to={'https://github.com/btholt'}>Brian Holt</Link> and{' '}
                 <Link to={'https://frontendmasters.com'}>FrontendMasters</Link>{' '}
                 for sparking some curiosity here!
+              </sub>
+              <br />
+              <sub>
+                Also, check out{' '}
+                <Link to="https://tldp.org/LDP/abs/html/">
+                  this in-depth set of write-ups
+                </Link>{' '}
+                for another look into bash, including lots more details and
+                nuiance.
               </sub>
             </section>
           </Layout>
