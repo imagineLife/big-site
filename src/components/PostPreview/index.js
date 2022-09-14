@@ -6,8 +6,6 @@ import GatsbyImage from 'gatsby-image';
 const PostPreview = ({ title, slug, excerpt, coverImage, coverAlt }) => {
   const slugString = slug.charAt(0) === '/' ? slug : `/${slug}`;
 
-  // ? slug.replace('strengths/', '')
-  // : slug;
   return (
     <article className="post-preview">
       {/* Optional Preview Image/Link */}
