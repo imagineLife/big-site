@@ -45,5 +45,46 @@ ls
 Escape the worker node terminal ssh sesssion -> `exit`.  
 
 ## Create the PVs
+A few ways to do this.  
+### Create A Handful of yaml files
+```bash
+# create the files
+for idx in $(seq 1 6); do touch "pv$idx.yaml"; done
+
+# populate the files
+```
+
+```yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: redis01
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  hostPath:
+    path: /redis01
+```
+- copy the contents here to the other files, replacing `redis01` with the other indexs
+
+### create the pvs
+```bash
+alias kk=kubectl
+alias kkc="kubectl create"
+
+# one way
+kkc -f redis01.yaml
+kkc -f redis02.yaml
+kkc -f redis03.yaml
+kkc -f redis04.yaml
+kkc -f redis05.yaml
+kkc -f redis06.yaml
+
+# a different way, not 1000% sure here yet 
+for idx in $(seq 1 6); do kkc -f redis0$idx.yaml
+```
 ## Create the Service
 ## Create The StatefulSet
