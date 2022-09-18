@@ -130,6 +130,11 @@ spec:
 ```
 
 ## Storage in Stateful Sets
+A unique detail in a db replica set is that writes only go to the master.  
+This adds some specifity to K8s:
+- a service that exposes the statefulSet can't be "normal" - the service in regular deployments balances requests across nodes
+- a "headless service" is needed here (see [This other doc](/k8s/in-depth/headless-services) for more deets on headless services)
+
 ### All pods share the same vol
 Here, all pods in the stateful set will try to use the same volume:
 ```yaml
