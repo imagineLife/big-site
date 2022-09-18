@@ -18,9 +18,10 @@ Stateful sets, though, ["maintain a sticky identifier"](https://kubernetes.io/do
     - [Starting With A Databse](#starting-with-a-databse)
     - [Add Servers For Higher Availability](#add-servers-for-higher-availability)
     - [The Deployment Order And Instructions Are Critical](#the-deployment-order-and-instructions-are-critical)
-    - [DB With Replicas In K8s](#db-with-replicas-in-k8s)
+    - [DB With Replicas In K8s Require More Specific and Critical Config](#db-with-replicas-in-k8s-require-more-specific-and-critical-config)
   - [May Not Be Needed](#may-not-be-needed)
   - [Consider Stateful Sets For Something Like DB Replicaion](#consider-stateful-sets-for-something-like-db-replicaion)
+    - [Stateful Set K8s Deployment Specifics](#stateful-set-k8s-deployment-specifics)
   - [Definition file](#definition-file)
   - [Storage in Stateful Sets](#storage-in-stateful-sets)
     - [All pods share the same vol](#all-pods-share-the-same-vol)
@@ -69,32 +70,11 @@ flowchart
 ### The Deployment Order And Instructions Are Critical
 In Db replicas, the order of how this whole thing gets built really matters. This is a db-specific detail, not explicitly about K8s or Stateful sets.
 
-### DB With Replicas In K8s
+### DB With Replicas In K8s Require More Specific and Critical Config
 The steps for the deployments, here, need to fit the db requirements.  
 Also, the "ephemeral" nature of kubernetes, without stateful sets, means that any pod + node can be destroyed and recreated without K8s really "caring" about the nodes + pods.  This ephemeral nature goes against the goals of a db replication, because the replicated db instances are critical to the success of a high-availability db setup.  
 
-```mermaid
-flowchart
-  DB["Database Instance"]
-  DB2["Database Instance"]
-  DB3["Database Instance"]
 
-  subgraph MS1["Master DB Instance"]
-    DB
-  end
-
-  subgraph RP1["Replica 1"]
-    DB2
-  end
-
-  subgraph RP2["Replica 2"]
-    DB3
-  end
-
-  ND1["Application Traffic"] ---> MS1
-  MS1 -.-> RP1
-  MS1 -.-> RP2
-```
 
 ## May Not Be Needed
 ["_If an application doesn't require any stable identifiers or ordered deployment, deletion, or scaling, you should deploy your application using a workload object that provides a set of stateless replicas_"](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#using-statefulsets). Go to Deployments or ReplicaSets instead.  
@@ -110,12 +90,13 @@ Build a few new servers.
 - the master db node "knows about" which slave node has the replica data on it
   - **the issue here** is that in K8s land, without stateful sets, this is impossible due to the ephemeral nature of pods
 
+### Stateful Set K8s Deployment Specifics
 With StatefuSets, pods are...
-- created in a sequential order - master could be spun up first, then slave 1, then slave 2
-- assigned indexes, 0-first, by the stateful set
-- get unique names (db-0, db-1, db-2, etc)
+- **created in a sequential order** - master could be spun up first, then slave 1, then slave 2
+- **assigned indexes**, 0-first, by the stateful set
+- **get reliable unique names** (db-0, db-1, db-2, etc)
   - **these names can be relied on!!**
-- given a stable, unique dns record that any app can use to access the pod
+- **given a stable, unique dns record** that any app can use to access the pod
 
 Scaling can be helped here because new pods are cloned from previous instances.  
 Also, on pod termination, the latest pod is deleted first.  
