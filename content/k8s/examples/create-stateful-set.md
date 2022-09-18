@@ -22,12 +22,11 @@ With 2 nodes setup - one controlplane and 1 worker, put a statefulSet together:
 - [TOC](#toc)
 - [Create Directories to Support the PVs](#create-directories-to-support-the-pvs)
 - [Create the PVs](#create-the-pvs)
-  - [Appraoch 1: Create A Handful of yaml files](#appraoch-1-create-a-handful-of-yaml-files)
-  - [Appraoch 1: Create The Pvs](#appraoch-1-create-the-pvs)
-  - [Appraoch 2: Leverage Bash For More Automation](#appraoch-2-leverage-bash-for-more-automation)
+  - [Approach 1: Create A Handful of yaml files](#approach-1-create-a-handful-of-yaml-files)
+  - [Approach 1: Create The Pvs](#approach-1-create-the-pvs)
+  - [Approach 2: Leverage Bash For More Automation](#approach-2-leverage-bash-for-more-automation)
 - [Create the Service](#create-the-service)
 - [Create The StatefulSet](#create-the-statefulset)
-
 
 ## Create Directories to Support the PVs
 Here, create some directories where the data for each persistent volume will live:
@@ -60,7 +59,7 @@ Escape the worker node terminal ssh sesssion -> `exit`.
 A few ways to do this.  
 
 Here, create a bunch of yaml files, and kubectl create the pvs.
-### Appraoch 1: Create A Handful of yaml files
+### Approach 1: Create A Handful of yaml files
 ```bash
 # create the files
 for idx in $(seq 1 6); do touch "pv$idx.yaml"; done
@@ -84,7 +83,7 @@ spec:
 ```
 - copy the contents here to the other files, replacing `redis01` with the other indexs
 
-### Appraoch 1: Create The Pvs
+### Approach 1: Create The Pvs
 ```bash
 alias kk=kubectl
 alias kkc="kubectl create"
@@ -101,8 +100,11 @@ kkc -f redis06.yaml
 for idx in $(seq 1 6); do kkc -f redis0$idx.yaml
 ```
 
-### Appraoch 2: Leverage Bash For More Automation
-Here, linux's [heredoc](linux/heredoc) offers a way to alleviate creating files. Less files to manage, in exchange for another syntax to master.  
+### Approach 2: Leverage Bash For More Automation
+Here, a few bash tools:
+- a [loop](https://www.gnu.org/software/bash/manual/html_node/Looping-Constructs.html)
+- a [sequence](https://man7.org/linux/man-pages/man1/seq.1.html) and the "for" keyword to create the [looping construct](https://www.gnu.org/software/bash/manual/html_node/Looping-Constructs.html) of the "for loop"
+- [heredoc](linux/heredoc) offers a way to alleviate creating files. Less files to manage, in exchange for another syntax to master.  
 ```bash
 for i in $(seq 1 6)
 do
