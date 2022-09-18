@@ -17,6 +17,18 @@ With 2 nodes setup - one controlplane and 1 worker, put a statefulSet together:
 - create the statefulSet
 - perhaps one more redis-specific detail
 
+## TOC
+- [The Goal](#the-goal)
+- [TOC](#toc)
+- [Create Directories to Support the PVs](#create-directories-to-support-the-pvs)
+- [Create the PVs](#create-the-pvs)
+  - [Appraoch 1: Create A Handful of yaml files](#appraoch-1-create-a-handful-of-yaml-files)
+  - [Appraoch 1: Create The Pvs](#appraoch-1-create-the-pvs)
+  - [Appraoch 2: Leverage Bash For More Automation](#appraoch-2-leverage-bash-for-more-automation)
+- [Create the Service](#create-the-service)
+- [Create The StatefulSet](#create-the-statefulset)
+
+
 ## Create Directories to Support the PVs
 Here, create some directories where the data for each persistent volume will live:
 ```bash
@@ -46,7 +58,9 @@ Escape the worker node terminal ssh sesssion -> `exit`.
 
 ## Create the PVs
 A few ways to do this.  
-### Create A Handful of yaml files
+
+Here, create a bunch of yaml files, and kubectl create the pvs.
+### Appraoch 1: Create A Handful of yaml files
 ```bash
 # create the files
 for idx in $(seq 1 6); do touch "pv$idx.yaml"; done
@@ -70,7 +84,7 @@ spec:
 ```
 - copy the contents here to the other files, replacing `redis01` with the other indexs
 
-### create the pvs
+### Appraoch 1: Create The Pvs
 ```bash
 alias kk=kubectl
 alias kkc="kubectl create"
@@ -86,5 +100,28 @@ kkc -f redis06.yaml
 # a different way, not 1000% sure here yet 
 for idx in $(seq 1 6); do kkc -f redis0$idx.yaml
 ```
+
+### Appraoch 2: Leverage Bash For More Automation
+Here, linux's [heredoc](linux/heredoc) offers a way to alleviate creating files. Less files to manage, in exchange for another syntax to master.  
+```bash
+for i in $(seq 1 6)
+do
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: redis0$i
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /redis0$i
+EOF
+done
+```
+
 ## Create the Service
 ## Create The StatefulSet
