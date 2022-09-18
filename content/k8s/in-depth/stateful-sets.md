@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/stateful-sets
 author: Jake Laursen
 excerpt: When Pods rely on other pods, like in replicated dbs, stateful sets can be a helpful tool
-tags: Kubernetes, K8s, data, persistence, volumes
+tags: Kubernetes, K8s, data, persistence, volumes, diagram
 order: 23
 ---
 
@@ -12,6 +12,89 @@ order: 23
 Deployments can manage replicas of pods.  
 Stateful sets can too.  
 Stateful sets, though, ["maintain a sticky identifier"](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) for each of the pods that the set "watches over".  
+
+- [Stateful Sets Are Similar To Deployments](#stateful-sets-are-similar-to-deployments)
+  - [Explanation Through Diagrams](#explanation-through-diagrams)
+    - [Starting With A Databse](#starting-with-a-databse)
+    - [Add Servers For Higher Availability](#add-servers-for-higher-availability)
+    - [The Deployment Order And Instructions Are Critical](#the-deployment-order-and-instructions-are-critical)
+    - [DB With Replicas In K8s](#db-with-replicas-in-k8s)
+  - [May Not Be Needed](#may-not-be-needed)
+  - [Consider Stateful Sets For Something Like DB Replicaion](#consider-stateful-sets-for-something-like-db-replicaion)
+  - [Definition file](#definition-file)
+  - [Storage in Stateful Sets](#storage-in-stateful-sets)
+    - [All pods share the same vol](#all-pods-share-the-same-vol)
+    - [Each Pod Gets Its Own PVC + PV](#each-pod-gets-its-own-pvc--pv)
+
+## Explanation Through Diagrams
+### Starting With A Databse
+Starting small, consider a db being required in a "Full-Stack" application. Here, a DB, lets say mongoDB for those JS and application-first data architecture fans - 
+```mermaid
+flowchart
+  DB["Database Instance"]
+
+  subgraph Server
+    DB
+  end
+```
+
+### Add Servers For Higher Availability
+For more reliability, replication is required for DB resilliancy. New Servers with DBs get setup, and Mongo Replica Sets get introduced (_this is a "high-level" example here._):
+- application-to-db communication go to the now "master" node
+- the "master" node gets replicated to 2 "slave" instances, where the data is cloned
+
+```mermaid
+flowchart
+  DB["Database Instance"]
+  DB2["Database Instance"]
+  DB3["Database Instance"]
+
+  subgraph MS1["Master DB Instance"]
+    DB
+  end
+
+  subgraph RP1["Replica 1"]
+    DB2
+  end
+
+  subgraph RP2["Replica 2"]
+    DB3
+  end
+
+  ND1["Application Traffic"] ---> MS1
+  MS1 -.-> RP1
+  MS1 -.-> RP2
+```
+
+### The Deployment Order And Instructions Are Critical
+In Db replicas, the order of how this whole thing gets built really matters. This is a db-specific detail, not explicitly about K8s or Stateful sets.
+
+### DB With Replicas In K8s
+The steps for the deployments, here, need to fit the db requirements.  
+Also, the "ephemeral" nature of kubernetes, without stateful sets, means that any pod + node can be destroyed and recreated without K8s really "caring" about the nodes + pods.  This ephemeral nature goes against the goals of a db replication, because the replicated db instances are critical to the success of a high-availability db setup.  
+
+```mermaid
+flowchart
+  DB["Database Instance"]
+  DB2["Database Instance"]
+  DB3["Database Instance"]
+
+  subgraph MS1["Master DB Instance"]
+    DB
+  end
+
+  subgraph RP1["Replica 1"]
+    DB2
+  end
+
+  subgraph RP2["Replica 2"]
+    DB3
+  end
+
+  ND1["Application Traffic"] ---> MS1
+  MS1 -.-> RP1
+  MS1 -.-> RP2
+```
 
 ## May Not Be Needed
 ["_If an application doesn't require any stable identifiers or ordered deployment, deletion, or scaling, you should deploy your application using a workload object that provides a set of stateless replicas_"](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#using-statefulsets). Go to Deployments or ReplicaSets instead.  
