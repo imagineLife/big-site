@@ -25,7 +25,7 @@ With 2 nodes setup - one controlplane and 1 worker, put a statefulSet together:
   - [Approach 1: Create A Handful of yaml files](#approach-1-create-a-handful-of-yaml-files)
   - [Approach 1: Create The Pvs](#approach-1-create-the-pvs)
   - [Approach 2: Leverage Bash For More Automation](#approach-2-leverage-bash-for-more-automation)
-- [Create the Service](#create-the-service)
+- [Create a Service for the Stateful Set](#create-a-service-for-the-stateful-set)
 - [Create The StatefulSet](#create-the-statefulset)
 
 ## Create Directories to Support the PVs
@@ -104,7 +104,11 @@ for idx in $(seq 1 6); do kkc -f redis0$idx.yaml
 Here, a few bash tools:
 - a [loop](https://www.gnu.org/software/bash/manual/html_node/Looping-Constructs.html)
 - a [sequence](https://man7.org/linux/man-pages/man1/seq.1.html) and the "for" keyword to create the [looping construct](https://www.gnu.org/software/bash/manual/html_node/Looping-Constructs.html) of the "for loop"
-- [heredoc](linux/heredoc) offers a way to alleviate creating files. Less files to manage, in exchange for another syntax to master.  
+- [heredoc](linux/heredoc) offers a way to alleviate creating files. Less files to manage, in exchange for another syntax to master
+- the "inline" combination of 
+  - the `kubectl apply -f -`, which tells k8s to build the objects
+  - the in-text yaml "file" syntax
+  - a variable in place of the `metadata.name` and `spec.hostPath.path` values (_with the `$i` syntax here_)
 ```bash
 for i in $(seq 1 6)
 do
@@ -125,5 +129,91 @@ EOF
 done
 ```
 
-## Create the Service
+## Create a Service for the Stateful Set
+The statefulSet yaml will refer to this service by name. Because the StateFulSet yaml will refer to this service by name, the service will need be created first - otherwise, the StatefulSet will not succeed.  
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-cluster-service
+spec:
+  ports:
+    - port: 6379
+      name: client
+      targetPort: 6379
+    - port: 16379
+      name: gossip
+      targetPort: 16379
+  selector:
+    app: redis-cluster
+```
+
 ## Create The StatefulSet
+The "big kahuna":  
+- named & labeled
+- includes the serviceName that will service the statefulSet
+- the `spec` section has 3 Key "sub" categories: selector, template, and volumeClaims
+  - `selector`
+  - `template`
+    - here, the container volumes and 
+  - `volumeClaimTemplates`
+    - here, the persistentVolumeClaim data is included
+
+```yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis-cluster
+  labels:
+    run: redis-cluster
+spec:
+  serviceName: redis-cluster-service
+  replicas: 6
+  selector:
+    matchLabels:
+      app: redis-cluster
+  template:
+    metadata:
+      name: redis-cluster
+      labels:
+        app: redis-cluster
+    spec:
+      volumes:
+        - name: conf
+          configMap:
+            name: redis-cluster-configmap
+            defaultMode: 0755
+      containers:
+        - image: redis:5.0.1-alpine
+          name: redis
+          command:
+            - "/conf/update-node.sh"
+            - "redis-server"
+            - "/conf/redis.conf"
+          env:
+          - name: POD_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP
+                apiVersion: v1
+          ports:
+            - containerPort: 6379
+              name: client
+            - name: gossip
+              containerPort: 16379
+          volumeMounts:
+            - name: conf
+              mountPath: /conf
+              readOnly: false
+            - name: data
+              mountPath: /data
+              readOnly: false
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi
+```
