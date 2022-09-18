@@ -26,6 +26,7 @@ Stateful sets, though, ["maintain a sticky identifier"](https://kubernetes.io/do
   - [Storage in Stateful Sets](#storage-in-stateful-sets)
     - [All pods share the same vol](#all-pods-share-the-same-vol)
     - [Each Pod Gets Its Own PVC + PV](#each-pod-gets-its-own-pvc--pv)
+      - [During Pod Failure](#during-pod-failure)
 
 ## Explanation Through Diagrams
 ### Starting With A Databse
@@ -187,15 +188,18 @@ spec:
 ```
 
 ### Each Pod Gets Its Own PVC + PV
-Here, a stateful set can deploy pods that each reference their own pvc, which each is bound to their own pv. Here, what looks nearly identical to a pvc definition file gets added to the statefulset def file under `spec.volumeClaimTemplates`. Note:
-- stateful set creates the first pod
+Here, a stateful set can deploy pods that each reference their own pvc, where each is bound to their own pv.   
+Here, what looks nearly identical to a pvc definition file gets added to the statefulset def file under `spec.volumeClaimTemplates`.  Note:
+- stateful set creates the pods chronologically
   - A Pvc is created for each pod
-  - the pvc is connected to a storageClass
-  - the storageClass provisions a vol on the storage provider, here google
+  - A pvc is connected to a storageClass
+  - The storageClass provisions a vol on the storage provider, here google
   - the storageClass creates a pv
   - the storageClass binds the pv to the pvc
 - those steps repeat for each pod in the replica set, in order
-- **stateful sets** dont delete pvcs during pod failure/recreation - stateful sets maintain "stable storage" for pods
+
+#### During Pod Failure
+**stateful sets** dont delete pvcs during pod failure/recreation. Stateful sets maintain "stable storage" for pods
 
 ```yaml
 apiVersion: apps/v1
@@ -221,6 +225,8 @@ spec:
         volumeMounts:
         - mountPath: /data-root-dir-i-forgot
           name: db-vol
+  # like pvcs, but "templatized" for deployments
+  # 1 pvc for each pod will be created
   volumeClaimTemplates:
   - metadata:
       name: db-vol
