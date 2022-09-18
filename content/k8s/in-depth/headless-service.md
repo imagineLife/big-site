@@ -55,6 +55,7 @@ For pods to work with stateful sets and headless services, 2 fields must be adde
   - this must match the name of the headless service in the service def `metadata.name` - see a pod def file example below
 
 ### Pod Def File To Work With a StatefulSet And A Headless Service
+With this, DNS records get created per pod, with the `hostname` field and the `subdomain` field.  
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -71,7 +72,8 @@ spec:
 ```
 
 ### Deploying a pod via Deployment
-Similar to the pod def file, a deployment would require 2 new fields:
+Similar to the pod def file, a deployment would require new details.  
+The Deployment needs
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -89,10 +91,6 @@ spec:
       labels:
         app: db
     spec:
-      # THIS! must match the headless service metadata.name
-      subdomain: db-h
-      # THIS!
-      hostname: db-pod
       containers:
       - name: mongodb
         image: mongodb:5
@@ -100,7 +98,8 @@ spec:
 
 ### Comparing to a stateful set
 Deploying a stateful set, instead of a deployment, that connects to a headless service - a serviceName needs to be specified for the statefulset.  
-K8s uses the servicename to apply subdomains to its pods:  
+K8s uses the servicename to apply subdomains to its pods, instaed of the `subdomain`+`hostname` field requirements listed above.  
+
 ```yaml
 apiVersion: apps/v1
 kind: StatefulSet
@@ -110,6 +109,7 @@ metadata:
     app: db
 spec:
   # THIS! must match the headless-service metadata.name
+  # this matches the pods in this statefulSet to the headless service
   serviceName: db-h
   replicas: 3
   matchLabels:
