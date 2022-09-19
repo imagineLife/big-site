@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { StaticQuery, graphql, Link } from 'gatsby';
 import Toc from './../components/TOC';
 import Card from './../components/Card';
+import Helmet from 'react-helmet';
 import './mongo.scss';
 
 const IndexPage = () => (
@@ -24,34 +25,48 @@ const IndexPage = () => (
     `}
     render={({ mongodirs: { dirs } }) => {
       return (
-        <Toc sub="Topics" title="MongoDB" childrenTop>
-          <section id="sections-wrapper">
-            {dirs.reduce(
-              (
-                resArr,
-                { overview: { title, excerpt, slug, parentDir } },
-                idx,
-              ) => {
-                if (parentDir && slug.indexOf('/') === slug.lastIndexOf('/')) {
-                  return [
-                    ...resArr,
-                    <Link to={`/${slug}`} key={`mongo-dir-to-${slug}`}>
-                      <Card
-                        key={`mongo-dir-${title}`}
-                        title={title}
-                        content={excerpt}
-                        className="section"
-                      ></Card>
-                    </Link>,
-                  ];
-                } else {
-                  return resArr;
-                }
-              },
-              [],
-            )}
-          </section>
-        </Toc>
+        <Fragment>
+          <Helmet>
+            <title>MongoDB Blog</title>
+            <meta
+              name="description"
+              content="Blog posts on MongoDB"
+            />
+            <meta property="og:title" content="MongoDB Blog" />
+            <meta property="og:url" content="http://laursen.tech/mongo" />
+          </Helmet>
+          <Toc sub="Topics" title="MongoDB" childrenTop>
+            <section id="sections-wrapper">
+              {dirs.reduce(
+                (
+                  resArr,
+                  { overview: { title, excerpt, slug, parentDir } },
+                  idx,
+                ) => {
+                  if (
+                    parentDir &&
+                    slug.indexOf('/') === slug.lastIndexOf('/')
+                  ) {
+                    return [
+                      ...resArr,
+                      <Link to={`/${slug}`} key={`mongo-dir-to-${slug}`}>
+                        <Card
+                          key={`mongo-dir-${title}`}
+                          title={title}
+                          content={excerpt}
+                          className="section"
+                        ></Card>
+                      </Link>,
+                    ];
+                  } else {
+                    return resArr;
+                  }
+                },
+                [],
+              )}
+            </section>
+          </Toc>
+        </Fragment>
       );
     }}
   />
