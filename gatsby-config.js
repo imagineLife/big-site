@@ -141,6 +141,7 @@ const pluginsArr = [
       path: `${__dirname}/content/http-server`,
     },
   },
+  'gatsby-plugin-sitemap'
 ];
   
 if (process.env.NODE_ENV === 'production') {
@@ -173,6 +174,7 @@ module.exports = {
   siteMetadata: {
     title: 'imagineLife',
     description: 'A Place for some content',
+    siteUrl: 'http://laursen.tech'
   },
   plugins: pluginsArr,
 };
