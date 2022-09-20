@@ -15,6 +15,23 @@ Here, some stream-of-consciousness and follow-along notes through a process of l
   - set one up as a k8s worker node
 
 - [Leveraging Google Cloud to Run Kubernetes](#leveraging-google-cloud-to-run-kubernetes)
-  - [](#)
+  - [VM Hardware, OS, and Networking Configurations](#vm-hardware-os-and-networking-configurations)
+    - [GCE Config Details](#gce-config-details)
 
-## 
+## VM Hardware, OS, and Networking Configurations
+Here are some per-vm config details to consider:
+- 2 CPUs
+- 8GB of Ram - a reasonably low amount
+- 25GB of disk on the "master" controlplane node
+- should be accessible by ss (_and potentially http and https, we'll get there_)
+
+
+### GCE Config Details
+During my setup
+- E2 series
+- e2-standard-2 (_2 vCPU, 8 GB memory_)
+- Automatic CPU Platform
+- Boot Disk: 25gb, ubuntu 20.xx (_LTS_)
+- Allowing some firewall details
+- allow access to some cloud apis
+- bunch of other details I did not care about, shot in the dark a bit here
