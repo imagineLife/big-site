@@ -90,8 +90,71 @@ const About = () => (
               being, both in my own life and when working with others. When
               conflict arises, we can learn to leverage one anothers'
               personality tendencies for the best, and take steps toward
-              conflict resolution by pulling out the best in one another.
+              conflict resolution by pulling out the best in one another. (
+              <i>quotes below from gallups site</i>)
             </p>
+            <ul>
+              <li>
+                {' '}
+                <a
+                  href="https://www.gallup.com/cliftonstrengths/en/252293/learner-theme.aspx"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <b>Learner</b>
+                </a>{' '}
+                ...a great desire to learn and want to continuously improve. The
+                process of learning, rather than the outcome... is exciting to
+                me!
+              </li>
+              <li>
+                {' '}
+                <a
+                  href="https://www.gallup.com/cliftonstrengths/en/252278/input-theme.aspx"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <b>Input</b>
+                </a>{' '}
+                ...have a need to collect and archive... information, ideas,
+                artifacts...
+              </li>
+              <li>
+                {' '}
+                <a
+                  href="https://www.gallup.com/cliftonstrengths/en/252215/deliberative-theme.aspx"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <b>Deliberative</b>
+                </a>{' '}
+                ...described by the serious care (I) take in making decisions or
+                choices. (I) anticipate obstacles.
+              </li>
+              <li>
+                {' '}
+                <a
+                  href="https://www.gallup.com/cliftonstrengths/en/252176/command-theme.aspx"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <b>Command</b>
+                </a>{' '}
+                ...have presence. (I) can take control of a situation and make
+                decisions.
+              </li>
+              <li>
+                {' '}
+                <a
+                  href="https://www.gallup.com/cliftonstrengths/en/252134/achiever-theme.aspx"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <b>Achiever</b>
+                </a>{' '}
+                ...work hard to possess a great deal of stamina... take immense satisfactioin in being busy and productive. 
+              </li>
+            </ul>
           </div>
           <div className="figure">
             <img src={strengthsImg} alt="StrengthsFinder advocate" />
