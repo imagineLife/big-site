@@ -19,6 +19,7 @@ Here, some stream-of-consciousness and follow-along notes through a process of l
     - [GCE Config Details](#gce-config-details)
   - [VM K8s Setup](#vm-k8s-setup)
     - [SSH Into the Machine](#ssh-into-the-machine)
+    - [Perhaps a Screeching Halt](#perhaps-a-screeching-halt)
 
 ## VM Hardware, OS, and Networking Configurations
 Here are some per-vm config details to consider:
@@ -40,8 +41,13 @@ During my setup
 - i named my "cp" to resemble "controlplane"
 ## VM K8s Setup
 Once the vm is "setup" by gce, ssh into the machine.
+
 ### SSH Into the Machine
 - navigate to the gce "console": This can be cumbersome and complicated if you've "messed around" a bit with this GCE setup - mine is a "compute engine"
 - There will be a left-hand nav bar with "VM instances" - click that to see a "list" of vms... should be this one 
 - find the "row" that lists this single vm && find the `Connect` header - there should be a bold `SSH` in there - click that!!
 - a new window popped up on mine after waiting a few seconds - thought the thing was broken
+
+### Perhaps a Screeching Halt
+Give the [kubernetes docs](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/) a shot at installing K8s on a GCE VM.  
+I followed some other directions.  
