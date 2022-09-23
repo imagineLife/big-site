@@ -58,8 +58,24 @@ Download a bunch of needed tooling:
 - kubelet 
 - kubeadm 
 - kubectl
+- probably a few more bits too
 
 More:
 - Update the networking to allow traffic between soon-to-be-innards
 - Install, setup, and start containerd
-- 
+- initialize the controlplane node with [kubeadm init](https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-init/)
+  - consider using the [`--pod-network-cidr` cli option](https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-init/#options) to specify a range of IPs for the pod network
+- Setup the kubernetes root user
+  - per the ["Create a cluster with kubeadm" docs, in the "More Information" section](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#more-information)  
+
+```bash
+# make a dir to store the kube config file
+mkdir -p $HOME/.kube
+
+
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+- consider some extra bits
+  - a pod networking tool (_something like calico_)
+  - helm ([the kubernetes "package manager"](https://helm.sh/))
