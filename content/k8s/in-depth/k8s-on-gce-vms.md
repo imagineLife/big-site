@@ -20,6 +20,7 @@ Here, some stream-of-consciousness and follow-along notes through a process of l
   - [VM K8s Setup](#vm-k8s-setup)
     - [SSH Into the Machine](#ssh-into-the-machine)
     - [Perhaps a Screeching Halt](#perhaps-a-screeching-halt)
+    - [A Run-Around on Setting up K8s for a control Plane Node](#a-run-around-on-setting-up-k8s-for-a-control-plane-node)
 
 ## VM Hardware, OS, and Networking Configurations
 Here are some per-vm config details to consider:
@@ -51,3 +52,14 @@ Once the vm is "setup" by gce, ssh into the machine.
 ### Perhaps a Screeching Halt
 Give the [kubernetes docs](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/) a shot at installing K8s on a GCE VM.  
 I followed some other directions.  
+
+### A Run-Around on Setting up K8s for a control Plane Node
+Download a bunch of needed tooling:
+- kubelet 
+- kubeadm 
+- kubectl
+
+More:
+- Update the networking to allow traffic between soon-to-be-innards
+- Install, setup, and start containerd
+- 
