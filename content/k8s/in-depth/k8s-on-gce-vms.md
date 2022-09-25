@@ -86,3 +86,6 @@ Repeat all the steps from the contril plane node.
 Those are, more or less, kubernetes setup directions.  
 Then, the control plane node can be used to provide a "join" command.  
 The "join" command will be used on the worker node to join the worker to the cp node.  
+- on the controlplane node, create a command to use on the worker node: `kubeadm token create --print-join-command`
+- copy the output - this is a "join" command that can be run on the worker node
+- run that on the worker node: `sudo kubeadm join ...(the rest of the command)`
