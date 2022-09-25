@@ -21,6 +21,7 @@ Here, some stream-of-consciousness and follow-along notes through a process of l
     - [SSH Into the Machine](#ssh-into-the-machine)
     - [Perhaps a Screeching Halt](#perhaps-a-screeching-halt)
     - [A Run-Around on Setting up K8s for a control Plane Node](#a-run-around-on-setting-up-k8s-for-a-control-plane-node)
+    - [A Run-Around on Setting up K8s for a worker Node](#a-run-around-on-setting-up-k8s-for-a-worker-node)
 
 ## VM Hardware, OS, and Networking Configurations
 Here are some per-vm config details to consider:
@@ -79,3 +80,9 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 - consider some extra bits
   - a pod networking tool (_something like calico_)
   - helm ([the kubernetes "package manager"](https://helm.sh/))
+
+### A Run-Around on Setting up K8s for a worker Node
+Repeat all the steps from the contril plane node.  
+Those are, more or less, kubernetes setup directions.  
+Then, the control plane node can be used to provide a "join" command.  
+The "join" command will be used on the worker node to join the worker to the cp node.  
