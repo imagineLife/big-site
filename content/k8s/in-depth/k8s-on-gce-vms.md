@@ -80,6 +80,8 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 - consider some extra bits
   - a pod networking tool (_something like calico_)
   - helm ([the kubernetes "package manager"](https://helm.sh/))
+  - configure [k8s bash autocompletion](https://kubernetes.io/docs/tasks/tools/included/optional-kubectl-configs-bash-linux/#bash): `source <(kubectl completion bash)`  
+  - 
 
 ### A Run-Around on Setting up K8s for a worker Node
 Repeat all the steps from the contril plane node.  
@@ -89,3 +91,4 @@ The "join" command will be used on the worker node to join the worker to the cp 
 - on the controlplane node, create a command to use on the worker node: `kubeadm token create --print-join-command`
 - copy the output - this is a "join" command that can be run on the worker node
 - run that on the worker node: `sudo kubeadm join ...(the rest of the command)`
+
