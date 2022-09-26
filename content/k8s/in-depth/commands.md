@@ -68,6 +68,10 @@ Check out the [generated reference docs](https://kubernetes.io/docs/reference/ge
 
 
 ```bash
+
+# show all current "api resource" types that are available
+kubectl api-resources
+
 # 
 # CONFIG
 # 
@@ -108,4 +112,14 @@ kk run api-pod --image=node:alpine --dry-run=client -o yaml > podfile.yaml
 kkg pods --all-namespace
 # all namespaces shorthand
 kkg pods -A
+
+
+# 
+# Taints
+#
+
+# un-taint a node
+# note the "-" at the end removes the taint
+mretfaster@cp:~$ kubectl taint nodes --all node-role.kubernetes.io/control-plane-
+node/cp untainted
 ```
