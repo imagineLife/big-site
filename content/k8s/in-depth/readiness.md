@@ -32,12 +32,13 @@ Applications in containers may not be "ready" but the container, outside of the 
 This can feel misleading
 
 ## Create Readiness Probes for Containers
-Readiness Probe is a familiar term for "real-world" k8s containerized apps to be ready:
-- try building a "ready" api on a web app
+Readiness Probe is a familiar term for "real-world" k8s containerized apps to be ready. K8s will use a custom-defined  readinessProbe to wait until the readinessProbe "tells k8s" that the container within the pod is "ready" via some custom logic we, the container/pod devs, create:  
+
+- try building a "ready" api on a web app (`/healthz` or something)
 - try testing a db connecting with tcp on the default port (_3306 perhaps_)
 - try building a "readiness" script to run on a more back-end-y service
 
-## Configure a ReadinessProve in a pod def file
+## Configure a ReadinessProbe in a pod def file
 With this, K8s does not set the container status to "ready" until k8s gets a successful response from an api
 ```yaml
 apiVersion: v1
