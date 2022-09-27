@@ -9,12 +9,17 @@ order: 32
 ---
 
 # Leveraging Google Cloud to Run Kubernetes 
-Here, some stream-of-consciousness and follow-along notes through a process of levering Google's google cloud setup to...
-- build 2 vms
+Here, some stream-of-consciousness and follow-along notes through a process of levering Google's google cloud setup to run a simple p.o.c k8s cluster.
+
+## An overview of the elements involved
+- A VPC
+  - a ["virtual private cloud" network](https://cloud.google.com/vpc/docs/vpc), _"...a virtual version of a physical network, implemented inside of Google's production network..."_
+- 2 Vms
   - set one up as a k8s controlplane node
   - set one up as a k8s worker node
 
 - [Leveraging Google Cloud to Run Kubernetes](#leveraging-google-cloud-to-run-kubernetes)
+  - [An overview of the elements involved](#an-overview-of-the-elements-involved)
   - [VM Hardware, OS, and Networking Configurations](#vm-hardware-os-and-networking-configurations)
     - [GCE Config Details](#gce-config-details)
   - [VM K8s Setup](#vm-k8s-setup)
@@ -81,7 +86,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
   - a pod networking tool (_something like calico_)
   - helm ([the kubernetes "package manager"](https://helm.sh/))
   - configure [k8s bash autocompletion](https://kubernetes.io/docs/tasks/tools/included/optional-kubectl-configs-bash-linux/#bash): `source <(kubectl completion bash)`  
-  - 
+  - c
 
 ### A Run-Around on Setting up K8s for a worker Node
 Repeat all the steps from the contril plane node.  
