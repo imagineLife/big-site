@@ -88,6 +88,8 @@ Alternative to the web guis, use the cli:
 # helm search hub <val here>
 helm search hub wordpress
 ```
+
+[Artifacthub](https://artifacthub.io) seems to be the growing place to store helm charts - something like the npm repo of k8s configurations.  
 ### Consider alternative helm repositories
 There are a bunch of helm chart repos, like one in bitnami.  
 ```bash
