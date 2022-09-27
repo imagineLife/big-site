@@ -23,6 +23,8 @@ There are patterns:
 - container logging
 - monitoring
 - debugging
+- startupProbe
+  - this one is JUST to protect against containers that have a slow startup, where the liveness + readiness might timeout and trow an error
 
 ## Pod Design
 - labels
