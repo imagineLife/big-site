@@ -113,6 +113,13 @@ kkg pods --all-namespace
 # all namespaces shorthand
 kkg pods -A
 
+# get deployments AND pods, in oneline
+kkg deployment,pod
+
+# get more all at once
+# replicasets, pods, services, endpoints
+# for a list of ALL shortcuts and their types: https://kubernetes.io/docs/reference/kubectl/#resource-types
+kkg deploy,rs,po,svc,ep
 
 # 
 # Taints
