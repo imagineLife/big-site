@@ -21,7 +21,8 @@ order: 14
 - [Build The Project](#build-the-project)
   - [Start with node and a node script](#start-with-node-and-a-node-script)
   - [Assemble the project into a directory](#assemble-the-project-into-a-directory)
-  - [Write The Direction to Create The Image in the Dockerfile](#write-the-direction-to-create-the-image-in-the-dockerfile)
+  - [Write The Directions to Create The Image in the Dockerfile](#write-the-directions-to-create-the-image-in-the-dockerfile)
+  - [Build And Run An Image Using Podman](#build-and-run-an-image-using-podman)
 
 
 ## Build The Project
@@ -78,7 +79,7 @@ toy-node-app
 Now, node can run the process in the directory.  
 Also, container tooling like docker and/or podman in this case can use the Dockerfile in the directory to create an image!
 
-### Write The Direction to Create The Image in the Dockerfile
+### Write The Directions to Create The Image in the Dockerfile
 Fill out the dockerfile.  
 The dockerfile contains directions on how to create an image from the directory.  
 This tells "container-land" (_a joke_) how to make an image.    
@@ -92,4 +93,28 @@ COPY index.js .
 
 # Run the node process
 CMD ["node", "."]
+```
+
+### Build And Run An Image Using Podman
+Without comments, this is 4 lines of functional code - very short!   
+All of these can be done with the terminal session "inside" the node project directory.  
+
+```bash
+# 
+# Get Podman installed
+# 
+# download the tarfile for podman
+$ curl -fsSL -o podman-linux-amd64.tar.gz \https://github.com/mgoltzsche/podman-static/releases/latest/download/podman-linux-amd64.tar.gz
+
+# unzip the file
+$ tar -xf podman-linux-amd64.tar.gz
+
+# copy the output to the 
+$ sudo cp -r podman-linux-amd64/usr podman-linux-amd64/etc /
+
+# use the Dockerfile to build the project image
+# here, tagged toy-node version 1.0
+# NOTE: During this build step, the podman cli currently requests which registry to use
+#   - i use the "docker.io/library/xxx" repo option, as that is the dockerhub repo
+$ sudo podman build -t toy-node:1.0 .
 ```
