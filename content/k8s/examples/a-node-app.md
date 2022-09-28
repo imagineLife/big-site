@@ -117,4 +117,26 @@ $ sudo cp -r podman-linux-amd64/usr podman-linux-amd64/etc /
 # NOTE: During this build step, the podman cli currently requests which registry to use
 #   - i use the "docker.io/library/xxx" repo option, as that is the dockerhub repo
 $ sudo podman build -t toy-node:1.0 .
+
+# VALIDATION
+# see the image on your machine!
+$ sudo podman images
+
+# should show something like...
+REPOSITORY                TAG         IMAGE ID      CREATED         SIZE
+localhost/toy-node        1.0         some-string   1 minute ago    118 MB
+
+
+# 
+# Run the image as a container
+# 
+# - include the localhost prefix, and the ":1.0" tag
+sudo podman run localhost/toy-node:1.0
+
+# TO STOP THE CONTAINER FROM RUNNING FOREVER
+#   open another terminal session to the host machine 
+#   and run...
+#   sudo podman stop localhost/toy-node:1.0
+
+
 ```
