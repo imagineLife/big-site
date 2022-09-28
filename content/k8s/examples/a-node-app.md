@@ -138,5 +138,12 @@ sudo podman run localhost/toy-node:1.0
 #   and run...
 #   sudo podman stop localhost/toy-node:1.0
 
+# find the node output
+sudo find / -name nodeOut.txt
+# will probably output something like...
+# /var/lib/containers/storage/overlay/garbly-gook/diff/nodeOut.txt
+
+# show the output of the file if you'd like!
+# cat <the-directory-path-about>
 
 ```
