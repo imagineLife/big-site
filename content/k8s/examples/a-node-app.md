@@ -3,7 +3,7 @@ title: Create And Deploy An App Using Podman
 parentDir: k8s/examples
 slug: k8s/examples/a-container-with-podman
 author: Jake Laursen
-excerpt: 
+excerpt: A Brief and overly simple example of working a node process through an image-creation lifecycle
 tags: k8s, node, node, podman
 order: 14
 ---
@@ -20,12 +20,15 @@ order: 14
 - [TOC](#toc)
 - [Build The Project](#build-the-project)
   - [Start with node and a node script](#start-with-node-and-a-node-script)
+  - [Assemble the project into a directory](#assemble-the-project-into-a-directory)
+  - [Write The Direction to Create The Image in the Dockerfile](#write-the-direction-to-create-the-image-in-the-dockerfile)
 
 
 ## Build The Project
 ### Start with node and a node script
+Starting with a machine that doesn't even have node on it, install node. This way, the node script can be tested on the machine.  
 Here, a node script that adds 2 random numbers between 1 & 10.  
-NOTE: using `fs.appendFile` like this is not recommended in a production environment.  
+NOTE: using `fs.appendFile` like this is not recommended in a production environment. Using `fs.createWriteStream` would be better for continuously writing to a file - this here is a trivial example, so appendFile it is!  
 
 ```js
 // dependency
@@ -34,7 +37,7 @@ const { appendFile } = require('fs')
 // variables + functions
 const LOWEST = 1;
 const HIGHEST = 10;
-const FILE_PATH_TO_WRITE_TO = './nodeOut.txt'
+const FILE_PATH_TO_WRITE_TO = './nodeOut.txt';
 
 function getRandomBetween({ low, high }) {
   return Math.floor(Math.random() * high) + low;
@@ -59,5 +62,34 @@ setInterval(() => {
   // write to the file
   appendFile(FILE_PATH_TO_WRITE_TO, STRING_TO_PRINT, appendCallback);
 }, 2500);
+```
 
+### Assemble the project into a directory
+In order for this to become an image, lets do some project organizaiton.
+- Put the file into a directory, something sensibly named like `toy-node-process`
+- name the file `index.js`: this allows node to run the file without explicitly naming the file, like `node .` when the terminal session is "in" the `toy-node-process` dir
+- Add a file called `Dockerfile` to the directory - no extensions on the filename, nothing else there besides `Dockerfile`
+The directory should be something like
+```bash
+toy-node-app
+  - index.js
+  - Dockerfile
+```
+Now, node can run the process in the directory.  
+Also, container tooling like docker and/or podman in this case can use the Dockerfile in the directory to create an image!
+
+### Write The Direction to Create The Image in the Dockerfile
+Fill out the dockerfile.  
+The dockerfile contains directions on how to create an image from the directory.  
+This tells "container-land" (_a joke_) how to make an image.    
+
+```Dockerfile
+# start with a pre-made image, node v16 with alpine as the "os", a smaller image than the "node:16" image for this example
+FROM node:16-alpine
+
+# pull the js file into "container-land", at the root of the image dir structure
+COPY index.js .
+
+# Run the node process
+CMD ["node", "."]
 ```
