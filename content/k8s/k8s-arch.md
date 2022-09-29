@@ -25,4 +25,6 @@ order: 17
   - deployments "select" containers by label
   - pods can be more "picky" about which node they get deployed onto with nodeSelectors, which select labels on nodes
   - labels can "group" resources together to meet company + organization needs (_a "frontend" label present on several frontend pods, a "blue/green" set of labels for blue/green deployments for a "growth" team, an "analytics" label for an internal-analytics team across several log pods, etc_)
+  - labels can be used to interact with items via kubectl
+    - `kubectl delete labelKey=labelValue pod`
 - [Multi-Container Pods](/k8s/in-depth/multi-container-pods) are a thing to consider
