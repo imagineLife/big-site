@@ -9,16 +9,18 @@ order: 21
 ---
 
 # Volumes
-- Volumes in Docker
+## Volumes in Docker
   - **containers** are transient: lasting only as long as they are needed
   - **data** in containers gets destroyed
   - **volumes** can be attached to containers to retain data when the container is deleted
 
-- Volumes in K8s
+### Volumes in K8s
   - **pods are transiet** - like containers
   - **volumes** can be attached to a pod
 
 - [Volumes](#volumes)
+  - [Volumes in Docker](#volumes-in-docker)
+    - [Volumes in K8s](#volumes-in-k8s)
   - [A Workflow For Creating a Volume to Persist Data Of A Pod](#a-workflow-for-creating-a-volume-to-persist-data-of-a-pod)
   - [A Trivial Pod With A Volume Attached](#a-trivial-pod-with-a-volume-attached)
   - [Volume Data-Storage Options](#volume-data-storage-options)
@@ -101,6 +103,7 @@ Many `/data` dirs, one per node, would be used. This might not be what the goal 
 
 
 # Introduce Volumes At Scale With Persistent Volumes
+Persistent Volumes, along with Persistent Volume Claims, allow things like pods to "talk to" a persistent volume object. Data that a pod might create (logs, etc.) can be stored in the persistent volume. The Persistent volume can be "bound" to objects like pods.
 ## Pod-Defined Volumes May Not Be Scalable
 Volume Config _can happen in a pod definition file_, as in the above work.  
 With a large env, **this does not scale well.** If many folks are creating pod def files, users will be required to include what seems like redundant config detailing in order to leverage a volume.  
