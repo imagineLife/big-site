@@ -4,23 +4,19 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/vols-and-claims
 author: Jake Laursen
 excerpt: PersistentVolumes, and PersistentVolumeClaims are K8s objects to manage data in the semi-ephemeral state of K8s Pods
-tags: Kubernetes, K8s, data, persistence, volumes
+tags: Kubernetes, K8s, data, persistence, volumes, diagram
 order: 21
 ---
 
 # Volumes
-## Volumes in Docker
-  - **containers** are transient: lasting only as long as they are needed
-  - **data** in containers gets destroyed
-  - **volumes** can be attached to containers to retain data when the container is deleted
-
-### Volumes in K8s
-  - **pods are transiet** - like containers
-  - **volumes** can be attached to a pod
+Volumes are directories.  
+Volumes can be shared between many pods/containers. One Container can access many pods. its a many-to-many potential.  
+Data corruption, due to many pods writing, can happen. Ugh.  
 
 - [Volumes](#volumes)
   - [Volumes in Docker](#volumes-in-docker)
     - [Volumes in K8s](#volumes-in-k8s)
+      - [Volumes Have Access Modes](#volumes-have-access-modes)
   - [A Workflow For Creating a Volume to Persist Data Of A Pod](#a-workflow-for-creating-a-volume-to-persist-data-of-a-pod)
   - [A Trivial Pod With A Volume Attached](#a-trivial-pod-with-a-volume-attached)
   - [Volume Data-Storage Options](#volume-data-storage-options)
@@ -36,6 +32,32 @@ order: 21
   - [Apply a PVC To A Pod](#apply-a-pvc-to-a-pod)
 - [References](#references)
   - [Random Take-Aways](#random-take-aways)
+  - [A Diagram](#a-diagram)
+
+
+
+## Volumes in Docker
+  - **containers** are transient: lasting only as long as they are needed
+  - **data** in containers gets destroyed
+  - **volumes** can be attached to containers to retain data when the container is deleted
+
+### Volumes in K8s
+  - **pods are transiet** - like containers
+  - **volumes** can be attached to a pod
+There are over 20 volume types: NFS, rgb, cloud-provided types - each with a specific set of config details.  
+The Cluster groups & sorts the volumes, grouped by access mode and sorted by vol size, from small to big.  
+
+#### Volumes Have Access Modes
+Volumes Can either be
+- ReadWriteOnce (RWO)
+  - allows read-write by a node
+- ReadWriteMany (RWX)
+  - allows read-write by many nodes
+- ReadOnlyMany (ROX)
+  - allows read-only by many nodes
+
+This mode must Match or be "greater" between the PV and the PVC.  
+
 
 ## A Workflow For Creating a Volume to Persist Data Of A Pod
 - ID the data persistence needs of the pod
@@ -264,3 +286,36 @@ More Topics related to storage:
   - create persistentVolumes
   - create persistentVolumeClaims
   - bind pvcs to pvs
+
+
+## A Diagram
+```mermaid
+  flowchart
+
+    API["Backend API"]
+    LGSV["Logging Service"]
+    APPD[("App Data Store")]
+    LGDB[("Log Data Store")]
+    WRLD["the world"]
+
+    subgraph POD
+      direction LR
+      subgraph APPS["App-layer"]
+        API
+        LGSV
+      end
+      
+      subgraph DBLY["Data-layer"]
+        APPD
+        LGDB
+      end
+
+      %% CONNECTIONS
+      API <-- read-write --> APPD
+      APPD -- read-only --> LGSV
+      LGSV <-- read-write --> LGDB
+    end
+
+    WRLD --> POD
+
+```
