@@ -3,7 +3,7 @@ title: A Biref Review of The Lifecycle of a Persistent Volume in Kubernetes
 parentDir: k8s/in-depth
 slug: k8s/in-depth/persistent-volume-lifecycle
 author: Jake Laursen
-excerpt: 
+excerpt: An Overview of how a persistent volume gets created, bound, used, and options for "end-of-life" handling
 tags: Kubernetes, K8s, volumes, lifecycle
 order: 34
 ---
