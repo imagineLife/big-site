@@ -30,6 +30,7 @@ Data corruption, due to many pods writing, can happen. Ugh.
   - [A PVC Def File](#a-pvc-def-file)
   - [Delete a PVC](#delete-a-pvc)
   - [Apply a PVC To A Pod](#apply-a-pvc-to-a-pod)
+  - [Volume Types In More Depth](#volume-types-in-more-depth)
 - [References](#references)
   - [Random Take-Aways](#random-take-aways)
   - [A Diagram](#a-diagram)
@@ -252,6 +253,34 @@ spec:
         claimName: pvc-claim-for-me
 ```
 
+## Volume Types In More Depth
+There are a [bunch of volume types](https://kubernetes.io/docs/concepts/storage/volumes/) that k8s works with.  
+Some options require external disk configuration via a server or online setup (_maybe obvious after reviewing the options_) -
+- gcePersistentDisk
+  - mount GCE (_google_) disk
+- awsElasticBlockStore
+  - mount EBS (_amazon_) disk
+- emptyDir
+  - an empty directory that lives only as long as the pod does
+- hostPath
+  - connects to the host node's file-system
+  - include an option of a condional ['type' conifg](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath)
+    - DirectoryOrCreate
+    - Directory
+    - FileOrCreate
+    - File
+    - Socket
+    - CharDevice
+    - BlockDevice
+- NFS
+  - a pre-existing Network File System share
+- iSCSI
+  - internet small computer sustem interface
+  - not allowed for multiple writers to write to
+- rbd
+  - rados block device
+- Many others
+ 
 # References
 [Some K8s Docs](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#claims-as-volumes) on applying persistent vols to pods as volumes.  
 There are [many different types of volumes supported by k8s](https://kubernetes.io/docs/concepts/storage):
