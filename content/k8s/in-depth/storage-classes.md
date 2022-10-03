@@ -33,7 +33,8 @@ This is **static provisioning**.
 
 **With Storage Classes**, though, and **dynamic provisioning**
 - a data provisioner can be made (_like google or amazon or whatever_)
-- the provisioner can _automatically create storage_ and attach the storage to pods when a claim is made.
+- the provisioner can _automatically create storage_ and attach the storage to pods when a claim is made.  
+- StorageClasses allow for external storage providers, like GCE, Amazon, or others to create the disk
 
 ```mermaid
 flowchart LR
