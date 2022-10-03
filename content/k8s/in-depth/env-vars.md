@@ -187,6 +187,30 @@ kubectl create configmap my-config-map \
   --from-file=config-map.yaml
 ```
 
+Here, an example of...
+- some trivial files on the os, files that store data
+- several different ways of pulling data into a configmap, all-in-one command
+
+```bash
+# make a handful of files
+$ mkdir pwds
+$ cd pwds
+$ echo my-username > un
+$ echo my-pw > pw
+$ echo my-secret-word > secret-word
+$ cd ..
+$ echo "more text" >> another-file
+
+# make the configmap using a few different methods 
+kubectl create configmap my-configmap \
+# literal input
+--from-literal=whoami=jake \
+# a file with some text
+--from-file=./another-file \
+# a directory containing files with text
+--from-file=./pwds
+```
+
 ### Creating ConfigMaps Declaratively
 ```yaml
 # config-map.yaml
