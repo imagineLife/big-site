@@ -22,14 +22,14 @@ Here, ConfigMaps and Secrets!
     - [Inspecting Config Maps](#inspecting-config-maps)
     - [ConfigMap Tasks](#configmap-tasks)
   - [SecretKey Format](#secretkey-format)
-    - [Why Secrets Instead of ConfigMaps](#why-secrets-instead-of-configmaps)
+    - [Why Secrets Instead of ConfigMaps or Volumes](#why-secrets-instead-of-configmaps-or-volumes)
     - [Creating Secrets Imperatively](#creating-secrets-imperatively)
     - [Creating Secrets Declaratively](#creating-secrets-declaratively)
       - [Encoding and Decoding Values with linux](#encoding-and-decoding-values-with-linux)
       - [A Secrets yaml def](#a-secrets-yaml-def)
     - [See Secret Obejcts](#see-secret-obejcts)
     - [Config a Secrets Object with a Pod](#config-a-secrets-object-with-a-pod)
-    - [Secreet Things To Be Able To Do](#secreet-things-to-be-able-to-do)
+    - [Secret Things To Be Able To Do](#secret-things-to-be-able-to-do)
     - [Secrets and Security](#secrets-and-security)
 
 Start with a pod definition file
@@ -71,7 +71,7 @@ spec:
 
 ## ConfigMap Format
 Here, env var values are pulled out from the object definition file into a unique definition file.  
-The separate env var file is then _referenced_ in the env object. 
+The separate env var file is then _referenced_ in the pod's env object. 
 
 Here, an external configMap file is referenced for a single env var ->
 ```yaml
@@ -234,9 +234,11 @@ kubectl get pod horse-pod -o yaml > horse.yaml
 
 ## SecretKey Format
 
-### Why Secrets Instead of ConfigMaps
-Config Maps are cleartext.  
-Secrets are encoded!  
+### Why Secrets Instead of ConfigMaps or Volumes
+Vlumes store storage - the data is not necesarily encrypted.  
+Config Maps store cleartext.  
+
+Secrets, though, are encoded!  
 
 ### Creating Secrets Imperatively
 This syntax is very similar to the configmap syntax:  
@@ -353,13 +355,20 @@ spec:
       image: simple-webapp-color
       ports:
         - containerPort: 8080
-      volumes:
-        - name: app-secret-vol
-          secret:
-            secretName: horse-secret
+      volumeMounts:
+      - mountPath: /dog
+        name: mounted-dog
+  volumes:
+    - name: app-secret-vol
+      secret:
+        secretName: horse-secret
+```
+Here, the secret that is mounted as a vol can be inspected through the kubectl cli:  
+```bash
+kubectl exec -it demo-pod-webapp -- cat /dog/<the-secret-here>
 ```
 
-### Secreet Things To Be Able To Do
+### Secret Things To Be Able To Do
 Find how many secret objects in an env:
 ```bash
 kubect get secrets
