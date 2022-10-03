@@ -236,6 +236,12 @@ kubectl rollout history deployment/<dep-name>
 
 # go to previous rollout
 kubectl rollout undo deployment/<dep-name>
+
+# pause one!
+kubectl rollout pause deployment/<dep-name>
+
+# restart/resume the deployment
+kubectl rollout resume deployment/<dep-name>
 ```
 
 
