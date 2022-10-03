@@ -209,6 +209,19 @@ kubectl create configmap my-configmap \
 --from-file=./another-file \
 # a directory containing files with text
 --from-file=./pwds
+
+
+# 
+# check out configmap output in yaml!
+# 
+kubectl get configmap my-configmap -o yaml
+
+# should ouput...
+apiVersion: v1
+data:
+  whoami: |
+    jake
+# etc
 ```
 
 ### Creating ConfigMaps Declaratively
@@ -390,6 +403,10 @@ spec:
 Here, the secret that is mounted as a vol can be inspected through the kubectl cli:  
 ```bash
 kubectl exec -it demo-pod-webapp -- cat /dog/<the-secret-here>
+
+# another way
+# -c <this> is the container name
+kk exec -c simple-webapp -it demo-pod-webapp -- /bin/bash -c 'cat /dog/<the-secret-here>'
 ```
 
 ### Secret Things To Be Able To Do
