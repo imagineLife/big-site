@@ -21,6 +21,9 @@ order: 22
     - [Adjust the Persistent Volume Claim to Point To The Storage Class](#adjust-the-persistent-volume-claim-to-point-to-the-storage-class)
   - [Data Volume Provisioners](#data-volume-provisioners)
   - [Other Storage Class Parameter To Consider](#other-storage-class-parameter-to-consider)
+  - [An Example, Leveraging An NFS Mount](#an-example-leveraging-an-nfs-mount)
+    - [The PV Definition](#the-pv-definition)
+    - [The PVC Def](#the-pvc-def)
 - [An Example, StorageClasses By "Tier"](#an-example-storageclasses-by-tier)
   - [Bronze](#bronze)
   - [Silver](#silver)
@@ -188,6 +191,45 @@ There are many providers for data volumes:
 
 ## Other Storage Class Parameter To Consider
 Disk Type, replication Type, etc.  
+
+## An Example, Leveraging An NFS Mount
+For Background
+- one node (i.e the controlplane node) has an nfs server built into the node, making some directories & files available through nfs
+- another node (i.e a worker node), with expected nfs tooling installed, should be able to access the controlplanes node
+### The PV Definition
+```yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pvvol-1
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+  - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    # the shared path from the nfs server
+    path: /opt/sfw
+    # the NAME or the IP of the controlplane node here
+    server: controlplanenode
+    readOnly: false
+```
+
+### The PVC Def
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-pvc
+spec:
+  accessModes:
+  # match the pv, don't forget!
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 200Mi
+```
 
 # An Example, StorageClasses By "Tier"
 Here, 3 "tiers" of storage class could be developed, with varying attributes to "match" the tier. Then, some less-cumbersome language can be used to describe the storage obejcts (_bronze, silver, and gold_).  
