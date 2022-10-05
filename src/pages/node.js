@@ -32,6 +32,18 @@ const IndexPage = () => (
       return (
         <Fragment>
           <Toc sub="Topics" title="NodeJS" childrenTop>
+            <section id="notes">
+              <p>
+                While studying for and becoming an{' '}
+                <Link
+                  target="_blank"
+                  to="https://training.linuxfoundation.org/certification/verify/"
+                >
+                  OpenJS Node.js Application Developer
+                </Link>
+                through the linux foundation, I did a lot of writing - this is a brief set of notes:
+              </p>
+            </section>
             <section id="sections-wrapper">
               {dirs.reduce(
                 (

@@ -28,14 +28,24 @@ const IndexPage = () => (
         <Fragment>
           <Helmet>
             <title>MongoDB Blog</title>
-            <meta
-              name="description"
-              content="Blog posts on MongoDB"
-            />
+            <meta name="description" content="Blog posts on MongoDB" />
             <meta property="og:title" content="MongoDB Blog" />
             <meta property="og:url" content="http://laursen.tech/mongo" />
           </Helmet>
           <Toc sub="Topics" title="MongoDB" childrenTop>
+            <section id="notes">
+              <p>
+                While studying for and becoming a{' '}
+                <Link
+                  target="_blank"
+                  to="https://university.mongodb.com/certified_professional_finder/certified_professionals/793573?name=laursen"
+                >
+                  MongoDB Certified Developer
+                </Link>
+                , I did a lot of writing - here's some topics!
+              </p>
+            </section>
+            <br />
             <section id="sections-wrapper">
               {dirs.reduce(
                 (
