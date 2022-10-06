@@ -10,7 +10,8 @@ order: 26
 
 
 # There Is A Kubernetes Api Server
-Check out the 
+Check out the [K8s docs](https://kubernetes.io/docs/reference/access-authn-authz/authentication/) for more.  
+
 There are a bunch of endpoints that can be accessed at `curl https://kube-master-node-ip:6443/<many-endpoints>`:
 - metrics
   - monitor health of cluster
@@ -25,6 +26,10 @@ There are a bunch of endpoints that can be accessed at `curl https://kube-master
 
 
 - [There Is A Kubernetes Api Server](#there-is-a-kubernetes-api-server)
+  - [Access to the api is protected](#access-to-the-api-is-protected)
+    - [Authentication](#authentication)
+    - [Authorization](#authorization)
+    - [Admission Controls](#admission-controls)
   - [Use Auth When requesting to the api](#use-auth-when-requesting-to-the-api)
     - [Note Differences Between Kube Proxy and Kubectl Proxy](#note-differences-between-kube-proxy-and-kubectl-proxy)
   - [Apis Responsible For Cluster Functionality](#apis-responsible-for-cluster-functionality)
@@ -36,6 +41,28 @@ There are a bunch of endpoints that can be accessed at `curl https://kube-master
       - [Prior Version Maintenance SChedules](#prior-version-maintenance-schedules)
       - [Use Kubectl Convert to get new apis](#use-kubectl-convert-to-get-new-apis)
   - [Todo](#todo)
+
+
+## Access to the api is protected
+Through a 3-stage process of authentication, authorization, and admission controls. (_Check out the [K8s docs](https://kubernetes.io/docs/concepts/security/controlling-access/) on this for more_).  
+
+### Authentication
+- certs
+- tokens
+- username+password
+- users are managed elsewhere, not created in k8s
+- webhooks can varify bearer tokens & oidc providers
+Some Auth settings defined in the `kube-apiserver` file are
+- `--basic-auth-file`
+- `--oidc-issuer-url`
+- `--token-auth-file`
+- `authorization-webhook-config-file`
+
+
+
+### Authorization
+
+### Admission Controls
 
 
 ## Use Auth When requesting to the api
