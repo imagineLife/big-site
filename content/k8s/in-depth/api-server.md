@@ -29,6 +29,7 @@ There are a bunch of endpoints that can be accessed at `curl https://kube-master
   - [Access to the api is protected](#access-to-the-api-is-protected)
     - [Authentication](#authentication)
     - [Authorization](#authorization)
+      - [A Note On RBAC](#a-note-on-rbac)
     - [Admission Controls](#admission-controls)
   - [Use Auth When requesting to the api](#use-auth-when-requesting-to-the-api)
     - [Note Differences Between Kube Proxy and Kubectl Proxy](#note-differences-between-kube-proxy-and-kubectl-proxy)
@@ -61,6 +62,22 @@ Some Auth settings defined in the `kube-apiserver` file are
 
 
 ### Authorization
+3 modes of authorization:
+- node
+- rbac
+- webhook
+
+These settings can be config'd in the `kube-apiserver` file:
+- `--authorization-mode=Node,RBAC` or something like `--authorization-mode=Webhook`
+
+#### A Note On RBAC
+RBAC seems to be the preferred authz method.  
+Note the [K8s Docs on RBAC Auth](https://kubernetes.io/docs/reference/access-authn-authz/rbac/).  
+- figure out the namespace the user needs access to
+- create cert creds for the user
+- set creds of the user+namespace with a context
+- create a role associated with the user's tasks
+- bind the user to the role
 
 ### Admission Controls
 
