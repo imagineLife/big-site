@@ -18,6 +18,7 @@ Say, for an example, a docker container is running that just .... runs sleep for
   - [Docker Containers Relate to the Host](#docker-containers-relate-to-the-host)
   - [Setting Docker Container Security Settings](#setting-docker-container-security-settings)
   - [Things to be able to do](#things-to-be-able-to-do)
+  - [The Deprecated PSP](#the-deprecated-psp)
 
 ## Root Users Can Do Anything
 Linux has users.  
@@ -58,6 +59,11 @@ docker run --cap-add NET_ADMIN alpine sleep 20000
 ```
 
 ## Setting Docker Container Security Settings  
+[K8s docs on the topic](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
+- The description of security constrainst is called a "security context" and leverage the `securityContext` setting in yaml defintions
+- security contexts can be set on a pod and on a container
+- linux settings are set at the container level
+
 Pod-Level Settings:
 ```yaml
 apiVersion: v1
@@ -70,6 +76,7 @@ spec:
       image: alpine
       command: ["sleep", "200000"]
   # THIS! sibline of containers line
+  # security at the pod level
   securityContext:
     # set user ID on the pod
     runAsUser: 1000
@@ -86,9 +93,9 @@ spec:
     - name: alpine
       image: alpine
       command: ["sleep", "200000"]
-  # THIS! sibline of container args lines
+      # THIS! sibline of container args lines
+      # security at the container level
       securityContext:
-        # set user ID on the pod
         runAsUser: 1000
         # AND the container-level can include specific capability deets
         capabilities:
@@ -122,3 +129,7 @@ spec:
      name: sidecar
      command: ["sleep", "5000"]
 ```
+
+## The Deprecated PSP
+[K8s docs on the deprecation](https://kubernetes.io/blog/2021/04/06/podsecuritypolicy-deprecation-past-present-and-future/).  
+This was used to set security details on pods.  
