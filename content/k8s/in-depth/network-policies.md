@@ -33,8 +33,10 @@ flowchart LR
     - [Allow Traffic from non-pod I.P addresses](#allow-traffic-from-non-pod-ip-addresses)
   - [Network Policies are Enforced by the networking solutions](#network-policies-are-enforced-by-the-networking-solutions)
     - [Egress Definitions](#egress-definitions)
+  - [A Deny-All Ingress Policy](#a-deny-all-ingress-policy)
   - [Some Takeaways](#some-takeaways)
   - [Things to do](#things-to-do)
+  - [Open-Source Netowrk Policy Recipes](#open-source-netowrk-policy-recipes)
 
 ## Kubernetes default allow-all policy
 Kubernetes applies an "allow-all" networking policy between objects.  
@@ -245,6 +247,18 @@ spec:
         port: 80
 ```
 
+## A Deny-All Ingress Policy
+This can be one way to lock-down network traffic, and require all network traffic between pods to be explicity: egress and ingress.
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: 
+  name: default-deny-ingress
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+```
 
 ## Some Takeaways
 - Network Policies are enforced by the networking tool (see above)
@@ -287,3 +301,16 @@ spec:
     - protocol: TCP
       port: 3306
 ```
+## Open-Source Netowrk Policy Recipes
+[Here!](https://github.com/ahmetb/kubernetes-network-policy-recipes):
+- Deny
+  - via whitelise
+  - from other namespaces
+- Limit
+- Allow
+  - to
+    - apps in a namespace
+    - certain ports
+  - from
+    - a namespace
+    - external clients
