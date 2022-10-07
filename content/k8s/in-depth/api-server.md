@@ -29,8 +29,9 @@ There are a bunch of endpoints that can be accessed at `curl https://kube-master
   - [Access to the api is protected](#access-to-the-api-is-protected)
     - [Authentication](#authentication)
     - [Authorization](#authorization)
-      - [A Note On RBAC](#a-note-on-rbac)
+      - [A Few Notes On RBAC](#a-few-notes-on-rbac)
     - [Admission Controls](#admission-controls)
+      - [Dynamic Admission Controllers](#dynamic-admission-controllers)
   - [Use Auth When requesting to the api](#use-auth-when-requesting-to-the-api)
     - [Note Differences Between Kube Proxy and Kubectl Proxy](#note-differences-between-kube-proxy-and-kubectl-proxy)
   - [Apis Responsible For Cluster Functionality](#apis-responsible-for-cluster-functionality)
@@ -70,16 +71,30 @@ Some Auth settings defined in the `kube-apiserver` file are
 These settings can be config'd in the `kube-apiserver` file:
 - `--authorization-mode=Node,RBAC` or something like `--authorization-mode=Webhook`
 
-#### A Note On RBAC
+#### A Few Notes On RBAC
 RBAC seems to be the preferred authz method.  
 Note the [K8s Docs on RBAC Auth](https://kubernetes.io/docs/reference/access-authn-authz/rbac/).  
 - figure out the namespace the user needs access to
 - create cert creds for the user
 - set creds of the user+namespace with a context
 - create a role associated with the user's tasks
+  - see [this other post](/k8s/in-depth/authorization) for way more details on roles and authorization as a whole
 - bind the user to the role
+- ALL resources are api objects in K8s: roles, rolebindings, etc.
+- 
 
 ### Admission Controls
+- software
+- this can access, modify, and/or validate contents of objects being CRUD by api requests
+- this can deny the api request when above validation fails
+SEttings like these can be set for the kube-apiserver:
+```bash
+--enable-admission-plugins=LimitRanger,NamespaceLifecycle
+--disable-admission-plugins=PodNodeSelector
+```
+#### Dynamic Admission Controllers
+[K8s Docs](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/).  
+These are http callbacks that get requests & do something with them. Validation and mutating are the two types.    
 
 
 ## Use Auth When requesting to the api
