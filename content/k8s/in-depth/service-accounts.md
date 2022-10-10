@@ -13,10 +13,10 @@ According to the [K8s docs](https://kubernetes.io/docs/tasks/configure-pod-conta
 `A service account provides an identity for processes that run in a Pod.`  
 
 There are two Types of accounts in K8s:
-- User accounts are used by humans
+- **User accounts** are used by humans
   - an admin accesses a cluster
   - a dev accesses the cluster to deploy an app
-- Service accounts are used by machines
+- **Service accounts** are used by machines
   - an app accesses a cluster (_prometheus_)
   - jenkins deploys apps after pipelines
 
@@ -42,6 +42,7 @@ Here, the service account would be used by the app to "talk to" the cluster and 
   - [Hosting A K8s App In A Cluster That Uses A Service Account](#hosting-a-k8s-app-in-a-cluster-that-uses-a-service-account)
     - [Leverage the Default Service Account and Default Secret](#leverage-the-default-service-account-and-default-secret)
   - [An Example Of A Dashboard App Pod And A Service Account](#an-example-of-a-dashboard-app-pod-and-a-service-account)
+  - [Binding A Service Account To A Cluster Role](#binding-a-service-account-to-a-cluster-role)
   - [Things to be able to do](#things-to-be-able-to-do)
 ## Create a Service Account
 ```yaml
@@ -211,6 +212,62 @@ kubectl exec my-kubernetes-dashboard -- cat /var/run/secrets/kubernetesviceaccou
 # returns
 eyJhbGciOiJSUzI1NiIsImtpZCI6Il8tOTNrdTloSUpLSEZmazg2NE40enBHZUYxTXJQM1hrbERscTMwb0hINWsifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWwiXSwiZXhwIjoxNjg5MzQwOTYyLCJpYXQiOjE2NTc4MDQ5NjIsImlzcyI6Imh0dHBzOi8va3ViZXJuZXRlcy5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJkZWZhdWx0IiwicG9kIjp7Im5hbWUiOiJteS1rdWJlcm5ldGVzLWRhc2hib2FyZCIsInVpZCI6IjZhMjQ1NDJkLWQ4YTEtNDk0Yy1hZGI1LTA5ZThiNDA0MjA5MyJ9LCJzZXJ2aWNlYWNjb3VudCI6eyJuYW1lIjoiZGVmYXVsdCIsInVpZCI6ImI0YThhY2VlLWUyOTItNGZiMi05NmE3LTE5YmVhYmViMWExYSJ9LCJ3YXJuYWZ0ZXIiOjE2NTc4MDg1Njl9LCJuYmYiOjE2NTc4MDQ5NjIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpkZWZhdWx0OmRlZmF1bHQifQ...more...
 
+```
+
+
+## Binding A Service Account To A Cluster Role
+A Service Account definition file
+```yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: secrets-account
+```
+
+A ClusterRole Definition File
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: get-secrets-role
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - secrets:
+  verbs:
+  - get
+  - list
+```
+
+A RoleBinding Definition File
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: secrets-role-binding
+subjects:
+- kind: ServiceAcount
+  name: secrets-account
+roleRef:
+  kind: ClusterRole
+  name: get-secrets-role
+  apiGroup: rbac.authorization.k8s.io  
+```
+
+Adding this service account to a pod:
+- edit a pod def file...
+```yaml
+# ...
+spec:
+  # add this line!
+  serviceAccountName: secrets-account
+# ...
+```
+
+One way to see that this service account is connected to a pod is by 
+```bash
+kubectl get pod secrets-pod -o yaml | grep serviceAccount
 ```
 
 
