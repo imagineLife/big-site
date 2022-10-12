@@ -189,6 +189,7 @@ say more pods are needed.
 - OR
 - another "advanced" way based on load
 
+**NOTE**: `kubectl replace` is an interesting and rarely referenced command.
 
 ## Takeaways
 - `kubectl create -f replicated-def.yml`
