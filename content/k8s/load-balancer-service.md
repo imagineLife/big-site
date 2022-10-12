@@ -12,6 +12,9 @@ order: 11
 Sit between the "frontend" apps and the world.  
 NodePorts accept traffic on ports.  
 Users need 1 url to access frontend apps.  
+- The passes requests to cloud providers
+- The Address that is created becomes available to the public
+- Traffic is spread across pods (_balancing the network load_)
 
 ## 3rd Party Clouds Support LoadBalancers
 
