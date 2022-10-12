@@ -61,15 +61,8 @@ const About = () => (
                 networking, ConfigMaps...
               </li>
               <li>
-                {' '}
-                <a
-                  href="https://github.com/imagineLife/frontendpipeline"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <b>CI/CD Automated pipelines</b>:
-                </a>{' '}
-                building & deploying automated ci/cd "pipelines"
+                <b>CI/CD Automated pipelines</b>: building & deploying automated
+                ci/cd "pipelines"
               </li>
               <li>
                 <b>keeping up on some node chops</b>: some small projects on
@@ -152,7 +145,8 @@ const About = () => (
                 >
                   <b>Achiever</b>
                 </a>{' '}
-                ...work hard to possess a great deal of stamina... take immense satisfactioin in being busy and productive. 
+                ...work hard to possess a great deal of stamina... take immense
+                satisfactioin in being busy and productive.
               </li>
             </ul>
           </div>
