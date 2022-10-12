@@ -51,12 +51,8 @@ const Index = () => {
             </Link>{' '}
             of work including web apps, technologies, and certifications
           </p>
-          {/* <Link to="">Developing Engineer Competencies toward career growth</Link> */}
           <footer className="flex-col">
             <Link to="/misc">Miscellaneous</Link>
-            {/* <Link to="/charts">
-              Charts: A Growing folio of data visualization work
-            </Link> */}
           </footer>
         </main>
       </Layout>
