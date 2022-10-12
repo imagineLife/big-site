@@ -20,3 +20,19 @@ Users need 1 url to access frontend apps.
 
 - [LoadBalancer](#loadbalancer)
   - [3rd Party Clouds Support LoadBalancers](#3rd-party-clouds-support-loadbalancers)
+  - [Dont Forget about ExternalName Services](#dont-forget-about-externalname-services)
+
+## Dont Forget about ExternalName Services
+[K8s docs](https://kubernetes.io/docs/concepts/services-networking/service/#externalname)    
+These map a service to a dns name.   
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: external-svc
+  namespace: production
+spec:
+  type: ExternalName
+  externalName: my.database.example.com
+```
