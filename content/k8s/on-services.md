@@ -25,6 +25,8 @@ I.E. - groups of pods where...
   - [External Communicaton](#external-communicaton)
   - [A Method For Setting Up A Cluster And Services](#a-method-for-setting-up-a-cluster-and-services)
   - [Services Use Selectors](#services-use-selectors)
+  - [Use kubectl expose to create a service for a deployment](#use-kubectl-expose-to-create-a-service-for-a-deployment)
+  - [Services can be made without selectors](#services-can-be-made-without-selectors)
   - [Things To Do](#things-to-do)
 ## Types of Services
 ### Node Port
@@ -76,6 +78,26 @@ Two types of selectors work:
   - by label key/value pair
 - set-based
   - like `in`, `notin`, `exists`
+
+## Use kubectl expose to create a service for a deployment
+```bash
+kubectl get deployments
+# say there's a deployment called frontend
+
+# create the service for the deployment!
+kubectl expose deployment/frontend --port=80 --type=NodePort
+
+kubectl get svc frontend -o yaml
+# will return a yaml def of the service!
+```
+Expose can take some args:
+- port
+- targetPort
+
+## Services can be made without selectors
+Perhaps a deploymenet is not ready, but the goals of the service are ready.  
+Create the service without the deployment.  
+Services could also "point to" another service! interesting. 
 
 ## Things To Do
 - get how many services exist in a namespace
