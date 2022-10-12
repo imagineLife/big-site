@@ -12,12 +12,15 @@ order: 10
 The ClusterIP service is...
 - an object
 - acts as a "middleman" between replica pods and other pods 
+- allows "internal cluster" traffic
+- this is the "default" service type
 
 - [ClusterIP](#clusterip)
   - [A Situation](#a-situation)
     - [Some Problems](#some-problems)
     - [ClusterIP To the Rescue](#clusterip-to-the-rescue)
   - [Setting up a ClusterIP Service with yaml](#setting-up-a-clusterip-service-with-yaml)
+  - [A Local Proxy Is Available](#a-local-proxy-is-available)
 
 ## A Situation 
 - several frontend web-server pods
@@ -67,3 +70,18 @@ node-port-service     NodePort    10.97.106.144   1.2.3.110     80:30004/TCP   4
 ```
 
 The service can be accessed by pods by the clusterIP or the service name.  
+
+## A Local Proxy Is Available
+[K8s docs](https://kubernetes.io/docs/tasks/extend-kubernetes/http-proxy-access-api/#using-kubectl-to-start-a-proxy-server).  
+[kubectl proxy docs](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#proxy).  
+
+```bash
+kubectl proxy --port=8080
+```
+That will open the kube-api server to `http://localhost:8080/api`.  
+Epic.  
+```bash
+# get a list of pods in the default namespace
+curl http://localhost:8080/api/v1/namespaces/default/pods
+```
+
