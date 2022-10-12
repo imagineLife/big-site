@@ -15,6 +15,7 @@ The NodePort service is...
 - listens to ports on the node
 - fwds req from a port on the node to a port the pod
 - allows for pod-access from "outside" the k8s world
+- useful for leveraging a pre-existing static IP (_maybe opened by a security team through a firewall_)
 
 - [Node Port](#node-port)
   - [External Communicaton](#external-communicaton)
