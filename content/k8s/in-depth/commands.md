@@ -129,4 +129,15 @@ kkg deploy,rs,po,svc,ep
 # note the "-" at the end removes the taint
 mretfaster@cp:~$ kubectl taint nodes --all node-role.kubernetes.io/control-plane-
 node/cp untainted
+
+
+# 
+# Process info
+# 
+
+# kk top: display resources by "type"
+# https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#top
+# show cpu + memory highlights
+kk top nodes
+kk top pods
 ```
