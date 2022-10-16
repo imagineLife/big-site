@@ -77,7 +77,11 @@ spec:
 ```  
 
 ## Match Pods to Any Nodes With a Specific Label Present
-Another example of a pod def file, where the nodeAffinity expresses that the pod will be deployed on any node where the "size" label exists:
+Another example of a pod def file, where the nodeAffinity expresses that the pod will be deployed on any node where the "size" label exists.  
+Note: on the node, a label will be present that looks like `size=`. This means that 
+- the label key is PRESENT
+- the size label has not set value
+
 ```yaml
 apiVersion: v1
 kind: Pod
