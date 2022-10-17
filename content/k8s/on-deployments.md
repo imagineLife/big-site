@@ -190,8 +190,12 @@ Replace 1-by-1.
 - update a deployment config file
 - apply the changes with `kubectl apply -f deploy-file.yml`
 - OR
-- `kubectlk set image deployment/<deployment-name> containername=new:image:tag`
+- `kubectl set image deployment/<deployment-name> containername=new:image:tag`
   - NOTE: this does not update the config file, only the running deployment
+  - `set image` will update an image of a container
+  - `deployment/<deployment-name>` will reference a deployment by name
+  - `containername` should match the `spec:template:spec:containers[x]:name`
+  - `new:image` should be a valid image with optional tag: `node` and `node:18` both will work to reference 2 difference images
 
 ```bash
 kubectl describe deployment <deployment-name>
