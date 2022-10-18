@@ -191,6 +191,10 @@ There are many providers for data volumes:
 
 ## Other Storage Class Parameter To Consider
 Disk Type, replication Type, etc.  
+One in particular is the `VolumeBindingMode`.  
+This affects how the thing "works".  
+As an example, the `waitForFirstConsumer` option means that a pvc connected to a pv _without a pod_ will set the pvc to `available` and the pvc doesn't mount to the pv.  
+A pod consuming the pvc must be created in order for the pvc+pv to marry.
 
 ## An Example, Leveraging An NFS Mount
 For Background
