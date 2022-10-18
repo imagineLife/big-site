@@ -80,3 +80,5 @@ spec:
         - mountPath: "/usr/share/nginx/html"
           name: task-pv-storage
 ```
+
+- once the pvc is mounted to a pod and bound to a pv, the pvc cannot be deleted: the pvc will "hang" in "terminating" state
