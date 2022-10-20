@@ -42,6 +42,7 @@ There are a bunch of endpoints that can be accessed at `curl https://kube-master
       - [Removing Endpoint by excluding in new verisons](#removing-endpoint-by-excluding-in-new-verisons)
       - [Prior Version Maintenance SChedules](#prior-version-maintenance-schedules)
       - [Use Kubectl Convert to get new apis](#use-kubectl-convert-to-get-new-apis)
+  - [kubectl Create Token](#kubectl-create-token)
   - [Todo](#todo)
 
 
@@ -316,6 +317,16 @@ When an api is deprecated, the `kubectl convert` command can be used to help mig
 # kubectl-convert -f old-config-file.yaml --output-version new-version-here
 kubectl-convert -f app-deployment.yaml --output-version apps/v1
 ```  
+
+
+## kubectl Create Token
+[Kubectl command docs](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#-em-token-em-): Request a service account token.  
+[Kubernetes docs](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#service-account-tokens).  
+`kubectl create serviceaccount devopsuser`.  
+`kubectl create token devopsuser`.  
+That will create a token (_a jwt_) for the serviceaccount & returns the token.  
+THe token can be used to auth as the service account as a Bearer token.  
+
 
 
 ## Todo
