@@ -121,3 +121,25 @@ linkerd check
 ```
 NOTE this check: I have 2 google vms setup with a pretty small amount of resources. I removed some unused pods/deployments etc in order for this check to complete :) 
 
+### Install and setup linkerd viz
+[linkerd viz](https://linkerd.io/2.12/reference/cli/viz/) "_manages the linkerd-viz extension of (the) Linkerd service mesh_".  
+```bash
+# install
+$ linkerd viz install | kubectl apply -f -
+
+# validate
+$ linkerd viz check
+
+# check the localhost url of the DASHBOARD!
+linkerd viz dashboard &
+```
+
+In order to see the first linkerd viz, a "dashboard"
+- the `web` deployment, in the `linkerd-viz` namespace needs to be edited
+  - a line in the container args needs adjusting
+  - `kubectl edit deploy web -n linkerd-viz`
+  - from `- -enforced-host=q374trob23bt8ofabef1239h`
+  - to `- -enforced-host=` (_remove all the garbly-gook after the = sign_) 
+- the service that exposes the web deployment needs adjusting
+  - convert the type to a nodeport from a clusterIP (_by default, the dashboard is available on "localhost" of the host node_)
+  - set a nodePort value on the `http` port - maybe something that you'll remember!
