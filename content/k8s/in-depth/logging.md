@@ -61,6 +61,26 @@ Several options are out there:
 - pod cpu & memory usage
 
 
+## Kubectl Debug
+[k8s docs](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#debug):
+- can "debug" an object (i.e. pod)
+- can create an ephemeral container to _an already running process!_
+- access a nodes FS by creating a pod in a nodes host namespace
+
+```bash
+kubectl debug -h
+
+# debug the master node
+#   create a "busybox" image to run on the node
+kubectl debug node master -it --image=busybox
+
+# in the new container, view processes on the host node
+ps
+# in the container, print logs of a different pod
+kubectl logs the-other-pod
+
+```
+# was kubectl alpha debug
 ## Things to be able to do
 - install the metrics server
   - git clone https://github.com/kodekloudhub/kubernetes-metrics-server.git
