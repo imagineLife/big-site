@@ -33,9 +33,16 @@ kubectl logs -f api-pod
 kubectl logs -f api-pod api-emailing-sidecar-box
 ```
 
+## Fluentd for cluster-wide details
+[fluentd](https://kubernetes.io/docs/concepts/cluster-administration/logging/) can help aggregate logs across a cluster:
+- fluentd agents run on each node via a `DaemonSet`Troubleshooting
+- they agg logs
+- they feed them to an elasticsearch instane 
+- can be viz'd in a kibana dashboard!
+
 # Monitoring
-Metric are collected with the kubelet:
-- kubelet is the agent on each node
+Metric are collected with the `kubelet`:
+- `kubelet` is the agent on each node - it writes logs to the local fs via the docker logging driver
 - gets directions from master server
 - contains `cAdvisor`, getting performance metrics from pods
 - Get this up & running with
@@ -44,6 +51,8 @@ Metric are collected with the kubelet:
   - git clone https://github.com/kubernetes-incubator.metrics-server.git then kubectl create -f deploy/1.8+/
   - `kubectl top node` will show a little cli table
   - `kubectl top pod` will show a little cli table
+- `kubectl logs` GETS the logs that the `kubelet` wrote
+
 Several options are out there:
 - Metrics Server
   - an in-memory option && cannot see historical performance data
@@ -69,6 +78,7 @@ Several options are out there:
 
 ```bash
 kubectl debug -h
+# was kubectl alpha debug
 
 # debug the master node
 #   create a "busybox" image to run on the node
@@ -78,9 +88,8 @@ kubectl debug node master -it --image=busybox
 ps
 # in the container, print logs of a different pod
 kubectl logs the-other-pod
-
 ```
-# was kubectl alpha debug
+
 ## Things to be able to do
 - install the metrics server
   - git clone https://github.com/kodekloudhub/kubernetes-metrics-server.git
