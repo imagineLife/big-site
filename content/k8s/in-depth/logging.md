@@ -9,6 +9,12 @@ order: 15
 ---
 
 # Logging And Monitoring
+- get errors from the command line
+- get pod logs
+- get the status of pods
+- troubleshoot networking bugs
+- validate resource allocation
+
 ## Logging For Docker Containers
 ```bash
 # docker logs -f container-id
