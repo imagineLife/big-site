@@ -60,14 +60,33 @@ Several options are out there:
 - Elastic Stack
 - DataDog
 - Dynatrace
-## Monitoring Resource Consumption
+### Monitoring Resource Consumption
 - cpu
 - network
-## Monitoring Objects And Object Health
+### Monitoring Objects And Object Health
 - number of nodes
 - health of nodes
 - pod count
 - pod cpu & memory usage
+
+### Other CNFC monitoring and tracing tools
+The [Cloud Native Computing Foundation](https://www.cncf.io) has a few open-source tools for monitoring: Prometheus, Fluentd, OpenTracint, and Jaeger:
+#### Prometheus
+[Prometheus](https://prometheus.io)
+- focuses on alerting and metrics
+- provides a db that is time-series oriented, query-able
+- cluster-wide alerts
+- integrates with grafana
+
+#### Fluentd
+[Fluentd](https://www.fluentd.org):
+- an open-source data collector
+- unifies data collection & consumption
+- JSON formatted logs
+- plugin-architecture: plugins galore
+- low hardware reqs:
+  - "_30-40MB of memory and can process 13,000 events/second/core_" (from docs)
+- 
 
 
 ## Kubectl Debug
@@ -89,6 +108,7 @@ ps
 # in the container, print logs of a different pod
 kubectl logs the-other-pod
 ```
+
 
 ## Things to be able to do
 - install the metrics server
