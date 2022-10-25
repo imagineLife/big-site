@@ -86,8 +86,15 @@ The [Cloud Native Computing Foundation](https://www.cncf.io) has a few open-sour
 - plugin-architecture: plugins galore
 - low hardware reqs:
   - "_30-40MB of memory and can process 13,000 events/second/core_" (from docs)
-- 
 
+#### OpenTracing
+NOTE: it looks like the openTracing has "moved" to [OpenTelemetry](https://github.com/open-telemetry).  
+
+[OpenTracing](https://opentracing.io)
+- "distributed tracing"
+- maybe optimal for microservice archutecture
+- an API spec, has frameworks and libs that implement the spec
+- [here](https://opentelemetry.io/docs/instrumentation/js/getting-started/nodejs/) is an example of the nodejs example running a simple express app
 
 ## Kubectl Debug
 [k8s docs](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#debug):
