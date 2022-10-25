@@ -70,7 +70,8 @@ Several options are out there:
 - pod cpu & memory usage
 
 ### Other CNFC monitoring and tracing tools
-The [Cloud Native Computing Foundation](https://www.cncf.io) has a few open-source tools for monitoring: Prometheus, Fluentd, OpenTracint, and Jaeger:
+The [Cloud Native Computing Foundation](https://www.cncf.io) has a few open-source tools for monitoring: Prometheus, Fluentd, OpenTracint, and Jaeger.  
+A bunch of these tools have batteries-included examples to spin up with docker, an express api, etc.
 #### Prometheus
 [Prometheus](https://prometheus.io)
 - focuses on alerting and metrics
@@ -95,6 +96,16 @@ NOTE: it looks like the openTracing has "moved" to [OpenTelemetry](https://githu
 - maybe optimal for microservice archutecture
 - an API spec, has frameworks and libs that implement the spec
 - [here](https://opentelemetry.io/docs/instrumentation/js/getting-started/nodejs/) is an example of the nodejs example running a simple express app
+
+#### Jaeger
+[Jaeger](https://www.jaegertracing.io). Developed by uber! 
+[Uber's blogpost](https://www.uber.com/blog/distributed-tracing/) on their evolution of distributed tracing.  
+Jaeger is used to "_Monitor and troubleshoot transactions in complex distributed systems_".  
+- transaction monitoring
+- RCA
+- service dependency analysis
+- perf/latency optimization
+
 
 ## Kubectl Debug
 [k8s docs](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#debug):
