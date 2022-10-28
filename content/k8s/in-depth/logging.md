@@ -33,6 +33,15 @@ kubectl logs -f api-pod
 kubectl logs -f api-pod api-emailing-sidecar-box
 ```
 
+## System Logs
+`systemd` matters here - with `systemd`, logs go to journalct, viewable through the cli tool `jourcnalctl -a`.  
+Without `systemd`, logs go to `/var/log/<agent-name>.log`.  
+Things that log:
+- kube-scheduler
+- kube-proxy
+- kubelet
+- Docker
+
 ## Fluentd for cluster-wide details
 [fluentd](https://kubernetes.io/docs/concepts/cluster-administration/logging/) can help aggregate logs across a cluster:
 - fluentd agents run on each node via a `DaemonSet`Troubleshooting
@@ -128,9 +137,16 @@ ps
 kubectl logs the-other-pod
 ```
 
+## References for Logging, Debugging and Troubleshooting
+- [Monitoring, Logging, and Debugging](https://kubernetes.io/docs/tasks/debug/) K8s docs
+- [Debug Pods](https://kubernetes.io/docs/tasks/debug/debug-application/debug-pods/) K8s docs
+- [Debug Services](https://kubernetes.io/docs/tasks/debug/debug-application/debug-service/) k8s docs
+- [Troubleshooting Clusters](https://kubernetes.io/docs/tasks/debug/debug-cluster/) K8s docs
+- [K8s Github Issues](https://github.com/kubernetes/kubernetes/issues)  
+- [K8s Slack](https://kubernetes.slack.com)
 
 ## Things to be able to do
-- install the metrics server
+- install a metrics server
   - git clone https://github.com/kodekloudhub/kubernetes-metrics-server.git
 - create all the k8s objects from the downloaded resources
   - cd kubernetes-metrics-server
