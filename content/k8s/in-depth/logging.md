@@ -78,6 +78,7 @@ A bunch of these tools have batteries-included examples to spin up with docker, 
 - provides a db that is time-series oriented, query-able
 - cluster-wide alerts
 - integrates with grafana
+- [grafana](https://github.com/grafana/grafana)
 
 #### Fluentd
 [Fluentd](https://www.fluentd.org):
