@@ -53,3 +53,5 @@ say `apipod`.
 - review that an ENDPOINT! is available for the svc
     - `kkg ep` - best case: the svc port and name are connected to an available endpoint
   - get config deets of the endpoint
+    - `kkg ep apiapp -o yaml`
+    - 
