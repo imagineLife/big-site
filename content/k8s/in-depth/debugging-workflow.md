@@ -3,7 +3,7 @@ title: One Way To Approach Debugging Kubernetes Object Errors
 parentDir: k8s/in-depth
 slug: k8s/in-depth/debugging-workflow
 author: Jake Laursen
-excerpt: 
+excerpt: Starting with "familiar" k8s bits to logs and iptables
 tags: Kubernetes, K8s, debugging, workflow
 order: 37
 ---
@@ -54,4 +54,13 @@ say `apipod`.
     - `kkg ep` - best case: the svc port and name are connected to an available endpoint
   - get config deets of the endpoint
     - `kkg ep apiapp -o yaml`
-    - 
+- if the above are all working as expected (_containers, pods, services, endpoints_) check out more deets
+  - Check the status of the kube-proxy:
+    - `ps | grep kube-proxy` (_maybe add flags `-elf `_)
+      - to stdout, in a list
+    - or perhaps `journalctl -a | grep proxy`
+  - check out the logs of the kube-proxy
+    - `kubectl -n kube-system logs kube-proxy-randoCharsHere`
+  - Check that the expected "rules" are being created for a servuce
+    - `sudo iptables-save 
+     grep <a-service-here>`
