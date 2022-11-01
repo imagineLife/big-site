@@ -62,5 +62,4 @@ say `apipod`.
   - check out the logs of the kube-proxy
     - `kubectl -n kube-system logs kube-proxy-randoCharsHere`
   - Check that the expected "rules" are being created for a servuce
-    - `sudo iptables-save 
-     grep <a-service-here>`
+    - `sudo iptables-save | grep <a-service-here>`
