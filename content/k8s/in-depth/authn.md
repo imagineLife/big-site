@@ -37,6 +37,7 @@ Access to hosts should only be used with ssh keys: no un+pw.
       - [Create The Role for the user](#create-the-role-for-the-user)
       - [Create the Role Binding for the user](#create-the-role-binding-for-the-user)
       - [Authenticate with the cred](#authenticate-with-the-cred)
+  - [Things To Do](#things-to-do)
 
 ## The First Line Of Defense: Protect the Kube-Apiserver
 The kube-apiserver can perform almost all functions. This must be protected.
@@ -305,3 +306,17 @@ roleRef:
 
 #### Authenticate with the cred
 `curl -v -k https://localhost:6443/api/v1/pods -u "userSecond2:pw123"`
+
+
+## Things To Do
+- update the 3 parts of the kubeconfig file:
+  - users
+    - the crt can be content or a file
+  - clusters
+    - 
+  - contexts
+    - a combo of user + cluster
+- update the current context through the cli
+  - `kubectl config use-context context-name-here`
+- get the current context
+  - `kubectl config current-context`
