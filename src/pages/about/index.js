@@ -29,8 +29,7 @@ const About = () => (
             <h2>A Do-er</h2>
             <p>
               I am usually a little restless if I'm not getting something done.
-              Even my down time is intentional, focused on connecting with my
-              wife and/or friends, considering future plans... even solitude and
+              Even my down time is has intentional elements: even solitude and
               meditation are focused and part of my goals.
             </p>
           </div>

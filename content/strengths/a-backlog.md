@@ -19,10 +19,6 @@ I have a tendency to gather information. This has been useful when I happen to h
 I also have a nack for making a to-do list and getting it done. I poke my head up sometimes, evaluate my to-do list, and put my head back down and get to work, getting things done.
 
 ## We Have Varying Talents
-
-My wife has a talent for getting things done through a schedule. This has served her and others well by crafting helpful schedules that help get longer-term goals accomplished.  
-I do not thrive with a schedule like my wife does. This is not a _strong_ skill of mine.
-
 A friend of mine has a seemingly natural skill for describing what the future can look like for himself and others. This has served himself and other by contributing to a sense of purpose that connects to something broader than the current details of the moment.  
 I do not get as excited, nor communicate as eloquently about the future as he does. This is not a _strong_ skill of mine.
 
