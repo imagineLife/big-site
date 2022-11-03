@@ -23,6 +23,7 @@ Other User Accounts can be made for other types of users. These can have restric
     - [WebHooks](#webhooks)
     - [Always](#always)
     - [Where Authorization Mode Config Lives](#where-authorization-mode-config-lives)
+      - [Find the Authorization Modes](#find-the-authorization-modes)
   - [RBAC In More Depth](#rbac-in-more-depth)
     - [A Developer Role Example](#a-developer-role-example)
       - [Create The Role](#create-the-role)
@@ -137,6 +138,19 @@ This lives in the kube apiserver config file.
 The default authorization mode of k8s is `AlwaysAllow`.  
 The mode config can be updated in the kubeapi-server: `---authorization-mode=Node,RBAC,Webhook`.  
 Multiple modes in the list mean that each request goes through each listed authz mode: First handled by the node authorizer (for node requests), RBAC checks, then webhooks. When one step is denied, the next is processed. When one succeeds, the authz process does not continue.  
+#### Find the Authorization Modes
+These are set as commands passed to a pod:
+- the `kube-apiserver` pod, may be named something different
+- the pod is "usually" in the `kube-system` namespace
+- a bunch of "commands" get passed to the pod
+```bash
+# first command
+kube-apiserver
+# WITH a bunch of flags
+      # ....
+      --authorization-mode=Node,RBAC
+      # ....
+```
 
 ## RBAC In More Depth
 ### A Developer Role Example
