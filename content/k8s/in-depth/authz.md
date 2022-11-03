@@ -32,6 +32,7 @@ Other User Accounts can be made for other types of users. These can have restric
     - [ClusterRoles and ClusterRoleBindings](#clusterroles-and-clusterrolebindings)
   - [See my own access](#see-my-own-access)
   - [Access within the cluster](#access-within-the-cluster)
+  - [Test a Users Capabilities](#test-a-users-capabilities)
 ## Authorization On Objects
 ### Internal Access of the K8s Cluster
 #### Nodes
@@ -303,3 +304,7 @@ kubectl auth can-i delete pods --as dev-user --namespace horse
   - read + write info about k8s objects
   - handled by special authoriser: the node authorizor
   - kubelet should be part of the `system:node` group
+
+## Test a Users Capabilities
+`kkg pods --as <user-to-test-here>`, `kkg svc --as <user-to-test-here>`
+That can be used to run a command AS A USER - that's one way of "testing" what kubectl commands "work" for a user - here the "get pods" command and the "get services" command.
