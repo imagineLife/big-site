@@ -30,6 +30,7 @@ Other User Accounts can be made for other types of users. These can have restric
         - [Config-First](#config-first)
         - [Imperative-First](#imperative-first)
       - [Bind The Role To A User](#bind-the-role-to-a-user)
+        - [Imperative-First](#imperative-first-1)
   - [Cluster-Wide Objects ANd Cluster-Wide Roles](#cluster-wide-objects-and-cluster-wide-roles)
     - [ClusterRoles and ClusterRoleBindings](#clusterroles-and-clusterrolebindings)
   - [See my own access](#see-my-own-access)
@@ -220,6 +221,10 @@ create it
 ```bash
 kubectl create -f dev-to-role-binding.yaml
 ```
+
+##### Imperative-First
+Here, an imperative command to create a rolebinding with a user and a role in a nammespace:
+`kkc rolebinding dev-user-binding --namespace=default --role=developer --user=dev-user`
 
 See Roles & Bindings:
 ```bash
