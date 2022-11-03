@@ -27,6 +27,8 @@ Other User Accounts can be made for other types of users. These can have restric
   - [RBAC In More Depth](#rbac-in-more-depth)
     - [A Developer Role Example](#a-developer-role-example)
       - [Create The Role](#create-the-role)
+        - [Config-First](#config-first)
+        - [Imperative-First](#imperative-first)
       - [Bind The Role To A User](#bind-the-role-to-a-user)
   - [Cluster-Wide Objects ANd Cluster-Wide Roles](#cluster-wide-objects-and-cluster-wide-roles)
     - [ClusterRoles and ClusterRoleBindings](#clusterroles-and-clusterrolebindings)
@@ -156,6 +158,7 @@ kube-apiserver
 ## RBAC In More Depth
 ### A Developer Role Example
 #### Create The Role
+##### Config-First
 A new config file. Config for all!  
 
 This could be called dev-role.yaml or something.
@@ -184,11 +187,14 @@ rules:
   verbs: ["list", "get", "create", "update", "delete"]
   resourceNames: ["webapp", "nginx"]
 ```
-
 Create the role:
 ```bash
 kubectl create -f dev-role.yaml
 ```
+
+##### Imperative-First
+Here, an imperative command to start the yaml file from a one-liner:
+`kkc role --verb=list --verb=get --verb=create --resource=pods --dry-run=client -o yaml > dev-role.yaml`
 
 #### Bind The Role To A User
 Another config file.  
