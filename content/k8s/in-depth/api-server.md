@@ -31,6 +31,8 @@ There are a bunch of endpoints that can be accessed at `curl https://kube-master
     - [Authorization](#authorization)
       - [A Few Notes On RBAC](#a-few-notes-on-rbac)
     - [Admission Controls](#admission-controls)
+      - [Enable a plugin](#enable-a-plugin)
+      - [Disable a plugin](#disable-a-plugin)
       - [Dynamic Admission Controllers](#dynamic-admission-controllers)
   - [Use Auth When requesting to the api](#use-auth-when-requesting-to-the-api)
     - [Note Differences Between Kube Proxy and Kubectl Proxy](#note-differences-between-kube-proxy-and-kubectl-proxy)
@@ -88,10 +90,17 @@ Note the [K8s Docs on RBAC Auth](https://kubernetes.io/docs/reference/access-aut
 - software
 - this can access, modify, and/or validate contents of objects being CRUD by api requests
 - this can deny the api request when above validation fails
-SEttings like these can be set for the kube-apiserver:
+
+Settings like these can be set for the kube-apiserver pod, as args.  
+The defualt kube-apiserver file is located at `/etc/kubernetes/manifests/kube-apiserver.yaml`.
+
+#### Enable a plugin
 ```bash
---enable-admission-plugins=LimitRanger,NamespaceLifecycle
---disable-admission-plugins=PodNodeSelector
+--enable-admissions-plugins=LimitRanger,NamespaceLifecycle
+```
+#### Disable a plugin
+```bash
+--disable-admissions-plugins=PodNodeSelector
 ```
 #### Dynamic Admission Controllers
 [K8s Docs](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/).  
