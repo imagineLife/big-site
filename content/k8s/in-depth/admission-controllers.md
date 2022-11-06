@@ -59,6 +59,10 @@ flowchart LR
       - [A Deployment](#a-deployment)
       - [A Service](#a-service)
       - [Webhook Config](#webhook-config)
+- [A pod with a securityContext explicitly allowing it to run as root.](#a-pod-with-a-securitycontext-explicitly-allowing-it-to-run-as-root)
+- [The effect of deploying this with and without the webhook is the same. The](#the-effect-of-deploying-this-with-and-without-the-webhook-is-the-same-the)
+- [explicit setting however prevents the webhook from applying more secure](#explicit-setting-however-prevents-the-webhook-from-applying-more-secure)
+- [defaults.](#defaults)
 
 ## Permissions can be more granular than user RBAC with Admission Controllers
 Some use-cases for different authz checks:
@@ -252,3 +256,54 @@ webhooks:
         apiVersions: ["v1"]
         resources: ["pods"]
 ```
+
+
+```yaml
+# A pod with a conflicting securityContext setting: it has to run as a non-root
+# user, but we explicitly request a user id of 0 (root).
+# Without the webhook, the pod could be created, but would be unable to launch
+# due to an unenforceable security context leading to it being stuck in a
+# 'CreateContainerConfigError' status. With the webhook, the creation of
+# the pod is outright rejected.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-conflict
+  labels:
+    app: pod-with-conflict
+spec:
+  restartPolicy: OnFailure
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 0
+  containers:
+    - name: busybox
+      image: busybox
+      command: ["sh", "-c", "echo I am running as user $(id -u)"]
+```
+
+
+
+```yaml
+# A pod with a securityContext explicitly allowing it to run as root.
+# The effect of deploying this with and without the webhook is the same. The
+# explicit setting however prevents the webhook from applying more secure
+# defaults.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-override
+  labels:
+    app: pod-with-override
+spec:
+  restartPolicy: OnFailure
+  securityContext:
+    runAsNonRoot: false
+  containers:
+    - name: busybox
+      image: busybox
+      command: ["sh", "-c", "echo I am running as user $(id -u)"]
+
+
+kk logs pod-with-override
+I am running as user 0
