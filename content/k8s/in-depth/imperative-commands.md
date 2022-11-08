@@ -15,6 +15,7 @@ order: 3
   - [Imperative Service Handling](#imperative-service-handling)
     - [Imperative Namespace Handling](#imperative-namespace-handling)
     - [Imperative 2-in-1](#imperative-2-in-1)
+  - [Explaining](#explaining)
 ## Imperative Pod Handling
 ```bash
 # deploy a pod named "nginx" with the "nginx:alpine" image
@@ -110,4 +111,12 @@ kubectl create namespace horse-ns
 # with same name as the pod, http
 # with a terget port of 80
 kubectl run httpd --image=httpd:alpine --port=80 --expose
+```
+
+## Explaining
+documenting of resources  
+[k8s docs](https://jamesdefabia.github.io/docs/user-guide/kubectl/kubectl_explain/)
+
+```bash
+kk explain jobs
 ```
