@@ -97,6 +97,10 @@ kk get pods pod-name
 kk get netpol a-policy-name
 kk get svc a-service-name
 
+# WATCH the status of pods update
+# note, this one needs ^C to cancel the terminal session
+kk get pods --watch
+
 
 # 
 # Create a yaml before creating the resource
