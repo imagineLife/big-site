@@ -126,28 +126,29 @@ kk explain jobs
 The [K8s Docs](https://kubernetes.io/docs/reference/kubectl/#resource-types) show a list of all resource types and their shortnames, api versions, and kind. Here's a shortlist of maybe the "common" resource types:
 |||
 |:--:|:--|
-
-
 | cm | 	configmaps |
 | ds | 	daemonsets |
 | deploy | 	deployments |
 | ep | 	endpoints |
-| ev | 	events |
-| hpa |       	horizontalpodautoscalers |
 | ing | 	ingresses |
-| limits | 	limitranges |
 | ns | 	namespaces |
 | no | 	nodes |
 | pvc | 	persistentvolumeclaims |
 | pv | 	persistentvolumes |
 | po | 	pods |
-| pdb | 	poddisruptionbudgets |
-| psp | 	podsecuritypolicies |
 | rs | 	replicasets |
 | rc  | 	replicationcontrollers |
 | sa | 	serviceaccounts |
 | svc | 	services |
 
+Here are some I have not really used
+|||  
+| :--: | :-- |  
 | cs | 	componentstatuses |
 | csr |       	certificatesigningrequests |
+| ev | 	events |
+| hpa |       	horizontalpodautoscalers |
+| limits | 	limitranges |
+| pdb | 	poddisruptionbudgets |
+| psp | 	podsecuritypolicies |
 | quota | 	resourcequotas |
