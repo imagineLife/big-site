@@ -16,6 +16,7 @@ order: 3
     - [Imperative Namespace Handling](#imperative-namespace-handling)
     - [Imperative 2-in-1](#imperative-2-in-1)
   - [Explaining](#explaining)
+  - [Shorthand resources](#shorthand-resources)
 ## Imperative Pod Handling
 ```bash
 # deploy a pod named "nginx" with the "nginx:alpine" image
@@ -120,3 +121,33 @@ documenting of resources
 ```bash
 kk explain jobs
 ```
+
+## Shorthand resources
+The [K8s Docs](https://kubernetes.io/docs/reference/kubectl/#resource-types) show a list of all resource types and their shortnames, api versions, and kind. Here's a shortlist of maybe the "common" resource types:
+|||
+|:--:|:--|
+
+
+| cm | 	configmaps |
+| ds | 	daemonsets |
+| deploy | 	deployments |
+| ep | 	endpoints |
+| ev | 	events |
+| hpa |       	horizontalpodautoscalers |
+| ing | 	ingresses |
+| limits | 	limitranges |
+| ns | 	namespaces |
+| no | 	nodes |
+| pvc | 	persistentvolumeclaims |
+| pv | 	persistentvolumes |
+| po | 	pods |
+| pdb | 	poddisruptionbudgets |
+| psp | 	podsecuritypolicies |
+| rs | 	replicasets |
+| rc  | 	replicationcontrollers |
+| sa | 	serviceaccounts |
+| svc | 	services |
+
+| cs | 	componentstatuses |
+| csr |       	certificatesigningrequests |
+| quota | 	resourcequotas |
