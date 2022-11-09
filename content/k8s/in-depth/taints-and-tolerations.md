@@ -149,11 +149,14 @@ status: {}
 
 # 7
 # remove taint from controlplane
+# SHOW the taint - can be seen though "kubectl describe" or 
 kk describe nodes controlplane | grep Taint
-# shows....
 Taints:             node-role.kubernetes.io/master:NoSchedule
+
+
 # remove it
-# NOTICE the - at the end of the taint - thats the key!
+# the command is NEARLT IDENTICAL to adding a taint to the node
+# NOTICE the "-" at the end of the taint - thats the key!
 kk taint node controlplane node-role.kubernetes.io/master:NoSchedule-
 node/controlplane untainted
 ```
