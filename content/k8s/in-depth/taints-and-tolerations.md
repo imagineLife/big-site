@@ -25,6 +25,7 @@ Taints are interpreted by the K8s scheduler, and the scheduler takes into accoun
   - [Taints Only Prevent Tainted Nodes From Accepting Pods](#taints-only-prevent-tainted-nodes-from-accepting-pods)
   - [Master Nodes Are Tainted](#master-nodes-are-tainted)
   - [Things to be able to do](#things-to-be-able-to-do)
+    - [See the Impact of Taints And Tolerations](#see-the-impact-of-taints-and-tolerations)
     - [In Action](#in-action)
 
 ### Taint Effects
@@ -93,10 +94,19 @@ kubectl describe node kubemaster | grep Taint
 ```
 
 ## Things to be able to do
+### See the Impact of Taints And Tolerations
+Here
+- use a 2-node setup - one controlplane another called...`qwer`
+- taint the `qwer` node
+- deploy a pod & see it in "pending" state
+- deploy ANOTHER pod with a toleration to the taint and see it deploy successfully
+- remove the taint on the `qwer` pod and see the previously-pending pod now in the "running" state
+
+
 1. see now many nodes are running
 2. see if any taints are present on node qwer
 3. taint a node
-   1. node123, 
+   1. `qwer`, 
    2. with key of asdf
    3. val of poiu
    4. effect of NoSchedule
@@ -116,7 +126,7 @@ kubectl get nodes
 # 2
 kubectl describe nodes qwer | grep Taint
 # 3
-kubectl taint nodes node123 asdf=poiu:NoSchedule
+kubectl taint nodes qwer asdf=poiu:NoSchedule
 # 4 
 kubectl run lkjh --image=nginx
 # 6
@@ -124,7 +134,8 @@ kubectl run lkjh --image=nginx
 kubectl run bee --image=nginx --restart=Never --dry-run=client -o yaml > asdf.yaml
 # update the config file
 vi asdf.yaml
-
+```
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -136,17 +147,15 @@ spec:
   containers:
   - image: nginx
     name: bee
-    resources: {}
+  # THIS is the key, setting the pod to tolerate the node taint 
   tolerations:
     - effect: NoSchedule
-      key: spray
+      key: asdf
       operator: Equal
-      value: mortein
-  dnsPolicy: ClusterFirst
-  restartPolicy: Never
-status: {}
+      value: poiu
+```
 
-
+```bash
 # 7
 # remove taint from controlplane
 # SHOW the taint - can be seen though "kubectl describe" or 
