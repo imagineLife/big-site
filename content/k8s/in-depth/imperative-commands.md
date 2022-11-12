@@ -16,7 +16,10 @@ order: 3
     - [Imperative Namespace Handling](#imperative-namespace-handling)
     - [Imperative 2-in-1](#imperative-2-in-1)
   - [Explaining](#explaining)
+  - [Setting up a user, role, rolebinding](#setting-up-a-user-role-rolebinding)
+  - [Config Updates](#config-updates)
   - [Shorthand resources](#shorthand-resources)
+  - [Kubectl Config Overview](#kubectl-config-overview)
 ## Imperative Pod Handling
 ```bash
 # deploy a pod named "nginx" with the "nginx:alpine" image
@@ -122,6 +125,17 @@ documenting of resources
 kk explain jobs
 ```
 
+## Setting up a user, role, rolebinding
+```bash
+# ROLE
+kk create role dev-role --resources=pods,svc,
+```
+## Config Updates
+Here, deal with users, and contexts
+```bash
+kubectl config set-credentials username --username=kubeuser --password=kubepassword
+```
+
 ## Shorthand resources
 The [K8s Docs](https://kubernetes.io/docs/reference/kubectl/#resource-types) show a list of all resource types and their shortnames, api versions, and kind. Here's a shortlist of maybe the "common" resource types:
 |||
@@ -152,3 +166,44 @@ Here are some I have not really used
 | pdb | 	poddisruptionbudgets |
 | psp | 	podsecuritypolicies |
 | quota | 	resourcequotas |
+
+## Kubectl Config Overview
+`kubectl config <command and more>` can be used to work the kubeconfig file:
+- crud contexts
+- crud clusters
+- crud users
+
+```bash
+
+# ...lifted from the `kubectl config --help` output
+
+
+Modify kubeconfig files using subcommands like "kubectl config set current-context my-context"
+
+ The loading order follows these rules:
+
+  1.  If the --kubeconfig flag is set, then only that file is loaded. The flag may only be set once and no merging takes
+place.
+  2.  If $KUBECONFIG environment variable is set, then it is used as a list of paths (normal path delimiting rules for
+your system). These paths are merged. When a value is modified, it is modified in the file that defines the stanza. When
+a value is created, it is created in the first file that exists. If no files in the chain exist, then it creates the
+last file in the list.
+  3.  Otherwise, ${HOME}/.kube/config is used and no merging takes place.
+
+Available Commands:
+  current-context   Display the current-context
+  delete-cluster    Delete the specified cluster from the kubeconfig
+  delete-context    Delete the specified context from the kubeconfig
+  delete-user       Delete the specified user from the kubeconfig
+  get-clusters      Display clusters defined in the kubeconfig
+  get-contexts      Describe one or many contexts
+  get-users         Display users defined in the kubeconfig
+  rename-context    Rename a context from the kubeconfig file
+  set               Set an individual value in a kubeconfig file
+  set-cluster       Set a cluster entry in kubeconfig
+  set-context       Set a context entry in kubeconfig
+  set-credentials   Set a user entry in kubeconfig
+  unset             Unset an individual value in a kubeconfig file
+  use-context       Set the current-context in a kubeconfig file
+  view              Display merged kubeconfig settings or a specified kubeconfig file
+```
