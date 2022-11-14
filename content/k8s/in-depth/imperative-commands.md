@@ -20,6 +20,7 @@ order: 3
   - [Config Updates](#config-updates)
   - [Shorthand resources](#shorthand-resources)
   - [Kubectl Config Overview](#kubectl-config-overview)
+    - [Configure User Credentials](#configure-user-credentials)
 ## Imperative Pod Handling
 ```bash
 # deploy a pod named "nginx" with the "nginx:alpine" image
@@ -206,4 +207,12 @@ Available Commands:
   unset             Unset an individual value in a kubeconfig file
   use-context       Set the current-context in a kubeconfig file
   view              Display merged kubeconfig settings or a specified kubeconfig file
+```
+
+### Configure User Credentials
+this will
+- add a user credential to the kubeconfig file
+- use a cert + key combo for the user from local key/cert files
+```bash
+kubectl config set-credentials joe --client-certificate ./joe.crt --client-key ./joe.key
 ```
