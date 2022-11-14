@@ -19,3 +19,24 @@ kubectl config set-credentials jake --client-certificate ./jake.crt --client-key
 kubectl config set-credentials jake --auth-provider=oidc --auth-provider-arg=client-id=auth-id-here
 --auth-provider-arg=client-secret=auth-client-secret-here
 ```
+
+## Setup a Role That Jake Will Be Connected To
+This role...
+- named `devops-engineer`
+- in the `dev` namespace
+- can crud on pods, services, persistent volume claims, and deployments
+
+```bash
+kubectl create role devops-engineer --resource=pods,svc,pvc,deployment --verb="*" -n dev
+```
+
+## Bind Jake to The Role with a RoleBinding
+Connect Jake + the role
+```bash
+kubectl create rolebinding jake-devops-rb --role=devops-engineer --user=jakje -n dev
+```
+## Set the current context for jake
+Here, a context named `devopsengineer` will be created for "jake" in the "kubernetes" cluster
+```bash
+kubectl config set-context devopsengineer --cluster kubernetes --user jake
+```
