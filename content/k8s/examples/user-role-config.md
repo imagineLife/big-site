@@ -8,6 +8,12 @@ tags: k8s, user, role, rolebinding, resources, permissions, kubeconfig, kubectl
 order: 19
 ---
 
+- [Enable User Credentials for User "Jake"](#enable-user-credentials-for-user-jake)
+- [Setup a Role That Jake Will Be Connected To](#setup-a-role-that-jake-will-be-connected-to)
+- [Bind Jake to The Role with a RoleBinding](#bind-jake-to-the-role-with-a-rolebinding)
+- [Set the current context for jake](#set-the-current-context-for-jake)
+- [Use the new context](#use-the-new-context)
+
 ## Enable User Credentials for User "Jake" 
 Here, "jake" gets added as a user to the kubeconfig file.
 ```bash
@@ -39,4 +45,9 @@ kubectl create rolebinding jake-devops-rb --role=devops-engineer --user=jakje -n
 Here, a context named `devopsengineer` will be created for "jake" in the "kubernetes" cluster
 ```bash
 kubectl config set-context devopsengineer --cluster kubernetes --user jake
+```
+
+## Use the new context
+```bash
+kubectl config use-context devopsengineer
 ```
