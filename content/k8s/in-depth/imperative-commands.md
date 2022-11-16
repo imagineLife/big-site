@@ -104,6 +104,10 @@ kubectl expose pod redis --name=redis-service --port=6379 --target-port=6379
 # create a namespace
 # named horse-ns
 kubectl create namespace horse-ns
+
+# permanently save the namespace for all subsequent kubectl commands in that context.
+# i.e set the current namespace
+kubectl config set-context --current --namespace=horse
 ```
 
 ### Imperative 2-in-1
