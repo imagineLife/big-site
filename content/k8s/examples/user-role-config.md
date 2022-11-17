@@ -39,7 +39,7 @@ kubectl create role devops-engineer --resource=pods,svc,pvc,deployment --verb="*
 ## Bind Jake to The Role with a RoleBinding
 Connect Jake + the role
 ```bash
-kubectl create rolebinding jake-devops-rb --role=devops-engineer --user=jakje -n dev
+kubectl create rolebinding jake-devops-rb --role=devops-engineer --user=jake -n dev
 ```
 ## Set the current context for jake
 Here, a context named `devopsengineer` will be created for "jake" in the "kubernetes" cluster
