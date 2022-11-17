@@ -1,5 +1,5 @@
 ---
-title: Personal Growth Through Assembly, Assumptions, and Assertions
+title: Personal Growth Through Information, Assumptions, And Actions
 author: Jake Laursen
 excerpt: We can grow while we gather info, make meaning, and assert our will
 tags: personal development, growth, bias, learn,  
@@ -7,6 +7,17 @@ parentDir: misc
 slug: misc/growth-and-bias
 order: 8
 ---
+
+# Assembling Knowledge, Assuming Meaning, and Asserting Our Will
+- [Assembling Knowledge, Assuming Meaning, and Asserting Our Will](#assembling-knowledge-assuming-meaning-and-asserting-our-will)
+  - [Each One Of Us Is Figuring Things Out](#each-one-of-us-is-figuring-things-out)
+    - [We Assemble Knowledge](#we-assemble-knowledge)
+      - [We Make Shortcuts Assembling Knowledge](#we-make-shortcuts-assembling-knowledge)
+    - [We Assume Meaning](#we-assume-meaning)
+      - [We Make Shortcuts When Assuming Meaning](#we-make-shortcuts-when-assuming-meaning)
+    - [We Assert Our Will](#we-assert-our-will)
+      - [We Make Shortcuts When Asserting Our Will](#we-make-shortcuts-when-asserting-our-will)
+
 
 ## Each One Of Us Is Figuring Things Out
 We Gather facts: **assmebling knowledge**.  
