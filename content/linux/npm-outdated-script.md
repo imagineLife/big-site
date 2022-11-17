@@ -16,6 +16,10 @@ Requirements:
 - running `npm outdated` must work in the project root - this script uses npm outdated
 
 NOTE: this is a work-in-progress...
+- dealing with package version strings seems particular:
+  - getting the version numbers into a list
+  - replacing any "*" with a value seems important
+  - comparing current vs. wanted version for major, minor, and patch differences will matter
 
 ```bash
 #!/bin/bash
