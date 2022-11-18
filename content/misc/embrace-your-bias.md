@@ -33,17 +33,33 @@ Consider something that requires action, like which car to buy:
 - articles a-plenty can be found "_the top 24 (any vehicle type) to buy this year_"
 - video reviews of cars are all over the web, and the car's ["quirks and features"](https://www.youtube.com/@DougDeMuro) can be entertaining to learn about
 - friends, family, and familiar trusted auto brands might also be a source of input (_"...this honda has been running for 25 years and all the bells and whistles still work fine!"_)
+
+Each of these may be "the best" option, and also maby be "missing out" on a "better" option.
 #### We Make Shortcuts Assembling Knowledge
 - I might need to make a decision quick - reducing the sher volume of input I can handle
 - I might only have a limited local set of car options
 - I might have social pressure to choose from family, friends, and peers, reducing my options yet again
 - I might really like the car I have and might not even consider other brands due to a sense of brand loyalty and trust
 
+Each of these may be "the best" option, and also maby be "missing out" on a "better" option.
 ### We Assume Meaning
-- 
+Terms like "best", "risk", "easy"... these things are succinct value statements - 
+- I might assume that the dealer with the best load interest rate is the best
+- I might assume that new options, with the most new tech with the most opportunity to fail, are more risky than trusty reliable simpler vehicles
+- I might assume that a specific drivetrain is best
+
+Each of these may be "the best" option, and also maby be "missing out" on a "better" option.
 #### We Make Shortcuts When Assuming Meaning
 
+I might make most decisions based on ...
+- the trust I have in my family's input
+- the quirkiest and most fun option
+- the strongest sense of need and time efficiency to get the task done
+
+Each of these may be "the best" option, and also maby be "missing out" on a "better" option.
+
 ### We Assert Our Will
+
 #### We Make Shortcuts When Asserting Our Will
 
 
