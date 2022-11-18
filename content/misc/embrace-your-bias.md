@@ -31,15 +31,16 @@ There is a lot of information out there.
 Consider something that requires action, like which car to buy:
 - local dealers may be available for consultations
 - articles a-plenty can be found "_the top 24 (any vehicle type) to buy this year_"
-- video reviews of cars can be found, even ones that cover 
+- video reviews of cars are all over the web, and the car's ["quirks and features"](https://www.youtube.com/@DougDeMuro) can be entertaining to learn about
+- friends, family, and familiar trusted auto brands might also be a source of input (_"...this honda has been running for 25 years and all the bells and whistles still work fine!"_)
 #### We Make Shortcuts Assembling Knowledge
-There are a bunch of "ways" that we might "shortcut" this information gathering process...
-- Let me gather content related to 1 specific top across candidates (_i.e any "hot topic" of the moment_) rather than gathering all info about all topics for all candidates
-- Let me look into the few candidates just within the party I'm already affiliated with
-- Let me "time box" this - I'm not going to do this all night long - I have other things to do (_have you SEEN the ["Life Uncontained" youtube channel](https://www.youtube.com/channel/UC-l69It3hxAY3tkBH_utLNQ)?! FASCINATING!_)
-
+- I might need to make a decision quick - reducing the sher volume of input I can handle
+- I might only have a limited local set of car options
+- I might have social pressure to choose from family, friends, and peers, reducing my options yet again
+- I might really like the car I have and might not even consider other brands due to a sense of brand loyalty and trust
 
 ### We Assume Meaning
+- 
 #### We Make Shortcuts When Assuming Meaning
 
 ### We Assert Our Will
