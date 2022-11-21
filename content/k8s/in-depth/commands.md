@@ -13,6 +13,7 @@ order: 98
   - [Terminal Ninja Commands](#terminal-ninja-commands)
     - [Bash Aliases](#bash-aliases)
     - [Imperative commands](#imperative-commands)
+  - [Create Vs Apply](#create-vs-apply)
 # Creating Objects Imperatively
 This is intended to be a brief collection of commands. Read the other posts for more deets.  
 [Kubectl docs](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#create) cover imperative commands in extensive details.  
@@ -61,6 +62,8 @@ alias kk=kubectl
 alias kkg"kubectl get"
 alias kkd="kubectl describe"
 alias kkc="kubeclt create"
+alias kkdel="kubectl delete"
+alias kkconf="kubectl config"
 ```
 ### Imperative commands
 Check out the [kubectl cheatsheet docs for more](https://kubernetes.io/docs/reference/kubectl/cheatsheet/).   
@@ -82,6 +85,16 @@ kk config get-contexts
 kk config current-context
 kk config use-context some-named-context
 
+
+#
+# CONFIG: create config objects
+#
+
+# create a user in the kubeconfig file @ /root/.kube/config
+#  LEVERAGE a client-cert from a file 
+#  LEVERAGE a client-key from a file 
+# kubectl config set-credentials <user-name> --client-certificate=/the/cert/file.crt --client-key=the/key/file.key
+kubectl config set-credentials webappadmin --client-certificate=/webappadmin.crt --client-key=/webappadmin.key
 
 
 # 
@@ -144,4 +157,19 @@ node/cp untainted
 # show cpu + memory highlights
 kk top nodes
 kk top pods
+```
+
+## Create Vs Apply
+```bash
+┌─────────┬───────────────────────┬────────────────────────┐
+│ command │ object does not exist │ object already exists  │
+├─────────┼───────────────────────┼────────────────────────┤
+│ create  │ create new object     │          ERROR         │ 
+│         │                       │                        │
+│ apply   │ create new object     │ configure object       │
+│         │ (needs complete spec) │ (accepts partial spec) │
+│         │                       │                        │
+│ replace │         ERROR         │ delete object          │
+│         │                       │ create new object      │
+└─────────┴───────────────────────┴────────────────────────┘
 ```
