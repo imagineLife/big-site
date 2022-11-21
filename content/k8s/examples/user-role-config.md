@@ -14,6 +14,9 @@ order: 19
 - [Set the current context for jake](#set-the-current-context-for-jake)
 - [Use the new context](#use-the-new-context)
 
+
+NOTE: the order here matters a bit. The last thing that can happen is using the new context. This seemed counterintuitive to me at first.  
+  
 ## Enable User Credentials for User "Jake" 
 Here, "jake" gets added as a user to the kubeconfig file.
 ```bash
