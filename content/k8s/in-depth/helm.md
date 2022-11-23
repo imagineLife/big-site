@@ -62,7 +62,6 @@ Get K8s and kubectl installed on the host machine - here, my laptop.
 ```bash
 # install with snap
 sudo snap install helm --classic
-
 # instsall with apt
 # add key + sources list prior
 curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
@@ -71,6 +70,15 @@ echo "deb https://](https://baltocdn.com/helm/stable/debian/ all main" | sudo te
 sudo apt-get install helm
 ```
 
+Another set of directions from the [debia/ubuntu section of the docs](https://helm.sh/docs/intro/install/#from-apt-debianubuntu):
+```bash
+curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
+sudo apt-get install apt-transport-https --yes
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+sudo apt-get update
+sudo apt-get install helm
+
+```
 ## Helm Charts
 Consider Kubernetes across environments: qa might require different details across k8s objects than production: container image versions, pv storage disk allocation limits, object passwords, etc.  
 These Values can be abstracted out of K8s object config files, entirely, and referenced with `key: {{ .Values.value-key-here }}`. `Values.yaml` will then contain values to be used across the kubernetes objects. Templates for all of the the kubernetes objects can also be created.  
