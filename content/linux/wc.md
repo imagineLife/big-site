@@ -53,4 +53,9 @@ wc -l testfile.txt
       2 testfile.txt
 ```
 
-
+## Piping
+```bash
+# note: npm outdated includes a "header", so the number may be 1 greater than the total number of outdated modules
+npm outdated | wc -l
+      34
+```
