@@ -133,7 +133,7 @@ kk explain jobs
 ## Setting up a user, role, rolebinding
 ```bash
 # ROLE
-kk create role dev-role --resources=pods,svc,
+kk create role dev-role --resources=pods,svc
 ```
 ## Config Updates
 Here, deal with users, and contexts
