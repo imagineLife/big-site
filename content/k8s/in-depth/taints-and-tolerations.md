@@ -28,6 +28,7 @@ Taints are interpreted by the K8s scheduler, and the scheduler takes into accoun
     - [See the Impact of Taints And Tolerations](#see-the-impact-of-taints-and-tolerations)
     - [In Action](#in-action)
 - [Toggle Schedulability of A Node](#toggle-schedulability-of-a-node)
+- [Remove A Node From The Cluster](#remove-a-node-from-the-cluster)
 
 ## Taint Effects
 There are 3 "types" of taints, describe by kubernetes as "effects": NoSchedule, PreferNoSchedule, and NoExecute.  
@@ -173,10 +174,18 @@ node/controlplane untainted
 ```
 
 # Toggle Schedulability of A Node
+see [k8s docs](https://kubernetes.io/docs/concepts/architecture/nodes/#manual-node-administration) for a few details:  
+
 ```bash
 # mark as unschedulable
 kubectl cordon <node-here>
 
 # mark as schedulable
 kubectl uncordon <node-here>
+```
+
+# Remove A Node From The Cluster
+[K8s Docs](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/#use-kubectl-drain-to-remove-a-node-from-service): Remove a node - this can be useful "_...before you perform maintenance on the node (e.g. kernel upgrade, hardware maintenance, etc.)_"
+```bash
+kubectl drain nodeNameHere
 ```
