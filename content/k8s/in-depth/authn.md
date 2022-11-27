@@ -320,3 +320,7 @@ roleRef:
   - `kubectl config use-context context-name-here`
 - get the current context
   - `kubectl config current-context`
+- use a context from a custom config file 
+  - file called `my-kube-config`
+  - context in that file called `jrdevops`
+  - `kubectl config --kubeconfig=/root/my-kube-config use-context jrdevops`
