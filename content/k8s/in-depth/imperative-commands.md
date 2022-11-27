@@ -219,4 +219,7 @@ this will
 - use a cert + key combo for the user from local key/cert files
 ```bash
 kubectl config set-credentials joe --client-certificate ./joe.crt --client-key ./joe.key
+
+# display the user(s) in the kubeconf file
+kubectl get-users
 ```
