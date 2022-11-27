@@ -92,7 +92,7 @@ Note the [K8s Docs on RBAC Auth](https://kubernetes.io/docs/reference/access-aut
 - this can deny the api request when above validation fails
 
 Settings like these can be set for the kube-apiserver pod, as args.  
-The defualt kube-apiserver file is located at `/etc/kubernetes/manifests/kube-apiserver.yaml`.
+The default kube-apiserver file is located at `/etc/kubernetes/manifests/kube-apiserver.yaml`.
 
 #### Enable a plugin
 ```bash
