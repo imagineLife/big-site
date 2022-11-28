@@ -14,6 +14,7 @@ order: 98
     - [Bash Aliases](#bash-aliases)
     - [Imperative commands](#imperative-commands)
   - [Create Vs Apply](#create-vs-apply)
+  - [Copy Files Between Nodes](#copy-files-between-nodes)
 # Creating Objects Imperatively
 This is intended to be a brief collection of commands. Read the other posts for more deets.  
 [Kubectl docs](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#create) cover imperative commands in extensive details.  
@@ -172,4 +173,10 @@ kk top pods
 │ replace │         ERROR         │ delete object          │
 │         │                       │ create new object      │
 └─────────┴───────────────────────┴────────────────────────┘
+```
+
+## Copy Files Between Nodes
+while the terminal is "in" a node, say the `controlplane` node, use the `scp` command (_OpenSSH secure file copy_) to copy to another node, say the node `worker2`:
+```bash
+controlplane$ scp path/to/files/on/host worker2:/path/on/worker2/node
 ```
