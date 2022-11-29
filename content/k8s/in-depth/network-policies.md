@@ -167,6 +167,8 @@ spec:
         matchLabels:
           name: prod
     # traffic source port(s)
+    # ...DONT FORGET PORTS CONFIG in a network policy
+    # a "default" could be protocol:tcp port:80
     ports:
       - protocol: TCP
         port: 27017
