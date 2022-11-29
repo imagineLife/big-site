@@ -9,6 +9,7 @@ order: 2
 ---
 # Kubernetes Concepts
 - [Kubernetes Concepts](#kubernetes-concepts)
+  - [Be Tedious](#be-tedious)
   - [Nodes](#nodes)
   - [Clusters](#clusters)
   - [A Master Node](#a-master-node)
@@ -41,7 +42,13 @@ With Kubernetes, one of the primary goals is to...
 K8s does not deploy containers directly on a worker node, though.  
 Containers are encapsulated in [pods](/k8s/on-pods): single instances of an app or suite of tightly-coupled apps. Pods are the smallest object that can be created/managed in K8s.  
 
-Containers in a pod run in parallel by defaylt.  
+Containers in a pod run in parallel by default.  
+
+## Be Tedious
+Be extremely attentitive to details - slow down and nail all the bits in any "directions" given to create and/or interact with a cluster 
+- ports
+- names of objects (_pods, containers, volumes, secretsm env var names, etc_)
+
 ## Nodes
 A node is a machine, physical or virtual, where K8s is installed. Nodes might be known as minions.  
 
