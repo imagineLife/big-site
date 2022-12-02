@@ -20,6 +20,7 @@ Node Affinity help match pods to nodes more flexibly than node selectors.
   - [Combining Taints, Tolerations, and NodeAffinity](#combining-taints-tolerations-and-nodeaffinity)
   - [Things To Be Able To Do](#things-to-be-able-to-do)
   - [A Visualization](#a-visualization)
+  - [A Deployment Definition WIth NodeAffinity](#a-deployment-definition-with-nodeaffinity)
 
 
 Set a label on a node:
@@ -190,4 +191,41 @@ kubectl create -f asdf.yaml
 
   DP --"X: Does not match affinity + label"--> NDB
   DP --"YES!"--> NDA
+```
+
+## A Deployment Definition WIth NodeAffinity
+NOTE: When building a deployment definition file, the nodeAffinity goes in `spec.template.spec.<here>`.  
+Here, an api deployment is intended to go on a specific node...   
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dep-with-affinity
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: rest-api
+  #  pod templates nested
+  #  includes nested metadata & spec
+  template:
+    metadata:
+      labels:
+        app: rest-api
+    spec:
+      # HERE! is the affinity
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelector:
+            - matchExpressions:
+              - key: node_type
+                operator: In
+                values:
+                - api_friendly
+      # ... the rest of the pod definition
+      containers:
+      - name: api-box
+        image: homegrownimage:1.2.3 
 ```
