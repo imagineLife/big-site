@@ -149,6 +149,7 @@ Multiple containers in a single pod are best used when the containers are _tight
 Containers in a single pod can all access one another through `localhost`.  
 
 ## A Pod Running A Container with an explicit command
+Here, a pod runs the cowsay image with an explicity string passed to the cowsay program:
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -162,6 +163,19 @@ spec:
     - sh
     - -c
     - "cowsay this was run with a command in a container in a pod #TheMatrix"
+```
+This will output something like...
+```bash
+  ________________________________
+/ this was run with a command in a \
+\ container in a pod #TheMatrix    /
+  --------------------------------
+         \   ^__^ 
+          \  (oo)\_______
+             (__)\       )\/\
+                 ||----w |
+                 ||     ||
+    
 ```
 
 ## Parallels to Docker
