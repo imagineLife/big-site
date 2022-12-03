@@ -338,4 +338,4 @@ To spelling.
 To port numbers.  
 To Directions.  
 Pod names, deployment names, service names, namespace names.  
-These things, although they don't take up a lot of code (_perhaps compared to a backend system or a complex single-page app_), these _details_ make-or-break the kubernetes world.  
+These things, although they don't take up a lot of code (_perhaps compared to building a backend system or a complex single-page app_), these _details_ make-or-break the kubernetes world.  
