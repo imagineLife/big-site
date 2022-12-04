@@ -73,6 +73,10 @@ Some Auth settings defined in the `kube-apiserver` file are
 
 These settings can be config'd in the `kube-apiserver` file:
 - `--authorization-mode=Node,RBAC` or something like `--authorization-mode=Webhook`
+The apiserver is(_can be?_) a pod & the pod definition can be seen with something like...
+```bash
+kubectl get pod kube-apiserver-controlplane --namespace=kube-system -o yaml
+```
 
 #### A Few Notes On RBAC
 RBAC seems to be the preferred authz method.  
