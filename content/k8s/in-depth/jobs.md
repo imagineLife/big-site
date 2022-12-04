@@ -25,6 +25,7 @@ Job-oriented workloads perform a task and then are done.
     - [Kubernetes Will Restart until the Completions are Successful](#kubernetes-will-restart-until-the-completions-are-successful)
     - [Run Jobs In Parralel](#run-jobs-in-parralel)
   - [CronJobs](#cronjobs)
+  - [Backing a Job Off After Failed attempts](#backing-a-job-off-after-failed-attempts)
 
 
 
@@ -280,4 +281,26 @@ Epic Imperative line:
 ```bash
 kk create cronjob throw-dice-cron-job --image=kodekloud/throw-dice --schedule="30 21 * * *"
 cronjob.batch/throw-dice-cron-job created
+```
+
+## Backing a Job Off After Failed attempts
+[K8s docs on backoffLimits](https://kubernetes.io/docs/concepts/workloads/controllers/job/#pod-backoff-failure-policy):  
+jobs can fail, outright, after a set number of retries with `spec.backoffLimit`.
+```yaml
+apiVersion: batch/v1
+kindL Job
+metadata:
+  name: whalejob
+spec:
+  # JOB DEETS
+  completions: 5
+  backoffLimit: 6
+  # the job spec
+  template:
+    # the "pod" spec that the job runs
+    spec:
+      containers:
+      - name: whalesay
+        image: docker/whalesay
+        command: ["cowsay this is a string"]
 ```
