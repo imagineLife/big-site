@@ -18,6 +18,7 @@ order: 3
   - [Explaining](#explaining)
   - [Setting up a user, role, rolebinding](#setting-up-a-user-role-rolebinding)
   - [Config Updates](#config-updates)
+  - [Get an Ingress Controller Started](#get-an-ingress-controller-started)
   - [Shorthand resources](#shorthand-resources)
   - [Kubectl Config Overview](#kubectl-config-overview)
     - [Configure User Credentials](#configure-user-credentials)
@@ -137,8 +138,15 @@ kk create role dev-role --resources=pods,svc
 ```
 ## Config Updates
 Here, deal with users, and contexts
+
 ```bash
 kubectl config set-credentials username --username=kubeuser --password=kubepassword
+```
+
+## Get an Ingress Controller Started
+Ingress Controller Config has more details than this command, but this can get the yaml config started:
+```bash
+kubectl create ingress videoingress --rule="theurl.com/videos=video-service:8765" --dry-run=client -o yaml > vidingress.yaml
 ```
 
 ## Shorthand resources

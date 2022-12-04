@@ -12,6 +12,7 @@ order: 14
 Periodically test an app in a container.  
 If the test fails, the container is destroyed & recreated.  
 This allows devs to "decide" what makes an app healthy.  
+**NOTE**: the livenessProve goes IN the container definition. This applies to a pod AND this can apply in a deployment of pods!
 
 ```yaml
 apiVersion: v1
@@ -48,4 +49,38 @@ livenessProbe:
   initialDelaySeconds: 5
   periodSeconds: 1
   failureThreshold: 10 
+```
+
+## Liveness Probes in a Deployment
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: cowdep
+  name: cowdep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cowdep
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: cowdep
+    spec:
+      containers:
+      - image: docker/cowsay
+        name: cowsay
+        command:
+        - sh
+        - -c
+        - "cowsay horselisten"
+        # THIS is the liveness probe, IN the container definition block
+        livenessProbe:
+          exec:
+            command: ["cat", "check/if/its/alive"]
+
 ```

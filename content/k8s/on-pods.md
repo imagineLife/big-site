@@ -22,6 +22,7 @@ order: 4
     - [Scalability with Nodes](#scalability-with-nodes)
   - [One Pod with Many Containers](#one-pod-with-many-containers)
   - [A Pod Running A Container with an explicit command](#a-pod-running-a-container-with-an-explicit-command)
+    - [Cowsay and a shell command](#cowsay-and-a-shell-command)
   - [Parallels to Docker](#parallels-to-docker)
   - [Deploying a pod using the cli](#deploying-a-pod-using-the-cli)
     - [See Pods available](#see-pods-available)
@@ -149,7 +150,10 @@ Multiple containers in a single pod are best used when the containers are _tight
 Containers in a single pod can all access one another through `localhost`.  
 
 ## A Pod Running A Container with an explicit command
+### Cowsay and a shell command
 Here, a pod runs the cowsay image with an explicity string passed to the cowsay program:
+- run `shell`
+- pass a string to the shell command
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -175,7 +179,6 @@ This will output something like...
              (__)\       )\/\
                  ||----w |
                  ||     ||
-    
 ```
 
 ## Parallels to Docker
