@@ -31,6 +31,7 @@ order: 2
     - [Cluster-Wide Tooling Not Available](#cluster-wide-tooling-not-available)
     - [Kube-ApiServer](#kube-apiserver)
     - [Kube-Scheduler](#kube-scheduler)
+  - [Getting Started](#getting-started)
   - [A Diagram](#a-diagram)
 
 With Kubernetes, one of the primary goals is to...
@@ -198,6 +199,14 @@ This is the only agent connected to the etcd db.
 ### Kube-Scheduler
 Determines which node(s) host which pod(s).  
 Tries to view resource availability.  
+
+## Getting Started
+`kubeadm init` and `kubeadm join` are 2 commands that work to help setup kubernetes on some nodes.  
+[kubernetes "implementation details" docs](https://kubernetes.io/docs/reference/setup-tools/kubeadm/implementation-details/) give more on the notes in this doc:
+- be secure (_including RBAC and security keys, etc_)
+- be user-friendly to setup a kubernetes cluster
+- `/etc/kubernetes` is an important directory to find manifests and moer
+- 
 
 ## A Diagram
 ```mermaid
