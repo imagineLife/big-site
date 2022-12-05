@@ -237,9 +237,10 @@ pw123,userFifth5,u0005
 ```
 
 #### Edit The Kube-ApiServer Pod Definition File
-The Kube-ApiServer works with a pod def file at `/etc/kubernetes/manifests/kube-apiserver.yaml`.  
-The Kube-apiserver default config file is located at `/etc/kubernetes/manifests/kube-apiserver.yaml`.  
-The Kube-apiserver default config file is located at `/etc/kubernetes/manifests/kube-apiserver.yaml`.  
+
+This file location matters.  
+The kubeapi server config file can be found at `/etc/kubernetes/manifests/kube-apiserver.yaml`.  
+The kubeapi server config file can be found at `/etc/kubernetes/manifests/kube-apiserver.yaml`.  
 
 Add the command to the command list to include the user-auth csv created above:
 ```yaml
