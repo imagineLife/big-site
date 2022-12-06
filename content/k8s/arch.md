@@ -205,8 +205,7 @@ Tries to view resource availability.
 [kubernetes "implementation details" docs](https://kubernetes.io/docs/reference/setup-tools/kubeadm/implementation-details/) give more on the notes in this doc:
 - be secure (_including RBAC and security keys, etc_)
 - be user-friendly to setup a kubernetes cluster
-- `/etc/kubernetes` is an important directory to find manifests and moer
-- 
+- `/etc/kubernetes` is an important directory to find manifests and more
 
 ## A Diagram
 ```mermaid
