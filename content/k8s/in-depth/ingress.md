@@ -28,12 +28,13 @@ Without ingress, a reverse-proxy might be useful as a type of  "ingress controll
     - [Service Exposing Ingress Controller to the World](#service-exposing-ingress-controller-to-the-world)
     - [Service Account Config](#service-account-config)
   - [Ingress Resources](#ingress-resources)
-    - [A Trivial definition File](#a-trivial-definition-file)
+  - [A Workflow for Exposing a Project to the world](#a-workflow-for-exposing-a-project-to-the-world)
+    - [A Trivial Ingress definition File](#a-trivial-ingress-definition-file)
     - [Rules](#rules)
       - [Domain Or HostName](#domain-or-hostname)
       - [Path](#path)
   - [Consider Re-Writing Urls](#consider-re-writing-urls)
-  - [Useful Commands & References](#useful-commands--references)
+  - [Useful Commands \& References](#useful-commands--references)
   - [Things To Be Able To Do](#things-to-be-able-to-do)
 
 ## Ingress Requires 2 Things: Rules and A Controller  
@@ -164,7 +165,14 @@ metadata:
 ## Ingress Resources
 Rules + Config on the Ingress Controller: route traffic to different apps (_pods_) based on urls, and/or domain doman.
 
-### A Trivial definition File
+## A Workflow for Exposing a Project to the world
+- Create a Deployment
+  - `kubectl create deployment.... etc...`
+- Create A ClusterIP Service to expose the deployment
+  - `kubectl create service clusterip ...`
+- Create an Ingress Resource to expose the project to the world
+  - this one can get started with something like `kubectl create ingress projectingress --rule="theurl.com/aPath*=<the-service-name>:<a-port-to-expose!>"`
+### A Trivial Ingress definition File
 Here, an ingress resource def file:
 ```yaml
 apiVersion: networking.k8s.io/v1
