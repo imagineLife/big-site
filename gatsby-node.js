@@ -7,7 +7,7 @@ exports.createPages = async ({
   const res = await graphql(`
     query {
       scrum: allMarkdownRemark(
-        sort: { fields: frontmatter___order }
+        sort: { frontmatter: { order: ASC } }
         filter: {
           frontmatter: { order: { gt: 0 }, slug: { regex: "/scrum/" } }
         }
@@ -24,7 +24,7 @@ exports.createPages = async ({
         }
       }
       strengths: allMarkdownRemark(
-        sort: { fields: frontmatter___order }
+        sort: { frontmatter: { order: ASC } }
         filter: {
           frontmatter: { order: { gt: 0 }, slug: { regex: "/strengths/" } }
         }
@@ -41,7 +41,7 @@ exports.createPages = async ({
         }
       }
       recipes: allMarkdownRemark(
-        sort: { fields: frontmatter___order }
+        sort: { frontmatter: { order: ASC } }
         filter: {
           frontmatter: { order: { gt: 0 }, slug: { regex: "/recipes/" } }
         }
@@ -57,7 +57,7 @@ exports.createPages = async ({
         }
       }
       febs: allMarkdownRemark(
-        sort: { fields: frontmatter___order }
+        sort: { frontmatter: { order: ASC } }
         filter: { frontmatter: { order: { gt: 0 }, slug: { regex: "/febs/" } } }
       ) {
         pages: edges {
@@ -72,10 +72,8 @@ exports.createPages = async ({
         }
       }
       k8s: allMarkdownRemark(
-        sort: { fields: frontmatter___order }
-        filter: {
-          frontmatter: { order: { gt: 0 }, slug: { regex: "/k8s/" } }
-        }
+        sort: { frontmatter: { order: ASC } }
+        filter: { frontmatter: { order: { gt: 0 }, slug: { regex: "/k8s/" } } }
       ) {
         pages: edges {
           page: node {
@@ -89,7 +87,7 @@ exports.createPages = async ({
         }
       }
       linux: allMarkdownRemark(
-        sort: { fields: frontmatter___order }
+        sort: { frontmatter: { order: ASC } }
         filter: {
           frontmatter: { order: { gt: 0 }, slug: { regex: "/linux/" } }
         }
@@ -106,7 +104,7 @@ exports.createPages = async ({
         }
       }
       py: allMarkdownRemark(
-        sort: { fields: frontmatter___order }
+        sort: { frontmatter: { order: ASC } }
         filter: { frontmatter: { order: { gt: 0 }, slug: { regex: "/py/" } } }
       ) {
         pages: edges {
@@ -138,7 +136,7 @@ exports.createPages = async ({
         }
       }
       misc: allMarkdownRemark(
-        sort: { fields: frontmatter___order }
+        sort: { frontmatter: { order: ASC } }
         filter: {
           frontmatter: { order: { gt: 0 }, slug: { regex: "/^misc/" } }
         }
@@ -155,7 +153,7 @@ exports.createPages = async ({
         }
       }
       mongo: allMarkdownRemark(
-        sort: { fields: frontmatter___order }
+        sort: { frontmatter: { order: ASC } }
         filter: {
           frontmatter: { order: { gt: 0 }, slug: { regex: "/^mongo/" } }
         }
@@ -172,7 +170,7 @@ exports.createPages = async ({
         }
       }
       mongosectioncontent: allMarkdownRemark(
-        sort: { fields: frontmatter___order }
+        sort: { frontmatter: { order: ASC } }
         filter: { frontmatter: { slug: { regex: "/^mongo//" } } }
       ) {
         pages: edges {
@@ -187,7 +185,7 @@ exports.createPages = async ({
         }
       }
       node: allMarkdownRemark(
-        sort: { fields: frontmatter___order }
+        sort: { frontmatter: { order: ASC } }
         filter: {
           frontmatter: { order: { gt: 0 }, slug: { regex: "/^node/" } }
         }
@@ -204,7 +202,7 @@ exports.createPages = async ({
         }
       }
       httpserver: allMarkdownRemark(
-        sort: { fields: frontmatter___order }
+        sort: { frontmatter: { order: ASC } }
         filter: {
           frontmatter: { order: { gt: 0 }, slug: { regex: "/http-server/" } }
         }
@@ -264,7 +262,7 @@ exports.createPages = async ({
   ].forEach(({ page }) => {
     createPage({
       path: page.overview.slug || null,
-      component: mdTemplate,
+      component: `${mdTemplate}`,
       context: {
         slug: page.overview.slug,
         parentDir: page.overview.parentDir || page.overview.slug,
