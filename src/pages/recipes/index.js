@@ -11,7 +11,7 @@ const IndexPage = () => (
     query={graphql`
       query Recipes {
         recipes: allMarkdownRemark(
-          sort: { fields: frontmatter___order }
+          sort: { frontmatter: { order: ASC } }
           filter: {
             frontmatter: { order: { gt: 0 }, slug: { regex: "/recipes/" } }
           }
