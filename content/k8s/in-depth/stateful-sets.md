@@ -31,7 +31,9 @@ Stateful sets, though, ["maintain a sticky identifier"](https://kubernetes.io/do
 ## Explanation Through Diagrams
 ### Starting With A Databse
 Starting small, consider a db being required in a "Full-Stack" application. Here, a DB, lets say mongoDB for those JS and application-first data architecture fans - 
-```mermaid
+Diagram coming soon...
+```js
+// mermaid
 flowchart
   DB["Database Instance"]
 
@@ -45,7 +47,9 @@ For more reliability, replication is required for DB resilliancy. New Servers wi
 - application-to-db communication go to the now "master" node
 - the "master" node gets replicated to 2 "slave" instances, where the data is cloned
 
-```mermaid
+Diagram coming soon...
+```js
+// mermaid
 flowchart
   DB["Database Instance"]
   DB2["Database Instance"]
@@ -167,7 +171,9 @@ spec:
         persistentVolumeClaim:
           claimName: db-vol-claim
 ```
-```mermaid
+Diagram coming soon...
+```js
+// mermaid
   flowchart LR
   
   %%
@@ -239,7 +245,9 @@ spec:
           storage: 500Mi
 ```
 
-```mermaid
+Diagram coming soon...
+```js
+// mermaid
   flowchart LR
   
   %%

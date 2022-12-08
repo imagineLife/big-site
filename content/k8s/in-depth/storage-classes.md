@@ -39,7 +39,9 @@ This is **static provisioning**.
 - the provisioner can _automatically create storage_ and attach the storage to pods when a claim is made.  
 - StorageClasses allow for external storage providers, like GCE, Amazon, or others to create the disk
 
-```mermaid
+Diagram coming soon...
+```js
+// mermaid
 flowchart LR
   DRV["Data Drive"]
   SC["StorageClass"]
