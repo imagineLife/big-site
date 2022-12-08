@@ -11,7 +11,9 @@ db.coll.createIndex({address.zipcode:1, cuisine: 1})
 db.coll.find({"address.zipcode": {$gt: '50000'}, cuisine: 'Sushi'}).sort({rating: -1})
 ```
 
-```mermaid
+Diagram coming soon...
+```js
+// mermaid
 flowchart BT;
   IXSCAN-->FETCH;
   FETCH-->SORT;
@@ -34,7 +36,9 @@ WIth these indexes, the query plan would look different
 db.coll.createIndex({cuisine: 1, stars: 1})
 ```
 
-```mermaid
+Diagram coming soon...
+```js
+// mermaid
 flowchart BT;
   IXSCAN-->FETCH;
 ```

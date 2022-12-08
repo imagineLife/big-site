@@ -24,7 +24,9 @@ Here are a bunch of technologies that may or may not be involved in a web-app.
 
 ## A Visual
 
-```mermaid
+Diagram coming soon...
+```js
+// mermaid
   flowchart TB
 %% List of nodes at top
 %% Composition of nodes into Sub-Graphs & flow layout in graph below
