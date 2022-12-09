@@ -192,6 +192,9 @@ if (process.env.NODE_ENV === 'production') {
       },
     },
   });
+  pluginsArr.push({
+    resolve: 'gatsby-plugin-no-sourcemaps',
+  });
 }
 module.exports = {
   siteMetadata: {
