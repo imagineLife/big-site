@@ -166,7 +166,9 @@ kubectl create -f asdf.yaml
 ```
 
 ## A Visualization
-```mermaid
+Diagram coming soon...
+```js
+// mermaid
   flowchart 
     direction TB
 

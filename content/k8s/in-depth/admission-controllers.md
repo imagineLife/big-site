@@ -23,7 +23,9 @@ Every time a _request goes through_ the kubectl cli...
 
 NOTE: built-in admission controllers run in an order. The order makes logical sense in order of applicability.  
 
-```mermaid
+Diagram coming soon...
+```js
+// mermaid
 flowchart LR
 
   KTL["Kubectl gui"]
@@ -53,7 +55,7 @@ flowchart LR
     - [View All Enabled Admission Controllers](#view-all-enabled-admission-controllers)
     - [Add An Admission Controller](#add-an-admission-controller)
   - [Custom External Admission Controllers with Webhooks](#custom-external-admission-controllers-with-webhooks)
-    - [Build & Deploy a webhook server](#build--deploy-a-webhook-server)
+    - [Build \& Deploy a webhook server](#build--deploy-a-webhook-server)
   - [Things To Do](#things-to-do)
     - [Demo Config files](#demo-config-files)
       - [A Deployment](#a-deployment)

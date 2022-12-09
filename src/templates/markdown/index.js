@@ -25,14 +25,6 @@ export default function Template({
 
   // ONLY create footer links when order is explicit in frontmatter
   if (order !== null && parentDir !== null) {
-    //   console.log('pages.details');
-    //   console.log(pages.map((d) => d.details));
-    //   console.log('parentDir');
-    //   console.log(parentDir);
-    // console.log(
-    //   `ORDER: ${order} - - PAGES: ${pages.length} - - - parentDir: ${parentDir}`,
-    // );
-
     footerLinks = [];
     // get previous, && next page details
     let prevPage = pages[order - 1 - 1];
@@ -125,7 +117,7 @@ export const pgQuery = graphql`
       }
     }
     pageSummaries: allMarkdownRemark(
-      sort: { fields: frontmatter___order }
+      sort: { frontmatter: { order: ASC } }
       filter: { frontmatter: { parentDir: { eq: $parentDir } } }
     ) {
       pages: nodes {

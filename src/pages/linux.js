@@ -18,7 +18,7 @@ const IndexPage = () => (
       query LinuxTOC {
         linux: allMarkdownRemark(
           filter: { frontmatter: { slug: { regex: "/linux/" } } }
-          sort: { fields: frontmatter___order }
+          sort: { frontmatter: { order: ASC } }
         ) {
           pages: edges {
             page: node {

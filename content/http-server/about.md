@@ -9,8 +9,9 @@ order: 1
 ---
 
 # Serving Content Over The Web
-
-```mermaid
+Diagram Coming soon...
+```js
+// mermaid
 sequenceDiagram
   participant Browser
 

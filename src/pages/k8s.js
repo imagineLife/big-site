@@ -17,8 +17,13 @@ const IndexPage = () => (
     query={graphql`
       query k8sTOC {
         k8s: allMarkdownRemark(
-          filter: { frontmatter: { slug: { regex: "/k8s/" }, parentDir: { regex: "/k8s/" } } }
-          sort: { fields: frontmatter___order }
+          filter: {
+            frontmatter: {
+              slug: { regex: "/k8s/" }
+              parentDir: { regex: "/k8s/" }
+            }
+          }
+          sort: { frontmatter: { order: ASC } }
         ) {
           pages: edges {
             page: node {
@@ -33,16 +38,16 @@ const IndexPage = () => (
       }
     `}
     render={({ k8s: { pages } }) => {
-      let rootPages = []
-      let inDepthPages = []
+      let rootPages = [];
+      let inDepthPages = [];
       // categorize into "Getting Started" and "In-Depth"
-      pages.forEach((p,pidx) => { 
+      pages.forEach((p, pidx) => {
         if (!p.page.overview.slug.includes('in-depth')) {
           rootPages.push(p);
-        } else { 
-          inDepthPages.push(p)
+        } else {
+          inDepthPages.push(p);
         }
-      })
+      });
       return (
         <Fragment>
           <Helmet>

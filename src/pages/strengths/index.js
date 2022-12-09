@@ -12,7 +12,7 @@ const IndexPage = () => (
     query={graphql`
       query StrengthsTOC {
         strengths: allMarkdownRemark(
-          sort: { fields: frontmatter___order }
+          sort: { frontmatter: { order: ASC } }
           filter: {
             frontmatter: { order: { gt: 0 }, slug: { regex: "/strengths/" } }
           }

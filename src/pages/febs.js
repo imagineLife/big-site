@@ -18,7 +18,7 @@ const IndexPage = () => (
       query FebsTOC {
         febs: allMarkdownRemark(
           filter: { frontmatter: { slug: { regex: "/febs/" } } }
-          sort: { fields: frontmatter___order }
+          sort: { frontmatter: { order: ASC } }
         ) {
           pages: edges {
             page: node {
