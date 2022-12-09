@@ -21,6 +21,7 @@
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
     "@mui/material": "^5.8.7",
+    "@netlify/build-info": "^6.0.7",
     "d3-scale": "^3.3.0",
     "gatsby": "^5.0.0",
     "gatsby-background-image": "^1.6.0",
