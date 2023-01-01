@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import { StaticQuery, graphql, Link } from 'gatsby';
 import Toc from './../components/TOC';
 import Card from './../components/Card';
-import Helmet from 'react-helmet';
 import './mongo.scss';
 
 const IndexPage = () => (
@@ -26,12 +25,6 @@ const IndexPage = () => (
     render={({ mongodirs: { dirs } }) => {
       return (
         <Fragment>
-          <Helmet>
-            <title>MongoDB Blog</title>
-            <meta name="description" content="Blog posts on MongoDB" />
-            <meta property="og:title" content="MongoDB Blog" />
-            <meta property="og:url" content="http://laursen.tech/mongo" />
-          </Helmet>
           <Toc sub="Topics" title="MongoDB" childrenTop>
             <section id="notes">
               <p>
@@ -83,3 +76,13 @@ const IndexPage = () => (
 );
 
 export default IndexPage;
+export function Head() {
+  return (
+    <Fragment>
+      <title>MongoDB Blog</title>
+      <meta name="description" content="Blog posts on MongoDB" />
+      <meta property="og:title" content="MongoDB Blog" />
+      <meta property="og:url" content="http://laursen.tech/mongo" />
+    </Fragment>
+  );
+}

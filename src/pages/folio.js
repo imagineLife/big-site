@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import './folio.scss';
 import FolioItem from './../components/folioItem';
 import TechList from './../components/techList';
-import { Helmet } from 'react-helmet'
 import { Link } from 'gatsby';
 
 const techs = {
@@ -334,16 +333,6 @@ const folioItems = [
 
 export default function Folio() {
   return (
-    <React.Fragment>
-      <Helmet>
-        <title>Eric (Jake) Laursen Portfolio</title>
-        <meta
-          name="description"
-          content="Come check out some examples of webapps, and some writing about tech, personality, team development, and more!"
-        />
-        <meta property="og:title" content="Jake (Eric) Laursen Portfolio" />
-        <meta property="og:url" content="http://laursen.tech" />
-      </Helmet>
       <main role="main" className="folio">
         <section className="welcome">
           <div className="text-box">
@@ -387,6 +376,19 @@ export default function Folio() {
           ))}
         </section>
       </main>
-    </React.Fragment>
+  );
+}
+
+export function Head() {
+  return (
+    <Fragment>
+      <title>Eric (Jake) Laursen Portfolio</title>
+      <meta
+        name="description"
+        content="Come check out some examples of webapps, and some writing about tech, personality, team development, and more!"
+      />
+      <meta property="og:title" content="Jake (Eric) Laursen Portfolio" />
+      <meta property="og:url" content="http://laursen.tech" />
+    </Fragment>
   );
 }

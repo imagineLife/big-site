@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { StaticQuery, graphql, Link } from 'gatsby';
-import { Helmet } from 'react-helmet';
 import Toc from './../components/TOC';
 
 
@@ -77,12 +76,6 @@ const IndexPage = () => (
     render={({ scrum: { pages } }) => {
       return (
         <Fragment>
-          <Helmet>
-            <title>Thoughts On Scrum</title>
-            <meta name="description" content="A Lightweight Framework" />
-            <meta property="og:title" content="Eric Laursen" />
-            <meta property="og:url" content="http://laursen.tech" />
-          </Helmet>
           <Toc
             title="Scrum"
             sub="A Brief collection of writings"
@@ -97,3 +90,13 @@ const IndexPage = () => (
 );
 
 export default IndexPage;
+export function Head() { 
+  return (
+    <Fragment>
+      <title>Thoughts On Scrum</title>
+      <meta name="description" content="A Lightweight Framework" />
+      <meta property="og:title" content="Eric Laursen" />
+      <meta property="og:url" content="http://laursen.tech" />
+    </Fragment>
+  );
+}

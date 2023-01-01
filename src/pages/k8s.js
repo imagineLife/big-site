@@ -3,7 +3,6 @@ import { StaticQuery, graphql, Link } from 'gatsby';
 
 import Layout from './../components/layout';
 import Hero from './../components/hero';
-import { Helmet } from 'react-helmet';
 import './scrum.scss';
 
 /*
@@ -45,12 +44,6 @@ const IndexPage = () => (
       })
       return (
         <Fragment>
-          <Helmet>
-            <title>Kubernetes Blog</title>
-            <meta name="description" content="A Blog on Learning Kubernetes" />
-            <meta property="og:title" content="Kubernetes Blog" />
-            <meta property="og:url" content="http://laursen.tech/k8s" />
-          </Helmet>
           <Hero />
           <Layout>
             <section className="toc-wrapper">
@@ -109,3 +102,13 @@ const IndexPage = () => (
 );
 
 export default IndexPage;
+export function Head() {
+  return (
+    <Fragment>
+      <title>Kubernetes Blog</title>
+      <meta name="description" content="A Blog on Learning Kubernetes" />
+      <meta property="og:title" content="Kubernetes Blog" />
+      <meta property="og:url" content="http://laursen.tech/k8s" />
+    </Fragment>
+  );
+}
