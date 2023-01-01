@@ -1,180 +1,158 @@
-const pluginsArr = [
-  {
-    resolve: `gatsby-transformer-remark`,
-    options: {
-      plugins: [
-        `gatsby-plugin-react-helmet-async`,
-        {
-          resolve: 'gatsby-remark-embed-video',
-          options: {
-            width: 800,
-            ratio: 1.77, // Optional: Defaults to 16/9 = 1.77
-            height: 400, // Optional: Overrides optional.ratio
-            related: false, //Optional: Will remove related videos from the end of an embedded YouTube video.
-            noIframeBorder: true, //Optional: Disable insertion of <style> border: 0
-            loadingStrategy: 'lazy', //Optional: Enable support for lazy-load offscreen iframes. Default is disabled.
-            urlOverrides: [
-              {
-                id: 'youtube',
-                embedURL: (videoId) =>
-                  `https://www.youtube-nocookie.com/embed/${videoId}`,
-              },
-            ], //Optional: Override URL of a service provider, e.g to enable youtube-nocookie support
-            containerClass: 'embedVideo-container', //Optional: Custom CSS class for iframe container, for multiple classes separate them by space
-            iframeId: false, //Optional: if true, iframe's id will be set to what is provided after 'video:' (YouTube IFrame player API requires iframe id)
-          },
-        },
-        'gatsby-remark-mermaid',
-        `gatsby-remark-autolink-headers`,
-        `gatsby-remark-copy-linked-files`,
-        {
-          resolve: `gatsby-remark-images`,
-          options: {
-            maxWidth: 400,
-          },
-        },
-        `gatsby-remark-prismjs`,
-      ],
-    },
-  },
-  `gatsby-plugin-sass`,
-  'gatsby-plugin-react-helmet',
-  'gatsby-plugin-image',
-  'gatsby-plugin-sharp',
-  'gatsby-transformer-sharp',
-  'gatsby-transformer-json',
-  {
-    resolve: 'gatsby-plugin-mdx',
-    options: {
-      defaultLayouts: {
-        default: require.resolve('./src/components/layout'),
-      },
-      gatsbyRemarkPlugins: [
-        {
-          resolve: 'gatsby-remark-mermaid',
-        },
-      ],
-      plugins: ['gatsby-remark-images'],
-    },
-  },
-  {
-    resolve: `gatsby-source-filesystem`,
-    options: {
-      name: `posts`,
-      path: `content/posts`,
-    },
-  },
-  {
-    resolve: `gatsby-source-filesystem`,
-    options: {
-      name: `recipes`,
-      path: `content/recipes`,
-    },
-  },
-  {
-    resolve: `gatsby-source-filesystem`,
-    options: {
-      name: `strengths`,
-      path: `content/strengths`,
-    },
-  },
-  {
-    resolve: `gatsby-source-filesystem`,
-    options: {
-      name: `scrum`,
-      path: `content/scrum`,
-    },
-  },
-  {
-    resolve: `gatsby-source-filesystem`,
-    options: {
-      name: `febs`,
-      path: `content/febs`,
-    },
-  },
-  {
-    resolve: `gatsby-source-filesystem`,
-    options: {
-      name: `k8s`,
-      path: `content/k8s`,
-    },
-  },
-  {
-    resolve: `gatsby-source-filesystem`,
-    options: {
-      name: `linux`,
-      path: `content/linux`,
-    },
-  },
-  {
-    resolve: `gatsby-source-filesystem`,
-    options: {
-      name: `py`,
-      path: `content/py`,
-    },
-  },
-  {
-    resolve: `gatsby-source-filesystem`,
-    options: {
-      name: `node`,
-      path: `content/node`,
-    },
-  },
-  {
-    resolve: `gatsby-source-filesystem`,
-    options: {
-      name: `images`,
-      path: `images`,
-    },
-  },
-  {
-    resolve: `gatsby-source-filesystem`,
-    options: {
-      name: `json-data`,
-      path: `${__dirname}/content`,
-    },
-  },
-  {
-    resolve: `gatsby-source-filesystem`,
-    options: {
-      name: `http-server`,
-      path: `${__dirname}/content/http-server`,
-    },
-  },
-  'gatsby-plugin-sitemap'
-];
-  
-if (process.env.NODE_ENV === 'production') {
-  console.log('Adding Google Gtag to gatsby plugins')
-  
-  pluginsArr.push({
-    resolve: `gatsby-plugin-google-gtag`,
-    options: {
-      // You can add multiple tracking ids and a pageview event will be fired for all of them.
-      trackingIds: [
-        'G-WZNFNRGGSR', // Google Analytics / GA
-      ],
-      // This object gets passed directly to the gtag config command
-      // This config will be shared across all trackingIds
-      gtagConfig: {
-        anonymize_ip: true,
-        cookie_expires: 0,
-      },
-      // This object is used for configuration specific to this plugin
-      pluginConfig: {
-        // Puts tracking script in the head instead of the body
-        head: true,
-        // Defaults to https://www.googletagmanager.com
-        // origin: 'YOUR_SELF_HOSTED_ORIGIN',
-      },
-    },
-  });
-}
+/**
+ * Configure your Gatsby site with this file.
+ *
+ * See: https://www.gatsbyjs.com/docs/reference/config-files/gatsby-config/
+ */
+
+/**
+ * @type {import('gatsby').GatsbyConfig}
+ */
 module.exports = {
   siteMetadata: {
-    title: 'imagineLife',
-    description: 'A Place for some content',
-    siteUrl: 'http://laursen.tech'
+    title: `Laursen.Tech: A Blog And Portfolio`,
+    author: {
+      name: `Eric Laursen`,
+      summary: `Notes and Thoughts on SaaS Tech & People-Oriented SaaS Work`,
+    },
+    description: `My Blog`,
+    siteUrl: `https://laursen.tech`,
   },
-  plugins: pluginsArr,
-};
+  plugins: [
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sass`,
+    {
+      resolve: "gatsby-remark-embed-video",
+      options: {
+        width: 800,
+        ratio: 1.77, // Optional: Defaults to 16/9 = 1.77
+        height: 400, // Optional: Overrides optional.ratio
+        related: false, //Optional: Will remove related videos from the end of an embedded YouTube video.
+        noIframeBorder: true, //Optional: Disable insertion of <style> border: 0
+        loadingStrategy: "lazy", //Optional: Enable support for lazy-load offscreen iframes. Default is disabled.
+        urlOverrides: [
+          {
+            id: "youtube",
+            embedURL: videoId =>
+              `https://www.youtube-nocookie.com/embed/${videoId}`,
+          },
+        ], //Optional: Override URL of a service provider, e.g to enable youtube-nocookie support
+        containerClass: "embedVideo-container", //Optional: Custom CSS class for iframe container, for multiple classes separate them by space
+        iframeId: false, //Optional: if true, iframe's id will be set to what is provided after 'video:' (YouTube IFrame player API requires iframe id)
+      },
+    },
+    // {
+    //   resolve: `gatsby-source-filesystem`,
+    //   options: {
+    //     name: `images`,
+    //     path: `${__dirname}/src/images`,
+    //   },
+    // },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `images`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `json-data`,
+        path: `${__dirname}/content`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `k8s`,
+        path: `content/k8s`,
+      },
+    },
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 630,
+            },
+          },
+          {
+            resolve: `gatsby-remark-responsive-iframe`,
+            options: {
+              wrapperStyle: `margin-bottom: 1.0725rem`,
+            },
+          },
+          `gatsby-remark-prismjs`,
+        ],
+      },
+    },
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                title
+                description
+                siteUrl
+                site_url: siteUrl
+              }
+            }
+          }
+        `,
+        feeds: [
+          {
+            serialize: ({ query: { site, allMarkdownRemark } }) => {
+              return allMarkdownRemark.nodes.map(node => {
+                return Object.assign({}, node.frontmatter, {
+                  description: node.excerpt,
+                  date: node.frontmatter.date,
+                  url: site.siteMetadata.siteUrl + node.fields.slug,
+                  guid: site.siteMetadata.siteUrl + node.fields.slug,
+                  custom_elements: [{ "content:encoded": node.html }],
+                })
+              })
+            },
+            query: `{
+              allMarkdownRemark(sort: {frontmatter: {date: DESC}}) {
+                nodes {
+                  excerpt
+                  html
+                  fields {
+                    slug
+                  }
+                  frontmatter {
+                    title
+                    date
+                  }
+                }
+              }
+            }`,
+            output: "/rss.xml",
+            title: "Gatsby Starter Blog RSS Feed",
+          },
+        ],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Gatsby Starter Blog`,
+        short_name: `Gatsby`,
+        start_url: `/`,
+        background_color: `#ffffff`,
+        // This will impact how browsers show your PWA/website
+        // https://css-tricks.com/meta-theme-color-and-trickery/
+        // theme_color: `#663399`,
+        display: `minimal-ui`,
+        icon: `static/favicon.png`, // This path is relative to the root of the site.
+      },
+    },
+    `gatsby-transformer-json`,
+  ],
+}
