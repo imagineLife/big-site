@@ -79,7 +79,7 @@ storage:
 clone for 2 other nodes, passing different ports & different data directories.  
 
 Check which mongod services are running
-```bah
+```bash
 ps -edaf | grep mongo | grep -v grep
 ```
 should return something like
