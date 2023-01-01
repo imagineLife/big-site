@@ -111,7 +111,7 @@ module.exports = {
               return allMarkdownRemark.nodes.map(node => {
                 return Object.assign({}, node.frontmatter, {
                   description: node.excerpt,
-                  date: node.frontmatter.date,
+                  date: node?.frontmatter?.date || new Date(),
                   url: site.siteMetadata.siteUrl + node.fields.slug,
                   guid: site.siteMetadata.siteUrl + node.fields.slug,
                   custom_elements: [{ "content:encoded": node.html }],
@@ -119,7 +119,7 @@ module.exports = {
               })
             },
             query: `{
-              allMarkdownRemark(sort: {frontmatter: {date: DESC}}) {
+              allMarkdownRemark(sort: {frontmatter: {order: DESC}}) {
                 nodes {
                   excerpt
                   html
@@ -128,13 +128,12 @@ module.exports = {
                   }
                   frontmatter {
                     title
-                    date
                   }
                 }
               }
             }`,
             output: "/rss.xml",
-            title: "Gatsby Starter Blog RSS Feed",
+            title: "Eric (Jake) Laursen Blog RSS Feed",
           },
         ],
       },
