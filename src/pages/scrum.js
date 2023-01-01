@@ -56,7 +56,7 @@ const IndexPage = () => (
     query={graphql`
       query ScrumTOC {
         scrum: allMarkdownRemark(
-          sort: { fields: frontmatter___order }
+          sort: { frontmatter: { order: ASC } }
           filter: {
             frontmatter: { order: { gt: 0 }, slug: { regex: "/scrum/" } }
           }
@@ -84,10 +84,10 @@ const IndexPage = () => (
             children={<ScrumChild />}
           />
         </Fragment>
-      );
+      )
     }}
   />
-);
+)
 
 export default IndexPage;
 export function Head() { 

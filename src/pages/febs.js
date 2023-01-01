@@ -18,7 +18,7 @@ const IndexPage = () => (
       query FebsTOC {
         febs: allMarkdownRemark(
           filter: { frontmatter: { slug: { regex: "/febs/" } } }
-          sort: { fields: frontmatter___order }
+          sort: { frontmatter: { order: ASC } }
         ) {
           pages: edges {
             page: node {
@@ -46,7 +46,7 @@ const IndexPage = () => (
                       overview: { slug, title, excerpt },
                     },
                   },
-                  pageIdx,
+                  pageIdx
                 ) => {
                   return (
                     <div className="toc-card" key={`febs-toc-${pageIdx}`}>
@@ -55,8 +55,8 @@ const IndexPage = () => (
                       </Link>
                       <p className="content">{excerpt}</p>
                     </div>
-                  );
-                },
+                  )
+                }
               )}
               <div className="coming-soon">
                 <p>
@@ -67,9 +67,9 @@ const IndexPage = () => (
             </section>
           </Layout>
         </Fragment>
-      );
+      )
     }}
   />
-);
+)
 
 export default IndexPage;

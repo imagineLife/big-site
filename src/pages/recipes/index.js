@@ -11,7 +11,7 @@ const IndexPage = () => (
     query={graphql`
       query Recipes {
         recipes: allMarkdownRemark(
-          sort: { fields: frontmatter___order }
+          sort: { frontmatter: { order: ASC } }
           filter: {
             frontmatter: { order: { gt: 0 }, slug: { regex: "/recipes/" } }
           }
@@ -43,7 +43,7 @@ const IndexPage = () => (
                       overview: { slug, title, excerpt },
                     },
                   },
-                  pageIdx,
+                  pageIdx
                 ) => {
                   return (
                     <div className="toc-card" key={`recipe-toc-${pageIdx}`}>
@@ -52,15 +52,15 @@ const IndexPage = () => (
                       </Link>
                       <p className="content">{excerpt}</p>
                     </div>
-                  );
-                },
+                  )
+                }
               )}
             </section>
           </Layout>
         </Fragment>
-      );
+      )
     }}
   />
-);
+)
 
 export default IndexPage;

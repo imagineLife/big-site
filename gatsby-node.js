@@ -60,6 +60,72 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           }
         }
       }
+      mongo: allMarkdownRemark(
+        sort: { frontmatter: { order: ASC } }
+        filter: {
+          frontmatter: { order: { gt: 0 }, slug: { regex: "/^mongo/" } }
+        }
+      ) {
+        pages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              excerpt
+              parentDir
+            }
+          }
+        }
+      }
+      mongosectioncontent: allMarkdownRemark(
+        sort: { frontmatter: { order: ASC } }
+        filter: { frontmatter: { slug: { regex: "/^mongo//" } } }
+      ) {
+        pages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              excerpt
+              parentDir
+            }
+          }
+        }
+      }
+      node: allMarkdownRemark(
+        sort: { frontmatter: { order: ASC } }
+        filter: {
+          frontmatter: { order: { gt: 0 }, slug: { regex: "/^node/" } }
+        }
+      ) {
+        pages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              excerpt
+              parentDir
+            }
+          }
+        }
+      }
+      httpserver: allMarkdownRemark(
+        sort: { frontmatter: { order: ASC } }
+        filter: {
+          frontmatter: { order: { gt: 0 }, slug: { regex: "/http-server/" } }
+        }
+      ) {
+        pages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              excerpt
+              parentDir
+            }
+          }
+        }
+      }
     }
   `)
 
@@ -75,6 +141,10 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     data: {
       k8s: { pages: k8sPages },
       febs: { pages: febsPages },
+      mongo: { pages: mongoPages },
+      node: { pages: nodePages },
+      httpserver: { pages: httpServerPages },
+      mongosectioncontent: { pages: mongoSectionContent },
     },
   } = result
 
@@ -85,7 +155,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // let posts = []
   // if (posts.length > 0) {
   //   posts.forEach((post, index) => {
-  const pages = [...k8sPages, ...febsPages]
+  const pages = [...k8sPages, ...febsPages, ...mongoPages, ...nodePages, ...httpServerPages, ...mongoSectionContent]
   pages.forEach(({ page }, index) => {
     //     // const previousPostId = index === 0 ? null : posts[index - 1].id
     //     // const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id

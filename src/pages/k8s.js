@@ -16,8 +16,13 @@ const IndexPage = () => (
     query={graphql`
       query k8sTOC {
         k8s: allMarkdownRemark(
-          filter: { frontmatter: { slug: { regex: "/k8s/" }, parentDir: { regex: "/k8s/" } } }
-          sort: { fields: frontmatter___order }
+          filter: {
+            frontmatter: {
+              slug: { regex: "/k8s/" }
+              parentDir: { regex: "/k8s/" }
+            }
+          }
+          sort: { frontmatter: { order: ASC } }
         ) {
           pages: edges {
             page: node {
@@ -35,10 +40,10 @@ const IndexPage = () => (
       let rootPages = []
       let inDepthPages = []
       // categorize into "Getting Started" and "In-Depth"
-      pages.forEach((p,pidx) => { 
-        if (!p.page.overview.slug.includes('in-depth')) {
-          rootPages.push(p);
-        } else { 
+      pages.forEach((p, pidx) => {
+        if (!p.page.overview.slug.includes("in-depth")) {
+          rootPages.push(p)
+        } else {
           inDepthPages.push(p)
         }
       })
@@ -58,7 +63,7 @@ const IndexPage = () => (
                       overview: { slug, title, excerpt },
                     },
                   },
-                  pageIdx,
+                  pageIdx
                 ) => {
                   return (
                     <div className="toc-card" key={`k8s-toc-${pageIdx}`}>
@@ -67,8 +72,8 @@ const IndexPage = () => (
                       </Link>
                       <p className="content">{excerpt}</p>
                     </div>
-                  );
-                },
+                  )
+                }
               )}
               <br />
               <br />
@@ -81,7 +86,7 @@ const IndexPage = () => (
                       overview: { slug, title, excerpt },
                     },
                   },
-                  pageIdx,
+                  pageIdx
                 ) => {
                   return (
                     <div className="toc-card" key={`k8s-toc-${pageIdx}`}>
@@ -90,16 +95,16 @@ const IndexPage = () => (
                       </Link>
                       <p className="content">{excerpt}</p>
                     </div>
-                  );
-                },
+                  )
+                }
               )}
             </section>
           </Layout>
         </Fragment>
-      );
+      )
     }}
   />
-);
+)
 
 export default IndexPage;
 export function Head() {

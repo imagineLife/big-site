@@ -17,7 +17,7 @@ const IndexPage = () => (
       query LinuxTOC {
         linux: allMarkdownRemark(
           filter: { frontmatter: { slug: { regex: "/linux/" } } }
-          sort: { fields: frontmatter___order }
+          sort: { frontmatter: { order: ASC } }
         ) {
           pages: edges {
             page: node {
@@ -45,7 +45,7 @@ const IndexPage = () => (
                       overview: { slug, title, excerpt },
                     },
                   },
-                  pageIdx,
+                  pageIdx
                 ) => {
                   return (
                     <div className="toc-card" key={`linux-toc-${pageIdx}`}>
@@ -54,31 +54,31 @@ const IndexPage = () => (
                       </Link>
                       <p className="content">{excerpt}</p>
                     </div>
-                  );
-                },
+                  )
+                }
               )}
               <sub>
-                Thanks to{' '}
-                <Link to={'https://github.com/btholt'}>Brian Holt</Link> and{' '}
-                <Link to={'https://frontendmasters.com'}>FrontendMasters</Link>{' '}
+                Thanks to{" "}
+                <Link to={"https://github.com/btholt"}>Brian Holt</Link> and{" "}
+                <Link to={"https://frontendmasters.com"}>FrontendMasters</Link>{" "}
                 for sparking some curiosity here!
               </sub>
               <br />
               <sub>
-                Also, check out{' '}
+                Also, check out{" "}
                 <Link to="https://tldp.org/LDP/abs/html/">
                   this in-depth set of write-ups
-                </Link>{' '}
+                </Link>{" "}
                 for another look into bash, including lots more details and
                 nuiance.
               </sub>
             </section>
           </Layout>
         </Fragment>
-      );
+      )
     }}
   />
-);
+)
 
 export default IndexPage;
 

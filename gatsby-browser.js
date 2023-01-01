@@ -1,12 +1,14 @@
-// -require('prismjs/themes/prism-tomorrow.min.css');
--// require('prismjs/plugins/command-line/prism-command-line.css');
 // custom typefaces
-import "@fontsource/montserrat/variable.css"
-import "@fontsource/merriweather"
+require("@fontsource/montserrat/variable.css")
+require("@fontsource/merriweather")
+
 // normalize CSS across browsers
-import "./src/normalize.css"
+require("./src/normalize.css")
+
 // custom CSS styles
-import "./src/style.css"
+require("./src/style.css")
 
 // Highlighting for code blocks
-import "prismjs/themes/prism.css"
+require("prismjs/themes/prism-tomorrow.min.css")
+// require("prismjs/themes/prism.css")
+// require('prismjs/plugins/command-line/prism-command-line.css');

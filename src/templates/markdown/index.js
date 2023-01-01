@@ -106,7 +106,7 @@ export const pgQuery = graphql`
       }
     }
     pageSummaries: allMarkdownRemark(
-      sort: { fields: frontmatter___order }
+      sort: { frontmatter: { order: ASC } }
       filter: { frontmatter: { parentDir: { eq: $parentDir } } }
     ) {
       pages: nodes {
@@ -119,7 +119,7 @@ export const pgQuery = graphql`
       }
     }
   }
-`;
+`
 
 export function Head({
   data: {
