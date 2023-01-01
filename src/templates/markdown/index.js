@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { graphql, Link } from 'gatsby';
-import { Helmet } from 'react-helmet';
 import './index.scss';
 import Header from './../../components/header'
 
@@ -66,24 +65,6 @@ export default function Template({
 
   return (
     <Fragment>
-      <Helmet>
-        <title>{title || 'Jake Laursen Blog'}</title>
-        <meta name="description" content={excerpt} />
-        <meta property="og:title" content={title} />
-        <meta property="og:url" content={`http://laursen.tech${slug}`} />
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "http://laursen.tech/",
-            "@type": "Blog",
-            "name": title,
-            "author": {
-              "@type": "Person",
-              "name": "Eric (Jake) Laursen"
-            },
-          "description": excerpt,
-          })}
-          </script>
-      </Helmet>
       <main className={`md-wrapper${parentDir ? ` ${parentDir}` : ''}`}>
         <Header className="md" />
         <section dangerouslySetInnerHTML={{ __html: content }}></section>
@@ -139,3 +120,32 @@ export const pgQuery = graphql`
     }
   }
 `;
+
+export function Head({
+  data: {
+    pageData: {
+      overview: { title, excerpt, slug },
+    },
+  },
+}) {
+  return (
+    <Fragment>
+      <title>{title || 'Jake Laursen Blog'}</title>
+      <meta name="description" content={excerpt} />
+      <meta property="og:title" content={title} />
+      <meta property="og:url" content={`http://laursen.tech${slug}`} />
+      <script type="application/ld+json">
+        {JSON.stringify({
+          '@context': 'http://laursen.tech/',
+          '@type': 'Blog',
+          name: title,
+          author: {
+            '@type': 'Person',
+            name: 'Eric (Jake) Laursen',
+          },
+          description: excerpt,
+        })}
+      </script>
+    </Fragment>
+  );
+}
