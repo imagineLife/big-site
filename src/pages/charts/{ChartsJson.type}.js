@@ -3,7 +3,7 @@ import { graphql } from 'gatsby';
 import './chart-by-type.scss';
 
 // components
-import Drawer from '@mui/material/Drawer';
+// import Drawer from '@mui/material/Drawer';
 
 function chartReducer(state, action) {
   const reducerObj = {
@@ -32,13 +32,13 @@ export default function ChartName({ data: { chartData, chartsSummary } }) {
 
   return (
     <main className="chart-wrapper">
-      <Drawer
+      {/* <Drawer
         anchor={'left'}
         open={drawerOpen}
         onClose={() => dispatch({ type: 'TOGGLE_DRAWER', payload: false })}
       >
         sauce
-      </Drawer>
+      </Drawer> */}
 
       <h1>{chartData.title || 'A Chart'}</h1>
       {chartData.excerpt && <p>{chartData.excerpt}</p>}
