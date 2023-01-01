@@ -6,7 +6,7 @@ const useMisc = () => {
   } = useStaticQuery(graphql`
     query {
       misc: allMarkdownRemark(
-        sort: { fields: frontmatter___order }
+        sort: { frontmatter: { order: ASC } }
         filter: {
           frontmatter: { order: { gt: 0 }, slug: { regex: "/^misc/" } }
         }
@@ -23,7 +23,7 @@ const useMisc = () => {
         }
       }
     }
-  `);
+  `)
 
   return pages;
 };
