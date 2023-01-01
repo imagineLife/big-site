@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import './index.scss';
 // Components
-import { Helmet } from 'react-helmet';
 import { Link } from 'gatsby';
 import Layout from './../../components/layout';
 import Hero from './../../components/hero';
@@ -12,15 +11,6 @@ import introvertImg from './introvert.jpg';
 import strengthsImg from './strengths.jpg';
 const About = () => (
   <Fragment>
-    <Helmet>
-      <title>About Me</title>
-      <meta
-        name="description"
-        content="I'm a do-er, a learner, and I enjoy working with people, data, and tech!"
-      />
-      <meta property="og:title" content="Eric Laursen" />
-      <meta property="og:url" content="http://laursen.tech" />
-    </Helmet>
     <Hero />
     <Layout>
       <div className="md-wrapper alternating">
@@ -217,3 +207,17 @@ const About = () => (
   </Fragment>
 );
 export default About;
+
+export function Head() { 
+  return (
+    <Fragment>
+      <title>About Me</title>
+      <meta
+        name="description"
+        content="I'm a do-er, a learner, and I enjoy working with people, data, and tech!"
+      />
+      <meta property="og:title" content="Eric Laursen" />
+      <meta property="og:url" content="http://laursen.tech" />
+    </Fragment>
+  );
+}
