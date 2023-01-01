@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import './index.scss';
 
 import { Link } from 'gatsby';
-import { Helmet } from 'react-helmet';
 
 // Components
 import Layout from './../components/layout';
@@ -25,15 +24,6 @@ const Index = () => {
 
   return (
     <Fragment>
-      <Helmet>
-        <title>Eric (Jake) Laursen</title>
-        <meta
-          name="description"
-          content="Come check out some examples of webapps, and some writing about tech, personality, team development, and more!"
-        />
-        <meta property="og:title" content="Eric Laursen" />
-        <meta property="og:url" content="http://laursen.tech" />
-      </Helmet>
       <Hero windowWidth={windowSize?.width} />
       <Layout>
         <main className="centered">
@@ -60,3 +50,17 @@ const Index = () => {
   );
 };
 export default Index;
+
+export function Head() {
+  return (
+    <Fragment>
+      <title>Eric (Jake) Laursen</title>
+      <meta
+        name="description"
+        content="Come check out some examples of webapps, and some writing about tech, personality, team development, and more!"
+      />
+      <meta property="og:title" content="Eric Laursen" />
+      <meta property="og:url" content="http://laursen.tech" />
+    </Fragment>
+  );
+}
