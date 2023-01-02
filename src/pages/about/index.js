@@ -51,7 +51,7 @@ const About = () => (
               </li>
               <li>
                 <b>CI/CD Automated pipelines</b>: building & deploying automated
-                ci/cd "pipelines"
+                ci/cd "pipelines" for tooling like a frontend build system, a node_module, a rest api, an api in a docker container... 
               </li>
               <li>
                 <b>keeping up on some node chops</b>: some small projects on

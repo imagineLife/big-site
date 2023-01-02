@@ -29,9 +29,47 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   */
   const result = await graphql(`
     {
+      febs: allMarkdownRemark(
+        sort: { frontmatter: { order: ASC } }
+        filter: { frontmatter: { order: { gt: 0 }, slug: { regex: "/febs/" } } }
+      ) {
+        pages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              excerpt
+              parentDir
+            }
+          }
+        }
+      }
+      httpserver: allMarkdownRemark(
+        sort: { frontmatter: { order: ASC } }
+        filter: {
+          frontmatter: { order: { gt: 0 }, slug: { regex: "/http-server/" } }
+        }
+      ) {
+        pages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              excerpt
+              parentDir
+            }
+          }
+        }
+      }
       k8s: allMarkdownRemark(
         sort: { frontmatter: { order: ASC } }
-        filter: { frontmatter: { order: { gt: 0 }, slug: { regex: "/k8s/" } } }
+        filter: {
+          frontmatter: {
+            order: { gt: 0 }
+            slug: { regex: "/k8s/in-depth|k8s/[^docker|/]/" }
+            title: { ne: null }
+          }
+        }
       ) {
         pages: edges {
           page: node {
@@ -45,9 +83,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           }
         }
       }
-      febs: allMarkdownRemark(
+      linux: allMarkdownRemark(
         sort: { frontmatter: { order: ASC } }
-        filter: { frontmatter: { order: { gt: 0 }, slug: { regex: "/febs/" } } }
+        filter: {
+          frontmatter: { order: { gt: 0 }, slug: { regex: "/linux/" } }
+        }
       ) {
         pages: edges {
           page: node {
@@ -109,10 +149,10 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           }
         }
       }
-      httpserver: allMarkdownRemark(
+      strengths: allMarkdownRemark(
         sort: { frontmatter: { order: ASC } }
         filter: {
-          frontmatter: { order: { gt: 0 }, slug: { regex: "/http-server/" } }
+          frontmatter: { order: { gt: 0 }, slug: { regex: "/strengths/" } }
         }
       ) {
         pages: edges {
@@ -139,12 +179,14 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   const {
     data: {
+      httpserver: { pages: httpServerPages },
       k8s: { pages: k8sPages },
       febs: { pages: febsPages },
+      linux: { pages: linuxPages },
       mongo: { pages: mongoPages },
-      node: { pages: nodePages },
-      httpserver: { pages: httpServerPages },
       mongosectioncontent: { pages: mongoSectionContent },
+      node: { pages: nodePages },
+      strengths: { pages: strengthsPages },
     },
   } = result
 
@@ -155,7 +197,16 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // let posts = []
   // if (posts.length > 0) {
   //   posts.forEach((post, index) => {
-  const pages = [...k8sPages, ...febsPages, ...mongoPages, ...nodePages, ...httpServerPages, ...mongoSectionContent]
+  const pages = [
+    ...febsPages,
+    ...httpServerPages,
+    ...k8sPages,
+    ...linuxPages,
+    ...mongoPages,
+    ...nodePages,
+    ...mongoSectionContent,
+    ...strengthsPages,
+  ]
   pages.forEach(({ page }, index) => {
     //     // const previousPostId = index === 0 ? null : posts[index - 1].id
     //     // const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id

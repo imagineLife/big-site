@@ -16,13 +16,14 @@ const IndexPage = () => (
     query={graphql`
       query k8sTOC {
         k8s: allMarkdownRemark(
+          sort: { frontmatter: { order: ASC } }
           filter: {
             frontmatter: {
-              slug: { regex: "/k8s/" }
-              parentDir: { regex: "/k8s/" }
+              order: { gt: 0 }
+              slug: { regex: "/k8s/in-depth|k8s/[^docker|/]/" }
+              title: { ne: null }
             }
           }
-          sort: { frontmatter: { order: ASC } }
         ) {
           pages: edges {
             page: node {
@@ -30,6 +31,8 @@ const IndexPage = () => (
                 slug
                 title
                 excerpt
+                parentDir
+                order
               }
             }
           }
