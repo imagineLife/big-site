@@ -24,6 +24,12 @@
     "image": "./sections/bash.jpg"
   },
   {
+    "title": "Docker",
+    "snippet": "Sort-Of Like a virtual machine, something like a \"layer\" between software and hardware",
+    "to": "/docker",
+    "image": "./sections/docker.png"
+  },
+  {
     "title": "Kubernetes",
     "snippet": "Covering some beyond-the-frontend details of pods, services, networking, and more",
     "to": "/k8s",
