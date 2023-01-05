@@ -34,7 +34,7 @@ Container have large open-source and third-party-supported ecosystems of pre-bui
 # Containers As The Focus
 ## Containers As A Bundled Set Of Kernel Features
 The [kernel](https://en.wikipedia.org/wiki/Kernel_(operating_system)) is a bit of a "middle-man" between physical hardware parts of a computer and the operating system.  
-THe [Linux](/linux) Kernel does many things, including these 3 that containers encapsulate: chroot, namespacing, and control-groups (cgroups).
+THe [Linux Kernel](https://en.wikipedia.org/wiki/Linux_kernel#/media/File:Linux_kernel_map.png) does many things, including these 3 that containers encapsulate: chroot, namespacing, and control-groups (cgroups).
 ### Namespaces
 [Namespaces](https://www.nginx.com/blog/what-are-namespaces-cgroups-how-do-they-work/) split up processes that can and cannot "see" one another.  
 Maybe something like user accounts on a laptop: I have my account/namespace, you have your account/namespace. Namespaces are something like a "lower level" technical version of that.  
