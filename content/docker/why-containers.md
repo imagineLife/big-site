@@ -46,5 +46,5 @@ There are a few "types" of namespaces: user, pid, network, mount, IPC (_interpro
 With a bit of imagination, it is clear how restricted process sharing (_namespaces_) AND reource access (_cgroups_) can work together. Maybe something like a more technical version of creating a "user" account on a laptop who can only save 10 gigabytes of info to the hard drive, and only use 8 gigabytes of ram: the two can work together!
 
 ### ChRoot  
-[chRoot](https://www.howtogeek.com/devops/what-is-chroot-on-linux-and-how-do-you-use-it/) sets a root directory of a process - somewhere where the "work" of a process "lives".  
+[chRoot](https://www.howtogeek.com/devops/what-is-chroot-on-linux-and-how-do-you-use-it/) sets a root directory of a process - somewhere where the "work" of a process "lives". Each new "root" project "thinks" that it is indeed the "root" of the filesystem of the host machine.  
 Again, marrying process root with resource restriction and process interaction, all together, can be a very "isolated" setup for a unit of work to be done with some level of security & singleness-of-purpose.  
