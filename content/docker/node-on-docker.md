@@ -1,5 +1,5 @@
 ---
-title: Setup Docker
+title: "Node On Docker: An Intro"
 parentDir: docker
 slug: docker/node-on-docker-intro
 author: Jake Laursen
