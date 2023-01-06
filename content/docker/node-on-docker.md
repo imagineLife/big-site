@@ -30,9 +30,13 @@ Here's a command to run node inside a docker container:
 
 
 ## Why tags matter
-- there are MANY versions of the node container...
-  - node:alpine
-  - node:10.17.0-buster
-  - node:12.13.1-buster
-tags can be leveraged to pin the version... if an app/container is created, and set on the shelf for a year, the TAGS save the versions of the modules, so that newer breaking versions aren't over-writing the working version 
-- 16-stretch is a good one!
+Tags are meant to help describe what is "in" the tagged image.  
+There are [MANY versions (_tags_) of the node container](https://hub.docker.com/_/node/tags)
+  - node
+  - node:gallium
+  - node:gallium-buster
+
+tags can be leveraged to pin the version of some key dependencies:
+- the version of node itself with `node:18.12.1`
+- the version and type of OS: `node:18.12.1-buster`
+- a "slimmed down" version of the above 2 images, with `node:18.12.1-slim` and `node:18.12.1-buster-slim`
