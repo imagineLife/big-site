@@ -1,5 +1,5 @@
 ---
-title: Why "Containers"? What are they?
+title: Why Containers?
 parentDir: docker
 slug: docker/why-containers
 author: Jake Laursen
