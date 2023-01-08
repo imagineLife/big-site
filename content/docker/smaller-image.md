@@ -24,7 +24,8 @@ For reference, [Docker Node Images](https://hub.docker.com/_/node/tags?page=1&na
 |node:18|950MB|.... .... .... .... .... .... .... .... .... ..|
 |node:18-slim|243MB|.... .... ..|
 |node:18-alpine|176MB|.... ...|
-|alpine as the root|176MB|.... ...|
+|alpine as the root|59MB|..|
+
 ```Dockerfile
 FROM node:18
 # FROM node:18-slim
