@@ -3,7 +3,7 @@ title: "Dockerfile: An Intro"
 parentDir: docker
 slug: docker/dockerfile-intro
 author: Jake Laursen
-excerpt: 
+excerpt: What
 tags: Docker, Dockerfile
 order: 5
 ---
@@ -32,7 +32,7 @@ make the Dockerfile
 touch Dockerfile
 ```
 #### Prep the file
-the dockerfile represents a series of constructions that the os runs. Each line or "section" in the dockerfile is an instruction
+the dockerfile represents a series of instructions that the os runs. Each line or "section" in the dockerfile is an instruction that Docker uses to prep an image.
 
 ```bash
 # get the node container from dockerHub
