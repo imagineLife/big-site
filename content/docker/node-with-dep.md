@@ -16,7 +16,7 @@ order: 8
   - [A Trivial Approach](#a-trivial-approach)
   - [build the container](#build-the-container)
   - [run the container \&\& server](#run-the-container--server)
-- [HMM](#hmm)
+- [Not Optimal](#not-optimal)
   - [...permission errors!](#permission-errors)
   - [build the container](#build-the-container-1)
   - [run the container](#run-the-container)
@@ -66,7 +66,7 @@ start().catch(e => {
 ```
 
 ### install dependencies
-On the host machine...
+On the host machine
 - go to terminal
 - go to directory 'more-complicated-nodejs-app' or whatever it is called
 - run ```npm init -y```
@@ -103,8 +103,8 @@ CMD ["node", "index.js"]
 docker run --init --rm --publish 3000:3000 noder-server-container 
 ```
 
-## HMM
-- above, the node modules have been installed on the HOST computer. This is not optimal, perhaps
+## Not Optimal
+Above, the node_modules have been installed on the HOST computer. This is not optimal, perhaps
   - the npm install has to happen inside the container
   - the dockerfile needs updating...
 
