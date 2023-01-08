@@ -3,7 +3,7 @@ title: "Noder Server III: With Dependenceis"
 parentDir: docker
 slug: docker/node-server-with-deps
 author: Jake Laursen
-excerpt: The IMpact of Dependencies in A Node Image
+excerpt: The Impact of Dependencies in A Node Image
 tags: Docker, Dockerfile, NodeJS, Container, Image, Dependencies
 order: 8
 ---
@@ -17,7 +17,6 @@ order: 8
   - [build the container](#build-the-container)
   - [run the container \&\& server](#run-the-container--server)
 - [Not Optimal](#not-optimal)
-  - [...permission errors!](#permission-errors)
   - [build the container](#build-the-container-1)
   - [run the container](#run-the-container)
 - [Why publish instead of Expose](#why-publish-instead-of-expose)
@@ -120,9 +119,6 @@ COPY --chown=node:node . .
 RUN npm ci
 CMD ["node", "index.js"]
 ```
-### ...permission errors!
-- this home/code  dir is owned by 'root' user not 'node' user
-- dockerfile needs updating
 
 ```dockerfile
 FROM node:18
@@ -142,8 +138,8 @@ RUN npm ci
 CMD ["node", "index.js"]
 ```
 ### build the container
-```docker build -t noder-server-container```
-...now everything works as expected
+```docker build -t noder-server-container```  
+...now the permission error will not appear
 
 ### run the container
 ```
