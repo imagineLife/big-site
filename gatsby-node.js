@@ -29,6 +29,28 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   */
   const result = await graphql(`
     {
+      docker: allMarkdownRemark(
+        sort: { frontmatter: { order: ASC } }
+        filter: {
+          frontmatter: {
+            order: { gt: 0 }
+            slug: { regex: "/docker/" }
+            title: { ne: null }
+          }
+        }
+      ) {
+        pages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              excerpt
+              parentDir
+              order
+            }
+          }
+        }
+      }
       febs: allMarkdownRemark(
         sort: { frontmatter: { order: ASC } }
         filter: { frontmatter: { order: { gt: 0 }, slug: { regex: "/febs/" } } }
@@ -179,6 +201,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   const {
     data: {
+      docker: { pages: dockerPages },
       httpserver: { pages: httpServerPages },
       k8s: { pages: k8sPages },
       febs: { pages: febsPages },
@@ -198,6 +221,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // if (posts.length > 0) {
   //   posts.forEach((post, index) => {
   const pages = [
+    ...dockerPages,
     ...febsPages,
     ...httpServerPages,
     ...k8sPages,
