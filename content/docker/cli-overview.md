@@ -5,7 +5,7 @@ slug: docker/cli-overview
 author: Jake Laursen
 excerpt: Some Commands That May Become Second Nature
 tags: Docker, CLI
-order: 4
+order: 3
 ---
 
 

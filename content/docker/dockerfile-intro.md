@@ -5,7 +5,7 @@ slug: docker/dockerfile-intro
 author: Jake Laursen
 excerpt: Beginning With A 2-Line Dockerfile 
 tags: Docker, Dockerfile
-order: 5
+order: 4
 ---
 
 # Creating Images With Dockerfiles
