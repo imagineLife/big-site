@@ -62,9 +62,31 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `docker`,
+        path: `content/docker`,
+      },
+    },
+    {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
+          // {
+          //   resolve: `gatsby-remark-mermaid`,
+          //   options: {
+          //     launchOptions: {
+          //       executablePath: "path/to/chrome/executable",
+          //     },
+          //     svgo: {
+          //       plugins: [{ name: "removeTitle", active: false }],
+          //     },
+              // mermaidOptions: {
+              //   theme: "dark",
+          //       // themeCSS: ".node rect { fill: #fff; }",
+            //   },
+            // },
+          // },
           {
             resolve: "gatsby-remark-embed-video",
             options: {
