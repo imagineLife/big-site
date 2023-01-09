@@ -1,5 +1,5 @@
 ---
-title: "Noder Server III: With Dependenceis"
+title: "Node Server III: With Dependenceis"
 parentDir: docker
 slug: docker/node-server-with-deps
 author: Jake Laursen
@@ -95,11 +95,11 @@ CMD ["node", "index.js"]
 
 
 ### build the container
-```docker build -t noder-server-container```
+```docker build -t node-server-container```
 
 ### run the container && server
 ```
-docker run --init --rm --publish 3000:3000 noder-server-container 
+docker run --init --rm --publish 3000:3000 node-server-container 
 ```
 
 ## Not Optimal
@@ -138,12 +138,12 @@ RUN npm ci
 CMD ["node", "index.js"]
 ```
 ### build the container
-```docker build -t noder-server-container```  
+```docker build -t node-server-container```  
 ...now the permission error will not appear
 
 ### run the container
 ```
-docker run --init --rm --publish 3000:3000 noder-server-container
+docker run --init --rm --publish 3000:3000 node-server-container
 ```
 
 
@@ -153,7 +153,7 @@ docker run --init --rm --publish 3000:3000 noder-server-container
 - this needs a flag
   - build the container
   - then run the container detatched, in the bg...
-    - ```docker run --init --rm --detatch noder-server-container ```
+    - ```docker run --init --rm --detatch node-server-container ```
     - detach runs it in the bg
 
 localhost:3000 is not exposed yet

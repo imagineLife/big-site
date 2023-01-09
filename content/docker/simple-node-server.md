@@ -1,5 +1,5 @@
 ---
-title: "Noder Server I: Containerization"
+title: "Node Server I: Containerization"
 parentDir: docker
 slug: docker/node-server-containerized
 author: Jake Laursen

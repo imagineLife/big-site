@@ -1,5 +1,5 @@
 ---
-title: "Noder Server IV: A Smaller Image"
+title: "Node Server IV: A Smaller Image"
 parentDir: docker
 slug: docker/a-smaller-node-image
 author: Jake Laursen

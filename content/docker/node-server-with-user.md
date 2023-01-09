@@ -1,5 +1,5 @@
 ---
-title: "Noder Server II: With A Container User"
+title: "Node Server II: With A Container User"
 parentDir: docker
 slug: docker/node-server-with-user
 author: Jake Laursen
