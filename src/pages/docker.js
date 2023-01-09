@@ -50,15 +50,18 @@ const IndexPage = () => (
       }
     `}
     render={({ docker: { pages } }) => {
+      const intro_max_index = 4
+      const node_max_index = 9;
       const myPages = {
         intro: [],
         node: []
       }
       pages.forEach(p => { 
-        if (p.page.overview.order <= 3) myPages.intro.push(p)
-        else if (p.page.overview.order > 3 && p.page.overview.order <= 9) myPages.node.push(p)
+        if (p.page.overview.order <= intro_max_index) myPages.intro.push(p)
+        else if (p.page.overview.order > intro_max_index && p.page.overview.order <= node_max_index) myPages.node.push(p)
         else { 
-          console.log("UnHandled Page")
+          console.log("%c UnHandled Page", "background-color: red; color: black;")
+          
           console.log(p.page.overview.slug)
           console.log(p.page.overview.order)
         } 
