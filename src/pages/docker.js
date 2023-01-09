@@ -5,6 +5,16 @@ import Layout from './../components/layout';
 import Hero from './../components/hero';
 import './scrum.scss';
 
+function DockerPageLink({slug, title, excerpt }) {
+  return (
+    <div className="toc-card">
+      <Link to={`/${slug}`} className="title">
+        {title}
+      </Link>
+      <p className="content">{excerpt}</p>
+    </div>
+  )
+}
 /*
   before filter
 
@@ -40,16 +50,35 @@ const IndexPage = () => (
       }
     `}
     render={({ docker: { pages } }) => {
+      const myPages = {
+        intro: [],
+        node: []
+      }
+      pages.forEach(p => { 
+        if (p.page.overview.order <= 3) myPages.intro.push(p)
+        else if (p.page.overview.order > 3 && p.page.overview.order <= 9) myPages.node.push(p)
+        else { 
+          console.log("UnHandled Page")
+          console.log(p.page.overview.slug)
+          console.log(p.page.overview.order)
+        } 
+      })
       return (
         <Fragment>
           <Hero />
           <Layout>
             <section className="toc-wrapper">
               <h1>Docker</h1>
-              <h2 title="Thanks to Brian Holt from Frontend Masters for Sparking some Curiosity here!">
+              <a href="/docker#getting-started">Getting Started</a>
+              <br />
+              <a href="/docker#docker-node-intro">Docker With Node: An Intro</a>
+              <h2
+                id="getting-started"
+                title="Thanks to Brian Holt from Frontend Masters for Sparking some Curiosity here!"
+              >
                 Getting Started
               </h2>
-              {pages.map(
+              {myPages.intro.map(
                 (
                   {
                     page: {
@@ -59,12 +88,32 @@ const IndexPage = () => (
                   pageIdx
                 ) => {
                   return (
-                    <div className="toc-card" key={`docker-toc-${pageIdx}`}>
-                      <Link to={`/${slug}`} className="title">
-                        {title}
-                      </Link>
-                      <p className="content">{excerpt}</p>
-                    </div>
+                    <DockerPageLink
+                      key={`docker-toc-${pageIdx}`}
+                      slug={slug}
+                      title={title}
+                      excerpt={excerpt}
+                    />
+                  )
+                }
+              )}
+              <h2 id="docker-node-intro">Docker With Node: An Intro</h2>
+              {myPages.node.map(
+                (
+                  {
+                    page: {
+                      overview: { slug, title, excerpt },
+                    },
+                  },
+                  pageIdx
+                ) => {
+                  return (
+                    <DockerPageLink
+                      key={`docker-toc-${pageIdx}`}
+                      slug={slug}
+                      title={title}
+                      excerpt={excerpt}
+                    />
                   )
                 }
               )}
