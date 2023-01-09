@@ -66,3 +66,7 @@ FROM nginx:alpine
 # prep & do dir, stage, owner, and running process work
 COPY --from=buildstage /build-dir/build /usr/share/nginx/html
 ```
+
+- uses a node image for the work of compiling and building the react project
+- uses an nginx image to serve the frontend content in a webserver
+- the nginx server serves content from the "internal" path of `/usr/share/nginx/html`
