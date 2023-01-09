@@ -1,7 +1,7 @@
 ---
 title: Include Docker Container Security Instructions In Kubernetes Pod Definition Files
 parentDir: k8s/in-depth
-slug: k8s/in-depth/security-in-docker
+slug: k8s/in-depth/security-with-containers
 author: Jake Laursen
 excerpt: 
 tags: Kubernetes, K8s, Security, Docker, Users, Privileges
