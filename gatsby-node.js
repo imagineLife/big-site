@@ -122,6 +122,23 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           }
         }
       }
+      misc: allMarkdownRemark(
+        sort: { frontmatter: { order: ASC } }
+        filter: {
+          frontmatter: { order: { gt: 0 }, slug: { regex: "/^misc/" } }
+        }
+      ) {
+        pages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              excerpt
+              parentDir
+            }
+          }
+        }
+      }
       mongo: allMarkdownRemark(
         sort: { frontmatter: { order: ASC } }
         filter: {
@@ -171,6 +188,23 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           }
         }
       }
+      scrum: allMarkdownRemark(
+        sort: { frontmatter: { order: ASC } }
+        filter: {
+          frontmatter: { order: { gt: 0 }, slug: { regex: "/scrum/" } }
+        }
+      ) {
+        pages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              excerpt
+              parentDir
+            }
+          }
+        }
+      }
       strengths: allMarkdownRemark(
         sort: { frontmatter: { order: ASC } }
         filter: {
@@ -206,9 +240,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       k8s: { pages: k8sPages },
       febs: { pages: febsPages },
       linux: { pages: linuxPages },
+      misc: { pages: miscPages },
       mongo: { pages: mongoPages },
       mongosectioncontent: { pages: mongoSectionContent },
       node: { pages: nodePages },
+      scrum: { pages: scrumPages },
       strengths: { pages: strengthsPages },
     },
   } = result
@@ -226,9 +262,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     ...httpServerPages,
     ...k8sPages,
     ...linuxPages,
+    ...miscPages,
     ...mongoPages,
     ...nodePages,
     ...mongoSectionContent,
+    ...scrumPages,
     ...strengthsPages,
   ]
   pages.forEach(({ page }, index) => {
