@@ -74,7 +74,7 @@ const IndexPage = () => (
               )}
             </section>
           </Toc>
-          <Link to="/node/event-loop/overview">Event Loop I: An Overview</Link>
+          {/* <Link to="/node/event-loop/overview">Event Loop I: An Overview</Link> */}
           <br />
           {/* <Link to="/node/event-loop/example">Event Loop II: Examples of Events in the loop</Link> */}
         </Fragment>
