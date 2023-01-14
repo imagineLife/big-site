@@ -216,8 +216,8 @@ module.exports = {
             )
             if (matchingFromAll[0]) {
               return {
-                ...sitePage,
                 ...matchingFromAll[0],
+                ...sitePage,
               }
             } else {
               return null
