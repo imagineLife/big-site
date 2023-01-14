@@ -4,7 +4,7 @@ parentDir: k8s
 slug: k8s/load-balancer-service
 author: Jake Laursen
 excerpt: Not much here
-tags: Kubernetes, K8s, services, load balancer
+tags: ["Kubernetes", "K8s", "services", "load balancer"]
 order: 11
 ---
 

@@ -4,7 +4,7 @@ parentDir: k8s
 slug: k8s/setup-overview
 author: Jake Laursen
 excerpt: A few different options for setting up K8s
-tags: Kubernetes, K8s, setup
+tags: ["Kubernetes", "K8s", "setup"]
 order: 3
 ---
 # Building A Kubernetes Cluster

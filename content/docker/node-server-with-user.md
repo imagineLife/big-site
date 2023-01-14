@@ -4,7 +4,7 @@ parentDir: docker
 slug: docker/node-server-with-user
 author: Jake Laursen
 excerpt: Declare a user for an image and running container
-tags: Docker, Dockerfile, NodeJS, Container, Image, User
+tags: ["Docker", "Dockerfile", "NodeJS", "Container", "Image", "User"]
 order: 7
 ---
 

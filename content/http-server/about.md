@@ -4,7 +4,7 @@ slug: http-server
 author: Jake Laursen
 excerpt: An overview of http servers
 parentDir: http-server
-tags: http, web, server, node, express
+tags: ["http", "web", "server", "node", "express"]
 order: 1
 ---
 

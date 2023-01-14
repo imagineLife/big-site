@@ -4,7 +4,7 @@ slug: http-server/styling-and-interaction
 author: Jake Laursen
 parentDir: http-server
 excerpt: Include a style-sheet and a js file while serving a frontend from an express server
-tags: http, web, server, node, express, npm, html
+tags: ["http", "web", "server", "node", "express", "npm", "html"]
 order: 4
 ---
 

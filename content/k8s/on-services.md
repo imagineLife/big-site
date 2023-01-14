@@ -4,7 +4,7 @@ parentDir: k8s
 slug: k8s/intro-to-services
 author: Jake Laursen
 excerpt: Only an Intro
-tags: Kubernetes, K8s, services
+tags: ["Kubernetes", "K8s", "services"]
 order: 8
 ---
 

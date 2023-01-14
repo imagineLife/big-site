@@ -4,7 +4,7 @@ parentDir: docker
 slug: docker/node-on-docker-intro
 author: Jake Laursen
 excerpt: Run NodeJS in a Docker Container From an Image with a tag
-tags: Docker, containers, node
+tags: ["Docker", "containers", "node"]
 order: 5
 ---
 

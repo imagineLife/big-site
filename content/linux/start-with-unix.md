@@ -4,7 +4,7 @@ parentDir: linux
 slug: linux/starting-with-unix
 author: Jake Laursen
 excerpt: Unix and Linux as unix-like
-tags: http, web, server, node, express
+tags: ["http", "web", "server", "node", "express"]
 order: 1
 ---
 
@@ -24,7 +24,6 @@ order: 1
       - [1991: Linux and the free OS](#1991-linux-and-the-free-os)
   - [Linux is not unix](#linux-is-not-unix)
     - [Unix-Like](#unix-like)
-Unix might be known as the "grandfather" of all current computer operating systems: windows, mac, android, and _linux_.  
 
 A brief "history" of OS -  
 

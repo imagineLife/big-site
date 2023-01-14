@@ -4,7 +4,7 @@ parentDir: docker
 slug: docker/a-smaller-node-image
 author: Jake Laursen
 excerpt: Considering the Impact that the base image has on the final image
-tags: Docker, Dockerfile, NodeJS, Container, Image, Dependencies, Optimization, Size, Footprint
+tags: ["Docker", "Dockerfile", "NodeJS", "Container", "Image", "Dependencies", "Optimization", "Size", "Footprint"]
 order: 9
 ---
 

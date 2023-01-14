@@ -4,7 +4,7 @@ parentDir: k8s
 slug: k8s/node-port-service
 author: Jake Laursen
 excerpt: Allow External network connectivity to a Kubernetes service
-tags: Kubernetes, K8s, services, odeport
+tags: ["Kubernetes", "K8s", "services", "nodeport"]
 order: 10
 ---
 

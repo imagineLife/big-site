@@ -4,7 +4,7 @@ parentDir: docker
 slug: docker/why-containers
 author: Jake Laursen
 excerpt: Summarizing Containers, VMs, and Virtualization
-tags: Docker, containers, serverss, virtualizaton
+tags: ["Docker", "containers", "servers", "virtualizaton"]
 order: 1
 ---
 

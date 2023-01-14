@@ -4,7 +4,7 @@ parentDir: k8s/examples
 slug: k8s/examples/a-container-with-podman
 author: Jake Laursen
 excerpt: A Brief and overly simple example of working a node process through an image-creation lifecycle
-tags: k8s, node, node, podman
+tags: ["k8s", "node", "node", "podman"]
 order: 14
 ---
 

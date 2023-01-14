@@ -4,7 +4,7 @@ parentDir: docker
 slug: docker/cli-overview
 author: Jake Laursen
 excerpt: Some Commands That May Become Second Nature
-tags: Docker, CLI
+tags: ["Docker", "CLI"]
 order: 3
 ---
 

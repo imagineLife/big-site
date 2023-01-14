@@ -4,7 +4,7 @@ parentDir: k8s
 slug: k8s/containers-first
 author: Jake Laursen
 excerpt: Dockerfiles, layers, instructions, args, etc
-tags: Docker, dockerfile, containers
+tags: ["Docker", "dockerfile", "containers"]
 order: 16
 ---
 

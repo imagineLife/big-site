@@ -4,7 +4,7 @@ parentDir: docker
 slug: docker/node-server-containerized
 author: Jake Laursen
 excerpt: A Piece-by-Piece Approach to a simple node server in a docker Image + Container
-tags: Docker, Dockerfile, NodeJS, Container, Image
+tags: ["Docker", "Dockerfile", "NodeJS", "Container", "Image"]
 order: 6
 ---
 
