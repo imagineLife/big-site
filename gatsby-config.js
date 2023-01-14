@@ -7,6 +7,8 @@
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
+const robots = require('./robots-txt');
+
 module.exports = {
   siteMetadata: {
     title: `Laursen.Tech: A Blog And Portfolio`,
@@ -225,12 +227,24 @@ module.exports = {
           })
           return resArr.filter(d => d)
         },
-        serialize: ({path, modifiedTime}) => {
+        serialize: ({ path, modifiedTime }) => {
           return {
             url: path,
             lastmod: modifiedTime,
           }
         },
+      },
+    },
+    {
+      resolve: "gatsby-plugin-robots-txt",
+      options: {
+        host: "https://www.laursen.tech",
+        sitemap: "https://www.laursen.tech/sitemap-index.xml",
+        // { userAgent: "*", allow: "/" }
+        policy: [
+          ...robots.allow.map(d => ({ userAgent: d, disallow: "" })),
+          { userAgent: "*", disallow: "/" },
+        ],
       },
     },
   ],
