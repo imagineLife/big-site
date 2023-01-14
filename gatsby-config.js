@@ -81,11 +81,11 @@ module.exports = {
           //     svgo: {
           //       plugins: [{ name: "removeTitle", active: false }],
           //     },
-              // mermaidOptions: {
-              //   theme: "dark",
+          // mermaidOptions: {
+          //   theme: "dark",
           //       // themeCSS: ".node rect { fill: #fff; }",
-            //   },
-            // },
+          //   },
+          // },
           // },
           {
             resolve: "gatsby-remark-embed-video",
@@ -188,5 +188,50 @@ module.exports = {
       },
     },
     `gatsby-transformer-json`,
+    {
+      resolve: "gatsby-plugin-sitemap",
+      options: {
+        query: `
+          {
+            allFile(filter: { relativePath: { regex: "/md/" } } ){
+              nodes {
+                relativePath
+                modifiedTime
+
+              }
+            }
+            allSitePage{
+              nodes {
+                pageContext
+                path
+              }
+            }
+          }
+        `,
+        resolveSiteUrl: () => `https://laursen.tech`,
+        resolvePages: ({ allSitePage, allFile }) => {
+          const resArr = allSitePage.nodes.map((sitePage, idx) => {
+            const matchingFromAll = allFile.nodes.filter(d =>
+              d.relativePath.includes(sitePage.pageContext.slug)
+            )
+            if (matchingFromAll[0]) {
+              return {
+                ...sitePage,
+                ...matchingFromAll[0],
+              }
+            } else {
+              return null
+            }
+          })
+          return resArr.filter(d => d)
+        },
+        serialize: ({path, modifiedTime}) => {
+          return {
+            url: path,
+            lastmod: modifiedTime,
+          }
+        },
+      },
+    },
   ],
 }
