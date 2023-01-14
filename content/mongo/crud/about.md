@@ -4,14 +4,14 @@ slug: mongo/crud
 parentDir: mongo
 author: Jake Laursen
 excerpt: Creating, Reading, Updating and Deleting Data
-tags: db, mongodb, crud
+tags: ["database" "mongodb", "crud"]
 ---
 
 # CRUD
 
 - [CRUD](#crud)
   - [Data Storage](#data-storage)
-  - [Data Importing & Exporting](#data-importing--exporting)
+  - [Data Importing \& Exporting](#data-importing--exporting)
   - [On Reading](#on-reading)
   - [On Creating](#on-creating)
   - [On Updating](#on-updating)

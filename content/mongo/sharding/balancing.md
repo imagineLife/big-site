@@ -4,7 +4,7 @@ slug: mongo/sharding/balancing
 parentDir: mongo/sharding
 author: Jake Laursen
 excerpt: Distributing data evenly across shards
-tags: db, mongodb, replication, sharding, horizontal scaling
+tags: ["database" "mongodb", "replication", "sharding", "horizontal scaling"]
 ---
 
 # On Balancing

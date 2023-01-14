@@ -4,7 +4,7 @@ slug: mongo/performance/indexes
 parentDir: mongo/performance
 author: Jake Laursen
 excerpt: Optimizing queries with various index types
-tags: db, mongodb, performance, indexes
+tags: ["database" "mongodb", "performance", "indexes"]
 ---
 
 # Indexes
@@ -22,7 +22,7 @@ tags: db, mongodb, performance, indexes
   - [Forcing Indexes with hint](#forcing-indexes-with-hint)
   - [Resource Allocation for indexes](#resource-allocation-for-indexes)
     - [Determine index sizes](#determine-index-sizes)
-    - [Determine what kind of resources are involved in index allocation & operation](#determine-what-kind-of-resources-are-involved-in-index-allocation--operation)
+    - [Determine what kind of resources are involved in index allocation \& operation](#determine-what-kind-of-resources-are-involved-in-index-allocation--operation)
     - [Consider compromises and edge cases](#consider-compromises-and-edge-cases)
       - [Skip BI tooling queries](#skip-bi-tooling-queries)
       - [Skip monotonically growing fields](#skip-monotonically-growing-fields)

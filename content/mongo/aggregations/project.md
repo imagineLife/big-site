@@ -4,7 +4,7 @@ slug: mongo/aggregations/project
 parentDir: mongo/aggregations
 author: Jake Laursen
 excerpt: Shape the output content of a query using the projections
-tags: db, mongodb, aggregation, projection
+tags: ["database" "mongodb", "aggregation", "projection"]
 ---
 
 # project

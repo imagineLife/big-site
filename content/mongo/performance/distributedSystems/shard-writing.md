@@ -4,7 +4,7 @@ slug: mongo/performance/distributed-systems/shard-writing
 parentDir: mongo/performance/distributed-systems
 author: Jake Laursen
 excerpt: Optimizing for the horizontal-scaling advantage
-tags: db, mongodb, performance, replica sets, secondary nodes, indexes
+tags: ["database" "mongodb", "performance", "replica sets", "secondary nodes", "indexes"]
 ---
 
 # Increasing write performance with shards

@@ -3,7 +3,7 @@ title: Mongo Authorization
 slug: mongo/authorization
 author: Jake Laursen
 excerpt: Setting up a root admin db user
-tags: database, javascript, blogpost, overview, authorization
+tags: ["database", "javascript", "blogpost", "overview", "authorization"]
 order: 6
 ---
 

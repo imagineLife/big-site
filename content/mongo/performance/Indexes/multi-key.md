@@ -4,7 +4,7 @@ slug: mongo/performance/multi-key-indexes
 parentDir: mongo/performance
 author: Jake Laursen
 excerpt: Indexing array values of nested documents
-tags: db, mongodb, performance, indexes, multikey
+tags: ["database" "mongodb", "performance", "indexes", "multikey"]
 ---
 
 # Indexes on array field keys

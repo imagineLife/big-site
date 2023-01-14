@@ -3,7 +3,7 @@ title: MongoDB, an Overview
 slug: mongo/overview
 author: Jake Laursen
 excerpt: Thoughts on Mongo and blog posts
-tags: database, javascript, blogpost, overview, tech
+tags: ["database", "javascript", "blogpost", "overview", "tech"]
 order: 1
 ---
 

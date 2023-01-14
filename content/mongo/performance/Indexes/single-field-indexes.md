@@ -4,7 +4,7 @@ slug: mongo/performance/single-field-indexes
 parentDir: mongo/performance
 author: Jake Laursen
 excerpt: The Power of an index on a single field
-tags: db, mongodb, performance, indexes
+tags: ["database" "mongodb", "performance", "indexes"]
 ---
 
 # Single Field Indexes

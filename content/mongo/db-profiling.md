@@ -3,7 +3,7 @@ title: Profiling MongoDB
 slug: mongo/profiling
 author: Jake Laursen
 excerpt: Gathering profiling stats from a db
-tags: database, javascript, blogpost, overview, profiling
+tags: ["database", "javascript", "blogpost", "overview", "profiling"]
 order: 5
 ---
 

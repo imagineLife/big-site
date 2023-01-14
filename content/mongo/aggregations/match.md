@@ -3,8 +3,8 @@ title: Match
 slug: mongo/aggregations/match
 parentDir: mongo/aggregations
 author: Jake Laursen
-excerpt:
-tags: db, mongodb, performance, aggregation, match
+excerpt: 
+tags: ["database" "mongodb", "performance", "aggregation", "match"]
 ---
 
 # match

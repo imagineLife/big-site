@@ -1,10 +1,10 @@
 ---
-title: Reads and Writes on a Replica Set
+title: Failovers and Elections
 slug: mongo/replication/failover-and-elections
 parentDir: mongo/replication
 author: Jake Laursen
 excerpt: How primary & secondary nodes leverage elections to handle downtime
-tags: db, mongodb, replication, replica sets, failover, elections
+tags: [db, mongodb, replication, replica sets, failover, elections]
 ---
 
 # Failovers and Elections
@@ -76,16 +76,16 @@ Election depends on 2 things: recency of data and priority.
 
 ##### how to change priority
 
-```bash
-# store config in var
+```js
+// store config in var
 let c = rs.conf()
 c.members[2].priority = 0
 rs.reconfig(c)
 
-# check out the new topology
+// check out the new topology
 rs.isMaster()
 
-# see that the node with priority 0 is now in the "passive" node list
+// see that the node with priority 0 is now in the "passive" node list
 ```
 
 - rs.stepDown always tries to choose a new primary node

@@ -4,7 +4,7 @@ slug: mongo/data-modeling/anti-patterns
 parentDir: mongo/data-modeling
 author: Jake Laursen
 excerpt: Un-needed indexes, bloated documents, huge arrays, storing data strategically
-tags: db, mongodb, data modeling
+tags: ["database" "mongodb", "data modeling"]
 ---
 
 # Schema Design Anti Patterns

@@ -3,7 +3,7 @@ title: The Mongo Config File
 slug: mongo/a-config-file
 author: Jake Laursen
 excerpt: Setting up Mongo using a config file
-tags: database, javascript, blogpost, overview, config
+tags: ["database", "javascript", "blogpost", "overview", "config"]
 order: 6
 ---
 

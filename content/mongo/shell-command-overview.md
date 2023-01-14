@@ -3,7 +3,7 @@ title: MongoDB and the shell, an overview
 slug: mongo/shell-overview
 author: Jake Laursen
 excerpt: the db, rs, and sh groups of shell commands
-tags: database, javascript, blogpost, overview, tech
+tags: ["database", "javascript", "overview", "tech"]
 order: 3
 ---
 

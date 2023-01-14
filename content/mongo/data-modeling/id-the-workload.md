@@ -4,7 +4,7 @@ slug: mongo/data-modeling/id-the-workload
 parentDir: mongo/data-modeling
 author: Jake Laursen
 excerpt: Identify how the application will use data
-tags: db, mongodb, data modeling
+tags: ["database" "mongodb", "data modeling"]
 ---
 
 # Identify the workload

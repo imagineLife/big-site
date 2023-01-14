@@ -4,7 +4,7 @@ slug: mongo/performance/hardware
 parentDir: mongo/performance
 author: Jake Laursen
 excerpt: How the elements in hardware affect the performance of a DB
-tags: db, mongodb, performance, hardware, ram, cpu
+tags: ["database" "mongodb", "performance", "hardware", "ram", "cpu"]
 ---
 
 # Hardware
@@ -17,9 +17,6 @@ tags: db, mongodb, performance, hardware, ram, cpu
       - [Disks and Raid](#disks-and-raid)
   - [Blocking Ops](#blocking-ops)
     - [Networking](#networking)
-      Mongodb is high-performance.  
-      MongoDB requires adequate hardware.
-      Here, overviews of what & how the hardware impacts mongodb.
 
 ## A Server
 

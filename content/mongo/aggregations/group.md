@@ -4,7 +4,7 @@ slug: mongo/aggregations/group
 parentDir: mongo/aggregations
 author: Jake Laursen
 excerpt: group data into custom-made categories
-tags: db, mongodb, performance, aggregation, grouping
+tags: ["database" "mongodb", "performance", "aggregation", "grouping"]
 ---
 
 # Group

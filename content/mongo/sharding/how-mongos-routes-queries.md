@@ -4,7 +4,7 @@ slug: mongo/sharding/how-mongos-routes-queries
 parentDir: mongo/sharding
 author: Jake Laursen
 excerpt: The mongos server handles directing queries to the appropriate shards
-tags: db, mongodb, replication, sharding, horizontal scaling
+tags: ["database" "mongodb", "replication", "sharding", "horizontal scaling"]
 ---
 
 # How Mongos routes queries

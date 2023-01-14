@@ -4,7 +4,7 @@ slug: mongo/replication/setup-a-replica-set
 parentDir: mongo/replication
 author: Jake Laursen
 excerpt: Use 3 Mongo Instances to allow for higher availability
-tags: db, mongodb, replication, replica sets, setup
+tags: ["database" 'mongodb', 'replication', "replica sets", "setup"]
 ---
 
 # Setting up A local replica set

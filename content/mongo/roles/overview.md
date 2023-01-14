@@ -4,7 +4,7 @@ slug: mongo/roles
 parentDir: mongo
 author: Jake Laursen
 excerpt: Admins, DB users, Custer Admins, Backup users, etc.
-tags: database, javascript, blogpost, overview, tech, users, roles
+tags: ["database", "javascript", "blogpost", "overview", "tech", "users", "roles"]
 order: 1
 ---
 

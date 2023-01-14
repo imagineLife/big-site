@@ -4,7 +4,7 @@ slug: mongo/aggregations/geo-near
 parentDir: mongo/aggregations
 author: Jake Laursen
 excerpt: Work with GeoJSON data
-tags: db, mongodb, aggregation, geoNear, geojson
+tags: ["database" "mongodb", "aggregation", "geoNear", "geojson"]
 ---
 
 # geonear

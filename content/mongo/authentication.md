@@ -3,7 +3,7 @@ title: Mongo Authentication Mechanisms
 slug: mongo/authentication
 author: Jake Laursen
 excerpt: 4 Authentication mechanisms
-tags: database, javascript, blogpost, overview, authentication
+tags: ["database", "javascript", "blogpost", "overview", "authentication"]
 order: 7
 ---
 

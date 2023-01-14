@@ -4,7 +4,7 @@ slug: mongo/performance/distributed-systems
 parentDir: mongo/performance
 author: Jake Laursen
 excerpt: Aggregations, Secondary Nodes, Replica Sets, and Shards
-tags: db, mongodb, performance
+tags: ["database" "mongodb", "performance"]
 ---
 
 # Distributed systems

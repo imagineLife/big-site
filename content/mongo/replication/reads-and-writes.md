@@ -4,7 +4,7 @@ slug: mongo/replication/reads-and-writes
 parentDir: mongo/replication
 author: Jake Laursen
 excerpt: Read data & write data on a replica set
-tags: db, mongodb, replication, replica sets, CRUD
+tags: ["database" "mongodb", "replication", "replica sets", "CRUD"]
 ---
 
 # Reading and Writing with Replica Sets

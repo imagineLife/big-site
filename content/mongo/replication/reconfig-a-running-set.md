@@ -4,7 +4,7 @@ slug: mongo/replication/reconfig-a-running-set
 parentDir: mongo/replication
 author: Jake Laursen
 excerpt: Update an already-running replica set with minimal downtime
-tags: db, mongodb, replication, replica sets, reconfiguration
+tags: ["database" "mongodb", "replication", "replica sets", "reconfiguration"]
 ---
 
 # Reconfiguring a running Replica Set

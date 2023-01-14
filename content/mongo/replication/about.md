@@ -4,7 +4,7 @@ slug: mongo/replication
 parentDir: mongo
 author: Jake Laursen
 excerpt: Cloning MongoDB Instances for High Availability
-tags: db, mongodb, replication, replica sets, arbiters, elections
+tags: ["database" "mongodb", "replication", "replica sets", "arbiters", "elections"]
 ---
 
 # What Is Replication

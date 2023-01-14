@@ -3,7 +3,7 @@ title: A Backlog
 slug: strengths/a-backlog
 author: Jake Laursen
 excerpt: A list of writings I'm working on
-tags: personality, strengths, thoughts, overview, topic, community
+tags: ["personality", "strengths", "thoughts", "overview", "topic", "community"]
 coverImage: ./index.JPG
 coverAlt: Granola
 order: 1

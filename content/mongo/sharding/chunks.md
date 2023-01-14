@@ -4,7 +4,7 @@ slug: mongo/sharding/chunks
 parentDir: mongo/sharding
 author: Jake Laursen
 excerpt: Leveraging the shard key to group data together
-tags: db, mongodb, replication, sharding, horizontal scaling
+tags: ["database" "mongodb", "replication", "sharding", "horizontal scaling"]
 ---
 
 # Chunks

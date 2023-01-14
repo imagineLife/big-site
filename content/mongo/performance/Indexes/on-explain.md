@@ -4,7 +4,7 @@ slug: mongo/performance/explain-details
 parentDir: mongo/performance
 author: Jake Laursen
 excerpt: Learning the most about query and db performance through an extra command on a query
-tags: db, mongodb, performance, explain
+tags: ["database" "mongodb", "performance", "explain"]
 ---
 
 # Explain

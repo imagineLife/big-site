@@ -4,7 +4,7 @@ slug: mongo/sharding/hashed-shard-keys
 parentDir: mongo/sharding
 author: Jake Laursen
 excerpt: Shard Keys can help drive even data distribution
-tags: db, mongodb, replication, sharding, horizontal scaling, hashing
+tags: ["database" "mongodb", "replication", "sharding", "horizontal scaling", "hashing"]
 ---
 
 # Hashed Shard Keys

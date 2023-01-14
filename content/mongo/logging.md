@@ -3,7 +3,7 @@ title: Logging DB Components
 slug: mongo/logging-db-components
 author: Jake Laursen
 excerpt: A single command to show some logs about a db instance
-tags: database, javascript, blogpost, overview, tech
+tags: ["database", "javascript", "blogpost", "overview", "tech"]
 order: 4
 ---
 

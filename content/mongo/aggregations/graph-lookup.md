@@ -4,7 +4,7 @@ slug: mongo/aggregations/graph-lookup
 parentDir: mongo/aggregations
 author: Jake Laursen
 excerpt: recursively parse & reconstruct query output per parameters
-tags: db, mongodb, performance, aggregation, unwind, arrays
+tags: ["database" "mongodb", "performance", "aggregation", "unwind", "arrays"]
 ---
 
 # graphLookup

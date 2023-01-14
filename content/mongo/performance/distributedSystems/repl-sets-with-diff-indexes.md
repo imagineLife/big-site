@@ -4,7 +4,7 @@ slug: mongo/performance/distributed-systems/repl-sets-diff-indexes
 parentDir: mongo/performance/distributed-systems
 author: Jake Laursen
 excerpt: An infrequent use-case
-tags: db, mongodb, performance, replica sets, secondary nodes, indexes
+tags: ["database" "mongodb", "performance", "replica sets", "secondary nodes", "indexes"]
 ---
 
 # Replica Sets with Differing Indexes

@@ -4,7 +4,7 @@ slug: mongo/performance/partial-indexes
 parentDir: mongo/performance
 author: Jake Laursen
 excerpt: Indexing a restricted set of docs in a collection
-tags: db, mongodb, performance, partial indexes
+tags: ["database" "mongodb", "performance", "partial indexes"]
 ---
 
 # Partial Indexes
@@ -24,9 +24,6 @@ tags: db, mongodb, performance, partial indexes
     - [Failing to use the partial Index pt 2](#failing-to-use-the-partial-index-pt-2)
   - [Partial Indexes and Unique Constraints](#partial-indexes-and-unique-constraints)
   - [Partial Indexes to save space with Multikey Indexes](#partial-indexes-to-save-space-with-multikey-indexes)
-    Mongodb supports this.  
-    These allow indexing a PORTION of a collection.  
-    This leads to lower storage reqs && smaller performance costs to maintain these.
 
 ## Example 1, greater than
 

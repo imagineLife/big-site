@@ -4,7 +4,7 @@ slug: mongo/aggregations/cursor-like-stages
 parentDir: mongo/aggregations
 author: Jake Laursen
 excerpt: Rather than passing logic to the cursor, some logic can be in the aggregation pipeline directly
-tags: db, mongodb, aggregation, sort, limit, skip, count, cursor
+tags: ["database" "mongodb", "aggregation", "sort", "limit", "skip", "count", "cursor"]
 ---
 
 # Cursor-Like Stages

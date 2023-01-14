@@ -4,7 +4,7 @@ slug: mongo/storage-engines
 parentDir: mongo
 author: Jake Laursen
 excerpt: how data is stored on disk, primarily through wiredTiger
-tags: db, mongodb, storage engine, wiredtiger
+tags: ["database" "mongodb", "storage engine", "wiredtiger"]
 ---
 
 # Storage Engines

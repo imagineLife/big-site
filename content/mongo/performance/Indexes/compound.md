@@ -4,7 +4,7 @@ slug: mongo/performance/compound-indexes
 parentDir: mongo/performance
 author: Jake Laursen
 excerpt: Indexing across several fields within a single defined index
-tags: db, mongodb, performance, indexes, compound
+tags: ["database" "mongodb", "performance", "indexes", "compound"]
 ---
 
 # Compound Index

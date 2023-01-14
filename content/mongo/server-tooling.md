@@ -3,7 +3,7 @@ title: MongoDB Server Tooling
 slug: mongo/server-tooling
 author: Jake Laursen
 excerpt: importing and exporting data from a cli
-tags: mongo, database, data,
+tags: ["mongo", "database", "data"]
 order: 2
 ---
 

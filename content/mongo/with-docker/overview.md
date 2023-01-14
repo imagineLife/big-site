@@ -4,7 +4,7 @@ slug: mongo/with-containers
 parentDir: mongo
 author: Jake Laursen
 excerpt: Running the mongodb instance in a container is great for replicating db development environments for multiple developers
-tags: mongo, docker, overview, containerization
+tags: ["mongo", "docker", "overview", "containerization"]
 order: 1
 ---
 
