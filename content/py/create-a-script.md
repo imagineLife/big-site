@@ -4,7 +4,7 @@ parentDir: py
 slug: py/create-a-script
 author: Jake Laursen
 excerpt: an initial setup for creating a first python program
-tags: learn, python, setup, windows
+tags: ["learn", "python", "setup", "windows"]
 order: 1
 ---
 

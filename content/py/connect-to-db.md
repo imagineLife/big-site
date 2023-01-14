@@ -4,7 +4,7 @@ parentDir: py
 slug: py/connect-to-db
 author: Jake Laursen
 excerpt: use connection parameters and run a query
-tags: learn, python, setup, windows
+tags: ["learn", "python", "setup", "windows"]
 order: 2
 ---
 
