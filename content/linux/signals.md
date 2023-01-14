@@ -4,7 +4,7 @@ parentDir: linux
 slug: linux/ctrl-and-signals
 author: Jake Laursen
 excerpt: The Control key is a powerful key in bash, allowing for shortcuts as well as "signal" sending
-tags: linux, kernel, cli, ubuntu, shell, ctrl, shortcuts, signals
+tags: ["linux", "kernel", "cli", "ubuntu", "shell", "ctrl", "shortcuts", "signals"]
 order: 5
 ---
 

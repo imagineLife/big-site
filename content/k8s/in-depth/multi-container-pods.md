@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/multi-container-pods
 author: Jake Laursen
 excerpt: A few meaningful approaches to deploying multiple containers in a single pod
-tags: Kubernetes, K8s, pods, containers, patterns, sidecar, adapter, ambassador
+tags: ["Kubernetes", "K8s", "pods", "containers", "patterns", "sidecar", "adapter", "ambassador"]
 order: 12
 ---
 

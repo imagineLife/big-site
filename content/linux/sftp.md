@@ -4,7 +4,7 @@ title: SSH
 slug: linux/sftp
 author: Jake Laursen
 excerpt: Share files with SFTP
-tags: linux, kernel, cli, ssh, sftp
+tags: ["linux", "kernel", "cli", "ssh", "sftp"]
 order: 16
 ---
 

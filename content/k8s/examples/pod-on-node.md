@@ -4,7 +4,7 @@ parentDir: k8s/examples
 slug: k8s/examples/pod-on-a-node
 author: Jake Laursen
 excerpt: Some Pod Details and a node detail
-tags: Kubernetes, K8s, pod, deployment, node
+tags: ["Kubernetes", "K8s", "pod", "deployment", "node"]
 order: 7
 ---
 Create a pod 

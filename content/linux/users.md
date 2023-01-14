@@ -4,7 +4,7 @@ title: Users
 slug: linux/users
 author: Jake Laursen
 excerpt: Users and accounts of the Linux OS
-tags: linux, kernel, cli, users
+tags: ["linux", "kernel", "cli", "users"]
 order: 10
 ---
 

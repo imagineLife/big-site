@@ -3,7 +3,7 @@ title: Web-Based Software Beyond The Frontend
 slug: misc/beyond-the-frontend
 author: Jake Laursen
 excerpt: technology topics including & beyond the frontend
-tags: work, growth, topics, engineering
+tags: ["work", "growth", "topics", "engineering"]
 parentDir: misc
 order: 1
 ---
@@ -15,7 +15,7 @@ order: 1
     - [JS](#js)
     - [Framework(s)](#frameworks)
   - [Api and Frontend-To-Server Communication](#api-and-frontend-to-server-communication)
-  - [Backend & Server-Side Logic](#backend--server-side-logic)
+  - [Backend \& Server-Side Logic](#backend--server-side-logic)
   - [Data Storage](#data-storage)
   - [Systems Architecture](#systems-architecture)
 

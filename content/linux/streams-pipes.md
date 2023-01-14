@@ -4,20 +4,20 @@ title: Input, Output, Streams, anddata-flow direction with Pipes
 slug: linux/streams-pipes
 author: Jake Laursen
 excerpt: Linux treats input, output and errors as streams
-tags: linux, kernel, cli, input, output, streams, pipes
+tags: ["linux", "kernel", "cli", "input", "output", "streams", "pipes"]
 order: 9
 ---
 
 # Streams
 - [Streams](#streams)
   - [CLI Output with stdout](#cli-output-with-stdout)
-    - [Piping with 1> to overwrite](#piping-with-1-to-overwrite)
+    - [Piping with 1\> to overwrite](#piping-with-1-to-overwrite)
       - [from stdout](#from-stdout)
       - [from cat](#from-cat)
       - [Replaces only](#replaces-only)
-    - [Piping with 1>> to add](#piping-with-1-to-add)
+    - [Piping with 1\>\> to add](#piping-with-1-to-add)
   - [Error output with stderr](#error-output-with-stderr)
-    - [Piping errors with 2>> to add](#piping-errors-with-2-to-add)
+    - [Piping errors with 2\>\> to add](#piping-errors-with-2-to-add)
   - [Multiple outputs with Multiple Commands](#multiple-outputs-with-multiple-commands)
   - [Directing contents to a program with stdin](#directing-contents-to-a-program-with-stdin)
 - [Pipes](#pipes)

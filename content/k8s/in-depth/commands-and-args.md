@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/commands-and-args
 author: Jake Laursen
 excerpt: Pass Commands and Arguments to the Docker Containers that are run inside of pods
-tags: Kubernetes, K8s, commands, args, docker, cli
+tags: ["Kubernetes", "K8s", "commands", "args", "docker", "cli"]
 order: 4
 ---
 

@@ -2,7 +2,7 @@
 title: A Task Pipeline for a Frontend Project
 author: Jake Laursen
 excerpt: Using automation to replace testing, deploying, releasing, versioning, bundling....
-tags: CI/CD, automation, github, pipeline
+tags: ["CI/CD", "automation", "github", "pipeline"]
 parentDir: misc
 slug: misc/frontend-pipeline
 order: 5

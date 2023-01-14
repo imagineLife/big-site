@@ -4,7 +4,7 @@ parentDir: k8s/examples
 slug: k8s/examples/secrets-in-action
 author: Jake Laursen
 excerpt: Encoding a string, Creating a Secret Object, And Mounting the secret to a pod
-tags: k8s, secrets, volumes, mounts, encoding
+tags: ["k8s", "secrets", "volumes", "mounts", "encoding"]
 order: 16
 ---
 

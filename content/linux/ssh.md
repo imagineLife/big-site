@@ -4,7 +4,7 @@ title: SSH
 slug: linux/ssh
 author: Jake Laursen
 excerpt: Remote CLI Sessions with a Secure Shell
-tags: linux, kernel, cli, ssh, remote, shell
+tags: ["linux", "kernel", "cli", "ssh", "remote", "shell"]
 order: 15
 ---
 

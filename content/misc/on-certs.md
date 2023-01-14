@@ -3,7 +3,7 @@ title: On Certifications
 slug: misc/on-certs
 author: Jake Laursen
 excerpt: No talking, No looking away, No docs, No BS, Alone in a room with a clear desk
-tags: studying, learning, certification, thoughts
+tags: ["studying", "learning", "certification", "thoughts"]
 parentDir: misc
 order: 2
 ---

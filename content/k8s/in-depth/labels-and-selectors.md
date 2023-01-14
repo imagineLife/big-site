@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/labels-and-selectors
 author: Jake Laursen
 excerpt: Labels And Selectors can allow for grouping objects together with kubectl or replicasites k8s objects
-tags: Kubernetes, K8s, pods, containers, logs
+tags: ["Kubernetes", "K8s", "pods", "containers", "logs"]
 order: 16
 ---
 

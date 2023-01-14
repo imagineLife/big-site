@@ -4,7 +4,7 @@ parentDir: k8s/examples
 slug: k8s/examples/nuanced-deployment
 author: Jake Laursen
 excerpt: Specify cpu request units, mounted volume types, a label, and expose a port
-tags: Kubernetes, K8s, deployment, redis, resources
+tags: ["Kubernetes", "K8s", "deployment", "redis", "resources"]
 order: 5
 ---
 

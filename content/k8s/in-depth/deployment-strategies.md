@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/deployment-strategies
 author: Jake Laursen
 excerpt: Blue-Green and Canary deployments are not built into K8s, but can be used with some strategic object manipulation
-tags: Kubernetes, K8s, deployments, canary, blue/green, deployment strategies
+tags: ["Kubernetes", "K8s", "deployments", "canary", "blue/green", "deployment strategies"]
 order: 30
 ---
 

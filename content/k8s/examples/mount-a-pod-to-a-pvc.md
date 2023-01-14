@@ -4,7 +4,7 @@ parentDir: k8s/examples
 slug: k8s/examples/add-a-vol-to-a-pod
 author: Jake Laursen
 excerpt: 
-tags: Kubernetes, K8s
+tags: ["Kubernetes", "K8s"]
 order: 2
 ---
 

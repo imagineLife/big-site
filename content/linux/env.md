@@ -4,7 +4,7 @@ title: Env and Env Vars
 slug: linux/env
 author: Jake Laursen
 excerpt: Linux runs in environments
-tags: linux, kernel, cli, environment, variables
+tags: ["linux", "kernel", "cli", "environment", "variables"]
 order: 13
 ---
 
@@ -21,12 +21,12 @@ There is something like a "global" environment and also a "local" environment.
   - [Set a Temporary Variable](#set-a-temporary-variable)
   - [Set System-Wide Permanent Variables](#set-system-wide-permanent-variables)
     - [System-Wide with /etc/environment](#system-wide-with-etcenvironment)
-    - [System-Wide with /etc/profile.d/*.sh](#system-wide-with-etcprofiledsh)
+    - [System-Wide with /etc/profile.d/\*.sh](#system-wide-with-etcprofiledsh)
     - [Scriptable System-Wide with /etc/profile and /etc/bashrc](#scriptable-system-wide-with-etcprofile-and-etcbashrc)
-  - [Customizing the Bash Shell with bashrc and bash_profile](#customizing-the-bash-shell-with-bashrc-and-bash_profile)
-    - [bash_profile for login shells](#bash_profile-for-login-shells)
+  - [Customizing the Bash Shell with bashrc and bash\_profile](#customizing-the-bash-shell-with-bashrc-and-bash_profile)
+    - [bash\_profile for login shells](#bash_profile-for-login-shells)
     - [bashrc for every shell instance](#bashrc-for-every-shell-instance)
-    - [telling bash_profile to refer to bashrc](#telling-bash_profile-to-refer-to-bashrc)
+    - [telling bash\_profile to refer to bashrc](#telling-bash_profile-to-refer-to-bashrc)
 ## Terminals are Temporary Sessions
 Every time a terminal/cmd window is open, it is a bash "session".  
 Each session can "remember" information. 

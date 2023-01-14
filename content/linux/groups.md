@@ -4,7 +4,7 @@ title: Groups
 slug: linux/groups
 author: Jake Laursen
 excerpt: Users with a shared group attribute
-tags: linux, kernel, cli, users, groups
+tags: ["linux", "kernel", "cli", "users", "groups"]
 order: 11
 ---
 

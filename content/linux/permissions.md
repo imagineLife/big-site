@@ -4,7 +4,7 @@ title: Permissions
 slug: linux/permissions
 author: Jake Laursen
 excerpt: 
-tags: linux, kernel, cli, users, groups
+tags: ["linux", "kernel", "cli", "users", "groups"]
 order: 12
 ---
 

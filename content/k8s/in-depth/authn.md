@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/authentication
 author: Jake Laursen
 excerpt: Users Can Gain Access to Clusters Through Kubeconfig Files and Contexts
-tags: Kubernetes, K8s, authentication, users, clusters, certs, diagram
+tags: ["Kubernetes", "K8s", "authentication", "users", "clusters", "certs", "diagram"]
 order: 25
 ---
 

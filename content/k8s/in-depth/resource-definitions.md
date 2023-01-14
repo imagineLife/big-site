@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/on-resources
 author: Jake Laursen
 excerpt: Disk, Memory, and CPU are 3 types of resources that can be configured within Kubernets
-tags: Kubernetes, K8s, Disk, Memory, CPU, Hardware, resources, allocation
+tags: ["Kubernetes", "K8s", "Disk", "Memory", "CPU", "Hardware", "resources", "allocation"]
 order: 8
 ---
 

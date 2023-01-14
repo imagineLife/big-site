@@ -4,7 +4,7 @@ title: Use Multi-Line Text Blocks in combination with other commands using hered
 slug: linux/heredoc
 author: Jake Laursen
 excerpt: Need A Text Block To
-tags: linux, bash, command, heredoc, text, redirect
+tags: ["linux", "bash", "command", "heredoc", "text", "redirect"]
 order: 23
 ---
 

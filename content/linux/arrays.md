@@ -4,7 +4,7 @@ title: Arrays and Loops
 slug: linux/arrays
 author: Jake Laursen
 excerpt: arrays and looping through items
-tags: linux, bash, arrays, loops, lists
+tags: ["linux", "bash", "arrays", "loops", "lists"]
 order: 22
 ---
 

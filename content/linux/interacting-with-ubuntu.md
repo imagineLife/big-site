@@ -4,7 +4,7 @@ parentDir: linux
 slug: linux/interacting-with-ubuntu
 author: Jake Laursen
 excerpt: Getting a cli up and running
-tags: linux, kernel, cli, ubuntu, shell
+tags: ["linux", "kernel", "cli", "ubuntu", "shell"]
 order: 3
 ---
 #  Get Ubuntu Set Up

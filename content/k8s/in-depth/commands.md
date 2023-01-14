@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/commands
 author: Jake Laursen
 excerpt: Create objects, alter objects, and more through configuration files and imperative kubectl commands
-tags: Kubernetes, K8s, Commands, CLI, config, imperative example
+tags: ["Kubernetes", "K8s", "Commands", "CLI", "config", "imperative example"]
 order: 98
 ---
 

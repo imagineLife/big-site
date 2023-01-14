@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/custom-resources
 author: Jake Laursen
 excerpt: Leverage Kubernetes to create new resources types, custom specs on a resource, and custom controllers
-tags: Kubernetes, K8s, custom resource, resource, controller
+tags: ["Kubernetes", "K8s", "custom resource", "resource", "controller"]
 order: 29
 ---
 

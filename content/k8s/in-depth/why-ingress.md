@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/why-ingress
 author: Jake Laursen
 excerpt: Ingress solves some networking nuianced configuration details
-tags: Kubernetes, K8s, ingress, networking, dns, proxy
+tags: ["Kubernetes", "K8s", "ingress", "networking", "dns", "proxy"]
 order: 18
 ---
 

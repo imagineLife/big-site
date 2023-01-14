@@ -4,7 +4,7 @@ parentDir: k8s/examples
 slug: k8s/examples/deal-with-users
 author: Jake Laursen
 excerpt: User Details
-tags: k8s, node, users, config, kubectl
+tags: ["k8s", "node", "users", "config", "kubectl"]
 order: 12
 ---
 

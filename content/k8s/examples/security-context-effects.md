@@ -4,7 +4,7 @@ parentDir: k8s/examples
 slug: k8s/examples/security-context-effects
 author: Jake Laursen
 excerpt: Setting securityContext on a container and/or a pod will impact what privileges the pod/container has within the host os
-tags: k8s, security contexts, security,
+tags: ["k8s", "security contexts", "security"]
 order: 15
 ---
 

@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/network-policies
 author: Jake Laursen
 excerpt: Ingress policies allow incoming network requests, and Egress policies all outgoing network requests 
-tags: Kubernetes, K8s, ingress, egress networking, policies, network policies
+tags: ["Kubernetes", "K8s", "ingress", "egress networking", "policies", "network policies"]
 order: 20
 ---
 

@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/helm
 author: Jake Laursen
 excerpt: Helm can help remove object-by-object management when looking to manage a suite of Kubernetes objects
-tags: Kubernetes, K8s, Helm, Objects, Management, Packages
+tags: ["Kubernetes", "K8s", "Helm", "Objects", "Management", "Packages"]
 order: 31
 ---
 

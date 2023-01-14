@@ -3,7 +3,7 @@ title: Use JS Across a Stack
 slug: misc/js-stack
 author: Jake Laursen
 excerpt: Break the Language Barrier, Empower a Cross-Discipline Team
-tags: JavaScript, Languages, stack, server, node, client, Database, Mongo
+tags: ["JavaScript", "Languages", "stack", "server", "node", "client", "Database", "Mongo"]
 parentDir: misc
 order: 3
 ---

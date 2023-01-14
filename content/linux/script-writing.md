@@ -4,7 +4,7 @@ title: Writing Scripts with Bash
 slug: linux/script-writing
 author: Jake Laursen
 excerpt: Scripts, bash, automation
-tags: linux, kernel, cli, scripts
+tags: ["linux", "kernel", "cli", "scripts"]
 order: 19
 ---
 

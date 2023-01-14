@@ -2,7 +2,7 @@
 title: An Http-Server Approach to Web Development
 author: Jake Laursen
 excerpt: Developing competence for building web-based tech
-tags: http, web, node, react, html, css, js, pedagogy, path,
+tags: ["http", "web", "node", "react", "html", "css", "js", "pedagogy", "path"]
 parentDir: misc
 slug: misc/a-web-first-path
 order: 4

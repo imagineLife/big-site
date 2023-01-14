@@ -4,7 +4,7 @@ parentDir: linux
 slug: linux/text-editors
 author: Jake Laursen
 excerpt: Classic text editors
-tags: linux, kernel, cli, nano, text, vim
+tags: ["linux", "kernel", "cli", "nano", "text", "vim"]
 order: 6
 ---
 

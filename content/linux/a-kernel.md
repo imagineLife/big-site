@@ -4,7 +4,7 @@ parentDir: linux
 slug: linux/a-kernel
 author: Jake Laursen
 excerpt: The glue between the hardware and software
-tags: linux, kernel
+tags: ["linux", "kernel"]
 order: 2
 ---
 ## Linux is a Kernel

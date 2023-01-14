@@ -4,7 +4,7 @@ parentDir: k8s/examples
 slug: k8s/examples/user-role-config
 author: Jake Laursen
 excerpt: A Several-Step Process to get a new kubectl user up & running with explicit permissions on Kubernetes resources
-tags: k8s, user, role, rolebinding, resources, permissions, kubeconfig, kubectl
+tags: ["k8s", "user", "role", "rolebinding", "resources", "permissions", "kubeconfig", "kubectl"]
 order: 19
 ---
 

@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/admission-controllers
 author: Jake Laursen
 excerpt: A properly configured k8s server leverages admissionControllers for automated request processing
-tags: Kubernetes, K8s, admission controllers, requests, mutations, validations, visualization, diagram
+tags: ["Kubernetes", "K8s", "admission controllers", "requests", "mutations", "validations", "visualization", "diagram"]
 order: 28
 ---
 
@@ -53,7 +53,7 @@ flowchart LR
     - [View All Enabled Admission Controllers](#view-all-enabled-admission-controllers)
     - [Add An Admission Controller](#add-an-admission-controller)
   - [Custom External Admission Controllers with Webhooks](#custom-external-admission-controllers-with-webhooks)
-    - [Build & Deploy a webhook server](#build--deploy-a-webhook-server)
+    - [Build \& Deploy a webhook server](#build--deploy-a-webhook-server)
   - [Things To Do](#things-to-do)
     - [Demo Config files](#demo-config-files)
       - [A Deployment](#a-deployment)

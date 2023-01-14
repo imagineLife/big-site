@@ -4,7 +4,7 @@ title: Conditions And Cases
 slug: linux/conditions-and-cases
 author: Jake Laursen
 excerpt: More on Conditional Logic and Case Statements
-tags: linux, bash, scripts, conditions, cases
+tags: ["linux", "bash", "scripts", "conditions", "cases"]
 order: 21
 ---
 

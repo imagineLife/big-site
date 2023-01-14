@@ -4,7 +4,7 @@ title: Processes
 slug: linux/processes
 author: Jake Laursen
 excerpt: 
-tags: linux, kernel, cli, environment, processes
+tags: ["linux", "kernel", "cli", "environment", "processes"]
 order: 14
 ---
 

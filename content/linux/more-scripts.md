@@ -4,7 +4,7 @@ title: Doing More With Bash
 slug: linux/more-scripts
 author: Jake Laursen
 excerpt: Conditional logic, collecting variable input, and more
-tags: linux, bash, scripts, variables
+tags: ["linux", "bash", "scripts", "variables"]
 order: 20
 ---
 

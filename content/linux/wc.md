@@ -4,7 +4,7 @@ title: Count Words, Lines, and/or bytes with 2 wc
 slug: linux/wordcount
 author: Jake Laursen
 excerpt: Use this 2-character cli to get some simple counts
-tags: linux, bash, wc, cli, commands
+tags: ["linux", "bash", "wc", "cli", "commands"]
 order: 27
 ---
 

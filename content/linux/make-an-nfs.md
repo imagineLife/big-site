@@ -4,7 +4,7 @@ title: Create an NFS server
 slug: linux/create-an-nfs
 author: Jake Laursen
 excerpt: Leverage a few commands in a linux environment to share files across a network
-tags: linux, bash, nfs, server
+tags: ["linux", "bash", "nfs", "server"]
 order: 24
 ---
 

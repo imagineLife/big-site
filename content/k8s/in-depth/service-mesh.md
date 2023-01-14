@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/service-mesh
 author: Jake Laursen
 excerpt: An abstract layer of proxies to help with complex network scenarios
-tags: Kubernetes, K8s, service mesh
+tags: ["Kubernetes", "K8s", "service mesh"]
 order: 36
 ---
 

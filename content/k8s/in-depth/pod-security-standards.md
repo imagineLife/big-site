@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/pod-security-standards
 author: Jake Laursen
 excerpt: Namespaces can contain one-of-three pod-security labels that give broad summaries of "levels" of pod security
-tags: Kubernetes, K8s, volumes, lifecycle
+tags: ["Kubernetes", "K8s", "volumes", "lifecycle"]
 order: 35
 ---
 

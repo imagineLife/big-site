@@ -2,7 +2,7 @@
 title: Learn
 author: Jake Laursen
 excerpt: Some "tricks" to assure retention and comprehension while learning
-tags: learning, personality, growth, tools
+tags: ["learning", "personality", "growth", "tools"]
 parentDir: misc
 slug: misc/learn
 order: 6

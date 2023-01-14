@@ -4,7 +4,7 @@ parentDir: k8s/examples
 slug: k8s/examples/deployment-to-node
 author: Jake Laursen
 excerpt: Taint a node and deploy a pod with a toleration to the tainted node
-tags: k8s, node, pod, taint, toleration
+tags: ["k8s", "node", "pod", "taint", "toleration"]
 order: 11
 ---
 

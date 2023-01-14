@@ -4,7 +4,7 @@ parentDir: linux
 slug: linux/file-interaction
 author: Jake Laursen
 excerpt: Reading, Writing, Combining and Compressing Directories and files
-tags: linux, kernel, cli, files
+tags: ["linux", "kernel", "cli", "files"]
 order: 7
 ---
 

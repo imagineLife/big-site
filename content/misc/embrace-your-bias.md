@@ -2,7 +2,7 @@
 title: Personal Growth Through Information, Assumptions, And Actions
 author: Jake Laursen
 excerpt: We can grow while we gather info, make meaning, and assert our will
-tags: personal development, growth, bias, learn,  
+tags: ["personal development", "growth", "bias", "learn"]  
 parentDir: misc
 slug: misc/growth-and-bias
 order: 8

@@ -4,7 +4,7 @@ title: wget & curl
 slug: linux/wget-curl
 author: Jake Laursen
 excerpt: Request info from the www using wget and curl
-tags: linux, kernel, cli, wget, networking
+tags: ["linux", "kernel", "cli", "wget", "networking"]
 order: 17
 ---
 
