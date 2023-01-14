@@ -3,7 +3,7 @@ title: A Scrum Checklist
 slug: scrum/a-checklist
 author: Jake Laursen
 excerpt: An overview of the elements that are part of scrum
-tags: team, scrum, process
+tags: ["team", "scrum", "process"]
 parentDir: scrum
 order: 6
 ---

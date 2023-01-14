@@ -3,14 +3,14 @@ title: The Increment
 slug: scrum/the-increment
 author: Jake Laursen
 excerpt: The tool that can transform ideas into releasable content
-tags: team, scrum, process, increment, transformation
+tags: ["team", "scrum", "process", "increment", "transformation"]
 parentDir: scrum
 order: 7
 ---
 
 # Iterations, Increments & Releases
 
-- [Iterations, Increments & Releases](#iterations-increments--releases)
+- [Iterations, Increments \& Releases](#iterations-increments--releases)
   - [Big Ideas Take Big Time](#big-ideas-take-big-time)
   - [Trade The Long Wait For Releasable Value](#trade-the-long-wait-for-releasable-value)
   - [Release The First Increment](#release-the-first-increment)

@@ -3,7 +3,7 @@ title: The Artifacts
 slug: scrum/the-artifacts
 author: Jake Laursen
 excerpt: The Product Backlog, Sprint Backlog, Increment, and Definition of Done
-tags: team, scrum, process
+tags: ["team", "scrum", "process"]
 parentDir: scrum
 order: 5
 ---

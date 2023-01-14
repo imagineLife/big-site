@@ -3,7 +3,7 @@ title: An Overview
 slug: node/overview
 author: Jake Laursen
 excerpt: JavaScript on the Server and more
-tags: server, node, javascript, overview, idea, backend,
+tags: ["server", "node", "javascript", "overview", "idea", "backend"]
 parentDir: node
 order: 1
 ---

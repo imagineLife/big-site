@@ -3,7 +3,7 @@ title: A Brief Introduction to Node and the Event Loop
 slug: node/event-loop/in-action
 author: Jake Laursen
 excerpt: Notice some details about the event loop and ordering logic
-tags: node, events, event loop, setTimeout, process, promises
+tags: ["node", "events", "event loop", "setTimeout", "process", "promises"]
 parentDir: node/event-loop
 order: 4
 ---

@@ -3,7 +3,7 @@ title: The Event Loop
 slug: node/event-loop
 author: Jake Laursen
 excerpt: The power of the Event Loop can lead devs to build faster more reliable node systems
-tags: server, node, event loop, overview, call stack, queue, process
+tags: ["server", "node", "event loop", "overview", "call stack", "queue", "process"]
 parentDir: node
 order: 3
 ---

@@ -3,7 +3,7 @@ title: Blocking The Event Loop
 slug: node/event-loop/blocking
 author: Jake Laursen
 excerpt: 
-tags: server, node, event loop, blocking, single thread
+tags: ["server", "node", "event loop", "blocking", "single thread"]
 parentDir: node
 order: 4
 ---

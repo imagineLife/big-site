@@ -4,7 +4,7 @@ slug: node/terminal-input/repl
 parentDir: node/terminal-input
 author: Jake Laursen
 excerpt: node with command line args
-tags: NodeJS, Terminal, cmd
+tags: ["NodeJS", "Terminal", "cmd"]
 order: 1
 ---
 

@@ -4,7 +4,7 @@ slug: node/terminal-input/cmd-entrypoint
 parentDir: node/terminal-input
 author: Jake Laursen
 excerpt: Use the CLI to handle, evaluate, and run a program
-tags: NodeJS, Terminal, cmd
+tags: ["NodeJS", "Terminal", "cmd"]
 order: 2
 ---
 
@@ -13,13 +13,15 @@ Node has [comprehensive docs](https://nodejs.org/dist/latest-v16.x/docs/api/cli.
 
 Here's just a few highlights to get the ball rolling:  
 
+- [Using node as a program entrypoint](#using-node-as-a-program-entrypoint)
   - [see input options](#see-input-options)
     - [Expected input order](#expected-input-order)
   - [CLI examples using flags and files](#cli-examples-using-flags-and-files)
     - [see v8 input options](#see-v8-input-options)
     - [evaluate the syntax of an argument](#evaluate-the-syntax-of-an-argument)
     - [check the syntax of a file](#check-the-syntax-of-a-file)
-  - [evaluate or check](#evaluate-or-check)
+      - [checking a file with broken syntax](#checking-a-file-with-broken-syntax)
+    - [evaluate or check](#evaluate-or-check)
 
 ## see input options
 Use node, itself, to get a glimpse into what it expects from the command line.

@@ -3,7 +3,7 @@ title: Scrum Values
 slug: scrum/the-values
 author: Jake Laursen
 excerpt: Commitment, Respect, Courage, Opennes and Focus
-tags: team, scrum, process, values
+tags: ["team", "scrum", "process", "values"]
 parentDir: scrum
 order: 2
 ---

@@ -4,7 +4,7 @@ slug: node/terminal-input/requiring-modules
 parentDir: node/terminal-input
 author: Jake Laursen
 excerpt: leverage code stored in a module file with a command flag
-tags: NodeJS, Terminal, cmd, require
+tags: ["NodeJS", "Terminal", "cmd", "require"]
 order: 3
 ---
 # Requiring Modules
