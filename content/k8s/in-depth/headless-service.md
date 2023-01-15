@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/headless-services
 author: Jake Laursen
 excerpt: Headless Services assign DNS entries to pods, which can be useful for use-cases likes statefulSets and Master/Slave Pods
-tags: ["Kubernetes", "K8s", "data", "persistence", "volumes"]
+tags: ["Kubernetes", "k8s", "data", "persistence", "volumes"]
 order: 24
 ---
 

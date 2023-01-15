@@ -4,7 +4,7 @@ slug: mongo/sharding/architecture
 parentDir: mongo/sharding
 author: Jake Laursen
 excerpt: The Data-flow from client request to db shard and back
-tags: ["database" "mongodb", "replication", "sharding", "horizontal scaling"]
+tags: ["database", "mongodb", "replication", "sharding", "horizontal scaling"]
 ---
 
 # The Architecture of Sharding

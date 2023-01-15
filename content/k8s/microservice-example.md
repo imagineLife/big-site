@@ -4,7 +4,7 @@ parentDir: k8s
 slug: k8s/microservice-demo
 author: Jake Laursen
 excerpt: Deploying a Microservice set of Applications with K8s
-tags: ["Kubernetes", "K8s", "Microservices"]
+tags: ["Kubernetes", "k8s", "Microservices"]
 order: 13
 ---
 

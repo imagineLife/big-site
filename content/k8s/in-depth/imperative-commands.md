@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/imperative-commands
 author: Jake Laursen
 excerpt: Use One-Line Imperative programming syntax to build some k8s objects
-tags: ["Kubernetes", "K8s", "imperative", "cli"]
+tags: ["Kubernetes", "k8s", "imperative", "cli"]
 order: 3
 ---
 

@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/more-resources
 author: Jake Laursen
 excerpt: Links to other folks' collections of K8s notes
-tags: ["Kubernetes", "K8s", "Resources"]
+tags: ["Kubernetes", "k8s", "Resources"]
 order: 99
 ---
 

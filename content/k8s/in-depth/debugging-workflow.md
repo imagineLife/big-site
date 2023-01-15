@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/debugging-workflow
 author: Jake Laursen
 excerpt: Starting with "familiar" k8s bits to logs and iptables
-tags: ["Kubernetes", "K8s", "debugging", "workflow"]
+tags: ["Kubernetes", "k8s", "debugging", "workflow"]
 order: 37
 ---
 

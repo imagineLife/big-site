@@ -4,7 +4,7 @@ slug: mongo/replication/replication-config
 parentDir: mongo/replication
 author: Jake Laursen
 excerpt: Brief highlights of the rs.config output
-tags: ["database" "mongodb", "replication", "replica sets", "setup"]
+tags: ["database", "mongodb", "replication", "replica sets", "setup"]
 ---
 
 # Configuring Replication Sets

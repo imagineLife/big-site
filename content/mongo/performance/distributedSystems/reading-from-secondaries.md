@@ -4,7 +4,7 @@ slug: mongo/performance/distributed-systems/reading-from-secondaries
 parentDir: mongo/performance/distributed-systems
 author: Jake Laursen
 excerpt: Secondary nodes can be used to serve lower-frequency data needs
-tags: ["database" "mongodb", "performance"]
+tags: ["database", "mongodb", "performance"]
 ---
 
 # Reading From Secondary Nodes

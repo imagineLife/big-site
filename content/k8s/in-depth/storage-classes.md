@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/storage-classes
 author: Jake Laursen
 excerpt: Describe a type of storage with a storage class definition
-tags: ["Kubernetes", "K8s", "data", "persistence", "volumes"]
+tags: ["Kubernetes", "k8s", "data", "persistence", "volumes"]
 order: 22
 ---
 

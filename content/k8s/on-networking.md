@@ -4,7 +4,7 @@ parentDir: k8s
 slug: k9s/networking-intro
 author: Jake Laursen
 excerpt: Only an Intro
-tags: ["Kubernetes", "K8s", "networking"]
+tags: ["Kubernetes", "k8s", "networking"]
 order: 7
 ---
 

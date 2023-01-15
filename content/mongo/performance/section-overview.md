@@ -4,7 +4,7 @@ slug: mongo/performance
 parentDir: mongo
 author: Jake Laursen
 excerpt: Optimizing queries with indexes & various index types, Leveraging Indexes in queries, query planning, understanding query execution statistics, benchmark testing the db & more
-tags: ["database" "mongodb", "performance", "indexes"]
+tags: ["database", "mongodb", "performance", "indexes"]
 ---
 
 # Mongo Performance

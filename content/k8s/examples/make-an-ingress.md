@@ -4,7 +4,7 @@ parentDir: k8s/examples
 slug: k8s/examples/build-an-ingress
 author: Jake Laursen
 excerpt: Route Traffic from multiple backend services to multiple urls
-tags: ["Kubernetes", "K8s", "ingress", "routing"]
+tags: ["Kubernetes", "k8s", "ingress", "routing"]
 order: 6
 ---
 Create an ingress resource 

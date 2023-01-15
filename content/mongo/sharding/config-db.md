@@ -4,7 +4,7 @@ slug: mongo/sharding/config-db
 parentDir: mongo/sharding
 author: Jake Laursen
 excerpt: A unique db that supports sharded cluster operations
-tags: ["database" "mongodb", "replication", "sharding", "horizontal scaling"]
+tags: ["database", "mongodb", "replication", "sharding", "horizontal scaling"]
 ---
 
 # Config DB

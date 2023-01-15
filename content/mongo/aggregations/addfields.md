@@ -4,7 +4,7 @@ slug: mongo/aggregations/add-fields
 parentDir: mongo/aggregations
 author: Jake Laursen
 excerpt: Add fields to the output of a doc
-tags: ["database" "mongodb", "aggregation", "add fields"]
+tags: ["database", "mongodb", "aggregation", "add fields"]
 ---
 
 # add fields

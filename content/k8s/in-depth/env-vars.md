@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/env-vars
 author: Jake Laursen
 excerpt: Pull dynamic values out of hard-coded object defclaration with Environment Variables
-tags: ["Kubernetes", "K8s", "environment", "variables"]
+tags: ["Kubernetes", "k8s", "environment", "variables"]
 order: 5
 ---
 

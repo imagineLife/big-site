@@ -4,7 +4,7 @@ slug: mongo/data-modeling/relationships
 parentDir: mongo/data-modeling
 author: Jake Laursen
 excerpt: Consider the ways that separate pieces of data are related
-tags: ["database" 'mongodb', "data modeling"]
+tags: ["database", "mongodb', "data modeling"]
 ---
 
 # relationships

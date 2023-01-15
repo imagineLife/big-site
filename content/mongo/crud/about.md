@@ -4,7 +4,7 @@ slug: mongo/crud
 parentDir: mongo
 author: Jake Laursen
 excerpt: Creating, Reading, Updating and Deleting Data
-tags: ["database" "mongodb", "crud"]
+tags: ["database", "mongodb", "crud"]
 ---
 
 # CRUD

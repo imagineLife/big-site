@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/liveliness
 author: Jake Laursen
 excerpt: Create http requests, bash scripts, or tcp requests to assess application readyness status 
-tags: ["Kubernetes", "K8s", "pods", "containers", "liveness"]
+tags: ["Kubernetes", "k8s", "pods", "containers", "liveness"]
 order: 14
 ---
 

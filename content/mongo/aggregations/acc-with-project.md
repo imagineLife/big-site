@@ -4,7 +4,7 @@ slug: mongo/aggregations/acc-with-project
 parentDir: mongo/aggregations
 author: Jake Laursen
 excerpt: Average, count, sum, etc.
-tags: ["database" "mongodb", "performance", "aggregation", "accumulation"]
+tags: ["database", "mongodb", "performance", "aggregation", "accumulation"]
 ---
 
 # accumulator exps inside project

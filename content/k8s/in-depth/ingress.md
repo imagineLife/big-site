@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/ingress
 author: Jake Laursen
 excerpt: Kubernetes helps manage traffic, load-balancing, routing, and more through its ingress implementation
-tags: ["Kubernetes", "K8s", "ingress", "networking", "dns", "proxy", "load balancing"]
+tags: ["Kubernetes", "k8s", "ingress", "networking", "dns", "proxy", "load balancing"]
 order: 19
 ---
 

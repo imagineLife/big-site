@@ -4,7 +4,7 @@ slug: mongo/performance/hardware
 parentDir: mongo/performance
 author: Jake Laursen
 excerpt: How the elements in hardware affect the performance of a DB
-tags: ["database" "mongodb", "performance", "hardware", "ram", "cpu"]
+tags: ["database", "mongodb", "performance", "hardware", "ram", "cpu"]
 ---
 
 # Hardware

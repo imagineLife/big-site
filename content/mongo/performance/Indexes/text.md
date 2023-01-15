@@ -4,7 +4,7 @@ slug: mongo/performance/text-indexes
 parentDir: mongo/performance
 author: Jake Laursen
 excerpt: Indexing based on words in text fields
-tags: ["database" "mongodb", "performance", "text indexes"]
+tags: ["database", "mongodb", "performance", "text indexes"]
 ---
 
 # Text Indexes

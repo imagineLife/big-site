@@ -4,7 +4,7 @@ slug: mongo/sharding
 parentDir: mongo
 author: Jake Laursen
 excerpt: Horizontal Scaling by splitting collections
-tags: ["database" "mongodb", "replication", "sharding", "horizontal scaling"]
+tags: ["database", "mongodb", "replication", "sharding", "horizontal scaling"]
 ---
 
 ## Blog Posts

@@ -4,7 +4,7 @@ slug: mongo/data-modeling/schema-design-table
 parentDir: mongo/data-modeling
 author: Jake Laursen
 excerpt: An overview of how schema design patterns apply to several application types
-tags: ["database" "mongodb", "data modeling"]
+tags: ["database", "mongodb", "data modeling"]
 ---
 
 # Schema Design

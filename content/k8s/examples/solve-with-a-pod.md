@@ -4,7 +4,7 @@ parentDir: k8s/examples
 slug: k8s/examples/solve-a-problem-with-a-pod
 author: Jake Laursen
 excerpt: This requires a pod with a specific run command, a Config Map with some data, and a volume mount
-tags: ["Kubernetes", "K8s"]
+tags: ["Kubernetes", "k8s"]
 order: 3
 ---
 

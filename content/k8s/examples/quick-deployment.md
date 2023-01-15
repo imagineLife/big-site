@@ -4,7 +4,7 @@ parentDir: k8s/examples
 slug: k8s/examples/run-a-quick-deployment
 author: Jake Laursen
 excerpt: In just a few brief commands and edits, an entire replicaset of pods can be rolled out & the container images can be adusted, and the deployment can be rolled back
-tags: ["Kubernetes", "K8s", "deployment", "task", "replicaset", "image", "rollback"]
+tags: ["Kubernetes", "k8s", "deployment", "task", "replicaset", "image", "rollback"]
 order: 4
 ---
 

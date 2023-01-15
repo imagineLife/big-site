@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/node-affinity
 author: Jake Laursen
 excerpt: Affinities applied to Nodes push nodes to prefer Specific K8s Nodes to be deployed to
-tags: ["Kubernetes", "K8s", "nodes", "node affinity", "visualization", "diagram"]
+tags: ["Kubernetes", "k8s", "nodes", "node affinity", "visualization", "diagram"]
 order: 11
 ---
 

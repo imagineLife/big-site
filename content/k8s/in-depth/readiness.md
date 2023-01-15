@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/readiness
 author: Jake Laursen
 excerpt: Surely there is a status of the pod, but the applications inside the pods can require more granular configuring to understand their readyness
-tags: ["Kubernetes", "K8s", "pods", "containers", "patterns", "sidecar", "adapter", "ambassador"]
+tags: ["Kubernetes", "k8s", "pods", "containers", "patterns", "sidecar", "adapter", "ambassador"]
 order: 13
 ---
 

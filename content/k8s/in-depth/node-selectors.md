@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/node-selectors
 author: Jake Laursen
 excerpt: Match node labels with pod NodeSelectors to sync pods with nodes simply
-tags: ["Kubernetes", "K8s", "nodes", "labels", "selectors"]
+tags: ["Kubernetes", "k8s", "nodes", "labels", "selectors"]
 order: 10
 ---
 

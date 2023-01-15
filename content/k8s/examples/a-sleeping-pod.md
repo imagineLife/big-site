@@ -4,7 +4,7 @@ parentDir: k8s/examples
 slug: k8s/examples/a-sleepy-pod
 author: Jake Laursen
 excerpt: Perhaps reasonably simple
-tags: ["Kubernetes", "K8s"]
+tags: ["Kubernetes", "k8s"]
 order: 8
 ---
 

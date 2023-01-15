@@ -4,7 +4,7 @@ parentDir: k8s
 slug: k8s/k8s-app-arch
 author: Jake Laursen
 excerpt: Dockerfiles, layers, instructions, args, etc
-tags: ["K8s", "Architecture"]
+tags: ["k8s", "Architecture"]
 order: 17
 ---
 

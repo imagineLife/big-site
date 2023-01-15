@@ -4,7 +4,7 @@ slug: mongo/performance/partial-indexes
 parentDir: mongo/performance
 author: Jake Laursen
 excerpt: Indexing a restricted set of docs in a collection
-tags: ["database" "mongodb", "performance", "partial indexes"]
+tags: ["database", "mongodb", "performance", "partial indexes"]
 ---
 
 # Partial Indexes

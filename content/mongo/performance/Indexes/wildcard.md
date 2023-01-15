@@ -4,7 +4,7 @@ slug: mongo/performance/wildcard-indexes
 parentDir: mongo/performance
 author: Jake Laursen
 excerpt:
-tags: ["database" "mongodb", "performance", "wildcard indexes"]
+tags: ["database", "mongodb", "performance", "wildcard indexes"]
 ---
 
 # Wildcard indexes

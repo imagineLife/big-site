@@ -4,7 +4,7 @@ parentDir: k8s/examples
 slug: k8s/examples/debugging-a-network-error
 author: Jake Laursen
 excerpt: 
-tags: ["Kubernetes", "K8s"]
+tags: ["Kubernetes", "k8s"]
 order: 1
 ---
 # Debug A Pod And A Service Error

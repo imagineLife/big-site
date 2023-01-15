@@ -4,7 +4,7 @@ slug: mongo/aggregations/unwind
 parentDir: mongo/aggregations
 author: Jake Laursen
 excerpt: Create a new document for each item in an array
-tags: ["database" "mongodb", "performance", "aggregation", "unwind", "arrays"]
+tags: ["database", "mongodb", "performance", "aggregation", "unwind", "arrays"]
 ---
 
 # unwind

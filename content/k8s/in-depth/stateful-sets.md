@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/stateful-sets
 author: Jake Laursen
 excerpt: When Pods rely on other pods, like in replicated dbs, stateful sets can be a helpful tool
-tags: ["Kubernetes", "K8s", "data", "persistence", "volumes", "diagram"]
+tags: ["Kubernetes", "k8s", "data", "persistence", "volumes", "diagram"]
 order: 23
 ---
 

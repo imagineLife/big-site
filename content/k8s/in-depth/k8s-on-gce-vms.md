@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/k8s-on-gce-vms
 author: Jake Laursen
 excerpt: A Follow-Along set of notes ony setting Kubernetes up across 2 VMs in Google Cloud
-tags: ["Kubernetes", "K8s", "GCE", "VMs"]
+tags: ["Kubernetes", "k8s", "GCE", "VMs"]
 order: 32
 ---
 

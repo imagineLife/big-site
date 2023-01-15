@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/security-with-containers
 author: Jake Laursen
 excerpt: 
-tags: ["Kubernetes", "K8s", "Security", "Docker", "Users", "Privileges"]
+tags: ["Kubernetes", "k8s", "Security", "Docker", "Users", "Privileges"]
 order: 6
 ---
 

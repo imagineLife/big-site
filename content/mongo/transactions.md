@@ -3,7 +3,7 @@ title: Transactions
 slug: mongo/transactions
 author: Jake Laursen
 excerpt: ATOMIC actions across multiple documents
-tags: ["database" "mongodb", "replication", "replica sets", "CRUD"]
+tags: ["database", "mongodb", "replication", "replica sets", "CRUD"]
 order: 8
 ---
 

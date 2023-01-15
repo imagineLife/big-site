@@ -4,7 +4,7 @@ slug: mongo/data-modeling/schema-design-patterns
 parentDir: mongo/data-modeling
 author: Jake Laursen
 excerpt: Ways of organizing data across collections
-tags: ["database" "mongodb", "data modeling"]
+tags: ["database", "mongodb", "data modeling"]
 ---
 
 # Schema Design Patters

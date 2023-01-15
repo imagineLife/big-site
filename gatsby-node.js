@@ -10,6 +10,7 @@ const { createFilePath } = require(`gatsby-source-filesystem`)
 // Define the template for blog post
 // const blogPost = path.resolve(`./src/templates/blog-post.js`)
 const mdTemplate = path.resolve(`./src/templates/markdown/index.js`)
+const tagTemplate = path.resolve(`./src/templates/tags.js`)
 
 /**
  * @type {import('gatsby').GatsbyNode['createPages']}
@@ -45,6 +46,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               slug
               title
               excerpt
+              tags
               parentDir
               order
             }
@@ -61,6 +63,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               slug
               title
               excerpt
+              tags
               parentDir
             }
           }
@@ -78,6 +81,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               slug
               title
               excerpt
+              tags
               parentDir
             }
           }
@@ -99,6 +103,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               slug
               title
               excerpt
+              tags
               parentDir
               order
             }
@@ -117,6 +122,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               slug
               title
               excerpt
+              tags
               parentDir
             }
           }
@@ -134,6 +140,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               slug
               title
               excerpt
+              tags
               parentDir
             }
           }
@@ -151,6 +158,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               slug
               title
               excerpt
+              tags
               parentDir
             }
           }
@@ -166,6 +174,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               slug
               title
               excerpt
+              tags
               parentDir
             }
           }
@@ -183,6 +192,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               slug
               title
               excerpt
+              tags
               parentDir
             }
           }
@@ -200,6 +210,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               slug
               title
               excerpt
+              tags
               parentDir
             }
           }
@@ -217,9 +228,15 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               slug
               title
               excerpt
+              tags
               parentDir
             }
           }
+        }
+      }
+      tagsGroup: allMarkdownRemark(limit: 2000) {
+        group(field: { frontmatter: { tags: SELECT } }) {
+          fieldValue
         }
       }
     }
@@ -246,6 +263,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       node: { pages: nodePages },
       scrum: { pages: scrumPages },
       strengths: { pages: strengthsPages },
+      tagsGroup: { group: groupOfTags },
     },
   } = result
 
@@ -283,7 +301,17 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       },
     })
   })
-  // }
+  
+  
+  groupOfTags.forEach(({fieldValue}) => {
+    createPage({
+      path: `/tags/${fieldValue}/`,
+      component: tagTemplate,
+      context: {
+        tag: fieldValue,
+      },
+    })
+  })
 }
 
 /**
@@ -337,7 +365,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       parentDir: String
       author: String
       excerpt: String
-      tags: String
+      tags: [String]
       order: Int
     }
 

@@ -4,7 +4,7 @@ slug: mongo/sharding/the-shard-key
 parentDir: mongo/sharding
 author: Jake Laursen
 excerpt: Indexed fields used to partition collection data across shards
-tags: ["database" "mongodb", "replication", "sharding", "horizontal scaling", "hashing"]
+tags: ["database", "mongodb", "replication", "sharding", "horizontal scaling", "hashing"]
 ---
 
 # The Shard Key

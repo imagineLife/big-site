@@ -3,11 +3,28 @@ import { graphql, Link } from 'gatsby';
 import './index.scss';
 import Header from './../../components/header'
 
+function Tags({tags}) {
+  return (<i>Tags: {tags?.map((t, tidx) => {
+    let optionalEnd;
+    if (tidx < (tags.length - 1)) { 
+      optionalEnd = ', ';
+    }
+
+    return (
+      <>
+        <span>
+          <Link to={`/tags/${t}`}>{t}</Link>
+        </span>
+        {optionalEnd}
+      </>
+    )
+  })}</i>)
+}
 export default function Template({
   data: {
     pageData: {
       content,
-      overview: { order, parentDir, title, excerpt, slug },
+      overview: { order, parentDir, tags },
     },
     pageSummaries: { pages },
   },
@@ -62,11 +79,12 @@ export default function Template({
       }
     }
   }
-
+  
   return (
     <Fragment>
       <main className={`md-wrapper${parentDir ? ` ${parentDir}` : ''}`}>
         <Header className="md" />
+        <Tags tags={tags} />
         <section dangerouslySetInnerHTML={{ __html: content }}></section>
       </main>
       <footer className="md-footer">
@@ -103,6 +121,7 @@ export const pgQuery = graphql`
         title
         excerpt
         slug
+        tags
       }
     }
     pageSummaries: allMarkdownRemark(

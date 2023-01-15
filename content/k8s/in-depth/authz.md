@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/authorization
 author: Jake Laursen
 excerpt: Create Roles and RoleBindings to configure customizable authorization across K8s objects
-tags: ["Kubernetes", "K8s", "authorization", "roles", "role bindings", "diagram"]
+tags: ["Kubernetes", "k8s", "authorization", "roles", "role bindings", "diagram"]
 order: 27
 ---
 

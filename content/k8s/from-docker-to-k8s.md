@@ -4,7 +4,7 @@ parentDir: k8s
 slug: k8s/microservice-case-study
 author: Jake Laursen
 excerpt: Microservices are great candidates for adopting containerization and kubernetes
-tags: ["Kubernetes", "K8s", "microservice", "visualization", "diagram"]
+tags: ["Kubernetes", "k8s", "microservice", "visualization", "diagram"]
 order: 12
 ---
 

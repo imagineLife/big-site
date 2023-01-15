@@ -4,7 +4,7 @@ slug: mongo/performance/indexes
 parentDir: mongo/performance
 author: Jake Laursen
 excerpt: Optimizing queries with various index types
-tags: ["database" "mongodb", "performance", "indexes"]
+tags: ["database", "mongodb", "performance", "indexes"]
 ---
 
 # Indexes

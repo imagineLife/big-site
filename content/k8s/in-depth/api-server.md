@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/api-server
 author: Jake Laursen
 excerpt: A built-in api can allow for api-driven discovery and config
-tags: ["Kubernetes", "K8s", "authentication", "authorization", "visualization", "diagram"]
+tags: ["Kubernetes", "k8s", "authentication", "authorization", "visualization", "diagram"]
 order: 26
 ---
 

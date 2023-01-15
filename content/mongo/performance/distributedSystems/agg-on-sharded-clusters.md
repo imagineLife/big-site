@@ -4,7 +4,7 @@ slug: mongo/performance/distributed-systems/agg-on-shareded-clusters
 parentDir: mongo/performance/distributed-systems
 author: Jake Laursen
 excerpt: Aggregations, Secondary Nodes, Replica Sets, and Shards
-tags: ["database" "mongodb", "performance"]
+tags: ["database", "mongodb", "performance"]
 ---
 
 # Aggregations on sharded clusters

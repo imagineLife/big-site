@@ -4,7 +4,7 @@ slug: mongo/replication/about-the-local-db
 parentDir: mongo/replication
 author: Jake Laursen
 excerpt: Brief highlights of the local DB and the contents that impact replication
-tags: ["database" "mongodb", "replication", replica "sets", "setup", "local"]
+tags: ["database", "mongodb", "replication", replica "sets", "setup", "local"]
 ---
 
 # The localdb

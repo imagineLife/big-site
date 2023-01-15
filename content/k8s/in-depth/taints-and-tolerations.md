@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/taints-and-tolerations
 author: Jake Laursen
 excerpt: Taints on nodes block pod deployment and tolerations enable pods to work with node taints
-tags: ["Kubernetes", "K8s", "taints", "tolerations", "deployment"]
+tags: ["Kubernetes", "k8s", "taints", "tolerations", "deployment"]
 order: 9
 ---
 

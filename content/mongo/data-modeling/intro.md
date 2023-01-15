@@ -4,7 +4,7 @@ slug: mongo/data-modeling
 parentDir: mongo
 author: Jake Laursen
 excerpt: Consider the ways that data is stored within and across documents
-tags: ["database" "mongodb", "data modeling"]
+tags: ["database", "mongodb", "data modeling"]
 ---
 
 # Intro to Data Modeling

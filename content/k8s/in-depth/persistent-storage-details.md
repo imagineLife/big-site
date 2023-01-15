@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/persistent-volume-lifecycle
 author: Jake Laursen
 excerpt: An Overview of how a persistent volume gets created, bound, used, and options for "end-of-life" handling
-tags: ["Kubernetes", "K8s", "volumes", "lifecycle"]
+tags: ["Kubernetes", "k8s", "volumes", "lifecycle"]
 order: 34
 ---
 

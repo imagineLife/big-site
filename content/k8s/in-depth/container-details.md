@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/containers-and-more
 author: Jake Laursen
 excerpt: Docker has led to many other container details 
-tags: ["Kubernetes", "K8s", "containers", "docker", "OCI"]
+tags: ["Kubernetes", "k8s", "containers", "docker", "OCI"]
 order: 33
 ---
 

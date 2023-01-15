@@ -4,7 +4,7 @@ parentDir: k8s/in-depth
 slug: k8s/in-depth/jobs
 author: Jake Laursen
 excerpt: A Job Object can describe to kubernetes how to manage workloads that only need to run for the duration of the workload
-tags: ["Kubernetes", "K8s", "pods", "containers", "jobs", "workloads"]
+tags: ["Kubernetes", "k8s", "pods", "containers", "jobs", "workloads"]
 order: 17
 ---
 

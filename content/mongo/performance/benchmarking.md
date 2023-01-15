@@ -4,7 +4,7 @@ slug: mongo/performance/benchmarking
 parentDir: mongo/performance
 author: Jake Laursen
 excerpt: Gather performance data
-tags: ["database" "mongodb", "performance", "benchmarking", "testing"]
+tags: ["database", "mongodb", "performance", "benchmarking", "testing"]
 ---
 
 # Benchmarking

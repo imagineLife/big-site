@@ -4,7 +4,7 @@ slug: mongo/replication/repl-commands-intro
 parentDir: mongo/replication
 author: Jake Laursen
 excerpt: See the status of a replica set and more
-tags: ["database" "mongodb", "replication", "replica sets", "setup"]
+tags: ["database", "mongodb", "replication", "replica sets", "setup"]
 ---
 
 # Introducing Replication cli Commands
