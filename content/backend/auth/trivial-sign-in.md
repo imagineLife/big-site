@@ -4,7 +4,7 @@ parentDir: backend/auth
 slug: backend/auth/init-sign-in
 author: Jake Laursen
 excerpt: Allowing users to Sign-Up and Sign In, Including One-Way Password Hashing
-tags: Authentication, Login, Sign In, Password Hashing, hashing
+tags: ["Authentication", "Login", "Sign In", "Password Hashing", "Hashing"]
 order: 1
 ---
 
