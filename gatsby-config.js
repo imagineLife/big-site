@@ -242,7 +242,7 @@ module.exports = {
         sitemap: "https://www.laursen.tech/sitemap-index.xml",
         // { userAgent: "*", allow: "/" }
         policy: [
-          ...robots.allow.map(d => ({ userAgent: d, disallow: "" })),
+          ...robots.allow.map(d => ({ userAgent: d, disallow: ["/tags/", "/tags/*"] })),
           { userAgent: "*", disallow: "/" },
         ],
       },
