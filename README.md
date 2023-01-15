@@ -1,1 +1,1 @@
-## A Blog
+https://laursen.tech
