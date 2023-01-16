@@ -1,0 +1,16 @@
+{
+    "commonWords": [],
+    "longestNine": [],
+    "selectedWord": null,
+    "wordLists": {
+        "Common Words": [],
+        "Longest Words": [],
+        "Action Words": []
+    },
+    "wordListFocus": null,
+    "wordListNames": [
+        "Common Words",
+        "Longest Words",
+        "Action Words"
+    ]
+}

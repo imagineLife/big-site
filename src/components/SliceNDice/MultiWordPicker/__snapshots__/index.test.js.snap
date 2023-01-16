@@ -1,0 +1,96 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MultiWordPicker /> matches snap 1`] = `
+<CommonWords>
+  <div
+    id="words-of-interest-box"
+  >
+    <h2
+      className="section-text"
+    >
+      Words Of Interest
+    </h2>
+    <p
+      className="explanatory-text"
+    >
+      Here are some various types of words that were spoken. The word lists are toggle-able & the words are selectable.
+      <span
+        className="interaction-note"
+      >
+        SELECT.SELECT
+      </span>
+    </p>
+    <section
+      id="words-of-interest-for-ui"
+    >
+      <section
+        id="word-list"
+      >
+        <h3
+          className="word-list-title"
+        >
+          Word Lists
+        </h3>
+        <ul
+          id="word-lists"
+        >
+          <ListItem
+            className="word-list-option"
+            key="Common Words-0"
+            onClick={[Function]}
+            selectedCondition={true}
+            txt="Common Words"
+          >
+            <li
+              className="word-list-option  selected"
+              onClick={[Function]}
+            >
+              Common Words
+            </li>
+          </ListItem>
+          <ListItem
+            className="word-list-option"
+            key="Longest Words-1"
+            onClick={[Function]}
+            selectedCondition={false}
+            txt="Longest Words"
+          >
+            <li
+              className="word-list-option "
+              onClick={[Function]}
+            >
+              Longest Words
+            </li>
+          </ListItem>
+          <ListItem
+            className="word-list-option"
+            key="Action Words-2"
+            onClick={[Function]}
+            selectedCondition={false}
+            txt="Action Words"
+          >
+            <li
+              className="word-list-option "
+              onClick={[Function]}
+            >
+              Action Words
+            </li>
+          </ListItem>
+        </ul>
+      </section>
+      <section
+        id="focus-words"
+      >
+        <h3
+          className="word-list-title"
+        >
+          List Results
+        </h3>
+        <ul
+          id="focus-word-list"
+        />
+      </section>
+    </section>
+  </div>
+</CommonWords>
+`;

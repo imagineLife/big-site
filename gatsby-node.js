@@ -374,3 +374,23 @@ exports.createSchemaCustomization = ({ actions }) => {
     }
   `)
 }
+
+
+exports.onCreateWebpackConfig = ({
+  stage,
+  rules,
+  loaders,
+  plugins,
+  actions,
+}) => {
+  actions.setWebpackConfig({
+    module: {
+      rules: [
+        {
+          test: /\.txt/,
+          type: "asset/source",
+        },
+      ],
+    },
+  })
+}

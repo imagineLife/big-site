@@ -1,0 +1,25 @@
+.selected-text{
+	font-size: 1.25em;
+	font-weight: bold;
+	text-transform: uppercase;
+	font-style: normal;
+}
+
+.word-length{
+	background-color: rgb(165,165,0);
+	color: black;
+	font-style: normal;
+}
+
+.display-text{
+	line-height: 1.75;
+}
+
+.themed{
+	text-decoration: underline pink wavy
+}
+
+.theme-sentence{
+	font-style: normal;
+	text-decoration: underline;
+}

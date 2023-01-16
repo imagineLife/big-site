@@ -1,0 +1,127 @@
+{
+    "commonWords": [
+        {
+            "word": "our",
+            "occurances": 8
+        },
+        {
+            "word": "people",
+            "occurances": 6
+        },
+        {
+            "word": "your",
+            "occurances": 6
+        },
+        {
+            "word": "is",
+            "occurances": 6
+        },
+        {
+            "word": "president",
+            "occurances": 5
+        },
+        {
+            "word": "america",
+            "occurances": 4
+        },
+        {
+            "word": "are",
+            "occurances": 4
+        },
+        {
+            "word": "all",
+            "occurances": 4
+        },
+        {
+            "word": "will",
+            "occurances": 4
+        },
+        {
+            "word": "obama",
+            "occurances": 3
+        }
+    ],
+    "longestNine": [
+        "administration",
+        "establishment",
+        "transferring",
+        "magnificent",
+        "politicians",
+        "celebration",
+        "challenges",
+        "throughout",
+        "transition",
+        "washington"
+    ],
+    "selectedWord": null,
+    "wordLists": {
+        "Common Words": [
+            {
+                "word": "all",
+                "occurances": 4
+            },
+            {
+                "word": "america",
+                "occurances": 4
+            },
+            {
+                "word": "are",
+                "occurances": 4
+            },
+            {
+                "word": "is",
+                "occurances": 6
+            },
+            {
+                "word": "obama",
+                "occurances": 3
+            },
+            {
+                "word": "our",
+                "occurances": 8
+            },
+            {
+                "word": "people",
+                "occurances": 6
+            },
+            {
+                "word": "president",
+                "occurances": 5
+            },
+            {
+                "word": "will",
+                "occurances": 4
+            },
+            {
+                "word": "your",
+                "occurances": 6
+            }
+        ],
+        "Longest Words": [
+            "administration",
+            "establishment",
+            "transferring",
+            "magnificent",
+            "politicians",
+            "celebration",
+            "challenges",
+            "throughout",
+            "transition",
+            "washington"
+        ],
+        "Action Words": [
+            "meaning",
+            "transferring",
+            "giving",
+            "struggling",
+            "starting",
+            "watching"
+        ]
+    },
+    "wordListFocus": "Common Words",
+    "wordListNames": [
+        "Common Words",
+        "Longest Words",
+        "Action Words"
+    ]
+}

@@ -1,0 +1,93 @@
+#theme-box{
+  width: 40%;
+  display: inline-block;
+  max-height: 350px;
+  border-image: linear-gradient(to bottom, 
+    transparent 10%,
+    rgb(80,80,80) 10% 85%, 
+    transparent 85% 100%
+  ) 1 / 2px;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.theme-title{
+  border-image: var(--bottom-narrow);
+  padding-bottom: 10px;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.theme-explanatory{
+  text-align: center;
+}
+
+#theme-list-box{
+  /*overflow-y: auto;*/
+}
+
+.theme-list{
+  margin-top: 20px;
+  text-align: center;
+  line-height: 2;
+  max-height: 216px;
+  overflow-y: auto;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgb(49,54,61); /* page background rgb(29,34,41);  */
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(69,74,81); 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+.theme-list::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+.theme-list::-webkit-scrollbar:vertical {
+    width: 11px;
+}
+
+.theme-list::-webkit-scrollbar:horizontal {
+    height: 11px;
+}
+
+.theme-list::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    border: 1px solid rgb(89,94,101); /* should match background, can't be transparent */
+    background-color: rgb(89,94,101);
+}
+
+.theme-word{
+  cursor: pointer;
+  transition: all 250ms;
+}
+
+.theme-word:hover{
+  color: rgb(215,215,215);
+}
+
+.selected-underline{
+  width: 70%;
+  height: 7px;
+  margin: -7px auto 0 auto;
+  display: block;
+  border-radius: 5px;
+  cursor: pointer;
+  content: " ";
+}

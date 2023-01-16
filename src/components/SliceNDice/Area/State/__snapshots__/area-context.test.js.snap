@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Area Context matches snapshot 1`] = `
+<AreaProvider
+  dims={
+    Object {
+      "height": 152,
+      "width": 312.796875,
+    }
+  }
+>
+  <ChildBox>
+    <div
+      id="child-box"
+    >
+      <p
+        id="selectedAreaArr"
+      />
+    </div>
+  </ChildBox>
+</AreaProvider>
+`;

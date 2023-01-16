@@ -1,0 +1,11 @@
+.explanation-wrapper{
+	height: 50px;	
+}
+
+.explanatory-text{
+	font-size: .75em;
+}
+
+rect.selection{
+	stroke-dasharray: 4 12;
+}

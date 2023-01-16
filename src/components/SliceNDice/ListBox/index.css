@@ -1,0 +1,28 @@
+#list-box > section {
+	width: 100px;
+	border: 1px solid green;
+	display: inline-block;
+	max-height: 500px;
+	min-height: 250px;
+	min-width: 300px;
+}
+
+#list-box > section > h4 {
+	margin: 10px 0;
+	width: 100%;
+	text-align: center;
+}
+
+.word-list-item{
+	list-style: none;
+	line-height: 25px;
+	cursor: pointer;
+}
+
+.word-list-item:hover{
+	font-weight: bold;
+}
+
+.word-list-item.selected{
+	text-decoration: underline;
+}

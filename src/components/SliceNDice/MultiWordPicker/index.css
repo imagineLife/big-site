@@ -1,0 +1,62 @@
+#words-of-interest-for-ui{
+	width: 100%;
+  display: flex;
+  min-height: 300px;
+}
+
+#word-list, #focus-words{
+	width: 50%;
+	display: inline-block;
+	text-align: left;
+	padding: 10px;
+	float: left;
+	max-height: 275px;
+	overflow-y: auto;
+}
+
+#word-lists{
+  line-height: 3;
+  padding: 0 15px;
+}
+
+#word-picker-title{
+	text-align: center;
+	font-size: 1.7em;
+	text-transform: uppercase;
+	margin: 10px 0;
+}
+
+.word-list-title{
+	text-align: center;
+	text-transform: uppercase;
+	margin: 8px 0;
+}
+
+.word-list-option, .focus-word-option{
+	list-style-type: none;
+	cursor: pointer;
+	transition: all 250ms;
+}
+
+.word-list-option:hover, .focus-word-option:hover{
+	text-decoration: underline;
+}
+
+
+.focus-word-option{
+	padding-left: 5px;
+}
+
+.focus-word-option.selected{
+	text-transform: uppercase;
+}
+
+.word-list-option.selected{
+	text-shadow: rgba(0,0,0,.5) 0 8px 3px;
+	text-decoration: underline;
+}
+
+
+section#word-list{
+	border-right: var(--border);
+}

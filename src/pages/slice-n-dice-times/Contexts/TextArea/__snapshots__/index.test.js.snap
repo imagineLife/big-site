@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextAreaContext matches snapshot 1`] = `
+<TextAreaProvider>
+  <ChildBox>
+    <div
+      id="box"
+    >
+      Child Box
+    </div>
+  </ChildBox>
+</TextAreaProvider>
+`;

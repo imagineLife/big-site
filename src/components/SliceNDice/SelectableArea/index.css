@@ -1,0 +1,8 @@
+#area-box{
+	border-bottom: var(--border)
+}
+
+.selectable-wrapper{
+	width: 100%;
+	height: 100%;
+}
