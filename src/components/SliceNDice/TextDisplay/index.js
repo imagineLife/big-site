@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
 import './index.css';
 
-import { TextAreaContext } from './../../../pages/slice-n-dice-times/Contexts/TextArea';
-import { WordListContext } from './../../../pages/slice-n-dice-times/Contexts/CommonWords';
+import { TextAreaContext } from '../Contexts/TextArea';
+import { WordListContext } from '../Contexts/CommonWords';
 import { getQueriedWord } from "./../../../pages/slice-n-dice-times/lib/getQueriedWord"
 import getWordLength from "./../../../pages/slice-n-dice-times/lib/getWordLength"
 
