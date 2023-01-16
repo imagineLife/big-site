@@ -1,6 +1,5 @@
 import React from 'react';
-import './index.css';
-import useDimensions from './lib/../../../hooks/useDims';
+import "./index.scss"
 
 // Components
 import SelectableArea from './../../components/SliceNDice/SelectableArea'
@@ -10,6 +9,8 @@ import AreaBox from './../../components/SliceNDice/Area';
 import Circles from './../../components/SliceNDice/Circles/State/ContextWrapper';
 import ThemeBox from './../../components/SliceNDice/ThemeBox';
 import ImageBox from './../../components/SliceNDice/ImageBox';
+
+import useDimensions from "./lib/../../../hooks/useDims"
 
 // const moved = () => console.log('moved');
 
