@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './ThemeBox.css';
 
-import { TextAreaContext } from './../../../pages/slice-n-dice-times/Contexts/TextArea';
+import { TextAreaContext } from './../../../components/SliceNDice/Contexts/TextArea';
 
 const ThemeBox = () => {
   const {

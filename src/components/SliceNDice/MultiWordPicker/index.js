@@ -1,6 +1,6 @@
 import React from 'react';
 import './index.css';
-import { WordListContext } from './../../../pages/slice-n-dice-times/Contexts/CommonWords';
+import { WordListContext } from "./../Contexts/CommonWords"
 import ListItem from '../ListItem';
 
 const CommonWords = () => {

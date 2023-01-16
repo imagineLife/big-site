@@ -1,6 +1,6 @@
 import React from 'react';
 import Circles from '..';
-import { CirclesProvider } from "./../../../../pages/slice-n-dice-times/Contexts/Circles"
+import { CirclesProvider } from './../../Contexts/Circles/'
 
 const WrappedComponent = () => (
   <CirclesProvider>

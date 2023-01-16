@@ -4,7 +4,7 @@ import { mount } from 'enzyme';
 import Area from './Area';
 
 // state
-import { TextAreaContext } from './../../../pages/slice-n-dice-times/Contexts/TextArea';
+import { TextAreaContext } from './../../../components/SliceNDice/Contexts/TextArea';
 import { AreaContext } from './State/Context';
 
 // mockData

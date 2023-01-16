@@ -3,8 +3,8 @@ import './index.css';
 
 import { TextAreaContext } from '../Contexts/TextArea';
 import { WordListContext } from '../Contexts/CommonWords';
-import { getQueriedWord } from "./../../../pages/slice-n-dice-times/lib/getQueriedWord"
-import getWordLength from "./../../../pages/slice-n-dice-times/lib/getWordLength"
+import { getQueriedWord } from "./../lib/getQueriedWord"
+import getWordLength from "./../lib/getWordLength"
 
 
 function splitStr(str, idx) {

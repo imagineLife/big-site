@@ -1,7 +1,7 @@
 import React from 'react';
-const CirclesContext = React.createContext(); 
-const {Provider, Consumer} = CirclesContext;
 import { getWordsByLength } from '../../lib/stats'
+const CirclesContext = React.createContext()
+const { Provider, Consumer } = CirclesContext
 
 const CirclesProvider = (props) => {
  

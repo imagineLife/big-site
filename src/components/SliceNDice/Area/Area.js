@@ -2,7 +2,7 @@ import React, { useContext, Fragment } from 'react';
 import './index.css';
 import * as scale from 'd3-scale';
 import * as d3Shape from 'd3-shape';
-import { TextAreaContext } from "./../../../pages/slice-n-dice-times/Contexts/TextArea"
+import { TextAreaContext } from "./../../../components/SliceNDice/Contexts/TextArea"
 import { AreaContext } from './State/Context';
 
 import { getSelectedSentences } from './helpers';

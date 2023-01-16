@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import { TextAreaContext, TextAreaProvider } from '.././../../../pages/slice-n-dice-times/Contexts/TextArea';
+import { TextAreaContext, TextAreaProvider } from '.././../../../components/SliceNDice/Contexts/TextArea';
 import { AreaContext, AreaProvider } from './Context';
 import mockTextAreaData from './mock-text-area-vals.json';
 import { waitForComponentToPaint } from '../../../helpers';

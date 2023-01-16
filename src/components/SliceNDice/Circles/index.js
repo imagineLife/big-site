@@ -3,8 +3,8 @@ import './index.css';
 import * as s from 'd3-scale';
 import * as a from 'd3-array';
 import useDimensions from '../../../hooks/useDims';
-import { TextAreaContext } from "./../../../pages/slice-n-dice-times/Contexts/TextArea"
-import { CirclesContext } from "./../../../pages/slice-n-dice-times/Contexts/Circles"
+import { TextAreaContext } from "./../Contexts/TextArea"
+import { CirclesContext } from "./../Contexts/Circles"
 
 function circlesReducer(state, {type, payload}){
   switch(type){

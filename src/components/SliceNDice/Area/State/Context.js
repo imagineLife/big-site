@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer } from 'react';
-import { TextAreaContext } from '.././../../../pages/slice-n-dice-times/Contexts/TextArea';
+import { TextAreaContext } from '.././../../../components/SliceNDice/Contexts/TextArea';
 
 // STATE
 import initialState from './reducer/initialState';

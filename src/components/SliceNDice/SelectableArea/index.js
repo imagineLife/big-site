@@ -6,7 +6,7 @@ import * as d3Select from 'd3-selection';
 import * as brush from 'd3-brush';
 import './index.css';
 
-import { TextAreaContext } from './../../../pages/slice-n-dice-times/Contexts/TextArea';
+import { TextAreaContext } from './../../../components/SliceNDice/Contexts/TextArea';
 
 const SelectableArea = ({ onMove, dims }) => {
 
