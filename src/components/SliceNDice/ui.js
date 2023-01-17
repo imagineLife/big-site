@@ -2,15 +2,15 @@ import React from 'react';
 import "./index.scss"
 
 // Components
-import SelectableArea from './../../components/SliceNDice/SelectableArea'
-import WordListPicker from './../../components/SliceNDice/MultiWordPicker';
-import TextDisplay from './../../components/SliceNDice/TextDisplay';
-import AreaBox from './../../components/SliceNDice/Area';
-import Circles from './../../components/SliceNDice/Circles/State/ContextWrapper';
-import ThemeBox from './../../components/SliceNDice/ThemeBox';
-import ImageBox from './../../components/SliceNDice/ImageBox';
+import SelectableArea from './SelectableArea'
+import WordListPicker from './MultiWordPicker';
+import TextDisplay from './TextDisplay';
+import AreaBox from './Area';
+import Circles from './Circles/State/ContextWrapper';
+import ThemeBox from './ThemeBox';
+import ImageBox from './ImageBox';
 
-import useDimensions from "./lib/../../../hooks/useDims"
+import useDimensions from "../../hooks/useDims"
 
 // const moved = () => console.log('moved');
 
