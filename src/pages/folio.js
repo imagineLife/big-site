@@ -197,7 +197,7 @@ const folioItems = [
     title: 'Slice-n-Dice Times',
     subText:
       "An interactive newspaper-influenced UI, analyzing textual themes in the president's Innaugural Address.",
-    aLink: 'https://slice-n-dice-times.herokuapp.com/',
+    aLink: 'https://laursen.tech/slice-n-dice-times',
     techList: [
       'D3',
       'Data Vizualization',
