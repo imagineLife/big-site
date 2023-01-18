@@ -141,7 +141,15 @@ footer{
 
 ul.title-data{
 	text-align: center;
+  border-top: var(--border);
+	border-bottom: var(--border);
 }
+
+h1.title{
+	text-align: center;
+	font-size: 36px;
+}
+
 
 li.sub-title{
   margin: 7px 25px;

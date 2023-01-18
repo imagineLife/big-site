@@ -58,6 +58,20 @@
   --color-heading: #1a202c;
   --color-heading-black: black;
   --color-accent: #d1dce5;
+  --gray: rgb(80,80,80);
+	--border: 2px solid var(--gray);
+	--bottom-narrow: linear-gradient(
+   to right,
+   transparent 30%, 
+   rgb(80,80,80) 30% 70%, 
+   transparent 70% 100%
+  ) 0 0 1 0 / 2px;
+  --bottom-mid: linear-gradient(
+   to right,
+   transparent 20%, 
+   rgb(80,80,80) 20% 80%, 
+   transparent 80% 100%
+  ) 0 0 1 0 / 2px;
 }
 
 /* HTML elements */
