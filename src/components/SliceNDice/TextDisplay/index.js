@@ -126,7 +126,7 @@ const TextDisplay = () => {
     columns: columnCount, // 10-sentence-columns,
     overflowX: 'auto',
     columnRuleStyle: 'solid',
-    height: '330px',
+    maxHeight: '300px',
   };
 
   /*

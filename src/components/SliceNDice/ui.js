@@ -28,8 +28,8 @@ const Together = () => {
             <div className="corner-box">
               <p>
                 A Play on Newspapers, Text-Analysis, & Interaction.
-                Some "Top" portions of this are interactive.
-                The bottom shows the text of a speech, resposive to your interactions.
+                <br />
+                Some parts are interactive.
               </p>
             </div>
           </div>

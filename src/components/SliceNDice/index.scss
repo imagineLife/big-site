@@ -18,11 +18,9 @@
 */
 
 #flex-grid-layout{
-  color: rgb(147,147,147);
+  // sizes + layout
   max-width: 100%;
   margin: 0;
-  background-color: #14181d;
-  background-image: url(https://www.transparenttextures.com/patterns/black-paper.png);
   display: inline-block;
   display: grid;
   width: 100%;
@@ -34,7 +32,15 @@
   padding: 0 25px;
   grid-column-gap: 20px;
   border: 1px solid var(--border);
+
+  // font
+  color: rgb(147,147,147);  
+  line-height:1.6;
   font-size: 16px;
+  
+  background-color: #14181d;
+  background-image: url(https://www.transparenttextures.com/patterns/black-paper.png);
+  
 
   * {
     color: rgb(147,147,147);
@@ -53,6 +59,12 @@
     height: -moz-fit-content;
     height: fit-content;
     max-height: 75px;
+  }
+
+  #theme-box{
+    max-height: 350px;
+    border-left: var(--border);
+    border-right: var(--border);
   }
 
   #focus-area-box{
@@ -110,19 +122,40 @@
 */
 header{
   grid-area: top;
+  border-bottom: var(--border);
 }
 
 #left-side{
-  grid-area: l;
-  display: flex;
-  flex-direction: column
+	grid-area: l;
+}
+
+#left-side > div .section-text, 
+#right-side > div .section-text{
+	transition: all 350ms;
+}
+
+#left-side > div .interaction-note, 
+#right-side > div .interaction-note{
+	transition: all 350ms;
+}
+
+#left-side > div:hover .section-text, 
+#right-side > div:hover .section-text,
+#left-side > div:hover .interaction-note, 
+#right-side > div:hover .interaction-note{
+	font-weight: 800;
+	color: rgb(215,215,215);
+}
+
+#right-side > div:hover #image-box .section-text{
+	text-shadow: none;
 }
 
 #right-side{
-  grid-area: r;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+	grid-area: r;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
 }
 
 footer{
@@ -186,10 +219,14 @@ li.sub-title:nth-child(even){
   top: 8px;
   right: 25px;
   width: 380px;
-  font-size: .25em;
+  font-size: .75em;
   text-align: center;
   padding: 6px;
-  margin: 10px 0;
+  margin: auto;
+  max-height: 60px;
+  p {
+    margin: 0;
+  }
 }
 
 .selectable-area-explain{
@@ -266,13 +303,10 @@ footer{
   max-width: 100%;
 }
 
-/*.section-text:hover{
-  transition: all 500ms;
-}
-
 .section-text:hover{
   text-shadow: rgba(0,0,0,.5) 0 8px 3px;
-}*/
+  transition: all 500ms;
+}
 #words-of-interest-box > .section-text{
   margin-bottom: 8px;
 }
@@ -294,6 +328,7 @@ footer{
   font-size: 1.6em;
   text-align: center;
   width: 100%;
+  margin: 0;
 }
 
 
@@ -327,11 +362,6 @@ footer{
   height: 80%;
   width: 100%;  
 }
-
-/* .interaction-note{
-  font-family: prata;
-} */
-
 
 
 @media only screen and (max-width: 800px){
