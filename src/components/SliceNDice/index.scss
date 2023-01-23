@@ -88,7 +88,7 @@
   // }
 
   #words-by-length-box{
-    max-height: 275px;
+    // max-height: 275px;
     flex: 1;
     padding-top: 35px;
     border-left: var(--border);
@@ -344,7 +344,6 @@ footer{
 }
 
 #divider-box {
-  /* border-top:  var(--border); */
   border-bottom:  var(--border);
   line-height: 2;
   text-align: center;
@@ -359,7 +358,7 @@ footer{
 }
 
 #circlesBox-forUI{
-  height: 80%;
+  // height: 80%;
   width: 100%;  
 }
 
