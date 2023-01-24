@@ -1,10 +1,10 @@
 ---
-title: Personal Growth Through Information, Assumptions, And Actions
+title: "On Decision: Information, Assumptions, And Actions"
 author: Jake Laursen
-excerpt: We can grow while we gather info, make meaning, and assert our will
+excerpt: A Perspective on how we make choices while we gather info, make meaning, and assert our will
 tags: ["personal development", "growth", "bias", "learn"]  
 parentDir: misc
-slug: misc/growth-and-bias
+slug: the-social-world/assemble-assume-assert
 order: 8
 ---
 
@@ -21,10 +21,10 @@ order: 8
 
 
 ## Each One Of Us Is Figuring Things Out
-We Gather facts: **assmebling knowledge**.  
+We Gather facts: **assembling knowledge**.  
 We make connections out of the info we've gathered, **assuming meaning**.  
 We respond to the meaning, **asserting our will**, one way or another.   
-I've personally begun to consider this type of "framework" from [Buster Benson](#reference), particularly in the context of managing arguments.  
+_This type of "framework" comes from [Buster Benson](#reference)._
 
 ### We Assemble Knowledge
 There is a lot of information out there.  

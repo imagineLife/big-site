@@ -216,6 +216,27 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           }
         }
       }
+      socials: allMarkdownRemark(
+        sort: { frontmatter: { order: ASC } }
+        filter: {
+          frontmatter: {
+            order: { gt: 0 }
+            slug: { regex: "/^the-social-world/" }
+          }
+        }
+      ) {
+        pages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              excerpt
+              tags
+              parentDir
+            }
+          }
+        }
+      }
       strengths: allMarkdownRemark(
         sort: { frontmatter: { order: ASC } }
         filter: {
@@ -262,6 +283,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       mongosectioncontent: { pages: mongoSectionContent },
       node: { pages: nodePages },
       scrum: { pages: scrumPages },
+      socials: { pages: socialPages },
       strengths: { pages: strengthsPages },
       tagsGroup: { group: groupOfTags },
     },
@@ -285,6 +307,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     ...nodePages,
     ...mongoSectionContent,
     ...scrumPages,
+    ...socialPages,
     ...strengthsPages,
   ]
   pages.forEach(({ page }, index) => {
