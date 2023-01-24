@@ -4,7 +4,7 @@ parentDir: k8s/examples
 slug: k8s/examples/real-time-service-adjustment
 author: Jake Laursen
 excerpt: Create 2 http servers and toggle a deployment to switch which server is served through the k8s service
-tags: ["k8s", "services", "deployments", "real-time"]
+tags: ["k8s", "services", "deployment", "real-time"]
 order: 17
 ---
 

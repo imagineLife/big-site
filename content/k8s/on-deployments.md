@@ -4,7 +4,7 @@ parentDir: k8s
 slug: k8s/deployments
 author: Jake Laursen
 excerpt: Deploying the Cluster
-tags: ["Kubernetes", "k8s", "deployments"]
+tags: ["Kubernetes", "k8s", "deployment"]
 order: 6
 ---
 
