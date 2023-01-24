@@ -221,7 +221,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         filter: {
           frontmatter: {
             order: { gt: 0 }
-            slug: { regex: "/^the-social-world/" }
+            slug: { regex: "/^social/" }
           }
         }
       ) {
