@@ -64,4 +64,4 @@ Each of these may be "the best" option, and also maby be "missing out" on a "bet
 
 
 ##### Reference
-- [Thank you Buster Benson for the inspiration from your book "Why Are We Yelling?"](https://busterbenson.com/whyareweyelling/)   
+_Thank you Buster Benson for the inspiration from your book ["Why Are We Yelling?"](https://busterbenson.com/whyareweyelling/)_
