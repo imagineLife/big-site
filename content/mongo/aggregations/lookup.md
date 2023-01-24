@@ -1,19 +1,31 @@
+---
+title: Lookup
+slug: mongo/aggregations/lookup
+parentDir: mongo/aggregations
+author: Jake Laursen
+excerpt: Something like a "join"
+tags: ["database", "mongodb", "performance", "aggregation", "lookup"]
+---
 # lookup
 
-[mongo docs](https://docs.mongodb.com/manual/reference/operator/aggregation/lookup/)
+[mongo docs on $lookup](https://docs.mongodb.com/manual/reference/operator/aggregation/lookup/)
+- [lookup](#lookup)
+  - [example 1](#example-1)
+  - [Another example](#another-example)
+  - [Thoughts](#thoughts)
 
 Like a left outer join: All fields from the "left" table, and the desired fields from the "right" table.  
 Merging data from 2 tables.  
 ARGS:
 
-- from: a collection from which to look up docs
+- `from`: a collection from which to look up docs
   - must be in same db
   - can not be sharded
-- localField: field in the "working collection" where the expression will compare _to_
-- foreignField: field formt he doc of the "from" collection
-- as: alias fieldName in the resulting doc
+- `localField`: field in the "working collection" where the expression will compare _to_
+- `foreignField`: field formt he doc of the "from" collection
+- `as`: alias fieldName in the resulting doc
 
-### example 1
+## example 1
 
 **Table 1**: a list of airlines  
 **Table 2**: a list of "alliances", which each have a list of airlines (_can be related to the airlines collection_)
@@ -72,7 +84,7 @@ db.air_alliances.aggregate([
 $ ...etc
 ```
 
-### Another example
+## Another example
 
 DID NOT GET IT HERE...
 
@@ -163,10 +175,10 @@ db.air_routes.aggregate([
 ])
 ```
 
-### Thoughts
+## Thoughts
 
-- the `from` field cannot be sharded
-- the `from` collection must be in the same db
+- the `from` **field** cannot be sharded
+- the `from` **collection** must be in the same db
 - the values in the `localField` and `foreignField` are matched on equality
 - `as` can be _any name_
-  - if the `as` is a field that laready exists, the og field will be overwritten
+  - if the `as` is a field that already exists, the pre-existing field will be overwritten
