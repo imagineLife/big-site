@@ -5,6 +5,36 @@ import { StaticQuery, graphql, Link } from "gatsby"
 import Layout from "./../../components/layout"
 import Hero from "./../../components/hero"
 
+const SocialLink = ({slug, title, excerpt, type}) => { 
+  return (
+    <div className="toc-card">
+      <Link to={`/${slug}`} className="title">
+        {title}
+      </Link>
+      <p className="content">{excerpt}</p>
+    </div>
+  )
+}
+
+function createLinksWithType({thisType}) {
+  return function createSocialLinks(
+    {
+      page: {
+        overview: { slug, title, excerpt },
+      },
+    },
+    pageIdx
+  ) {
+    return (
+      <SocialLink
+        slug={slug}
+        title={title}
+        excerpt={excerpt}
+        key={`${thisType}-toc-${pageIdx}`}
+      />
+    )
+  }
+}
 const IndexPage = () => (
   <StaticQuery
     query={graphql`
@@ -56,54 +86,18 @@ const IndexPage = () => (
           <Layout>
             <section className="toc-wrapper">
               <h1>You, Me, and the Social World</h1>
-              {socialPages.map(
-                (
-                  {
-                    page: {
-                      overview: { slug, title, excerpt },
-                    },
-                  },
-                  pageIdx
-                ) => {
-                  return (
-                    <div className="toc-card" key={`socialPage-toc-${pageIdx}`}>
-                      <Link to={`/${slug}`} className="title">
-                        {title}
-                      </Link>
-                      <p className="content">{excerpt}</p>
-                    </div>
-                  )
-                }
-              )}
+              {socialPages.map(createLinksWithType({thisType: 'social'}))}
               <h2>On Natural Talents</h2>
               <p>
                 We have skills and talents that seemingly are part of our
                 identity. <br /> These can shape our experiences and our world
                 for the better.
               </p>
-              {talents.map(
-                (
-                  {
-                    page: {
-                      overview: { slug, title, excerpt },
-                    },
-                  },
-                  pageIdx
-                ) => {
-                  return (
-                    <div className="toc-card" key={`strengths-toc-${pageIdx}`}>
-                      <Link to={`/${slug}`} className="title">
-                        {title}
-                      </Link>
-                      <p className="content">{excerpt}</p>
-                    </div>
-                  )
-                }
-              )}
+              {talents.map(createLinksWithType({ thisType: 'talent' }))}
               <h2>On Conflict And Conflict Resolution</h2>
               <p>
-                Conflict is inevitable. Much is written on conflict and resolution.{" "}
-                <i>More to come here...</i>
+                Conflict is inevitable. Much is written on conflict and
+                resolution. <i>More to come here...</i>
               </p>
             </section>
           </Layout>
