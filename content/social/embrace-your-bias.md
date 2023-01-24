@@ -65,4 +65,3 @@ Each of these may be "the best" option, and also maby be "missing out" on a "bet
 
 ##### Reference
 - [Thank you Buster Benson for the inspiration from your book "Why Are We Yelling?"](https://busterbenson.com/whyareweyelling/)   
-- [Doug Demuro's personality and car reviews](https://www.youtube.com/@DougDeMuro) on youtube are a fun and informative resource on the topic
