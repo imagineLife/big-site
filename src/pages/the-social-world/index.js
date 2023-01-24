@@ -101,10 +101,10 @@ const IndexPage = () => (
                 }
               )}
               <h2>On Conflict And Conflict Resolution</h2>
-              <p>Conflict is inevitable. Much is written on these topics.</p>
-              <sub>
-                <i>More to come here</i>
-              </sub>
+              <p>
+                Conflict is inevitable. Much is written on conflict and resolution.{" "}
+                <i>More to come here...</i>
+              </p>
             </section>
           </Layout>
         </Fragment>
