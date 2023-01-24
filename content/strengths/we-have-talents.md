@@ -2,10 +2,8 @@
 title: We All Have Talents
 slug: strengths/we-have-talents
 author: Jake Laursen
-excerpt: Parts of the ways that we show up in the world seem to be without effort
+excerpt: Parts of the ways that we show up in the world seem to be without effort  
 tags: ["personality", "strengths", "thoughts", "overview", "topic", "community"]
-coverImage: ./index.JPG
-coverAlt: Granola
 order: 2
 ---
 
