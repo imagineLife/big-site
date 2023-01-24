@@ -3,18 +3,9 @@ import { StaticQuery, graphql, Link } from 'gatsby';
 
 import Layout from './../components/layout';
 import Hero from './../components/hero';
-import './scrum.scss';
+import createLinksWithType from './../components/createLinksWithType';
+// import './scrum.scss';
 
-function DockerPageLink({slug, title, excerpt }) {
-  return (
-    <div className="toc-card">
-      <Link to={`/${slug}`} className="title">
-        {title}
-      </Link>
-      <p className="content">{excerpt}</p>
-    </div>
-  )
-}
 /*
   before filter
 
@@ -60,10 +51,10 @@ const IndexPage = () => (
         if (p.page.overview.order <= intro_max_index) myPages.intro.push(p)
         else if (p.page.overview.order > intro_max_index && p.page.overview.order <= node_max_index) myPages.node.push(p)
         else { 
-          console.log("%c UnHandled Page", "background-color: red; color: black;")
+          // console.log("%c UnHandled Page", "background-color: red; color: black;")
           
-          console.log(p.page.overview.slug)
-          console.log(p.page.overview.order)
+          // console.log(p.page.overview.slug)
+          // console.log(p.page.overview.order)
         } 
       })
       return (
@@ -81,45 +72,9 @@ const IndexPage = () => (
               >
                 Getting Started
               </h2>
-              {myPages.intro.map(
-                (
-                  {
-                    page: {
-                      overview: { slug, title, excerpt },
-                    },
-                  },
-                  pageIdx
-                ) => {
-                  return (
-                    <DockerPageLink
-                      key={`docker-toc-${pageIdx}`}
-                      slug={slug}
-                      title={title}
-                      excerpt={excerpt}
-                    />
-                  )
-                }
-              )}
+              {myPages.intro.map(createLinksWithType({ thisType: "docker-intro" }))}
               <h2 id="docker-node-intro">Docker With Node: An Intro</h2>
-              {myPages.node.map(
-                (
-                  {
-                    page: {
-                      overview: { slug, title, excerpt },
-                    },
-                  },
-                  pageIdx
-                ) => {
-                  return (
-                    <DockerPageLink
-                      key={`docker-toc-${pageIdx}`}
-                      slug={slug}
-                      title={title}
-                      excerpt={excerpt}
-                    />
-                  )
-                }
-              )}
+               {myPages.node.map(createLinksWithType({ thisType: "docker-node" }))}
             </section>
           </Layout>
         </Fragment>
