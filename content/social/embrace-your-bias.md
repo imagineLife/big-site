@@ -5,7 +5,7 @@ excerpt: A Perspective on how we make choices while we gather info, make meaning
 tags: ["personal development", "growth", "bias", "learn"]  
 parentDir: misc
 slug: the-social-world/assemble-assume-assert
-order: 8
+order: 1
 ---
 
 # Assembling Knowledge, Assuming Meaning, and Asserting Our Will
