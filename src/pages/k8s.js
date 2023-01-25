@@ -3,6 +3,7 @@ import { StaticQuery, graphql, Link } from 'gatsby';
 
 import Layout from './../components/layout';
 import Hero from './../components/hero';
+import createLinksWithType from "./../components/createLinksWithType"
 import './scrum.scss';
 
 /*
@@ -59,48 +60,12 @@ const IndexPage = () => (
               <h2 title="Thanks to Brian Holt from Frontend Masters for Sparking some Curiosity here!">
                 Getting Started
               </h2>
-              {rootPages.map(
-                (
-                  {
-                    page: {
-                      overview: { slug, title, excerpt },
-                    },
-                  },
-                  pageIdx
-                ) => {
-                  return (
-                    <div className="toc-card" key={`k8s-toc-${pageIdx}`}>
-                      <Link to={`/${slug}`} className="title">
-                        {title}
-                      </Link>
-                      <p className="content">{excerpt}</p>
-                    </div>
-                  )
-                }
-              )}
+              {rootPages.map(createLinksWithType({ thisType: "k8s" }))}
               <br />
               <br />
               <br />
               <h2>More In-Depth</h2>
-              {inDepthPages.map(
-                (
-                  {
-                    page: {
-                      overview: { slug, title, excerpt },
-                    },
-                  },
-                  pageIdx
-                ) => {
-                  return (
-                    <div className="toc-card" key={`k8s-toc-${pageIdx}`}>
-                      <Link to={`/${slug}`} className="title">
-                        {title}
-                      </Link>
-                      <p className="content">{excerpt}</p>
-                    </div>
-                  )
-                }
-              )}
+              {inDepthPages.map(createLinksWithType({ thisType: "k8s-in-depth" }))}
             </section>
           </Layout>
         </Fragment>

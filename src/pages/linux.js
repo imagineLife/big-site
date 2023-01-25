@@ -3,6 +3,7 @@ import { StaticQuery, graphql, Link } from 'gatsby';
 
 import Layout from './../components/layout';
 import Hero from './../components/hero';
+import createLinksWithType from "./../components/createLinksWithType"
 import './scrum.scss';
 
 /*
@@ -38,25 +39,7 @@ const IndexPage = () => (
           <Layout>
             <section className="toc-wrapper">
               <h1>Linux</h1>
-              {pages.map(
-                (
-                  {
-                    page: {
-                      overview: { slug, title, excerpt },
-                    },
-                  },
-                  pageIdx
-                ) => {
-                  return (
-                    <div className="toc-card" key={`linux-toc-${pageIdx}`}>
-                      <Link to={`/${slug}`} className="title">
-                        {title}
-                      </Link>
-                      <p className="content">{excerpt}</p>
-                    </div>
-                  )
-                }
-              )}
+              {pages.map(createLinksWithType({thisType: 'linux'}))}
               <sub>
                 Thanks to{" "}
                 <Link to={"https://github.com/btholt"}>Brian Holt</Link> and{" "}
