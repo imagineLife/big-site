@@ -21,7 +21,7 @@ const IndexPage = () => (
           filter: {
             frontmatter: {
               order: { gt: 0 }
-              slug: { regex: "/k8s/in-depth|k8s/[^docker|/]/" }
+              slug: { regex: "/^k8s(?!.*(docker|examples)).*/" }
               title: { ne: null }
             }
           }
@@ -65,7 +65,9 @@ const IndexPage = () => (
               <br />
               <br />
               <h2>More In-Depth</h2>
-              {inDepthPages.map(createLinksWithType({ thisType: "k8s-in-depth" }))}
+              {inDepthPages.map(
+                createLinksWithType({ thisType: "k8s-in-depth" })
+              )}
             </section>
           </Layout>
         </Fragment>
