@@ -92,7 +92,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         filter: {
           frontmatter: {
             order: { gt: 0 }
-            slug: { regex: "/k8s/in-depth|k8s/[^docker|/]/" }
+            slug: { regex: "/^k8s(?!.*(docker|examples)).*/" }
             title: { ne: null }
           }
         }
@@ -219,10 +219,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       socials: allMarkdownRemark(
         sort: { frontmatter: { order: ASC } }
         filter: {
-          frontmatter: {
-            order: { gt: 0 }
-            slug: { regex: "/^social/" }
-          }
+          frontmatter: { order: { gt: 0 }, slug: { regex: "/^social/" } }
         }
       ) {
         pages: edges {
