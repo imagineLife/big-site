@@ -2,24 +2,8 @@ import React, { Fragment } from 'react';
 import { graphql, Link } from 'gatsby';
 import './index.scss';
 import Header from './../../components/header'
+import TagList from './../../components/TagList'
 
-function Tags({tags}) {
-  return (<i>Tags: {tags?.map((t, tidx) => {
-    let optionalEnd;
-    if (tidx < (tags.length - 1)) { 
-      optionalEnd = ', ';
-    }
-
-    return (
-      <>
-        <span>
-          <Link to={`/tags/${t}`}>{t}</Link>
-        </span>
-        {optionalEnd}
-      </>
-    )
-  })}</i>)
-}
 export default function Template({
   data: {
     pageData: {
@@ -82,9 +66,9 @@ export default function Template({
   
   return (
     <Fragment>
-      <main className={`md-wrapper${parentDir ? ` ${parentDir}` : ''}`}>
+      <main className={`md-wrapper${parentDir ? ` ${parentDir}` : ""}`}>
         <Header className="md" />
-        <Tags tags={tags} />
+        <TagList tags={tags} />
         <section dangerouslySetInnerHTML={{ __html: content }}></section>
       </main>
       <footer className="md-footer">
@@ -96,19 +80,19 @@ export default function Template({
                   <Link key={`footer-link-${title}`} to={`/${slug}`}>
                     Prev: {title}
                   </Link>
-                );
+                )
               } else {
                 return (
                   <Link key={`footer-link-${title}`} to={`/${slug}`}>
                     Next: {title}
                   </Link>
-                );
+                )
               }
             })}
         </div>
       </footer>
     </Fragment>
-  );
+  )
 }
 
 export const pgQuery = graphql`
