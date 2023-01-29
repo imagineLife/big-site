@@ -3,8 +3,6 @@ import { graphql, Link } from 'gatsby';
 import './index.scss';
 import Header from './../../components/header'
 import TagList from './../../components/TagList'
-import linkedIn from './linkedin.svg';
-import github from "./github.svg"
 
 export default function Template({
   data: {
