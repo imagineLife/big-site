@@ -3,6 +3,8 @@ import { graphql, Link } from 'gatsby';
 import './index.scss';
 import Header from './../../components/header'
 import TagList from './../../components/TagList'
+import linkedIn from './linkedin.svg';
+import github from "./github.svg"
 
 export default function Template({
   data: {
@@ -72,7 +74,7 @@ export default function Template({
         <section dangerouslySetInnerHTML={{ __html: content }}></section>
       </main>
       <footer className="md-footer">
-        <div id="link-wrapper">
+        {/* <div id="link-wrapper">
           {pages.length > 1 &&
             footerLinks?.map(({ slug, title }, idx) => {
               if (idx === 0) {
@@ -89,7 +91,8 @@ export default function Template({
                 )
               }
             })}
-        </div>
+        </div> */}
+
       </footer>
     </Fragment>
   )
