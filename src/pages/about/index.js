@@ -9,6 +9,20 @@ import doerImg from './work.jpg';
 import coffeeImg from './coffee.jpg';
 import introvertImg from './introvert.jpg';
 import strengthsImg from './strengths.jpg';
+import linkedIn from './linkedin.svg';
+import github from "./github.svg"
+
+const contactLinks = [
+  {
+    to: "https://www.linkedin.com/in/eric-laursen-6a1b20b8/",
+    src: linkedIn,
+  },
+  {
+    to: "https://github.com/imagineLife",
+    src: github,
+  },
+]
+
 const About = () => (
   <Fragment>
     <Hero />
@@ -42,16 +56,17 @@ const About = () => (
             <p>Some topics I'm currently learning about:</p>
             <ul>
               <li>
-                {' '}
+                {" "}
                 <a href="/k8s" target="_blank" rel="noreferrer">
                   <b>kubernetes</b>:
-                </a>{' '}
+                </a>{" "}
                 controllers, deployments, pods, replicasets, ingress &
                 networking, ConfigMaps...
               </li>
               <li>
                 <b>CI/CD Automated pipelines</b>: building & deploying automated
-                ci/cd "pipelines" for tooling like a frontend build system, a node_module, a rest api, an api in a docker container... 
+                ci/cd "pipelines" for tooling like a frontend build system, a
+                node_module, a rest api, an api in a docker container...
               </li>
               <li>
                 <b>keeping up on some node chops</b>: some small projects on
@@ -77,63 +92,63 @@ const About = () => (
             </p>
             <ul>
               <li>
-                {' '}
+                {" "}
                 <a
                   href="https://www.gallup.com/cliftonstrengths/en/252293/learner-theme.aspx"
                   target="_blank"
                   rel="noreferrer"
                 >
                   <b>Learner</b>
-                </a>{' '}
+                </a>{" "}
                 ...a great desire to learn and want to continuously improve. The
                 process of learning, rather than the outcome... is exciting to
                 me!
               </li>
               <li>
-                {' '}
+                {" "}
                 <a
                   href="https://www.gallup.com/cliftonstrengths/en/252278/input-theme.aspx"
                   target="_blank"
                   rel="noreferrer"
                 >
                   <b>Input</b>
-                </a>{' '}
+                </a>{" "}
                 ...have a need to collect and archive... information, ideas,
                 artifacts...
               </li>
               <li>
-                {' '}
+                {" "}
                 <a
                   href="https://www.gallup.com/cliftonstrengths/en/252215/deliberative-theme.aspx"
                   target="_blank"
                   rel="noreferrer"
                 >
                   <b>Deliberative</b>
-                </a>{' '}
+                </a>{" "}
                 ...described by the serious care (I) take in making decisions or
                 choices. (I) anticipate obstacles.
               </li>
               <li>
-                {' '}
+                {" "}
                 <a
                   href="https://www.gallup.com/cliftonstrengths/en/252176/command-theme.aspx"
                   target="_blank"
                   rel="noreferrer"
                 >
                   <b>Command</b>
-                </a>{' '}
+                </a>{" "}
                 ...have presence. (I) can take control of a situation and make
                 decisions.
               </li>
               <li>
-                {' '}
+                {" "}
                 <a
                   href="https://www.gallup.com/cliftonstrengths/en/252134/achiever-theme.aspx"
                   target="_blank"
                   rel="noreferrer"
                 >
                   <b>Achiever</b>
-                </a>{' '}
+                </a>{" "}
                 ...work hard to possess a great deal of stamina... take immense
                 satisfactioin in being busy and productive.
               </li>
@@ -148,25 +163,25 @@ const About = () => (
           <div className="text">
             <h2>An INTJ</h2>
             <p>
-              Per{' '}
+              Per{" "}
               <a
                 href="https://www.myersbriggs.org/my-mbti-personality-type/mbti-basics/"
                 target="_blank"
                 rel="noreferrer"
               >
                 The MeyersBriggs
-              </a>{' '}
+              </a>{" "}
               personality assessment, I'm an INTJ.
             </p>
             <p>
-              Check out the{' '}
+              Check out the{" "}
               <a
                 href="https://www.16personalities.com/"
                 target="_blank"
                 rel="noreferrer"
               >
                 16 personalities site
-              </a>{' '}
+              </a>{" "}
               for a more friendly breakdown of the assessment.
             </p>
             <p>
@@ -201,11 +216,27 @@ const About = () => (
             <img src={coffeeImg} alt="coffee fanatic" />
           </div>
         </section>
+
+        <section className="box">
+          <div className="text">
+            <h4>Contact</h4>
+            <div style={{
+              display: 'flex',
+              justifyContent: 'space-around'
+            }}>
+              {contactLinks.map(d => (
+                <Link to={d.to} target="_blank" key={d.to}>
+                  <img style={{ width: "50px" }} src={d.src} />
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
       </div>
       <Link to="/">Home</Link>
     </Layout>
   </Fragment>
-);
+)
 export default About;
 
 export function Head() { 
