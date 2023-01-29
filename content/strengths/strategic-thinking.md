@@ -15,5 +15,4 @@ Others are skilled at relating a current situation to something else to ease dis
 Others bring interesting details to the table - historical references, relational nuiances, socio-economical informed variants...  
 Others thrive in deep and complex "heady" converstaions.  
 
-
 _This is heavily influenced by learnings from and an appreciation for [Clifton Strengths](https://www.gallup.com/cliftonstrengths)_.  
