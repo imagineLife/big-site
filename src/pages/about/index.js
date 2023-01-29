@@ -12,7 +12,7 @@ import strengthsImg from './strengths.jpg';
 import linkedIn from './linkedin.svg';
 import github from "./github.svg"
 
-const contactLinks = [
+const aboutContactLinks = [
   {
     to: "https://www.linkedin.com/in/eric-laursen-6a1b20b8/",
     src: linkedIn,
@@ -219,12 +219,12 @@ const About = () => (
 
         <section className="box">
           <div className="text">
-            <h4>Contact</h4>
+            <h4>Links</h4>
             <div style={{
               display: 'flex',
               justifyContent: 'space-around'
             }}>
-              {contactLinks.map(d => (
+              {aboutContactLinks.map(d => (
                 <Link to={d.to} target="_blank" key={d.to}>
                   <img style={{ width: "50px" }} src={d.src} />
                 </Link>
