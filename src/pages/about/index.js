@@ -38,7 +38,7 @@ const About = () => (
             </p>
           </div>
           <div className="figure">
-            <img src={doerImg} alt="do-er" />
+            <img src={doerImg} alt="do-er"/>
           </div>
         </section>
 
@@ -226,7 +226,7 @@ const About = () => (
             }}>
               {aboutContactLinks.map(d => (
                 <Link to={d.to} target="_blank" key={d.to}>
-                  <img style={{ width: "50px" }} src={d.src} />
+                  <img style={{ width: "50px" }} src={d.src} alt={d.to} />
                 </Link>
               ))}
             </div>
