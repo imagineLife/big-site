@@ -56,7 +56,7 @@ const Header = ({className}) => (
           height: '20px',
           width: '20px',
         }}>
-          <img style={{ width: "20px", height:'20px' }} src={d.src} />
+          <img style={{ width: "20px", height: '20px' }} src={d.src} alt={d.to} />
         </Link>
       ))}
     </div>
