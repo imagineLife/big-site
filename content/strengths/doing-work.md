@@ -2,7 +2,7 @@
 title: Doing Work
 slug: strengths/doing-work
 author: Jake Laursen
-excerpt: 
+excerpt: Focus on Tasks and Working Sometimes Relentlessly
 tags: ["personality", "strengths", "tasks", "working"]
 order: 5
 ---
