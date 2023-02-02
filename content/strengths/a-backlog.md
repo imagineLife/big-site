@@ -1,6 +1,6 @@
 ---
 title: A Backlog
-slug: strengths/a-backlog
+slug: swengths/a-backlog
 author: Jake Laursen
 excerpt: A list of writings I'm working on
 tags: ["personality", "strengths", "thoughts", "overview", "topic", "community"]
