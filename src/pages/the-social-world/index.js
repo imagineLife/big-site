@@ -13,7 +13,7 @@ const IndexPage = () => (
         thesepages: allMarkdownRemark(
           sort: { frontmatter: { order: ASC } }
           filter: {
-            frontmatter: { order: { gt: 0 }, slug: { regex: "/(strengths|social)/" } }
+            frontmatter: { order: { gt: 0 }, slug: { regex: "/(strengths|^the-social)/" } }
           }
         ) {
           pages: edges {
