@@ -219,7 +219,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       socials: allMarkdownRemark(
         sort: { frontmatter: { order: ASC } }
         filter: {
-          frontmatter: { order: { gt: 0 }, slug: { regex: "/^social/" } }
+          frontmatter: { order: { gt: 0 }, slug: { regex: "/^the-social/" } }
         }
       ) {
         pages: edges {
