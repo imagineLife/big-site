@@ -15,7 +15,7 @@ Having a clear and tangible presence.
 Making a decision when others are stalling or confused or lingering.  
 Translating good into great.  
 Organizing projects by levels of impactfulness.  
-
+Meeting and winning other over.
 
 Some folks have a natural "knack" for making an impact.    
 
