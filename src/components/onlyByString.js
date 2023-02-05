@@ -1,4 +1,4 @@
-function onlyByString(str) {
+function onlyWithString(str) {
   return function onlyThese({
     page: {
       overview: { slug },
@@ -8,4 +8,14 @@ function onlyByString(str) {
   }
 }
 
-export default onlyByString
+function onlyWithoutString(str) {
+  return function onlyThese({
+    page: {
+      overview: { slug },
+    },
+  }) {
+    return !slug.includes(str)
+  }
+}
+
+export { onlyWithString, onlyWithoutString }
