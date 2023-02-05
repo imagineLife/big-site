@@ -1,7 +1,7 @@
 ---
-title: Information Differs
+title: Conflict and Information
 author: Jake Laursen
-excerpt: The info we collect might contribute to conflict
+excerpt: The differing info we collect might contribute to conflict
 tags: ["the social world", "conflict", "information"]  
 parentDir: the-social-world
 slug: the-social-world/conflict-and-information
