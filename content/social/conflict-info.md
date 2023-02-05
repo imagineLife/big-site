@@ -53,10 +53,13 @@ Each of these "shortcuts" to collecting information is something like a two-side
 
 ## Facts Aren't Meaning
 [_"A Conflict of heart can't be solved with facts and figures; it needs to be addressed in other much  slower and more subtl ways."_](https://www.amazon.com/Why-Are-We-Yelling-hardcover/dp/0525540105/ref=tmm_hrd_swatch_0?_encoding=UTF8&qid=1675384779&sr=8-1)  
-Facts will only get us so far.  
-Trying to convince of new or different facts doesn't address meaning that we each associate with the facts.  
-Trying to get facts from similar sources will only aid differing opinions until new sources appear, which constantly happens.
+All of this detail about gathering info might certainly be interesting.  
+Facts, though,  will only get us so far in conflict.  
+Trying to convince someone of new or different facts doesn't address meaning that we each associate with the facts.  
+Trying to get facts from similar sources will only aid differing opinions until new sources appear, which constantly happens.  
+Pointing out the shortcuts we make can be percieved negatively and be unhelpful.  
 
+The [meanings we make](/the-social-world/conflict-and-meaning) from the information we have is another part of conflict and resolution.  
 
 ## Links
 ["Why Are We Yelling" by Buster Benson](https://www.amazon.com/Why-Are-We-Yelling-hardcover/dp/0525540105/ref=tmm_hrd_swatch_0?_encoding=UTF8&qid=1675384779&sr=8-1)  
