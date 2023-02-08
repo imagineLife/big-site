@@ -18,7 +18,7 @@ Not only does node give us the ability to run JavaScript on the server, but Node
 - **crypto** allows for hashing, ciphering, deciphering content
 - **cluster** allows for launching node while leveraging several cores of a system
 - **child_process** allows for "spawning" other processes besides the main running thread
-- **debugger** is a cli debugging utility
+- **debugger** is a cli debugging utility: see [debugging](/node/debugging)
 - **events** allow for quick-and-easy event-driven system development with "emitters" and "listeners"
 - **os** is a utility tool that can gather stats about the Operating System
 - **path** is an all-encompassing tool for dealing with files & directories and their paths
