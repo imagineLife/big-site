@@ -15,7 +15,6 @@ Not only does node give us the ability to run JavaScript on the server, but Node
 
 - **fs** gives file-system access
 - **http** & **https** gives server-creation ability
-- **crypto** allows for hashing, ciphering, deciphering content
 - **cluster** allows for launching node while leveraging several cores of a system
 - **child_process** allows for "spawning" other processes besides the main running thread
 - **debugger** is a cli debugging utility: see [debugging](/node/debugging)
