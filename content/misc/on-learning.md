@@ -29,5 +29,5 @@ Explain a nuance to someone who already knows what you're learning.
 Explain what you're learning in a "dumbed down" way to someone who will never be interested in the details.  
 
 ### Do  
-Hands-on learning is great. Idea-driven content might require some creative to turn ideas into "content".  
-Maybe make a connection between an idea and a reality: learning about the [Fundamental Attribution Error](https://online.hbs.edu/blog/post/the-fundamental-attribution-error#:~:text=The%20fundamental%20attribution%20error%20refers,factors%20outside%20of%20their%20control) as a logical fallacy? Point out to yourself and/or others when it is happening in real-time
+Make something.  
+Apply the learning knowledge somehow - this might be one of the most effective ways to make a nealy-learned detail "stick".  
