@@ -20,6 +20,7 @@ module.exports = {
     siteUrl: `https://laursen.tech`,
   },
   plugins: [
+    `gatsby-read-time-estimate`,
     `gatsby-plugin-sass`,
     {
       resolve: "gatsby-remark-embed-video",
@@ -242,7 +243,10 @@ module.exports = {
         sitemap: "https://www.laursen.tech/sitemap-index.xml",
         // { userAgent: "*", allow: "/" }
         policy: [
-          ...robots.allow.map(d => ({ userAgent: d, disallow: ["/tags/", "/tags/*"] })),
+          ...robots.allow.map(d => ({
+            userAgent: d,
+            disallow: ["/tags/", "/tags/*"],
+          })),
           { userAgent: "*", disallow: "/" },
         ],
       },

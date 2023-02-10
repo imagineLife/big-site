@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'gatsby';
 
 function TagList({tags}) {
@@ -9,12 +9,12 @@ function TagList({tags}) {
     }
 
     return (
-      <>
+      <Fragment key={t}>
         <span>
           <Link to={`/tags/${t}`}>{t}</Link>
         </span>
         {optionalEnd}
-      </>
+      </Fragment>
     )
   })}</i>)
 }

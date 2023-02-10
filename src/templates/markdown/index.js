@@ -1,8 +1,8 @@
-import React, { Fragment } from 'react';
-import { graphql } from 'gatsby';
-import './index.scss';
-import Header from './../../components/header'
-import TagList from './../../components/TagList'
+import React, { Fragment } from "react"
+import { graphql } from "gatsby"
+import "./index.scss"
+import Header from "./../../components/header"
+import TagList from "./../../components/TagList"
 
 export default function Template({
   data: {
@@ -13,15 +13,12 @@ export default function Template({
     pageSummaries: { pages },
   },
 }) {
-  
-
   /*
     get footer links
     - figure out parent dir
-  */ 
-  
+  */
 
-  let footerLinks;
+  let footerLinks
 
   // ONLY create footer links when order is explicit in frontmatter
   if (order !== null && parentDir !== null) {
@@ -33,37 +30,37 @@ export default function Template({
     //   `ORDER: ${order} - - PAGES: ${pages.length} - - - parentDir: ${parentDir}`,
     // );
 
-    footerLinks = [];
+    footerLinks = []
     // get previous, && next page details
-    let prevPage = pages[order - 1 - 1];
-    let nextPage = pages[order];
+    let prevPage = pages[order - 1 - 1]
+    let nextPage = pages[order]
 
     // FIRST page
     // show HOME dir
     if (order === 1) {
       prevPage = {
-        title: 'Start',
+        title: "Start",
         slug: parentDir,
-      };
+      }
 
-      footerLinks = [{ ...prevPage }];
+      footerLinks = [{ ...prevPage }]
       if (nextPage) {
-        footerLinks.push({ ...nextPage.details });
+        footerLinks.push({ ...nextPage.details })
       }
     }
     // LAST page
     else if (order === pages.length) {
-      footerLinks = [{ ...prevPage.details }];
+      footerLinks = [{ ...prevPage.details }]
     }
 
     //middle pages
     else {
       if (nextPage) {
-        footerLinks = [{ ...prevPage.details }, { ...nextPage.details }];
+        footerLinks = [{ ...prevPage.details }, { ...nextPage.details }]
       }
     }
   }
-  
+
   return (
     <Fragment>
       <main className={`md-wrapper${parentDir ? ` ${parentDir}` : ""}`}>
@@ -90,7 +87,6 @@ export default function Template({
               }
             })}
         </div> */}
-
       </footer>
     </Fragment>
   )
@@ -108,6 +104,10 @@ export const pgQuery = graphql`
         slug
         tags
       }
+      timeToRead
+      wordCount {
+        words
+      }
     }
     pageSummaries: allMarkdownRemark(
       sort: { frontmatter: { order: ASC } }
@@ -120,6 +120,7 @@ export const pgQuery = graphql`
           parentDir
           order
         }
+        timeToRead
       }
     }
   }
@@ -128,28 +129,46 @@ export const pgQuery = graphql`
 export function Head({
   data: {
     pageData: {
-      overview: { title, excerpt, slug },
+      overview: { title, excerpt, slug, tags },
+      timeToRead,
+      wordCount: { words }
     },
   },
 }) {
   return (
     <Fragment>
-      <title>{title || 'Jake Laursen Blog'}</title>
+      <title>{title || "Jake Laursen Blog"}</title>
       <meta name="description" content={excerpt} />
       <meta property="og:title" content={title} />
-      <meta property="og:url" content={`http://laursen.tech${slug}`} />
+      <meta property="og:url" content={`http://laursen.tech/${slug}`} />
       <script type="application/ld+json">
         {JSON.stringify({
-          '@context': 'http://laursen.tech/',
-          '@type': 'Blog',
-          name: title,
-          author: {
-            '@type': 'Person',
-            name: 'Eric (Jake) Laursen',
-          },
-          description: excerpt,
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "BlogPosting",
+              name: title,
+              author: {
+                "@type": "Person",
+                name: "Eric (Jake) Laursen",
+              },
+              description: excerpt,
+            },
+            {
+              "@type": "Article",
+              "@id":
+                `https://laursen.tech/${slug}/#article`,
+              author: {
+                name: "Jake Laursen",
+              },
+              headline: title,
+              wordCount: words,
+              keywords: tags,
+              inLanguage: "en-US",
+            },
+          ],
         })}
       </script>
     </Fragment>
-  );
+  )
 }
