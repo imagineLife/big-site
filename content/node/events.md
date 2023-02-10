@@ -19,6 +19,8 @@ order: 4
     - [removeListener](#removelistener)
     - [removeAllListeners](#removealllisteners)
   - [Error Events](#error-events)
+  - [Event Driven Architecture](#event-driven-architecture)
+    - [Some References](#some-references)
 
 This is not to be confused with the ideas involved in Event Driven Architecture.  
 Node provides the `EventEmitter` that can be used to write programs that operate with events.  
@@ -113,7 +115,7 @@ dataHandler.removeAllListeners("event-name");
 
 ## Error Events
 When an event gets emitted with an error, the error event gets triggered/emitted.  
-This is critical to NOT crash the node process: without the `.on("error", errorHandler)` written, if an event gets some sort of error during its processing, the whole node process crashes.  
+This is critical to handle and NOT crash the node process: without an error event handler written (`.on("error", errorHandler)`), the whole node process crashes. With the error event handler written, and an EventEmitter encounters an error, the node process will continue!
 
 ```js
 const { EventEmitter } = require("events");
@@ -128,3 +130,17 @@ thisTry.on("error", (err) => {
 
 thisTry.emit("error", new Error("dummy err message"));
 ```
+
+
+## Event Driven Architecture
+Again, this is a different topic.  
+Using the above `EventEmitter` in a node process is one thing.  
+Setting up a system's architecture to be driven by events is a whole other consideration.  
+Surely a node process that leverages the `EventEmitter` can be _part of_ an event-driven system.
+### Some References
+Links about event-driven-architecture
+- [microservices.io](https://microservices.io/patterns/data/event-driven-architecture.html)  
+- [microsoft](https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/event-driven)
+- [wikipedia](https://en.wikipedia.org/wiki/Event-driven_architecture)
+- [redhat](https://www.redhat.com/en/topics/integration/what-is-event-driven-architecture)
+- [martin fowler](https://martinfowler.com/articles/201701-event-driven.html)
