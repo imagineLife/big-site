@@ -36,18 +36,28 @@ const headerContactLinks = [
     to: "https://github.com/imagineLife",
     src: github,
   },
-]
+] 
+
 const Header = ({className}) => (
   <header className={`header ${className}`}>
     <Link className="styled bold" to="/">
       Home
     </Link>
     <nav>
-      {headerLinks.map(({ txt, to }, idx) => (
-        <Link key={`${txt}-header-link`} className="styled" activeClassName="current-page" to={to}>
-          {txt}
-        </Link>
-      ))}
+      {headerLinks.map(({ txt, to }, idx) => { 
+        const props = {
+          key: `${txt}-header-link`,
+            className: "styled",
+            activeClassName: "current-page",
+            to
+        }
+        if (idx === 0) props.tabindex = 0;
+        return (
+          <Link {...props}>
+            {txt}
+          </Link>
+        )
+      })}
     </nav>
     <div id="header-links-wrapper" style={{minWidth: '80px', display: 'flex'}}>
       {headerContactLinks.map(d => (
