@@ -27,7 +27,7 @@
     "title": "Docker",
     "snippet": "Sort-Of Like a virtual machine, something like a \"layer\" between software and hardware",
     "to": "/docker",
-    "image": "./sections/docker.png"
+    "image": "./sections/docker.jpg"
   },
   {
     "title": "Kubernetes",
