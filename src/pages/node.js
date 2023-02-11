@@ -34,14 +34,16 @@ const IndexPage = () => (
           <Toc sub="Topics" title="NodeJS" childrenTop>
             <section id="notes">
               <p>
-                While studying for and becoming an{' '}
+                While studying for and becoming an{" "}
                 <Link
                   target="_blank"
                   to="https://training.linuxfoundation.org/certification/verify/"
                 >
-                  OpenJS Node.js Application Developer
-                </Link>
-                through the linux foundation, I did a lot of writing - this is a brief set of notes:
+                  OpenJS Node.js Application Developer{" "}
+                </Link>{" "}
+                <i>(certificate number LF-0te91c2whv)</i>{" "}
+                through the linux foundation, I did a lot of writing - this is a
+                brief set of notes:
               </p>
             </section>
             <section id="sections-wrapper">
@@ -49,11 +51,11 @@ const IndexPage = () => (
                 (
                   resArr,
                   { overview: { title, excerpt, slug, parentDir } },
-                  idx,
+                  idx
                 ) => {
                   if (
                     parentDir &&
-                    slug.indexOf('/') === slug.lastIndexOf('/')
+                    slug.indexOf("/") === slug.lastIndexOf("/")
                   ) {
                     return [
                       ...resArr,
@@ -65,12 +67,12 @@ const IndexPage = () => (
                           className="section"
                         ></Card>
                       </Link>,
-                    ];
+                    ]
                   } else {
-                    return resArr;
+                    return resArr
                   }
                 },
-                [],
+                []
               )}
             </section>
           </Toc>
@@ -78,7 +80,7 @@ const IndexPage = () => (
           <br />
           {/* <Link to="/node/event-loop/example">Event Loop II: Examples of Events in the loop</Link> */}
         </Fragment>
-      );
+      )
     }}
   />
 );
