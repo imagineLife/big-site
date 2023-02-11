@@ -163,7 +163,7 @@ export function Head({
               },
               headline: title,
               wordCount: words,
-              keywords: tags,
+              keywords: [...tags, "blog", "blog post", "blogpost"],
               inLanguage: "en-US",
             },
           ],
