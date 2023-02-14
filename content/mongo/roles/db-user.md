@@ -4,6 +4,7 @@ parentDir: mongo/roles
 order: 1
 title: 'Roles: DB User'
 excerpt: read and readWrite
+tags: ["mongodb", "roles"]
 ---
 
 # Database User Roles

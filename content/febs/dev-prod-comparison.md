@@ -4,6 +4,7 @@ slug: febs/dev-prod-comparison
 parentDir: febs
 excerpt: How a Frontend Build System can work differently across environments
 order: 2
+tags: ["react", "server", "environments", "production", "development"]
 ---
 
 `video: [Frontend Build System: Prod Vs Dev Setup](https://youtu.be/U5ChM1R6MAc) youtube: [Frontend Build System: Prod Vs Dev Setup](https://youtu.be/U5ChM1R6MAc)`

@@ -3,6 +3,7 @@ title: Setup A react Component
 slug: fwebs/setup-a-react-component
 parentDir: febs
 order: 9999
+tags: ["react"]
 ---
 
 ## A Goal and A Strategy

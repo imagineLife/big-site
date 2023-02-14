@@ -3,6 +3,7 @@ title: Project Setup - Populate an HTML file
 slug: fwebs/populate-html
 parentDir: febs
 order: 99999
+tags: ["tooling", "frontend"]
 ---
 
 ## A Goal and A Strategy

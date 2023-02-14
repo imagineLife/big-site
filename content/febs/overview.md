@@ -4,6 +4,7 @@ slug: febs/overview
 parentDir: febs
 excerpt: A Brief overview of the tooling involved in a Frontend build System
 order: 1
+tags: ["tooling", "frontend", "build"]
 ---
 
 `video: [VideoTitle](https://youtu.be/R5JqzAij7gc) youtube: [Cool Youtube Video](https://youtu.be/R5JqzAij7gc)`

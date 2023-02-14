@@ -4,6 +4,7 @@ slug: febs/prod-server-setup
 parentDir: febs
 excerpt: Serve HTML, JS, and CSS from a Node Web Server
 order: 3
+tags: ["node", "server"]
 ---
 
 # Setting Up An HTTP Server

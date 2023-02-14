@@ -4,6 +4,7 @@ slug: fwebs/npm-setup
 parentDir: febs
 excerpt: Initialize an npm repo, install webpack, and setup a build script
 order: 3
+tags: ["npm", "dependencies", "webpack"]
 ---
 
 # Enabling Webpack Production Bundling
@@ -11,6 +12,7 @@ order: 3
 - [Enabling Webpack Production Bundling](#enabling-webpack-production-bundling)
   - [Create and Initial An Repo](#create-and-initial-an-repo)
   - [Install Webpack And Make a Build Script](#install-webpack-and-make-a-build-script)
+    - [](#)
 
 Here, we will leverage npm to initialize a project and install just enough dependencies to get webpack to consume some input and convert the input to an output directory.  
 This is how webpack is used to take developer code, in this case React code, and return browser-readable html/js/css.

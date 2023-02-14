@@ -4,6 +4,7 @@ parentDir: mongo/roles
 title: 'Role: Cluster Admin'
 excerpt: hostManager, clusterManager, clusterMonitor, and clusterAdmin
 order: 2
+tags: ["mongodb", "roles"]
 ---
 
 # Cluster Admin Roles

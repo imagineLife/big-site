@@ -4,6 +4,7 @@ slug: fwebs/setup-src
 parentDir: febs
 excerpt: Setting up the client directory to build with Webpack
 order: 4
+tags: ["tooling", "frontend"]
 ---
 
 # Setting Up A Client to Build For Production
@@ -15,8 +16,8 @@ order: 4
 - [Leverage Webpack to build static assets](#leverage-webpack-to-build-static-assets)
   - [Add a Build Script](#add-a-build-script)
     - [Build Attempt 1 - Fail](#build-attempt-1---fail)
-  - [Add Some Loaders & Parsers](#add-some-loaders--parsers)
-  - [Configure Webpack and Babel to leverage Loaders & Parses](#configure-webpack-and-babel-to-leverage-loaders--parses)
+  - [Add Some Loaders \& Parsers](#add-some-loaders--parsers)
+  - [Configure Webpack and Babel to leverage Loaders \& Parses](#configure-webpack-and-babel-to-leverage-loaders--parses)
     - [Add Babel Config File](#add-babel-config-file)
     - [Setup Webpack to Leverage Babel](#setup-webpack-to-leverage-babel)
     - [Build Attempt 2 - Success](#build-attempt-2---success)
