@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import './index.scss';
-
+import headshot from './imgs/Headshot.jpeg'
 import { Link } from 'gatsby';
 
 // Components
@@ -61,6 +61,7 @@ export function Head() {
       />
       <meta property="og:title" content="Eric Laursen" />
       <meta property="og:url" content="http://laursen.tech" />
+      <meta property="og:image" content={`https://laursen.tech/${headshot}`} />
     </Fragment>
-  );
+  )
 }

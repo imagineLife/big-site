@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, Suspense, lazy } from "react"
 import loadAndProcessData from "./load-and-process-data"
+const Map = lazy(() => import('./map'))
 export default function WorldMap() {
   const [countryData, setCountryData] = useState(null)
   useEffect(() => {
@@ -16,6 +17,11 @@ export default function WorldMap() {
   return (
     <main>
       <h1>This is a world map!</h1>
+      {countryData && (
+        <Suspense fallback={<span />}>
+          <Map countries={countryData} />
+        </Suspense>
+      )}
     </main>
   )
 }
