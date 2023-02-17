@@ -52,6 +52,7 @@ const Index = () => {
 export default Index;
 
 export function Head() {
+  const IMG_HOST = process.env.NODE_ENV === 'production'? 'https://laursen.tech' : 'localhost:8000'
   return (
     <Fragment>
       <title>Eric (Jake) Laursen</title>
@@ -61,7 +62,7 @@ export function Head() {
       />
       <meta property="og:title" content="Eric Laursen" />
       <meta property="og:url" content="http://laursen.tech" />
-      <meta property="og:image" content={`https://laursen.tech/${headshot}`} />
+      <meta property="og:image" content={`${IMG_HOST}${headshot}`} />
     </Fragment>
   )
 }
