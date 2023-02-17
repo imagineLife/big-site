@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Suspense, lazy } from "react"
-import loadAndProcessData from "./load-and-process-data"
-const Map = lazy(() => import('./map'))
+import loadAndProcessData from "../../helpers/worldMap/load-and-process-data"
+const Map = lazy(() => import('../../helpers/worldMap/map'))
 export default function WorldMap() {
   const [countryData, setCountryData] = useState(null)
   useEffect(() => {
