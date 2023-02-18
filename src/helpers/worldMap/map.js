@@ -1,10 +1,7 @@
 import React, { Fragment } from "react"
 import Legend from './legend'
 import { geoPath, geoNaturalEarth1 } from 'd3-geo';
-
-function colorVal(d) {
-  return d.properties.economy
-}
+import Country from './../../components/worldMap/country'
 
 function GlobeSphere() {
   const thisProjection = geoNaturalEarth1()
@@ -27,16 +24,12 @@ function CountryPaths({ countries, colorScale }) {
   const pathGenerator = geoPath().projection(thisProjection)
     
   return (
-    <> {countries?.map((d, idx) => { 
-      const props = {
-        className: "countryPath",
-        opacity: 1,
-        d: pathGenerator(d),
-        fill: colorScale(colorVal(d)),
-        key: `${d.id}-${d.properties.abbrev}-${idx}`,
-      }
-      return <path {...props} />
-    }) }</>
+    <>
+      {" "}
+      {countries?.map((d, idx) =>
+        <Country key={`country-${idx}`} pathGenerator={pathGenerator} colorScale={colorScale} d={d} idx={idx} />
+      )}
+    </>
   )
 }
 

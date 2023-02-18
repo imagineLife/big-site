@@ -1,0 +1,7 @@
+.countryPath{
+  opacity: 1;
+  transition: 0.2s;
+}
+.countryPath:hover{
+  opacity: .75;
+}
