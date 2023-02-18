@@ -2,11 +2,11 @@ import React, { Suspense, lazy } from "react"
 import useMapData from './../../hooks/worldMap/useMapData';
 import useColorData from "./../../hooks/worldMap/useColorData"
 const Map = lazy(() => import("../../helpers/worldMap/map"))
+const Legend = lazy(() => import("../../helpers/worldMap/legend"))
 
 function PageWrapper({ children }) {
   return (
-    <main>
-      <h1>This is a world map!</h1>
+    <main style={{backgroundColor: 'black', maxWidth: 'unset', margin: 0}}>
       {!children && <span>loading...</span>}
       {children && children}
     </main>
@@ -15,13 +15,13 @@ function PageWrapper({ children }) {
 
 export default function WorldMap() {
   const countryData = useMapData();
-  const colorData = useColorData(countryData)
-
+  const colorScale = useColorData(countryData)
+  
   return (
     <PageWrapper>
       {countryData && (
         <Suspense fallback={<span />}>
-          <Map countries={countryData} />
+          <Map countries={countryData} colorScale={colorScale} />
         </Suspense>
       )}
     </PageWrapper>
