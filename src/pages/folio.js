@@ -161,7 +161,7 @@ const certs = [
   {
     title: 'OpenJS Certified Node Application Developer',
     subText:
-      'Through the linux foundation, certified in leveraging core node apis for interacting with data streams, os modules, filesystems, and more.',
+      'Through the linux foundation, leveraging core node apis for interacting with data streams, os modules, fs handling, process flow, async...',
     textContext: 'cert no. LF-0te91c2whv',
     aLink: 'https://training.linuxfoundation.org/certification/verify/',
     techList: [
