@@ -2,24 +2,9 @@ import React, { useEffect } from "react"
 import Legend from "./legend"
 import { geoPath, geoNaturalEarth1 } from "d3-geo"
 // import { zoom } from "d3-zoom"
-import Country from "./../../components/worldMap/country"
+import CountryPaths from './../../components/worldMap/countryPaths'
 import GlobeSphere from "./../../components/worldMap/globeSphere"
 
-function CountryPaths({ countries, colorScale, pathGenerator }) {
-  return (
-    <>
-      {countries?.map((d, idx) => (
-        <Country
-          key={`country-${idx}`}
-          pathGenerator={pathGenerator}
-          colorScale={colorScale}
-          d={d}
-          idx={idx}
-        />
-      ))}
-    </>
-  )
-}
 
 export default function Map({ countries, colorScale }) {
   const thisProjection = geoNaturalEarth1()
