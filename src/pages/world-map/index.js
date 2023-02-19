@@ -21,11 +21,7 @@ export default function WorldMap() {
     <PageWrapper>
       {countryData && (
         <Suspense fallback={<span />}>
-          {/* includes 
-            - legend 
-            - GlobeSphere
-            - Countries
-          */}
+          {/* Map includes a Legend, GlobeSphere (bg), and Countries */}
           <Map countries={countryData} colorScale={colorScale} />
         </Suspense>
       )}

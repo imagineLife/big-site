@@ -5,6 +5,10 @@ function colorVal(d) {
   return d.properties.economy
 }
 
+function titleVal(d) {
+  return `${d.properties.name}: ${d.properties.economy}`
+}
+
 export default function Country({ d, idx, pathGenerator, colorScale }) {
   const props = {
     className: "countryPath",
@@ -12,5 +16,7 @@ export default function Country({ d, idx, pathGenerator, colorScale }) {
     fill: colorScale(colorVal(d)),
     key: `${d.id}-${d.properties.abbrev}-${idx}`,
   }
-  return <path {...props} />
+  return <path {...props}>
+    <title>{titleVal(d)}</title>
+    </path>
 }
