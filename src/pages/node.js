@@ -15,7 +15,8 @@ const IndexPage = () => (
     query={graphql`
       query NodeToc {
         nodeDirs: allMarkdownRemark(
-          filter: { frontmatter: { parentDir: { regex: "/node/" } } }
+          filter: { frontmatter: { parentDir: { regex: "/node$/" } } }
+          sort: { frontmatter: { order: ASC } }
         ) {
           dirs: nodes {
             overview: frontmatter {
@@ -41,9 +42,9 @@ const IndexPage = () => (
                 >
                   OpenJS Node.js Application Developer{" "}
                 </Link>{" "}
-                <i>(certificate number LF-0te91c2whv)</i>{" "}
-                through the linux foundation, I did a lot of writing - this is a
-                brief set of notes:
+                <i>(certificate number LF-0te91c2whv)</i> through the linux
+                foundation, I did a lot of writing - this is a brief set of
+                notes:
               </p>
             </section>
             <section id="sections-wrapper">
@@ -83,6 +84,6 @@ const IndexPage = () => (
       )
     }}
   />
-);
+)
 
 export default IndexPage;
