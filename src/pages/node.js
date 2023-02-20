@@ -1,7 +1,7 @@
-import React, { Fragment } from 'react';
-import { StaticQuery, graphql, Link } from 'gatsby';
-import Toc from '../components/TOC';
-import Card from '../components/Card';
+import React, { Fragment } from "react"
+import { StaticQuery, graphql, Link } from "gatsby"
+import Toc from "../components/TOC"
+import Card from "../components/Card"
 // import './mongo.scss';
 
 /*
@@ -9,7 +9,7 @@ import Card from '../components/Card';
   the pages that appear as blocks in this node "table of contents" must be ...
   - markdown
   - with parentDir as `node/<something-here>`
-*/ 
+*/
 const IndexPage = () => (
   <StaticQuery
     query={graphql`
@@ -30,6 +30,9 @@ const IndexPage = () => (
       }
     `}
     render={({ nodeDirs: { dirs } }) => {
+      console.log("dirs")
+      console.log(dirs)
+
       return (
         <Fragment>
           <Toc sub="Topics" title="NodeJS" childrenTop>
@@ -48,32 +51,17 @@ const IndexPage = () => (
               </p>
             </section>
             <section id="sections-wrapper">
-              {dirs.reduce(
-                (
-                  resArr,
-                  { overview: { title, excerpt, slug, parentDir } },
-                  idx
-                ) => {
-                  if (
-                    parentDir &&
-                    slug.indexOf("/") === slug.lastIndexOf("/")
-                  ) {
-                    return [
-                      ...resArr,
-                      <Link to={`/${slug}`} key={`node-dir-to-${slug}`}>
-                        <Card
-                          key={`node-dir-${title}`}
-                          title={title}
-                          content={excerpt}
-                          className="section"
-                        ></Card>
-                      </Link>,
-                    ]
-                  } else {
-                    return resArr
-                  }
-                },
-                []
+              {dirs.map(
+                ({ overview: { title, excerpt, slug, parentDir } }, idx) => (
+                  <Link to={`/${slug}`} key={`node-dir-to-${slug}`}>
+                    <Card
+                      key={`node-dir-${title}`}
+                      title={title}
+                      content={excerpt}
+                      className="section"
+                    ></Card>
+                  </Link>
+                )
               )}
             </section>
           </Toc>
@@ -86,4 +74,4 @@ const IndexPage = () => (
   />
 )
 
-export default IndexPage;
+export default IndexPage
