@@ -5,7 +5,7 @@ author: Jake Laursen
 excerpt: Debug in Node
 tags: ["server", "node", "javascript", "debugging"]
 parentDir: node
-order: 1
+order: 2
 ---
 
 # Debugging

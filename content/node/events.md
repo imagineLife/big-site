@@ -5,7 +5,7 @@ author: Jake Laursen
 excerpt: Events in Node are Underrated!
 tags: ["server", "node", "javascript", "events", "emitting", "listening"]
 parentDir: node
-order: 4
+order: 5
 ---
 
 # Node And Event Emitters
