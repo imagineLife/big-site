@@ -38,7 +38,7 @@ const About = () => (
             </p>
           </div>
           <div className="figure">
-            <img src={doerImg} alt="do-er"/>
+            <img src={doerImg} alt="do-er" />
           </div>
         </section>
 
@@ -209,7 +209,11 @@ const About = () => (
             <p>
               I roast coffee & I love my morning ritual of brewing myself some
               fresh-roasted coffee. Currently, I'm enjoying light-roasted beans,
-              a little beyond first crack, brewed in a Chemex.
+              just at first crack, brewed in a Chemex or a 1-Cup V60. I recently
+              purcahse the{" "}
+              <a href="https://fellowproducts.com/products/ode-brew-grinder-gen-2" target="blank">
+                Fellow Ode Gen2
+              </a> and I love it for the pour-over grinds!
             </p>
           </div>
           <div className="figure">
@@ -220,10 +224,12 @@ const About = () => (
         <section className="box">
           <div className="text">
             <h4>Links</h4>
-            <div style={{
-              display: 'flex',
-              justifyContent: 'space-around'
-            }}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-around",
+              }}
+            >
               {aboutContactLinks.map(d => (
                 <Link to={d.to} target="_blank" key={d.to}>
                   <img style={{ width: "50px" }} src={d.src} alt={d.to} />
