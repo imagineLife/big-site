@@ -131,7 +131,7 @@ export function Head({
     pageData: {
       overview: { title, excerpt, slug, tags },
       timeToRead,
-      wordCount: { words }
+      wordCount: { words },
     },
   },
 }) {
@@ -144,29 +144,18 @@ export function Head({
       <script type="application/ld+json">
         {JSON.stringify({
           "@context": "https://schema.org",
-          "@graph": [
-            {
-              "@type": "BlogPosting",
-              name: title,
-              author: {
-                "@type": "Person",
-                name: "Eric (Jake) Laursen",
-              },
-              description: excerpt,
-            },
-            {
-              "@type": "Article",
-              "@id":
-                `https://laursen.tech/${slug}/#article`,
-              author: {
-                name: "Jake Laursen",
-              },
-              headline: title,
-              wordCount: words,
-              keywords: [...tags, "blog", "blog post", "blogpost"],
-              inLanguage: "en-US",
-            },
-          ],
+          "@type": "BlogPosting",
+          name: title,
+          author: {
+            "@type": "Person",
+            name: "Eric (Jake) Laursen",
+            url: "http://laursen.tech/about",
+          },
+          description: excerpt,
+          headline: title,
+          wordCount: words,
+          keywords: [...tags, "blog", "blog post", "blogpost"],
+          inLanguage: "en-US",
         })}
       </script>
     </Fragment>
