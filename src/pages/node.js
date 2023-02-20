@@ -46,8 +46,7 @@ const IndexPage = () => (
                   OpenJS Node.js Application Developer{" "}
                 </Link>{" "}
                 <i>(certificate number LF-0te91c2whv)</i> through the linux
-                foundation, I did a lot of writing - this is a brief set of
-                notes:
+                foundation, I did a lot of writing
               </p>
             </section>
             <section id="sections-wrapper">
