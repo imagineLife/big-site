@@ -1,9 +1,9 @@
 import React, { useEffect } from "react"
-import Legend from "../../components/worldMap/legend"
+import Legend from "./legend"
 import { geoPath, geoNaturalEarth1 } from "d3-geo"
 // import { zoom } from "d3-zoom"
-import CountryPaths from './../../components/worldMap/countryPaths'
-import GlobeSphere from "./../../components/worldMap/globeSphere"
+import CountryPaths from './countryPaths'
+import GlobeSphere from "./globeSphere"
 
 function SvgWrapper({ children, legend, colorScale }) {
   const svgProps = {

@@ -7,8 +7,8 @@ export default function GlobeSphere({pathGenerator}) {
   const props = {
     className: "globeSpherePath",
     d: spherePath,
-    opacity: 1,
-    fill: "darkblue",
+    opacity: .25,
+    fill: "dodgerblue",
   }
   return <path {...props}></path>
 }
