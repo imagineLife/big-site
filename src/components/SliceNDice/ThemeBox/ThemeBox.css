@@ -2,7 +2,12 @@
   width: 40%;
   display: inline-block;
   max-height: 350px;
-  border-image: linear-gradient(to bottom, 
+  -o-border-image: linear-gradient(to bottom, 
+    transparent 10%,
+    rgb(80,80,80) 10% 85%, 
+    transparent 85% 100%
+  ) 1 / 2px;
+     border-image: linear-gradient(to bottom, 
     transparent 10%,
     rgb(80,80,80) 10% 85%, 
     transparent 85% 100%
@@ -11,8 +16,30 @@
   border-width: 1px;
 }
 
+/* width */
+#theme-box::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+#theme-box::-webkit-scrollbar-track {
+  background: rgb(49,54,61); /* page background rgb(29,34,41);  */
+}
+ 
+/* Handle */
+#theme-box::-webkit-scrollbar-thumb {
+  background: rgb(69,74,81); 
+}
+
+/* Handle on hover */
+#theme-box::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+
 .theme-title{
-  border-image: var(--bottom-narrow);
+  -o-border-image: var(--bottom-narrow);
+     border-image: var(--bottom-narrow);
   padding-bottom: 10px;
   border-width: 1px;
   border-style: solid;
@@ -22,9 +49,9 @@
   text-align: center;
 }
 
-#theme-list-box{
+/* #theme-list-box{ */
   /*overflow-y: auto;*/
-}
+/* } */
 
 .theme-list{
   margin-top: 20px;
@@ -32,27 +59,6 @@
   line-height: 2;
   max-height: 216px;
   overflow-y: auto;
-}
-
-
-/* width */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: rgb(49,54,61); /* page background rgb(29,34,41);  */
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: rgb(69,74,81); 
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555; 
 }
 
 .theme-list::-webkit-scrollbar {
