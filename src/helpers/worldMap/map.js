@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import Legend from "./legend"
+import Legend from "../../components/worldMap/legend"
 import { geoPath, geoNaturalEarth1 } from "d3-geo"
 // import { zoom } from "d3-zoom"
 import CountryPaths from './../../components/worldMap/countryPaths'
