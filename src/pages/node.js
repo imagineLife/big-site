@@ -36,19 +36,6 @@ const IndexPage = () => (
       return (
         <Fragment>
           <Toc sub="Topics" title="NodeJS" childrenTop>
-            <section id="notes">
-              <p>
-                While studying for and becoming an{" "}
-                <Link
-                  target="_blank"
-                  to="https://training.linuxfoundation.org/certification/verify/"
-                >
-                  OpenJS Node.js Application Developer{" "}
-                </Link>{" "}
-                <i>(certificate number LF-0te91c2whv)</i> through the linux
-                foundation, I did a lot of writing
-              </p>
-            </section>
             <section id="sections-wrapper">
               {dirs.map(
                 ({ overview: { title, excerpt, slug, parentDir } }, idx) => (
@@ -63,6 +50,20 @@ const IndexPage = () => (
                 )
               )}
             </section>
+
+            <section id="notes">
+              <sub>
+                <Link
+                  target="_blank"
+                  to="https://training.linuxfoundation.org/certification/verify/"
+                >
+                  OpenJS Node.js Application Developer
+                </Link>{" "}
+                certification 
+                <i>(number LF-0te91c2whv)</i>.
+              </sub>
+            </section>
+
           </Toc>
           {/* <Link to="/node/event-loop/overview">Event Loop I: An Overview</Link> */}
           <br />

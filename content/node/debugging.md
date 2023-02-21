@@ -2,10 +2,10 @@
 title: Debugging
 slug: node/debugging
 author: Jake Laursen
-excerpt: Debug in Node
+excerpt: An overview of Node's Built-In tooling for debugging
 tags: ["server", "node", "javascript", "debugging"]
 parentDir: node
-order: 2
+order: 3
 ---
 
 # Debugging

@@ -5,7 +5,7 @@ author: Jake Laursen
 excerpt: 
 tags: ["server", "node", "event loop", "blocking", "single thread"]
 parentDir: node
-order: 4
+order: 5
 ---
 
 # Blocking The Event Loop
