@@ -51,7 +51,7 @@ const Header = ({className}) => (
             activeClassName: "current-page",
             to
         }
-        if (idx === 0) props.tabindex = 0;
+        if (idx === 0) props.tabIndex = 0;
         return (
           <Link {...props}>
             {txt}
@@ -61,13 +61,13 @@ const Header = ({className}) => (
     </nav>
     <div id="header-links-wrapper" style={{minWidth: '80px', display: 'flex'}}>
       {headerContactLinks.map(d => (
-        <Link to={d.to} target="_blank" key={d.to} style={{
+        <a to={d.to} target="_blank" key={d.to} style={{
           margin: 'auto',
           height: '20px',
           width: '20px',
         }}>
           <img style={{ width: "20px", height: '20px' }} src={d.src} alt={d.to} />
-        </Link>
+        </a>
       ))}
     </div>
   </header>
