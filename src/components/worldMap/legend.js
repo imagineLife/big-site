@@ -1,6 +1,16 @@
 import React from 'react';
+import './legend.css';
 
-export default function Legend({ colorScale }) {
+function LegendItem({gProps, circleProps, textProps, text}) { 
+  return (
+    <g {...gProps} className="legend-item">
+      <circle {...circleProps} />
+      <text {...textProps}>{text}</text>
+    </g>
+  )
+}
+
+export default function Legend({ colorScale, itemClick, selectedLegendItem }) {
   const legendProps = {
     className: "legendBox",
     x: 5,
@@ -11,12 +21,18 @@ export default function Legend({ colorScale }) {
     rx: 25,
     ry: 25,
   }
-
+  
   return (
     <>
       <rect {...legendProps} />
       <g className="colorLegendG" transform="translate(25,325)">
         {colorScale.domain().map((itm, idx) => {
+          const itemOpacity =
+            !selectedLegendItem ||
+            (selectedLegendItem && selectedLegendItem === itm)
+              ? 1
+              : 0.25
+          
           const gProps = {
             x: -10 * 2,
             y: -10 * 2,
@@ -24,12 +40,9 @@ export default function Legend({ colorScale }) {
             // width: backgroundRectWidth,
             height: 25 * colorScale.domain().length + 10 * 2,
             fill: "white",
-            opacity: 0.8,
             className: "tick",
             transform: `translate(0, ${idx * 25})`,
-            // opacity: d => {
-            //   return !selectedLegendVal || d === selectedLegendVal ? 1 : 0.25
-            // },
+            opacity: itemOpacity,
           }
 
           const circleProps = {
@@ -37,6 +50,7 @@ export default function Legend({ colorScale }) {
             strokeOpacity: 0.5,
             r: 10,
             fill: colorScale.range()[idx],
+            onClick: () => itemClick(itm),
           }
 
           const textProps = {
@@ -45,13 +59,18 @@ export default function Legend({ colorScale }) {
             fontSize: ".4em",
             fill: "#635F5D",
             fontFamily: "sans-serif",
+            opacity: itemOpacity,
+            onClick: () => itemClick(itm),
           }
 
           return (
-            <g key={`legend-item-${idx}`} {...gProps} className="legend-item">
-              <circle {...circleProps} />
-              <text {...textProps}>{colorScale.domain()[idx]}</text>
-            </g>
+            <LegendItem
+              key={`legend-item-${idx}`}
+              gProps={gProps}
+              circleProps={circleProps}
+              textProps={textProps}
+              text={colorScale.domain()[idx]}
+            />
           )
         })}
       </g>
