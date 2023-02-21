@@ -263,7 +263,7 @@ const folioItems = [
     subText:
       'Zoom, toggle, & hover in this map of the countries of the world categorically colored by their GNI per capita.',
     imgClass: 'world-map-bg',
-    aLink: 'https://imaginelife.github.io/worldMap/',
+    aLink: '/world-map',
     techList: [
       'D3',
       'Mapping',
