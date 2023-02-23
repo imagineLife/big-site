@@ -1,8 +1,8 @@
 import React, { Suspense, lazy } from "react"
-import useMapData from './../../hooks/worldMap/useMapData';
-import useColorData from "./../../hooks/worldMap/useColorData"
-const Map = lazy(() => import("../../components/worldMap/map"))
-const Legend = lazy(() => import("../../components/worldMap/legend"))
+import useMapData from '../../../hooks/worldMap/useMapData';
+import useColorData from "../../../hooks/worldMap/useColorData"
+const Map = lazy(() => import("../../../components/worldMap/map"))
+const Legend = lazy(() => import("../../../components/worldMap/legend"))
 
 function PageWrapper({ children }) {
   return (

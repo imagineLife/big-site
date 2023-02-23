@@ -6,7 +6,7 @@ import { getQueriedWord } from "./../../lib/getQueriedWord"
 import { getSentences } from '../../lib/stats';
 import reducer from './reducer'
 import textRes from "./../../fullText.txt"
-import themeRes from "../../../../pages/slice-n-dice-times/themesArrSlim.json"
+import themeRes from "../../../../helpers/themesArrSlim.json"
 
 const TextAreaContext = createContext();
 const { Provider, Consumer } = TextAreaContext;
