@@ -180,6 +180,29 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           }
         }
       }
+      nginx: allMarkdownRemark(
+        sort: { frontmatter: { order: ASC } }
+        filter: {
+          frontmatter: {
+            order: { gt: 0 }
+            slug: { regex: "/nginx/" }
+            title: { ne: null }
+          }
+        }
+      ) {
+        pages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              excerpt
+              tags
+              parentDir
+              order
+            }
+          }
+        }
+      }
       node: allMarkdownRemark(
         sort: { frontmatter: { order: ASC } }
         filter: {
@@ -278,6 +301,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       misc: { pages: miscPages },
       mongo: { pages: mongoPages },
       mongosectioncontent: { pages: mongoSectionContent },
+      nginx: { pages: nginxPages },
       node: { pages: nodePages },
       scrum: { pages: scrumPages },
       socials: { pages: socialPages },
@@ -301,6 +325,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     ...linuxPages,
     ...miscPages,
     ...mongoPages,
+    ...nginxPages,
     ...nodePages,
     ...mongoSectionContent,
     ...scrumPages,
