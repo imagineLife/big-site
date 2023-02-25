@@ -46,10 +46,11 @@ const IndexPage = () => (
           <Hero />
           <Layout>
             <section className="toc-wrapper">
-              <h1>NginX</h1>
+              <h1>nginx</h1>
               <h2 title="Thanks to Hussein Nasser for sparking some curiosity here!">
                 Getting Started
               </h2>
+              <p>More to come here...</p>
             </section>
           </Layout>
         </Fragment>
