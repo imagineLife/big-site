@@ -12,13 +12,14 @@ function SvgWrapper({
   legendItemClick,
   selectedLegendItem,
 }) {
+
   const svgProps = {
     height: "100vh",
-    width: " 100%",
+    width: "1000vw",
     fontSize: " 32pt",
-    fontFamily: " sans-serif",
+    fontFamily: "sans-serif",
   }
-
+  
   return (
     <svg className="svgWrapper" {...svgProps}>
       <g className="map-g" pointerEvents={"all"}>
@@ -47,12 +48,6 @@ export default function Map({ countries, colorScale }) {
   useEffect(() => {
     console.log("Map ue onLoad")
   }, [])
-  const svgProps = {
-    height: "100vh",
-    width: "1000vw",
-    fontSize: " 32pt",
-    fontFamily: "sans-serif",
-  }
 
   function legendItemClick(d) {
     if (selectedClassification === null || selectedClassification !== d) { 
