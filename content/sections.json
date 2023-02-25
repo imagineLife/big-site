@@ -36,6 +36,12 @@
     "image": "./sections/k8s.jpg"
   },
   {
+    "title": "NginX",
+    "snippet": "The Web server, Proxy, Reverse Proxy, Load Balancer...",
+    "to": "/nginx",
+    "image": "./sections/nginx.jpg"
+  },
+  {
     "title": "Life",
     "snippet": "On Personality, Our Natural Talents, On Conflict, Decision Making...",
     "to": "/the-social-world",
