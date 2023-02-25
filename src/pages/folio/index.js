@@ -132,6 +132,21 @@ const technologies = [
     subText: "All-In-One SaaS Workflow Management & Code Integration",
     imgClass: `gitlab-bg`,
   },
+  {
+    title: "Docker",
+    subText: "Abstracting-Away the OS",
+    imgClass: `docker-bg`,
+  },
+  {
+    title: "Kubernetes",
+    subText: "Orchestrating Containers",
+    imgClass: `k8s-bg`,
+  },
+  {
+    title: "Bash",
+    subText: "The Shell",
+    imgClass: `bash-bg`,
+  },
 ]
 /*
     ADD:
@@ -210,6 +225,22 @@ const folioItems = [
     imgClass: "slice-n-dice-bg",
   },
   {
+    title: "WEO Country Categories Mapped",
+    subText:
+      "Zoom, toggle, & hover in this map of the countries of the world categorically colored by their GNI per capita.",
+    imgClass: "world-map-bg",
+    aLink: "/world-map",
+    techList: [
+      "D3",
+      "Mapping",
+      "GeoJSON (topJSON)",
+      "JavaScript",
+      "HTML",
+      "CSS",
+      "Data Visualization",
+    ],
+  },
+  {
     title: "Mastering D3v5",
     subText:
       "An online course I created covering D3v5, interactive mapping, linked visualizations, 3rd party api integration & more.",
@@ -256,22 +287,6 @@ const folioItems = [
       "HTML",
       "JS",
       "CSS",
-    ],
-  },
-  {
-    title: "WEO Country Categories Mapped",
-    subText:
-      "Zoom, toggle, & hover in this map of the countries of the world categorically colored by their GNI per capita.",
-    imgClass: "world-map-bg",
-    aLink: "/world-map",
-    techList: [
-      "D3",
-      "Mapping",
-      "GeoJSON (topJSON)",
-      "JavaScript",
-      "HTML",
-      "CSS",
-      "Data Visualization",
     ],
   },
   {
