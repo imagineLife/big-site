@@ -1,8 +1,7 @@
 import React, {
-  useReducer, useState, useEffect, createContext,
+  useReducer, useEffect, createContext,
 } from 'react';
 import * as arr from 'd3-array';
-import { getQueriedWord } from "./../../lib/getQueriedWord"
 import { getSentences } from '../../lib/stats';
 import reducer from './reducer'
 import textRes from "./../../fullText.txt"

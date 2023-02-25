@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import './ThemeBox.css';
 
 import { TextAreaContext } from './../../../components/SliceNDice/Contexts/TextArea';
@@ -50,7 +50,7 @@ const ThemeBox = () => {
 						  <li
 						    key={`theme-item-${thisTheme}-${idx}`}
 						    onClick={() => {
-						      if (thisTheme == theme) {
+						      if (thisTheme === theme) {
 						        textAreaDispatch({ type: 'THEME', payload: null });
 						      } else {
 						        textAreaDispatch({ type: 'THEME', payload: thisTheme });
@@ -59,7 +59,7 @@ const ThemeBox = () => {
 						    className="theme-li"
   >
 						    {<span className="theme-word">{thisTheme}</span>}
-						    {thisTheme == theme && <span style={{ backgroundColor: curColor }} className="selected-underline" />}
+						    {thisTheme === theme && <span style={{ backgroundColor: curColor }} className="selected-underline" />}
   </li>
 						))
           }

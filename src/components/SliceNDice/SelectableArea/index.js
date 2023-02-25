@@ -8,7 +8,7 @@ import './index.css';
 
 import { TextAreaContext } from './../../../components/SliceNDice/Contexts/TextArea';
 
-const SelectableArea = ({ onMove, dims }) => {
+const SelectableArea = ({ dims }) => {
 
   const {
     sentences,
@@ -33,8 +33,6 @@ const SelectableArea = ({ onMove, dims }) => {
       type: "UPDATE_DISPLAY_TEXT_FROM_AREA",
       payload: [scaledBegin, scaledEnd],
     })
-
-    // onMove([scaledBegin, scaledEnd]);
   }
 
   /*

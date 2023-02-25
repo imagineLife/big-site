@@ -34,8 +34,6 @@ const updateDisplayText = (sentenceArr, selectedSentenceArr) => {
 };
 
 const reducer = (state, {type, payload}) => {
-  let resText;
-  
   switch (type) {
     case DONE_FETCHING_TEXT: 
     return{
