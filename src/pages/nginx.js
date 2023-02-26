@@ -3,7 +3,7 @@ import { StaticQuery, graphql } from 'gatsby';
 
 import Layout from './../components/layout';
 import Hero from './../components/hero';
-// import createLinksWithType from "./../components/createLinksWithType"
+import createLinksWithType from "./../components/createLinksWithType"
 // import './scrum.scss';
 
 /*
@@ -50,6 +50,7 @@ const IndexPage = () => (
               <h2 title="Thanks to Hussein Nasser for sparking some curiosity here!">
                 Getting Started
               </h2>
+              {pages.map(createLinksWithType({ thisType: "nginx" }))}
               <p>More to come here...</p>
             </section>
           </Layout>
