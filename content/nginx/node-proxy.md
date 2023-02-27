@@ -1,22 +1,21 @@
 ---
 title: Running a Reverse Proxy
 parentDir: /nginx
-slug: /nginx/reverse-proxy
+slug: nginx/reverse-proxy
 author: Jake Laursen
 excerpt: A replicated node server and a reverse proxy
 tags: ["nginx", "reverse proxy", "node", "docker", "containers"]
 order: 2
 ---
 
+(_these are rough working notes - read at your own risk for now!_)
 
 NGINX
-- 3 containers
+- 4 containers
   - nginx as webserver
-  - 1x node as express api
-  - 1x node as express api
-  - put it all in docker, with a docker-compose file
+  - 3x node as express api
 
-To-DO
+To-Do
 - build a node/express server
 - test it in a browser
 - build a dockerfile for the node app
