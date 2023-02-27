@@ -1,7 +1,7 @@
 ---
 title: "nginx: an intro from a web-first perspective"
 parentDir: /nginx
-slug: /nginx/nginx-intro
+slug: nginx/nginx-intro
 author: Jake Laursen
 excerpt: What It Does And How It Can Fit In A Tech Stack
 tags: ["nginx", "server"]
