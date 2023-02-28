@@ -21,7 +21,7 @@ const IndexPage = () => (
           filter: {
             frontmatter: {
               order: { gt: 0 }
-              slug: { regex: "/^nginx/" }
+              parentDir: { regex: "/nginx/" }
               title: { ne: null }
             }
           }
