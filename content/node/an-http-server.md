@@ -1,10 +1,10 @@
 ---
 title: "HTTP Server I: Trivial Servers"
-slug: node/http-server
+slug: node/http/intro
 author: Jake Laursen
 excerpt: Probably one of the most prominent use-cases of node
 tags: ["server", "node", "javascript", "http", "express"]
-parentDir: node
+parentDir: node/http
 order: 7
 ---
 

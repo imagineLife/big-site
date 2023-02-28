@@ -3,16 +3,16 @@ title: Running a Reverse Proxy
 parentDir: /nginx
 slug: nginx/reverse-proxy
 author: Jake Laursen
-excerpt: A replicated node server and a reverse proxy
+excerpt: 3 node servers and a round-robin style load-balancer
 tags: ["nginx", "reverse proxy", "node", "docker", "containers"]
 order: 2
 ---
 
 (_these are rough working notes - read at your own risk for now!_)
 
-NGINX
+The system with docker
 - 4 containers
-  - nginx as webserver
+  - nginx as the reverse proxy 
   - 3x node as express api
 
 To-Do
