@@ -30,9 +30,6 @@ const IndexPage = () => (
       }
     `}
     render={({ nodeDirs: { dirs } }) => {
-      console.log("dirs")
-      console.log(dirs)
-
       return (
         <Fragment>
           <Toc sub="Topics" title="NodeJS" childrenTop>
