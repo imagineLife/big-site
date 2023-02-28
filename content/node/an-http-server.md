@@ -1,5 +1,5 @@
 ---
-title: Building An Http Server
+title: "HTTP Server I: Trivial Servers"
 slug: node/http-server
 author: Jake Laursen
 excerpt: Probably one of the most prominent use-cases of node
