@@ -74,11 +74,17 @@ CMD node index.js
 ```
 
 ### Verify The Node Server
-To test the node server without docker...
+To test the node server without docker and just node on your machine
 - run `npm i` in the `node-server` directory
 - run `node .` in the `node-server` directory
 - use a browser & enter the url `localhost:8080`
 - the browser should return the "Hello from (the name of your machine)"
+
+To test the node server with docker
+- build an image by running `docker build -t node-server .` in the `node-server` directory
+- run the image as a container with `docker run -d -rm --name node-box -p 8080:8080 node-server`
+- use a browser & enter the url `localhost:8080`
+- the browser should return the "Hello from (the name of the docker "host", which is probably a bit of garbly-gook to look at)"
 
 
 To-Do
