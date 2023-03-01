@@ -10,13 +10,78 @@ order: 2
 
 (_these are rough working notes - read at your own risk for now!_)
 
-The system with docker
-- 4 containers
-  - nginx as the reverse proxy 
-  - 3x node as express api
+## The Goals
+This will create a system where nginx acts as a reverse-proxy that passes requests along to some web servers.  
+There will be 3 web-servers, all clones of each other. Nginx passes requests along, as a load-balancer, with nginx's default "round-robin" approach - continuously "rotating" requests between the web servers.    
+The web servers are skeleton node http servers.  
+The web servers and the nginx instance will all run in docker.  
+
+- [The Goals](#the-goals)
+- [The Node Server](#the-node-server)
+  - [Build The Node Server](#build-the-node-server)
+  - [Build A Dockerfile](#build-a-dockerfile)
+  - [Verify The Node Server](#verify-the-node-server)
+
+## The Node Server
+### Build The Node Server
+Here, a little node+express server.  
+
+The directory and file:
+```bash
+mkdir node-server
+cd node-server 
+touch index.js
+
+npm init -y
+```
+
+The Javascript file:
+```js
+const e = require("express")
+const expObj = e()
+const { hostname } = require("os")
+const THIS_HOST = hostname()
+const PORT = process.env.API_PORT || 8080
+function rootHandler(req, res) {
+  return res.send(`Hello from ${THIS_HOST}!`)
+}
+expObj.get("/", rootHandler)
+const api_server = expObj.listen(PORT, () => console.log(`app running on ${PORT} on ${THIS_HOST}`));
+
+process.on('SIGTERM', () => {
+  console.log('SIGTERM signal received: closing HTTP server');
+  api_server.close(() => {
+    console.log('express server closed');
+  });
+});
+```
+
+### Build A Dockerfile
+```dockerfile
+FROM node:18-slim
+
+# workdir - here, where the app will run
+WORKDIR /node-api
+
+# From the sibling app dir on the host to the docker image workdir
+COPY app /node-api
+
+# command to run during the image build process
+RUN npm i
+
+# command to run during container run
+CMD node index.js
+```
+
+### Verify The Node Server
+To test the node server without docker...
+- run `npm i` in the `node-server` directory
+- run `node .` in the `node-server` directory
+- use a browser & enter the url `localhost:8080`
+- the browser should return the "Hello from (the name of your machine)"
+
 
 To-Do
-- build a node/express server
 - test it in a browser
 - build a dockerfile for the node app
 - use the dockerfile to build an image
@@ -41,42 +106,7 @@ To-Do
   - `docker network connect nx-lb nodeapp3`
   -  `docker run --name nxproxy --hostname ng1 -p 8081:8081 --network nx-lb -v $PWD/nginx.conf:/etc/nginx/nginx.conf nginx:alpine`
 
-```bash
-mkdir app
-touch index.js
-```
 
-```js
-const e = require('express')
-const expObj = e()
-const { hostname } = require('os')
-const THIS_HOST = hostname();
-function rootHandler(req,res){
-  return res.send(`Hello from ${THIS_HOST}!`)
-}
-expObj.get('/',rootHandler)
-expObj.listen(8080, () => console.log(`app running on 8080 on `,THIS_HOST))
-```
-
-```bash
-npm init -y
-```
-
-```dockerfile
-FROM node:18-slim
-
-# workdir - here, where the app will run
-WORKDIR /home/node/api
-
-# From the sibling app dir on the host to the docker image workdir
-COPY app /home/node/api/
-
-# command to run during the image build process
-RUN npm i
-
-# command to run during container run
-CMD node index.js
-```
 
 ```bash
 # build it
