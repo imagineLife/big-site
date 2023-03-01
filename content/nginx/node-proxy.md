@@ -21,6 +21,10 @@ The web servers and the nginx instance will all run in docker.
   - [Build The Node Server](#build-the-node-server)
   - [Build A Dockerfile](#build-a-dockerfile)
   - [Verify The Node Server](#verify-the-node-server)
+  - [Verify The Node Server In Docker](#verify-the-node-server-in-docker)
+- [The NGINX Load-Balancer](#the-nginx-load-balancer)
+  - [Build the Nginx config](#build-the-nginx-config)
+- [Other To-Do](#other-to-do)
 
 ## The Node Server
 ### Build The Node Server
@@ -80,19 +84,52 @@ To test the node server without docker and just node on your machine
 - use a browser & enter the url `localhost:8080`
 - the browser should return the "Hello from (the name of your machine)"
 
+### Verify The Node Server In Docker
 To test the node server with docker
 - build an image by running `docker build -t node-server .` in the `node-server` directory
 - run the image as a container with `docker run -d -rm --name node-box -p 8080:8080 node-server`
 - use a browser & enter the url `localhost:8080`
 - the browser should return the "Hello from (the name of the docker "host", which is probably a bit of garbly-gook to look at)"
 
+## The NGINX Load-Balancer 
+### Build the Nginx config
+[nginx docs](https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/) have a great write-up on load-balancing with nginx, including notes on...
+- [**http context**](https://nginx.org/en/docs/http/ngx_http_upstream_module.html?&_ga=2.250182340.397332022.1677686402-1818721733.1677362332#upstream): where the http server conf (_directive_) is specified
+- [**upstream**](https://nginx.org/en/docs/http/ngx_http_upstream_module.html?&_ga=2.250182340.397332022.1677686402-1818721733.1677362332#upstream): defining a group of servers and naming them
+- [**server**](https://nginx.org/en/docs/http/ngx_http_upstream_module.html?&_ga=2.47280741.397332022.1677686402-1818721733.1677362332#server) _inside the "upstream" block here_: defines an address for each server - the port is optional and when not present defaults to `80`. this can have more config details (_hope to cover elsewhere_)
+  - [**server**](https://nginx.org/en/docs/http/ngx_http_core_module.html#server) as the server block, configuring a "virtual server"
+- [**listen**](https://nginx.org/en/docs/http/ngx_http_core_module.html#listen): where to "listen" 
+- [**location**](https://nginx.org/en/docs/http/ngx_http_core_module.html#location): request-url-specific config settings
+- [**proxy_pass**](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass): the url (protocol+address) of the server that gets proxied _to_
+Here's the nginx config:
+```text
+# the context here: http context
+http {
 
-To-Do
-- test it in a browser
-- build a dockerfile for the node app
-- use the dockerfile to build an image
-- run the image as a container
-  - `docker run -p 8080:8080 -d node-for-nx`
+  # defaults to a "round-robin" method for load balancing across servers
+  # here, the servers are named "nodebackend"
+  upstream nodebackend {
+
+    server nodeapp1:8080;
+    server nodeapp2:8080;
+    server nodeapp3:8080;
+
+  }
+
+  server {
+    listen 8080;
+    location / {
+      
+      proxy_pass http://nodebackend/;
+    }
+  }
+}
+
+# can set things like maximum-worker-connections...
+events {}
+```
+
+## Other To-Do
 - write an nginx config 
   - a load balancer between 3 instances of the node app
   -  listen on port 8080 from the "outside"
