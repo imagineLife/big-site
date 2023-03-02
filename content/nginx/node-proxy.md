@@ -159,3 +159,5 @@ Also, these containers do not expose ports! These containers will only "talk to"
 
 ### The NGINX container
 -  `docker run --name nxproxy --hostname ng1 -p 8081:8081 --network nxnet -v $PWD/nginx.conf:/etc/nginx/nginx.conf nginx:alpine`
+
+Note the volume mount: the config file made earlier gets mounted to the [default location in the container](https://hub.docker.com/_/nginx), `/etc/nginx/nginx.conf`.  
