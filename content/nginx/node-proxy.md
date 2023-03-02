@@ -30,6 +30,7 @@ The web servers and the nginx instance will all run in docker.
 - [Run And Connect All Of the Containers](#run-and-connect-all-of-the-containers)
   - [3x the node app](#3x-the-node-app)
   - [The NGINX container](#the-nginx-container)
+- [Test The Setup](#test-the-setup)
 
 ## The Node Server
 ### Build The Node Server
@@ -109,7 +110,7 @@ To test the node server with docker
 - [**upstream**](https://nginx.org/en/docs/http/ngx_http_upstream_module.html?&_ga=2.250182340.397332022.1677686402-1818721733.1677362332#upstream): defining a group of servers and naming them
 - [**server**](https://nginx.org/en/docs/http/ngx_http_upstream_module.html?&_ga=2.47280741.397332022.1677686402-1818721733.1677362332#server) _inside the "upstream" block here_: defines an address for each server - the port is optional and when not present defaults to `80`. this can have more config details (_hope to cover elsewhere_)
   - [**server**](https://nginx.org/en/docs/http/ngx_http_core_module.html#server) as the server block, configuring a "virtual server"
-- [**listen**](https://nginx.org/en/docs/http/ngx_http_core_module.html#listen): where to "listen" 
+- [**listen**](https://nginx.org/en/docs/http/ngx_http_core_module.html#listen): where to "listen" for requests
 - [**location**](https://nginx.org/en/docs/http/ngx_http_core_module.html#location): request-url-specific config settings
 - [**proxy_pass**](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass): the url (protocol+address) of the server that gets proxied _to_
 Here's the nginx config:
@@ -128,7 +129,8 @@ http {
   }
 
   server {
-    listen 8080;
+    # here, listening on port 8081
+    listen 8081;
     location / {
       
       proxy_pass http://nodebackend/;
@@ -139,15 +141,17 @@ http {
 # can set things like maximum-worker-connections...
 events {}
 ```
+The nginx config is setup to listen on port 8081 and round-robin balance the requests to 3 different apps: nodeapp1 on port 8080, nodeapp2 on port 8080, and nodeapp3 on port 8080.  
+
 ## Build a Docker Network
 In order for the containers to be able to "talk to" each other, they all will get put on the same network. Here, this network will be called `nxnet`: `docker network create nxnet`.
 
 ## Run And Connect All Of the Containers
 ### 3x the node app
 This showcase one nice detail of working with docker: spinning up 3 node apis from the same image:
--  `docker run --hostname nodeapp1 --network nxnet name nodeapp1 -d nodebox`
--  `docker run --hostname nodeapp2 --network nxnet name nodeapp2 -d nodebox`
--  `docker run --hostname nodeapp2 --network nxnet name nodeapp3 -d nodebox`
+-  `docker run --hostname nodeapp1 --network nxnet name nodeapp1 --env API_PORT=8080 -d nodebox`
+-  `docker run --hostname nodeapp2 --network nxnet name nodeapp2 --env API_PORT=8080 -d nodebox`
+-  `docker run --hostname nodeapp2 --network nxnet name nodeapp3 --env API_PORT=8080 -d nodebox`
 
 The above commands include the `--network nxnet` flag.  
 Containers can be started without that flag and later joined to a network...
@@ -161,3 +165,8 @@ Also, these containers do not expose ports! These containers will only "talk to"
 -  `docker run --name nxproxy --hostname ng1 -p 8081:8081 --network nxnet -v $PWD/nginx.conf:/etc/nginx/nginx.conf nginx:alpine`
 
 Note the volume mount: the config file made earlier gets mounted to the [default location in the container](https://hub.docker.com/_/nginx), `/etc/nginx/nginx.conf`.  
+
+## Test The Setup
+use a browser and go to `localhost:8081`.  
+This will connect to nginx, which passes the request, round-robin, to the 3 instances of the node api.  
+The UI should show `Hello from ______`, with 3 different values rotating. This illustrates that nginx is having the 3 instances of the node server "handle" the requests and responses.  
