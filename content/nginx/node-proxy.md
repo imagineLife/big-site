@@ -20,11 +20,16 @@ The web servers and the nginx instance will all run in docker.
 - [The Node Server](#the-node-server)
   - [Build The Node Server](#build-the-node-server)
   - [Build A Dockerfile](#build-a-dockerfile)
+  - [Run The Docker Image](#run-the-docker-image)
+    - [Not Exposed with Bash and Curl](#not-exposed-with-bash-and-curl)
   - [Verify The Node Server](#verify-the-node-server)
   - [Verify The Node Server In Docker](#verify-the-node-server-in-docker)
 - [The NGINX Load-Balancer](#the-nginx-load-balancer)
   - [Build the Nginx config](#build-the-nginx-config)
-- [Other To-Do](#other-to-do)
+- [Build a Docker Network](#build-a-docker-network)
+- [Run And Connect All Of the Containers](#run-and-connect-all-of-the-containers)
+  - [3x the node app](#3x-the-node-app)
+  - [The NGINX container](#the-nginx-container)
 
 ## The Node Server
 ### Build The Node Server
@@ -62,7 +67,7 @@ process.on('SIGTERM', () => {
 
 ### Build A Dockerfile
 ```dockerfile
-FROM node:18-slim
+FROM node:18
 
 # workdir - here, where the app will run
 WORKDIR /node-api
@@ -73,9 +78,15 @@ COPY app /node-api
 # command to run during the image build process
 RUN npm i
 
-# command to run during container run
-CMD node index.js
+# NOTE: entrypoint OVER CMD to pass along process signals to the node process!
+ENTRYPOINT [ "node", "index.js" ]
 ```
+
+### Run The Docker Image
+Here are a few ways to run the image as a container:
+
+#### Not Exposed with Bash and Curl
+- run the image as a container with 
 
 ### Verify The Node Server
 To test the node server without docker and just node on your machine
@@ -86,8 +97,8 @@ To test the node server without docker and just node on your machine
 
 ### Verify The Node Server In Docker
 To test the node server with docker
-- build an image by running `docker build -t node-server .` in the `node-server` directory
-- run the image as a container with `docker run -d -rm --name node-box -p 8080:8080 node-server`
+- build an image by running `docker build -t nodebox .` in the `node-server` directory
+- run the image as a container with `docker run -d -rm --name node-box -p 8080:8080 nodebox`
 - use a browser & enter the url `localhost:8080`
 - the browser should return the "Hello from (the name of the docker "host", which is probably a bit of garbly-gook to look at)"
 
@@ -128,33 +139,23 @@ http {
 # can set things like maximum-worker-connections...
 events {}
 ```
+## Build a Docker Network
+In order for the containers to be able to "talk to" each other, they all will get put on the same network. Here, this network will be called `nxnet`: `docker network create nxnet`.
 
-## Other To-Do
-- write an nginx config 
-  - a load balancer between 3 instances of the node app
-  -  listen on port 8080 from the "outside"
--  create a docker network to run a bunch of containers on
-   -  OVERVIEW of containers -
-      -  nginx
-      -  3 instances of a simple node api
-   -  `docker network create nx-lb`
--  run the node app in 3x containers
-  -  NOTE the hostnames of the nodeapp instances must match the written hostnames in the nginx config
-  -  `docker run --hostname nodeapp1 name nodeapp1 -d node-for-nx`
-  -  `docker run --hostname nodeapp2 name nodeapp2 -d node-for-nx`
-  -  `docker run --hostname nodeapp2 name nodeapp2 -d node-for-nx`
-- connect the 3 node apps to the network
-  - `docker network connect nx-lb nodeapp1`
-  - `docker network connect nx-lb nodeapp2`
-  - `docker network connect nx-lb nodeapp3`
-  -  `docker run --name nxproxy --hostname ng1 -p 8081:8081 --network nx-lb -v $PWD/nginx.conf:/etc/nginx/nginx.conf nginx:alpine`
+## Run And Connect All Of the Containers
+### 3x the node app
+This showcase one nice detail of working with docker: spinning up 3 node apis from the same image:
+-  `docker run --hostname nodeapp1 --network nxnet name nodeapp1 -d nodebox`
+-  `docker run --hostname nodeapp2 --network nxnet name nodeapp2 -d nodebox`
+-  `docker run --hostname nodeapp2 --network nxnet name nodeapp3 -d nodebox`
+
+The above commands include the `--network nxnet` flag.  
+Containers can be started without that flag and later joined to a network...
+- create a container in one command: `docker run --hostname nodeapp4 name nodeapp4 -d nodebox`
+- join the network in another command: `docker network connect nxnet nodeapp4`
+
+Also, these containers do not expose ports! These containers will only "talk to" the nginx container, and the nginx container will be accessible from the host machine.  
 
 
-
-```bash
-# build it
-docker build -t nodeapp .
-
-# run it
-docker run -p 8081:8080 --hostname node-one -d nodeapp
-```
+### The NGINX container
+-  `docker run --name nxproxy --hostname ng1 -p 8081:8081 --network nxnet -v $PWD/nginx.conf:/etc/nginx/nginx.conf nginx:alpine`
