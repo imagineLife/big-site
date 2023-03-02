@@ -1,5 +1,6 @@
 ---
 title: MongoDB Table View of Permissions and Roles
+parentDir: /mongo/roles
 slug: mongo/roles/table-view
 author: Jake Laursen
 excerpt: DB, permissions, roles
