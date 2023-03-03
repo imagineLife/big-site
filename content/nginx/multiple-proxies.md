@@ -1,9 +1,9 @@
 ---
-title: Two Nginx Load-Balancers Across Two Ports
+title: Two Load-Balancers Across Two Ports
 parentDir: /nginx
 slug: nginx/multiple-proxies
 author: Jake Laursen
-excerpt: Here, 8 node servers behind 2 nginx instances - 4 node servers per nginx proxy
+excerpt: Here, 6 node servers behind 2 nginx instances - 3 node servers per nginx proxy
 tags: ["nginx", "reverse proxy", "node", "docker", "containers", "load balancer"]
 order: 3
 ---

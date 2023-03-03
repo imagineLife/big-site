@@ -1,5 +1,5 @@
 ---
-title: "nginx: an intro from a web-first perspective"
+title: "NGINX: An intro from a web-first perspective"
 parentDir: /nginx
 slug: nginx/nginx-intro
 author: Jake Laursen
