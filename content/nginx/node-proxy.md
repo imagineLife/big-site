@@ -4,11 +4,9 @@ parentDir: /nginx
 slug: nginx/reverse-proxy
 author: Jake Laursen
 excerpt: 3 node servers and a round-robin style load-balancer
-tags: ["nginx", "reverse proxy", "node", "docker", "containers"]
+tags: ["nginx", "reverse proxy", "node", "docker", "containers", "load balancer"]
 order: 2
 ---
-
-(_these are rough working notes - read at your own risk for now!_)
 
 ## The Goals
 This will create a system where nginx acts as a reverse-proxy that passes requests along to some web servers.  
@@ -152,7 +150,7 @@ In order for the containers to be able to "talk to" each other, they all will ge
 This showcase one nice detail of working with docker: spinning up 3 node apis from the same image:
 -  `docker run --hostname nodeapp1 --network nxnet name nodeapp1 --env API_PORT=8080 -d nodebox`
 -  `docker run --hostname nodeapp2 --network nxnet name nodeapp2 --env API_PORT=8080 -d nodebox`
--  `docker run --hostname nodeapp2 --network nxnet name nodeapp3 --env API_PORT=8080 -d nodebox`
+-  `docker run --hostname nodeapp3 --network nxnet name nodeapp3 --env API_PORT=8080 -d nodebox`
 
 The above commands include the `--network nxnet` flag.  
 Containers can be started without that flag and later joined to a network...
