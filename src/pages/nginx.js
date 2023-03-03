@@ -65,7 +65,7 @@ export function Head() {
   return (
     <Fragment>
       <title>Nginx Blog</title>
-      <meta name="description" content="A Set Of Blog Posts Reviewing NginX" />
+      <meta name="description" content="A Set Of Blog Posts Reviewing Nginx" />
       <meta property="og:title" content="Nginx Blog" />
       <meta property="og:url" content="http://laursen.tech/nginx" />
     </Fragment>

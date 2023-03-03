@@ -52,7 +52,7 @@ Additional details, "intelligence", to monitor the cluster for new definitions o
 ### Options for the Controllers
 A number of solutions exist:
 - GCE
-- NginX
+- Nginx
 - Contour
 - HaProxy
 - Traefik
