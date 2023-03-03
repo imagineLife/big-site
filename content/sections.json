@@ -36,7 +36,7 @@
     "image": "./sections/k8s.jpg"
   },
   {
-    "title": "NginX",
+    "title": "Nginx",
     "snippet": "The Web server, Proxy, Reverse Proxy, Load Balancer...",
     "to": "/nginx",
     "image": "./sections/nginx.jpg"
