@@ -31,6 +31,7 @@ The web servers and the nginx instance will all run in docker.
   - [3x the node app](#3x-the-node-app)
   - [The NGINX container](#the-nginx-container)
 - [Test The Setup](#test-the-setup)
+- [Compose For A Different Approach](#compose-for-a-different-approach)
 
 ## The Node Server
 ### Build The Node Server
@@ -169,4 +170,15 @@ Note the volume mount: the config file made earlier gets mounted to the [default
 ## Test The Setup
 use a browser and go to `localhost:8081`.  
 This will connect to nginx, which passes the request, round-robin, to the 3 instances of the node api.  
-The UI should show `Hello from ______`, with 3 different values rotating. This illustrates that nginx is having the 3 instances of the node server "handle" the requests and responses.  
+The UI should show `Hello from ______`.  
+Refreshing the page should show "rotating" values in the `Hello from ______` - 3 different values.   
+This rotation of values illustrates that nginx is having the 3 instances of the node server "handle" the requests and responses, as the 3 rotating values represent the 3 "hosts" of each docker container.  
+
+
+## Compose For A Different Approach
+Docker compose can change how this gets put together:
+- in the cli versions above...
+  - A PRO: there are no "artifacts" - no files, no documents, no stored port numbers or app names - that is unless you "store" all of the cli commands needed to run each container, spin up the network, etc.
+  - A CON: without artifacts, there are no "static" references to the details
+- in docker-compose
+  - A PRO: all "config" for the containers and the network are stored in the docker-compose file! 1 file with all the deets
