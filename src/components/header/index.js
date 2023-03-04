@@ -61,7 +61,7 @@ const Header = ({className}) => (
     </nav>
     <div id="header-links-wrapper" style={{minWidth: '80px', display: 'flex'}}>
       {headerContactLinks.map(d => (
-        <a to={d.to} target="_blank" key={d.to} style={{
+        <a href={d.to} target="_blank" key={d.to} style={{
           margin: 'auto',
           height: '20px',
           width: '20px',
