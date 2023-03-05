@@ -3,6 +3,7 @@ import { graphql } from "gatsby"
 import "./index.scss"
 import Header from "./../../components/header"
 import TagList from "./../../components/TagList"
+import PageHead from "./../../components/PageHead"
 
 export default function Template({
   data: {
@@ -136,28 +137,14 @@ export function Head({
   },
 }) {
   return (
-    <Fragment>
-      <title>{title || "Jake Laursen Blog"}</title>
-      <meta name="description" content={excerpt} />
-      <meta property="og:title" content={title} />
-      <meta property="og:url" content={`http://laursen.tech/${slug}`} />
-      <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "BlogPosting",
-          name: title,
-          author: {
-            "@type": "Person",
-            name: "Eric (Jake) Laursen",
-            url: "http://laursen.tech/about",
-          },
-          description: excerpt,
-          headline: title,
-          wordCount: words,
-          keywords: [...tags, "blog", "blog post", "blogpost"],
-          inLanguage: "en-US",
-        })}
-      </script>
-    </Fragment>
+    <PageHead
+      {...{
+        title,
+        excerpt,
+        slug,
+        words,
+        tags,
+      }}
+    />
   )
 }
