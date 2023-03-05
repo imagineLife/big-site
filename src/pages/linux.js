@@ -4,6 +4,7 @@ import { StaticQuery, graphql, Link } from 'gatsby';
 import Layout from './../components/layout';
 import Hero from './../components/hero';
 import createLinksWithType from "./../components/createLinksWithType"
+import PageHead from "./../components/PageHead"
 import './scrum.scss';
 
 /*
@@ -67,14 +68,11 @@ export default IndexPage;
 
 export function Head() {
   return (
-    <Fragment>
-      <title>Linux & Bash Blog</title>
-      <meta
-        name="description"
-        content="A Blog on Learning A Little Bit of Linux and Bash"
-      />
-      <meta property="og:title" content="Linux & Bash Blog" />
-      <meta property="og:url" content="http://laursen.tech/linux" />
-    </Fragment>
+     <PageHead {...{
+      title: "Linux & Bash Blog",
+      excerpt: "A Blog on Learning A Bit of Linux and Bash",
+      slug: 'linux',
+      tags: ["bash","cli","linux","os","scripting"]
+    }} />
   );
 }

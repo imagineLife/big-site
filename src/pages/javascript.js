@@ -3,7 +3,7 @@ import { StaticQuery, graphql, Link } from "gatsby"
 
 import Layout from "../components/layout"
 import Hero from "../components/hero"
-import createLinksWithType from "../components/createLinksWithType"
+import PageHead from "./../components/PageHead"
 import "./scrum.scss"
 
 /*
@@ -59,11 +59,11 @@ const IndexPage = () => (
 export default IndexPage
 export function Head() {
   return (
-    <Fragment>
-      <title>JavaScript Blog</title>
-      <meta name="description" content="A Blog on JavaScript" />
-      <meta property="og:title" content="JavaScript Blog" />
-      <meta property="og:url" content="http://laursen.tech/javascript" />
-    </Fragment>
+    <PageHead {...{
+      title: "Javascript Blog",
+      excerpt: "A Blog on Learning JavaScript",
+      slug: 'javascropt',
+      tags: ["javascript"]
+    }} />
   )
 }

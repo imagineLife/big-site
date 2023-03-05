@@ -3,6 +3,7 @@ import { StaticQuery, graphql } from 'gatsby';
 
 import Layout from './../components/layout';
 import Hero from './../components/hero';
+import PageHead from "./../components/PageHead"
 import createLinksWithType from './../components/createLinksWithType';
 // import './scrum.scss';
 
@@ -86,11 +87,11 @@ const IndexPage = () => (
 export default IndexPage;
 export function Head() {
   return (
-    <Fragment>
-      <title>Docker Blog</title>
-      <meta name="description" content="A Blog on Learning Docker" />
-      <meta property="og:title" content="Docker Blog" />
-      <meta property="og:url" content="http://laursen.tech/docker" />
-    </Fragment>
+    <PageHead {...{
+      title: "Docker Blog",
+      excerpt: "A Blog on Learning Docker",
+      slug: 'docker',
+      tags: ["docker", "containers"]
+    }} />
   );
 }

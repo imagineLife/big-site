@@ -4,6 +4,7 @@ import { StaticQuery, graphql } from 'gatsby';
 import Layout from './../components/layout';
 import Hero from './../components/hero';
 import createLinksWithType from "./../components/createLinksWithType"
+import PageHead from "./../components/PageHead"
 import './scrum.scss';
 
 /*
@@ -79,11 +80,11 @@ const IndexPage = () => (
 export default IndexPage;
 export function Head() {
   return (
-    <Fragment>
-      <title>Kubernetes Blog</title>
-      <meta name="description" content="A Blog on Learning Kubernetes" />
-      <meta property="og:title" content="Kubernetes Blog" />
-      <meta property="og:url" content="http://laursen.tech/k8s" />
-    </Fragment>
+    <PageHead {...{
+      title: "Kubernetes Blog",
+      excerpt: "A Blog on Learning Kubernetes",
+      slug: 'k8s',
+      tags: ["k8s","orchestration", "deployments", "pods", "replicaSets", "yaml", "containers"]
+    }} />
   );
 }
