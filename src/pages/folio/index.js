@@ -163,6 +163,20 @@ const certs = [
     subText: "Through Linux Foundation",
     textContext: "cert no. LF-2jtyhllngl",
     // aLink: 'https://university.mongodb.com/certification/certificate/330208369',
+    aLink: "https://training.linuxfoundation.org/certification/verify/",
+    techList: [
+      "Kubernetes",
+      "Orchestration",
+      "Containers",
+      "Networking",
+      "Debugging",
+    ],
+    imgClass: `k8s-cert-bg`,
+  },
+  {
+    title: "MongoDB Certified Developer Associate",
+    subText: "Through mongodb university",
+    textContext: "cert no. 330208369",
     aLink:
       "https://university.mongodb.com/certified_professional_finder/certified_professionals/793573?name=laursen",
     techList: [
@@ -172,20 +186,6 @@ const certs = [
       "Indexes and Performance",
       "Replication",
       "Sharding",
-    ],
-    imgClass: `k8s-cert-bg`,
-  },
-  {
-    title: "MongoDB Certified Developer Associate",
-    subText: "Through mongodb university",
-    textContext: "cert no. 330208369",
-    aLink: "https://training.linuxfoundation.org/certification/verify/",
-    techList: [
-      "Kubernetes",
-      "Orchestration",
-      "Containers",
-      "Networking",
-      "Debugging"
     ],
     imgClass: `mongo-cert-bg`,
   },

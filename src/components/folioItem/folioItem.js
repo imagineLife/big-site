@@ -30,11 +30,11 @@ export default function FolioItem({
               className="open"
             ></a>
           )}
-          <ul>
+          {/* <ul>
             {techList?.map((itm, itmIdx) => (
               <li key={`tech-list-${title}-${itmIdx}`}>{itm}</li>
             ))}
-          </ul>
+          </ul> */}
         </div>
       </div>
     </div>
