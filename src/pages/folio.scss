@@ -293,6 +293,12 @@ section.welcome * {
   Box bg images
 */
 
+
+div.k8s-cert-bg {
+  background-image: url('./../../images/imgs/k8s_cert_badge.png');
+  background-size: contain;
+}
+
 div.mongo-cert-bg {
   background-image: url('./../../images/imgs/mongoDB.png');
   background-size: contain;
@@ -302,6 +308,7 @@ div.node-cert-bg {
   background-image: url('./../../images/imgs/node-cert.png');
   background-size: contain;
 }
+
 
 div.psmi-bg {
   background-image: url('./../../images/imgs/psmiBadge.png');
