@@ -1,4 +1,4 @@
-import React, { Fragment } from "react"
+import React from "react"
 import "./../folio.scss"
 import FolioItem from "./../../components/folioItem"
 import TechList from "./../../components/techList"
