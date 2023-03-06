@@ -2,6 +2,7 @@ import React, { Fragment } from "react"
 import "./../folio.scss"
 import FolioItem from "./../../components/folioItem"
 import TechList from "./../../components/techList"
+import PageHead from "./../../components/PageHead"
 import { Link } from "gatsby"
 
 const techs = {
@@ -396,14 +397,13 @@ export default function Folio() {
 
 export function Head() {
   return (
-    <Fragment>
-      <title>Eric (Jake) Laursen Portfolio</title>
-      <meta
-        name="description"
-        content="Come check out some examples of webapps, and some writing about tech, personality, team development, and more!"
+    <PageHead
+      {...{
+        title: "Eric (Jake) Laursen Portfolio",
+        excerpt: "Some examples of webapps, some writing about tech, personality, team development, and more",
+        slug: "folio",
+        tags: ["portfolio", "about"],
+      }}
       />
-      <meta property="og:title" content="Jake (Eric) Laursen Portfolio" />
-      <meta property="og:url" content="http://laursen.tech" />
-    </Fragment>
   )
 }
