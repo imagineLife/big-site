@@ -7,7 +7,7 @@ import Header from './../header';
 const Layout = ({ children }) => (
   <Fragment>
     <Header />
-    <main>{children}</main>
+    {children}
   </Fragment>
 );
 
