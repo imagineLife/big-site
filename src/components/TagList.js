@@ -9,12 +9,12 @@ function TagList({tags}) {
     }
 
     return (
-      <Fragment key={t}>
-        <span>
+      <div key={t} role="list">
+        <span role="listitem">
           <Link to={`/tags/${t}`}>{t}</Link>
         </span>
         {optionalEnd}
-      </Fragment>
+      </div>
     )
   })}</i>)
 }

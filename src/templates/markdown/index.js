@@ -67,7 +67,7 @@ export default function Template({
       <main className={`md-wrapper${parentDir ? ` ${parentDir}` : ""}`}>
         <Header className="md" />
         <TagList tags={tags} />
-        <section dangerouslySetInnerHTML={{ __html: content }}></section>
+        <section dangerouslySetInnerHTML={{ __html: content }} role="article"></section>
       </main>
       <footer className="md-footer">
         {/* <div id="link-wrapper">
