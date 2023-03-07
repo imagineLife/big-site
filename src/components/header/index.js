@@ -39,11 +39,11 @@ const headerContactLinks = [
 ] 
 
 const Header = ({className}) => (
-  <header className={`header ${className}`}>
-    <Link className="styled bold" to="/">
+  <header aria-label="Primary" className={`header ${className}`}>
+    <Link className="styled bold" to="/" aria-label="Homepage">
       Home
     </Link>
-    <nav>
+    <nav aria-label="Global Navigation">
       {headerLinks.map(({ txt, to }, idx) => { 
         const props = {
           key: `${txt}-header-link`,
