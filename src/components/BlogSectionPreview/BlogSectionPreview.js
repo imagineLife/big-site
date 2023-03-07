@@ -20,7 +20,7 @@ function BlogSectionPreview({
           image={gatsbyImageData}
         />
       )}
-      <div className="text image-overlay">
+      <div className="text image-overlay" aria-details={`${title}: ${snippet}`}>
         <h1>{title || 'Title Here'}</h1>
         <p className="animate-text">{snippet || 'snippet goes here'}</p>
       </div>
