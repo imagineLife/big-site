@@ -1,6 +1,7 @@
 import React from "react"
 import "./../folio.scss"
 import FolioItem from "./../../components/folioItem"
+import CertItem from "./../../components/certItem"
 import TechList from "./../../components/techList"
 import PageHead from "./../../components/PageHead"
 import { Link } from "gatsby"
@@ -389,7 +390,7 @@ export default function Folio() {
       <h2>Certifications</h2>
       <section id="certs-wrapper">
         {certs.map((itm, itmIdex) => (
-          <FolioItem key={`folio-item-${itmIdex}`} {...itm} />
+          <CertItem key={`folio-item-${itmIdex}`} {...itm} />
         ))}
       </section>
 
