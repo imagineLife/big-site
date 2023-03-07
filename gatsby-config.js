@@ -157,7 +157,16 @@ module.exports = {
               })
             },
             query: `{
-              allMarkdownRemark(sort: {frontmatter: {order: DESC}}) {
+              allMarkdownRemark(sort: {
+                  frontmatter: {
+                    order: DESC
+                  }
+                }
+                filter: {
+                  frontmatter: {
+                    title: {ne: ""}
+                  }
+                }) {
                 nodes {
                   excerpt
                   html
@@ -247,7 +256,10 @@ module.exports = {
             userAgent: d,
             disallow: ["/tags/", "/tags/*"],
           })),
-          { userAgent: "*", disallow: "/" },
+          ...robots.allowGoogleBots.map(d => ({
+            userAgent: d,
+            disallow: "",
+          })),
         ],
       },
     },
