@@ -67,5 +67,11 @@ module.exports = {
     "yoozBot",
     "YoudaoBot",
   ],
-  disallow: ["*"],
+  allowGoogleBots: [
+    "Googlebot",
+    "Googlebot-Image",
+    "Googlebot-Mobile",
+    "Googlebot-News",
+    "Googlebot-Video",
+  ],
 }
