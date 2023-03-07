@@ -26,7 +26,7 @@ const Index = () => {
     <Fragment>
       <Hero windowWidth={windowSize?.width} />
       <Layout>
-        <main className="centered">
+        <main className="centered" role="region">
           <section className="flex-row flex-center flex-wrap">
             {sections.map((blogSection, rowIdx) => (
               <BlogSectionPreview
