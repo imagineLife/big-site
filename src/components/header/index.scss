@@ -40,11 +40,21 @@ header {
       margin-right: 0;
     }
   }
+
+  div#header-links-wrapper{
+    display: none;
+  }
 }
 
 div.mermaid{
   svg{
     height: auto;
+  }
+}
+
+@media only screen and (min-width: 460px) {
+  header div#header-links-wrapper{
+      display: flex;
   }
 }
 

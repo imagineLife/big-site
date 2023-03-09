@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'gatsby';
 import linkedIn from './../../pages/about/linkedin.svg';
 import github from "./../../pages/about/github.svg"
+import './index.scss';
 
 const headerLinks = [
   {
@@ -59,7 +60,7 @@ const Header = ({className}) => (
         )
       })}
     </nav>
-    <div id="header-links-wrapper" style={{minWidth: '80px', display: 'flex'}}>
+    <div id="header-links-wrapper" style={{minWidth: '80px'}}>
       {headerContactLinks.map(d => (
         <a href={d.to} target="_blank" key={d.to} style={{
           margin: 'auto',
