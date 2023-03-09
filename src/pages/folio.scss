@@ -801,7 +801,7 @@ div.caption li:last-child::after {
           transition: transform 0.6s, opacity 0.6s;
           opacity: 0;
           transform: translateY(15px);
-          width: 400px;
+          max-width: 400px;
         }
       }
 
