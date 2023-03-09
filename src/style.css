@@ -38,7 +38,7 @@
   --fontWeight-normal: 400;
   --fontWeight-bold: 700;
   --fontWeight-black: 900;
-  --fontSize-root: 16px;
+  --fontSize-root: 14px;
   --lineHeight-none: 1;
   --lineHeight-tight: 1.1;
   --lineHeight-normal: 1.5;
@@ -341,5 +341,11 @@ a:focus {
   ul,
   ol {
     list-style-position: inside;
+  }
+}
+
+@media (min-width: 480px){
+  html {
+    font-size: 18px;
   }
 }
