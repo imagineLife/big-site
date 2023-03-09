@@ -143,6 +143,12 @@ main.folio {
   display: inline-block;
 }
 
+#projects-wrapper {
+  div.box {
+    background-size: cover;
+  }
+}
+
 #certs-wrapper{
   display: flex;
   flex-wrap: wrap;
