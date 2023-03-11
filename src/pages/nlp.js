@@ -1,55 +1,34 @@
-import React from "react"
+import React, { useState, useRef } from "react"
 import "./nlp.scss"
 import DragDDropFile from "../components/DragNDropForm"
 
-function loadFile(e) {
-  // this is the original contents
-  // const contents = e.target.result
-  console.log('this')
-  console.log(this)
-  
-  const ct = this.result.replace(/\n/g, "")
-  // const words = ct.split(" ")
-  console.log("ct")
-  console.log(ct)
-  console.timeEnd("fileReader")
-}
-
-function handleFile(files) {
-  console.time("fileReader")
-
-  let theFile = files[0]
-  const reader = new FileReader()
-  reader.onload = loadFile
-  reader.readAsText(theFile)
-}
-
 // drag drop file component
 function DragDropFile() {
-  // drag state
-  const [dragActive, setDragActive] = React.useState(false)
   // ref
-  const inputRef = React.useRef(null)
+  const inputRef = useRef(null)
 
-  // handle drag events
-  const handleDrag = function (e) {
-    e.preventDefault()
-    e.stopPropagation()
-    if (e.type === "dragenter" || e.type === "dragover") {
-      setDragActive(true)
-    } else if (e.type === "dragleave") {
-      setDragActive(false)
-    }
+  const [loadedFileData, setLoadedFileData] = useState(null)
+  console.log('Boolean(loadedFileData)')
+  console.log(Boolean(loadedFileData))
+  
+  
+  function handleFile(files) {
+    let theFile = files[0]
+    const reader = new FileReader()
+    reader.onload = loadFile
+    reader.readAsText(theFile)
   }
 
-  // triggers when file is dropped
-  const handleDrop = function (e) {
-    e.preventDefault()
-    e.stopPropagation()
-    setDragActive(false)
-    if (e?.dataTransfer.files[0]) {
-      handleFile(e.dataTransfer.files)
-    }
+  function loadFile(e) {
+    // this is the original contents
+    // const contents = e.target.result
+
+    // replace new-line with no space
+    const ct = this.result.replace(/\n/g, "")
+
+    // const words = ct.split(" ")
+
+    setLoadedFileData(ct)
   }
 
   // triggers the input when the button is clicked
@@ -59,10 +38,8 @@ function DragDropFile() {
 
   return (
     <DragDDropFile
-      handleDrag={handleDrag}
-      handleDrop={handleDrop}
+      setLoaded={setLoadedFileData}
       onButtonClick={onButtonClick}
-      dragActive={dragActive}
       ref={inputRef}
       handleFile={handleFile}
     />

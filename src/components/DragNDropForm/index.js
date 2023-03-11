@@ -1,13 +1,32 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useState } from 'react';
 
 export default forwardRef(function DragDDropFile({
-  handleDrag,
-  dragActive,
   onButtonClick,
-  handleDrop,
-  handleFile
+  handleFile,
+  setLoaded
 }, ref) {
-  
+  // drag state
+  const [dragActive, setDragActive] = useState(false)
+
+  const handleDrag = function (e) {
+    e.preventDefault()
+    e.stopPropagation()
+    if (e.type === "dragenter" || e.type === "dragover") {
+      setDragActive(true)
+    } else if (e.type === "dragleave") {
+      setDragActive(false)
+    }
+  }
+
+  const handleDrop = function (e) {
+    e.preventDefault()
+    e.stopPropagation()
+    setDragActive(false)
+    if (e?.dataTransfer.files[0]) {
+      handleFile(e.dataTransfer.files, setLoaded)
+    }
+  }
+
   // triggers when file is selected with click
   const handleChange = function (e) {
     e.preventDefault()
