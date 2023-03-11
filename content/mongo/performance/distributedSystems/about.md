@@ -87,5 +87,5 @@ After querying the `mongos` instance, the query is sent to the designated shards
 
 [Aggregation on Sharded Clusters](/mongo/performance/distributed-systems/agg-on-shareded-clusters)  
 [Reading From Secondary Nodes](/mongo/performance/distributed-systems/reading-from-secondaries)  
-[Secondary Nodes with different indexes](mongo/performance/distributed-systems/repl-sets-diff-indexes)  
+[Secondary Nodes with different indexes](/mongo/performance/distributed-systems/repl-sets-diff-indexes)  
 [Notes on Sharding and Write Performance Optimization](/mongo/performance/distributed-systems/shard-writing)
