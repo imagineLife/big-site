@@ -44,7 +44,7 @@ const Header = ({className}) => (
     <Link className="styled bold" to="/" aria-label="Homepage">
       Home
     </Link>
-    <nav aria-label="Global Navigation">
+    <nav aria-label="Primary">
       {headerLinks.map(({ txt, to }, idx) => { 
         const props = {
           key: `${txt}-header-link`,
