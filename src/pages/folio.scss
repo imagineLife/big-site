@@ -152,6 +152,10 @@ main.folio {
 #certs-wrapper{
   display: flex;
   flex-wrap: wrap;
+
+  .box{
+    min-width: 300px;
+  }
 }
 
 h1 {
@@ -531,11 +535,9 @@ div.box:hover p.overlay-text {
     bottom: 15px;
     margin-top: 300px;
     padding: 15px;
-    color: white;
     width: 100%;
 
     a {
-      color: white;
       transition: border 250ms;
       border-style: double;
       border: none;
