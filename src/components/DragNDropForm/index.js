@@ -39,7 +39,6 @@ export default forwardRef(function DragDDropFile({
     <form onDragEnter={handleDrag} onSubmit={e => e.preventDefault()}>
       <input ref={ref} type="file" multiple={true} onChange={handleChange} />
       <label
-        htmlFor="input-file-upload"
         className={dragActive ? "drag-active" : ""}
       >
         <div>
