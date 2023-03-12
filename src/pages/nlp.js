@@ -1,18 +1,70 @@
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, useEffect } from "react"
+// import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
 import "./nlp.scss"
 import DragDDropFile from "../components/DragNDropForm"
+import Card from "../components/Card";
+function ResetPreviewForm({ reset, content }) {
+  return (
+    <section id="reset-preview">
+      <form>
+        <button type="button" onClick={() => reset()}>
+          Start Over
+        </button>
+      </form>
+      <figure>
+        <p>{content}</p>
+      </figure>
+    </section>
+  )
+}
 
-// drag drop file component
-function DragDropFile() {
-  // ref
+function TextAnalysis({textContent, reset}) {
+  return (
+    <section id="text-analysis">
+      <ResetPreviewForm reset={() => reset()} content={textContent} />
+      <Card>Words-PerSentence Line</Card>
+      <Card>Sentence Sentiment Score Line</Card>
+    </section>
+  )
+}
+
+
+
+export default function Nlp() {
   const inputRef = useRef(null)
-
   const [loadedFileData, setLoadedFileData] = useState(null)
-  console.log('Boolean(loadedFileData)')
-  console.log(Boolean(loadedFileData))
+  // const apiRes = useNlpApi(loadedFileData);
   
+  useEffect(() => { 
+    // console.log('Object.keys(process.env)')
+    // console.log(Object.keys(process.env))
+    // console.log('THIS: ',process.env.GATSBY_NLP_API_URL)
+    
+    
+    // fetch(process.env.GATSBY_NLP_API_URL).then(res => {
+    //   res
+    //     .json()
+    //     .then(d => {
+    //       console.log("d")
+    //       console.log(d)
+    //     })
+    //     .catch(e => {
+    //       console.log("FETCH ERROR")
+    //       console.log(e)
+    //     })
+    // })
+
+    return () => { 
+      console.log(
+        "%c useEffect NLP cleanup....",
+        "background-color: pink; color: black;"
+      )
+      
+      
+    }
+  },[])
   
-  function handleFile(files) {
+  function readWithFileReader(files) {
     let theFile = files[0]
     const reader = new FileReader()
     reader.onload = loadFile
@@ -20,8 +72,7 @@ function DragDropFile() {
   }
 
   function loadFile(e) {
-    // this is the original contents
-    // const contents = e.target.result
+    // original form contents acessible at e.target.result
 
     // replace new-line with no space
     const ct = this.result.replace(/\n/g, "")
@@ -37,20 +88,26 @@ function DragDropFile() {
   }
 
   return (
-    <DragDDropFile
-      setLoaded={setLoadedFileData}
-      onButtonClick={onButtonClick}
-      ref={inputRef}
-      handleFile={handleFile}
-    />
-  )
-}
-
-export default function Nlp() {
-  return (
     <section id="nlp-wrapper">
       <h2>NLP Here</h2>
-      <DragDropFile />
+      <sub><a href="/">go to my website</a></sub>
+      {/* no text data yet */}
+      {loadedFileData === null && (
+        <DragDDropFile
+          setLoaded={setLoadedFileData}
+          onButtonClick={onButtonClick}
+          ref={inputRef}
+          handleFile={readWithFileReader}
+        />
+      )}
+
+      {/* text data present */}
+      {loadedFileData !== null && (
+        <TextAnalysis
+          reset={() => setLoadedFileData(null)}
+          textContent={loadedFileData}
+        />
+      )}
     </section>
   )
 }
