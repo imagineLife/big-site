@@ -20,6 +20,7 @@
     "d3-selection": "^3.0.0",
     "d3-shape": "^3.2.0",
     "d3-zoom": "^3.0.0",
+    "dotenv": "^16.0.3",
     "gatsby": "^5.3.3",
     "gatsby-background-image": "^1.6.0",
     "gatsby-plugin-feed": "^5.3.1",
