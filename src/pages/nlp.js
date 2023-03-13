@@ -78,8 +78,20 @@ function ResetPreviewForm({ reset, content, fileType }) {
   )
 }
 
-function fetchTextAnalysis() {
-  return Promise.resolve('jake test')
+function fetchTextAnalysis(text) {
+  const SENTIMENT_PATH = "/nlp/sentiment"
+  return () => fetch(`${process.env.GATSBY_NLP_API_URL}${SENTIMENT_PATH}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ text }),
+  })
+    .then(d => d.json().then(d => d))
+    .catch(e => {
+      console.log("fetch error")
+      console.log(e)
+    })
   // return fetch(``)
 }
 
@@ -87,12 +99,17 @@ function TextAnalysis({ fileData, reset, fileType }) {
   // Access the client
   const nlpQueryClient = useQueryClient()
 
+  const useQOpts = {
+    enabled: !!fileData,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+    staleTime: Infinity,
+  }
   // Queries
-  const query = useQuery("textAnalysis", fetchTextAnalysis, {
-    enabled: !!fileData
-  })
+  const query = useQuery("textAnalysis", fetchTextAnalysis(fileData), useQOpts)
 
-  console.log('query')
+  console.log("query")
   console.log(query)
 
   return (
@@ -140,7 +157,7 @@ export default function Nlp() {
   const [state, dispatch] = useReducer(nlpReducer, initialReducerState)
   // const apiRes = useNlpApi(loadedFileData);
 
-  function excelOnLoad(e) {
+  function loadExcelFile(e) {
     const data = e.target.result
     const workbook = XLSX.read(data, {
       type: "binary",
@@ -160,15 +177,17 @@ export default function Nlp() {
   function readWithFileReader(files) {
     let theFile = files[0]
     const reader = new FileReader()
-
+    // console.log('theFile')
+    // console.log(theFile.name)
+    
     if (theFile.name.includes("txt")) {
-      reader.onload = loadFile
+      reader.onload = e => loadTextFile(e, theFile.name)
       reader.readAsText(theFile)
       return
     }
 
     if (theFile.name.includes("xl")) {
-      reader.onload = excelOnLoad
+      reader.onload = loadExcelFile
       reader.onerror = function (ex) {
         console.log(ex)
       }
@@ -176,9 +195,11 @@ export default function Nlp() {
     }
   }
 
-  function loadFile(e) {
+  function loadTextFile(e, fileName) {
     // original form contents acessible at e.target.result
-
+    console.log("loadTextFile this")
+    console.log(this)
+    
     // replace new-line with no space
     const ct = this.result.replace(/\n/g, "")
 
