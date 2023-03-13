@@ -5,6 +5,7 @@ parentDir: mongo
 author: Jake Laursen
 excerpt: Horizontal Scaling by splitting collections
 tags: ["database", "mongodb", "replication", "sharding", "horizontal scaling"]
+order: 1
 ---
 
 ## Blog Posts
