@@ -1,9 +1,66 @@
-import React, { useState, useRef, useEffect } from "react"
-// import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
+import React, { useState, useRef, useEffect, useReducer } from "react"
+import { useTable } from "react-table"
+
+import * as XLSX from "xlsx"
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+  useQueryClient,
+} from "react-query"
 import "./nlp.scss"
+
+// components
 import DragDDropFile from "../components/DragNDropForm"
-import Card from "../components/Card";
-function ResetPreviewForm({ reset, content }) {
+import Card from "../components/Card"
+import WordsPerSentenceLine from "../components/wordsPerSentenceLine"
+import SentimentScoreLine from "../components/sentimentScoreLine"
+
+// Create a client
+const nlpQueryClient = new QueryClient()
+
+function Table({ data }) {
+  const columns = Object.keys(data[0][0]).map(d => ({
+    Header: d,
+    accessor: d,
+  }))
+
+  // Use the state and functions returned from useTable to build your UI
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable({
+      columns,
+      data: data[0],
+    })
+
+  // Render the UI for your table
+  return (
+    <table {...getTableProps()}>
+      <thead>
+        {headerGroups.map(headerGroup => (
+          <tr {...headerGroup.getHeaderGroupProps()}>
+            {headerGroup.headers.map(column => (
+              <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+            ))}
+          </tr>
+        ))}
+      </thead>
+      <tbody {...getTableBodyProps()}>
+        {rows.map((row, i) => {
+          prepareRow(row)
+          return (
+            <tr {...row.getRowProps()}>
+              {row.cells.map(cell => {
+                return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+              })}
+            </tr>
+          )
+        })}
+      </tbody>
+    </table>
+  )
+}
+
+function ResetPreviewForm({ reset, content, fileType }) {
   return (
     <section id="reset-preview">
       <form>
@@ -11,64 +68,112 @@ function ResetPreviewForm({ reset, content }) {
           Start Over
         </button>
       </form>
-      <figure>
-        <p>{content}</p>
-      </figure>
+      {fileType === "text" && (
+        <figure>
+          <p>{content}</p>
+        </figure>
+      )}
+      {fileType === "excel" && <Table data={content} />}
     </section>
   )
 }
 
-function TextAnalysis({textContent, reset}) {
+function fetchTextAnalysis() {
+  return Promise.resolve('jake test')
+  // return fetch(``)
+}
+
+function TextAnalysis({ fileData, reset, fileType }) {
+  // Access the client
+  const nlpQueryClient = useQueryClient()
+
+  // Queries
+  const query = useQuery("textAnalysis", fetchTextAnalysis, {
+    enabled: !!fileData
+  })
+
+  console.log('query')
+  console.log(query)
+
   return (
     <section id="text-analysis">
-      <ResetPreviewForm reset={() => reset()} content={textContent} />
-      <Card>Words-PerSentence Line</Card>
-      <Card>Sentence Sentiment Score Line</Card>
+      <ResetPreviewForm
+        reset={() => reset()}
+        content={fileData}
+        fileType={fileType}
+      />
+      <WordsPerSentenceLine data={fileData} />
+      <SentimentScoreLine data={fileData} />
     </section>
   )
 }
 
+const initialReducerState = {
+  fileData: null,
+  tileType: null,
+}
 
+function nlpReducer(a, b) {
+  switch (b.type) {
+    case "text":
+      return {
+        fileType: "text",
+        fileData: b.payload,
+      }
+    case "excel":
+      return {
+        fileType: "excel",
+        fileData: b.payload,
+      }
+    case "reset":
+      return {
+        fileType: null,
+        fileData: null,
+      }
+    default:
+      return a
+  }
+}
 
 export default function Nlp() {
   const inputRef = useRef(null)
-  const [loadedFileData, setLoadedFileData] = useState(null)
+  const [state, dispatch] = useReducer(nlpReducer, initialReducerState)
   // const apiRes = useNlpApi(loadedFileData);
-  
-  useEffect(() => { 
-    // console.log('Object.keys(process.env)')
-    // console.log(Object.keys(process.env))
-    // console.log('THIS: ',process.env.GATSBY_NLP_API_URL)
-    
-    
-    // fetch(process.env.GATSBY_NLP_API_URL).then(res => {
-    //   res
-    //     .json()
-    //     .then(d => {
-    //       console.log("d")
-    //       console.log(d)
-    //     })
-    //     .catch(e => {
-    //       console.log("FETCH ERROR")
-    //       console.log(e)
-    //     })
-    // })
 
-    return () => { 
-      console.log(
-        "%c useEffect NLP cleanup....",
-        "background-color: pink; color: black;"
+  function excelOnLoad(e) {
+    const data = e.target.result
+    const workbook = XLSX.read(data, {
+      type: "binary",
+    })
+
+    const convertedToArr = workbook.SheetNames.map(function (sheetName) {
+      // Here is your object
+      const XL_row_object = XLSX.utils.sheet_to_row_object_array(
+        workbook.Sheets[sheetName]
       )
-      
-      
-    }
-  },[])
-  
+      return XL_row_object
+    })
+
+    dispatch({ type: "excel", payload: convertedToArr })
+  }
+
   function readWithFileReader(files) {
     let theFile = files[0]
     const reader = new FileReader()
-    reader.onload = loadFile
-    reader.readAsText(theFile)
+
+    if (theFile.name.includes("txt")) {
+      reader.onload = loadFile
+      reader.readAsText(theFile)
+      return
+    }
+
+    if (theFile.name.includes("xl")) {
+      reader.onload = excelOnLoad
+      reader.onerror = function (ex) {
+        console.log(ex)
+      }
+      reader.readAsBinaryString(theFile)
+    }
   }
 
   function loadFile(e) {
@@ -79,7 +184,7 @@ export default function Nlp() {
 
     // const words = ct.split(" ")
 
-    setLoadedFileData(ct)
+    dispatch({ type: "text", payload: ct })
   }
 
   // triggers the input when the button is clicked
@@ -88,26 +193,39 @@ export default function Nlp() {
   }
 
   return (
-    <section id="nlp-wrapper">
-      <h2>NLP Here</h2>
-      <sub><a href="/">go to my website</a></sub>
-      {/* no text data yet */}
-      {loadedFileData === null && (
-        <DragDDropFile
-          setLoaded={setLoadedFileData}
-          onButtonClick={onButtonClick}
-          ref={inputRef}
-          handleFile={readWithFileReader}
-        />
-      )}
+    <ReactQueryWrapper>
+      <section id="nlp-wrapper">
+        <h2>NLP Here</h2>
+        <sub>
+          <a href="/">go to my website</a>
+        </sub>
+        {/* no text data yet */}
+        {state.fileData === null && (
+          <DragDDropFile
+            setLoaded={d => dispatch({ type: "fileData", payload: d })}
+            onButtonClick={onButtonClick}
+            ref={inputRef}
+            handleFile={readWithFileReader}
+          />
+        )}
 
-      {/* text data present */}
-      {loadedFileData !== null && (
-        <TextAnalysis
-          reset={() => setLoadedFileData(null)}
-          textContent={loadedFileData}
-        />
-      )}
-    </section>
+        {/* text data present */}
+        {state.fileData !== null && (
+          <TextAnalysis
+            reset={() => dispatch({ type: "reset", payload: null })}
+            fileData={state.fileData}
+            fileType={state.fileType}
+          />
+        )}
+      </section>
+    </ReactQueryWrapper>
+  )
+}
+
+function ReactQueryWrapper({ children }) {
+  return (
+    <QueryClientProvider client={nlpQueryClient}>
+      {children}
+    </QueryClientProvider>
   )
 }
