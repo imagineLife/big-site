@@ -76,3 +76,12 @@ section#reset-preview{
     max-height: 12rem;
   }
 }
+
+section#text-analysis{
+    display: grid;
+
+
+    section#scalar-wrapper{
+      display: flex;
+    }
+  }

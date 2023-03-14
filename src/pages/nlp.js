@@ -12,7 +12,7 @@ import "./nlp.scss"
 
 // components
 import DragDDropFile from "../components/DragNDropForm"
-import Card from "../components/Card"
+import Scalar from "../components/Scalar"
 import WordsPerSentenceLine from "../components/wordsPerSentenceLine"
 import SentimentScoreLine from "../components/sentimentScoreLine"
 
@@ -80,18 +80,19 @@ function ResetPreviewForm({ reset, content, fileType }) {
 
 function fetchTextAnalysis(text) {
   const SENTIMENT_PATH = "/nlp/sentiment"
-  return () => fetch(`${process.env.GATSBY_NLP_API_URL}${SENTIMENT_PATH}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ text }),
-  })
-    .then(d => d.json().then(d => d))
-    .catch(e => {
-      console.log("fetch error")
-      console.log(e)
+  return () =>
+    fetch(`${process.env.GATSBY_NLP_API_URL}${SENTIMENT_PATH}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ text }),
     })
+      .then(d => d.json().then(d => d))
+      .catch(e => {
+        console.log("fetch error")
+        console.log(e)
+      })
   // return fetch(``)
 }
 
@@ -107,10 +108,11 @@ function TextAnalysis({ fileData, reset, fileType }) {
     staleTime: Infinity,
   }
   // Queries
-  const query = useQuery("textAnalysis", fetchTextAnalysis(fileData), useQOpts)
-
-  console.log("query")
-  console.log(query)
+  const { isLoading, data } = useQuery(
+    "textAnalysis",
+    fetchTextAnalysis(fileData),
+    useQOpts
+  )
 
   return (
     <section id="text-analysis">
@@ -119,8 +121,53 @@ function TextAnalysis({ fileData, reset, fileType }) {
         content={fileData}
         fileType={fileType}
       />
-      <WordsPerSentenceLine data={fileData} />
-      <SentimentScoreLine data={fileData} />
+      <section id="scalar-wrapper">
+        <Scalar
+          title={"Words"}
+          isLoading={isLoading}
+          value={data?.summary?.words}
+        />
+        <Scalar
+          title={"Sentences"}
+          isLoading={isLoading}
+          value={data?.summary?.sentences}
+        />
+        {/* <Scalar
+          title={"Avg W.P.S"}
+          isLoading={isLoading}
+          value={data?.summary?.agvWordsPerSentence}
+        /> */}
+        <Scalar title={"Sentiment Summary"} isLoading={isLoading}>
+          <span>
+            Positive: {data?.summary?.sentiments?.positive.count} (
+            {data?.summary?.sentiments?.positive.percent}%)
+          </span>
+          <br />
+          <span>
+            Negative: {data?.summary?.sentiments?.negative.count} (
+            {data?.summary?.sentiments?.negative.percent}%)
+          </span>
+          <br />
+          <span>
+            Neutral: {data?.summary?.sentiments?.neutral.count} (
+            {data?.summary?.sentiments?.neutral.percent}%)
+          </span>
+        </Scalar>
+      </section>
+      <WordsPerSentenceLine
+        data={data?.sentenceAnalysis.map((d, idx) => ({
+          idx: idx + 1,
+          d: d.length,
+        }))}
+        isLoading={isLoading}
+      />
+      <SentimentScoreLine
+        data={data?.sentenceAnalysis.map((d, idx) => ({
+          idx: idx + 1,
+          d: d.sentimentScore,
+        }))}
+        isLoading={isLoading}
+      />
     </section>
   )
 }
@@ -179,9 +226,10 @@ export default function Nlp() {
     const reader = new FileReader()
     // console.log('theFile')
     // console.log(theFile.name)
-    
+
     if (theFile.name.includes("txt")) {
-      reader.onload = e => loadTextFile(e, theFile.name)
+      // pass reader for a hack "this" workaround for now...
+      reader.onload = e => loadTextFile(reader, theFile.name)
       reader.readAsText(theFile)
       return
     }
@@ -195,13 +243,11 @@ export default function Nlp() {
     }
   }
 
-  function loadTextFile(e, fileName) {
+  function loadTextFile(item, fileName) {
     // original form contents acessible at e.target.result
-    console.log("loadTextFile this")
-    console.log(this)
-    
+
     // replace new-line with no space
-    const ct = this.result.replace(/\n/g, "")
+    const ct = item.result.replace(/\n/g, " ")
 
     // const words = ct.split(" ")
 

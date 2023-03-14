@@ -1,13 +1,14 @@
 import React from 'react';
 import './card.scss';
 
-const Card = ({ title, content, className, children }) => (
+const Card = ({ title, content, className, children, loading }) => (
   <div className={`card ${className || ""}`}>
     <div className="text-section">
       {title && <h3>{title}</h3>}
-      {content && <p>{content}</p>}
+      {loading && <span>loading...</span>}
+      {!loading && content && <p>{content}</p>}
     </div>
-    {children}
+    {!loading && children}
   </div>
 )
 
