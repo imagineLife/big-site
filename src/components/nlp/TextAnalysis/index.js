@@ -19,20 +19,14 @@ function ResetPreviewForm({ reset, content, fileType }) {
           <p>{content}</p>
         </figure>
       )}
-      {fileType === "excel"  && content && (
-        // <Suspense fallback={<span />}>
-        //   <Table data={content} />
-        // </Suspense>
-        <div>horse</div>
-      )}
     </section>
   )
 }
 
 function fetchTextAnalysis({data, type}) {
-  const SENTIMENT_PATH = "/nlp/sentiment"
+  const SENTIMENT_PATH = type === "text" ? "/nlp/sentiment" : "/nlp/sentiment/excel"
   const FETCH = {
-    URL: `${process.env.GATSBY_NLP_API_URL}${SENTIMENT_PATH}${type === 'excel' && '/excel'}`,
+    URL: `${process.env.GATSBY_NLP_API_URL}${SENTIMENT_PATH}`,
     METHOD: 'post',
     HEADERS: {
         "Content-Type": "application/json",
@@ -120,9 +114,6 @@ export default function TextAnalysis({ fileData, reset, fileType }) {
     fetchTextAnalysis({data: fileData, type: fileType}),
     useQOpts
   )
-
-  console.log('useQuery data res')
-  console.log(data)
   
 
   return (
@@ -132,10 +123,10 @@ export default function TextAnalysis({ fileData, reset, fileType }) {
         content={fileData}
         fileType={fileType}
       />
-      {fileType === "text" && (
-        <TextBlockOption data={data} isLoading={isLoading} />
+      {fileType === "text" && !isLoading && (
+        <TextBlockOption data={data} />
       )}
-      {fileType === 'excel' && <ExcelAnalysis data={data} isLoading={isLoading} />}
+      {fileType === "excel" && !isLoading && <ExcelAnalysis data={data} />}
     </section>
   )
 }

@@ -6,10 +6,10 @@ const ScrumChild = () => (
   <>
     <section id="notes">
       <p>
-        While studying for and becoming a Certified{' '}
+        While studying for and becoming a Certified{" "}
         <Link target="_blank" to="https://www.scrum.org/certificates/519854">
-          Professional Scrum Master I
-        </Link>
+          Professional Scrum Master
+        </Link>{" "}
         through scrum.org, I did a lot of writing - here's some notes!
       </p>
     </section>
@@ -37,7 +37,7 @@ const ScrumChild = () => (
     <br />
     <p>
       I personally don't feel like I have enough experience with other
-      "frameworks" to really support how the{' '}
+      "frameworks" to really support how the{" "}
       <a href="https://scrumguides.org/scrum-guide.html">scrum guide</a> refers
       to scrum as a "lightweight" framework. I know that there are a few
       concrete details with lots of room to embody the theories & values
@@ -48,7 +48,7 @@ const ScrumChild = () => (
       annoyed, overburdened, and disinterested.
     </p>
   </>
-);
+)
 
 const IndexPage = () => (
   <StaticQuery

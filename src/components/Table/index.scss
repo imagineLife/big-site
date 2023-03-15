@@ -1,9 +1,12 @@
 table.table-wrapper {
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 75%;
+  // width: 75%;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   font-size: .8rem;
-  height: 500px;
+  max-height: 500px;
   overflow-y: scroll;
   display: block;
   box-shadow: inset 1px 1px 10px;
