@@ -36,7 +36,7 @@ export default forwardRef(function DragDDropFile({
   }
 
   return (
-    <form onDragEnter={handleDrag} onSubmit={e => e.preventDefault()}>
+    <form onDragEnter={handleDrag} onSubmit={e => e.preventDefault()} id="drag-drop">
       <input ref={ref} type="file" multiple={true} onChange={handleChange} />
       <label
         className={dragActive ? "drag-active" : ""}

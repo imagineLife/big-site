@@ -1,176 +1,16 @@
-import React, { useState, useRef, useEffect, useReducer } from "react"
-import { useTable } from "react-table"
+import React, {  useRef, useReducer, lazy, Suspense } from "react"
 
 import * as XLSX from "xlsx"
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-  useQueryClient,
-} from "react-query"
+import { QueryClient } from "react-query"
 import "./nlp.scss"
 
 // components
 import DragDDropFile from "../components/DragNDropForm"
-import Scalar from "../components/Scalar"
-import WordsPerSentenceLine from "../components/wordsPerSentenceLine"
-import SentimentScoreLine from "../components/sentimentScoreLine"
+import ReactQueryWrapper from '../components/ReactQueryWrapper'
+import TextAnalysis from "../components/nlp/TextAnalysis"
 
 // Create a client
 const nlpQueryClient = new QueryClient()
-
-function Table({ data }) {
-  const columns = Object.keys(data[0][0]).map(d => ({
-    Header: d,
-    accessor: d,
-  }))
-
-  // Use the state and functions returned from useTable to build your UI
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({
-      columns,
-      data: data[0],
-    })
-
-  // Render the UI for your table
-  return (
-    <table {...getTableProps()}>
-      <thead>
-        {headerGroups.map(headerGroup => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map(column => (
-              <th {...column.getHeaderProps()}>{column.render("Header")}</th>
-            ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map((row, i) => {
-          prepareRow(row)
-          return (
-            <tr {...row.getRowProps()}>
-              {row.cells.map(cell => {
-                return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-              })}
-            </tr>
-          )
-        })}
-      </tbody>
-    </table>
-  )
-}
-
-function ResetPreviewForm({ reset, content, fileType }) {
-  return (
-    <section id="reset-preview">
-      <form>
-        <button type="button" onClick={() => reset()}>
-          Start Over
-        </button>
-      </form>
-      {fileType === "text" && (
-        <figure>
-          <p>{content}</p>
-        </figure>
-      )}
-      {fileType === "excel" && <Table data={content} />}
-    </section>
-  )
-}
-
-function fetchTextAnalysis(text) {
-  const SENTIMENT_PATH = "/nlp/sentiment"
-  return () =>
-    fetch(`${process.env.GATSBY_NLP_API_URL}${SENTIMENT_PATH}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ text }),
-    })
-      .then(d => d.json().then(d => d))
-      .catch(e => {
-        console.log("fetch error")
-        console.log(e)
-      })
-  // return fetch(``)
-}
-
-function TextAnalysis({ fileData, reset, fileType }) {
-  // Access the client
-  const nlpQueryClient = useQueryClient()
-
-  const useQOpts = {
-    enabled: !!fileData,
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-    refetchOnReconnect: false,
-    staleTime: Infinity,
-  }
-  // Queries
-  const { isLoading, data } = useQuery(
-    "textAnalysis",
-    fetchTextAnalysis(fileData),
-    useQOpts
-  )
-
-  return (
-    <section id="text-analysis">
-      <ResetPreviewForm
-        reset={() => reset()}
-        content={fileData}
-        fileType={fileType}
-      />
-      <section id="scalar-wrapper">
-        <Scalar
-          title={"Words"}
-          isLoading={isLoading}
-          value={data?.summary?.words}
-        />
-        <Scalar
-          title={"Sentences"}
-          isLoading={isLoading}
-          value={data?.summary?.sentences}
-        />
-        {/* <Scalar
-          title={"Avg W.P.S"}
-          isLoading={isLoading}
-          value={data?.summary?.agvWordsPerSentence}
-        /> */}
-        <Scalar title={"Sentiment Summary"} isLoading={isLoading}>
-          <span>
-            Positive: {data?.summary?.sentiments?.positive.count} (
-            {data?.summary?.sentiments?.positive.percent}%)
-          </span>
-          <br />
-          <span>
-            Negative: {data?.summary?.sentiments?.negative.count} (
-            {data?.summary?.sentiments?.negative.percent}%)
-          </span>
-          <br />
-          <span>
-            Neutral: {data?.summary?.sentiments?.neutral.count} (
-            {data?.summary?.sentiments?.neutral.percent}%)
-          </span>
-        </Scalar>
-      </section>
-      <WordsPerSentenceLine
-        data={data?.sentenceAnalysis.map((d, idx) => ({
-          idx: idx + 1,
-          d: d.length,
-        }))}
-        isLoading={isLoading}
-      />
-      <SentimentScoreLine
-        data={data?.sentenceAnalysis.map((d, idx) => ({
-          idx: idx + 1,
-          d: d.sentimentScore,
-        }))}
-        isLoading={isLoading}
-      />
-    </section>
-  )
-}
 
 const initialReducerState = {
   fileData: null,
@@ -260,7 +100,7 @@ export default function Nlp() {
   }
 
   return (
-    <ReactQueryWrapper>
+    <ReactQueryWrapper queryClient={nlpQueryClient}>
       <section id="nlp-wrapper">
         <h2>NLP Here</h2>
         <sub>
@@ -286,13 +126,5 @@ export default function Nlp() {
         )}
       </section>
     </ReactQueryWrapper>
-  )
-}
-
-function ReactQueryWrapper({ children }) {
-  return (
-    <QueryClientProvider client={nlpQueryClient}>
-      {children}
-    </QueryClientProvider>
   )
 }
