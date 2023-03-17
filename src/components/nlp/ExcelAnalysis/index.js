@@ -1,12 +1,23 @@
 import React from "react"
-
+import './index.scss'
 // components
 import Table from "../../Table"
-export default function ExcelAnalysis({ data, isLoading }) {
+import Card from '../../Card';
+function SentimentSummary({ stats }) { 
+  return (
+    <section id="stats-summary">
+      {Object.keys(stats).map(stat => (
+        <Card key={stat} title={stat} content={stats[stat]} />
+      ))}
+    </section>
+  )
+}
 
+export default function ExcelAnalysis({ data, isLoading }) {
+  
   return (
     <section id="excel">
-      {!isLoading && data?.map(({ question, answers }) => {
+      {!isLoading && data?.map(({ question, answers, sentimentStats }) => {
         const answerTableData = {
           columns: [
             {
@@ -25,7 +36,7 @@ export default function ExcelAnalysis({ data, isLoading }) {
         return (
           <section key={question}>
             <h3>{question}</h3>
-            <p><i>summary stats coming soon...</i></p>
+            <SentimentSummary stats={sentimentStats} />
             <Table data={answerTableData.data} columns={answerTableData.columns} />
           </section>
         )

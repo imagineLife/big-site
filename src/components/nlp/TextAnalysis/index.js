@@ -9,11 +9,11 @@ const Table = lazy(() => import("../../../components/Table"))
 function ResetPreviewForm({ reset, content, fileType }) {
   return (
     <section id="reset-preview">
-      <form>
+      {/* <form>
         <button type="button" onClick={() => reset()}>
           Start Over
         </button>
-      </form>
+      </form> */}
       {fileType === "text" && (
         <figure>
           <p>{content}</p>
@@ -60,11 +60,6 @@ function TextBlockOption({data, isLoading}) {
           isLoading={isLoading}
           value={data?.summary?.sentences}
         />
-        {/* <Scalar
-          title={"Avg W.P.S"}
-          isLoading={isLoading}
-          value={data?.summary?.agvWordsPerSentence}
-        /> */}
         <Scalar title={"Sentiment Summary"} isLoading={isLoading}>
           <span>
             Positive: {data?.summary?.sentiments?.positive.count} (
