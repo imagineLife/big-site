@@ -1,10 +1,10 @@
 table.table-wrapper {
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  // width: 75%;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+  max-width: 90%;
   font-size: .8rem;
   max-height: 500px;
   overflow-y: scroll;
