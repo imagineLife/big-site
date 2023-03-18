@@ -1,0 +1,12 @@
+:root{
+  --grid-color: lightgray;
+}
+path.axis {
+  &.bottom.tick.tick-line {
+    stroke: var(--grid-color);
+  }
+
+  &.left.tick.tick-line {
+    stroke: var(--grid-color);
+  }
+}
