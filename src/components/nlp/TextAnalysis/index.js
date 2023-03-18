@@ -1,7 +1,9 @@
 import React, { Suspense, lazy } from 'react';
 import { useQuery } from 'react-query';
+import { ResponsiveContainer, Pie, PieChart, Tooltip, Cell } from 'recharts'
+
 import WordsPerSentenceLine from "./../../wordsPerSentenceLine"
-import SentimentScoreLine from "../../../components/sentimentScoreLine"
+import SentimentScoreScatter from "../../../components/SentimentScoreScatter"
 import Scalar from "../../../components/Scalar"
 import ExcelAnalysis from "../ExcelAnalysis"
 const Table = lazy(() => import("../../../components/Table")) 
@@ -46,7 +48,43 @@ function fetchTextAnalysis({data, type}) {
       })
 }
 
-function TextBlockOption({data, isLoading}) {
+function SentimentSummary({ data }) {
+  
+  const COLORS = {
+    positive: 'green',
+    negative: 'darkred',
+    neutral: 'gray'
+  }
+   return (
+     <ResponsiveContainer width={300} height={300}>
+       <PieChart width={100} height={100}>
+         <Pie
+           dataKey="value"
+           isAnimationActive={false}
+           data={data}
+           cx="50%"
+           cy="50%"
+           outerRadius={80}
+           fill="#8884d8"
+           label
+         >
+           {data.map((slice, index) => (
+             <Cell key={`cell-${index}`} fill={COLORS[slice.name]} />
+           ))}
+         </Pie>
+         <Tooltip />
+       </PieChart>
+     </ResponsiveContainer>
+   )
+}
+
+function TextBlockOption({ data, isLoading }) {
+  const sentimentSummaryData = Object.keys(
+    data?.summary?.sentiments
+  ).map(k => ({ name: k, value: data.summary.sentiments[k].count }))
+  console.log('sentimentSummaryData')
+  console.log(sentimentSummaryData)
+  
   return (
     <>
       <section id="scalar-wrapper">
@@ -60,23 +98,9 @@ function TextBlockOption({data, isLoading}) {
           isLoading={isLoading}
           value={data?.summary?.sentences}
         />
-        <Scalar title={"Sentiment Summary"} isLoading={isLoading}>
-          <span>
-            Positive: {data?.summary?.sentiments?.positive.count} (
-            {data?.summary?.sentiments?.positive.percent}%)
-          </span>
-          <br />
-          <span>
-            Negative: {data?.summary?.sentiments?.negative.count} (
-            {data?.summary?.sentiments?.negative.percent}%)
-          </span>
-          <br />
-          <span>
-            Neutral: {data?.summary?.sentiments?.neutral.count} (
-            {data?.summary?.sentiments?.neutral.percent}%)
-          </span>
-        </Scalar>
+        <SentimentSummary data={sentimentSummaryData} />
       </section>
+
       <WordsPerSentenceLine
         data={data?.sentenceAnalysis.map((d, idx) => ({
           idx: idx + 1,
@@ -84,7 +108,7 @@ function TextBlockOption({data, isLoading}) {
         }))}
         isLoading={isLoading}
       />
-      <SentimentScoreLine
+      <SentimentScoreScatter
         data={data?.sentenceAnalysis.map((d, idx) => ({
           idx: idx + 1,
           d: d.sentimentScore,
