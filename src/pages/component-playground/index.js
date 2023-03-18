@@ -2,7 +2,7 @@ import React from 'react'
 import SentimentScoreLine from '../../components/sentimentScoreLine'
 import './index.scss';
 
-import mockSentimentScoreLineProps from './sentimentLineProps'
+import mockSentimentScoreLineProps from './../../components/sentimentLineProps'
 
 export default function ComponentPlayground() {
   return (
