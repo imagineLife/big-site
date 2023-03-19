@@ -18,5 +18,7 @@ Some details on http servers with node:
 - **authorization**: "stateless" protection of resources
 - **connecting to databases**: maybe a brief overview of connecting to mongodb and associating a trivial crud api to mongodb resources
 - **scaling**:
+  - **blocking the event loop**: how blocking the event loop impacts a node server
   - **"vertically"**: taking advantage of more resources available on a machine than the basic http server setup provides: multi-threading, clustering...
-  - **horizontally**:
+  - **managing workloads**: worker threads and "offloading" some work from the primary process
+
