@@ -225,7 +225,7 @@ module.exports = {
             }
           }
         `,
-        resolveSiteUrl: () => `https://laursen.tech`,
+        resolveSiteUrl: () => `http://laursen.tech`,
         resolvePages: ({ allSitePage, allFile }) => {
           const resArr = allSitePage.nodes.map((sitePage, idx) => {
             const matchingFromAll = allFile.nodes.filter(d =>
