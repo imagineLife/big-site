@@ -269,4 +269,5 @@ module.exports = {
       },
     },
   ],
+  trailingSlash: "never"
 }
