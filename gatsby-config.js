@@ -18,11 +18,11 @@ module.exports = {
   siteMetadata: {
     title: `Laursen.Tech: A Blog And Portfolio`,
     author: {
-      name: `Eric Laursen`,
-      summary: `Notes and Thoughts on SaaS Tech & People-Oriented SaaS Work`,
+      name: `Eric (Jake) Laursen`,
+      summary: `Learner, Do-er, Software Developer`,
     },
-    description: `My Blog`,
-    siteUrl: `https://laursen.tech`,
+    description: `Notes and Thoughts on SaaS Tech & People-Oriented SaaS Work`,
+    siteUrl: `http://laursen.tech`,
   },
   plugins: [
     `gatsby-read-time-estimate`,
