@@ -14,7 +14,6 @@ function SentimentSummary({ stats }) {
 }
 
 export default function ExcelAnalysis({ data, isLoading }) {
-  
   return (
     <section id="excel">
       {!isLoading && data?.map(({ question, answers, sentimentStats }) => {
@@ -25,9 +24,14 @@ export default function ExcelAnalysis({ data, isLoading }) {
               accessor: "sentimentScore",
             },
             {
+              Header: "Themes",
+              // accessor: "themes",
+              accessor: data => data.themes.sort().join(", ")
+            },
+            {
               Header: "answer",
               accessor: "text",
-              className: 'answer'
+              className: "answer",
             },
           ],
           data: [answers],

@@ -4,7 +4,7 @@ import './index.scss';
 
 export default function Table({ data, columns }) {
   
-  let innerColumns = columns || Object.keys(data[0][0]).map(d => ({
+  let innerColumns = columns || Object.keys(data[0][0]).map((d) => ({
     Header: d,
     accessor: d,
   }))
