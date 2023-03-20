@@ -17,8 +17,8 @@ Some details on http servers with node:
 - **CRUD**: leveraging http methods on resources to create, read, update and delete data
 - **authorization**: "stateless" protection of resources
 - **connecting to databases**: maybe a brief overview of connecting to mongodb and associating a trivial crud api to mongodb resources
+- **load testing**: using a cli tool like siege to gain some understanding of the scalability of a node server
 - **scaling**:
   - **blocking the event loop**: how blocking the event loop impacts a node server
   - **"vertically"**: taking advantage of more resources available on a machine than the basic http server setup provides: multi-threading, clustering...
   - **managing workloads**: worker threads and "offloading" some work from the primary process
-
