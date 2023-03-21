@@ -30,6 +30,24 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   */
   const result = await graphql(`
     {
+      allMarkdownRemark(
+        filter: { frontmatter: { parentDir: { in: ["docker"] } } }
+      ) {
+        pages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              excerpt
+              tags
+              parentDir
+              mySlug
+              order
+            }
+            content: html
+          }
+        }
+      }
       docker: allMarkdownRemark(
         sort: { frontmatter: { order: ASC } }
         filter: {
@@ -48,6 +66,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               excerpt
               tags
               parentDir
+              mySlug
               order
             }
           }
@@ -65,6 +84,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               excerpt
               tags
               parentDir
+              mySlug
             }
           }
         }
@@ -83,6 +103,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               excerpt
               tags
               parentDir
+              mySlug
             }
           }
         }
@@ -105,6 +126,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               excerpt
               tags
               parentDir
+              mySlug
               order
             }
           }
@@ -124,6 +146,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               excerpt
               tags
               parentDir
+              mySlug
             }
           }
         }
@@ -142,6 +165,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               excerpt
               tags
               parentDir
+              mySlug
             }
           }
         }
@@ -160,6 +184,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               excerpt
               tags
               parentDir
+              mySlug
             }
           }
         }
@@ -176,6 +201,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               excerpt
               tags
               parentDir
+              mySlug
             }
           }
         }
@@ -198,6 +224,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               excerpt
               tags
               parentDir
+              mySlug
               order
             }
           }
@@ -217,6 +244,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               excerpt
               tags
               parentDir
+              mySlug
             }
           }
         }
@@ -235,6 +263,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               excerpt
               tags
               parentDir
+              mySlug
             }
           }
         }
@@ -253,6 +282,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               excerpt
               tags
               parentDir
+              mySlug
             }
           }
         }
@@ -271,6 +301,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               excerpt
               tags
               parentDir
+              mySlug
             }
           }
         }
@@ -293,6 +324,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   const {
     data: {
+      // BlogPost: { pages: BlogPostPages },
       docker: { pages: dockerPages },
       httpserver: { pages: httpServerPages },
       k8s: { pages: k8sPages },
@@ -342,6 +374,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       context: {
         slug: page.overview.slug,
         parentDir: page.overview.parentDir || page.overview.slug,
+        mySlug: page.overview.mySlug || '',
         className: page.overview.parentDir || "",
       },
     })
@@ -407,6 +440,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       title: String
       description: String
       slug: String
+      mySlug: String
       parentDir: String
       author: String
       excerpt: String
@@ -416,6 +450,7 @@ exports.createSchemaCustomization = ({ actions }) => {
 
     type Fields {
       slug: String
+      mySlug: String
     }
   `)
 }
