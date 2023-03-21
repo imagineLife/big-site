@@ -2,6 +2,7 @@
 title: "The Docker CLI: An Overview"
 parentDir: docker
 slug: docker/cli-overview
+mySlug: cli-overview
 author: Jake Laursen
 excerpt: Some Commands That May Become Second Nature
 tags: ["Docker", "CLI"]

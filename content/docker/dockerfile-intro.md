@@ -2,6 +2,7 @@
 title: "Dockerfile: An Intro"
 parentDir: docker
 slug: docker/dockerfile-intro
+mySlug: dockerfile-intro
 author: Jake Laursen
 excerpt: Beginning With A 2-Line Dockerfile 
 tags: ["Docker", "Dockerfile"]
