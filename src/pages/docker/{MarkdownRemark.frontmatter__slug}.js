@@ -3,6 +3,7 @@ import { graphql, Link } from "gatsby"
 
 import Header from "../../components/header"
 import TagList from "../../components/TagList"
+import PageHead from "../../components/PageHead"
 
 // import './index.scss';
 
@@ -96,3 +97,25 @@ export const DockerBySlugQuery = graphql`
     }
   }
 `
+
+export function Head({
+  data: {
+    pageData: {
+      overview: { title, excerpt, slug, tags },
+      timeToRead,
+      wordCount: { words },
+    },
+  },
+}) {
+  return (
+    <PageHead
+      {...{
+        title,
+        excerpt,
+        slug,
+        words,
+        tags,
+      }}
+    />
+  )
+}
