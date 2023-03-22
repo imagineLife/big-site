@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 
-import Layout from './../components/layout';
-import Hero from './../components/hero';
-import PageHead from "./../components/PageHead"
-import createLinksWithType from './../components/createLinksWithType';
+import Layout from "./../../components/layout"
+import Hero from './../../components/hero';
+import PageHead from "./../../components/PageHead"
+import createLinksWithType from './../../components/createLinksWithType';
 // import './scrum.scss';
 
 /*
@@ -22,7 +22,7 @@ const IndexPage = () => (
           filter: {
             frontmatter: {
               order: { gt: 0 }
-              slug: { regex: "/docker/" }
+              parentDir: { regex: "/docker/" }
               title: { ne: null }
             }
           }
