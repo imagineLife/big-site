@@ -1,11 +1,15 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 
-import Header from "./../../../components/header"
-import TagList from "./../../../components/TagList"
+import Header from "../../../components/header"
+import TagList from "../../../components/TagList"
 
 import './index.scss';
 
+
+/*
+  
+*/ 
 export default function PostBySlug({
   pageContext,
   data: {
@@ -13,16 +17,14 @@ export default function PostBySlug({
       content,
       overview: { tags, parentDir },
     },
-    otherPages: {
-      nodes: otherPages
-    }
+    otherPages: { nodes: otherPages },
   },
   ...props
 }) {
   // console.log("props")
   // console.log(props)
-  console.log("otherPages")
-  console.log(otherPages)
+  // console.log("otherPages")
+  // console.log(otherPages)
   // console.log("pageContext")
   // console.log(pageContext)
   // console.log("mySlug")
@@ -46,12 +48,12 @@ export default function PostBySlug({
         </a>
       </div>
       <section role="region" className="md-wrapper">
-        <TagList tags={tags} />
         <section
           className={`${parentDir ? ` ${parentDir}` : ""}`}
           dangerouslySetInnerHTML={{ __html: content }}
           role="article"
         ></section>
+        <TagList tags={tags} />
       </section>
     </main>
   )
