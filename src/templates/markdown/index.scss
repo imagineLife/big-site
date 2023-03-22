@@ -11,8 +11,14 @@ $margin-small: 5px;
 
 */
 .md-wrapper {
-  margin: 60px auto 0 auto;
-  max-width: 70vw;
+
+  margin: 2rem auto 4rem;
+  max-width: 80vw;
+  width: 100%;
+
+  // margin: 60px auto 0 auto;
+  // max-width: 70vw;
+  
   h1 {
     margin: $margin-xbig 0 $margin-med;
   }

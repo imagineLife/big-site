@@ -4,16 +4,16 @@ $chip-hover-bg: #f4f4f4;
 .tag {
   &.chip{
     display: inline-block;
-    height: 32px;
-    font-size: 13px;
+    height: 27px;
+    font-size: 12px;
     font-weight: 500;
-    line-height:28px;
+    line-height: 23px;
     padding: 0 12px;
     border-radius: 16px;
-    background-color: $chip-bg;
+    background-color: #e4e4e4;
     margin-bottom: 5px;
     margin-right: 5px;
-    border: 1px solid $chip-bg;
+    border: 1px solid #e4e4e4;
 
     &:hover{
       background-color: $chip-hover-bg;
