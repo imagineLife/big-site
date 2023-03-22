@@ -5,19 +5,21 @@ function createLinksWithType({ thisType }) {
   return function createSocialLinks(
     {
       page: {
-        overview: { slug, title, excerpt },
+        overview: { slug, title, excerpt, parentDir },
       },
     },
     pageIdx
   ) {
-    return (
-      <SocialLink
-        slug={slug}
-        title={title}
-        excerpt={excerpt}
-        key={`${thisType}-toc-${pageIdx}`}
-      />
-    )
+    let innerSlug = slug;
+    if (parentDir === 'docker') innerSlug = `docker/${innerSlug}`
+      return (
+        <SocialLink
+          slug={innerSlug}
+          title={title}
+          excerpt={excerpt}
+          key={`${thisType}-toc-${pageIdx}`}
+        />
+      )
   }
 }
 
