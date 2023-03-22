@@ -1,4 +1,4 @@
-import React, {  useRef, useReducer, lazy, Suspense } from "react"
+import React, {  useRef, useReducer } from "react" // lazy, Suspense
 
 import * as XLSX from "xlsx"
 import { QueryClient } from "react-query"
