@@ -1,8 +1,7 @@
 ---
 title: "Node On Docker: An Intro"
 parentDir: docker
-slug: docker/node-on-docker-intro
-mySlug: node-on-docker-intro
+slug: node-on-docker-intro
 author: Jake Laursen
 excerpt: Run NodeJS in a Docker Container From an Image with a tag
 tags: ["Docker", "containers", "node"]

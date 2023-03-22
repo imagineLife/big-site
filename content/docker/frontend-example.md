@@ -1,8 +1,7 @@
 ---
 title: "Docker for \"Frontend\" Static Assets"
 parentDir: docker
-slug: docker/a-frontend
-mySlug: a-frontend
+slug: a-frontend
 author: Jake Laursen
 excerpt: Using Docker To Build and Serve Frontend Assets using Node and Nginx
 tags: ["Docker", "Dockerfile", "NodeJS", "Container", "Image", "Frontend", "React", "Nginx" ]
