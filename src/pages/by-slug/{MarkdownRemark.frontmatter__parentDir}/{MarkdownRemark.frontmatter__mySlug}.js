@@ -1,25 +1,69 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 
-export default function PostBySlug({ pageContext, ...props }) {
-  console.log("props")
-  console.log(props)
-  console.log("DATA")
-  console.log(props.data)
-  console.log("pageContext")
-  console.log(pageContext)
-  console.log("mySlug")
-  console.log(pageContext?.frontmatter__mySlug)
-  console.log("parentDir")
-  console.log(pageContext?.frontmatter__parentDir)
+import Header from "./../../../components/header"
+import TagList from "./../../../components/TagList"
+
+import './index.scss';
+
+export default function PostBySlug({
+  pageContext,
+  data: {
+    pageData: {
+      content,
+      overview: { tags, parentDir },
+    },
+    otherPages: {
+      nodes: otherPages
+    }
+  },
+  ...props
+}) {
+  // console.log("props")
+  // console.log(props)
+  console.log("otherPages")
+  console.log(otherPages)
+  // console.log("pageContext")
+  // console.log(pageContext)
+  // console.log("mySlug")
+  // console.log(pageContext?.frontmatter__mySlug)
+  // console.log("parentDir")
+  // console.log(pageContext?.frontmatter__parentDir)
 
   return (
-    <main className="chart-wrapper">
-      <h2>Post By Slug Here</h2>
+    <main className="page-by-slug">
+      <Header className="md" />
+      <div className="sidebar">
+        {otherPages?.map(({ frontmatter: { slug, title } }, pidx) => (
+          <Link key={`${pidx}-${slug}`} to={`/by-slug/${slug}`}>
+            {title}
+          </Link>
+        ))}
+        <a>
+          <div className="bar"></div>
+          <div className="bar"></div>
+          <div className="bar"></div>
+        </a>
+      </div>
+      <section role="region" className="md-wrapper">
+        <TagList tags={tags} />
+        <section
+          className={`${parentDir ? ` ${parentDir}` : ""}`}
+          dangerouslySetInnerHTML={{ __html: content }}
+          role="article"
+        ></section>
+      </section>
     </main>
   )
 }
 
+/*
+  NOTE:
+  the query params below, frontmatter__mySlug and frontmatter__parentDir are special
+  - they START at / "come from" the "context" values  in gatsby-node create-page parameters
+  - the SYNTAX comes from the default export HERE - its params at pageContext.frontmatter__mySlug
+  https://www.gatsbyjs.com/docs/creating-and-modifying-pages/
+*/ 
 export const BySlugQuery = graphql`
   query pageBySlug(
     $frontmatter__mySlug: String
