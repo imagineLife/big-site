@@ -261,10 +261,6 @@ module.exports = {
             userAgent: d,
             disallow: ["/tags/", "/tags/*"],
           })),
-          ...robots.allowGoogleBots.map(d => ({
-            userAgent: d,
-            disallow: "",
-          })),
         ],
       },
     },
