@@ -30,48 +30,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   */
   const result = await graphql(`
     {
-      allMarkdownRemark(
-        filter: { frontmatter: { parentDir: { in: ["docker"] } } }
-      ) {
-        pages: edges {
-          page: node {
-            overview: frontmatter {
-              slug
-              title
-              excerpt
-              tags
-              parentDir
-              mySlug
-              order
-            }
-            content: html
-          }
-        }
-      }
-      docker: allMarkdownRemark(
-        sort: { frontmatter: { order: ASC } }
-        filter: {
-          frontmatter: {
-            order: { gt: 0 }
-            slug: { regex: "/docker/" }
-            title: { ne: null }
-          }
-        }
-      ) {
-        pages: edges {
-          page: node {
-            overview: frontmatter {
-              slug
-              title
-              excerpt
-              tags
-              parentDir
-              mySlug
-              order
-            }
-          }
-        }
-      }
       febs: allMarkdownRemark(
         sort: { frontmatter: { order: ASC } }
         filter: { frontmatter: { order: { gt: 0 }, slug: { regex: "/febs/" } } }
@@ -324,8 +282,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   const {
     data: {
-      // BlogPost: { pages: BlogPostPages },
-      docker: { pages: dockerPages },
       httpserver: { pages: httpServerPages },
       k8s: { pages: k8sPages },
       febs: { pages: febsPages },
@@ -345,12 +301,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // Create blog posts pages
   // But only if there's at least one markdown file found at "content/blog" (defined in gatsby-config.js)
   // `context` is available in the template as a prop and as a variable in GraphQL
-
-  // let posts = []
-  // if (posts.length > 0) {
-  //   posts.forEach((post, index) => {
   const pages = [
-    ...dockerPages,
     ...febsPages,
     ...httpServerPages,
     ...k8sPages,
@@ -365,23 +316,19 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     ...strengthsPages,
   ]
   pages.forEach(({ page }, index) => {
-    //     // const previousPostId = index === 0 ? null : posts[index - 1].id
-    //     // const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id
-
     createPage({
       path: page.overview.slug,
-      component: mdTemplate, //blogPost,
+      component: mdTemplate,
       context: {
         slug: page.overview.slug,
         parentDir: page.overview.parentDir || page.overview.slug,
-        mySlug: page.overview.mySlug || '',
+        mySlug: page.overview.mySlug || "",
         className: page.overview.parentDir || "",
       },
     })
   })
-  
-  
-  groupOfTags.forEach(({fieldValue}) => {
+
+  groupOfTags.forEach(({ fieldValue }) => {
     createPage({
       path: `/tags/${fieldValue}/`,
       component: tagTemplate,
