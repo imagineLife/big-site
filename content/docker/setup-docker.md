@@ -2,6 +2,7 @@
 title: Setup Docker
 parentDir: docker
 slug: docker/setup-docker
+mySlug: setup-docker
 author: Jake Laursen
 excerpt: Getting Docker Setup On a Machine
 tags: ["Docker", "containers", "setup", "download"]
