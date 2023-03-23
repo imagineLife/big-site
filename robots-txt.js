@@ -63,6 +63,8 @@ module.exports = {
     "YioopBot",
     "yoozBot",
     "YoudaoBot",
+  ],
+  allowGoogleBots: [
     "AdsBot-Google",
     "AdsBot-Google-Mobile",
     "AdsBot-Google-Mobile-Apps",
