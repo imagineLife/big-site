@@ -1,17 +1,15 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 
-import Header from "./../../../components/header"
-import TagList from "./../../../components/TagList"
-import PageHead from "./../../../components/PageHead"
+import Header from "../../components/header"
+import TagList from "../../components/TagList"
+import PageHead from "../../components/PageHead"
 
 import './index.scss';
 
 
 /*
-  
-*/ 
-export default function PostBySlug({
+  {
   pageContext,
   data: {
     pageData: {
@@ -19,34 +17,38 @@ export default function PostBySlug({
       overview: { tags, parentDir },
     },
     otherPages: { nodes: otherPages },
+    ...otherProps
   },
   ...props
-}) {
-  // console.log("props")
-  // console.log(props)
-  // console.log("otherPages")
-  // console.log(otherPages)
-  // console.log("pageContext")
-  // console.log(pageContext)
-  // console.log("shortSlug")
-  // console.log(pageContext?.frontmatter__shortSlug)
-  // console.log("parentDir")
-  // console.log(pageContext?.frontmatter__parentDir)
+}
+*/ 
+export default function DockerBySlug(props) {
+  const { data } = props;
+  if (!data) return <p>not intended</p>
+  
+  const { pageData, otherPages } = data
+  if (!pageData || !otherPages) return <p>not intended</p>;
 
+  const { content, overview } = pageData;
+  if (!content || !overview) return <p>not intended</p>
+
+  const { tags, parentDir } = overview
+
+  const { nodes: theseOtherPages } = otherPages;
   return (
     <main className="page-by-slug">
       <Header className="md" />
       <div className="sidebar">
-        {otherPages?.map(({ frontmatter: { slug, title } }, pidx) => (
-          <Link key={`${pidx}-${slug}`} to={`/by-slug/${slug}`}>
+        {theseOtherPages.map(({ frontmatter: { shortSlug, title } }, pidx) => (
+          <Link key={`${pidx}-${shortSlug}`} to={`/docker/${shortSlug}`}>
             {title}
           </Link>
         ))}
-        <a>
+        {/* <a>
           <div className="bar"></div>
           <div className="bar"></div>
           <div className="bar"></div>
-        </a>
+        </a> */}
       </div>
       <section role="region" className="md-wrapper">
         <section
@@ -68,12 +70,12 @@ export default function PostBySlug({
   https://www.gatsbyjs.com/docs/creating-and-modifying-pages/
 */ 
 export const BySlugQuery = graphql`
-  query pageBySlug(
-    $frontmatter__shortSlug: String
-    $frontmatter__parentDir: String
-  ) {
+  query pageBySlug($frontmatter__shortSlug: String) {
     pageData: markdownRemark(
-      frontmatter: { shortSlug: { eq: $frontmatter__shortSlug } }
+      frontmatter: {
+        parentDir: { eq: "docker" }
+        shortSlug: { ne: null, eq: $frontmatter__shortSlug }
+      }
     ) {
       content: html
       overview: frontmatter {
@@ -82,9 +84,9 @@ export const BySlugQuery = graphql`
         title
         excerpt
         slug
+        shortSlug
         tags
       }
-      timeToRead
       wordCount {
         words
       }
@@ -93,14 +95,15 @@ export const BySlugQuery = graphql`
       filter: {
         frontmatter: {
           slug: { ne: null }
-          parentDir: { eq: $frontmatter__parentDir }
+          shortSlug: { ne: null }
+          parentDir: { eq: "docker" }
         }
       }
       sort: { frontmatter: { order: ASC } }
     ) {
       nodes {
         frontmatter {
-          slug
+          shortSlug
           parentDir
           order
           title
@@ -111,14 +114,14 @@ export const BySlugQuery = graphql`
 `
 
 export function Head({
-  data: {
-    pageData: {
-      overview: { title, excerpt, slug, tags },
-      timeToRead,
-      wordCount: { words },
-    },
-  },
+  data: { pageData }
 }) {
+  if (!pageData) return;
+  const {
+      overview: { title, excerpt, slug, tags },
+      wordCount: { words },
+    } = pageData 
+  
   return (
     <PageHead
       {...{

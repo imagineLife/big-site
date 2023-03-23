@@ -2,7 +2,7 @@
 title: Get Amazon Elastic Kubernetes Service Prepared to Deploy A Cluster
 author: Jake Laursen
 excerpt: Setup the AWS CLI, IAM Permissions, Create an EKS Cluster, and more
-tags: ["learning", "AWS", "Kubernetes"]
+tags: ["learning", "aws", "Kubernetes"]
 parentDir: misc
 slug: misc/aws-k8s-prereqs
 order: 7

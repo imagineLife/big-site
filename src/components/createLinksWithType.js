@@ -11,7 +11,7 @@ function createLinksWithType({ thisType }) {
     pageIdx
   ) {
     let innerSlug = slug;
-    if (parentDir === 'docker') innerSlug = `docker/${innerSlug}`
+    // if (parentDir === 'docker') innerSlug = `docker/${innerSlug}`
       return (
         <SocialLink
           slug={innerSlug}
