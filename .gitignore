@@ -75,3 +75,5 @@ data2
 data3
 
 kubectl
+
+content/mongo/data
