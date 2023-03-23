@@ -1,7 +1,8 @@
 ---
 title: "Node Server II: With A Container User"
 parentDir: docker
-slug: node-server-with-user
+mySlug: node-server-with-user
+slug: docker/node-server-with-user
 author: Jake Laursen
 excerpt: Declare a user for an image and running container
 tags: ["Docker", "Dockerfile", "NodeJS", "Container", "Image", "User"]

@@ -1,7 +1,8 @@
 ---
 title: Why Containers?
 parentDir: docker
-slug: why-containers
+mySlug: why-containers
+slug: docker/why-containers
 author: Jake Laursen
 excerpt: Summarizing Containers, VMs, and Virtualization
 tags: ["Docker", "containers", "servers", "virtualizaton"]
