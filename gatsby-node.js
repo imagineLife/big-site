@@ -42,7 +42,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               excerpt
               tags
               parentDir
-              mySlug
+              shortSlug
             }
           }
         }
@@ -61,7 +61,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               excerpt
               tags
               parentDir
-              mySlug
+              shortSlug
             }
           }
         }
@@ -84,7 +84,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               excerpt
               tags
               parentDir
-              mySlug
+              shortSlug
               order
             }
           }
@@ -104,7 +104,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               excerpt
               tags
               parentDir
-              mySlug
+              shortSlug
             }
           }
         }
@@ -123,7 +123,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               excerpt
               tags
               parentDir
-              mySlug
+              shortSlug
             }
           }
         }
@@ -142,7 +142,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               excerpt
               tags
               parentDir
-              mySlug
+              shortSlug
             }
           }
         }
@@ -159,7 +159,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               excerpt
               tags
               parentDir
-              mySlug
+              shortSlug
             }
           }
         }
@@ -182,7 +182,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               excerpt
               tags
               parentDir
-              mySlug
+              shortSlug
               order
             }
           }
@@ -202,7 +202,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               excerpt
               tags
               parentDir
-              mySlug
+              shortSlug
             }
           }
         }
@@ -221,7 +221,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               excerpt
               tags
               parentDir
-              mySlug
+              shortSlug
             }
           }
         }
@@ -240,7 +240,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               excerpt
               tags
               parentDir
-              mySlug
+              shortSlug
             }
           }
         }
@@ -259,7 +259,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               excerpt
               tags
               parentDir
-              mySlug
+              shortSlug
             }
           }
         }
@@ -322,7 +322,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       context: {
         slug: page.overview.slug,
         parentDir: page.overview.parentDir || page.overview.slug,
-        mySlug: page.overview.mySlug || "",
+        shortSlug: page.overview.shortSlug || "",
         className: page.overview.parentDir || "",
       },
     })
@@ -387,7 +387,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       title: String
       description: String
       slug: String
-      mySlug: String
+      shortSlug: String
       parentDir: String
       author: String
       excerpt: String
@@ -397,7 +397,7 @@ exports.createSchemaCustomization = ({ actions }) => {
 
     type Fields {
       slug: String
-      mySlug: String
+      shortSlug: String
     }
   `)
 }

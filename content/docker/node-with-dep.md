@@ -1,7 +1,7 @@
 ---
 title: "Node Server III: With Dependenceis"
 parentDir: docker
-mySlug: node-server-with-deps
+shortSlug: node-server-with-deps
 slug: docker/node-server-with-deps
 author: Jake Laursen
 excerpt: The Impact of Dependencies in A Node Image

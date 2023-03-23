@@ -28,8 +28,8 @@ export default function PostBySlug({
   // console.log(otherPages)
   // console.log("pageContext")
   // console.log(pageContext)
-  // console.log("mySlug")
-  // console.log(pageContext?.frontmatter__mySlug)
+  // console.log("shortSlug")
+  // console.log(pageContext?.frontmatter__shortSlug)
   // console.log("parentDir")
   // console.log(pageContext?.frontmatter__parentDir)
 
@@ -62,18 +62,18 @@ export default function PostBySlug({
 
 /*
   NOTE:
-  the query params below, frontmatter__mySlug and frontmatter__parentDir are special
+  the query params below, frontmatter__shortSlug and frontmatter__parentDir are special
   - they START at / "come from" the "context" values  in gatsby-node create-page parameters
-  - the SYNTAX comes from the default export HERE - its params at pageContext.frontmatter__mySlug
+  - the SYNTAX comes from the default export HERE - its params at pageContext.frontmatter__shortSlug
   https://www.gatsbyjs.com/docs/creating-and-modifying-pages/
 */ 
 export const BySlugQuery = graphql`
   query pageBySlug(
-    $frontmatter__mySlug: String
+    $frontmatter__shortSlug: String
     $frontmatter__parentDir: String
   ) {
     pageData: markdownRemark(
-      frontmatter: { mySlug: { eq: $frontmatter__mySlug } }
+      frontmatter: { shortSlug: { eq: $frontmatter__shortSlug } }
     ) {
       content: html
       overview: frontmatter {

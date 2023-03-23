@@ -1,7 +1,7 @@
 ---
 title: "Dockerfile: An Intro"
 parentDir: docker
-mySlug: dockerfile-intro
+shortSlug: dockerfile-intro
 slug: docker/dockerfile-intro
 author: Jake Laursen
 excerpt: Beginning With A 2-Line Dockerfile 

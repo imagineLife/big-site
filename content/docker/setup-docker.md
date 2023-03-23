@@ -1,7 +1,7 @@
 ---
 title: Setup Docker
 parentDir: docker
-mySlug: setup-docker
+shortSlug: setup-docker
 slug: docker/setup-docker
 author: Jake Laursen
 excerpt: Getting Docker Setup On a Machine
