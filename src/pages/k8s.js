@@ -5,7 +5,7 @@ import Layout from './../components/layout';
 import Hero from './../components/hero';
 import createLinksWithType from "./../components/createLinksWithType"
 import PageHead from "./../components/PageHead"
-import './scrum.scss';
+import "./scrum/scrum.scss"
 
 /*
   before filter

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { StaticQuery, graphql, Link } from 'gatsby';
-import Toc from './../components/TOC';
+import Toc from '../../components/TOC';
 
 const ScrumChild = () => (
   <>

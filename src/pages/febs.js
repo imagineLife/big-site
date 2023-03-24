@@ -4,7 +4,7 @@ import { StaticQuery, graphql, Link } from 'gatsby';
 import Layout from './../components/layout';
 import Hero from './../components/hero';
 
-import './scrum.scss';
+import "./scrum/scrum.scss"
 
 /*
   before filter

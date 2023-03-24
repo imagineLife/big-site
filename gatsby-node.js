@@ -207,25 +207,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           }
         }
       }
-      scrum: allMarkdownRemark(
-        sort: { frontmatter: { order: ASC } }
-        filter: {
-          frontmatter: { order: { gt: 0 }, slug: { regex: "/scrum/" } }
-        }
-      ) {
-        pages: edges {
-          page: node {
-            overview: frontmatter {
-              slug
-              title
-              excerpt
-              tags
-              parentDir
-              shortSlug
-            }
-          }
-        }
-      }
       socials: allMarkdownRemark(
         sort: { frontmatter: { order: ASC } }
         filter: {
@@ -291,7 +272,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       mongosectioncontent: { pages: mongoSectionContent },
       nginx: { pages: nginxPages },
       node: { pages: nodePages },
-      scrum: { pages: scrumPages },
       socials: { pages: socialPages },
       strengths: { pages: strengthsPages },
       tagsGroup: { group: groupOfTags },
@@ -311,7 +291,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     ...nginxPages,
     ...nodePages,
     ...mongoSectionContent,
-    ...scrumPages,
     ...socialPages,
     ...strengthsPages,
   ]
@@ -326,7 +305,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         className: page.overview.parentDir || "",
       },
     }
-    if(page?.overview?.shortSlug) pageObj.context.shortSlug = page.overview.shortSlug
+    if (page?.overview?.shortSlug)
+      pageObj.context.shortSlug = page.overview.shortSlug
     createPage(pageObj)
   })
 
@@ -419,10 +399,28 @@ exports.onCreateWebpackConfig = ({
 // BUT aren't what I want: here remove all docker/* that aren't supposed to be there
 exports.onCreatePage = ({ page, actions }) => {
   const { createPage, deletePage } = actions
+
+  /*
+    docker cleanup
+  */ 
   const dockerShortSlugs = ['cli-overview', 'dockerfile-intro', 'a-frontend', 'node-on-docker-intro', 'node-server-with-user', 'node-server-with-deps', 'setup-docker', 'node-server-containerized', 'a-smaller-node-image', 'why-containers'];
+
 
   if (page.path.includes("docker") && page.path !== "/docker" && !dockerShortSlugs.includes(page.context.frontmatter__shortSlug)) {
       console.log("deleting page: ", page.path)
       deletePage(page)
+  }
+
+  /*
+    scrum cleanup
+  */ 
+  const scrumShortSlugs = ['a-checklist','on-adoption', 'the-artifacts', 'the-ceremonies', 'the-increment', 'the-team', 'the-theories', 'the-values']
+  if (
+    page.path.includes("scrum") &&
+    page.path !== "/scrum" &&
+    !scrumShortSlugs.includes(page.context.frontmatter__shortSlug)
+  ) {
+    console.log("deleting page: ", page.path)
+    deletePage(page)
   }
 }
