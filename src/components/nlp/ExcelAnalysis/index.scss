@@ -1,7 +1,39 @@
-#stats-summary{
-  display: flex;
+section#excel{
 
-  div.card{
-    flex: 1
+  h4{
+    margin-top: var(--fontSize-4)
+  }
+  h3.question{
+    text-decoration: underline;
+  }
+  #stats-summary{
+    display: flex;
+    flex-direction: column;
+
+    p{
+      margin-bottom: 2px;
+    }
+    section#stats-box{
+      display: flex;
+      flex-direction: row;
+    }
+    div.card{
+      flex: 1
+    }
+  }
+
+  section.word-lists{
+    display: flex;
+    justify-content: space-around;
+
+
+    section#themes{
+    }
+    
+    section#words-by-count{
+      table{
+        max-height: 300px;
+      }
+    }
   }
 }
