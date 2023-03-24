@@ -1,6 +1,7 @@
 ---
 title: On Organizational Scrum Advocacy  & Adoption
 slug: scrum/on-adoption
+shortSlug: on-adoption
 author: Jake Laursen
 excerpt: Ways to keep the values alive
 tags: ["team", "scrum", "process", "scrum master"]

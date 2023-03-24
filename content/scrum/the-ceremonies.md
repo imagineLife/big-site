@@ -1,6 +1,7 @@
 ---
 title: The Ceremonies
 slug: scrum/the-ceremonies
+shortSlug: the-ceremonies
 author: Jake Laursen
 excerpt: The Sprint, Sprint Planning, Sprint Review, Sprint Retrospective and Daily Scrum
 tags: ["team", "scrum", "process"]

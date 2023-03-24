@@ -1,6 +1,7 @@
 ---
 title: The Scrum team
 slug: scrum/the-team
+shortSlug: the-team
 author: Jake Laursen
 excerpt: The 3 roles - Scrum Master, Product Owner, and Developers
 tags: ["team", "scrum", "process"]

@@ -1,6 +1,7 @@
 ---
 title: A Scrum Checklist
 slug: scrum/a-checklist
+shortSlug: a-checklist
 author: Jake Laursen
 excerpt: An overview of the elements that are part of scrum
 tags: ["team", "scrum", "process"]
