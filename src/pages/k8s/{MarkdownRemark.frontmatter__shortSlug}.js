@@ -32,31 +32,28 @@ export default function K8sBySlug(props) {
   const { tags, parentDir } = overview
 
   const { nodes: theseOtherPages = [] } = otherPages;
-  console.log('theseOtherPages')
-  console.log(theseOtherPages)
   
-  // let navItems = [
-  //   {
-  //     sectionName: "Getting Started",
-  //     items: [],
-  //   },
-  //   {
-  //     sectionName: "In Depth",
-  //     items: [],
-  //   },
-  // ]
-  // theseOtherPages.forEach(pg => {
-  //   if (pg.frontmatter?.shortSlug?.includes('node')) {
-  //     navItems[1].items.push(pg)
-  //   } else {
-  //     navItems[0].items.push(pg)
-  //   }
-  // })
+  let navItems = [
+    {
+      sectionName: "Getting Started",
+      items: [],
+    },
+    {
+      sectionName: "In Depth",
+      items: [],
+    },
+  ]
+  theseOtherPages.forEach(pg => {
+    if (pg.frontmatter?.slug?.includes('depth')) {
+      navItems[1].items.push(pg)
+    } else {
+      navItems[0].items.push(pg)
+    }
+  })
   
   return (
     <LayoutWithNav
-      // navWithSections={navItems}
-      navItems={theseOtherPages}
+      navWithSections={navItems}
       parentDir={parentDir}
       content={content}
       tags={tags}
@@ -75,7 +72,7 @@ export const K8sBySlugQuery = graphql`
   query pageBySlug($frontmatter__shortSlug: String) {
     pageData: markdownRemark(
       frontmatter: {
-        parentDir: { eq: "k8s" }
+        parentDir: { regex: "/k8s/" }
         shortSlug: { ne: null, eq: $frontmatter__shortSlug }
       }
     ) {
@@ -98,7 +95,8 @@ export const K8sBySlugQuery = graphql`
         frontmatter: {
           slug: { ne: null }
           shortSlug: { ne: null }
-          parentDir: { eq: "k8s" }
+          parentDir: { in: ["k8s", "k8s/in-depth"], nin: ["examples"] }
+          title: { ne: null }
         }
       }
       sort: { frontmatter: { order: ASC } }
@@ -106,6 +104,7 @@ export const K8sBySlugQuery = graphql`
       nodes {
         frontmatter {
           shortSlug
+          slug
           parentDir
           order
           title
