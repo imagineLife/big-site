@@ -1,11 +1,8 @@
 import React from "react"
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 
-import Header from "../../components/header"
-import TagList from "../../components/TagList"
 import PageHead from "../../components/PageHead"
-
-// import './index.scss';
+import LayoutWithNav from "../../templates/LayoutWithNav"
 
 
 /*
@@ -35,30 +32,14 @@ export default function ScrumBySlug(props) {
   const { tags, parentDir } = overview
 
   const { nodes: theseOtherPages } = otherPages;
+  
   return (
-    <main className="page-by-slug">
-      <Header className="md" />
-      <div className="sidebar">
-        {theseOtherPages.map(({ frontmatter: { shortSlug, title } }, pidx) => (
-          <Link key={`${pidx}-${shortSlug}`} to={`/scrum/${shortSlug}`}>
-            {title}
-          </Link>
-        ))}
-        {/* <a>
-          <div className="bar"></div>
-          <div className="bar"></div>
-          <div className="bar"></div>
-        </a> */}
-      </div>
-      <section role="region" className="md-wrapper">
-        <section
-          className={`${parentDir ? ` ${parentDir}` : ""}`}
-          dangerouslySetInnerHTML={{ __html: content }}
-          role="article"
-        ></section>
-        <TagList tags={tags} />
-      </section>
-    </main>
+    <LayoutWithNav
+      navItems={theseOtherPages}
+      parentDir={parentDir}
+      content={content}
+      tags={tags}
+    />
   )
 }
 
