@@ -2,6 +2,7 @@
 title: Test In-Container Readyness with Liveness Probes
 parentDir: k8s/in-depth
 slug: k8s/in-depth/liveliness
+shortSlug: liveliness
 author: Jake Laursen
 excerpt: Create http requests, bash scripts, or tcp requests to assess application readyness status 
 tags: ["Kubernetes", "k8s", "pods", "containers", "liveness"]

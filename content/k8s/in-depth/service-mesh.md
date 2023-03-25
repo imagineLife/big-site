@@ -2,6 +2,7 @@
 title: A Brief Overview of Service Meshes
 parentDir: k8s/in-depth
 slug: k8s/in-depth/service-mesh
+shortSlug: service-mesh
 author: Jake Laursen
 excerpt: An abstract layer of proxies to help with complex network scenarios
 tags: ["Kubernetes", "k8s", "service mesh"]

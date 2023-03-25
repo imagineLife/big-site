@@ -2,6 +2,7 @@
 title: Use Commands and Argunments to Configure Pods and Containers
 parentDir: k8s/in-depth
 slug: k8s/in-depth/commands-and-args
+shortSlug: commands-and-args
 author: Jake Laursen
 excerpt: Pass Commands and Arguments to the Docker Containers that are run inside of pods
 tags: ["Kubernetes", "k8s", "commands", "args", "docker", "cli"]

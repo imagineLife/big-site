@@ -2,6 +2,7 @@
 title: Topics to Consider When Configuring Kubernetes
 parentDir: k8s/in-depth
 slug: k8s/in-depth/topics
+shortSlug: topics
 author: Jake Laursen
 excerpt: Kubernetes has a bunch of details to consider when getting more in-depth than creating and getting objects
 tags: ["Kubernetes", "k8s", "configuration"]

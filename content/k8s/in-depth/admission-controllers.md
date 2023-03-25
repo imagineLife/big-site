@@ -2,6 +2,7 @@
 title: Mutate And Validate Request Details With Admission Controllers
 parentDir: k8s/in-depth
 slug: k8s/in-depth/admission-controllers
+shortSlug: admission-controllers
 author: Jake Laursen
 excerpt: A properly configured k8s server leverages admissionControllers for automated request processing
 tags: ["Kubernetes", "k8s", "admission controllers", "requests", "mutations", "validations", "visualization", "diagram"]

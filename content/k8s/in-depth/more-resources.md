@@ -2,6 +2,7 @@
 title: More Resources
 parentDir: k8s/in-depth
 slug: k8s/in-depth/more-resources
+shortSlug: more-resources
 author: Jake Laursen
 excerpt: Links to other folks' collections of K8s notes
 tags: ["Kubernetes", "k8s", "Resources"]

@@ -2,6 +2,7 @@
 title: Build Rules for Pod Network Traffic
 parentDir: k8s/in-depth
 slug: k8s/in-depth/network-policies
+shortSlug: network-policies
 author: Jake Laursen
 excerpt: Ingress policies allow incoming network requests, and Egress policies all outgoing network requests 
 tags: ["Kubernetes", "k8s", "ingress", "egress", "networking", "network policies"]

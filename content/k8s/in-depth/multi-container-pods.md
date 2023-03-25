@@ -2,6 +2,7 @@
 title: Multi-Container Pods Can be Valuable For Tightly-Coupled Applications
 parentDir: k8s/in-depth
 slug: k8s/in-depth/multi-container-pods
+shortSlug: multi-container-pods
 author: Jake Laursen
 excerpt: A few meaningful approaches to deploying multiple containers in a single pod
 tags: ["Kubernetes", "k8s", "pods", "containers", "patterns", "sidecar", "adapter", "ambassador"]

@@ -2,6 +2,7 @@
 title: Build Kubernetes Objects with One-Lineres
 parentDir: k8s/in-depth
 slug: k8s/in-depth/imperative-commands
+shortSlug: imperative-commands
 author: Jake Laursen
 excerpt: Use One-Line Imperative programming syntax to build some k8s objects
 tags: ["Kubernetes", "k8s", "imperative", "cli"]

@@ -2,6 +2,7 @@
 title: Remove a Requirement of Pre-Defined Storage Objects with Storage Classes
 parentDir: k8s/in-depth
 slug: k8s/in-depth/storage-classes
+shortSlug: storage-classes
 author: Jake Laursen
 excerpt: Describe a type of storage with a storage class definition
 tags: ["Kubernetes", "k8s", "data", "persistence", "volumes"]

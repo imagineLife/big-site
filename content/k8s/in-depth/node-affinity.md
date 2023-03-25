@@ -2,6 +2,7 @@
 title: Make Pods "Like" Nodes that have specific labels
 parentDir: k8s/in-depth
 slug: k8s/in-depth/node-affinity
+shortSlug: node-affinity
 author: Jake Laursen
 excerpt: Affinities applied to Nodes push nodes to prefer Specific K8s Nodes to be deployed to
 tags: ["Kubernetes", "k8s", "nodes", "node affinity", "visualization", "diagram"]

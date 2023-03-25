@@ -2,6 +2,7 @@
 title: Create Custom Resources To Meet Your Own Specific Needs In Kubernetes
 parentDir: k8s/in-depth
 slug: k8s/in-depth/custom-resources
+shortSlug: custom-resources
 author: Jake Laursen
 excerpt: Leverage Kubernetes to create new resources types, custom specs on a resource, and custom controllers
 tags: ["Kubernetes", "k8s", "custom resource", "resource", "controller"]
@@ -121,4 +122,3 @@ The Operator Framework can do things like...
   - i.e the `etcdController`
   - backup operator
   - restoreOperator
-

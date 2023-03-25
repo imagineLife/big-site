@@ -2,6 +2,7 @@
 title: Ingress Helps Simplify Some Networking Details
 parentDir: k8s/in-depth
 slug: k8s/in-depth/why-ingress
+shortSlug: why-ingress
 author: Jake Laursen
 excerpt: Ingress solves some networking nuianced configuration details
 tags: ["Kubernetes", "k8s", "ingress", "networking", "dns", "proxy"]
@@ -348,4 +349,3 @@ Ingress provides A single externally accessible url, configurable to route to di
 Ingress allows ssl config as well.  
 Ingress still needs to be exposed - published as a nodePort or a cloud-native load-balancer.  
 **Load-balancing, Auth, SSL, Url-Based Routing** all happen in an ingress controller.  
-

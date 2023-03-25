@@ -2,6 +2,7 @@
 title: Leverage Taints and Tolerations to Instruct Nodes to Allow or Not Allow Pod Deployment 
 parentDir: k8s/in-depth
 slug: k8s/in-depth/taints-and-tolerations
+shortSlug: taints-and-tolerations
 author: Jake Laursen
 excerpt: Taints on nodes block pod deployment and tolerations enable pods to work with node taints
 tags: ["Kubernetes", "k8s", "taints", "tolerations", "deployment"]

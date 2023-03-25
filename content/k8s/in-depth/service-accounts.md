@@ -2,6 +2,7 @@
 title: Service Accounts Provide Identity To Container Processes
 parentDir: k8s/in-depth
 slug: k8s/in-depth/service-accounts
+shortSlug: service-accounts
 author: Jake Laursen
 excerpt: Service accounts, intended to be used by machines and not humans, can be used for things like getting cluster data from within the cluster itself
 tags: ["Kubernetes", "k8s", "Security", "Docker", "Users", "Privileges"]

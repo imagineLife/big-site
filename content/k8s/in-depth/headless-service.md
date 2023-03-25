@@ -2,6 +2,7 @@
 title: Give DNS Records To Replicated Pods With Headless Services
 parentDir: k8s/in-depth
 slug: k8s/in-depth/headless-services
+shortSlug: headless-services
 author: Jake Laursen
 excerpt: Headless Services assign DNS entries to pods, which can be useful for use-cases likes statefulSets and Master/Slave Pods
 tags: ["Kubernetes", "k8s", "data", "persistence", "volumes"]

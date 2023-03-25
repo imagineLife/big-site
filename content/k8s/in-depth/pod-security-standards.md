@@ -2,6 +2,7 @@
 title: Three policies that broadly cover security options for pods in a Kubernetes Cluster
 parentDir: k8s/in-depth
 slug: k8s/in-depth/pod-security-standards
+shortSlug: pod-security-standards
 author: Jake Laursen
 excerpt: Namespaces can contain one-of-three pod-security labels that give broad summaries of "levels" of pod security
 tags: ["Kubernetes", "k8s", "volumes", "lifecycle"]

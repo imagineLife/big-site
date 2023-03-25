@@ -2,6 +2,7 @@
 title: Logging In K8s Is Similar to Logging in Docker
 parentDir: k8s/in-depth
 slug: k8s/in-depth/logging-and-monitoring
+shortSlug: logging-and-monitoring
 author: Jake Laursen
 excerpt: Syntax to log a pod in kubernetes is nearly identical to logging with docker
 tags: ["Kubernetes", "k8s", "pods", "containers", "logs"]

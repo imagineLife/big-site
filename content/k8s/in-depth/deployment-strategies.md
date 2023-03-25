@@ -2,6 +2,7 @@
 title: Apply Complex Deployment Strategies to A K8s Cluster For More Reliability
 parentDir: k8s/in-depth
 slug: k8s/in-depth/deployment-strategies
+shortSlug: deployment-strategies
 author: Jake Laursen
 excerpt: Blue-Green and Canary deployments are not built into K8s, but can be used with some strategic object manipulation
 tags: ["Kubernetes", "k8s", "deployment", "canary", "blue/green", "deployment strategies"]

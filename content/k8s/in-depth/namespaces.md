@@ -2,6 +2,7 @@
 title: Kubernetes Namespaces
 parentDir: k8s/in-depth
 slug: k8s/in-depth/namespaces
+shortSlug: namespaces
 author: Jake Laursen
 excerpt: Separate groups of Kubernetes objects with Namespaces for maby users across teams
 tags: ["Kubernetes", "k8s", "configuration"]

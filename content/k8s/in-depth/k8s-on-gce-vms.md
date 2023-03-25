@@ -2,6 +2,7 @@
 title: Run Kubernetes on 2 Virtual Machines in Google Cloud
 parentDir: k8s/in-depth
 slug: k8s/in-depth/k8s-on-gce-vms
+shortSlug: k8s-on-gce-vms
 author: Jake Laursen
 excerpt: A Follow-Along set of notes ony setting Kubernetes up across 2 VMs in Google Cloud
 tags: ["Kubernetes", "k8s", "GCE", "VMs"]
@@ -96,4 +97,3 @@ The "join" command will be used on the worker node to join the worker to the cp 
 - on the controlplane node, create a command to use on the worker node: `kubeadm token create --print-join-command`
 - copy the output - this is a "join" command that can be run on the worker node
 - run that on the worker node: `sudo kubeadm join ...(the rest of the command)`
-

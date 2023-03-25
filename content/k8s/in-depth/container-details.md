@@ -2,6 +2,7 @@
 title: Container tooling continues to develop
 parentDir: k8s/in-depth
 slug: k8s/in-depth/containers-and-more
+shortSlug: containers-and-more
 author: Jake Laursen
 excerpt: Docker has led to many other container details 
 tags: ["Kubernetes", "k8s", "containers", "docker", "OCI"]

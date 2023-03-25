@@ -2,6 +2,7 @@
 title: Working with Users, Clusters, and Contexts For Authentication
 parentDir: k8s/in-depth
 slug: k8s/in-depth/authentication
+shortSlug: authentication
 author: Jake Laursen
 excerpt: Users Can Gain Access to Clusters Through Kubeconfig Files and Contexts
 tags: ["Kubernetes", "k8s", "authentication", "users", "clusters", "certs", "diagram"]

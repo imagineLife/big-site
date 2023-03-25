@@ -2,6 +2,7 @@
 title: Kubernetes Kubectl Commands Through A Working Example
 parentDir: k8s/in-depth
 slug: k8s/in-depth/commands
+shortSlug: commands
 author: Jake Laursen
 excerpt: Create objects, alter objects, and more through configuration files and imperative kubectl commands
 tags: ["Kubernetes", "k8s", "Commands", "CLI", "config", "imperative example"]

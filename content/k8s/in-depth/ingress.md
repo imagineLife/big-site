@@ -2,6 +2,7 @@
 title: Ingress Requires a ServiceAccount, a Deployment, a ConfigMap, a Service, and and Ingress
 parentDir: k8s/in-depth
 slug: k8s/in-depth/ingress
+shortSlug: ingress
 author: Jake Laursen
 excerpt: Kubernetes helps manage traffic, load-balancing, routing, and more through its ingress implementation
 tags: ["Kubernetes", "k8s", "ingress", "networking", "dns", "proxy", "load balancing"]

@@ -2,6 +2,7 @@
 title: An Overview of Kubernetes Resource Allocation and Definition Options
 parentDir: k8s/in-depth
 slug: k8s/in-depth/on-resources
+shortSlug: on-resources
 author: Jake Laursen
 excerpt: Disk, Memory, and CPU are 3 types of resources that can be configured within Kubernets
 tags: ["Kubernetes", "k8s", "Disk", "Memory", "CPU", "Hardware", "resources", "allocation"]

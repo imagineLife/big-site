@@ -2,6 +2,7 @@
 title: One Way To Approach Debugging Kubernetes Object Errors
 parentDir: k8s/in-depth
 slug: k8s/in-depth/debugging-workflow
+shortSlug: debugging-workflow
 author: Jake Laursen
 excerpt: Starting with "familiar" k8s bits to logs and iptables
 tags: ["Kubernetes", "k8s", "debugging", "workflow"]

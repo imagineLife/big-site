@@ -2,6 +2,7 @@
 title: Use Kubernetes Jobs to Manage Workloads That End 
 parentDir: k8s/in-depth
 slug: k8s/in-depth/jobs
+shortSlug: jobs
 author: Jake Laursen
 excerpt: A Job Object can describe to kubernetes how to manage workloads that only need to run for the duration of the workload
 tags: ["Kubernetes", "k8s", "pods", "containers", "jobs", "workloads"]

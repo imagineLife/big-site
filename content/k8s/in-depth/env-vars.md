@@ -2,6 +2,7 @@
 title: Introduce Flexibility into Kubernetes Objects with Environment Variables
 parentDir: k8s/in-depth
 slug: k8s/in-depth/env-vars
+shortSlug: env-vars
 author: Jake Laursen
 excerpt: Pull dynamic values out of hard-coded object defclaration with Environment Variables
 tags: ["Kubernetes", "k8s", "environment", "variables"]
