@@ -22,3 +22,13 @@ $screen-xl-min: 1200px;
 */ 
 
 $min-hz-padding: 10px;
+
+
+
+$toolbar-height: 46px;
+$sidebar-width: 275px;
+$sidebar-height: calc(100% - $toolbar-height);
+$content-max-width: 80%;
+$content-width: calc($content-max-width - $sidebar-width);
+$content-margin: 10%;
+$content-left-margin: calc($sidebar-width + $content-margin);
