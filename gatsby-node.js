@@ -27,6 +27,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           }
         }
       }
+}
+      
+
   */
   const result = await graphql(`
     {
@@ -62,30 +65,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               tags
               parentDir
               shortSlug
-            }
-          }
-        }
-      }
-      k8s: allMarkdownRemark(
-        sort: { frontmatter: { order: ASC } }
-        filter: {
-          frontmatter: {
-            order: { gt: 0 }
-            slug: { regex: "/^k8s(?!.*(docker|examples)).*/" }
-            title: { ne: null }
-          }
-        }
-      ) {
-        pages: edges {
-          page: node {
-            overview: frontmatter {
-              slug
-              title
-              excerpt
-              tags
-              parentDir
-              shortSlug
-              order
             }
           }
         }
@@ -264,7 +243,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const {
     data: {
       httpserver: { pages: httpServerPages },
-      k8s: { pages: k8sPages },
       febs: { pages: febsPages },
       linux: { pages: linuxPages },
       misc: { pages: miscPages },
@@ -284,7 +262,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const pages = [
     ...febsPages,
     ...httpServerPages,
-    ...k8sPages,
     ...linuxPages,
     ...miscPages,
     ...mongoPages,
@@ -419,6 +396,39 @@ exports.onCreatePage = ({ page, actions }) => {
     page.path.includes("scrum") &&
     page.path !== "/scrum" &&
     !scrumShortSlugs.includes(page.context.frontmatter__shortSlug)
+  ) {
+    console.log("deleting page: ", page.path)
+    deletePage(page)
+  }
+
+
+  /*
+    k8s cleanup
+  */ 
+  const k8sShortSlugs = [
+    "node-port-service",
+    "cluster-ip-service",
+    "architecture-overview",
+    "microservice-case-study",
+    "containers-first",
+    "intro-to-k8s-in-the-cloud",
+    "k8s-app-arch",
+    "load-balancer-service",
+    "microservice-demo",
+    "microservice-with-deployments",
+    "replica-controllers",
+    "node-port-service",
+    "deployments",
+    "on-pods",
+    "networking-intro",
+    "intro-to-services",
+    "setup-overview",
+  ]
+
+  if (
+    page.path.includes("k8s") &&
+    page.path !== "/k8s" &&
+    !k8sShortSlugs.includes(page.context.frontmatter__shortSlug)
   ) {
     console.log("deleting page: ", page.path)
     deletePage(page)
