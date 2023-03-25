@@ -1,3 +1,34 @@
 import React from 'react';
+import { Link } from "gatsby"
 
-const Sidebar = () => <aside>Sidebar</aside>;
+import './index.scss'
+export default function Sidebar({ items, navWithSections, parentDir }) {
+  return (
+    <nav aria-label={`learn-${parentDir}`} className="sidebar">
+      {navWithSections &&
+        navWithSections.map(arrOfSections => (
+          <div key={arrOfSections.sectionName}>
+              <span>{arrOfSections.sectionName}</span>
+            <div role="region" aria-label={arrOfSections.sectionName}>
+              {arrOfSections.items.map(
+                ({ frontmatter: { shortSlug, title } }, pidx) => (
+                  <Link
+                    key={`${pidx}-${shortSlug}`}
+                    to={`/${parentDir}/${shortSlug}`}
+                  >
+                    {title}
+                  </Link>
+                )
+              )}
+            </div>
+          </div>
+        ))}
+      {!navWithSections &&
+        items?.map(({ frontmatter: { shortSlug, title } }, pidx) => (
+          <Link key={`${pidx}-${shortSlug}`} to={`/${parentDir}/${shortSlug}`}>
+            {title}
+          </Link>
+        ))}
+    </nav>
+  )
+}
