@@ -2,6 +2,7 @@
 title: On Services
 parentDir: k8s
 slug: k8s/intro-to-services
+shortSlug: intro-to-services
 author: Jake Laursen
 excerpt: Only an Intro
 tags: ["Kubernetes", "k8s", "services"]

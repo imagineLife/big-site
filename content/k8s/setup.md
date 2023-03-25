@@ -2,6 +2,7 @@
 title: An Overview of K8s Setup
 parentDir: k8s
 slug: k8s/setup-overview
+shortSlug: setup-overview
 author: Jake Laursen
 excerpt: A few different options for setting up K8s
 tags: ["Kubernetes", "k8s", "setup"]

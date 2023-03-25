@@ -2,6 +2,7 @@
 title: Some Architecture Principles for Kubernetes Applications
 parentDir: k8s
 slug: k8s/k8s-app-arch
+shortSlug: k8s-app-arch
 author: Jake Laursen
 excerpt: Dockerfiles, layers, instructions, args, etc
 tags: ["k8s", "Architecture"]

@@ -2,6 +2,7 @@
 title: On Networking
 parentDir: k8s
 slug: k9s/networking-intro
+shortSlug: networking-intro
 author: Jake Laursen
 excerpt: Only an Intro
 tags: ["Kubernetes", "k8s", "networking"]

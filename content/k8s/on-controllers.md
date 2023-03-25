@@ -2,6 +2,7 @@
 title: On Controllers
 parentDir: k8s
 slug: k8s/replica-controllers
+shortSlug: replica-controllers
 author: Jake Laursen
 excerpt: Controllers as "brains" behind monitoring and managing replicated pods
 tags: ["Kubernetes", "k8s", "controllers", "replicas"]

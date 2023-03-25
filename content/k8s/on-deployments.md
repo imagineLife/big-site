@@ -2,6 +2,7 @@
 title: On Deployments
 parentDir: k8s
 slug: k8s/deployments
+shortSlug: deployments
 author: Jake Laursen
 excerpt: Deploying the Cluster
 tags: ["Kubernetes", "k8s", "deployment"]

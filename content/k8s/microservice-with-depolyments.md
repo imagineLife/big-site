@@ -2,6 +2,7 @@
 title: Deploy a Microservice Set of Applications with K8s and Deployments
 parentDir: k8s
 slug: k8s/microservice-with-deployments
+shortSlug: microservice-with-deployments
 author: Jake Laursen
 excerpt: Use Kubernetes Deployment Objects to deploy replica sets of each service in a microservice-style application
 tags: ["Kubernetes", "k8s", "Microservices", "deployment", "visualization", "diagram"]

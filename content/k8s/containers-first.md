@@ -2,6 +2,7 @@
 title: A Brief Review of Dockerfiles and Images
 parentDir: k8s
 slug: k8s/containers-first
+shortSlug: containers-first
 author: Jake Laursen
 excerpt: Dockerfiles, layers, instructions, args, etc
 tags: ["Docker", "dockerfile", "containers"]

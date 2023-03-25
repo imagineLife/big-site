@@ -2,6 +2,7 @@
 title: K8s Architectural Concepts
 parentDir: k8s
 slug: k8s/architecture-overview
+shortSlug: architecture-overview
 author: Jake Laursen
 excerpt: Parts of Kubernets - Nodes, Clusters, API Server, and more!
 tags: ["Kubernetes", "k8s", "nodes", "clusters", "diagram"]
