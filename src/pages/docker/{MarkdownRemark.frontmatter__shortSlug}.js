@@ -1,12 +1,9 @@
 import React from "react"
-import { graphql, Link } from "gatsby"
-
-import Header from "../../components/header"
-import TagList from "../../components/TagList"
+import { graphql } from "gatsby"
 import PageHead from "../../components/PageHead"
+import LayoutWithNav from "../../templates/LayoutWithNav";
 
 import './index.scss';
-
 
 /*
   {
@@ -34,31 +31,32 @@ export default function DockerBySlug(props) {
 
   const { tags, parentDir } = overview
 
-  const { nodes: theseOtherPages } = otherPages;
+  const { nodes: theseOtherPages = [] } = otherPages;
+  let navItems = [
+    {
+      sectionName: "Getting Started",
+      items: [],
+    },
+    {
+      sectionName: "Docker With Node",
+      items: [],
+    },
+  ]
+  theseOtherPages.forEach(pg => {
+    if (pg.frontmatter?.shortSlug?.includes('node')) {
+      navItems[1].items.push(pg)
+    } else {
+      navItems[0].items.push(pg)
+    }
+  })
+  
   return (
-    <main className="page-by-slug">
-      <Header className="md" />
-      <div className="sidebar">
-        {theseOtherPages.map(({ frontmatter: { shortSlug, title } }, pidx) => (
-          <Link key={`${pidx}-${shortSlug}`} to={`/docker/${shortSlug}`}>
-            {title}
-          </Link>
-        ))}
-        {/* <a>
-          <div className="bar"></div>
-          <div className="bar"></div>
-          <div className="bar"></div>
-        </a> */}
-      </div>
-      <section role="region" className="md-wrapper">
-        <section
-          className={`${parentDir ? ` ${parentDir}` : ""}`}
-          dangerouslySetInnerHTML={{ __html: content }}
-          role="article"
-        ></section>
-        <TagList tags={tags} />
-      </section>
-    </main>
+    <LayoutWithNav
+      navWithSections={navItems}
+      parentDir={parentDir}
+      content={content}
+      tags={tags}
+    />
   )
 }
 
