@@ -1,11 +1,10 @@
 import React, { Suspense, lazy } from 'react';
 import { useQuery } from 'react-query';
-import { ResponsiveContainer, Pie, PieChart, Tooltip, Cell } from 'recharts'
 
-import WordsPerSentenceLine from "./../../wordsPerSentenceLine"
+// import WordsPerSentenceLine from "./../../wordsPerSentenceLine"
 import WordsPerSentenceScatter from './../../WordsPerSentenceScatter'
 import SentimentScoreLine from "./../../sentimentScoreLine/"
-
+import SentimentPie from "./../../SentimentPie"
 import Scalar from "../../../components/Scalar"
 import ExcelAnalysis from "../ExcelAnalysis"
 
@@ -51,37 +50,6 @@ function fetchTextAnalysis({data, type}) {
       })
 }
 
-function SentimentSummary({ data }) {
-  
-  const COLORS = {
-    positive: 'green',
-    negative: 'darkred',
-    neutral: 'gray'
-  }
-   return (
-     <ResponsiveContainer width={300} height={300}>
-       <PieChart width={100} height={100}>
-         <Pie
-           dataKey="value"
-           isAnimationActive={false}
-           data={data}
-           cx="50%"
-           cy="50%"
-           outerRadius={80}
-           fill="#8884d8"
-           label
-         >
-           {data.map((slice, index) => (
-             <Cell key={`cell-${index}`} fill={COLORS[slice.name]} />
-           ))}
-         </Pie>
-         <Tooltip />
-       </PieChart>
-     </ResponsiveContainer>
-   )
-}
-
-
 /*
   <SentimentScoreScatter
     data={data?.sentenceAnalysis.map((d, idx) => ({
@@ -95,7 +63,7 @@ function SentimentSummary({ data }) {
 function TextBlockOption({ data, isLoading }) {
   const sentimentSummaryData = Object.keys(
     data?.summary?.sentiments
-  ).map(k => ({ name: k, value: data.summary.sentiments[k].count }))
+  ).map(k => ({ name: k, ...data.summary.sentiments[k] }))
   
   return (
     <>
@@ -110,7 +78,7 @@ function TextBlockOption({ data, isLoading }) {
           isLoading={isLoading}
           value={data?.summary?.sentences}
         />
-        <SentimentSummary data={sentimentSummaryData} />
+        <SentimentPie data={sentimentSummaryData} />
       </section>
 
       {/* <WordsPerSentenceLine

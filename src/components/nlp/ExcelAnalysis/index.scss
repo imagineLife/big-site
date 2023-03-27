@@ -1,10 +1,16 @@
-section#excel{
+section.excel{
 
   h4{
     margin-top: var(--fontSize-4)
   }
   h3.question{
-    text-decoration: underline;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    width: 100%;
+    padding: 15px;
+    border-bottom: 1px solid rgb(25,25,25);
   }
   #stats-summary{
     display: flex;
