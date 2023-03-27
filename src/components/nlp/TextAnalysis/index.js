@@ -3,9 +3,12 @@ import { useQuery } from 'react-query';
 import { ResponsiveContainer, Pie, PieChart, Tooltip, Cell } from 'recharts'
 
 import WordsPerSentenceLine from "./../../wordsPerSentenceLine"
-import SentimentScoreScatter from "../../../components/SentimentScoreScatter"
+import WordsPerSentenceScatter from './../../WordsPerSentenceScatter'
+import SentimentScoreLine from "./../../sentimentScoreLine/"
+
 import Scalar from "../../../components/Scalar"
 import ExcelAnalysis from "../ExcelAnalysis"
+
 const Table = lazy(() => import("../../../components/Table")) 
 
 function ResetPreviewForm({ reset, content, fileType }) {
@@ -78,12 +81,21 @@ function SentimentSummary({ data }) {
    )
 }
 
+
+/*
+  <SentimentScoreScatter
+    data={data?.sentenceAnalysis.map((d, idx) => ({
+      idx: idx + 1,
+      d: d.sentimentScore,
+    }))}
+    isLoading={isLoading}
+  />
+*/ 
+
 function TextBlockOption({ data, isLoading }) {
   const sentimentSummaryData = Object.keys(
     data?.summary?.sentiments
   ).map(k => ({ name: k, value: data.summary.sentiments[k].count }))
-  console.log('sentimentSummaryData')
-  console.log(sentimentSummaryData)
   
   return (
     <>
@@ -101,23 +113,34 @@ function TextBlockOption({ data, isLoading }) {
         <SentimentSummary data={sentimentSummaryData} />
       </section>
 
-      <WordsPerSentenceLine
+      {/* <WordsPerSentenceLine
         data={data?.sentenceAnalysis.map((d, idx) => ({
           idx: idx + 1,
           d: d.length,
         }))}
         isLoading={isLoading}
-      />
-      <SentimentScoreScatter
-        data={data?.sentenceAnalysis.map((d, idx) => ({
-          idx: idx + 1,
-          d: d.sentimentScore,
+      /> */}
+      <WordsPerSentenceScatter
+        data={data?.sentenceAnalysis.map((d, didx) => ({
+          idx: didx + 1,
+          s: d.sentence,
+          words: d.length,
         }))}
+      />
+
+      <SentimentScoreLine
         isLoading={isLoading}
+        data={data?.sentenceAnalysis.map((d, idx) => ({
+          num: idx + 1,
+          text: d.sentence,
+          score: d.sentimentScore.toFixed(1),
+        }))}
       />
     </>
   )
 }
+
+
 
 export default function TextAnalysis({ fileData, reset, fileType }) {
   const useQOpts = {
