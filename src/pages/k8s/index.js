@@ -34,6 +34,7 @@ const IndexPage = () => (
                 excerpt
                 parentDir
                 order
+                shortSlug
               }
             }
           }

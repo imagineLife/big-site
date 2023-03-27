@@ -5,12 +5,12 @@ function createLinksWithType({ thisType }) {
   return function createSocialLinks(
     {
       page: {
-        overview: { slug, title, excerpt, parentDir },
+        overview: { slug, title, excerpt, parentDir, shortSlug },
       },
     },
     pageIdx
   ) {
-    let innerSlug = slug;
+    let innerSlug = thisType.includes('k8s-in-depth') ? `k8s/${shortSlug}` : slug
     // if (parentDir === 'docker') innerSlug = `docker/${innerSlug}`
       return (
         <SocialLink
