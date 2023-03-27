@@ -3,7 +3,7 @@ title: EventEmitters Are A Beautiful API in Node
 slug: node/event-loop/event-emitters
 author: Jake Laursen
 excerpt: Register event listeners, call events with payloads, and express a program through events fundamentally
-tags: ["server", "node", "events", "eventEmitters", "registering", "calling", "workflow"]
+tags: ["server", "node", "events", "eventEmitters", "workflow"]
 parentDir: node/event-loop
 order: 3
 ---
