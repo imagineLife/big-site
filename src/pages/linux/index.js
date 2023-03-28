@@ -1,11 +1,10 @@
 import React, { Fragment } from 'react';
 import { StaticQuery, graphql, Link } from 'gatsby';
 
-import Layout from './../components/layout';
-import Hero from './../components/hero';
-import createLinksWithType from "./../components/createLinksWithType"
-import PageHead from "./../components/PageHead"
-import "./scrum/scrum.scss"
+import Layout from "./../../components/layout"
+import Hero from "./../../components/hero"
+import createLinksWithType from "./../../components/createLinksWithType"
+import PageHead from "./../../components/PageHead"
 
 /*
   before filter

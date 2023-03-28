@@ -2,6 +2,7 @@
 title: Text Editors
 parentDir: linux
 slug: linux/text-editors
+shortSlug: text-editors
 author: Jake Laursen
 excerpt: Classic text editors
 tags: ["linux", "kernel", "cli", "nano", "text", "vim"]
@@ -32,4 +33,3 @@ This will also open the file in the nano editor.
 - Replace
 - Paste Text
 -  To Spell
-

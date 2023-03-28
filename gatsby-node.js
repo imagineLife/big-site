@@ -69,25 +69,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           }
         }
       }
-      linux: allMarkdownRemark(
-        sort: { frontmatter: { order: ASC } }
-        filter: {
-          frontmatter: { order: { gt: 0 }, slug: { regex: "/linux/" } }
-        }
-      ) {
-        pages: edges {
-          page: node {
-            overview: frontmatter {
-              slug
-              title
-              excerpt
-              tags
-              parentDir
-              shortSlug
-            }
-          }
-        }
-      }
       misc: allMarkdownRemark(
         sort: { frontmatter: { order: ASC } }
         filter: {
@@ -244,7 +225,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     data: {
       httpserver: { pages: httpServerPages },
       febs: { pages: febsPages },
-      linux: { pages: linuxPages },
       misc: { pages: miscPages },
       mongo: { pages: mongoPages },
       mongosectioncontent: { pages: mongoSectionContent },
@@ -262,7 +242,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const pages = [
     ...febsPages,
     ...httpServerPages,
-    ...linuxPages,
     ...miscPages,
     ...mongoPages,
     ...nginxPages,
@@ -469,6 +448,55 @@ exports.onCreatePage = ({ page, actions }) => {
     page.path.includes("k8s") &&
     page.path !== "/k8s" &&
     !k8sShortSlugs.includes(page.context.frontmatter__shortSlug)
+  ) {
+    console.log("deleting page: ", page.path)
+    deletePage(page)
+  }
+
+
+  /*
+  
+    linux+bash cleanup
+
+  */
+ 
+  const linuxShortSlugs = [
+    "a-kernel",
+    "a-kernel",
+    "arrays",
+    "cli-tools",
+    "dns",
+    "env",
+    "file-system",
+    "conditions-and-cases",
+    "file-interaction",
+    "flags-and-args",
+    "groups",
+    "heredoc",
+    "create-an-nfs",
+    "interacting-with-ubuntu",
+    "more-scripts",
+    "npm-outdated-script",
+    "pkgs",
+    "permissions",
+    "processes",
+    "script-writing",
+    "sftp",
+    "ssh",
+    "ctrl-and-signals",
+    "starting-with-unix",
+    "text-editors",
+    "streams-pipes",
+    "template",
+    "users",
+    "wordcount",
+    "wget-curl",
+  ]
+
+  if (
+    page.path.includes("linux") &&
+    page.path !== "/linux" &&
+    !linuxShortSlugs.includes(page.context.frontmatter__shortSlug)
   ) {
     console.log("deleting page: ", page.path)
     deletePage(page)

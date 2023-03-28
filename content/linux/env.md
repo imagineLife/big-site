@@ -2,6 +2,7 @@
 parentDir: linux
 title: Env and Env Vars
 slug: linux/env
+shortSlug: env
 author: Jake Laursen
 excerpt: Linux runs in environments
 tags: ["linux", "kernel", "cli", "environment", "variables"]
@@ -111,4 +112,3 @@ if [ -f ~/.bashrc ]; then
     source ~/.bashrc
 fi
 ```
-

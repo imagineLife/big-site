@@ -2,6 +2,7 @@
 parentDir: linux
 title: A Script for checking outdated npm dependency versions
 slug: linux/npm-outdated-script
+shortSlug: npm-outdated-script
 author: Jake Laursen
 excerpt: Intended to add to a ci-cd flow, i.e github action
 tags: ["linux", "bash", "npm", "dependencies", "maintenance"]

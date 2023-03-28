@@ -2,6 +2,7 @@
 title: Starting With Unix
 parentDir: linux
 slug: linux/starting-with-unix
+shortSlug: starting-with-unix
 author: Jake Laursen
 excerpt: Unix and Linux as unix-like
 tags: ["http", "web", "server", "node", "express"]

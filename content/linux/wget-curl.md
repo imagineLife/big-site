@@ -2,6 +2,7 @@
 parentDir: linux
 title: wget & curl
 slug: linux/wget-curl
+shortSlug: wget-curl
 author: Jake Laursen
 excerpt: Request info from the www using wget and curl
 tags: ["linux", "kernel", "cli", "wget", "networking"]

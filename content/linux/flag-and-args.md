@@ -2,6 +2,7 @@
 title: Flags and Args
 parentDir: linux
 slug: linux/flags-and-args
+shortSlug: flags-and-args
 author: Jake Laursen
 excerpt: Intro to CLI command flags and arguments
 tags: ["linux", "kernel", "cli", "ubuntu", "shell", "flags", "args"]

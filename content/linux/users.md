@@ -2,6 +2,7 @@
 parentDir: linux
 title: Users
 slug: linux/users
+shortSlug: users
 author: Jake Laursen
 excerpt: Users and accounts of the Linux OS
 tags: ["linux", "kernel", "cli", "users"]

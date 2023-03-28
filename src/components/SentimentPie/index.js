@@ -1,4 +1,5 @@
 import React from 'react';
+import './index.scss';
 
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts"
 
@@ -29,6 +30,18 @@ export default function SentimentPie({ data, small }) {
     height: 300
     }
   
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="tt">
+          <span>{label}</span>
+          <span>{payload}</span>
+        </div>
+      )
+    }
+
+    return null
+  }
   return (
     <ResponsiveContainer {...dims} >
       <PieChart width="50%" height="50%">
@@ -41,6 +54,7 @@ export default function SentimentPie({ data, small }) {
           fill="#8884d8"
           label={<PieLabel />}
           labelLine={false}
+          Tooltip={<CustomTooltip />}
         >
           {data.map((slice, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[slice.name]} />

@@ -2,6 +2,7 @@
 parentDir: linux
 title: CLI Tools
 slug: linux/cli-tools
+shortSlug: cli-tools
 author: Jake Laursen
 excerpt: Using Wildcards and Expansions for shorthand processing
 tags: ["linux", "kernel", "cli"]

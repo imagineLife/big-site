@@ -2,6 +2,7 @@
 title: A Kernel
 parentDir: linux
 slug: linux/a-kernel
+shortSlug: a-kernel
 author: Jake Laursen
 excerpt: The glue between the hardware and software
 tags: ["linux", "kernel"]

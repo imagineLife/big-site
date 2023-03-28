@@ -2,6 +2,7 @@
 parentDir: linux
 title: Groups
 slug: linux/groups
+shortSlug: groups
 author: Jake Laursen
 excerpt: Users with a shared group attribute
 tags: ["linux", "kernel", "cli", "users", "groups"]

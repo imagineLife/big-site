@@ -2,6 +2,7 @@
 title: Interacting with Ubuntu
 parentDir: linux
 slug: linux/interacting-with-ubuntu
+shortSlug: interacting-with-ubuntu
 author: Jake Laursen
 excerpt: Getting a cli up and running
 tags: ["linux", "kernel", "cli", "ubuntu", "shell"]
@@ -88,4 +89,3 @@ Here, typing `pwd` will show `/home/ubuntu/snap/multipass-sshfs`.
 `cd` can also be given more specific "backing out" instructions -  
 with the `pwd` at `/home/ubuntu/snap/multipass-sshfs`, typing `cd ../../../` will "back out" into the `/home` directory.  
 Here, typing `pwd` will show `/home`.  
-

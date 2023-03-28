@@ -2,6 +2,7 @@
 parentDir: linux
 title: Permissions
 slug: linux/permissions
+shortSlug: permissions
 author: Jake Laursen
 excerpt: 
 tags: ["linux", "kernel", "cli", "users", "groups"]

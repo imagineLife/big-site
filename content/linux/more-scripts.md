@@ -2,6 +2,7 @@
 parentDir: linux
 title: Doing More With Bash
 slug: linux/more-scripts
+shortSlug: more-scripts
 author: Jake Laursen
 excerpt: Conditional logic, collecting variable input, and more
 tags: ["linux", "bash", "scripts", "variables"]

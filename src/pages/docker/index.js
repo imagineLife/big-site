@@ -51,12 +51,6 @@ const IndexPage = () => (
       pages.forEach(p => { 
         if (p.page.overview.order <= intro_max_index) myPages.intro.push(p)
         else if (p.page.overview.order > intro_max_index && p.page.overview.order <= node_max_index) myPages.node.push(p)
-        else { 
-          // console.log("%c UnHandled Page", "background-color: red; color: black;")
-          
-          // console.log(p.page.overview.slug)
-          // console.log(p.page.overview.order)
-        } 
       })
       return (
         <Fragment>

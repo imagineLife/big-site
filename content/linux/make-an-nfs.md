@@ -2,6 +2,7 @@
 parentDir: linux
 title: Create an NFS server
 slug: linux/create-an-nfs
+shortSlug: create-an-nfs
 author: Jake Laursen
 excerpt: Leverage a few commands in a linux environment to share files across a network
 tags: ["linux", "bash", "nfs", "server"]

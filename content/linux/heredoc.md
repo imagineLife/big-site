@@ -2,6 +2,7 @@
 parentDir: linux
 title: Use Multi-Line Text Blocks in combination with other commands using heredoc
 slug: linux/heredoc
+shortSlug: heredoc
 author: Jake Laursen
 excerpt: Need A Text Block To
 tags: ["linux", "bash", "command", "heredoc", "text", "redirect"]

@@ -2,6 +2,7 @@
 parentDir: linux
 title: Processes
 slug: linux/processes
+shortSlug: processes
 author: Jake Laursen
 excerpt: 
 tags: ["linux", "kernel", "cli", "environment", "processes"]

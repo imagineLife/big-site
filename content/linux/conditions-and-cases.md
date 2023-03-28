@@ -2,6 +2,7 @@
 parentDir: linux
 title: Conditions And Cases
 slug: linux/conditions-and-cases
+shortSlug: conditions-and-cases
 author: Jake Laursen
 excerpt: More on Conditional Logic and Case Statements
 tags: ["linux", "bash", "scripts", "conditions", "cases"]

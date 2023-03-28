@@ -2,6 +2,7 @@
 parentDir: linux
 title: Writing Scripts with Bash
 slug: linux/script-writing
+shortSlug: script-writing
 author: Jake Laursen
 excerpt: Scripts, bash, automation
 tags: ["linux", "kernel", "cli", "scripts"]

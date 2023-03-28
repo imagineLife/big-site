@@ -2,6 +2,7 @@
 parentDir: linux
 title: SSH
 slug: linux/sftp
+shortSlug: sftp
 author: Jake Laursen
 excerpt: Share files with SFTP
 tags: ["linux", "kernel", "cli", "ssh", "sftp"]
