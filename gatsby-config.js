@@ -120,6 +120,7 @@ module.exports = {
               wrapperStyle: `margin-bottom: 1.0725rem`,
             },
           },
+          `gatsby-remark-autolink-headers`,
           `gatsby-remark-prismjs`,
         ],
       },
@@ -258,5 +259,5 @@ module.exports = {
       },
     },
   ],
-  trailingSlash: "never"
+  trailingSlash: "never",
 }
