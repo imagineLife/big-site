@@ -1,6 +1,6 @@
 ---
 parentDir: linux
-title: SSH
+title: SFTP
 slug: linux/sftp
 shortSlug: sftp
 author: Jake Laursen
