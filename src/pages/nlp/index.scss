@@ -59,6 +59,13 @@
     bottom: 0px;
     left: 0px;
   }
+
+  .connected-dot {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    display: inline-block;
+  }
 }
 
 section#reset-preview{
@@ -84,10 +91,10 @@ section#reset-preview{
 }
 
 section#text-analysis{
-    display: grid;
+  display: grid;
 
 
-    section#scalar-wrapper{
-      display: flex;
-    }
+  section#scalar-wrapper{
+    display: flex;
   }
+}
