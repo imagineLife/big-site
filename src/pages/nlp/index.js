@@ -1,7 +1,7 @@
 import React from "react"
 import { QueryClient } from "react-query"
 import "./index.scss"
-import NlpUi from './nlpUi'
+import NlpUi from '../../components/nlpUi'
 // components
 import ReactQueryWrapper from '../../components/ReactQueryWrapper'
 

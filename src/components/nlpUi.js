@@ -5,8 +5,8 @@ import { useQuery } from "react-query"
 import "./index.scss"
 
 // components
-import DragDDropFile from "../../components/DragNDropForm"
-import TextAnalysis from "../../components/nlp/TextAnalysis"
+import DragDDropFile from "./DragNDropForm"
+import TextAnalysis from "./nlp/TextAnalysis"
 import nlpReducer from "./reducer"
 
 const initialReducerState = {
