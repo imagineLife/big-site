@@ -2,7 +2,7 @@ import React, { useRef, useReducer, useEffect } from "react" // lazy, Suspense
 
 import * as XLSX from "xlsx"
 import { useQuery } from "react-query"
-import "./index.scss"
+import "./../pages/nlp/index.scss"
 
 // components
 import DragDDropFile from "./DragNDropForm"
