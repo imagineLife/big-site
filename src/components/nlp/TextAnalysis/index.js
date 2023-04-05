@@ -28,7 +28,7 @@ function ResetPreviewForm({ reset, content, fileType }) {
 }
 
 function fetchTextAnalysis({data, type}) {
-  const SENTIMENT_PATH = type === "text" ? "/nlp/sentiment" : "/nlp/sentiment/excel"
+  const SENTIMENT_PATH = type === "text" ? "/api/nlp/sentiment" : "/api/nlp/sentiment/excel"
   const FETCH = {
     URL: `${process.env.GATSBY_NLP_API_URL}${SENTIMENT_PATH}`,
     METHOD: 'post',
