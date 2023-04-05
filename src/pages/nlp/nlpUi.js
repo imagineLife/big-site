@@ -18,8 +18,8 @@ const initialReducerState = {
 export default function NlpUi() {
   const inputRef = useRef(null)
   const [state, dispatch] = useReducer(nlpReducer, initialReducerState)
-  console.log('state?.apiInitialized')
-  console.log(state?.apiInitialized)
+  // console.log('state?.apiInitialized')
+  // console.log(state?.apiInitialized)
   
   const useQOpts = {
     refetchOnWindowFocus: false,
@@ -119,8 +119,10 @@ export default function NlpUi() {
 
   return (
     <section id="nlp-wrapper">
-      <h2>NLP Here</h2>
-      <span className="connected-dot" style={{ ...connectedDotBg }}></span>
+      <div className="page-head">
+        <h2>NLP Here</h2>
+        <span className="connected-dot" style={{ ...connectedDotBg }}></span>
+      </div>
       {/* no text data yet */}
       {state.fileData === null && (
         <DragDDropFile

@@ -1,11 +1,4 @@
 export default function nlpReducer(a, b) {
-  console.log('nlpReducer')
-  console.log("a")
-  console.log(a)
-  console.log("b")
-  console.log(b)
-  console.log('- - - - ')
-  
   switch (b.type) {
     case "text":
       return {

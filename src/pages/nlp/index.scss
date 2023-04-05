@@ -3,6 +3,13 @@
   max-width: 85%;
   margin: 0 auto;
 
+  .page-head{
+    display: flex;
+    
+    h2{
+      margin: 10px;
+    }
+  }
   form {
     height: 2rem;
     width: 16rem;
