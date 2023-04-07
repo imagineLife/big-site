@@ -7,6 +7,7 @@ import SentimentScoreLine from "./../../sentimentScoreLine/"
 import SentimentPie from "./../../SentimentPie"
 import Scalar from "../../../components/Scalar"
 import ExcelAnalysis from "../ExcelAnalysis"
+import WordLists from './../WordLists'
 
 const Table = lazy(() => import("../../../components/Table")) 
 
@@ -61,9 +62,11 @@ function fetchTextAnalysis({data, type}) {
 */ 
 
 function TextBlockOption({ data, isLoading }) {
-  const sentimentSummaryData = Object.keys(
+  const sentimentPercentages = Object.keys(
     data?.summary?.sentiments
   ).map(k => ({ name: k, ...data.summary.sentiments[k] }))
+  console.log('data')
+  console.log(data)
   
   return (
     <>
@@ -78,9 +81,13 @@ function TextBlockOption({ data, isLoading }) {
           isLoading={isLoading}
           value={data?.summary?.sentences}
         />
-        <SentimentPie data={sentimentSummaryData} />
+        <SentimentPie data={sentimentPercentages} small />
       </section>
 
+      <WordLists
+        themes={data?.summary?.themes.map(t => t.theme)}
+        wordsByCount={data?.summary?.wordsByCount.slice(0, 20)}
+      />
       {/* <WordsPerSentenceLine
         data={data?.sentenceAnalysis.map((d, idx) => ({
           idx: idx + 1,
