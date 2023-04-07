@@ -8,6 +8,7 @@ import SentimentPie from "./../../SentimentPie"
 import Scalar from "../../../components/Scalar"
 import ExcelAnalysis from "../ExcelAnalysis"
 import WordLists from './../WordLists'
+import './index.scss'
 
 const Table = lazy(() => import("../../../components/Table")) 
 
@@ -69,7 +70,7 @@ function TextBlockOption({ data, isLoading }) {
   console.log(data)
   
   return (
-    <>
+    <div className="text-block-analysis">
       <section id="scalar-wrapper">
         <Scalar
           title={"Words"}
@@ -87,6 +88,7 @@ function TextBlockOption({ data, isLoading }) {
       <WordLists
         themes={data?.summary?.themes.map(t => t.theme)}
         wordsByCount={data?.summary?.wordsByCount.slice(0, 20)}
+        longest={data?.summary?.longestThirty}
       />
       {/* <WordsPerSentenceLine
         data={data?.sentenceAnalysis.map((d, idx) => ({
@@ -111,7 +113,7 @@ function TextBlockOption({ data, isLoading }) {
           score: d.sentimentScore.toFixed(1),
         }))}
       />
-    </>
+    </div>
   )
 }
 

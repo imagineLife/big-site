@@ -1,0 +1,17 @@
+section.word-lists{
+    display: flex;
+    justify-content: space-around;
+
+
+    section#themes{
+      ul {
+        max-height: 300px;
+      }
+    }
+    
+    section#words-by-count{
+      table{
+        max-height: 300px;
+      }
+    }
+  }

@@ -15,7 +15,16 @@ table.table-wrapper {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
-    // width: 30px;
+  }
+
+  /*
+    sticky header?
+  */ 
+  th{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-color: white;
   }
 
   tr:nth-child(even) {

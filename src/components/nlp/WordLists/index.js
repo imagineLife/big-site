@@ -1,7 +1,7 @@
 import React from 'react';
 import Table from "../../Table"
-
-function WordLists({ themes, wordsByCount }) {
+import './index.scss'
+function WordLists({ themes, wordsByCount, longest }) {
   return (
     <section className="word-lists">
       <section id="themes">
@@ -18,6 +18,7 @@ function WordLists({ themes, wordsByCount }) {
           ))}
         </ul>
       </section>
+
       <section id="words-by-count">
         <h4>Words By Count</h4>
         <Table
@@ -34,6 +35,21 @@ function WordLists({ themes, wordsByCount }) {
           ]}
         />
       </section>
+
+      {longest && (
+        <section id="longest-words">
+          <h4>Longest Words</h4>
+          <Table
+            data={[longest.map(d => ({Word: d}))]}
+            columns={[
+              {
+                Header: "Word",
+                accessor: "Word",
+              },
+            ]}
+          />
+        </section>
+      )}
     </section>
   )
 }
