@@ -71,11 +71,6 @@ function prepOtherPages({ pages, nestingRules }) {
   */ 
   pages.forEach(({ page }) => {
     const theSectionThisPageIsPartOf = nestingRules.order.find(sectionString => page.overview.slug.includes(sectionString))
-    console.log({
-      slug: page.overview.slug,
-      theSectionThisPageIsPartOf
-    })
-    
     if (theSectionThisPageIsPartOf) {
       nestingRules[theSectionThisPageIsPartOf].items.push(page)
     } else {
@@ -441,11 +436,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         let pageObj = {
           path: page.overview.slug,
           component:
-            page.overview.slug.includes("docker") ||
-            page.overview.slug.includes("scrum") ||
-            page.overview.slug.includes("nginx") ||
-            page.overview.slug.includes("linux") ||
-            page.overview.slug.includes("k8s")
+            page.overview.slug.startsWith("docker") ||
+            page.overview.slug.startsWith("scrum") ||
+            page.overview.slug.startsWith("nginx") ||
+            page.overview.slug.startsWith("linux") ||
+            page.overview.slug.startsWith("k8s")
               ? nestedNavTemplate
               : mdTemplate,
           context: {
