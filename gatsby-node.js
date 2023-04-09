@@ -13,6 +13,70 @@ const mdTemplate = path.resolve(`./src/templates/markdown/index.js`)
 const tagTemplate = path.resolve(`./src/templates/tags.js`)
 const nestedNavTemplate = path.resolve('./src/templates/nestedNav/index.js')
 
+const sidebarNestedSections = {
+  /*
+    blogSectionName: {
+      sectionFriendlyName: slug-key-word
+      order: declares the order
+    }
+  */
+  k8s: {
+    "in-depth": "In Depth",
+    "": "Getting Started",
+    order: ["Getting Started", "In Depth"],
+  },
+}
+
+
+
+
+
+
+/*
+  output extected to be shaped
+  [
+    {
+      sectionName: "In Depth",
+      items: [
+        {
+          frontmatter: { shortSlug, title, slug }
+        }
+      ]
+    }
+  ]
+*/ 
+function prepOtherPages({ pages, nestingRules }) {
+  if (nestingRules) { 
+    let gettingStarted = {
+      sectionName: 'Getting Started',
+      items: []
+    }
+    let inDepth = {
+      sectionName: "In Depth",
+      items: [],
+    }
+
+    /*
+      IN ENGLISH
+      - for each page
+        - does it have 'in-depth' in the page.overview.slug
+        - yes?!
+          - push item.page to inDepth array
+        - no?
+          - push to "getting started" array
+    */ 
+    pages.forEach(({ page }) => {
+      if (page.overview.slug.includes('in-depth')) {
+        inDepth.items.push(page)
+      } else {
+        gettingStarted.items.push(page) 
+      }
+    })
+    return [gettingStarted, inDepth]
+  }
+  return pages
+}
+
 /**
  * @type {import('gatsby').GatsbyNode['createPages']}
  */
@@ -378,6 +442,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               ? nestedNavTemplate
               : mdTemplate,
           context: {
+            title: page.overview.title,
+            excerpt: page.overview.excerpt,
             tags: page.overview.tags,
             slug: page.overview.slug,
             parentDir: thisParent,
@@ -403,7 +469,10 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           page.overview.slug.includes("k8s")
         ) {
           pageObj.context.content = page.content
-          pageObj.context.otherPages = result.data[`${sectionName}`].otherPages
+          pageObj.context.otherPages = prepOtherPages({
+            pages: result.data[`${sectionName}`].otherPages,
+            nestingRules: sidebarNestedSections[page.overview.slug.split('/')[0]],
+          })
         }
 
         createPage(pageObj)
@@ -525,80 +594,6 @@ exports.onCreatePage = ({ page, actions }) => {
     console.log("deleting page: ", page.path)
     deletePage(page)
   }
-
-
-  // /*
-  //   k8s cleanup
-  // */ 
-  // const k8sShortSlugs = [
-  //   "node-port-service",
-  //   "cluster-ip-service",
-  //   "architecture-overview",
-  //   "microservice-case-study",
-  //   "containers-first",
-  //   "intro-to-k8s-in-the-cloud",
-  //   "k8s-app-arch",
-  //   "load-balancer-service",
-  //   "microservice-demo",
-  //   "microservice-with-deployments",
-  //   "replica-controllers",
-  //   "node-port-service",
-  //   "deployments",
-  //   "on-pods",
-  //   "networking-intro",
-  //   "intro-to-services",
-  //   "setup-overview",
-  //   "admission-controllers",
-  //   "admission-controllers",
-  //   "api-server",
-  //   "authentication",
-  //   "authorization",
-  //   "commands-and-args",
-  //   "commands",
-  //   "containers-and-more",
-  //   "debugging-workflow",
-  //   "custom-resources",
-  //   "deployment-strategies",
-  //   "security-with-containers",
-  //   "env-vars",
-  //   "headless-services",
-  //   "helm",
-  //   "imperative-commands",
-  //   "ingress",
-  //   "jobs",
-  //   "labels-and-selectors",
-  //   "logging-and-monitoring",
-  //   "liveliness",
-  //   "more-resources",
-  //   "namespaces",
-  //   "multi-container-pods",
-  //   "network-policies",
-  //   "node-affinity",
-  //   "node-selectors",
-  //   "persistent-volume-lifecycle",
-  //   "readiness",
-  //   "pod-security-standards",
-  //   "on-resources",
-  //   "service-mesh",
-  //   "service-accounts",
-  //   "stateful-sets",
-  //   "k8s-on-gce-vms",
-  //   "storage-classes",
-  //   "taints-and-tolerations",
-  //   "topics",
-  //   "why-ingress",
-  //   "vols-and-claims",
-  // ]
-
-  // if (
-  //   page.path.includes("k8s") &&
-  //   page.path !== "/k8s" &&
-  //   !k8sShortSlugs.includes(page.context.frontmatter__shortSlug)
-  // ) {
-  //   console.log("deleting page: ", page.path)
-  //   deletePage(page)
-  // }
-
 
   /*
   

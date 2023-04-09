@@ -3,17 +3,20 @@ import { Link } from "gatsby"
 
 import './index.scss'
 export default function Sidebar({ items, navWithSections, parentDir }) {
-  
+
   return (
     <nav aria-label={`learn-${parentDir}`} className="sidebar">
+      {/*  */}
+      {/* SECTIONED */}
+      {/*  */}
       {navWithSections &&
-        navWithSections.map(arrOfSections => (
-          <div key={arrOfSections.sectionName}>
-            <span>{arrOfSections.sectionName}</span>
-            <div role="region" aria-label={arrOfSections.sectionName}>
-              {arrOfSections.items.map(
-                ({ frontmatter: { shortSlug, title, slug } }, pidx) => (
-                  <Link key={`${pidx}-${shortSlug}`} to={`/${slug}`}>
+        navWithSections.map(sectionObject => (
+          <div key={sectionObject.sectionName}>
+            <span>{sectionObject.sectionName}</span>
+            <div role="region" aria-label={sectionObject.sectionName}>
+              {sectionObject.items.map(
+                ({ overview: { title, slug } }, pidx) => (
+                  <Link key={`${pidx}-${slug}`} to={`/${slug}`}>
                     {title}
                   </Link>
                 )
@@ -21,6 +24,10 @@ export default function Sidebar({ items, navWithSections, parentDir }) {
             </div>
           </div>
         ))}
+
+      {/*  */}
+      {/* FLAT */}
+      {/*  */}
       {!navWithSections &&
         items?.map(({ frontmatter: { shortSlug, title, slug } }, pidx) => {
           // let innerTo = `/${parentDir}/${shortSlug}`
