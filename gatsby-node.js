@@ -11,6 +11,7 @@ const { createFilePath } = require(`gatsby-source-filesystem`)
 // const blogPost = path.resolve(`./src/templates/blog-post.js`)
 const mdTemplate = path.resolve(`./src/templates/markdown/index.js`)
 const tagTemplate = path.resolve(`./src/templates/tags.js`)
+const nestedNavTemplate = path.resolve('./src/templates/nestedNav/index.js')
 
 /**
  * @type {import('gatsby').GatsbyNode['createPages']}
@@ -33,6 +34,34 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   */
   const result = await graphql(`
     {
+      crocker: allMarkdownRemark(
+        sort: { frontmatter: { order: ASC } }
+        filter: {
+          frontmatter: { order: { gt: 0 }, slug: { regex: "/crocker/" } }
+        }
+      ) {
+        pages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              excerpt
+              tags
+              parentDir
+              shortSlug
+            }
+            content: html
+          }
+        }
+        otherPages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+            }
+          }
+        }
+      }
       febs: allMarkdownRemark(
         sort: { frontmatter: { order: ASC } }
         filter: { frontmatter: { order: { gt: 0 }, slug: { regex: "/febs/" } } }
@@ -223,8 +252,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   const {
     data: {
-      httpserver: { pages: httpServerPages },
+      crocker: { pages: crockerPages, otherPages: otherCrockerPages },
       febs: { pages: febsPages },
+      httpserver: { pages: httpServerPages },
       misc: { pages: miscPages },
       mongo: { pages: mongoPages },
       mongosectioncontent: { pages: mongoSectionContent },
@@ -249,20 +279,34 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     ...mongoSectionContent,
     ...socialPages,
     ...strengthsPages,
+    ...crockerPages,
   ]
+
   pages.forEach(({ page }, index) => {
+    const thisParent = page.overview.parentDir || page.overview.slug; 
     let pageObj = {
       path: page.overview.slug,
-      component: mdTemplate,
+      component: thisParent.includes("crocker")
+        ? nestedNavTemplate
+        : mdTemplate,
       context: {
         slug: page.overview.slug,
-        parentDir: page.overview.parentDir || page.overview.slug,
+        parentDir: thisParent,
         shortSlug: page.overview.shortSlug,
         className: page.overview.parentDir || "",
       },
     }
     if (page?.overview?.shortSlug)
-      pageObj.context.shortSlug = page.overview.shortSlug
+      pageObj.context.shortSlug = page.overview.shortSlug;
+    
+    // 
+    // more all-inclusive nested-layout accommodations
+    // 
+    if (page.overview.slug.includes("crocker")) { 
+      pageObj.context.content = page.content
+      pageObj.context.otherPages = otherCrockerPages
+    }
+
     createPage(pageObj)
   })
 
