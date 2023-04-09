@@ -458,10 +458,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             className: page.overview.parentDir || "",
           },
         }
-        if (page.overview.slug.includes('k8s')) {
-          console.log('pageObj')
-          console.log(pageObj)
-        }
+
         if (page?.overview?.shortSlug)
           pageObj.context.shortSlug = page.overview.shortSlug;
 
