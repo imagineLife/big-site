@@ -4,14 +4,14 @@ import "./index.scss"
 import Header from "./../../components/header"
 import TagList from "./../../components/TagList"
 import Sidebar from "./../../components/sidebar"
-// import PageHead from "./../../components/PageHead"
+import PageHead from "./../../components/PageHead"
 
 export default function NestedNavTemplate({ pageContext: { content, parentDir, otherPages, tags } }) {
   return (
     <main className="page-by-slug">
       <Header className="md" />
       <Sidebar
-        items={otherPages.map(p => ({ frontmatter: { shortSlug: p.page.overview.shortSlug, title: p.page.overview.title} }))}
+        items={otherPages.map(p => ({ frontmatter: { shortSlug: p.page.overview.shortSlug, title: p.page.overview.title, slug: p.page.overview.slug} }))}
         // navWithSections={navWithSections}
         parentDir={parentDir}
       />
@@ -27,24 +27,24 @@ export default function NestedNavTemplate({ pageContext: { content, parentDir, o
   )
 }
 
-// export function Head({
-//   data: {
-//     pageData: {
-//       overview: { title, excerpt, slug, tags },
-//       timeToRead,
-//       wordCount: { words },
-//     },
-//   },
-// }) {
-//   return (
-//     <PageHead
-//       {...{
-//         title,
-//         excerpt,
-//         slug,
-//         words,
-//         tags,
-//       }}
-//     />
-//   )
-// }
+export function Head({
+  data: {
+    pageData: {
+      overview: { title, excerpt, slug, tags },
+      timeToRead,
+      wordCount: { words },
+    },
+  },
+}) {
+  return (
+    <PageHead
+      {...{
+        title,
+        excerpt,
+        slug,
+        words,
+        tags,
+      }}
+    />
+  )
+}

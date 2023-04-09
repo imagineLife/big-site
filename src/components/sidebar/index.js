@@ -4,9 +4,6 @@ import { Link } from "gatsby"
 import './index.scss'
 export default function Sidebar({ items, navWithSections, parentDir }) {
   
-  let innerParentDir = parentDir;
-  if (parentDir.includes('in-depth')) innerParentDir = "k8s"
-  
   return (
     <nav aria-label={`learn-${parentDir}`} className="sidebar">
       {navWithSections &&
@@ -15,11 +12,8 @@ export default function Sidebar({ items, navWithSections, parentDir }) {
             <span>{arrOfSections.sectionName}</span>
             <div role="region" aria-label={arrOfSections.sectionName}>
               {arrOfSections.items.map(
-                ({ frontmatter: { shortSlug, title } }, pidx) => (
-                  <Link
-                    key={`${pidx}-${shortSlug}`}
-                    to={`/${innerParentDir}/${shortSlug}`}
-                  >
+                ({ frontmatter: { shortSlug, title, slug } }, pidx) => (
+                  <Link key={`${pidx}-${shortSlug}`} to={`/${slug}`}>
                     {title}
                   </Link>
                 )
@@ -28,14 +22,14 @@ export default function Sidebar({ items, navWithSections, parentDir }) {
           </div>
         ))}
       {!navWithSections &&
-        items?.map(({ frontmatter: { shortSlug, title } }, pidx) => (
-          <Link
-            key={`${pidx}-${shortSlug}`}
-            to={`/${innerParentDir}/${shortSlug}`}
-          >
-            {title}
-          </Link>
-        ))}
+        items?.map(({ frontmatter: { shortSlug, title, slug } }, pidx) => {
+          // let innerTo = `/${parentDir}/${shortSlug}`
+          return (
+            <Link key={`${pidx}-${shortSlug}`} to={`/${slug}`}>
+              {title}
+            </Link>
+          )
+        })}
     </nav>
   )
 }

@@ -100,6 +100,39 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           }
         }
       }
+      k8s: allMarkdownRemark(
+        sort: { frontmatter: { order: ASC } }
+        filter: {
+          frontmatter: {
+            order: { gt: 0 }
+            slug: { regex: "/^k8s/((?!examples).)/" }
+          }
+        }
+      ) {
+        pages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              excerpt
+              tags
+              parentDir
+              shortSlug
+            }
+            content: html
+          }
+        }
+        otherPages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              shortSlug
+              parentDir
+            }
+          }
+        }
+      }
       linux: allMarkdownRemark(
         sort: { frontmatter: { order: ASC } }
         filter: {
@@ -326,14 +359,24 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   Object.keys(result.data).forEach(sectionName => {
     if (sectionName !== 'tagsGroup') {
+      if (sectionName === 'k8s') {
+        console.log('// - - - - - //')
+        console.log('creating k8s pages')
+        console.log('// - - - - - //')
+      }
       const thisSectionPages = result.data[`${sectionName}`].pages
       thisSectionPages.forEach(({ page }) => {
         const thisParent = page.overview.parentDir || page.overview.slug;
         let pageObj = {
           path: page.overview.slug,
-          component: ["docker", "scrum", "nginx", "linux"].includes(thisParent)
-            ? nestedNavTemplate
-            : mdTemplate,
+          component:
+            page.overview.slug.includes("docker") ||
+            page.overview.slug.includes("scrum") ||
+            page.overview.slug.includes("nginx") ||
+            page.overview.slug.includes("linux") ||
+            page.overview.slug.includes("k8s")
+              ? nestedNavTemplate
+              : mdTemplate,
           context: {
             tags: page.overview.tags,
             slug: page.overview.slug,
@@ -341,6 +384,10 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             shortSlug: page.overview.shortSlug,
             className: page.overview.parentDir || "",
           },
+        }
+        if (page.overview.slug.includes('k8s')) {
+          console.log('pageObj')
+          console.log(pageObj)
         }
         if (page?.overview?.shortSlug)
           pageObj.context.shortSlug = page.overview.shortSlug;
@@ -352,7 +399,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           page.overview.slug.includes("docker") ||
           page.overview.slug.includes("scrum") ||
           page.overview.slug.includes("nginx") ||
-          page.overview.slug.includes("linux")
+          page.overview.slug.includes("linux") ||
+          page.overview.slug.includes("k8s")
         ) {
           pageObj.context.content = page.content
           pageObj.context.otherPages = result.data[`${sectionName}`].otherPages
@@ -479,77 +527,77 @@ exports.onCreatePage = ({ page, actions }) => {
   }
 
 
-  /*
-    k8s cleanup
-  */ 
-  const k8sShortSlugs = [
-    "node-port-service",
-    "cluster-ip-service",
-    "architecture-overview",
-    "microservice-case-study",
-    "containers-first",
-    "intro-to-k8s-in-the-cloud",
-    "k8s-app-arch",
-    "load-balancer-service",
-    "microservice-demo",
-    "microservice-with-deployments",
-    "replica-controllers",
-    "node-port-service",
-    "deployments",
-    "on-pods",
-    "networking-intro",
-    "intro-to-services",
-    "setup-overview",
-    "admission-controllers",
-    "admission-controllers",
-    "api-server",
-    "authentication",
-    "authorization",
-    "commands-and-args",
-    "commands",
-    "containers-and-more",
-    "debugging-workflow",
-    "custom-resources",
-    "deployment-strategies",
-    "security-with-containers",
-    "env-vars",
-    "headless-services",
-    "helm",
-    "imperative-commands",
-    "ingress",
-    "jobs",
-    "labels-and-selectors",
-    "logging-and-monitoring",
-    "liveliness",
-    "more-resources",
-    "namespaces",
-    "multi-container-pods",
-    "network-policies",
-    "node-affinity",
-    "node-selectors",
-    "persistent-volume-lifecycle",
-    "readiness",
-    "pod-security-standards",
-    "on-resources",
-    "service-mesh",
-    "service-accounts",
-    "stateful-sets",
-    "k8s-on-gce-vms",
-    "storage-classes",
-    "taints-and-tolerations",
-    "topics",
-    "why-ingress",
-    "vols-and-claims",
-  ]
+  // /*
+  //   k8s cleanup
+  // */ 
+  // const k8sShortSlugs = [
+  //   "node-port-service",
+  //   "cluster-ip-service",
+  //   "architecture-overview",
+  //   "microservice-case-study",
+  //   "containers-first",
+  //   "intro-to-k8s-in-the-cloud",
+  //   "k8s-app-arch",
+  //   "load-balancer-service",
+  //   "microservice-demo",
+  //   "microservice-with-deployments",
+  //   "replica-controllers",
+  //   "node-port-service",
+  //   "deployments",
+  //   "on-pods",
+  //   "networking-intro",
+  //   "intro-to-services",
+  //   "setup-overview",
+  //   "admission-controllers",
+  //   "admission-controllers",
+  //   "api-server",
+  //   "authentication",
+  //   "authorization",
+  //   "commands-and-args",
+  //   "commands",
+  //   "containers-and-more",
+  //   "debugging-workflow",
+  //   "custom-resources",
+  //   "deployment-strategies",
+  //   "security-with-containers",
+  //   "env-vars",
+  //   "headless-services",
+  //   "helm",
+  //   "imperative-commands",
+  //   "ingress",
+  //   "jobs",
+  //   "labels-and-selectors",
+  //   "logging-and-monitoring",
+  //   "liveliness",
+  //   "more-resources",
+  //   "namespaces",
+  //   "multi-container-pods",
+  //   "network-policies",
+  //   "node-affinity",
+  //   "node-selectors",
+  //   "persistent-volume-lifecycle",
+  //   "readiness",
+  //   "pod-security-standards",
+  //   "on-resources",
+  //   "service-mesh",
+  //   "service-accounts",
+  //   "stateful-sets",
+  //   "k8s-on-gce-vms",
+  //   "storage-classes",
+  //   "taints-and-tolerations",
+  //   "topics",
+  //   "why-ingress",
+  //   "vols-and-claims",
+  // ]
 
-  if (
-    page.path.includes("k8s") &&
-    page.path !== "/k8s" &&
-    !k8sShortSlugs.includes(page.context.frontmatter__shortSlug)
-  ) {
-    console.log("deleting page: ", page.path)
-    deletePage(page)
-  }
+  // if (
+  //   page.path.includes("k8s") &&
+  //   page.path !== "/k8s" &&
+  //   !k8sShortSlugs.includes(page.context.frontmatter__shortSlug)
+  // ) {
+  //   console.log("deleting page: ", page.path)
+  //   deletePage(page)
+  // }
 
 
   /*
