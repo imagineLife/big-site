@@ -364,38 +364,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   })
   
 
-  // Create blog posts pages
-  // But only if there's at least one markdown file found at "content/blog" (defined in gatsby-config.js)
-  // `context` is available in the template as a prop and as a variable in GraphQL
-
-  // pages.forEach(({ page }, index) => {
-  //   const thisParent = page.overview.parentDir || page.overview.slug; 
-  //   let pageObj = {
-  //     path: page.overview.slug,
-  //     component: thisParent.includes("docker")
-  //       ? nestedNavTemplate
-  //       : mdTemplate,
-  //     context: {
-  //       slug: page.overview.slug,
-  //       parentDir: thisParent,
-  //       shortSlug: page.overview.shortSlug,
-  //       className: page.overview.parentDir || "",
-  //     },
-  //   }
-  //   if (page?.overview?.shortSlug)
-  //     pageObj.context.shortSlug = page.overview.shortSlug;
-    
-  //   // 
-  //   // more all-inclusive nested-layout accommodations
-  //   // 
-  //   if (page.overview.slug.includes("docker")) { 
-  //     pageObj.context.content = page.content
-  //     pageObj.context.otherPages = otherdockerPages
-  //   }
-
-  //   createPage(pageObj)
-  // })
-
   groupOfTags.forEach(({ fieldValue }) => {
     createPage({
       path: `/tags/${fieldValue}/`,
