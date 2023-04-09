@@ -21,9 +21,18 @@ const sidebarNestedSections = {
     }
   */
   k8s: {
-    "in-depth": "In Depth",
-    "": "Getting Started",
-    order: ["Getting Started", "In Depth"],
+    "in-depth": {
+      sectionName: "In Depth",
+      items: [],
+      parentDir: "k8s/in-depth",
+    },
+    "": {
+      sectionName: "Getting Started",
+      items: [],
+      parentDir: "k8s",
+    },
+    order: ["", "in-depth"],
+    finished: false
   },
 }
 
@@ -46,35 +55,35 @@ const sidebarNestedSections = {
   ]
 */ 
 function prepOtherPages({ pages, nestingRules }) {
-  if (nestingRules) { 
-    let gettingStarted = {
-      sectionName: 'Getting Started',
-      items: []
-    }
-    let inDepth = {
-      sectionName: "In Depth",
-      items: [],
-    }
+  
+  // FLAT
+  if (!nestingRules) return pages;
 
-    /*
-      IN ENGLISH
-      - for each page
-        - does it have 'in-depth' in the page.overview.slug
-        - yes?!
-          - push item.page to inDepth array
-        - no?
-          - push to "getting started" array
-    */ 
-    pages.forEach(({ page }) => {
-      if (page.overview.slug.includes('in-depth')) {
-        inDepth.items.push(page)
-      } else {
-        gettingStarted.items.push(page) 
-      }
+  if (nestingRules.finished === true) return nestingRules.order.map(sectionToUse => nestingRules[`${sectionToUse}`]);
+  /*
+    IN ENGLISH
+    - for each page
+      - does it have 'in-depth' in the page.overview.slug
+      - yes?!
+        - push item.page to inDepth array
+      - no?
+        - push to "getting started" array
+  */ 
+  pages.forEach(({ page }) => {
+    const theSectionThisPageIsPartOf = nestingRules.order.find(sectionString => page.overview.slug.includes(sectionString))
+    console.log({
+      slug: page.overview.slug,
+      theSectionThisPageIsPartOf
     })
-    return [gettingStarted, inDepth]
-  }
-  return pages
+    
+    if (theSectionThisPageIsPartOf) {
+      nestingRules[theSectionThisPageIsPartOf].items.push(page)
+    } else {
+      nestingRules[""].items.push(page)
+    }
+  })
+  nestingRules.finished = true;
+  return nestingRules.order.map(sectionToUse => nestingRules[`${sectionToUse}`])
 }
 
 /**
@@ -421,14 +430,12 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     },
   } = result
 
+  // loop through graphql sections (docker, k8s, linux, etc)
   Object.keys(result.data).forEach(sectionName => {
     if (sectionName !== 'tagsGroup') {
-      if (sectionName === 'k8s') {
-        console.log('// - - - - - //')
-        console.log('creating k8s pages')
-        console.log('// - - - - - //')
-      }
+
       const thisSectionPages = result.data[`${sectionName}`].pages
+      
       thisSectionPages.forEach(({ page }) => {
         const thisParent = page.overview.parentDir || page.overview.slug;
         let pageObj = {
@@ -474,7 +481,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             nestingRules: sidebarNestedSections[page.overview.slug.split('/')[0]],
           })
         }
-
         createPage(pageObj)
       })
     }
