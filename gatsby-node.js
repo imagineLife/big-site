@@ -34,10 +34,10 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   */
   const result = await graphql(`
     {
-      crocker: allMarkdownRemark(
+      docker: allMarkdownRemark(
         sort: { frontmatter: { order: ASC } }
         filter: {
-          frontmatter: { order: { gt: 0 }, slug: { regex: "/crocker/" } }
+          frontmatter: { order: { gt: 0 }, slug: { regex: "/docker/" } }
         }
       ) {
         pages: edges {
@@ -58,6 +58,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             overview: frontmatter {
               slug
               title
+              shortSlug
+              parentDir
             }
           }
         }
@@ -94,6 +96,36 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               tags
               parentDir
               shortSlug
+            }
+          }
+        }
+      }
+      linux: allMarkdownRemark(
+        sort: { frontmatter: { order: ASC } }
+        filter: {
+          frontmatter: { order: { gt: 0 }, slug: { regex: "/linux/" } }
+        }
+      ) {
+        pages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              excerpt
+              tags
+              parentDir
+              shortSlug
+            }
+            content: html
+          }
+        }
+        otherPages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              shortSlug
+              parentDir
             }
           }
         }
@@ -156,11 +188,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       nginx: allMarkdownRemark(
         sort: { frontmatter: { order: ASC } }
         filter: {
-          frontmatter: {
-            order: { gt: 0 }
-            slug: { regex: "/nginx/" }
-            title: { ne: null }
-          }
+          frontmatter: { order: { gt: 0 }, slug: { regex: "/nginx/" } }
         }
       ) {
         pages: edges {
@@ -172,7 +200,17 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               tags
               parentDir
               shortSlug
-              order
+            }
+            content: html
+          }
+        }
+        otherPages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              shortSlug
+              parentDir
             }
           }
         }
@@ -192,6 +230,36 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               tags
               parentDir
               shortSlug
+            }
+          }
+        }
+      }
+      scrum: allMarkdownRemark(
+        sort: { frontmatter: { order: ASC } }
+        filter: {
+          frontmatter: { order: { gt: 0 }, slug: { regex: "/scrum/" } }
+        }
+      ) {
+        pages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              excerpt
+              tags
+              parentDir
+              shortSlug
+            }
+            content: html
+          }
+        }
+        otherPages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              shortSlug
+              parentDir
             }
           }
         }
@@ -252,63 +320,81 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   const {
     data: {
-      crocker: { pages: crockerPages, otherPages: otherCrockerPages },
-      febs: { pages: febsPages },
-      httpserver: { pages: httpServerPages },
-      misc: { pages: miscPages },
-      mongo: { pages: mongoPages },
-      mongosectioncontent: { pages: mongoSectionContent },
-      nginx: { pages: nginxPages },
-      node: { pages: nodePages },
-      socials: { pages: socialPages },
-      strengths: { pages: strengthsPages },
       tagsGroup: { group: groupOfTags },
     },
   } = result
 
+  Object.keys(result.data).forEach(sectionName => {
+    if (sectionName !== 'tagsGroup') {
+      const thisSectionPages = result.data[`${sectionName}`].pages
+      thisSectionPages.forEach(({ page }) => {
+        const thisParent = page.overview.parentDir || page.overview.slug;
+        let pageObj = {
+          path: page.overview.slug,
+          component: ["docker", "scrum", "nginx", "linux"].includes(thisParent)
+            ? nestedNavTemplate
+            : mdTemplate,
+          context: {
+            tags: page.overview.tags,
+            slug: page.overview.slug,
+            parentDir: thisParent,
+            shortSlug: page.overview.shortSlug,
+            className: page.overview.parentDir || "",
+          },
+        }
+        if (page?.overview?.shortSlug)
+          pageObj.context.shortSlug = page.overview.shortSlug;
+
+        //
+        // more all-inclusive nested-layout accommodations
+        //
+        if (
+          page.overview.slug.includes("docker") ||
+          page.overview.slug.includes("scrum") ||
+          page.overview.slug.includes("nginx") ||
+          page.overview.slug.includes("linux")
+        ) {
+          pageObj.context.content = page.content
+          pageObj.context.otherPages = result.data[`${sectionName}`].otherPages
+        }
+
+        createPage(pageObj)
+      })
+    }
+  })
+  
+
   // Create blog posts pages
   // But only if there's at least one markdown file found at "content/blog" (defined in gatsby-config.js)
   // `context` is available in the template as a prop and as a variable in GraphQL
-  const pages = [
-    ...febsPages,
-    ...httpServerPages,
-    ...miscPages,
-    ...mongoPages,
-    ...nginxPages,
-    ...nodePages,
-    ...mongoSectionContent,
-    ...socialPages,
-    ...strengthsPages,
-    ...crockerPages,
-  ]
 
-  pages.forEach(({ page }, index) => {
-    const thisParent = page.overview.parentDir || page.overview.slug; 
-    let pageObj = {
-      path: page.overview.slug,
-      component: thisParent.includes("crocker")
-        ? nestedNavTemplate
-        : mdTemplate,
-      context: {
-        slug: page.overview.slug,
-        parentDir: thisParent,
-        shortSlug: page.overview.shortSlug,
-        className: page.overview.parentDir || "",
-      },
-    }
-    if (page?.overview?.shortSlug)
-      pageObj.context.shortSlug = page.overview.shortSlug;
+  // pages.forEach(({ page }, index) => {
+  //   const thisParent = page.overview.parentDir || page.overview.slug; 
+  //   let pageObj = {
+  //     path: page.overview.slug,
+  //     component: thisParent.includes("docker")
+  //       ? nestedNavTemplate
+  //       : mdTemplate,
+  //     context: {
+  //       slug: page.overview.slug,
+  //       parentDir: thisParent,
+  //       shortSlug: page.overview.shortSlug,
+  //       className: page.overview.parentDir || "",
+  //     },
+  //   }
+  //   if (page?.overview?.shortSlug)
+  //     pageObj.context.shortSlug = page.overview.shortSlug;
     
-    // 
-    // more all-inclusive nested-layout accommodations
-    // 
-    if (page.overview.slug.includes("crocker")) { 
-      pageObj.context.content = page.content
-      pageObj.context.otherPages = otherCrockerPages
-    }
+  //   // 
+  //   // more all-inclusive nested-layout accommodations
+  //   // 
+  //   if (page.overview.slug.includes("docker")) { 
+  //     pageObj.context.content = page.content
+  //     pageObj.context.otherPages = otherdockerPages
+  //   }
 
-    createPage(pageObj)
-  })
+  //   createPage(pageObj)
+  // })
 
   groupOfTags.forEach(({ fieldValue }) => {
     createPage({

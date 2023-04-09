@@ -3,19 +3,16 @@ import { graphql } from "gatsby"
 import "./index.scss"
 import Header from "./../../components/header"
 import TagList from "./../../components/TagList"
-import PageHead from "./../../components/PageHead"
+import Sidebar from "./../../components/sidebar"
+// import PageHead from "./../../components/PageHead"
 
-export default function NestedNavTemplate(props) {
-  console.log('props')
-  console.log(props)
-  
+export default function NestedNavTemplate({ pageContext: { content, parentDir, otherPages, tags } }) {
   return (
     <main className="page-by-slug">
-      crocker
-      {/* <Header className="md" />
+      <Header className="md" />
       <Sidebar
-        items={navItems}
-        navWithSections={navWithSections}
+        items={otherPages.map(p => ({ frontmatter: { shortSlug: p.page.overview.shortSlug, title: p.page.overview.title} }))}
+        // navWithSections={navWithSections}
         parentDir={parentDir}
       />
       <section className="md-wrapper">
@@ -25,7 +22,7 @@ export default function NestedNavTemplate(props) {
           role="article"
         ></section>
         <TagList tags={tags} />
-      </section> */}
+      </section>
     </main>
   )
 }
