@@ -1,5 +1,5 @@
 ---
-title: A Biref Review of The Lifecycle of a Persistent Volume in Kubernetes
+title: A Brief Review of The Lifecycle of a Persistent Volume in Kubernetes
 parentDir: k8s/in-depth
 slug: k8s/in-depth/persistent-volume-lifecycle
 shortSlug: persistent-volume-lifecycle
