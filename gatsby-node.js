@@ -31,8 +31,9 @@ const sidebarNestedSections = {
       items: [],
       parentDir: "k8s",
     },
+    findOrder: ["in-depth", ""],
     order: ["", "in-depth"],
-    finished: false
+    finished: false,
   },
 }
 
@@ -69,8 +70,10 @@ function prepOtherPages({ pages, nestingRules }) {
       - no?
         - push to "getting started" array
   */ 
+  
   pages.forEach(({ page }) => {
-    const theSectionThisPageIsPartOf = nestingRules.order.find(sectionString => page.overview.slug.includes(sectionString))
+    const theSectionThisPageIsPartOf = nestingRules.findOrder.find(sectionString => page.overview.slug.includes(sectionString))
+    
     if (theSectionThisPageIsPartOf) {
       nestingRules[theSectionThisPageIsPartOf].items.push(page)
     } else {
@@ -566,78 +569,17 @@ exports.onCreateWebpackConfig = ({
 
 // delete the pages that match the collection routing provided by gatsby
 // BUT aren't what I want: here remove all docker/* that aren't supposed to be there
-exports.onCreatePage = ({ page, actions }) => {
-  const { createPage, deletePage } = actions
+// exports.onCreatePage = ({ page, actions }) => {
+  // const { createPage, deletePage } = actions
 
   /*
     docker cleanup
   */ 
-  const dockerShortSlugs = ['cli-overview', 'dockerfile-intro', 'a-frontend', 'node-on-docker-intro', 'node-server-with-user', 'node-server-with-deps', 'setup-docker', 'node-server-containerized', 'a-smaller-node-image', 'why-containers'];
+  // const dockerShortSlugs = ['cli-overview', 'dockerfile-intro', 'a-frontend', 'node-on-docker-intro', 'node-server-with-user', 'node-server-with-deps', 'setup-docker', 'node-server-containerized', 'a-smaller-node-image', 'why-containers'];
 
 
-  if (page.path.includes("docker") && page.path !== "/docker" && !dockerShortSlugs.includes(page.context.frontmatter__shortSlug)) {
-      console.log("deleting page: ", page.path)
-      deletePage(page)
-  }
-
-  /*
-    scrum cleanup
-  */ 
-  const scrumShortSlugs = ['a-checklist','on-adoption', 'the-artifacts', 'the-ceremonies', 'the-increment', 'the-team', 'the-theories', 'the-values']
-  if (
-    page.path.includes("scrum") &&
-    page.path !== "/scrum" &&
-    !scrumShortSlugs.includes(page.context.frontmatter__shortSlug)
-  ) {
-    console.log("deleting page: ", page.path)
-    deletePage(page)
-  }
-
-  /*
-  
-    linux+bash cleanup
-
-  */
- 
-  const linuxShortSlugs = [
-    "a-kernel",
-    "a-kernel",
-    "arrays",
-    "cli-tools",
-    "dns",
-    "env",
-    "file-system",
-    "conditions-and-cases",
-    "file-interaction",
-    "flags-and-args",
-    "groups",
-    "heredoc",
-    "create-an-nfs",
-    "interacting-with-ubuntu",
-    "more-scripts",
-    "npm-outdated-script",
-    "pkgs",
-    "permissions",
-    "processes",
-    "script-writing",
-    "sftp",
-    "ssh",
-    "ctrl-and-signals",
-    "starting-with-unix",
-    "text-editors",
-    "streams-pipes",
-    "template",
-    "users",
-    "wordcount",
-    "wget-curl",
-  ]
-
-  if (
-    page.path.includes("linux") &&
-    page.path !== "/linux" &&
-    !linuxShortSlugs.includes(page.context.frontmatter__shortSlug)
-  ) {
-    console.log("deleting page: ", page.path)
-    deletePage(page)
-  }
-}
+  // if (page.path.includes("docker") && page.path !== "/docker" && !dockerShortSlugs.includes(page.context.frontmatter__shortSlug)) {
+  //     console.log("deleting page: ", page.path)
+  //     deletePage(page)
+  // }
+// }
