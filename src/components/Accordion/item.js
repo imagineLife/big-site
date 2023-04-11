@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 
-const AccordionItem = ({ title, content }) => {
-  const [isActive, setIsActive] = useState(false)
+const AccordionItem = ({ title, content, startOpen }) => {
+  const [isActive, setIsActive] = useState(startOpen || false)
 
   return (
     <div className="item" aria-label={title}>

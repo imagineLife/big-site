@@ -1,48 +1,98 @@
 @import 'src/globals/styles/vars';
-/* The side navigation menu */
-  .sidebar {
-    margin: 0;
-    padding: 0;
-    width: $sidebar-width;
-    background-color: #f1f1f1;
-    position: fixed;
-    height: $sidebar-height;
-    overflow: auto;
 
-    /* Sidebar links */
-    a, span {
-      display: block;
-      color: black;
-      padding: 16px;
-      text-decoration: none;
-      font-size: 14px;
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: $sidebar-width;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: $sidebar-height;
+  overflow: auto;
+  background: #eee;
 
-      /* Active/current link */
-      &.active {
-        background-color: #04AA6D;
-        color: white;
-      }
+  /* Sidebar links */
+  a, span {
+    display: block;
+    color: black;
+    padding: 16px;
+    text-decoration: none;
+    font-size: 14px;
 
-      /* Links on mouse-over */
-      &:hover:not(.active) {
-        background-color: #555;
-        color: white;
-      }
-
-      &[aria-current="page"]{
-        background-color: #868585;
-        color: white;
-      }
+    /* Active/current link */
+    &.active {
+      color: white;
     }
 
-    span{ 
-      // font-size: 18px;
-      font-weight: bold;
-      text-decoration: underline;
+    /* Links on mouse-over */
+    &:hover:not(.active) {
+      color: white;
+    }
 
-      &:hover:not(.active) {
-        background-color: unset;
-        color: black;
+    &[aria-current="page"]{
+      background-color: #868585;
+      color: white;
+    }
+  }
+
+  span{ 
+    // font-size: 18px;
+    font-weight: bold;
+    text-decoration: underline;
+
+    &:hover:not(.active) {
+      background-color: unset;
+      color: black;
+    }
+  }
+
+
+  // accordion-style nav styling adjustments
+  div.accordion{
+    max-width: unset;
+    margin: unset;
+    
+    .item{
+
+      .title{
+        padding: 0 10px;
+        margin: unset;
+        line-height: 3;
+
+        // &:hover{
+        //   text-decoration: underline;
+        //   color: black;
+        // }
+      }
+
+      .content{
+        padding: 0;
+        margin: unset;
+        line-height: 2;
+
+        &:hover{
+          text-decoration: underline;
+          color: black;
+        }
+
+        &:hover:not(.active) {
+          background-color: unset;
+          color: black;
+          text-decoration:none;
+        }
+
+        .link{
+          padding: 5px 5px 5px 10px;
+
+          &:hover:not(.active) {
+            color: black;
+            text-decoration:underline;
+          }
+
+          &[aria-current="page"]{
+            color: black;
+          }
+        }
       }
     }
   }
+}
