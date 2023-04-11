@@ -25,12 +25,13 @@
 
     /* Links on mouse-over */
     &:hover:not(.active) {
-      color: white;
+      text-decoration: underline;
     }
 
     &[aria-current="page"]{
       background-color: #868585;
-      color: white;
+      // color: white;
+      text-decoration: underline;
     }
   }
 
