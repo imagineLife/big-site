@@ -19,8 +19,6 @@ export default function NestedNavTemplate({ pageContext: { content, parentDir, o
       },
     }))
   if (otherPages[0].sectionName) {
-    console.log('%c navWithSection', 'background-color: pink; color: black;')
-    
     props.navWithSections = otherPages
   }
 
