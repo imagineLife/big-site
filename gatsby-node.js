@@ -15,9 +15,10 @@ const nestedNavTemplate = path.resolve('./src/templates/nestedNav/index.js')
 
 const sidebarNestedSections = {
   /*
-    blogSectionName: {
-      sectionFriendlyName: slug-key-word
-      order: declares the order
+    blogSection (by-url-string): {
+      sectionName: "friendly name here",
+      items: [], array for logic later,
+      parentDir: hmm...
     }
   */
   k8s: {
@@ -71,15 +72,6 @@ function prepOtherPages({ pages, nestingRules }) {
   if (!nestingRules) return pages;
 
   if (nestingRules.finished === true) return nestingRules.order.map(sectionToUse => nestingRules[`${sectionToUse}`]);
-  /*
-    IN ENGLISH
-    - for each page
-      - does it have 'in-depth' in the page.overview.slug
-      - yes?!
-        - push item.page to inDepth array
-      - no?
-        - push to "getting started" array
-  */ 
   
   pages.forEach(({ page }) => {
     const theSectionThisPageIsPartOf = nestingRules.findOrder.find(sectionString => page.overview.slug.includes(sectionString))
@@ -93,6 +85,11 @@ function prepOtherPages({ pages, nestingRules }) {
   nestingRules.finished = true;
   return nestingRules.order.map(sectionToUse => nestingRules[`${sectionToUse}`])
 }
+
+
+
+
+
 
 /**
  * @type {import('gatsby').GatsbyNode['createPages']}
