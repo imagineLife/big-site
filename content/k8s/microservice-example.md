@@ -1,7 +1,7 @@
 ---
 title: A Microservice K8s Demo
 parentDir: k8s
-slug: k8s/microservice-demo
+slug: k8s/architecture-intro/microservice-demo
 shortSlug: microservice-demo
 author: Jake Laursen
 excerpt: Deploying a Microservice set of Applications with K8s

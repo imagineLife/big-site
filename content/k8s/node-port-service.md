@@ -1,7 +1,7 @@
 ---
 title: Allow Communication between Host and Pod with the NodePort Service
 parentDir: k8s
-slug: k8s/node-port-service
+slug: k8s/networking-intro/node-port-service
 shortSlug: node-port-service
 author: Jake Laursen
 excerpt: Allow External network connectivity to a Kubernetes service

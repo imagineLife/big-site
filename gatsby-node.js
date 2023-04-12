@@ -26,13 +26,23 @@ const sidebarNestedSections = {
       items: [],
       parentDir: "k8s/in-depth",
     },
+    "networking-intro": {
+      sectionName: "Networking Intro",
+      items: [],
+      parentDir: "k8s",
+    },
+    "architecture-intro": {
+      sectionName: "Architecture Intro",
+      items: [],
+      parentDir: "k8s",
+    },
     "": {
       sectionName: "Getting Started",
       items: [],
       parentDir: "k8s",
     },
-    findOrder: ["in-depth", ""],
-    order: ["", "in-depth"],
+    findOrder: ["networking-intro", "architecture-intro", "in-depth", ""],
+    order: ["", "networking-intro", "architecture-intro", "in-depth"],
     finished: false,
   },
 }

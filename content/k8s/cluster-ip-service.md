@@ -1,7 +1,7 @@
 ---
 title: Allow Communication Within A Cluster with the ClusterIP Service
 parentDir: k8s
-slug: k8s/cluster-ip-service
+slug: k8s/networking-intro/cluster-ip-service
 shortSlug: cluster-ip-service
 author: Jake Laursen
 excerpt: Allow External network connectivity to a Kubernetes service
