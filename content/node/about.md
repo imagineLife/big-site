@@ -10,7 +10,10 @@ order: 1
 
 # JavaScript on the Server
 
-I was introduced to [Node](https://nodejs.org/en/) as "_JavaScript on the Server_".  
+I was introduced to [Node](https://nodejs.org/en/) as "_JavaScript on the Server_".   
+Node on the server allows for 1 cross-application lanugage, [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript), to be writable in a web browsers and on servers. 
+
+# A Robust built-In Module Ecosystem
 Not only does node give us the ability to run JavaScript on the server, but Node has built-in "modules" that JavaScript in the browser does not have:
 
 - **fs** gives file-system access

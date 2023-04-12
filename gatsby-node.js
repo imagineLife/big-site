@@ -329,7 +329,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       node: allMarkdownRemark(
         sort: { frontmatter: { order: ASC } }
         filter: {
-          frontmatter: { order: { gt: 0 }, slug: { regex: "/^node/" } }
+          frontmatter: { slug: { regex: "/node/" } }
         }
       ) {
         pages: edges {
@@ -341,6 +341,17 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               tags
               parentDir
               shortSlug
+            }
+            content: html
+          }
+        }
+        otherPages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              shortSlug
+              parentDir
             }
           }
         }
@@ -447,10 +458,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           path: page.overview.slug,
           component:
             page.overview.slug.startsWith("docker") ||
-            page.overview.slug.startsWith("scrum") ||
-            page.overview.slug.startsWith("nginx") ||
-            page.overview.slug.startsWith("linux") ||
-            page.overview.slug.startsWith("k8s")
+              page.overview.slug.startsWith("k8s") ||
+              page.overview.slug.startsWith("linux") ||
+              page.overview.slug.startsWith("nginx") ||
+              page.overview.slug.startsWith("node") ||
+            page.overview.slug.startsWith("scrum")
               ? nestedNavTemplate
               : mdTemplate,
           context: {
@@ -472,10 +484,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         //
         if (
           page.overview.slug.includes("docker") ||
-          page.overview.slug.includes("scrum") ||
-          page.overview.slug.includes("nginx") ||
+          page.overview.slug.includes("k8s") ||
           page.overview.slug.includes("linux") ||
-          page.overview.slug.includes("k8s")
+          page.overview.slug.includes("nginx") ||
+          page.overview.slug.includes("node") ||
+          page.overview.slug.includes("scrum") 
         ) {
           pageObj.context.content = page.content
           pageObj.context.otherPages = prepOtherPages({
