@@ -1,5 +1,5 @@
 ---
-title: Evaluating 
+title: Evaluating & Printing
 slug: node/using-the-cli/evaluating-code
 parentDir: node/using-the-cli
 author: Jake Laursen

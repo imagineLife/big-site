@@ -9,20 +9,20 @@ order: 3
 ---
 # Requiring Modules
 
-- `-r`
+The `-r` flag can be used to require a module in the node cli.  
 
-## Steps
 
-- have a module
+## A Module
 
 ```js
-console.log("module loaded!");
+// my-module.js
+console.log("this is a module, module loaded!");
 ```
 
-- use `-r` flag to load the module, then start the node shell with the module in memory
+use `-r` flag to load the module, then start the node shell with the module in memory ->
 
 ```bash
-node -r ./dummy-module.js
+node -r ./my-module.js
 dummy module loaded!
 Welcome to Node.js v14.15.0.
 Type ".help" for more information.
@@ -31,31 +31,34 @@ Type ".help" for more information.
 
 ### Naming export content
 
-named-export.js
-
-````js
-module.export = thisFn = () => { console.log("thisFn ran")}
+```js
+// function-export.js
+module.export = thisFn = () => console.log("thisFn ran from module!");
 ```
 
-```bash
-node -r ./dummy-module.js
-````
-
-returns...
+require THAT module with node: 
 
 ```bash
+node -r ./function-export.js
+
+# this will show...
 Welcome to Node.js v14.15.0.
 Type ".help" for more information.
 ```
-
-then enter...
-
-```bash
-thisFn()
-```
-
-returns...
+notice that unlike the first example, this does not show any content from the module. Here, the module exports a function that can be used by other parts of node. Like....
 
 ```bash
-thisFn ran
+# 
+# Using the module in the repl
+# 
+
+# require the module and start node
+node -r ./function-export.js
+
+# this will show, the node repl...
+Welcome to Node.js v14.15.0.
+Type ".help" for more information.
+> 
+
+# USE the function exported from the module
 ```
