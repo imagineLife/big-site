@@ -1,7 +1,7 @@
 ---
 title: Running a Program through an Entrypoint
-slug: node/terminal-input/cmd-entrypoint
-parentDir: node/terminal-input
+slug: node/using-the-cli/cmd-entrypoint
+parentDir: node/using-the-cli
 author: Jake Laursen
 excerpt: Use the CLI to handle, evaluate, and run a program
 tags: ["NodeJS", "Terminal", "cmd"]

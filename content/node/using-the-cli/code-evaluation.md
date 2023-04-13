@@ -1,58 +1,51 @@
+---
+title: Evaluating 
+slug: node/using-the-cli/evaluating-code
+parentDir: node/using-the-cli
+author: Jake Laursen
+excerpt: Use the CLI to handle, evaluate, and run a program
+tags: ["NodeJS", "Terminal", "cmd"]
+order: 2
+---
+
 # Evaluating Code
-
-- checking code
-- using a node/js file across platforms, check syntax of a program that is directly as a shell script!
-
-## Eval to evaluate
+The`-e` or `--evaluate` flag can be used to check code.
 
 ```bash
 node --eval "2 * 4"
-```
+# this will show no output
 
-(no output)
 
-```bash
 node -e "console.log(14+7)"
+# 21
+
 ```
 
-```bash
-21
-```
-
-## Print to evaluate and print
+## Print Rather Than Evaluate
 
 ```bash
 node --print "4 * 5"
-```
+# 20
 
-`20`
-
-```bash
 node -p "console.log(3 * 7)"
+# 21
+# undefined
 ```
 
-```bash
-2
-undefined
-```
-
-- prints undefined because the console.log does not return anything other than _undefined_
+- `-p` prints undefined after the console.log because the console.log does not return anything other than _undefined_
 
 ## Importing node modules
 
 - node "modules" come with the library/binary (_fs, http, etc_)
-- these modules can be required direclty from cmd input
-- **useful because node is cross-platform!!**
+- these modules can be required directly from cmd input
+- **this can be useful because the core node modules are cross-platform!!**
 
 ### using the print flag with modules
 
-#### Example
-
 ```bash
 node -p "Object.keys(require('fs'))"
-```
 
-```bash
+# will return...
 [
   'appendFile',       'appendFileSync',    'access',
   'accessSync',       'chown',             'chownSync',

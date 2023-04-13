@@ -1,7 +1,7 @@
 ---
 title: Node REPL
-slug: node/terminal-input/repl
-parentDir: node/terminal-input
+slug: node/using-the-cli/repl
+parentDir: node/using-the-cli/
 author: Jake Laursen
 excerpt: node with command line args
 tags: ["NodeJS", "Terminal", "cmd"]

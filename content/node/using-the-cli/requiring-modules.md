@@ -1,7 +1,7 @@
 ---
 title: Requiring Modules
-slug: node/terminal-input/requiring-modules
-parentDir: node/terminal-input
+slug: node/using-the-cli/requiring-modules
+parentDir: node/using-the-cli/
 author: Jake Laursen
 excerpt: leverage code stored in a module file with a command flag
 tags: ["NodeJS", "Terminal", "cmd", "require"]
