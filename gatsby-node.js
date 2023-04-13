@@ -46,6 +46,21 @@ const sidebarNestedSections = {
     order: ["", "networking-intro", "architecture-intro", "in-depth"],
     finished: false,
   },
+  node: {
+    "using-the-cli": {
+      sectionName: "Using The CLI",
+      items: [],
+      parentDir: "node",
+    },
+    "": {
+      sectionName: "More",
+      items: [],
+      parentDir: "node",
+    },
+    findOrder: ["using-the-cli", ""],
+    order: ["using-the-cli", ""],
+    finished: false,
+  },
 }
 
 
