@@ -344,7 +344,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       node: allMarkdownRemark(
         sort: { frontmatter: { order: ASC } }
         filter: {
-          frontmatter: { slug: { regex: "/node/" } }
+          frontmatter: { slug: { regex: "/^node/" } }
         }
       ) {
         pages: edges {
