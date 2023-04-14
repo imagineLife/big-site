@@ -17,12 +17,22 @@ Primitive data types represent the "lowest level" types of data in JS.
 Other data types exist & are more-or-less composed of these datatypes.  
 ### Numbers 
 ```js
+321
+// 321
+
+Number("432")
+// 432
+
++"3"
+// 3
 
 ```
 ### BigInts
 ```js
 ```
 ### Strings
+There is a String Object, and there are String instances.  
+Here, a look at some instances of strings - 
 ```js
 const thisString = `This is a string`;
 const thisStringTwo = "This is a string";
