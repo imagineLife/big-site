@@ -29,6 +29,7 @@ Number("432")
 ```
 ### BigInts
 ```js
+
 ```
 ### Strings
 There is a String Object, and there are String instances.  
@@ -76,6 +77,25 @@ thisString.split(' is ')
 ```
 ### Boolean
 ```js
+true
+// true
+
+false
+// false
+
+Boolean()
+// false
+Boolean(3)
+// true
+Boolean("water")
+// true
+Boolean(false)
+// false
+Boolean(undefined)
+// false
+Boolean(null)
+// false
+
 ```
 ### Symbols
 ```js
