@@ -1,16 +1,19 @@
 ---
 title: Intro To Data Types
-parentDir: js/data-type-intro
-slug: js/
+parentDir: js/intro
+slug: js/intro/data-types
 author: Jake Laursen
 excerpt: Consider a Real-World Promise
-tags: ["js","data", "object", "array", ]
+tags: ["js","data", "introduction"]
 order: 1
 ---
 
 # Data Types In JavaScript
 Javascript stores data, information, in a bunch of different ways.  
 Let this be a brief intro into datatypes.  
+Spending most time in react+node+db interfaces, I perhaps have not dug terribly deep into data types.  
+
+One particular detail I find interesting is that data types are usually referred to by an instance and in my experience are often ignoring or missing the Object definition of the data type.  
 
 ## Primitives Are The Root
 Primitive data types represent the "lowest level" types of data in JS.  
@@ -27,10 +30,7 @@ Number("432")
 // 3
 
 ```
-### BigInts
-```js
 
-```
 ### Strings
 There is a String Object, and there are String instances.  
 Here, a look at some instances of strings - 
@@ -102,6 +102,39 @@ Boolean(null)
 ```
 ### Undefined & Null
 ```js
+// 
+// UNDEFINED: when a variable is DECLARED but has no value assigned to it
+// 
+// let x;
+x
+// undefined
+
+typeof undefinedVariableHere
+// 'undefined'
+
+
+
+// 
+// NULL: well...something that is not there
+// 
+null
+
+```
+
+### BigInts
+BigInt, for the layperson, is meant to represent large numbers (big integers).  
+A bit more technically, BigInt can represent large numbers more precisely than integers.  
+```js
+// 15 9s
+let x = 999999999999999;
+// 999999999999999
+
+// 16 9s
+let y = 9999999999999999;
+// 10000000000000000
+
+let bigNine = BigInt(999999999999999999)
+// 1000000000000000000n
 ```
 
 
@@ -111,6 +144,41 @@ Each data type does have unique properties, use-cases, syntaxes, etc.
 
 
 ### Objects
+Objects are chunks of key-value pairs.  
+The object data type does have [built-in methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object#static_methods) too.  
+
+Data in objects can be accessed by key name. 
+```js
+const me = {
+  name: "Jake",
+  age: Infinity,
+  hobbies: ["roasting coffee", "writing", "learning"]
+}
+
+/*
+  this object instance is called "me"
+  the keys in the obejct are name,age,hobbies
+*/
+
+console.log(Object.keys(me))
+// [name,age,hobbies]
+
+console.log(me.name)
+// Jake
+
+console.log(me.age)
+// Infinity
+
+```
 ### Functions
+```js
+
+```
 ### Arrays
+```js
+
+```
 ### Dates  
+```js
+
+```
