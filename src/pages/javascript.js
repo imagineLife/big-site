@@ -1,11 +1,11 @@
 import React, { Fragment } from "react"
-import { StaticQuery, graphql, Link } from "gatsby"
+import { StaticQuery, graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import Hero from "../components/hero"
 import PageHead from "./../components/PageHead"
 import "./scrum/scrum.scss"
-
+import createLinksWithType from "./../components/createLinksWithType"
 /*
   before filter
 
@@ -21,7 +21,7 @@ const IndexPage = () => (
           filter: {
             frontmatter: {
               order: { gt: 0 }
-              slug: { regex: "/js/" }
+              slug: { regex: "/^js/" }
               title: { ne: null }
             }
           }
@@ -41,13 +41,15 @@ const IndexPage = () => (
       }
     `}
     render={({ js: { pages } }) => {
+      
+      
       return (
         <Fragment>
           <Hero />
           <Layout>
             <section className="toc-wrapper">
               <h1>JavaScript</h1>
-              <sub><i>more on this soon...</i></sub>
+              {pages.map(createLinksWithType({ thisType: "javascript" }))}
             </section>
           </Layout>
         </Fragment>

@@ -171,6 +171,8 @@ console.log(me.age)
 
 ```
 ### Functions
+Functions do things.  
+[Functional programming](https://en.wikipedia.org/wiki/Functional_programming),
 ```js
 
 ```

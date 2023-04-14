@@ -193,6 +193,36 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           }
         }
       }
+      js: allMarkdownRemark(
+        sort: { frontmatter: { order: ASC } }
+        filter: {
+          frontmatter: { order: { gt: 0 }, slug: { regex: "/js/" } }
+        }
+      ) {
+        pages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              excerpt
+              tags
+              parentDir
+              shortSlug
+            }
+            content: html
+          }
+        }
+        otherPages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              shortSlug
+              parentDir
+            }
+          }
+        }
+      }
       k8s: allMarkdownRemark(
         sort: { frontmatter: { order: ASC } }
         filter: {
@@ -343,9 +373,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       }
       node: allMarkdownRemark(
         sort: { frontmatter: { order: ASC } }
-        filter: {
-          frontmatter: { slug: { regex: "/^node/" } }
-        }
+        filter: { frontmatter: { slug: { regex: "/^node/" } } }
       ) {
         pages: edges {
           page: node {
