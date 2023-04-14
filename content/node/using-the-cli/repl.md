@@ -7,8 +7,6 @@ excerpt: node with command line args
 tags: ["NodeJS", "Terminal", "cmd"]
 order: 1
 ---
-
-- [Starting a REPL](#starting-a-repl)
 # Starting a REPL
 Node can be used as a terminal command-line interface where javascript can be written into a terminal. This can be started by writing into a terminal
 ```bash

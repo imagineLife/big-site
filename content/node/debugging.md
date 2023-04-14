@@ -1,28 +1,23 @@
 ---
-title: Debugging
-slug: node/debugging
+title: Debugging with inspect
+slug: node/using-the-cli/debugging
 author: Jake Laursen
 excerpt: An overview of Node's Built-In tooling for debugging
 tags: ["server", "node", "javascript", "debugging"]
-parentDir: node
+parentDir: node/using-the-cli
 order: 3
 ---
 
-# Debugging
-
-[Node's Debugging Guide, for reference](https://nodejs.org/en/docs/guides/debugging-getting-started/)  
-[Google's Dev Docs, too!](https://developers.google.com/web/tools/chrome-devtools)
-
-- **A debugger keyword**
-  - where ["simple stepping and inspection are possible"](https://nodejs.org/api/debugger.html#debugger_debugger)
-  - insert statement `debugger` into code: this enables a breakpoint at that spot
-  - triggered by `node inspect theFile.js`
-  - not recommended for prod
-- **Inspection mode** is the key!
-  - Inspection mode exposes a remote protocol
-  - Inspection mode allows accessing the Chrome-Dev-Tools debugger
-- Leverage the `Pause on Exception` tool, enabled by the hexagon with a pause-symbol inside it
-- A `Scope` section of the inspector tools shows the 'variables' and content available through the application && funcitonal scope!
+# Debugging With Inspect
+- [Debugging With Inspect](#debugging-with-inspect)
+  - [Adding Breakpoints](#adding-breakpoints)
+    - [in dev tools](#in-dev-tools)
+    - [adding debugger to the code](#adding-debugger-to-the-code)
+- [Debugging with cli](#debugging-with-cli)
+    - [CLI Output After Flags](#cli-output-after-flags)
+    - [Accessing the Node Debugger](#accessing-the-node-debugger)
+    - [Triggering A Breakpoint In The Code](#triggering-a-breakpoint-in-the-code)
+- [References](#references)
 ## Adding Breakpoints
 - pauses the running code at a specific 'line' in the process
 
@@ -57,19 +52,25 @@ For help, see: https://nodejs.org/en/docs/inspector
 ```
 
 ### Accessing the Node Debugger
+The Chrome browser comes with a builtiin `inspect` detail that node works with in order to allow us devs to "inspect" the node code during the `--inspect`ed process. In chrome, set the url to `chrome://inspect`
 
-- In chrome, set the url to `chrome://inspect`
-- see other md file for chrome deets
+Some Chrome Developer tools allow us to...
+
+- **Pause on Exception**
+  - 'break' the code when an exception is thrown
+  - open the 'sources' tab
+  - click the hexagon-with-a-pause sign
+- **Adding a breakpoint in devtools during inspections**
+  - open the 'sources' tab
+  - click one of the vertical 'columns' that are numbering the code lines
+    - should see a blue shape appear on the line, indicating a 'break-point' has been added to the running of the code
+  - click th 'play'-style button, to continue the execution of the code until the breakpoint is reached
 
 
-# Chrome DevTools
-The Chrome Devtools can be used to help in debugging a node process
-## Pause on Exception
-- 'break' the code when an exception is thrown
-- open the 'sources' tab
-- click the hexagon-with-a-pause sign
-## Adding a breakpoint in devtools during inspections
-- open the 'sources' tab
-- click one of the vertical 'columns' that are numbering the code lines
-  - should see a blue shape appear on the line, indicating a 'break-point' has been added to the running of the code
-- click th 'play'-style button, to continue the execution of the code until the breakpoint is reached
+### Triggering A Breakpoint In The Code
+Adding a `debugger` keyword to the code, directly, can allow for the chrome inspector devtools to stop the node process at the keyword.  
+
+# References
+- [Node's Debugging Guide](https://nodejs.org/en/docs/guides/debugging-getting-started/)  
+- [Google's Devtools Docs](https://developers.google.com/web/tools/chrome-devtools)
+- this is part of my broader notes on [Node](/node/using-the-cli/repl)
