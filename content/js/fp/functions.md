@@ -23,7 +23,42 @@ Pure functions are functions that
 - in practice return a result
 
 ## Functions Returning Functions
+This can be a handy application of functions.  
+Here, a function can return a function.  
 
+```js
+// inspecting this principle
+
+/*
+  1. here, a function
+*/ 
+function add(a,b){ return a + b}
+console.log(add.toString())
+// function add(a,b){ return a + b}
+
+
+/*
+  2. here a function that returns a function
+*/
+function curryAdd(val){
+  return function add(valTwo){ console.log(val + valTwo) }
+}
+console.log(curryAdd.toString())
+// function curryAdd(val){
+//   return function add(valTwo){ console.log(val + valTwo) }
+// }
+
+/*
+  3. 
+*/ 
+const addTwo = curryAdd(2)
+console.log(addTwo.toString())
+// function add(valTwo){ console.log(val + valTwo) }
+addTwo(3)
+// 5
+
+
+```
 ```js
 function prefixer(strOne){
   return function (strTwo){
@@ -45,3 +80,4 @@ console.log(sayHiTo('Mark'))
 console.log(sayByeTo('Quang')) 
 // 'Goodbye Quang
 ```
+
