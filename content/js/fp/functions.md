@@ -24,6 +24,9 @@ Need a function? wrap it in a function that creates and returns functions.
   - [Functions Can Be Hoisted](#functions-can-be-hoisted)
     - [Hoisting With Declarations](#hoisting-with-declarations)
     - [Not Hoisting With Expressions](#not-hoisting-with-expressions)
+  - [Functions Have Arguments](#functions-have-arguments)
+    - [The Arguments Objects](#the-arguments-objects)
+    - [Rest Parameters](#rest-parameters)
 
 ## Pure Functions
 Pure functions are functions that
@@ -134,4 +137,45 @@ runnable()
 // Uncaught ReferenceError: runnable is not defined
 
 const runnable = () => console.log('hello there!')
+```
+
+## Functions Have Arguments
+### The Arguments Objects
+An [arguments](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments) variable is available in functions - `arguments` is a reserved word in js!
+```js
+function add(){
+  console.log(arguments)
+  console.log(arguments[0] + arguments[1])
+}
+
+add(3,9)
+// [Arguments] { '0': 3, '1': 9 }
+// 12
+```
+
+### Rest Parameters
+[Rest Parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters) are another way to access function arguments.  
+
+```js
+function add(...args){
+  console.log(args)
+  console.log(args[0] + args[1])
+}
+
+add(3,9)
+// [ 3, 9 ]
+// 12
+```
+
+There are a few details to note with the rest parameters.  
+Rest Parameters can be used with named parameters. When other parameters are named, the "spread" style "rest" parameters MUST BE NAMED LAST, as sort of a "catch all" for "all remaining parameters".
+```js
+function add(firstArg, ...otherArgs){
+  console.log(otherArgs)
+  console.log(firstArg + otherArgs[0])
+}
+
+add(12, 19)
+// [ 19 ]
+// 31
 ```
