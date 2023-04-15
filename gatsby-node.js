@@ -61,6 +61,21 @@ const sidebarNestedSections = {
     order: ["using-the-cli", ""],
     finished: false,
   },
+  js: {
+    "intro": {
+      sectionName: "Intro",
+      items: [],
+      parentDir: "js",
+    },
+    "": {
+      sectionName: "More",
+      items: [],
+      parentDir: "js",
+    },
+    findOrder: ["intro", ""],
+    order: ["intro", ""],
+    finished: false,
+  },
 }
 
 
@@ -196,7 +211,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       js: allMarkdownRemark(
         sort: { frontmatter: { order: ASC } }
         filter: {
-          frontmatter: { order: { gt: 0 }, slug: { regex: "/js/" } }
+          frontmatter: { order: { gt: 0 }, slug: { regex: "/^js/" } }
         }
       ) {
         pages: edges {
@@ -501,10 +516,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           path: page.overview.slug,
           component:
             page.overview.slug.startsWith("docker") ||
-              page.overview.slug.startsWith("k8s") ||
-              page.overview.slug.startsWith("linux") ||
-              page.overview.slug.startsWith("nginx") ||
-              page.overview.slug.startsWith("node") ||
+            page.overview.slug.includes("js") ||
+            page.overview.slug.startsWith("k8s") ||
+            page.overview.slug.startsWith("linux") ||
+            page.overview.slug.startsWith("nginx") ||
+            page.overview.slug.startsWith("node") ||
             page.overview.slug.startsWith("scrum")
               ? nestedNavTemplate
               : mdTemplate,
@@ -527,16 +543,18 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         //
         if (
           page.overview.slug.includes("docker") ||
+          page.overview.slug.includes("js") ||
           page.overview.slug.includes("k8s") ||
           page.overview.slug.includes("linux") ||
           page.overview.slug.includes("nginx") ||
           page.overview.slug.includes("node") ||
-          page.overview.slug.includes("scrum") 
+          page.overview.slug.includes("scrum")
         ) {
           pageObj.context.content = page.content
           pageObj.context.otherPages = prepOtherPages({
             pages: result.data[`${sectionName}`].otherPages,
-            nestingRules: sidebarNestedSections[page.overview.slug.split('/')[0]],
+            nestingRules:
+              sidebarNestedSections[page.overview.slug.split("/")[0]],
           })
         }
         createPage(pageObj)

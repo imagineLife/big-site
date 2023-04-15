@@ -170,12 +170,50 @@ console.log(me.age)
 // Infinity
 
 ```
-### Functions
+### Functions Are Objects That Can Do Things
 Functions do things.  
-[Functional programming](https://en.wikipedia.org/wiki/Functional_programming),
-```js
+[Functional programming](https://en.wikipedia.org/wiki/Functional_programming) is (_by the name, perhaps_) REALLY into functions - attempting to make everything in code a function or a result of a function.  
+I have more on functions [starting here](/js/fp/overview).
 
+
+#### Perform Actions On Paramters
+```js
+// a function: takes a parameter, here referred to as "stringHere"
+function logString(stringHere){ console.log(stringHere)}
+
+// can get used like this
+logString("my example string")
+// should log to the console "mu example string"
 ```
+
+#### Take Other Functions As Arguments
+```js
+// 
+// Functions that can pass another function as a parameter
+// 
+function logWithPrefix(myString,loggerFunction){
+  return loggerFunction(`Here is a prefix for ${myString}`)
+}
+// here, pass the function from above, the "logString" function, as an argument TO the logWithPrefix function
+// perhaps a glimpse into functional porogramming
+
+logWithPrefix('my test string', logString)
+```
+
+
+### Be Parts Of Other Data Types
+```js
+// as the value of an object key/value pair
+const objWithFunction = {
+  add: (a,b) => a + b
+}
+
+// can be called like...
+const result = objWithFunction.add(3,4)
+console.log(result)
+// should show 7
+```
+
 ### Arrays
 ```js
 
