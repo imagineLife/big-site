@@ -15,6 +15,16 @@ need an object? get it from a function.
 Have repeatative tasks? wrap them in functions.  
 Need a function? wrap it in a function that creates and returns functions.  
 
+- [Functions For Everything](#functions-for-everything)
+  - [Pure Functions](#pure-functions)
+  - [Functions Returning Functions](#functions-returning-functions)
+  - [Functions Are Expressed And Declared](#functions-are-expressed-and-declared)
+    - [Function Expressions With The Function Keyword](#function-expressions-with-the-function-keyword)
+    - [Functions With The Arrow Declaration](#functions-with-the-arrow-declaration)
+  - [Functions Can Be Hoisted](#functions-can-be-hoisted)
+    - [Hoisting With Declarations](#hoisting-with-declarations)
+    - [Not Hoisting With Expressions](#not-hoisting-with-expressions)
+
 ## Pure Functions
 Pure functions are functions that
 - have no "side effects": they do one thing and one thing only
@@ -81,3 +91,46 @@ console.log(sayByeTo('Quang'))
 // 'Goodbye Quang
 ```
 
+## Functions Are Expressed And Declared
+### Function Expressions With The Function Keyword
+```js
+// un-named
+function(params){
+  // function statement goes here
+}
+
+// named
+function doSomething(params){
+  // function statement goes here
+}
+```
+
+### Functions With The Arrow Declaration
+```js
+const add = (valOne, valTwo) => { return valOne + valTwo }
+
+// a version with the implicit return
+with no curly brackets, 
+const add = (valOne, valTwo) =>  valOne + valTwo
+```
+
+
+## Functions Can Be Hoisted
+[Hoisintg](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting) is when the js interpreter "moves" declared functions to the "top" of the logic.
+### Hoisting With Declarations
+```js
+runnable()
+// logs "hello there!"
+
+function runnable(){
+  console.log('hello there!')
+}
+```
+
+### Not Hoisting With Expressions
+```js
+runnable()
+// Uncaught ReferenceError: runnable is not defined
+
+const runnable = () => console.log('hello there!')
+```
