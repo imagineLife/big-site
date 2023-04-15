@@ -106,6 +106,7 @@ function doSomething(params){
 ```
 
 ### Functions With The Arrow Declaration
+Functions can be declared as [arrow functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions).  
 ```js
 const add = (valOne, valTwo) => { return valOne + valTwo }
 
