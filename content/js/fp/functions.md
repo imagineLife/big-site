@@ -27,6 +27,8 @@ Need a function? wrap it in a function that creates and returns functions.
   - [Functions Have Arguments](#functions-have-arguments)
     - [The Arguments Objects](#the-arguments-objects)
     - [Rest Parameters](#rest-parameters)
+  - [Three Helpful Methods - Call, Bind, And Apply](#three-helpful-methods---call-bind-and-apply)
+  - [](#)
 
 ## Pure Functions
 Pure functions are functions that
@@ -179,3 +181,6 @@ add(12, 19)
 // [ 19 ]
 // 31
 ```
+
+## Three Helpful Methods - Call, Bind, And Apply
+## 
