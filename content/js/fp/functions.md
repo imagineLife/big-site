@@ -1,5 +1,5 @@
 ---
-title: Functional Programming
+title: Some Details on Functions
 parentDir: js/fp
 slug: js/fp/overview
 author: Jake Laursen
@@ -9,7 +9,7 @@ order: 1
 ---
 
 # Functions For Everything
-The principle of fp is that everything is a function.  
+Funcitonal Programming is an approach to programming. The principle of fp is that everything is a function.  
 **Creating data?** Use a function.  
 **Need an object?** Get it from a function.  
 **Have repeatative tasks?** Wrap them in functions.  
@@ -222,6 +222,10 @@ Call can take params.
 `.call` can be thought of as "call the function and pass these params".  
 
 ```js
+
+// 
+// example 1
+// 
 function returnThisId() { console.log(this.id) }
 
 function buildIdOffsetterFn() { 
@@ -245,11 +249,110 @@ const returnIdAndOffset = buildIdOffsetterFn.call(smallObj)
 
 returnIdAndOffset(1) // prints 1000 (999 + 1)
 
+
+
+// 
+// example 2
+// passing a starting "this" reference AS the first parameter of the call method
+// 
+function addToThis(a){
+  return this.num + a;
+}
+
+function addAFew(a,b,c){
+  return this.num + a + b + c;
+}
+
+let o = {
+  num: 2
+}
+
+let bigO = {
+  num: 14
+}
+
+let newNum = addToThis.call(o,4);
+console.log({newNum})
+// { newNum: 6 }
+
+// params can be added as a list
+let biggerNum = addAFew.call(o,2,3,4)
+console.log({biggerNum})
+// { biggerNum: 11 }
 ```
 
 
 ### Bind
+Bind is a method that makes a new function.  
+The 
+```js
+/*
+  does NOT give the result when logged result
+  below, returns a "bound" function
+  binds the function to the bind recieved object
+*/ 
+function addToThis(a){
+  return this.num + a;
+}
+let o = {
+  num: 2
+}
+let bindOne = addToThis.bind(o,4);
+
+let addToO = addToThis.bind(o);
+console.dir(addToO)
+console.dir(addToO.toString())
+let addedTo0 = addToO(14)
+console.log({addedTo0})
+
+
+let personOne = {
+  name: 'Joe',
+  job: 'mailman'
+};
+
+let personTwo = {
+  name: 'Wanda',
+  job: 'wizard'
+};
+
+function talkAboutMe(favFood){
+  console.log(`** TALK ABOUT ME THIS`)
+  console.log(this)
+  return `I'm ${this.name} and I'm a ${this.job} and my fav food is ${favFood}`
+}
+
+const aboutJoe = talkAboutMe.bind(personOne)
+
+
+console.log(aboutJoe('pizza'))
+const aboutWanda = talkAboutMe.bind(personTwo)
+console.log(aboutWanda('salmon'))
+```
 ### Apply
+Appply is similar to the `.call()` method.  
+The apply method, though, tales an array of arguments instead of a bunch of params:
+```js
+let o = {
+  num: 2
+}
+let bigO = {
+  num: 14
+}
+function addAFew(a,b,c){
+  return this.num + a + b + c;
+}
+let argsArr = [3,4,5]
+let bigAgain = addAFew.apply(o,argsArr);
+
+console.log({bigAgain})
+// { bigAgain: 14 }
+
+let biggerArgsArr = [4,5,6]
+let evenBig = addAFew.apply(bigO,biggerArgsArr);
+console.log({evenBig})
+// { evenBig: 29 }
+```
 
 
 ## Functions have a prototype
