@@ -3,7 +3,7 @@ title: Prototypical Inheritance
 parentDir: js/fp
 slug: js/fp/prototypical-inheritance
 author: Jake Laursen
-excerpt: More On Functions
+excerpt: Creating Objects From Other Objects
 tags: ["js","functions", "functional programming"]
 order: 2
 ---
