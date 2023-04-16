@@ -10,12 +10,13 @@ order: 1
 
 # Functions For Everything
 The principle of fp is that everything is a function.  
-Creating data? use a function.  
-need an object? get it from a function.  
-Have repeatative tasks? wrap them in functions.  
-Need a function? wrap it in a function that creates and returns functions.  
+**Creating data?** Use a function.  
+**Need an object?** Get it from a function.  
+**Have repeatative tasks?** Wrap them in functions.  
+**Need a function?** Wrap it in a function that creates and returns functions.  
 
 - [Functions For Everything](#functions-for-everything)
+  - [Functions Have "this"](#functions-have-this)
   - [Pure Functions](#pure-functions)
   - [Functions Returning Functions](#functions-returning-functions)
   - [Functions Are Expressed And Declared](#functions-are-expressed-and-declared)
@@ -28,8 +29,35 @@ Need a function? wrap it in a function that creates and returns functions.
     - [The Arguments Objects](#the-arguments-objects)
     - [Rest Parameters](#rest-parameters)
   - [Three Helpful Methods - Call, Bind, And Apply](#three-helpful-methods---call-bind-and-apply)
-  - [](#)
+    - [Call](#call)
+    - [Bind](#bind)
+    - [Apply](#apply)
+  - [Functions have a prototype](#functions-have-a-prototype)
 
+## Functions Have "this"
+[`this`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this#function_context) is a special keyword in javascript when leveraging functions.  
+`this` is a variable that refers to the "parent" that the function is used by. More on `this` [later on](#call). 
+```js
+// here, 2 functions bound to keys in an object
+// 1 as an arrow function variant
+// 1 as the more classical named variant
+const obj = {
+  arrowFn: () => { let id = 123; console.log(`arrow this.id: ${this.id}`); console.log(`arrow inner id: ${id}`) },
+  classicalFn: function classical(){ let id = 123; console.log(`classical this.id: ${this.id}`); console.log(`classical inner id: ${id}`) },
+  id: 234
+}
+
+obj.arrowFn()
+// arrow this.id: undefined
+// arrow inner id: 123
+// undefined
+obj.classicalFn()
+// classical this.id: 234
+// classical inner id: 123
+// undefined
+```
+The arrow style of functions do not refer to the parent `this` in the same way that a named function expression does.  
+Here, the `obj` is the `this` for the expression-style of a function. When referring to `this.id`, the expression version uses the `obj.id` rather than the `id` declared in the classical function itself.  
 ## Pure Functions
 Pure functions are functions that
 - have no "side effects": they do one thing and one thing only
@@ -112,6 +140,8 @@ function doSomething(params){
 
 ### Functions With The Arrow Declaration
 Functions can be declared as [arrow functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions).  
+These have been reffered to as "fat arrow" functions.  
+These have also been reffered to as "lambda" functions.  
 ```js
 const add = (valOne, valTwo) => { return valOne + valTwo }
 
@@ -183,4 +213,43 @@ add(12, 19)
 ```
 
 ## Three Helpful Methods - Call, Bind, And Apply
-## 
+Each function instance include [these methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function#instance_methods), along with other details.  
+### Call
+Call can be used to pass along a function's [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) context.  
+
+Call is a method on a function.  
+Call can take params.  
+`.call` can be thought of as "call the function and pass these params".  
+
+```js
+function returnThisId() { console.log(this.id) }
+
+function buildIdOffsetterFn() { 
+  return (offset) => {
+   console.log(this.id + offset) 
+  }
+}
+
+
+const smallObj = { id: 999 }
+const smallObj2 = { id: 2 }
+
+returnThisId.call(smallObj2) 
+// 2
+returnThisId.call(smallObj) 
+// 999
+returnThisId.call({id: 'hand-coded in param'}) 
+// hand-coded in param
+
+const returnIdAndOffset = buildIdOffsetterFn.call(smallObj)
+
+returnIdAndOffset(1) // prints 1000 (999 + 1)
+
+```
+
+
+### Bind
+### Apply
+
+
+## Functions have a prototype
