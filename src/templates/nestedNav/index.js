@@ -18,7 +18,7 @@ export default function NestedNavTemplate({ pageContext: { content, parentDir, o
         slug: p.page.overview.slug,
       },
     }))
-  if (otherPages?[0].sectionName) {
+  if (otherPages && otherPages[0] && otherPages[0].sectionName) {
     props.navWithSections = otherPages
   }
 
