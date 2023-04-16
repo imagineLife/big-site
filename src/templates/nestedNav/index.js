@@ -10,7 +10,7 @@ export default function NestedNavTemplate({ pageContext: { content, parentDir, o
     parentDir,
   }
   
-  if (otherPages.length && !otherPages[0].sectionName)
+  if (otherPages?.length && !otherPages[0].sectionName)
     props.items = otherPages.map(p => ({
       frontmatter: {
         shortSlug: p.page.overview.shortSlug,
@@ -18,7 +18,7 @@ export default function NestedNavTemplate({ pageContext: { content, parentDir, o
         slug: p.page.overview.slug,
       },
     }))
-  if (otherPages[0].sectionName) {
+  if (otherPages?[0].sectionName) {
     props.navWithSections = otherPages
   }
 
