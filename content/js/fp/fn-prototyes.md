@@ -1,5 +1,5 @@
 ---
-title: Prototypical Inheritance
+title: Prototypical Inheritance with Functions
 parentDir: js/fp
 slug: js/fp/prototypical-inheritance
 author: Jake Laursen
@@ -20,6 +20,9 @@ const human = {
   jobText: `I don't have a job`,
   logJob: function(){ console.log(this.jobText) }
 }
+
+Object.getPrototypeOf(human)
+// [Object: null prototype] {}
 
 human.sayName()
 // Hey, my "this.name" is Adam
@@ -58,6 +61,7 @@ Object.getPrototypeOf(teacher)
 // }
 
 // EXTENDING the above paradigm, with a 'createTeacher' wrapper
+// somewhat of a factory creation patter
 function createTeacher(name){
   return Object.create(teacher, {
     name: {
@@ -73,5 +77,9 @@ t2.logJob()
 // I teach for a living
 Object.getPrototypeOf(t2)
 // {}
-
 ```
+some notes on the above:
+- `human` is a js object with keys + values
+- the `prototype` value of the `human` object, and any "plain" js object, will return `[Object: null prototype] {}` when logged
+- `teacher` is made with [`Object.create`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create), which is used to ...well...create objects. The first arg is a starter object, which _becomes the prototype of the new object_. The second arg is an object that gets adjusted beyond the prototype on the newly-created object.
+- The above creates a [prototype chain](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain#inheritance_with_the_prototype_chain), where the prototype of `human` is `null` and the prototype of `teacher` is the `human` object (_this can be checked with something like Object.getPrototypeOf(teacher) === human_)
