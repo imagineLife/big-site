@@ -1,5 +1,5 @@
 ---
-title: Prototypical Inheritance with Constructors and Instances
+title: Prototypal Inheritance with Constructors and Instances
 parentDir: js/fp
 slug: js/fp/constructors-and-instances
 author: Jake Laursen
@@ -8,7 +8,7 @@ tags: ["js","functions", "functional programming"]
 order: 3
 ---
 
-# Prototypical Inheritance with Constructors
+# Prototypal Inheritance with Constructors
 ## The "new" keyword and Constructor Functions
 [`new`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new) is a reserved keyword in javascript.  
 The `new` keyword allows for creating instances of the "thing" that is being made "new".  

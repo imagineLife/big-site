@@ -1,5 +1,5 @@
 ---
-title: Prototypical Inheritance with Functions
+title: Prototypal Inheritance with Functions
 parentDir: js/fp
 slug: js/fp/prototypical-inheritance
 author: Jake Laursen
@@ -8,7 +8,7 @@ tags: ["js","functions", "functional programming"]
 order: 2
 ---
 
-# Prototypical Inheritance
+# Prototypal Inheritance
 Objects have a **prototype** property that "link" the object to the object's **prototype**.  
 Another way to consider this is to say that objects can **inherit** other objects - a "teacher" inherits a "person" object, and a "student" also inherits a "person" object.  
 

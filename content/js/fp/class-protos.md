@@ -1,5 +1,5 @@
 ---
-title: Prototypical Inheritance with Classes
+title: Prototypal Inheritance with Classes
 parentDir: js/fp
 slug: js/fp/classes-as-syntax
 author: Jake Laursen
@@ -8,7 +8,7 @@ tags: ["js","functions", "functional programming"]
 order: 4
 ---
 
-# Prototypical Inheritance with Classes
+# Prototypal Inheritance with Classes
 Javascript offers the [class](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) keyword.  
 This `class` syntax is "syntactical sugar" on top of prototypal inheritance - the syntax looks and feels cleaner to implement as a developer over the [Constructor function approach](/js/fp/constructors-and-instances).  
 `class` is commonly used with the [extends](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends) keyword, where one class inherits (_extends_) another class.  
