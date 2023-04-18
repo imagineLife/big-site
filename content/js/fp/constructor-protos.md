@@ -34,5 +34,9 @@ const kitchen = new Room({ w:22, l:16, type: 'kitchen'})
 
 kitchen.getDimensions()
 // 'This 22x16 kitchen is 352 sq ft'
-
 ```
+
+Some details about this:
+- the constructor function above is the  `Room` function
+- the constructor starts with a capital letter (_this is by convention_)
+- 
