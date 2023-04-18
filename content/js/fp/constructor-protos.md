@@ -4,7 +4,7 @@ parentDir: js/fp
 slug: js/fp/constructors-and-instances
 author: Jake Laursen
 excerpt: Leverage The "new" Keyword To Create Instances
-tags: ["js","functions", "functional programming", "creato"]
+tags: ["js","functions", "functional programming"]
 order: 3
 ---
 
