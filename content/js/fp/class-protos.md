@@ -42,14 +42,27 @@ class SportsCar extends Vehicle{
   the above `SportsCar` uses the "extends" keyword to inherit details from the `Vehicle` class
 */ 
 
+
+
 const zippy = new SportsCar('Zippy')
+
+
+
 zippy.honk()
 // Zippy the SportsCar: HONK HONK
-undefined
+
+
+
 zippy.vroom()
 // Zippy the SportsCar: vroom vroom
 
-console.log(Object.getPrototypeOf(zippy) === SportsCar.prototype) //true
-console.log(Object.getPrototypeOf(SportsCar.prototype) === Vehicle.prototype) //true
+
+
+console.log(Object.getPrototypeOf(zippy) === SportsCar.prototype)
+// true
+
+
+console.log(Object.getPrototypeOf(SportsCar.prototype) === Vehicle.prototype)
+// true
 
 ```
