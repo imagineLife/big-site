@@ -62,8 +62,13 @@ const sidebarNestedSections = {
     finished: false,
   },
   js: {
-    "intro": {
+    intro: {
       sectionName: "Intro",
+      items: [],
+      parentDir: "js",
+    },
+    fp: {
+      sectionName: "Functions",
       items: [],
       parentDir: "js",
     },
@@ -72,8 +77,8 @@ const sidebarNestedSections = {
       items: [],
       parentDir: "js",
     },
-    findOrder: ["intro", ""],
-    order: ["intro", ""],
+    findOrder: ["intro", "fp", ""],
+    order: ["intro", "fp", ""],
     finished: false,
   },
 }
