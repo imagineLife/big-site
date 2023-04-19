@@ -19,6 +19,9 @@ order: 5
   - [Closures Represent Scope Encapsulation](#closures-represent-scope-encapsulation)
     - [Functional Closure Takes Precedence Over Global Scope Variables](#functional-closure-takes-precedence-over-global-scope-variables)
     - [Global Scope Is Available In A Function Closure](#global-scope-is-available-in-a-function-closure)
+  - [Perhaps Use Composition Over Inheritence](#perhaps-use-composition-over-inheritence)
+    - [Inheritence Can Inherit Complications](#inheritence-can-inherit-complications)
+    - [Composition Can Introduce Flexibility](#composition-can-introduce-flexibility)
 
 ## Scope Is About What Is Available Within Reach
 Maybe like life, something are in-scope and some things are out-of-scope.  
@@ -102,3 +105,28 @@ Let's consider the `addThree` function, pand particularly how it differs from th
 - **the `a` variable is not declared inside the `addThree` function** and the function "gets" the `a` variable from the "next scope" available to the function. Because the `a` variable is not declared as an arg in this `addThree` function like it is in the `addTwo` function, the `a` variable is "found" by the `addThree` function in the global scope.
 - **these parts within the function represent the function's closure** 
   - a critical detail here is that the closure of this `addThree` function refers to the `a` global-scope variable. In pure functional programming, this is a bit of a "no no"
+
+
+## Perhaps Use Composition Over Inheritence
+### Inheritence Can Inherit Complications
+The problem that inheritence brings with it's design is when a "low-level" (_or high level, base, whatever you feel like calling it_) inherited object needs changing, this can make "child" or inherited instances of the object different than expected.  
+
+An example is that a multi-"level" class structure exists, and a class early on in the chain needs adjusting...
+- **a "card" class** builds a card component
+  - it includes a title and some content
+  - **a "chart" class** inherits the card class, and takes as a prop a chart-type (and does chart things with it)
+    - **a barChart class** inherits the chart class, and requires bar-chart details
+  - **a table class** also inherits the card class, and does table-things with the card
+  - 
+
+Perhpas over time the table class expects to be full-screen-able. In order to get this out the door to customers, this is included in the table class.  
+Perhaps over time, this same expand/collapse feature is requested on all "card" instances (_with more customer-friendly language_).  
+Here lies the problem that inheritence brings along with it: does code get copied+pasted? Does code get cut + moved? How will every other instance of a "card" be expected to act? If this is delivered incrementally (_which might be the expectation_), the implementation may get even more complex.  
+
+### Composition Can Introduce Flexibility
+With composition (_more to come on this later_), the building of objects can be less "dependent" on each "parent" element && rather, well, a composition of details.  
+One great one-liner comparing the two approaches:  
+[_In general, inheritance could answer the “is-a” relationship, when composition “has-a”._](https://hackernoon.com/inheritance-vs-composition-in-javascript)  
+
+An inherited class "is a" extension of another class which includes methods and state.  
+A composed function "has a" bunch of methods and state, and is not an instance of other similar instances.  
