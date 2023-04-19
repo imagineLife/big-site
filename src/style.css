@@ -349,3 +349,7 @@ a:focus {
     font-size: 18px;
   }
 }
+
+:not(pre)>code[class*=language-]{
+  padding: .2rem .4rem !important;
+}
