@@ -9,13 +9,14 @@ order: 4
 ---
 
 # Functions and Closure And Scope
-[Closure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) keep code "together" with details.  
+[Closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) represent code and its ability to access other parts of code. Closure is a result of different [scopes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures#closure_scope_chain) at play.   
 
 - [Functions and Closure And Scope](#functions-and-closure-and-scope)
   - [Scope Is About What Is Available Within Reach](#scope-is-about-what-is-available-within-reach)
     - [JavaScript Has A Global Scope](#javascript-has-a-global-scope)
     - [JavaScript Has A Module Scope](#javascript-has-a-module-scope)
     - [JavaScript Has A Function Scope](#javascript-has-a-function-scope)
+  - [Closures Represent Scope Encapsulation](#closures-represent-scope-encapsulation)
 
 ## Scope Is About What Is Available Within Reach
 Maybe like life, something are in-scope and some things are out-of-scope.  
@@ -35,4 +36,49 @@ JavaScript code can be run in a module. Code in a module is scoped to that modul
 JavaScript code can be run in a function.  
 Code inside the function is scoped to that function.  
 This functional scope is critical to master for implementing a funcitonal programming style.  
+
+## Closures Represent Scope Encapsulation
+Take for example a function that is part of a process:
+```js
+let a = 123;
+function addTwo(a,b){ 
+  console.log("a inside addTwo: ",a)
+  return a + b
+}
+
+let result = addTwo(2,3)
+// a inside addTwo:  2
+
+console.log(result)
+// 5
+
+console.log(a)
+// 123
+
+
+function addThree(x,y,z){
+  console.log("a inside addThree: ",a)
+  return  x + y + z
+}
+
+console.log(addThree(4,5,6))
+// a inside addThree: 123
+// 15
+```
+In this trivial example there are a few things to note: the global scope, the function scope, and the variable(s) `a`.  
+**The global scope** has a few pieces:
+- the `a` variable declaration
+- the `addTwo` variable declaration
+- the running of `addTwo(2,3)` stored in a variable called `result`
+- the instruction to `console.log()` the `result` value  
+
+**The function scope** has a few pieces:
+- "knowledge" of 2 arguments of the function, here named `a` and `b`
+- the instructions to log the `a` parameter
+- the instruction to return `a + b` as a result of running this function
+- **these parts within the function represent the function's closure**   
+
+The `a` variable is the critical piece to consider:
+- in the global scope, a is equal to `123`
+- in the function's closure, `a` is equal to whatever the first parameter passed to the calling of the `addTwo` function - in the case above, it is equal to `2`
 
