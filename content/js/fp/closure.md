@@ -5,7 +5,7 @@ slug: js/fp/closure-scope
 author: Jake Laursen
 excerpt: 
 tags: ["js","functions", "functional programming", "closure"]
-order: 4
+order: 5
 ---
 
 # Functions and Closure And Scope
@@ -17,6 +17,8 @@ order: 4
     - [JavaScript Has A Module Scope](#javascript-has-a-module-scope)
     - [JavaScript Has A Function Scope](#javascript-has-a-function-scope)
   - [Closures Represent Scope Encapsulation](#closures-represent-scope-encapsulation)
+    - [Functional Closure Takes Precedence Over Global Scope Variables](#functional-closure-takes-precedence-over-global-scope-variables)
+    - [Global Scope Is Available](#global-scope-is-available)
 
 ## Scope Is About What Is Available Within Reach
 Maybe like life, something are in-scope and some things are out-of-scope.  
@@ -65,12 +67,16 @@ console.log(addThree(4,5,6))
 // a inside addThree: 123
 // 15
 ```
+### Functional Closure Takes Precedence Over Global Scope Variables
+Let's start by looking at the `addTwo` function.  
 In this trivial example there are a few things to note: the global scope, the function scope, and the variable(s) `a`.  
 **The global scope** has a few pieces:
 - the `a` variable declaration
 - the `addTwo` variable declaration
 - the running of `addTwo(2,3)` stored in a variable called `result`
 - the instruction to `console.log()` the `result` value  
+- the declaration of the `addThree`
+- the instructions to log the results of the `addThree(4,5,6)` (_[addThree is covered in more depth below](#global-scope-is-available)_)
 
 **The function scope** has a few pieces:
 - "knowledge" of 2 arguments of the function, here named `a` and `b`
@@ -78,7 +84,20 @@ In this trivial example there are a few things to note: the global scope, the fu
 - the instruction to return `a + b` as a result of running this function
 - **these parts within the function represent the function's closure**   
 
-The `a` variable is the critical piece to consider:
+The `a` variable is the critical piece to master when understanding scope and closure:
 - in the global scope, a is equal to `123`
 - in the function's closure, `a` is equal to whatever the first parameter passed to the calling of the `addTwo` function - in the case above, it is equal to `2`
+- **the value of a inside of addTwo only exists as the argument value, not as the global value**  
 
+What about `addThree`? [See below](#global-scope-is-available)
+
+### Global Scope Is Available 
+Let's consider the `addThree` function, pand particularly how it differs from the `addTwo` function.  
+
+**The global scope** is shared between the `addThree` and `addTwo` functions.  
+
+**The function scope** is a bit smaller:
+- there are 3 args of the function, `x`, `y` and `z`
+- there are instructions to log the `a` variable
+- **the `a` variable is not declared inside the `addThree` function** and the function "gets" the `a` variable from the "next scope" available to the function. Because the `a` variable is not declared as an arg in this `addThree` function like it is in the `addTwo` function, the `a` variable is "found" by the `addThree` function in the global scope.
+- **these parts within the function represent the function's closure** - a critical detail here is that the closure of this `addThree` function refers to a global-scope variable. In pure functional programming, this is a bit of a "no no" and 
