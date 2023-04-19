@@ -18,7 +18,7 @@ order: 5
     - [JavaScript Has A Function Scope](#javascript-has-a-function-scope)
   - [Closures Represent Scope Encapsulation](#closures-represent-scope-encapsulation)
     - [Functional Closure Takes Precedence Over Global Scope Variables](#functional-closure-takes-precedence-over-global-scope-variables)
-    - [Global Scope Is Available](#global-scope-is-available)
+    - [Global Scope Is Available In A Function Closure](#global-scope-is-available-in-a-function-closure)
 
 ## Scope Is About What Is Available Within Reach
 Maybe like life, something are in-scope and some things are out-of-scope.  
@@ -91,7 +91,7 @@ The `a` variable is the critical piece to master when understanding scope and cl
 
 What about `addThree`? [See below](#global-scope-is-available)
 
-### Global Scope Is Available 
+### Global Scope Is Available In A Function Closure
 Let's consider the `addThree` function, pand particularly how it differs from the `addTwo` function.  
 
 **The global scope** is shared between the `addThree` and `addTwo` functions.  
