@@ -11,6 +11,12 @@ order: 4
 # Functions and Closure And Scope
 [Closure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) keep code "together" with details.  
 
+- [Functions and Closure And Scope](#functions-and-closure-and-scope)
+  - [Scope Is About What Is Available Within Reach](#scope-is-about-what-is-available-within-reach)
+    - [JavaScript Has A Global Scope](#javascript-has-a-global-scope)
+    - [JavaScript Has A Module Scope](#javascript-has-a-module-scope)
+    - [JavaScript Has A Function Scope](#javascript-has-a-function-scope)
+
 ## Scope Is About What Is Available Within Reach
 Maybe like life, something are in-scope and some things are out-of-scope.  
 Changing a tire on a car means certain things are in scope: using a tire-iron, a jack, dealing with lug nuts, potentially a tire-pressure gague and a pressurizing device. The task, in this case, defines the scope. There is a broader scope, perhaps the drive-train, whic encapsulates the tires, but also includes more. There is an even broader scope, perhaps the entire vehicle, which summarizes all of the child components.   
