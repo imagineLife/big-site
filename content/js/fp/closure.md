@@ -100,4 +100,5 @@ Let's consider the `addThree` function, pand particularly how it differs from th
 - there are 3 args of the function, `x`, `y` and `z`
 - there are instructions to log the `a` variable
 - **the `a` variable is not declared inside the `addThree` function** and the function "gets" the `a` variable from the "next scope" available to the function. Because the `a` variable is not declared as an arg in this `addThree` function like it is in the `addTwo` function, the `a` variable is "found" by the `addThree` function in the global scope.
-- **these parts within the function represent the function's closure** - a critical detail here is that the closure of this `addThree` function refers to a global-scope variable. In pure functional programming, this is a bit of a "no no" and 
+- **these parts within the function represent the function's closure** 
+  - a critical detail here is that the closure of this `addThree` function refers to the `a` global-scope variable. In pure functional programming, this is a bit of a "no no"
