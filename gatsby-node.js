@@ -72,13 +72,18 @@ const sidebarNestedSections = {
       items: [],
       parentDir: "js",
     },
+    deps: {
+      sectionName: "Dependencies",
+      items: [],
+      parentDir: "js",
+    },
     "": {
       sectionName: "More",
       items: [],
       parentDir: "js",
     },
-    findOrder: ["intro", "fp", ""],
-    order: ["intro", "fp", ""],
+    findOrder: ["intro", "fp", "deps", ""],
+    order: ["intro", "fp", "deps", ""],
     finished: false,
   },
 }
