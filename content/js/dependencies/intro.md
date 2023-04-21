@@ -27,3 +27,29 @@ The `--help` flag and the `-h` flag produce some manual-like details in the cli.
 `npm help npm`: for a longer-form manual.  
 `npm help <command-here>` or `npm <command-here> -h`: for a manual about a specific command, i.e the `install` has a mini-manual at `npm install -h` or `npm help install`.  
 
+
+## package.json Is The Beginning Of A Node Module
+a module, or a "package", is a project/directory that includes the `package.json` file at the root of the dir.  
+
+Here's 2 ways to use the package.json file to being a node module.  
+First, the "template" way -  
+- create a directory to hold the thing (_lets call ours "horse"_)
+- run `npm init -y`: this will create a package.json file and fill it with some "template" content:
+```json
+{
+  "name": "horse",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+```
+
+Another approach is to leverage the npm cli for more details:
+- create the directory, like above
+- run `npm init` and a cli will "walk you through" creating a `package.json` file with more detail.  
