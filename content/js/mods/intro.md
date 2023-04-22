@@ -37,4 +37,4 @@ function listenFollowup(){
   console.log(`Example expressObj listening on port ${port}`)
 }
 ```
-The first line uses the `require` keyword to import the "express" node module.  
+The first line uses the `require` keyword to import the "express" node module. The required module result is stored in the variable named `express`.  
