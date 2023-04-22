@@ -14,6 +14,19 @@ There are [devDependencies](https://docs.npmjs.com/cli/v9/configuring-npm/packag
 There are [dependencies](https://docs.npmjs.com/cli/v9/configuring-npm/package-json#dependencies), the ones needed for a prod env.  
 These are managed with [npm](https://docs.npmjs.com/about-npm), "_the worlds largest software registry_".   
 
+- [Intro To Dependencies, npm, and package.json](#intro-to-dependencies-npm-and-packagejson)
+  - [A Dependency Is Someone Elses Code](#a-dependency-is-someone-elses-code)
+  - [NPM, the Node Package manager](#npm-the-node-package-manager)
+    - [Get Started with npm](#get-started-with-npm)
+      - [See The npm Manuals](#see-the-npm-manuals)
+  - [package.json Is The Beginning Of A Node Module](#packagejson-is-the-beginning-of-a-node-module)
+    - [package.json has a bunch of fields](#packagejson-has-a-bunch-of-fields)
+    - [package.json Manages Dependencies And Dependency Versions](#packagejson-manages-dependencies-and-dependency-versions)
+      - [Using "npm install" to Add New Dependencies](#using-npm-install-to-add-new-dependencies)
+      - [Using "npm install" to Install All Dependencies](#using-npm-install-to-install-all-dependencies)
+      - [Using "npm install" to Install Development-Only Dependencies](#using-npm-install-to-install-development-only-dependencies)
+  - [Leveraging NPM CLI Commands](#leveraging-npm-cli-commands)
+
 ## A Dependency Is Someone Elses Code
 Dependencies are pieces of code that do things, stored in directories, available to consume and use in (y)our projects, and maintained by others.  
 Devs use dependencies for all types of things and for all sorts of purposes:
@@ -25,16 +38,6 @@ Devs use dependencies for all types of things and for all sorts of purposes:
 - managing the semantic version implementation
 - bundling and transpiling
 - interfacing with other third-party vendors (email, logging, payment systems, etc)
-
-
-- [Intro To Dependencies, npm, and package.json](#intro-to-dependencies-npm-and-packagejson)
-  - [NPM, the Node Package manager](#npm-the-node-package-manager)
-    - [Get Started with npm](#get-started-with-npm)
-      - [See The npm Manuals](#see-the-npm-manuals)
-  - [package.json Is The Beginning Of A Node Module](#packagejson-is-the-beginning-of-a-node-module)
-    - [package.json has a bunch of fields](#packagejson-has-a-bunch-of-fields)
-    - [package.json Manages Dependencies And Dependency Versions](#packagejson-manages-dependencies-and-dependency-versions)
-      - [Using "npm install" to Add New Dependencies](#using-npm-install-to-add-new-dependencies)
 
 
 ## NPM, the Node Package manager
@@ -120,5 +123,71 @@ The `package.json` file now includes notes on the dependency:
 `express` is listed as one of the key/value pairs inside the `dependencies` array. Here, express is included with any version greater-than or equal `4.8.12` and less than `5.0.0`.  
 
 The [`package-lock.json`](https://docs.npmjs.com/cli/v9/configuring-npm/package-lock-json) is something like a record that documents _exact versions_ of modules, including dependencies of the modules. This file is not intended to be modified by us mere humans - npm will make use of it.  
+**Disabling The Package-Lock**  
+The creation & management of the package-lock file can be disabled by setting `package-lock=false` in a file called [`.npmrc`](https://docs.npmjs.com/cli/v8/configuring-npm/npmrc). The `npmrc` file is like a configuration file for npm itself, detailing different and "lower level" content beyond the details in the `package.json`.  
+**Creating package-lock manually**  
+`npm i --package-lock`.  
+
 
 The [node_modules](https://docs.npmjs.com/cli/v8/configuring-npm/folders#node-modules) directory stores the dependency code content.  
+
+#### Using "npm install" to Install All Dependencies
+A common scenario is where developers download a module to _work on the module_. Perhaps I share the code of `blog-demo-repo` with a friend. _It is extremely common to keep the contents of the `node_modules` directory out of the "shared" version of the project_. This is where `npm install` comes in.  
+Run `npm install` at the root of the repo, and npm "figures out" what dependencies to install without having to name the dependencies explicitly. As long as a package.json (_and potentially a package-lock.json_) are present, npm knows what to do.  
+
+#### Using "npm install" to Install Development-Only Dependencies
+Some project dependencies can and probably will be development-only dependencies (_devDependencies_) - things like linters, formatters, bundlers & compilers... things that aren't needed in a production environment.  
+For frontend projects, where the only goal is to product html+js+css for browsers to consume, all dependenciens might be devDependencies.  
+To add a dependency as a dev-only dependency, let's take [eslint](https://eslint.org/) as the example.  
+Use `npm install --save-dev eslint` or `npm instal -D eslint`
+
+## Leveraging NPM CLI Commands
+There are a [bunch of helpful cli commands](https://docs.npmjs.com/cli/v8/commands) that npm includes to interact with npm and dependencies. 
+For example, `npm ls` will show dependencies in the cli:
+```js
+> npm ls
+blog-demo-repo@1.0.0 /Users/me/Desktop/blog-demo-repo
+└── express@4.18.2
+
+
+
+
+
+// with a depth of 1
+// this will show the project dependencies, as well as 1 "level" deeper (the dependencies of the project dependencies)
+// the depth value can reveal a lot at higher values
+npm ls --depth=1
+blog-demo-repo@1.0.0 /Users/me/Desktop/blog-demo-repo
+└─┬ express@4.18.2
+  ├── accepts@1.3.8
+  ├── array-flatten@1.1.1
+  ├── body-parser@1.20.1
+  ├── content-disposition@0.5.4
+  ├── content-type@1.0.5
+  ├── cookie-signature@1.0.6
+  ├── cookie@0.5.0
+  ├── debug@2.6.9
+  ├── depd@2.0.0
+  ├── encodeurl@1.0.2
+  ├── escape-html@1.0.3
+  ├── etag@1.8.1
+  ├── finalhandler@1.2.0
+  ├── fresh@0.5.2
+  ├── http-errors@2.0.0
+  ├── merge-descriptors@1.0.1
+  ├── methods@1.1.2
+  ├── on-finished@2.4.1
+  ├── parseurl@1.3.3
+  ├── path-to-regexp@0.1.7
+  ├── proxy-addr@2.0.7
+  ├── qs@6.11.0
+  ├── range-parser@1.2.1
+  ├── safe-buffer@5.2.1
+  ├── send@0.18.0
+  ├── serve-static@1.15.0
+  ├── setprototypeof@1.2.0
+  ├── statuses@2.0.1
+  ├── type-is@1.6.18
+  ├── utils-merge@1.0.1
+  └── vary@1.1.2
+```
