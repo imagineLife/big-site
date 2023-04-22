@@ -53,3 +53,14 @@ First, the "template" way -
 Another approach is to leverage the npm cli for more details:
 - create the directory, like above
 - run `npm init` and a cli will "walk you through" creating a `package.json` file with more detail.  
+
+### package.json has a bunch of fields
+There is an [entire doc](https://docs.npmjs.com/cli/v9/configuring-npm/package-json) about the fields in a `package.json` file. Here's the fields to get started with:
+- `name`: well, give it a name!
+- `version`: a [semantic version](https://semver.org) string
+- `description`: this appears when somehone [searches for your module through npm](https://www.npmjs.com)
+- `main`: the "entrypoint" of the project - where the code running should start at
+- `scripts`: an objects of commands (_scripts_) that npm can use (with [a robust doc](https://docs.npmjs.com/cli/v9/using-npm/scripts) to go with it)
+- `keywords`: an array of strings
+- `author`: this can include an object with `name`, `email`, and `url`
+- `license`: Check out something like [choosealicense.com](https://choosealicense.com) for options to consider - let consumers of the project know what they can and can't do with it
