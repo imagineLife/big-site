@@ -9,9 +9,13 @@ require("./src/normalize.css")
 require("./src/style.css")
 
 // Highlighting for code blocks
-require("prismjs/themes/prism-tomorrow.min.css")
+// require("prismjs/plugins/command-line/prism-command-line.css")
+require("prismjs/themes/prism-solarizedlight.min.css")
+// require("prismjs/themes/prism-tomorrow.min.css")
+// require("prismjs/themes/prism-dark.min.css")
+// require("prismjs/themes/prism-twilight.min.css")
+// require("prismjs/themes/prism-twilight.min.css")
 // require("prismjs/themes/prism.css")
-// require('prismjs/plugins/command-line/prism-command-line.css');
 
 exports.shouldUpdateScroll = () => {
   window.scrollTo(0, 0)
