@@ -125,8 +125,7 @@ The `package.json` file now includes notes on the dependency:
 The [`package-lock.json`](https://docs.npmjs.com/cli/v9/configuring-npm/package-lock-json) is something like a record that documents _exact versions_ of modules, including dependencies of the modules. This file is not intended to be modified by us mere humans - npm will make use of it.  
 **Disabling The Package-Lock**  
 The creation & management of the package-lock file can be disabled by setting `package-lock=false` in a file called [`.npmrc`](https://docs.npmjs.com/cli/v8/configuring-npm/npmrc). The `npmrc` file is like a configuration file for npm itself, detailing different and "lower level" content beyond the details in the `package.json`.  
-**Creating package-lock manually**  
-`npm i --package-lock`.  
+**Create a package-lock manually** during package installation with `npm i --package-lock`.  
 
 
 The [node_modules](https://docs.npmjs.com/cli/v8/configuring-npm/folders#node-modules) directory stores the dependency code content.  
@@ -139,7 +138,9 @@ Run `npm install` at the root of the repo, and npm "figures out" what dependenci
 Some project dependencies can and probably will be development-only dependencies (_devDependencies_) - things like linters, formatters, bundlers & compilers... things that aren't needed in a production environment.  
 For frontend projects, where the only goal is to product html+js+css for browsers to consume, all dependenciens might be devDependencies.  
 To add a dependency as a dev-only dependency, let's take [eslint](https://eslint.org/) as the example.  
-Use `npm install --save-dev eslint` or `npm instal -D eslint`
+
+Use `npm install --save-dev eslint` or `npm instal -D eslint`.  
+
 
 ## Leveraging NPM CLI Commands
 There are a [bunch of helpful cli commands](https://docs.npmjs.com/cli/v8/commands) that npm includes to interact with npm and dependencies. 
