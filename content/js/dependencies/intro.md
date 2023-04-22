@@ -14,6 +14,13 @@ There are [devDependencies](https://docs.npmjs.com/cli/v9/configuring-npm/packag
 There are [dependencies](https://docs.npmjs.com/cli/v9/configuring-npm/package-json#dependencies), the ones needed for a prod env.  
 These are managed with [npm](https://docs.npmjs.com/about-npm), "_the worlds largest software registry_". 
 
+- [Intro To Dependencies, npm, and package.json](#intro-to-dependencies-npm-and-packagejson)
+  - [NPM, the Node Package manager](#npm-the-node-package-manager)
+    - [Get Started with npm](#get-started-with-npm)
+      - [See The npm Manuals](#see-the-npm-manuals)
+  - [package.json Is The Beginning Of A Node Module](#packagejson-is-the-beginning-of-a-node-module)
+    - [package.json has a bunch of fields](#packagejson-has-a-bunch-of-fields)
+
 
 ## NPM, the Node Package manager
 [npm](https://www.npmjs.com) is a free node module registry overflowing with node modules that perform functionality with easy-to-use apis.  
@@ -53,6 +60,8 @@ First, the "template" way -
 Another approach is to leverage the npm cli for more details:
 - create the directory, like above
 - run `npm init` and a cli will "walk you through" creating a `package.json` file with more detail.  
+
+Also, `npm init` can be run on a project that already has `package.json` - the cli will ask the same questions, and if there are new answers, the package.json will be updated!
 
 ### package.json has a bunch of fields
 There is an [entire doc](https://docs.npmjs.com/cli/v9/configuring-npm/package-json) about the fields in a `package.json` file. Here's the fields to get started with:
