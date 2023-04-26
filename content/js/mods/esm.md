@@ -11,6 +11,15 @@ order: 2
 # EcmaScript Modules
 [ECMAScript modules](https://nodejs.org/dist/latest-v18.x/docs/api/esm.html) are the most up-to-date [standardized](https://tc39.es/ecma262/#sec-ecmascript-language-scripts-and-modules) way to put js code bits into modularized code. Two details that separate CommonJS from EMCAScript syntactically are [exports](https://tc39.es/ecma262/#sec-exports), [imports](https://tc39.es/ecma262/#sec-imports).  
 
+
+- [EcmaScript Modules](#ecmascript-modules)
+  - [EcmaScript is Different than CommonJS](#ecmascript-is-different-than-commonjs)
+  - [Build A Node Process To Leverage ECMAScript Module Syntax](#build-a-node-process-to-leverage-ecmascript-module-syntax)
+    - [Create A Module](#create-a-module)
+    - [Setup A Repo To Work With ESM](#setup-a-repo-to-work-with-esm)
+    - [Use A Module As An Index File](#use-a-module-as-an-index-file)
+
+
 ## EcmaScript is Different than CommonJS
 [Node docs](https://nodejs.org/api/esm.html) are a great reference for details comparing the two:
 - esmodules (ecmaScript) are async, whereas commonjs require statements are syynchronous
@@ -23,10 +32,9 @@ Here, a simple version of the `addTwo.js` file (_as built in a [previous post](/
 // addTwo.mjs
 export default function addTwo(a,b){ return a + b}
 ```
-Two details to notice:
-- the filename suffix is now `*.mjs` (_which is even recommended by [V8](https://v8.dev/features/modules#mjs), the js engine_)
+A few details to notice:
+- the filename suffix is now `*.mjs` (_which is even recommended by [V8](https://v8.dev/features/modules#mjs), the js engine_). This is not required when [the next step is done](#setup-a-repo-to-work-with-esm), but can be helpful to reduce developer cognitive load during development
 - the function is `export`ed, and here even as a `default`
-
 ### Setup A Repo To Work With ESM
 One detail is different in this `package.json` from [the package.json in another post](/js/mods): the `type` keyword. 
 ```json
