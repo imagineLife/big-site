@@ -58,8 +58,8 @@ One detail is different in this `package.json` from [the package.json in another
 The "type" keyword instructs node to use ECMAScript modules && recognize `*.mjs` as javascript modules.  
 
 ### Set An ECMAScript Module To Discover Its Runtime Method
-In the [commonJS approach]('/js./mods#run-a-program-as-a-module), the `require.main` is used by node to "figure out" its runtime method of either being run directly through something like `node addTwo.js` or `require('./addTwo')`.  
-In ECMAScript modules, though, `require.main` is not an available functionality.   
+In the [commonJS approach]('/js./mods#run-a-program-as-a-module), the `require.main` and the `module` can be used by node to "figure out" a file's runtime method of either being run directly through something like `node addTwo.js` or `require('./addTwo')`.  
+In ECMAScript modules, though, `require.main` is not an available functionality, and setting a file to discover it's runtime approach requires can require more work.   
 In order to "discover" if an ecmascript module is ran by `node` or by `import` 
 - the `process.argv` could be used alongside 
 - the [`import.meta.url`](https://nodejs.org/dist/latest-v18.x/docs/api/esm.html#importmetaurl) variable could be used
