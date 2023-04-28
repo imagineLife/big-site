@@ -17,7 +17,7 @@ order: 2
   - [Build A Node Process To Leverage ECMAScript Module Syntax](#build-a-node-process-to-leverage-ecmascript-module-syntax)
     - [Create A Module](#create-a-module)
     - [Setup A Repo To Work With ESM](#setup-a-repo-to-work-with-esm)
-    - [Use A Module As An Index File](#use-a-module-as-an-index-file)
+    - [Set An ECMAScript Module To Discover Its Runtime Method](#set-an-ecmascript-module-to-discover-its-runtime-method)
 
 
 ## EcmaScript is Different than CommonJS
@@ -33,7 +33,7 @@ Here, a simple version of the `addTwo.js` file (_as built in a [previous post](/
 export default function addTwo(a,b){ return a + b}
 ```
 A few details to notice:
-- the filename suffix is now `*.mjs` (_which is even recommended by [V8](https://v8.dev/features/modules#mjs), the js engine_). This is not required when [the next step is done](#setup-a-repo-to-work-with-esm), but can be helpful to reduce developer cognitive load during development
+- the filename suffix is now `*.mjs` (_which is even recommended by [V8](https://v8.dev/features/modules#mjs), the js engine_). This file extension update is not required when [the next step is done](#setup-a-repo-to-work-with-esm), but could be helpful to reduce developer cognitive load during development by expressing with the filename that the file is intended to be a module
 - the function is `export`ed, and here even as a `default`
 ### Setup A Repo To Work With ESM
 One detail is different in this `package.json` from [the package.json in another post](/js/mods): the `type` keyword. 
@@ -57,26 +57,9 @@ One detail is different in this `package.json` from [the package.json in another
 [The `type` keyword](https://nodejs.org/dist/latest-v18.x/docs/api/esm.html#enabling) is about "enabling" the esm syntax.  
 The "type" keyword instructs node to use ECMAScript modules && recognize `*.mjs` as javascript modules.  
 
-### Use A Module As An Index File
-```js
-// index.mjs
-import { realpath } from 'fs/promises' 
-import { fileURLToPath } from 'url' 
-import * as format from './format.js'
-
-const executedByNodeCli = process.argv[1]
-const isMain =  executedByNodeCli && 
- await realpath(fileURLToPath(import.meta.url)) === 
- await realpath(executedByNodeCli)
-
-if (isMain) { 
-  const { default: pino } = await import('pino') 
-  const logger = pino() 
-  logger.info(format.upper('my-package started')) 
-  process.stdin.resume() 
-}
-
-export default (str) => { 
-  return format.upper(str).split('').reverse().join('') 
-}
-```
+### Set An ECMAScript Module To Discover Its Runtime Method
+In the [commonJS approach]('/js./mods#run-a-program-as-a-module), the `require.main` is used by node to "figure out" its runtime method of either being run directly through something like `node addTwo.js` or `require('./addTwo')`.  
+In ECMAScript modules, though, `require.main` is not an available functionality.   
+In order to "discover" if an ecmascript module is ran by `node` or by `import` 
+- the `process.argv` could be used alongside 
+- the [`import.meta.url`](https://nodejs.org/dist/latest-v18.x/docs/api/esm.html#importmetaurl) variable could be used
