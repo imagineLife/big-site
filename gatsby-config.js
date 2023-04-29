@@ -204,37 +204,29 @@ module.exports = {
       options: {
         query: `
           {
-            allFile(filter: { relativePath: { regex: "/md/" } } ){
-              nodes {
-                relativePath
-                modifiedTime
-
-              }
-            }
-            allSitePage{
-              nodes {
-                pageContext
-                path
+            allMarkdownRemark(filter: { frontmatter: { order: { gt: 0 } } }){
+              pages: edges {
+                page: node {
+                  fields{
+                    gitAuthorTime
+                  }
+                  overview: frontmatter {
+                    slug
+                  }
+                }
+                
               }
             }
           }
         `,
         resolveSiteUrl: () => `http://laursen.tech`,
-        resolvePages: ({ allSitePage, allFile }) => {
-          const resArr = allSitePage.nodes.map((sitePage, idx) => {
-            const matchingFromAll = allFile.nodes.filter(d =>
-              d.relativePath.includes(sitePage.pageContext.slug)
-            )
-            if (matchingFromAll[0]) {
-              return {
-                ...matchingFromAll[0],
-                ...sitePage,
-              }
-            } else {
-              return null
+        resolvePages: ({ allMarkdownRemark }) => {
+          return allMarkdownRemark.pages.map((sitePage) => {
+            return {
+              modifiedTime: sitePage.page.fields.gitAuthorTime,
+              path: sitePage.page.overview.slug
             }
           })
-          return resArr.filter(d => d)
         },
         serialize: ({ path, modifiedTime }) => {
           return {
