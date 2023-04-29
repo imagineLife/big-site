@@ -204,7 +204,11 @@ module.exports = {
       options: {
         query: `
           {
-            allMarkdownRemark(filter: { frontmatter: { order: { gt: 0 } } }){
+            allMarkdownRemark(filter: { 
+              frontmatter: { 
+                order: { gt: 0 } 
+                slug: { nin: "k8s/examples" }
+              } }){
               pages: edges {
                 page: node {
                   fields{
@@ -221,10 +225,10 @@ module.exports = {
         `,
         resolveSiteUrl: () => `http://laursen.tech`,
         resolvePages: ({ allMarkdownRemark }) => {
-          return allMarkdownRemark.pages.map((sitePage) => {
+          return allMarkdownRemark.pages.map(sitePage => {
             return {
               modifiedTime: sitePage.page.fields.gitAuthorTime,
-              path: sitePage.page.overview.slug
+              path: sitePage.page.overview.slug,
             }
           })
         },
