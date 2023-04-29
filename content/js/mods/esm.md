@@ -18,6 +18,7 @@ order: 2
     - [Create A Module](#create-a-module)
     - [Setup A Repo To Work With ESM](#setup-a-repo-to-work-with-esm)
     - [Set An ECMAScript Module To Discover Its Runtime Method](#set-an-ecmascript-module-to-discover-its-runtime-method)
+      - [Understand How The Program Was Started From the CLI with process.argv](#understand-how-the-program-was-started-from-the-cli-with-processargv)
 
 
 ## EcmaScript is Different than CommonJS
@@ -58,8 +59,10 @@ One detail is different in this `package.json` from [the package.json in another
 The "type" keyword instructs node to use ECMAScript modules && recognize `*.mjs` as javascript modules.  
 
 ### Set An ECMAScript Module To Discover Its Runtime Method
-In the [commonJS approach]('/js./mods#run-a-program-as-a-module), the `require.main` and the `module` can be used by node to "figure out" a file's runtime method of either being run directly through something like `node addTwo.js` or `require('./addTwo')`.  
+In the [commonJS approach]('/js./mods#run-a-program-as-a-module) of "figuring out" a program's runtime approach, the `require.main` and the `module` can be used by node to "figure out" a file's runtime method of either being run directly through something like `node addTwo.js` or `require('./addTwo')`.  
 In ECMAScript modules, though, `require.main` is not an available functionality, and setting a file to discover it's runtime approach requires can require more work.   
-In order to "discover" if an ecmascript module is ran by `node` or by `import` 
-- the `process.argv` could be used alongside 
-- the [`import.meta.url`](https://nodejs.org/dist/latest-v18.x/docs/api/esm.html#importmetaurl) variable could be used
+In order to "discover" if an ecmascript module is ran by `node` or by `import`, a few things can be leveraged...
+
+#### Understand How The Program Was Started From the CLI with process.argv
+A typical node module start script is `npm start` or `npm run start`. These leverage npm to run the "start" script in the project's `package.json` file.  
+In a simple project like this, where the start script reads `node index.js`, the npm start script is running node with the file argument of `index.js`.  
