@@ -4,6 +4,7 @@
  * See: https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node/
  */
 
+const { execSync } = require("child_process")
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
@@ -11,7 +12,7 @@ const { createFilePath } = require(`gatsby-source-filesystem`)
 // const blogPost = path.resolve(`./src/templates/blog-post.js`)
 const mdTemplate = path.resolve(`./src/templates/markdown/index.js`)
 const tagTemplate = path.resolve(`./src/templates/tags.js`)
-const nestedNavTemplate = path.resolve('./src/templates/nestedNav/index.js')
+const nestedNavTemplate = path.resolve("./src/templates/nestedNav/index.js")
 
 const sidebarNestedSections = {
   /*
@@ -93,11 +94,6 @@ const sidebarNestedSections = {
   },
 }
 
-
-
-
-
-
 /*
   output extected to be shaped
   [
@@ -110,31 +106,30 @@ const sidebarNestedSections = {
       ]
     }
   ]
-*/ 
+*/
 function prepOtherPages({ pages, nestingRules }) {
-  
   // FLAT
-  if (!nestingRules) return pages;
+  if (!nestingRules) return pages
 
-  if (nestingRules.finished === true) return nestingRules.order.map(sectionToUse => nestingRules[`${sectionToUse}`]);
-  
+  if (nestingRules.finished === true)
+    return nestingRules.order.map(
+      sectionToUse => nestingRules[`${sectionToUse}`]
+    )
+
   pages.forEach(({ page }) => {
-    const theSectionThisPageIsPartOf = nestingRules.findOrder.find(sectionString => page.overview.slug.includes(sectionString))
-    
+    const theSectionThisPageIsPartOf = nestingRules.findOrder.find(
+      sectionString => page.overview.slug.includes(sectionString)
+    )
+
     if (theSectionThisPageIsPartOf) {
       nestingRules[theSectionThisPageIsPartOf].items.push(page)
     } else {
       nestingRules[""].items.push(page)
     }
   })
-  nestingRules.finished = true;
+  nestingRules.finished = true
   return nestingRules.order.map(sectionToUse => nestingRules[`${sectionToUse}`])
 }
-
-
-
-
-
 
 /**
  * @type {import('gatsby').GatsbyNode['createPages']}
@@ -225,9 +220,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       }
       js: allMarkdownRemark(
         sort: { frontmatter: { order: ASC } }
-        filter: {
-          frontmatter: { order: { gt: 0 }, slug: { regex: "/^js/" } }
-        }
+        filter: { frontmatter: { order: { gt: 0 }, slug: { regex: "/^js/" } } }
       ) {
         pages: edges {
           page: node {
@@ -521,12 +514,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   // loop through graphql sections (docker, k8s, linux, etc)
   Object.keys(result.data).forEach(sectionName => {
-    if (sectionName !== 'tagsGroup') {
-
+    if (sectionName !== "tagsGroup") {
       const thisSectionPages = result.data[`${sectionName}`].pages
-      
+
       thisSectionPages.forEach(({ page }) => {
-        const thisParent = page.overview.parentDir || page.overview.slug;
+        const thisParent = page.overview.parentDir || page.overview.slug
         let pageObj = {
           path: page.overview.slug,
           component:
@@ -551,7 +543,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         }
 
         if (page?.overview?.shortSlug)
-          pageObj.context.shortSlug = page.overview.shortSlug;
+          pageObj.context.shortSlug = page.overview.shortSlug
 
         //
         // more all-inclusive nested-layout accommodations
@@ -576,7 +568,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       })
     }
   })
-  
 
   groupOfTags.forEach(({ fieldValue }) => {
     createPage({
@@ -596,6 +587,16 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
 
   if (node.internal.type === `MarkdownRemark`) {
+    const gitAuthorTime = execSync(
+      `git log -1 --pretty=format:%aI ${node.fileAbsolutePath}`
+    ).toString()
+
+    createNodeField({
+      node,
+      name: "gitAuthorTime",
+      value: gitAuthorTime,
+    })
+
     const value = createFilePath({ node, getNode })
     createNodeField({
       name: `slug`,
@@ -625,13 +626,13 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
             const { shortSlug } = source
             if (source.shortSlug == null) {
               const thisShortSlug = source.slug?.split("/")[1]
-              if (!thisShortSlug) { 
-                if (!source.slug) { 
-                  return 'missing'
+              if (!thisShortSlug) {
+                if (!source.slug) {
+                  return "missing"
                 } else {
-                  return source.slug 
+                  return source.slug
                 }
-              } 
+              }
               return thisShortSlug
             } else return shortSlug
           },
@@ -666,16 +667,15 @@ exports.onCreateWebpackConfig = ({
 // delete the pages that match the collection routing provided by gatsby
 // BUT aren't what I want: here remove all docker/* that aren't supposed to be there
 // exports.onCreatePage = ({ page, actions }) => {
-  // const { createPage, deletePage } = actions
+// const { createPage, deletePage } = actions
 
-  /*
+/*
     docker cleanup
-  */ 
-  // const dockerShortSlugs = ['cli-overview', 'dockerfile-intro', 'a-frontend', 'node-on-docker-intro', 'node-server-with-user', 'node-server-with-deps', 'setup-docker', 'node-server-containerized', 'a-smaller-node-image', 'why-containers'];
+  */
+// const dockerShortSlugs = ['cli-overview', 'dockerfile-intro', 'a-frontend', 'node-on-docker-intro', 'node-server-with-user', 'node-server-with-deps', 'setup-docker', 'node-server-containerized', 'a-smaller-node-image', 'why-containers'];
 
-
-  // if (page.path.includes("docker") && page.path !== "/docker" && !dockerShortSlugs.includes(page.context.frontmatter__shortSlug)) {
-  //     console.log("deleting page: ", page.path)
-  //     deletePage(page)
-  // }
+// if (page.path.includes("docker") && page.path !== "/docker" && !dockerShortSlugs.includes(page.context.frontmatter__shortSlug)) {
+//     console.log("deleting page: ", page.path)
+//     deletePage(page)
+// }
 // }
