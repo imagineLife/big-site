@@ -67,6 +67,7 @@ export function Head() {
         name="google-site-verification"
         content="2GHmkybMS3wSWW3Ld1eKNBEB0JygEYUAgQIGN2j-n98"
       />
+      <link rel="canonical" href={`http://laursen.tech/`} />
     </Fragment>
   )
 }

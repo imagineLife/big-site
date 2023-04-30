@@ -42,6 +42,7 @@ export default function PageHead({ title, excerpt, slug, words, tags }) {
         <meta name="description" content={excerpt} />
         <meta property="og:title" content={title} />
         <meta property="og:url" content={`http://laursen.tech/${slug}`} />
+        <link rel="canonical" href={`http://laursen.tech/${slug}`}/>
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Fragment>
     )
