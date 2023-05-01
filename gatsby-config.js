@@ -207,7 +207,7 @@ module.exports = {
             allMarkdownRemark(filter: { 
               frontmatter: { 
                 order: { gt: 0 } 
-                slug: { nin: "k8s/examples" }
+                slug: { regex: "/^(?!k8s/examples|fwebs|backend)/" }
               } }){
               pages: edges {
                 page: node {
