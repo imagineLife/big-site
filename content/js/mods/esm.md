@@ -18,7 +18,9 @@ order: 2
     - [Create A Module](#create-a-module)
     - [Setup A Repo To Work With ESM](#setup-a-repo-to-work-with-esm)
     - [Set An ECMAScript Module To Discover Its Runtime Method](#set-an-ecmascript-module-to-discover-its-runtime-method)
-      - [Understand How The Program Was Started From the CLI with process.argv](#understand-how-the-program-was-started-from-the-cli-with-processargv)
+      - [process.argv accesses command-line arguments](#processargv-accesses-command-line-arguments)
+      - [import.meta.url shows a modules url](#importmetaurl-shows-a-modules-url)
+      - [process.argv can be leveraged to detect a files run approach](#processargv-can-be-leveraged-to-detect-a-files-run-approach)
 
 
 ## EcmaScript is Different than CommonJS
@@ -63,6 +65,50 @@ In the [commonJS approach]('/js./mods#run-a-program-as-a-module) of "figuring ou
 In ECMAScript modules, though, `require.main` is not an available functionality, and setting a file to discover it's runtime approach requires can require more work.   
 In order to "discover" if an ecmascript module is ran by `node` or by `import`, a few things can be leveraged...
 
-#### Understand How The Program Was Started From the CLI with process.argv
-A typical node module start script is `npm start` or `npm run start`. These leverage npm to run the "start" script in the project's `package.json` file.  
-In a simple project like this, where the start script reads `node index.js`, the npm start script is running node with the file argument of `index.js`.  
+#### process.argv accesses command-line arguments
+Let's look at a 2-line code snippet in order to see what `process.argv` does:
+```js
+// argv.js
+console.log('argv here')
+console.log(process.argv)
+```
+Running this from the cli with `node argv.js` returns...
+```bash
+[
+  '/usr/local/bin/node',
+  '(<pwd/path/...>)/args.js'
+]
+```
+What this shows is...
+- [process.argv returns a list (array) of strings](https://nodejs.org/dist/latest-v18.x/docs/api/process.html#processargv), where each item in the list correlates to one of the commands in the run arg (`node` and `argv.js`)
+- the first result represents the node runtime, located at `/usr/local/bin/node`
+- the second result represents the file that is run, located at the current working direct (_here summarized_) ending with the js file 
+
+Running the same program with something like `node argv.js 123 water` will return
+```bash
+[
+  '/usr/local/bin/node',
+  '(<pwd/path/...>)/args.js'
+  '123',
+  'water'
+]
+```
+Notice that each argument in the cli run command gets its own string in the `process.argv` array.  
+
+
+#### import.meta.url shows a modules url
+[import.meta.url](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import.meta) is a handy detail within a module.  
+
+
+#### process.argv can be leveraged to detect a files run approach
+Lets make a small progam and incorporate `process.argv` to "figure out" how a module is run.  
+Here, a directory structure for the project that will add two numbers together:
+```bash
+my-adder        # directory
+  index.js      # file
+  package.json  # file
+  add.mjs       # file
+```
+
+Run `npm init -y` at the root to fill out some template package.json contents.  
+Populate add.mjs 
