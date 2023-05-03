@@ -44,6 +44,7 @@ The ClusterIP Service...
 - creates a virtual ip in a cluster
 - lives in a cluster
 - enables communication between services
+See [a longer article on the topic of ClusterIP Services](k8s/networking-intro/cluster-ip-service).  
 
 ### Load Balancer
 LoadBalancer services...
