@@ -21,6 +21,7 @@ There are a few different syntaxes between browsers and node: [commonJS](https:/
   - [Two Ways To Run A Module With the Node CLI](#two-ways-to-run-a-module-with-the-node-cli)
     - [Run A Program As A Program](#run-a-program-as-a-program)
     - [Run A Program As A Module](#run-a-program-as-a-module)
+  - [Discover A Module's Path With require.resolve](#discover-a-modules-path-with-requireresolve)
 
 
 ## Load A Module with the require keyword
@@ -111,3 +112,43 @@ if (require.main === module) {
 module.exports = { addTwo };
 
 ```
+
+
+## Discover A Module's Path With require.resolve
+
+Let's set up a simple node module to illustrate how [require.resolve](https://nodejs.org/dist/latest-v18.x/docs/api/modules.html#requireresolverequest-options) returns a string representing the location of a module:
+
+```bash
+# 1. build a repo & initialize it as an npm repo
+mkdir requireResolvePractice
+cd requireResolvePractice
+
+# 2. initialize it as a node module + setup some files
+npm init -y
+npm i express
+touch index.js
+touch addTwo.js
+```
+
+Here, some code for `index.js` to illustrate the output of `require.resolve`
+```js
+console.log({
+  expressResolved: require.resolve('express'),
+  selfResolved: require.resolve('.'),
+  addTwoResolved: require.resolve('./addTwo'),
+  fsResolved: require.resolve('fs')
+})
+```
+Running `node index.js` will return something like....
+```json
+{
+  "expressResolved": "<path-to>/requireResolvePractice/node_modules/express/index.js",
+  "selfResolved": "<path-to>/requireResolvePractice/index.js",
+  "addTwoResolved": "<path-to>/requireResolvePractice/addTwo.js",
+  "fsResolved": "fs"
+}
+```
+Interesting details to note:
+- modules resolve to the node_module main file
+- core "absolute" dependencies, like `fs` return seemingly the same string
+- relative modules, like the `.` and `./addTwo`, return absolute path strings
