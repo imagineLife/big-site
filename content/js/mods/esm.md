@@ -19,7 +19,7 @@ order: 2
     - [Setup A Repo To Work With ESM](#setup-a-repo-to-work-with-esm)
     - [Set An ECMAScript Module To Discover Its Runtime Method](#set-an-ecmascript-module-to-discover-its-runtime-method)
       - [process.argv accesses command-line arguments](#processargv-accesses-command-line-arguments)
-      - [import.meta.url shows a modules url](#importmetaurl-shows-a-modules-url)
+      - [import.meta.url shows a modules file: url](#importmetaurl-shows-a-modules-file-url)
       - [process.argv can be leveraged to detect a files run approach](#processargv-can-be-leveraged-to-detect-a-files-run-approach)
 
 
@@ -96,8 +96,92 @@ Running the same program with something like `node argv.js 123 water` will retur
 Notice that each argument in the cli run command gets its own string in the `process.argv` array.  
 
 
-#### import.meta.url shows a modules url
+#### import.meta.url shows a modules file: url
 [import.meta.url](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import.meta) is a handy detail within a module.  
+
+Let's create a 2-file project and use the `import.meta.url` to see what this does.  
+Make the directory, `demo-add-two`.
+Cteate an `index.mjs` and an `addTwo.mjs`.  
+setup the index.js:
+```js
+import addTwo from './addTwo.mjs`;
+
+console.log(`index meta url: ${import.meta.url}`)
+console.log(addTwo(3,2));
+```
+Setup the addTwo file:
+```js
+// addTwo.js
+console.log(`addTwo meta url: ${import.meta.url}`)
+function addTwo(a,b){ return a + b };
+export default addTWo;
+```
+
+Run the project and see the output in the cli:
+```bash
+cd demo-add-two
+
+node index.mjs
+
+addTwo meta url: file:///<demo-add-two-path>/addTwo.mjs
+index meta url: file:///<demo-add-two-path>/index.mjs
+```
+This file url can be used in conjunction with other native node module functionalities to get the "real" path of the files:   
+```js
+// addTwo.js
+// 1 import
+import { fileURLToPath } from 'url';
+
+// 2. do work
+const fileUrl = import.meta.url
+const thisFilesPath = fileURLToPath(importMetaUrl)
+
+// 3. see output
+console.log({
+  fileUrl,
+  thisFilesPath
+})
+function addTwo(a,b){ return a + b };
+export default addTWo;
+```
+Now, the output will include the file-path that can be more usable by node's module system, as the `fileURLToPath` in this case more-or-less "strips" the [file:// prefix](https://en.wikipedia.org/wiki/File_URI_scheme) from the file's path:  
+
+```json
+{
+  fileUrl: "file:///<demo-add-two-path>/addTwo.mjs"
+  thisFilesPath: "<demo-add-two-path>/addTwo.mjs"
+}
+```
+One more precautionary measure could be used to "normalize" the url with the `realpath` module:  
+```js
+// addTwo.js
+// 1 import
+import { fileURLToPath } from 'url';
+import { realpath } from 'fs/promises';
+
+// 2. do work
+const fileUrl = import.meta.url
+const thisFilesPath = fileURLToPath(importMetaUrl)
+const cleanFilePath = await realpath(thisFilesPath);
+
+// 3. see output
+console.log({
+  fileUrl,
+  thisFilesPath,
+  cleanFilePath
+})
+function addTwo(a,b){ return a + b };
+export default addTWo;
+```
+This should output something like:  
+```json
+{
+  fileUrl: "file:///<demo-add-two-path>/addTwo.mjs",
+  thisFilesPath: "<demo-add-two-path>/addTwo.mjs"
+  cleanFilePath: "<demo-add-two-path>/addTwo.mjs"
+}
+```
+
 
 
 #### process.argv can be leveraged to detect a files run approach
