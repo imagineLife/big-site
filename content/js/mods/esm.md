@@ -21,6 +21,7 @@ order: 2
       - [process.argv accesses command-line arguments](#processargv-accesses-command-line-arguments)
       - [import.meta.url shows a modules file: url](#importmetaurl-shows-a-modules-file-url)
       - [process.argv can be leveraged to detect a files run approach](#processargv-can-be-leveraged-to-detect-a-files-run-approach)
+  - [Discover A Module's Path With import.meta.resolve experimentally](#discover-a-modules-path-with-importmetaresolve-experimentally)
 
 
 ## EcmaScript is Different than CommonJS
@@ -196,3 +197,24 @@ my-adder        # directory
 
 Run `npm init -y` at the root to fill out some template package.json contents.  
 Populate add.mjs 
+
+## Discover A Module's Path With import.meta.resolve experimentally
+[import.meta.resolve](https://nodejs.org/dist/latest-v18.x/docs/api/esm.html#importmetaresolvespecifier-parent) is currently in [experimental stability](https://nodejs.org/dist/latest-v18.x/docs/api/documentation.html#stability-index), but here's a look at it!
+
+Let's create a simple project and illustrate how import.meta.resolve can be used and what it returns:  
+```bash
+mkdir metaResolvePractice
+cd metaResolvePractice
+touch index.js
+touch addTwo.mjs
+
+npm init -y
+```
+
+```js
+// index.js
+const addTwoPath = './addTWo.mjs'
+const resolvedAddTwo = import.meta.resolve(addTwoPath)
+console.log({resolvedAddTwo})
+```
+This can be run with something like `node start -- --experimental-import-meta-resolve`
