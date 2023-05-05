@@ -21,7 +21,9 @@ order: 2
       - [process.argv accesses command-line arguments](#processargv-accesses-command-line-arguments)
       - [import.meta.url shows a modules file: url](#importmetaurl-shows-a-modules-file-url)
       - [process.argv can be leveraged to detect a files run approach](#processargv-can-be-leveraged-to-detect-a-files-run-approach)
-  - [Discover A Module's Path With import.meta.resolve experimentally](#discover-a-modules-path-with-importmetaresolve-experimentally)
+  - [Discover A Module's Path](#discover-a-modules-path)
+    - [An Experimental Approach With import.meta.resolve](#an-experimental-approach-with-importmetaresolve)
+  - [Use A More Stable Approach With createRequire](#use-a-more-stable-approach-with-createrequire)
 
 
 ## EcmaScript is Different than CommonJS
@@ -198,8 +200,10 @@ my-adder        # directory
 Run `npm init -y` at the root to fill out some template package.json contents.  
 Populate add.mjs 
 
-## Discover A Module's Path With import.meta.resolve experimentally
-[import.meta.resolve](https://nodejs.org/dist/latest-v18.x/docs/api/esm.html#importmetaresolvespecifier-parent) is currently in [experimental stability](https://nodejs.org/dist/latest-v18.x/docs/api/documentation.html#stability-index), but here's a look at it!
+## Discover A Module's Path 
+### An Experimental Approach With import.meta.resolve
+[import.meta.resolve](https://nodejs.org/dist/latest-v18.x/docs/api/esm.html#importmetaresolvespecifier-parent) is currently in [experimental stability](https://nodejs.org/dist/latest-v18.x/docs/api/documentation.html#stability-index), but here's a look at it!  
+(_for a less experiment appraoch see [the createRequire section below](#discover-a-modules-path-with-createrequire)_).  
 
 Let's create a simple project and illustrate how import.meta.resolve can be used and what it returns:  
 ```bash
@@ -218,3 +222,9 @@ const resolvedAddTwo = import.meta.resolve(addTwoPath)
 console.log({resolvedAddTwo})
 ```
 This can be run with something like `node start -- --experimental-import-meta-resolve`
+
+## Use A More Stable Approach With createRequire
+A different approach to discover a modules path, less experimental than the `import.meta.resolve` approach, is to leverage [createResolve](https://nodejs.org/dist/latest-v18.x/docs/api/module.html#modulecreaterequirefilename):  
+
+- use `createRequire` in combination with `import.meta.url` to create a "require" function, much like the native commonJS require function
+- use the new "require" function and its chained method `require.resolve` to get the location of the module (_covered in the [node docs](https://nodejs.org/dist/latest-v18.x/docs/api/modules.html#requireresolverequest-options) as well as an ["intro to modules"](/js/mods) post_)
