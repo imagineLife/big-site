@@ -228,3 +228,15 @@ A different approach to discover a modules path, less experimental than the `imp
 
 - use `createRequire` in combination with `import.meta.url` to create a "require" function, much like the native commonJS require function
 - use the new "require" function and its chained method `require.resolve` to get the location of the module (_covered in the [node docs](https://nodejs.org/dist/latest-v18.x/docs/api/modules.html#requireresolverequest-options) as well as an ["intro to modules"](/js/mods) post_)
+
+With a `node_modules` dir, and something like `express` installed...
+```js
+import { createRequire } from 'module';
+const myRequire = createRequire(import.meta.url)
+const resolvedExpress = myRequire.resolve('express')
+console.log("resolvedExpress: ",resolvedExpress)
+```
+...that will return something like...
+```bash
+"<path-to-project>/node_modules/express/index.js"
+```
