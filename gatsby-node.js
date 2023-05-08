@@ -83,13 +83,18 @@ const sidebarNestedSections = {
       items: [],
       parentDir: "js",
     },
+    "control-flow": {
+      sectionName: "Control Flow",
+      items: [],
+      parentDir: "js",
+    },
     "": {
       sectionName: "More",
       items: [],
       parentDir: "js",
     },
-    findOrder: ["intro", "fp", "deps", "mods", ""],
-    order: ["intro", "fp", "deps", "mods", ""],
+    findOrder: ["intro", "fp", "deps", "mods", "control-flow", ""],
+    order: ["intro", "fp", "deps", "mods", "control-flow", ""],
     finished: false,
   },
 }
