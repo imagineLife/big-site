@@ -32,7 +32,7 @@ Synchronous code matters. Code that runs in-order is critical to [the event-loop
 A callback can be any function.  
 **Like any function**, the callback gets "called" (_or "invoked"_) by something.  
 **Unlike any function**, a callback gets "called" more "programmatically" by something like another function. Functions can be called more directly by a program writer (_`addTwo(2,3) calls addTwo "directly"`_). Callbacks, though, get called  another function.  
-For a longer write-up, [check out another post I wrote](/js/callbacks), but here's a snippet to get the ball rolling: 
+For a longer write-up, [check out another post I wrote](/js/control-flow/callbacks), but here's a snippet to get the ball rolling: 
 ```js
 // two different functions, addTwo and addThree
 function twoTogether(a,b){ return a + b};
