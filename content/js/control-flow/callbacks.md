@@ -31,7 +31,6 @@ console.log(addWithCallback(3,2,squared));
   - [Callbacks May Not Run In The Order They Are Written](#callbacks-may-not-run-in-the-order-they-are-written)
   - [Callback Hell And Serial Execution](#callback-hell-and-serial-execution)
   - [Callbacks And Recursion And Global State](#callbacks-and-recursion-and-global-state)
-    - [Build Some State To Track The Control-Flow](#build-some-state-to-track-the-control-flow)
 
 
 ## A Function Gets A Function As A Parameter
@@ -142,7 +141,8 @@ The naming of variables also becomes critical - `contents` in the first example 
 ## Callbacks And Recursion And Global State
 One approach to avoid "callback hell" is to leverage some sort of "state" which tracks the logic flow of a process. This can introduce some iteration in-exchange-for the nesting of callbacks.  
 Here's a brief example.  
-### Build Some State To Track The Control-Flow
+
+Some global state to get started:
 ```js
 const STATE = {
   fileIteration: 0,
