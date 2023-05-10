@@ -4,7 +4,7 @@ parentDir: js/control-flow
 slug: js/control-flow/callbacks
 author: Jake Laursen
 excerpt: Callbacks 
-tags: ["js","control flow", "callbacks"]
+tags: ["js","control flow", "callbacks", "async"]
 order: 2
 ---
 
@@ -31,6 +31,7 @@ console.log(addWithCallback(3,2,squared));
   - [Callbacks May Not Run In The Order They Are Written](#callbacks-may-not-run-in-the-order-they-are-written)
   - [Callback Hell And Serial Execution](#callback-hell-and-serial-execution)
   - [Callbacks And Recursion And Global State](#callbacks-and-recursion-and-global-state)
+  - [Promises As A Callback Alternative](#promises-as-a-callback-alternative)
 
 
 ## A Function Gets A Function As A Parameter
@@ -206,3 +207,7 @@ function readFilesAndStart(err, files) {
 }
 readdir(FILES_DIR, readFilesAndStart)
 ```
+
+## Promises As A Callback Alternative
+[promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) Can be an alternative syntax to use instead of callbacks.  
+Check out [another post here](/js/control-flow/promises) for a summary on promises!  

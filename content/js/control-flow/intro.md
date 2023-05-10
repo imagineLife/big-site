@@ -4,7 +4,7 @@ parentDir: js/
 slug: js/control-flow
 author: Jake Laursen
 excerpt: Code Might Happen Out-Of-Order
-tags: ["js","control flow","intro"]
+tags: ["js","control flow","intro", "async"]
 order: 1
 ---
 
