@@ -30,6 +30,8 @@ console.log(addWithCallback(3,2,squared));
   - [A Function is Called Anonymously](#a-function-is-called-anonymously)
   - [Callbacks May Not Run In The Order They Are Written](#callbacks-may-not-run-in-the-order-they-are-written)
   - [Callback Hell And Serial Execution](#callback-hell-and-serial-execution)
+  - [Callbacks And Recursion And Global State](#callbacks-and-recursion-and-global-state)
+    - [Build Some State To Track The Control-Flow](#build-some-state-to-track-the-control-flow)
 
 
 ## A Function Gets A Function As A Parameter
@@ -136,3 +138,71 @@ This file will read the files in the order written: large, then medium, then sma
 With more and more callbacks, it is clear how this nesting of callbacks can begin to look confusing and become difficult to "reason about". It may be common to look at a file like the above and begin to wonder "which callback am I in?"  
 
 The naming of variables also becomes critical - `contents` in the first example now become 3 different variables (`contentsOne`, `contentsTwo`,`contentsThree`).  
+
+## Callbacks And Recursion And Global State
+One approach to avoid "callback hell" is to leverage some sort of "state" which tracks the logic flow of a process. This can introduce some iteration in-exchange-for the nesting of callbacks.  
+Here's a brief example.  
+### Build Some State To Track The Control-Flow
+```js
+const STATE = {
+  fileIteration: 0,
+  filesData: [],
+  filesToRead: []
+}
+```
+Here:
+- **fileIteration**: store the file number (indexed starting at 0) that is "currently" being parsed - starting at 0 as the first file
+- **filesData**: a list that will store the data of the files that get read from the `readFile` function
+- **filesToRead**: a list that will store the names or file-paths to read - here, we'll use node to "figure out" which files to read instead of the above hard-coded filenames (sm,md,lg)
+
+Here's a working js file that uses callbacks and a "global" state to iterate through files concurrently:
+```js
+const { readFile, readdir } = require('fs');
+const STATE = {
+  fileIteration: 0,
+  filesData: [],
+  filesToRead: []
+}
+const FILES_DIR = './files';
+
+const printFileContents = (err, contents) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+  console.log(contents.toString());
+};
+
+function readAndUpdateState() {
+  const FILE_TO_READ = `${FILES_DIR}/${STATE.filesToRead[STATE.fileIteration]}`
+  console.log(`READING ${FILE_TO_READ}`)
+  
+  readFile(FILE_TO_READ, (e, fileContent) => {
+    // increment state count
+    STATE.fileIteration = STATE.fileIteration + 1;
+    if (e) {
+      console.error(e);
+    } else {
+      STATE.filesData.push(fileContent);
+
+      // conditional continue
+      if (STATE.fileIteration < STATE.filesToRead.length) {
+        readAndUpdateState()
+      } else {
+        console.log('DONE!')
+        console.log(STATE.filesData.length)
+      }
+    }
+  });
+}
+
+function readFilesAndStart(err, files) { 
+  if (err) {
+    console.error(err);
+    return;
+  }
+  STATE.filesToRead = files;
+  readAndUpdateState()
+}
+readdir(FILES_DIR, readFilesAndStart)
+```
