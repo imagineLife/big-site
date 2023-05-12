@@ -8,7 +8,7 @@ tags: ["js","control flow", "callbacks", "async"]
 order: 2
 ---
 
-# Callbacks
+# Promises
 [callback](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function) is a term that represents a function in a particular use.  
 Callbacks are functions that get "passed" to _another function_.  
 The function that "gets" the callback passed will "call" the "callback" function after doing something in the function.  
@@ -25,7 +25,7 @@ console.log(addWithCallback(3,2,squared));
 // will show "25" in the console
 ```
 
-- [Callbacks](#callbacks)
+- [Promises](#promises)
   - [A Function Gets A Function As A Parameter](#a-function-gets-a-function-as-a-parameter)
   - [A Function is Called Anonymously](#a-function-is-called-anonymously)
   - [Callbacks May Not Run In The Order They Are Written](#callbacks-may-not-run-in-the-order-they-are-written)
