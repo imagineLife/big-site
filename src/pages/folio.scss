@@ -147,6 +147,9 @@ main.folio {
   div.box {
     background-size: cover;
   }
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 20px;
 }
 
 #certs-wrapper{
@@ -553,6 +556,10 @@ div.box:hover p.overlay-text {
     background-size: cover;
     background-position: unset;
   }
+
+  #projects-wrapper{
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @media only screen and (min-width: 640px) {
@@ -669,6 +676,10 @@ div.box:hover p.overlay-text {
 }
 
 @media only screen and (min-width: 880px) {
+  #projects-wrapper{
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
   .stackWrapper {
     width: 45%;
     display: inline-block;
