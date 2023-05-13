@@ -8,7 +8,8 @@ export default function FolioItem({
   imgClass,
 }) {
   return (
-    <div className="col-3-4 hover-v2">
+    // col-3-4
+    <div className="hover-v2 folio-item">
       <div target="_blank" className={`box ${imgClass} `}>
         <div className="caption">
           <p>{title}</p>
@@ -38,5 +39,5 @@ export default function FolioItem({
         </div>
       </div>
     </div>
-  );
+  )
 }
