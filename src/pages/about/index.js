@@ -60,8 +60,19 @@ const About = () => (
                 <a href="/k8s" target="_blank" rel="noreferrer">
                   <b>kubernetes</b>:
                 </a>{" "}
-                controllers, deployments, pods, replicasets, ingress &
-                networking, ConfigMaps...
+                I recently got{" "}
+                <a
+                  href="https://ti-user-certificates.s3.amazonaws.com/e0df7fbf-a057-42af-8a1f-590912be5460/9c6591a6-3adf-4184-8a59-63d13c620470-eric-jake-laursen-e27e0a5d-ce83-4006-8b9f-8f05509843d4-certificate.pdf"
+                  target="_blank"
+                >
+                  CKAD certified
+                </a>{" "}
+                and learned a ton about a stack of technologies "beyond" my
+                most-practiced MERN stack and/or PERN stacks (
+                <a href="/mongo" target="_blank">
+                  Mongo
+                </a>
+                /Postgres, Express, React, <a href="/node">Node</a>)
               </li>
               <li>
                 <b>CI/CD Automated pipelines</b>: building & deploying automated
@@ -69,8 +80,24 @@ const About = () => (
                 node_module, a rest api, an api in a docker container...
               </li>
               <li>
-                <b>keeping up on some node chops</b>: some small projects on
-                "scaling" a node http server
+                <b>keeping up </b>
+                on some core{" "}
+                <a href="/javascript" target="_blank">
+                  JS
+                </a>{" "}
+                and{" "}
+                <a href="/node" target="_blank">
+                  Node
+                </a>{" "}
+                chops: some small projects on "scaling" a node http server, etc
+              </li>
+              <li>
+                <b>
+                  <a href="/nginx" target="_blank">
+                    nginx:
+                  </a>{" "}
+                </b>
+                an http server with perhaps more singleness-of-purpose than a node server
               </li>
             </ul>
           </div>
@@ -211,9 +238,13 @@ const About = () => (
               fresh-roasted coffee. Currently, I'm enjoying light-roasted beans,
               just at first crack, brewed in a Chemex or a 1-Cup V60. I recently
               purcahse the{" "}
-              <a href="https://fellowproducts.com/products/ode-brew-grinder-gen-2" target="blank">
+              <a
+                href="https://fellowproducts.com/products/ode-brew-grinder-gen-2"
+                target="blank"
+              >
                 Fellow Ode Gen2
-              </a> and I love it for the pour-over grinds!
+              </a>{" "}
+              and I love it for the pour-over grinds!
             </p>
           </div>
           <div className="figure">
