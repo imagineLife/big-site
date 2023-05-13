@@ -1,9 +1,9 @@
 ---
-title: Two Load-Balancers Across Two Ports
+title: Use-Cases for NGINX as a Layer-7 Proxy
 parentDir: /nginx
-slug: nginx/multiple-proxies
+slug: nginx/layer-7-proxy
 author: Jake Laursen
-excerpt: Here, 6 node servers behind 2 nginx instances - 3 node servers per nginx proxy
+excerpt:
 tags: ["nginx", "reverse proxy", "node", "docker", "containers", "load balancer"]
 order: 4
 ---
@@ -100,7 +100,7 @@ http{
 
   server{
     listen: 80;
-    
+
     location / {
       proxy_pass http://allinstances/;
     }
@@ -118,4 +118,52 @@ events{}
 ```
 
 
+## Block Connections To A Specific Route
+NGINX can "block" responding to specific routes.  
+A use-case here might be to disallow access to `/admin` routes - these could be for "internal-only" use-cases. NGINX can help with this type of use-case.  
+This will "block" responses to `/admin` without a port.  
+In this example, `/admin` will continue to be available on ports `2222`, `3333`,`4444` and `5555`.
 
+```bash
+http{
+
+  upstream allinstances {
+    server  127.0.0.1:2222;
+    server  127.0.0.1:3333;
+    server  127.0.0.1:4444;
+    server  127.0.0.1:5555;
+  }
+
+
+  upstream summaryinstances {
+    server  127.0.0.1:2222;
+    server  127.0.0.1:3333;
+  }
+
+  upstream userdatainstances {
+    server  127.0.0.1:4444;
+    server  127.0.0.1:5555;
+  }
+
+  server{
+    listen: 80;
+
+    location / {
+      proxy_pass http://allinstances/;
+    }
+
+     location /summary {
+      proxy_pass http://summaryinstances/;
+    }
+
+    location /user-data {
+      proxy_pass http://userdatainstances/;
+    }
+
+    location /admin {
+      retirn 403;
+    }
+  }
+}
+events{}
+```
