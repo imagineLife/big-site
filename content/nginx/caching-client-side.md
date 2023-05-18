@@ -17,7 +17,8 @@ As a one-line review, nginx here lives between client requests and servers - cli
 ## client-side timeouts to restrict "stalling"
 
 ## client_header_timeout
-Restrict the time it takes for a client to finish sending headers with [client_header_timeout](http://nginx.org/en/docs/http/ngx_http_core_module.html#client_header_timeout). The default value is 60s & can be shortened when the expected request time for headers, alone, is much less:
+Restrict the time it takes for a client to finish sending headers with [client_header_timeout](http://nginx.org/en/docs/http/ngx_http_core_module.html#client_header_timeout). The default value is 60s & can be shortened when the expected request time for headers, alone, is much less.  
+When might this be helpful? To be a preventative measure against long-lasting open requests to the backend server: this is called the [slowloris DDoS attack](https://www.cloudflare.com/learning/ddos/ddos-attack-tools/slowloris/)
 ```bash
 http{
   client_header_timeout: 5s;
