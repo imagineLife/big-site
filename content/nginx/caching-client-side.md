@@ -13,4 +13,13 @@ nginx includes [a bunch](https://www.nginx.com/resources/wiki/start/topics/examp
 Directives are a set of instructions.  
 The directives I'll note here deal specifically with instructing nginx about timeouts in two ways: (a) client-side, between itself and the client-world (b) server-side, between itself and "backend" proxied service(s).  
 As a one-line review, nginx here lives between client requests and servers - client requests get to nginx and nginx "passes along" requests to servers. Servers respond, send the respond to nginx, which "passes along" the response to the client.  
- 
+
+## client-side timeouts to restrict "stalling"
+
+## client_header_timeout
+Restrict the time it takes for a client to finish sending headers with [client_header_timeout](http://nginx.org/en/docs/http/ngx_http_core_module.html#client_header_timeout). The default value is 60s & can be shortened when the expected request time for headers, alone, is much less:
+```bash
+http{
+  client_header_timeout: 5s;
+}
+```
