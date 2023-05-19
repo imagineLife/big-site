@@ -40,3 +40,5 @@ This drive beyond the goal has proven to be a helpful approach to life where she
 
 Mark always took action as a first resort. Growth required an immediate next step. Waiting, pausing, or stalling were never the best options.  
 This fire-aim-ready style can serve as the spark to a room full of ideas who may seem 'stuck' ideating and need this boost to take some first steps.
+
+[_This is part of a brief series of posts on strengths and natural talents_](/strengths).  

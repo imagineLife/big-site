@@ -16,3 +16,4 @@ Others bring interesting details to the table - historical references, relationa
 Others thrive in deep and complex "heady" converstaions.  
 
 _This is heavily influenced by learnings from and an appreciation for [Clifton Strengths](https://www.gallup.com/cliftonstrengths)_.  
+[_This is part of a brief series of posts on strengths and natural talents_](/strengths).  

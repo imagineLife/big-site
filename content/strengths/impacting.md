@@ -20,3 +20,4 @@ Meeting and winning other over.
 Some folks have a natural "knack" for making an impact.    
 
 _This is heavily influenced by learnings from and an appreciation for [Clifton Strengths](https://www.gallup.com/cliftonstrengths)_.  
+[_This is part of a brief series of posts on strengths and natural talents_](/strengths).  

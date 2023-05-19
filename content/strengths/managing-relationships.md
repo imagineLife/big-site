@@ -16,3 +16,4 @@ Some folks have a magnetically positive vibe - cracking a great joke, keeping a 
 Others are flexible to fill a gap where needed.  
 
 _This is heavily influenced by learnings from and an appreciation for [Clifton Strengths](https://www.gallup.com/cliftonstrengths)_.  
+[_This is part of a brief series of posts on strengths and natural talents_](/strengths).  
