@@ -33,3 +33,10 @@ the [client_body_timeout](http://nginx.org/en/docs/http/ngx_http_core_module.htm
 
 ### keepalive_timeout
 [keepalive_timeout](http://nginx.org/en/docs/http/ngx_http_core_module.html#keepalive_timeout) sets the max time that a client with the "keep-alive" header can stay open
+
+### lingering_timeout
+the [most time to wait for a "lingering" client data request to continue](http://nginx.org/en/docs/http/ngx_http_core_module.html#lingering_timeout). The default lingering timeout is 5s.  
+This is connected to the [lingering_close directive](http://nginx.org/en/docs/http/ngx_http_core_module.html#lingering_close), which is "on" by default.
+
+### resolver_timeout
+[resolver_timeout](http://nginx.org/en/docs/http/ngx_http_core_module.html#resolver_timeout) is the max time to "resolve" a name resolution (like a dns)  
