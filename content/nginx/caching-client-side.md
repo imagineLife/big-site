@@ -24,3 +24,12 @@ http{
   client_header_timeout: 5s;
 }
 ```
+
+### client_body_timeout
+the [client_body_timeout](http://nginx.org/en/docs/http/ngx_http_core_module.html#client_body_timeout) sets a maximum time allowed for a request body to complete.
+
+### send_timeout
+[send_timeout](http://nginx.org/en/docs/http/ngx_http_core_module.html#send_timeout) sets the max time allowed to while transmitting the response to the client
+
+### keepalive_timeout
+[keepalive_timeout](http://nginx.org/en/docs/http/ngx_http_core_module.html#keepalive_timeout) sets the max time that a client with the "keep-alive" header can stay open
