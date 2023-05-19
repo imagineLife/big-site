@@ -1,15 +1,15 @@
 ---
 title: Test In-Container Readyness with Liveness Probes
 parentDir: k8s/in-depth
-slug: k8s/in-depth/liveliness
-shortSlug: liveliness
+slug: k8s/in-depth/liveness
+shortSlug: liveness
 author: Jake Laursen
 excerpt: Create http requests, bash scripts, or tcp requests to assess application readyness status 
 tags: ["Kubernetes", "k8s", "pods", "containers", "liveness"]
 order: 14
 ---
 
-# Liveliness Probes
+# liveness Probes
 Periodically test an app in a container.  
 If the test fails, the container is destroyed & recreated.  
 This allows devs to "decide" what makes an app healthy.  
