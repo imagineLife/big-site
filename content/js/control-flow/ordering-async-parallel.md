@@ -19,7 +19,6 @@ Here's an example of some async code.
 3 different functions, that take 3 different sets of time to complete.  
 
 ```js
-// ordered.js
 const LONG_TIME = 500;
 const MID_TIME = 250;
 const SHORT_TIME = 125;
