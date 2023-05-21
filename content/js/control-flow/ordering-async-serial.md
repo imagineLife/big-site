@@ -1,15 +1,15 @@
 ---
-title: Ordering Async Code
+title: Ordering For Serial Execution
 parentDir: js/control-flow
-slug: js/control-flow/ordering-async
+slug: js/control-flow/ordering-serial
 author: Jake Laursen
 excerpt: A few different ways that code gets ordered and executed
-tags: ["js","control flow", "async", "callbacks"]
-order: 5
+tags: ["js","control flow", "async", "callbacks", "promises"]
+order: 6
 ---
 
-# Ordering Async Code
-- [Ordering Async Code](#ordering-async-code)
+# Ordering Async Code For Serial Execution
+- [Ordering Async Code For Serial Execution](#ordering-async-code-for-serial-execution)
   - [Some Async Functions To Run In "Parallel"](#some-async-functions-to-run-in-parallel)
   - [Run In Parallel And Output In Reverse Order](#run-in-parallel-and-output-in-reverse-order)
     - [A Look With More Logs](#a-look-with-more-logs)
