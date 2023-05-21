@@ -9,10 +9,15 @@ order: 5
 ---
 
 # Ordering Async Code
+- [Ordering Async Code](#ordering-async-code)
+  - [Some Async Functions To Run In "Parallel"](#some-async-functions-to-run-in-parallel)
+  - [Run In Parallel And Output In Reverse Order](#run-in-parallel-and-output-in-reverse-order)
+    - [A Look With More Logs](#a-look-with-more-logs)
 
-## Some Async Functions To Start
+## Some Async Functions To Run In "Parallel"
 Here's an example of some async code.  
 3 different functions, that take 3 different sets of time to complete.  
+
 ```js
 // ordered.js
 const LONG_TIME = 500;
@@ -52,8 +57,8 @@ function printResOrErr(err, s){
 - each has a different time to wait for the callback to run (_hopefully with functions named to match the timeout duration: mid, shortest and longest_)
 - each logs a string
 
-## ToDo: Run And Aoutput In Reverse Order
-One interesting detail could be to run them in order `longestFn`,`midFn`,`shortestFn` (_with printResOrErr as the callback to see the output_) and see how the output is actually in _reverse order_: shortest, mid, then longest:
+## Run In Parallel And Output In Reverse Order
+One interesting detail could be to run them in order `longestFn`,`midFn`,`shortestFn` (_with printResOrErr as the callback to see the output_) and see how the output is actually in _reverse order_: shortest, mid, then longest.  
 ```js
 longestFn(printResOrErr)
 midFn(printResOrErr)
@@ -61,7 +66,11 @@ shortestFn(printResOrErr)
 ```
 that will log `shortest wait done` then `mid wait done` then `longest wait done`.  
 This is, perhaps, an "introductory" example of how the [event loop](/node/event-loop) can be leveraged.  
-here, the `setTimeout` leverages the event loop to "wait" until the timeout duration runs before "running" the function that was passed to the setTimeout function.
+here, the `setTimeout` leverages the event loop to "wait" until the timeout duration runs before "running" the function that was passed to the setTimeout function.  
+
+These will run in "parallel". "Parallel" here refers to the event-loop's perspective. The Event-Loop "sees" the 3 instances of `setTimeout` all running simultaneously. The event-loop is "ready" to do other logic while the 3x setTimeout calls are "waiting" in the background.  
+
+This "parallel" detail is a critical aspect of the event-loop and the control flow of this example. 
 
 ### A Look With More Logs
 One way to understand the flow control of this type of logic is good-ol' console.logging.  
