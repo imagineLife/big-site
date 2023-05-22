@@ -16,7 +16,6 @@ According to the [Node Docs](https://nodejs.org/api/events.html#events)...
   - [Initialize an Event Emitter](#initialize-an-event-emitter)
   - [TLDR: A Trivial Example](#tldr-a-trivial-example)
   - [An Overview of the Events Module](#an-overview-of-the-events-module)
-  - [Creating Event Emitters](#creating-event-emitters)
   - [Listening For Events](#listening-for-events)
     - [On](#on)
     - [prependListener](#prependlistener)
@@ -113,24 +112,6 @@ Object.keys(e)
 ]
 ```
 
-## Creating Event Emitters
-The EventEmitter itself can be used to create an instance of its event-managing object
-
-```js
-const { EventEmitter } = require("events");
-
-// one way of making an event object
-const dataHandler = new EventEmitter();
-
-// a more 'traditional' way
-class dataHandler extends EventEmitter {
-  constructor(opts = {}) {
-    super(opts);
-    this.name = opts.name;
-  }
-}
-```
-
 ## Listening For Events
 ### On
 The most-used event listener registration may be the `on` method.  
@@ -146,12 +127,40 @@ dataHandler.on("event-name", handleParamsFnTwo);
 
 ### prependListener
 
-- a method on the eventEmitter
+- a method on an instance of an eventEmitter
 - registers at the beginning of the listeners array for the given event
 - can be written out-of-order, and will ALWAYS 'handle' an event even when the `.on` is written after prependListener
 
 ```js
-dataHandler.prependListener("event-name", prependFn);
+const { EventEmitter } = require('events');
+const ee = new EventEmitter();
+const EVENT_NAME = 'example';
+function onEvent() {
+  console.log('on the event!');
+}
+
+function onPrepend() {
+  console.log('on prepend');
+}
+console.log('1');
+ee.on(EVENT_NAME, onEvent);
+
+ee.prependListener(EVENT_NAME, onPrepend);
+
+ee.emit(EVENT_NAME);
+console.log('2');
+ee.emit(EVENT_NAME);
+console.log('3');
+```
+This will log
+```bash
+1
+on prepend
+on the event!
+2
+on prepend
+on the event!
+3
 ```
 
 ### once
