@@ -25,6 +25,7 @@ According to the [Node Docs](https://nodejs.org/api/events.html#events)...
     - [removeListener](#removelistener)
     - [removeAllListeners](#removealllisteners)
   - [Error Events](#error-events)
+  - [Events Can Be Chained](#events-can-be-chained)
   - [Some Take-Aways](#some-take-aways)
 
 ## Initialize an Event Emitter
@@ -200,6 +201,13 @@ dataHandler.emit("event-name", { ...eventParams });
 ```js
 dataHandler.removeListener("event-name", handleParamsFnTwo);
 ```
+The 2nd arg can be one of any functions that may be registered with the event. I.E ->
+
+```js
+dataHandler.on("event-name", firstFn);
+dataHandler.on("event-name", secondFn);
+dataHandler.removeListener("event-name", secondFn);
+```
 
 ### removeAllListeners
 
@@ -226,6 +234,16 @@ thisTry.on("error", (err) => {
 
 thisTry.emit("error", new Error("dummy err message"));
 ```
+
+## Events Can Be Chained
+Event methods can be chained:
+- `.on()`
+- `.once()`
+- `.prependListener()`
+- `.prependOnceListener()`
+- `.removeAllListeners()`
+- `.removeListener()`
+- `.setMaxListeners()`
 
 
 ## Some Take-Aways
