@@ -13,6 +13,7 @@ According to the [Node Docs](https://nodejs.org/api/events.html#events)...
 "_Much of the Node.js core API is built around an idiomatic asynchronous event-driven architecture in which certain kinds of objects (called "emitters") emit named events that cause Function objects ("listeners") to be called._"
 
 - [Event Emitters](#event-emitters)
+  - [Initialize an Event Emitter](#initialize-an-event-emitter)
   - [TLDR: A Trivial Example](#tldr-a-trivial-example)
   - [An Overview of the Events Module](#an-overview-of-the-events-module)
   - [Creating Event Emitters](#creating-event-emitters)
@@ -26,6 +27,28 @@ According to the [Node Docs](https://nodejs.org/api/events.html#events)...
     - [removeAllListeners](#removealllisteners)
   - [Error Events](#error-events)
   - [Some Take-Aways](#some-take-aways)
+
+## Initialize an Event Emitter
+Here's 3 ways to initialize the Event Emitter:
+```js
+// NOTE: this default export from "events" is not really recommended by the node docs
+const { EventEmitter } = require('events')
+
+
+class MyEmitter extends EventEmitter {
+  constructor(opts = {}) {
+    super(opts);
+    this.name = opts.name;
+  }
+}
+const newE = new MyEmitter()
+myEmitter.on('dog', (d) => console.log('on dog'));
+myEmitter.emit('dog');
+
+const lastEv = new EventEmitter();
+lastEv.on('water', (d) => console.log('on water'));
+lastEv.emit('water');
+```
 
 ## TLDR: A Trivial Example
 A trivial non-functional example, briefly illustrating the eventEmitter in action
