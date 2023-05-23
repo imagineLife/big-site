@@ -1,5 +1,5 @@
 ---
-title: "HTTP Server I: Trivial Servers"
+title: "I: Trivial Servers"
 slug: node/http/intro
 author: Jake Laursen
 excerpt: Probably one of the most prominent use-cases of node

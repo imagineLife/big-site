@@ -17,7 +17,7 @@ According to the [Node Docs](https://nodejs.org/api/events.html#events)...
   - [TLDR: A Trivial Example](#tldr-a-trivial-example)
   - [An Overview of the Events Module](#an-overview-of-the-events-module)
   - [Listening For Events](#listening-for-events)
-    - [On](#on)
+    - [on](#on)
     - [prependListener](#prependlistener)
     - [once](#once)
   - [Emitting Events](#emitting-events)
@@ -114,7 +114,7 @@ Object.keys(e)
 ```
 
 ## Listening For Events
-### On
+### on
 The most-used event listener registration may be the `on` method.  
 With the eventEmitter object, the on is like describing what happens when an event gets "called" or "emitted" or "triggered".
 ```js

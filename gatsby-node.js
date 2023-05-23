@@ -53,7 +53,7 @@ const sidebarNestedSections = {
       items: [],
       parentDir: "node",
     },
-    "http-servers": {
+    "http": {
       sectionName: "HTTP Servers",
       items: [],
       parentDir: "node",
@@ -63,8 +63,8 @@ const sidebarNestedSections = {
       items: [],
       parentDir: "node",
     },
-    findOrder: ["using-the-cli", "http-servers", ""],
-    order: ["using-the-cli", "http-servers", ""],
+    findOrder: ["using-the-cli", "http", ""],
+    order: ["using-the-cli", "http", ""],
     finished: false,
   },
   js: {
