@@ -87,7 +87,6 @@ Once the child process is done running, the "main" event loop can be informed an
 [Worker Threads](https://nodejs.org/docs/latest-v16.x/api/worker_threads.html#worker-threads) are one tool that can be used to scale a node server.  
 Consume more available threads and one could essentially replicate the "entire" node process! Potentially huge scaling gains.  
 Worker threads are like child processes - they are separate processes that can handle their own workload from the parent node thread.  
-A primary difference 
 
 #### Identify and Adjust Long-Running Logic Tidbits
 Some logic may need to be in the node server or be best-fit for the node server. This should not be the norm, though. Finding oursellves in a place where we think node is slow might reveal our misuse of its strongest assets.  
