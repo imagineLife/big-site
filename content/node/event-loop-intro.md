@@ -81,7 +81,7 @@ After offloading as much looping as possible to external parties, some parts of 
 Node does offer a few out-of-the-box tools to help with scaling.  
 
 ##### Child Processes
-[Child Processes](https://nodejs.org/docs/latest-v16.x/api/child_process.html#child-process) can be triggered, ["spawned"](https://nodejs.org/docs/latest-v16.x/api/child_process.html#child_processspawncommand-args-options), during a node server, to pass-off long-running processes to a different "process". This would move some blocking logic elsewhere, unclogging the main event loop.  
+[Child Processes](https://nodejs.org/docs/latest-v16.x/api/child_process.html#child-process) can be triggered, ["spawned"](https://nodejs.org/docs/latest-v16.x/api/child_process.html#child_processspawncommand-args-options), during a node process (_like an api_), to pass-off long-running processes to a different "process". This would move some blocking logic elsewhere, unclogging the main event loop.  
 Once the child process is done running, the "main" event loop can be informed and the parent node process can move on - essentially doing the same logic but without blocking other logic from happening simultaneously.  
 ##### Worker Threads
 [Worker Threads](https://nodejs.org/docs/latest-v16.x/api/worker_threads.html#worker-threads) are one tool that can be used to scale a node server.  

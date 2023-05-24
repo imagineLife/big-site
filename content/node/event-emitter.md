@@ -1,5 +1,5 @@
 ---
-title: EventEmitters Are A Beautiful API in Node
+title: EventEmitters Are A Beautiful API
 slug: node/event-loop/event-emitters
 author: Jake Laursen
 excerpt: Register event listeners, call events with payloads, and express a program through events fundamentally
