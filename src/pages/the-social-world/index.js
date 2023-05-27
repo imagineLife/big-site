@@ -1,7 +1,7 @@
 import React, { Fragment } from "react"
 import { StaticQuery, graphql } from "gatsby"
 import createLinksWithType from "./../../components/createLinksWithType"
-import { onlyWithString, onlyWithoutString } from './../../components/onlyByString'
+import { onlyWithString } from './../../components/onlyByString' //onlyWithoutString
 // Components
 import Layout from "./../../components/layout"
 import Hero from "./../../components/hero"
@@ -36,13 +36,13 @@ const IndexPage = () => (
           <Hero />
           <Layout>
             <section className="toc-wrapper">
-              <h1>You, Me, and the Social World</h1>
+              <h1 style={{marginBottom: '2rem'}}>You, Me, and the Social World</h1>
+              <h3>On Decision Making</h3>
               {pages
-                .filter(onlyWithString("social"))
-                .filter(onlyWithoutString("conflict"))
+                .filter(onlyWithString("decision"))
                 .map(createLinksWithType({ thisType: "social" }))}
 
-              <h2>On Natural Talents</h2>
+              <h3>On Natural Talents</h3>
               <p>
                 We have skills and talents that seemingly are part of our
                 identity. <br /> These can shape our experiences and our world
@@ -51,7 +51,7 @@ const IndexPage = () => (
               {pages
                 .filter(onlyWithString("strengths"))
                 .map(createLinksWithType({ thisType: "talent" }))}
-              <h2>On Conflict And Conflict Resolution</h2>
+              <h3>On Conflict And Conflict Resolution</h3>
               <p>
                 Conflict is inevitable. Much is written on conflict and
                 resolution. <i>More to come here...</i>

@@ -7,3 +7,5 @@ parentDir: the-social-world
 slug: the-social-world/decision-making
 order: 1
 ---
+
+# Interpersonal Decision Making Is Complex
