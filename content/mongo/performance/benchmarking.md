@@ -5,6 +5,7 @@ parentDir: mongo/performance
 author: Jake Laursen
 excerpt: Gather performance data
 tags: ["database", "mongodb", "performance", "benchmarking", "testing"]
+order: 1
 ---
 
 # Benchmarking
