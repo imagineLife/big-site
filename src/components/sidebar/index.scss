@@ -9,6 +9,7 @@
   height: $sidebar-height;
   overflow: auto;
   background: #eee;
+  border-right: 1px solid rgb(220,220,220);
 
   /* Sidebar links */
   a, span {
@@ -58,7 +59,8 @@
         padding: 0 10px;
         margin: unset;
         line-height: 3;
-
+        border-bottom: 1px solid rgb(220,220,220);
+        border-top: 1px solid rgb(220,220,220);
         // &:hover{
         //   text-decoration: underline;
         //   color: black;
