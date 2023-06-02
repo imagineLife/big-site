@@ -35,3 +35,5 @@ What is people's trust in my decision-making like?
 ## How Strong Is My Domain Expertise?
 Is this ["within my wheelhouse"](https://www.quickanddirtytips.com/articles/what-does-in-your-wheelhouse-mean/#:~:text=A%20wheelhouse%20is%20the%20location%20of%20a%20ship's%20wheel)?  
 Is this involving tools & tech that I don't use regularly?  
+**What about the folks who are involved in the decision and it's outcome**: how strong is _their_ domain expertise in this area? Will they be able to execute flawlessly? Is this a new tool or technique that is outside the current comfort-zone of them?  
+
