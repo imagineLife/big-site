@@ -8,13 +8,17 @@ slug: the-social-world/decision-making
 order: 1
 ---
 
-# Interpersonal Decision Making Is Complex
+# Consider Some Interpersonal Elements During Decision-Making
 
-- [Interpersonal Decision Making Is Complex](#interpersonal-decision-making-is-complex)
+- [Consider Some Interpersonal Elements During Decision-Making](#consider-some-interpersonal-elements-during-decision-making)
   - [How Impactful Is The Decision?](#how-impactful-is-the-decision)
   - [How Much Does "Buy-In" From Others Matter?](#how-much-does-buy-in-from-others-matter)
   - [How Likely Is "Buy-In" From Others?](#how-likely-is-buy-in-from-others)
   - [How Strong Is My Domain Expertise?](#how-strong-is-my-domain-expertise)
+  - [What Is The Organizational Environment Like?](#what-is-the-organizational-environment-like)
+    - [How Harmonious Are Personal And Org Goals?](#how-harmonious-are-personal-and-org-goals)
+    - [How Unified Is The Team In Team-Based Skills?](#how-unified-is-the-team-in-team-based-skills)
+
 
 ## How Impactful Is The Decision?
 How many people is this affecting? 3? 12? 200?  
@@ -37,3 +41,14 @@ Is this ["within my wheelhouse"](https://www.quickanddirtytips.com/articles/what
 Is this involving tools & tech that I don't use regularly?  
 **What about the folks who are involved in the decision and it's outcome**: how strong is _their_ domain expertise in this area? Will they be able to execute flawlessly? Is this a new tool or technique that is outside the current comfort-zone of them?  
 
+## What Is The Organizational Environment Like?
+### How Harmonious Are Personal And Org Goals?  
+Do people want the same things as the org?  
+Are people's best interests the same as the org's best interests?  
+How does individual performance get "judged" in comparison to the performance of the org?  
+Would "higher level" leadership's involvement feel _uniting_ or _divisive_ during the decision-making process? 
+
+### How Unified Is The Team In Team-Based Skills?  
+Does everyone know one-another well on the team?  
+Is conflict within the team resolved in a professional, timely manner?  
+Do team members effectively leverage systems to manage time, work, and communication?  
