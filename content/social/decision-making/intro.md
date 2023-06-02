@@ -13,6 +13,7 @@ order: 1
 - [Interpersonal Decision Making Is Complex](#interpersonal-decision-making-is-complex)
   - [How Impactful Is The Decision?](#how-impactful-is-the-decision)
   - [How Much Does "Buy-In" From Others Matter?](#how-much-does-buy-in-from-others-matter)
+  - [How Likely Is "Buy-In" From Others?](#how-likely-is-buy-in-from-others)
   - [How Strong Is My Domain Expertise?](#how-strong-is-my-domain-expertise)
 
 ## How Impactful Is The Decision?
@@ -25,6 +26,11 @@ Once the decision is made, are other folks going to be "doing" new or different 
 Would it be best if everyone was "on board" with this decision?  
 How many people within the scope of impact of this decision will not be required to believe in the decision?  
 How many people might need to feel "part of" the decision-making process in order for it to go best?  
+
+## How Likely Is "Buy-In" From Others?
+Am I surrounded by "yes" people?  
+Is this an uphill battle from the start?  
+What is people's trust in my decision-making like?  
 
 ## How Strong Is My Domain Expertise?
 Is this ["within my wheelhouse"](https://www.quickanddirtytips.com/articles/what-does-in-your-wheelhouse-mean/#:~:text=A%20wheelhouse%20is%20the%20location%20of%20a%20ship's%20wheel)?  
