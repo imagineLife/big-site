@@ -1,7 +1,7 @@
 ---
 title: Decisions Have Many Facets
 author: Jake Laursen
-excerpt: Team Commitment, Decision Impact, Skill Expertise And Others
+excerpt: Team Commitment, Decision Impact, Skill Experience, And Others
 tags: ["the social world", "decisions"]  
 parentDir: the-social-world
 slug: the-social-world/decision-making
