@@ -205,7 +205,7 @@ li *:last-child {
 
 li > ul {
   margin-left: var(--spacing-8);
-  margin-top: calc(var(--spacing-8) / 2);
+  /* margin-top: calc(var(--spacing-8) / 2); */
 }
 
 blockquote {
