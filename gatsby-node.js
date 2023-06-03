@@ -7,7 +7,7 @@
 const { execSync } = require("child_process")
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
-
+const chromium = require('chrome-aws-lambda')
 // Define the template for blog post
 // const blogPost = path.resolve(`./src/templates/blog-post.js`)
 const mdTemplate = path.resolve(`./src/templates/markdown/index.js`)
@@ -689,3 +689,41 @@ exports.onCreateWebpackConfig = ({
 //     deletePage(page)
 // }
 // }
+
+
+exports.onPreInit = async ({actions, store, ...params}) => {
+  console.log("---onPreInit--")
+  console.log('process.env.LOCAL_BUILD')
+  console.log(process.env.LOCAL_BUILD)
+  
+  const state = store.getState()
+  const plugin = state.flattenedPlugins.find(
+    plugin => plugin.name === "gatsby-remark-mermaid"
+  )
+  let executablePath = '';
+  if (plugin && process.env.LOCAL_BUILD) {
+    executablePath = process.env.CHROME_PATH
+  } else {
+    executablePath = await chromium.executablePath
+  }
+  
+  plugin.pluginOptions = {
+    ...plugin.pluginOptions,
+    launchOptions: {
+      ...plugin.pluginOptions.launchOptions,
+      executablePath,
+    },
+  } 
+    // setPluginStatus({ pluginOptions: plugin.pluginOptions }, plugin)
+    // console.log('actions')
+    // console.log(actions)
+    // console.log('store')
+    // console.log(store)
+
+    // console.log('Object.keys(params)')
+    // console.log(Object.keys(params))
+    // console.log('Object.keys(state)')
+    // console.log(Object.keys(state))
+    console.log("plugin")
+    console.log(plugin)
+}
