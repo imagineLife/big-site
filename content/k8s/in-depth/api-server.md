@@ -177,11 +177,8 @@ kubectl uses these apis under the hood, i think!
 
 ## A Visual
 The api resource url "hierarchy": 
-```myMermaid
+```mermaid
 flowchart TD
-  %% 
-  %% NODES
-  %% 
   APIS["/apis"]
   APPS["/apps"]
   EXT["/extensions"]
@@ -238,19 +235,16 @@ flowchart TD
 
   APIS --> APIG
 
-  %% /apps-to-verbs
   APPS --> V11
   V11 --> APPV1RES
   DEP --> VRBS
   REPL --> VRBS
   STF --> VRBS
 
-  %% /networking-to-verbs
   NTWK --> V12
   V12 --> NTWKP
   NTWKP --> VRBS
 
-  %% /cert-to-verbs
   CRT --> V13
   V13 --> CRTSR
   CRTSR --> VRBS

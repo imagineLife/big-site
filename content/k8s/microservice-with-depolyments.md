@@ -314,9 +314,6 @@ worker-deploy       1/1     1            1           25h
 ```mermaid
 flowchart
   direction TB
-  
-
-
 
   ACCESS["User Access"]
   PG1(("PostGres"))

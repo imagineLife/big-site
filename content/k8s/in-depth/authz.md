@@ -54,11 +54,8 @@ This file gets passed into the api server.
 ABAC are more difficult to manage than RBAC, and might require more manual updates to manage.  
 Each user can get a policy file. Editing these policies require restarting the kubeapi server.  
 
-```myMermaid
+```mermaid
 flowchart
-  %%
-  %% ITEMS
-  %%
   USR1["Dev-User-Joe"]
   USR2["Dev-User-Sally"]
   USRGRP["Dev-User-Group"]
@@ -99,11 +96,8 @@ A nuisance of this ABAC approach is that in order to update user access privileg
 Wrap a bunch of permissions into a role.  
 Assign roles to users - a developer role for developers, a security role for security users.  
 
-```myMermaid
+```mermaid
 flowchart
-  %%
-  %% ITEMS
-  %%
   USR1["Dev-User-Joe"]
   USR2["Dev-User-Sally"]
   USRGRP["Dev-User-Group"]

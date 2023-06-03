@@ -23,19 +23,24 @@ Every time a _request goes through_ the kubectl cli...
 - info is persistent in the etcd database
 
 NOTE: built-in admission controllers run in an order. The order makes logical sense in order of applicability.  
+  
+  
+  <!-- 
+    AUTHNOTE>"Kubectl gets user authN \n from $HOME/.kube/config"]  
+    AUTHZNOTE>"Kube ApiServer Checks for RBAC \n via roles and roleBindings"]
+  
+  VDC["Validation AdmissionControllers"] -->
 
-```myMermaid
+```mermaid
 flowchart LR
 
   KTL["Kubectl gui"]
   AUTHN["Authentication"]
-  AUTHNOTE>"Kubectl gets user authN \n from $HOME/.kube/config"]
   AUTHZ["Authorization"]
-  AUTHZNOTE>"Kube ApiServer Checks for RBAC \n via roles and roleBindings"]
   WRK["Do The Work"]
   MTC["Mutation AdmissionControllers"]
-  VDC["Validation AdmissionControllers"]
-
+  AUTHNOTE>Kubectl gets user authN from $HOME/.kube/config]  
+  
   KTL --> AUTHN
   AUTHN -.-> AUTHNOTE
   AUTHN --> AUTHZ
