@@ -692,10 +692,6 @@ exports.onCreateWebpackConfig = ({
 
 
 exports.onPreInit = async ({actions, store, ...params}) => {
-  console.log("---onPreInit--")
-  console.log('process.env.LOCAL_BUILD')
-  console.log(process.env.LOCAL_BUILD)
-  
   const state = store.getState()
   const plugin = state.flattenedPlugins.find(
     plugin => plugin.name === "gatsby-remark-mermaid"
@@ -724,6 +720,4 @@ exports.onPreInit = async ({actions, store, ...params}) => {
     // console.log(Object.keys(params))
     // console.log('Object.keys(state)')
     // console.log(Object.keys(state))
-    console.log("plugin")
-    console.log(plugin)
 }
