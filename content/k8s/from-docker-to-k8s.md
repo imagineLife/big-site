@@ -123,14 +123,11 @@ Services are only required for a pod when the pod needs to be accessed by anothe
 
 
 ## A Visual
-```myMermaid
+```mermaid
 flowchart
   direction TB
   
   
-  %%  
-  %% NODES
-  %% 
   FEPOD["Voting Frontend"]
   RDPOD["Redis"]
   WKPOD["Worker"]
@@ -138,9 +135,7 @@ flowchart
   F2POD["Analytics Frontend"]
   WRLD["World"]
 
-  %%  
-  %% Services
-  %% 
+
   PGS[["PostGres Service (ClusterIP)"]]
   RDS[["Redis Service (ClusterIP)"]]
   RSS[["Analytics Service (NodePort)"]]
@@ -165,5 +160,4 @@ flowchart
 
     WKPOD
   end
-
 ```

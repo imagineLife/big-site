@@ -35,3 +35,8 @@ section.centered {
     justify-content: center;
   }
 }
+
+
+foreignObject > div {
+  transform: translateY(-4px);
+}

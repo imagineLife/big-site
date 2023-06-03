@@ -311,15 +311,13 @@ worker-deploy       1/1     1            1           25h
 
 
 ## A Diagram
-```myMermaid
+```mermaid
 flowchart
   direction TB
   
 
 
-  %%
-  %% "raw" objects
-  %%
+
   ACCESS["User Access"]
   PG1(("PostGres"))
   PG2(("PostGres"))
@@ -333,9 +331,7 @@ flowchart
 
 
 
-  %%
-  %% Services
-  %%
+
   SVCPG[["ClusterIP Service: Postgres"]]
   SVCRD[["ClusterIP Service: Redis"]]
   SVCRSL[["NodePort Service: Results-App"]]
@@ -343,9 +339,6 @@ flowchart
 
 
 
-  %%
-  %% Deployments
-  %%
 
   subgraph DPPG["Deployment: PostGres"]
     PG1
@@ -369,9 +362,7 @@ flowchart
 
 
 
-  %%
-  %% All In The Node
-  %%
+
   subgraph NODE
     direction TB
 
