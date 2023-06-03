@@ -14,7 +14,7 @@ require("dotenv").config({
 
 const robots = require('./robots-txt');
 
-module.exports = async () => ({
+module.exports = {
   siteMetadata: {
     title: `Laursen.Tech: A Blog And Portfolio`,
     author: {
@@ -255,4 +255,4 @@ module.exports = async () => ({
       },
     },
   ],
-})
+}
