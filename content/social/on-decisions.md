@@ -3,9 +3,9 @@ title: Information, Assumptions, And Actions
 author: Jake Laursen
 excerpt: A Perspective on how we make choices while we gather info, make meaning, and assert our will
 tags: ["personal development", "growth", "bias", "learn"]  
-parentDir: misc
+parentDir: the-social-world
 slug: the-social-world/decision-making/assemble-assume-assert
-order: 1
+order: 2
 ---
 
 # Assembling Knowledge, Assuming Meaning, and Asserting Our Will

@@ -1,7 +1,7 @@
 ---
-title: We Make Decisions
+title: Decisions Have Many Facets
 author: Jake Laursen
-excerpt: Sometimes Decision-Making Is Complex
+excerpt: Team Commitment, Decision Impact, Skill Expertise And Others
 tags: ["the social world", "decisions"]  
 parentDir: the-social-world
 slug: the-social-world/decision-making
