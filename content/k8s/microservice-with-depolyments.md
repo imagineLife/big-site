@@ -311,7 +311,7 @@ worker-deploy       1/1     1            1           25h
 
 
 ## A Diagram
-```mermaid
+```myMermaid
 flowchart
   direction TB
   

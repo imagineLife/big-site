@@ -177,7 +177,7 @@ kubectl uses these apis under the hood, i think!
 
 ## A Visual
 The api resource url "hierarchy": 
-```mermaid
+```myMermaid
 flowchart TD
   %% 
   %% NODES

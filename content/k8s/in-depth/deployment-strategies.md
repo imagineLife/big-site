@@ -47,7 +47,7 @@ How does this work in K8s?
   - a deployment of pods of the app is present
   - a service routing traffic to the pods is also present
 
-```mermaid
+```myMermaid
 flowchart 
   direction TB
   DP["Deployment"]
@@ -60,7 +60,7 @@ flowchart
 Here something like "version:1". Note the wrapper boxes here are just to "tie" the labels to the objects visually.  
 The label on the deployment should also be included in the selector in the service definition file. This step can also be done when _creating the objects initially_: maybe including a `version: 1` on both the deployment and service to begin with.  
 
-```mermaid
+```myMermaid
 flowchart 
   direction TB
   
@@ -86,7 +86,7 @@ flowchart
 Deploy a new Deployment of the new version of the app.  
 Have the deploymet accessible through a new service, accessible by some folks to test with, perphaps internal dogfooding or something.  
 
-```mermaid
+```myMermaid
 flowchart 
   direction TB
   
@@ -138,7 +138,7 @@ This will leave...
 - the prod service talking to the latest instance of the app
 - the previous deployment of the app "dangling" without incoming traffic
 
-```mermaid
+```myMermaid
 flowchart 
   direction TB
   

@@ -180,7 +180,7 @@ PVCs are 1-to-1 to a PV.
 K8s tries to find a vol that matches requested criteria requested by the claim.  
 PVCs might be in a "pending" state if a volume is not "ready", or does not match the claim's desired crieteria.  
 
-```mermaid
+```myMermaid
 flowchart LR
   PV["Persistent Volume"]
   PVC["Persistent Volume Claim"]
@@ -319,7 +319,7 @@ More Topics related to storage:
 
 
 ## A Diagram
-```mermaid
+```myMermaid
   flowchart
 
     API["Backend API"]

@@ -14,10 +14,10 @@ order: 1
 sequenceDiagram
   participant Browser
 
-  Browser->>Web Server: REQUEST </br> Hey web server, can I view this website?
+  Browser->>Web Server: REQUEST <br/> Hey web server, can I view this website?
 
-  loop Handling </br> the Request
-  Web Server->>Web Server: - Receive Request </br> - Use a "handler" </br> - Prepare The Response
+  loop Handling the Request
+  Web Server->>Web Server: - Receive Request <br/> - Use a "handler" <br/> - Prepare The Response
   end
 
   Web Server-->>Browser: RESPONSE: Here's what you asked for!

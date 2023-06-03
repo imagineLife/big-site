@@ -29,7 +29,7 @@ Deploy it on a K8s Pod, in a K8s Deployment object.
 The db needs a db, so a db gets built.  
 A new Pod gets deployed on the same node.  
 The App pod needs to talk to the db, so a new K8s service gets created to allow this pod-to-pod communication.  
-```mermaid
+```myMermaid
 flowchart TD
   %%
   %%  Nodes
@@ -49,7 +49,7 @@ flowchart TD
 ### Make it Available with a NodePort Service
 Another service is made, a NodePort service, that opens the app to the world via a url+port, at something like http://<the-k8s-node-ip>:<the-nodePort-port>.  
 
-```mermaid
+```myMermaid
 flowchart TD
   %%
   %%  Nodes
@@ -76,7 +76,7 @@ flowchart TD
 
 ### Address App Scaling Needs With ReplicaSets
 Once Traffic gets busy enough, build a ReplicaSet to scale the App pods. the NodePort service will split traffic between the replicated pods.  
-```mermaid
+```myMermaid
 flowchart TD
   %%
   %%  Nodes
@@ -113,7 +113,7 @@ flowchart TD
 ### Allow For Friendly URL with DNS Config
 Configure the dns server in use to redirect `my-demo-app.com` to `<the-k8s-node-ip>`. Now, users can access the app at http://my-demo-app.com:<the-nodePort-port>`.  
 
-```mermaid
+```myMermaid
 flowchart TD
   %%
   %%  Nodes
@@ -158,7 +158,7 @@ flowchart TD
 ### Remove the Need For the Port in the URL with A Proxy Server
 Configure a proxy-server to sit between the world and the DNS, so that the world can access the url without the port.  
 The Proxy server will forward port 80 (_open ot the world_) to the nodePort service port.  
-```mermaid
+```myMermaid
 flowchart TD
   %%
   %%  Nodes
@@ -206,7 +206,7 @@ Take GCP as an example. A few things get updated:
   - the GCP load-balancer comes with an external ip
 - The DNS needs to be updated to change my-app-url to the gcp-ip-addr
 
-```mermaid
+```myMermaid
 flowchart TD
   %%
   %%  Nodes
@@ -266,7 +266,7 @@ This develops into its own:
 - a new load-balancer on the GCP Platform
 
 
-```mermaid
+```myMermaid
 flowchart TD
   %%
   %%  Nodes

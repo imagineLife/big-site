@@ -209,7 +209,7 @@ Tries to view resource availability.
 - `/etc/kubernetes` is an important directory to find manifests and more
 
 ## A Diagram
-```mermaid
+```myMermaid
 flowchart
   direction LR
   KCM["kube-controller-manager"]

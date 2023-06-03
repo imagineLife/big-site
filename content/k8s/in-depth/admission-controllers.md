@@ -24,7 +24,7 @@ Every time a _request goes through_ the kubectl cli...
 
 NOTE: built-in admission controllers run in an order. The order makes logical sense in order of applicability.  
 
-```mermaid
+```myMermaid
 flowchart LR
 
   KTL["Kubectl gui"]
