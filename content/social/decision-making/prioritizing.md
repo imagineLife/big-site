@@ -1,7 +1,7 @@
 ---
 title: Prioritizing
 author: Jake Laursen
-excerpt: 
+excerpt: Some Tasks Are More Important Than Others
 tags: ["the social world", "decisions"]  
 parentDir: the-social-world
 slug: the-social-world/decision-making/prioritizing
