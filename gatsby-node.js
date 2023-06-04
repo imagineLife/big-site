@@ -689,17 +689,22 @@ exports.onCreateWebpackConfig = ({
 // }
 
 
-exports.onPreInit = async ({actions, store, ...params}) => {
+exports.onPreInit = async ({ actions, store }) => {
+  console.log("- - - onPreInit - - -")
+  
   const state = store.getState()
   const plugin = state.flattenedPlugins.find(
     plugin => plugin.name === "gatsby-remark-mermaid"
   )
   let executablePath = '';
-  if (plugin && process?.env?.LOCAL_BUILD) {
+  if (process?.env?.LOCAL_BUILD) {
     executablePath = process.env.CHROME_PATH
   } else {
     executablePath = await chromium.executablePath
   }
+  console.log('executablePath')
+  console.log(executablePath)
+  
   
   plugin.pluginOptions = {
     ...plugin.pluginOptions,
@@ -708,14 +713,4 @@ exports.onPreInit = async ({actions, store, ...params}) => {
       executablePath,
     },
   } 
-    // setPluginStatus({ pluginOptions: plugin.pluginOptions }, plugin)
-    // console.log('actions')
-    // console.log(actions)
-    // console.log('store')
-    // console.log(store)
-
-    // console.log('Object.keys(params)')
-    // console.log(Object.keys(params))
-    // console.log('Object.keys(state)')
-    // console.log(Object.keys(state))
 }
