@@ -71,7 +71,7 @@
     "url": "https://github.com/imagineLife/big-site.git"
   },
   "scripts": {
-    "build": "gatsby build",
+    "build": "AWS_LAMBDA_FUNCTION_NAME=true gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "gatsby develop",
