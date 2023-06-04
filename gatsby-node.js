@@ -8,8 +8,6 @@ const { execSync } = require("child_process")
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
 const chromium = require('chrome-aws-lambda')
-// Define the template for blog post
-// const blogPost = path.resolve(`./src/templates/blog-post.js`)
 const mdTemplate = path.resolve(`./src/templates/markdown/index.js`)
 const tagTemplate = path.resolve(`./src/templates/tags.js`)
 const nestedNavTemplate = path.resolve("./src/templates/nestedNav/index.js")
