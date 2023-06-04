@@ -11,7 +11,7 @@ order: 20
 
 # Network Traffic Is Though Of From Where The Request Starts
 In a traditional http data-transfer, each request has 2 parts: a request and a response. One unit makes a request to another unit, and the other unit fullfills the request and the http data-transfer "comes back" to the initial requester.  
-```myMermaid
+```mermaid
 flowchart LR
   A["I Want Something"]
   B["I Have What You Need"]
@@ -46,7 +46,7 @@ Network policies are used to restrict network activity to & from k8s objects.
 ## A 3-Pod Networking Example
 3 Servers. Example Ports. What happens when the users wants to use a page that gets data from a db through an api:  
 
-```myMermaid
+```mermaid
 sequenceDiagram
   user ->> FrontendServer: Req. on port 80
   FrontendServer ->> API_Server: Req. on port 3001
@@ -62,36 +62,21 @@ Here, actors and request ports.
 Requests, **ingress traffic**, are solid lines with port labels.  
 Responses are dotted lines.  
 
-```myMermaid
+```mermaid
 flowchart TD
+  USR["End-User"]
+  FE["Frontend"]
+  API["API"]
+  DB["DB"]
+  
+  USR --":80" Frontend Ingress--> FE
+  FE -.-> USR
+  
+  FE --":5000" Frontend Egress API Ingress--> API
+  API -.-> FE
 
- %%
- %% NODES
- %%
-
- USR["End-User"]
- FE["Frontend"]
- API["API"]
- DB["DB"]
-
- USR --":80
-  Frontend Ingress"
-  --> FE
- 
- FE -.-> USR
-
- FE --":5000
-  Frontend Egress
-  API Ingress
- " --> API
- 
- API -.-> FE
-
- API --":27017
-  API Egress
-  DB Ingress
- " --> DB
- DB -.-> API
+  API --":27017" API Egress DB Ingress--> DB
+  DB -.-> API
 
 ```
 

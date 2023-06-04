@@ -29,11 +29,8 @@ Deploy it on a K8s Pod, in a K8s Deployment object.
 The db needs a db, so a db gets built.  
 A new Pod gets deployed on the same node.  
 The App pod needs to talk to the db, so a new K8s service gets created to allow this pod-to-pod communication.  
-```myMermaid
+```mermaid
 flowchart TD
-  %%
-  %%  Nodes
-  %%
 
   APP((Web-App Pod))
   DBS[[ClusterIP Service - Inner-Node-Communication]]
@@ -49,11 +46,9 @@ flowchart TD
 ### Make it Available with a NodePort Service
 Another service is made, a NodePort service, that opens the app to the world via a url+port, at something like http://<the-k8s-node-ip>:<the-nodePort-port>.  
 
-```myMermaid
+```mermaid
 flowchart TD
-  %%
-  %%  Nodes
-  %%
+
   USER[End-User]
 
   NPS[[NodePort Service: port 38080]]
@@ -76,11 +71,9 @@ flowchart TD
 
 ### Address App Scaling Needs With ReplicaSets
 Once Traffic gets busy enough, build a ReplicaSet to scale the App pods. the NodePort service will split traffic between the replicated pods.  
-```myMermaid
+```mermaid
 flowchart TD
-  %%
-  %%  Nodes
-  %%
+  
   USER[End-User]
 
   NPS[[NodePort Service: port 38080]]
@@ -113,11 +106,9 @@ flowchart TD
 ### Allow For Friendly URL with DNS Config
 Configure the dns server in use to redirect `my-demo-app.com` to `<the-k8s-node-ip>`. Now, users can access the app at http://my-demo-app.com:<the-nodePort-port>`.  
 
-```myMermaid
+```mermaid
 flowchart TD
-  %%
-  %%  Nodes
-  %%
+
   USER[End-User]
   
   DNS[[demo-app to k8s-node-ip]]
@@ -158,11 +149,9 @@ flowchart TD
 ### Remove the Need For the Port in the URL with A Proxy Server
 Configure a proxy-server to sit between the world and the DNS, so that the world can access the url without the port.  
 The Proxy server will forward port 80 (_open ot the world_) to the nodePort service port.  
-```myMermaid
+```mermaid
 flowchart TD
-  %%
-  %%  Nodes
-  %%
+
   USER[End-User]
   
   PXY[[Proxy-Server: port 80 to 38080]]
@@ -206,17 +195,12 @@ Take GCP as an example. A few things get updated:
   - the GCP load-balancer comes with an external ip
 - The DNS needs to be updated to change my-app-url to the gcp-ip-addr
 
-```myMermaid
+```mermaid
 flowchart TD
-  %%
-  %%  Nodes
-  %%
   USER[End-User]
   
   DNS[[DNS: demo-app to gcp-provided LoadBalancer IP]]
-  GCPLB["GCP LoadBalancer:
-    - IP Provided + port proxying included
-    - fwd req from 80 to 38080 (K8s LoadBalancer Service Port)"]
+  GCPLB["GCP LoadBalancer: - IP Provided + port proxying included - fwd req from 80 to 38080"]
 
   NPS[[LoadBalancer Service: port 38080]]
   APP((Web-App Pod))
@@ -266,22 +250,13 @@ This develops into its own:
 - a new load-balancer on the GCP Platform
 
 
-```myMermaid
+```mermaid
 flowchart TD
-  %%
-  %%  Nodes
-  %%
   USER[End-User]
   
   DNS[[DNS: demo-app to gcp-provided LoadBalancer IP]]
-  GCPLB1["Root Route: GCP LoadBalancer:
-    - IP Provided + port proxying included
-    - fwd req from 80 to 38080 (K8s LoadBalancer Service Port)
-    - $$ paid $$"]
-  GCPLB2["How-To Route: GCP LoadBalancer:
-    - IP Provided + port proxying included
-    - fwd req from 80 to 38080 (K8s LoadBalancer Service Port)
-    - $$ paid $$"]
+  GCPLB1["Root Route: GCP LoadBalancer: - IP Provided + port proxying included - fwd req from 80 to 38080 - $$ paid $$"]
+  GCPLB2["How-To Route: GCP LoadBalancer: - IP Provided + port proxying included - fwd req from 80 to 38080 - $$ paid $$"]
 
   LB1[[Root: LoadBalancer Service: port 38080]]
   LB2[[How-To: LoadBalancer Service: port 38282]]

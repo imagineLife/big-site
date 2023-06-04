@@ -167,18 +167,10 @@ kubectl create -f asdf.yaml
 ```
 
 ## A Visualization
-```myMermaid
-  flowchart 
-    direction TB
+```mermaid
+  flowchart TB
 
-  %%
-  %% Objects
-  %%
-  DP(("Deployment
-    affinity:
-    size:
-    in:Large
-  "))
+  DP((Deployment affinity: size: in:Large))
   LBLG[["label: LARGE"]]
   LBSM[["label: SMALL"]]
 
