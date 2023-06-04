@@ -695,7 +695,7 @@ exports.onPreInit = async ({actions, store, ...params}) => {
     plugin => plugin.name === "gatsby-remark-mermaid"
   )
   let executablePath = '';
-  if (plugin && process.env.LOCAL_BUILD) {
+  if (plugin && process?.env?.LOCAL_BUILD) {
     executablePath = process.env.CHROME_PATH
   } else {
     executablePath = await chromium.executablePath
