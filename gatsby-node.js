@@ -700,6 +700,8 @@ exports.onPreInit = async ({ actions, store }) => {
   if (process?.env?.LOCAL_BUILD) {
     executablePath = process.env.CHROME_PATH
   } else {
+    console.log('getting from chromium')
+    
     executablePath = await chromium.executablePath
   }
   console.log('executablePath')
