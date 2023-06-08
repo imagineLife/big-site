@@ -23,4 +23,28 @@ exports.shouldUpdateScroll = () => {
 
 exports.onInitialClientRender = () => {
   window.scrollTo(0, 0)
+  window.addEventListener("activate", function (event) {
+    event.waitUntil(
+      caches.keys().then(function (cacheNames) {
+        return Promise.all(
+          cacheNames
+            .map(function (cacheName) {
+              return caches.delete(cacheName)
+            })
+        )
+      })
+    )
+  })
+}
+
+Copygatsby-browser.js: copy code to clipboard
+export const onServiceWorkerUpdateReady = () => {
+  const answer = window.confirm(
+    `This application has been updated.` +
+      `Reload to display the latest version?`
+  )
+
+  if (answer === true) {
+    window.location.reload()
+  }
 }
