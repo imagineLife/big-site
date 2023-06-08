@@ -37,7 +37,7 @@ exports.onInitialClientRender = () => {
   })
 }
 
-Copygatsby-browser.js: copy code to clipboard
+
 export const onServiceWorkerUpdateReady = () => {
   const answer = window.confirm(
     `This application has been updated.` +
