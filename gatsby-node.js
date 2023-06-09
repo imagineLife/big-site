@@ -7,7 +7,7 @@
 const { execSync } = require("child_process")
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
-const chromium = require('chrome-aws-lambda')
+const chromium = require("chrome-aws-lambda")
 const mdTemplate = path.resolve(`./src/templates/markdown/index.js`)
 const tagTemplate = path.resolve(`./src/templates/tags.js`)
 const nestedNavTemplate = path.resolve("./src/templates/nestedNav/index.js")
@@ -51,7 +51,7 @@ const sidebarNestedSections = {
       items: [],
       parentDir: "node",
     },
-    "http": {
+    http: {
       sectionName: "HTTP Servers",
       items: [],
       parentDir: "node",
@@ -476,6 +476,17 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               parentDir
               shortSlug
             }
+            content: html
+          }
+        }
+        otherPages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              shortSlug
+              parentDir
+            }
           }
         }
       }
@@ -536,7 +547,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             page.overview.slug.startsWith("linux") ||
             page.overview.slug.startsWith("nginx") ||
             page.overview.slug.startsWith("node") ||
-            page.overview.slug.startsWith("scrum")
+            page.overview.slug.startsWith("scrum") ||
+            page.overview.slug.startsWith("the-social-world")
               ? nestedNavTemplate
               : mdTemplate,
           context: {
@@ -563,7 +575,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           page.overview.slug.startsWith("linux") ||
           page.overview.slug.startsWith("nginx") ||
           page.overview.slug.startsWith("node") ||
-          page.overview.slug.startsWith("scrum")
+          page.overview.slug.startsWith("scrum") ||
+          page.overview.slug.startsWith("the-social-world")
         ) {
           pageObj.context.content = page.content
           pageObj.context.otherPages = prepOtherPages({
@@ -683,36 +696,28 @@ exports.onCreateWebpackConfig = ({
 // const dockerShortSlugs = ['cli-overview', 'dockerfile-intro', 'a-frontend', 'node-on-docker-intro', 'node-server-with-user', 'node-server-with-deps', 'setup-docker', 'node-server-containerized', 'a-smaller-node-image', 'why-containers'];
 
 // if (page.path.includes("docker") && page.path !== "/docker" && !dockerShortSlugs.includes(page.context.frontmatter__shortSlug)) {
-//     console.log("deleting page: ", page.path)
 //     deletePage(page)
 // }
 // }
 
-
 exports.onPreInit = async ({ actions, store }) => {
-  console.log("- - - onPreInit - - -")
-  
   const state = store.getState()
   const plugin = state.flattenedPlugins.find(
     plugin => plugin.name === "gatsby-remark-mermaid"
   )
-  let executablePath = '';
+  let executablePath = ""
   if (process?.env?.LOCAL_BUILD) {
     executablePath = process.env.CHROME_PATH
   } else {
-    console.log('getting from chromium')
-    
+    console.log("getting from chromium")
+
     executablePath = await chromium.executablePath
   }
-  console.log('executablePath')
-  console.log(executablePath)
-  
-  
   plugin.pluginOptions = {
     ...plugin.pluginOptions,
     launchOptions: {
       ...plugin.pluginOptions.launchOptions,
       executablePath,
     },
-  } 
+  }
 }
