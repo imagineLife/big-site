@@ -5,11 +5,13 @@ import TagList from "./../../components/TagList"
 import Sidebar from "./../../components/sidebar"
 import PageHead from "./../../components/PageHead"
 
-export default function NestedNavTemplate({ pageContext: { content, parentDir, otherPages, tags } }) {
+export default function NestedNavTemplate({
+  pageContext: { content, parentDir, otherPages, tags },
+}) {
   let props = {
     parentDir,
   }
-  
+
   if (otherPages?.length && !otherPages[0].sectionName)
     props.items = otherPages.map(p => ({
       frontmatter: {
@@ -22,20 +24,20 @@ export default function NestedNavTemplate({ pageContext: { content, parentDir, o
     props.navWithSections = otherPages
   }
 
-    return (
-      <main className="page-by-slug">
-        <Header className="md" />
-        <Sidebar {...props} />
-        <section className="md-wrapper">
-          <section
-            className={`${parentDir ? ` ${parentDir}` : ""}`}
-            dangerouslySetInnerHTML={{ __html: content }}
-            role="article"
-          ></section>
-          <TagList tags={tags} />
-        </section>
-      </main>
-    )
+  return (
+    <main className="page-by-slug">
+      <Header className="md" />
+      <Sidebar {...props} />
+      <section className="md-wrapper">
+        <section
+          className={`${parentDir ? ` ${parentDir}` : ""}`}
+          dangerouslySetInnerHTML={{ __html: content }}
+          role="article"
+        ></section>
+        <TagList tags={tags} />
+      </section>
+    </main>
+  )
 }
 
 export function Head({ pageContext: { title, excerpt, slug, tags } }) {
