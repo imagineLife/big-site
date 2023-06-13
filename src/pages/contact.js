@@ -25,7 +25,7 @@ const Index = () => {
     <Fragment>
       <Hero />
       <Layout>
-        <form name="contact" netlify onSubmit={handleSubmit}>
+        <form name="contact" data-netlify="true" onSubmit={handleSubmit}>
           <p>
             <label>
               Name <input type="text" name="name" />
