@@ -38,13 +38,13 @@ exports.onInitialClientRender = () => {
 }
 
 
-exports.onServiceWorkerUpdateReady = () => {
-  const answer = window.confirm(
-    `This application has been updated.` +
-      `Reload to display the latest version?`
-  )
+// exports.onServiceWorkerUpdateReady = () => {
+//   const answer = window.confirm(
+//     `This application has been updated.` +
+//       `Reload to display the latest version?`
+//   )
 
-  if (answer === true) {
-    window.location.reload()
-  }
-}
+//   if (answer === true) {
+//     window.location.reload()
+//   }
+// }
