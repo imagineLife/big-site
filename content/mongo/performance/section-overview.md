@@ -19,7 +19,7 @@ tags: ["database", "mongodb", "performance", "indexes"]
 - [Multikey](/mongo/performance/multi-key-indexes) are indexes on nested arrays
 
 [Benchmarking](/mongo/performance/benchmarking)  
-[Hardware](/mongo/performance/hardward)  
+[Hardware](/mongo/performance/hardware)  
 [Optimizing CRUD](/mongo/performance/optimizing-crud)  
 [Wired Tiger](/mongo/performance/wired-tiger)  
 [Particulars to a Distributed System](/mongo/performance/distributed-systems/)
