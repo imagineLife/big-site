@@ -36,7 +36,9 @@ const IndexPage = () => (
           <Hero />
           <Layout>
             <section className="toc-wrapper">
-              <h1 style={{marginBottom: '2rem'}}>You, Me, and the Social World</h1>
+              <h1 style={{ marginBottom: "2rem" }}>
+                You, Me, and the Social World
+              </h1>
               <h3>On Decision Making</h3>
               {pages
                 .filter(onlyWithString("decision"))
@@ -58,6 +60,11 @@ const IndexPage = () => (
               </p>
               {pages
                 .filter(onlyWithString("conflict"))
+                .map(createLinksWithType({ thisType: "social" }))}
+              <h3>On Communication</h3>
+              <p><i>more to come...</i></p>
+              {pages
+                .filter(onlyWithString("communication"))
                 .map(createLinksWithType({ thisType: "social" }))}
             </section>
           </Layout>
