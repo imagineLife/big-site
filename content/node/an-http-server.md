@@ -12,6 +12,11 @@ order: 7
 Build a web server is one of the most common parts of a JavaScript developer's "Full-Stack" arsenal.  
 Serving http json payloads for APIs ([rest](https://restfulapi.net/), [graphQL](https://graphql.org/), etc)
 
+- [Building An HTTP Server](#building-an-http-server)
+  - [Just Node, No Dependencies](#just-node-no-dependencies)
+  - [Leveraging Express](#leveraging-express)
+  - [Leveraging Fastify](#leveraging-fastify)
+
 ## Just Node, No Dependencies
 The [node docs](https://nodejs.org/dist/latest-v18.x/docs/api/http.html) have great examples of how to go about starting http server work.  
 The basic http server looks something like...
@@ -62,4 +67,33 @@ expressObj.get(ROOT_ROUTE, helloHandler)
 
 // start server, register listener callback
 expressObj.listen(port, serverListeningCallback)
+```
+
+
+## Leveraging Fastify
+```js
+const fastify = require('fastify');
+
+const HELLO_STRING = 'Hello from the fastify server!';
+const PORT = process.env.PORT || 3000;
+const ROOT_ROUTE = '/'
+function helloHandler(req, res) {
+  return res.send(HELLO_STRING);
+}
+
+const app = fastify();
+
+function listenCallback(err, address){
+  if (err) {
+    console.error(err);
+    process.exit(1);
+  }
+  console.log(`Server listening on ${address}`);
+}
+
+app.get(ROOT_ROUTE, helloHandler);
+
+// Start the server
+app.listen({ port: PORT }, listenCallback);
+
 ```
