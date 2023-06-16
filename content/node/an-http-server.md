@@ -71,6 +71,7 @@ expressObj.listen(port, serverListeningCallback)
 
 
 ## Leveraging Fastify
+A Trivial server in fastify can look nearly identical to the trivial example in express:
 ```js
 const fastify = require('fastify');
 
