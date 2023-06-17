@@ -15,16 +15,6 @@ order: 1
 
 Errors are both objects and instances. Most of the time during dev work I think I've heard folks talk about writing code that throws error _instances_ without as much consideration for the error _types_ that are being thrown. Also, I think most of the time Errors are _responded to_ during dev efforts and not _written explicitly_.  
 
-
-## There Are Several Types Of Errors
-Perhaps a TL;DR of [the node docs](https://nodejs.org/dist/latest-v18.x/docs/api/errors.html#errors):
-- [**JS Errors**](#js-errors): Some built-in errors that exist in both browser and node envs
-- **System Errors**: OS errors (fs, http, etc)
-- **User-Written Errors**: things devs can write in an application
-- **Assertion Errors**: resulting from failing tests
-
-## JS Errors
-There are a few [errors that "come with" JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors):
 - [Errors](#errors)
   - [There Are Several Types Of Errors](#there-are-several-types-of-errors)
   - [JS Errors](#js-errors)
@@ -32,6 +22,18 @@ There are a few [errors that "come with" JavaScript](https://developer.mozilla.o
     - [Syntax Error](#syntax-error)
     - [Range Error](#range-error)
     - [Type Error](#type-error)
+  - [User-Written Errors](#user-written-errors)
+
+
+## There Are Several Types Of Errors
+Perhaps a TL;DR of [the node docs](https://nodejs.org/dist/latest-v18.x/docs/api/errors.html#errors):
+- [**JS Errors**](#js-errors): Some built-in errors that exist in both browser and node envs
+- **System Errors**: OS errors (fs, http, etc)
+- [**User-Written Errors**](#user-written-errors): things devs can write in an application
+- **Assertion Errors**: resulting from failing tests
+
+## JS Errors
+There are a few [errors that "come with" JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors):
 ### Reference Error
 This is thrown when a variable is not defined.  
 These can be thrown due to developer error: scope mismatches, typos, etc.
@@ -90,4 +92,52 @@ addTwo(1,'two')
 //     at addTwo (REPL13:3:35)
 addTwo(1,2)
 // 3
+```
+
+## User-Written Errors
+Developers can write our own error types based on the "parent" error object. Here, an error with code "MUST_BE_PRIMARY" gets written into a function:
+
+```js
+function validPrimary(color) {
+  const PRIMARY_COLORS = ['red','yellow','blue']
+  if (!PRIMARY_COLORS.includes(color)) {
+    const e = Error('must be a primary color');
+    e.code = "ERR_MUST_BE_PRIMARY";
+    throw e
+  }
+  return true
+}
+
+validPrimary('lightgreen');
+// Uncaught Error: must be a primary color
+//     at validPrimary (REPL59:4:15) {
+//   code: 'ERR_MUST_BE_PRIMARY'
+// }
+
+validPrimary('blue');
+// true
+```
+
+Another approach to building the Error, this one might look a bit nicer in the err output text:
+```js
+class PrimaryError extends Error {
+  constructor (colorParam = '') {
+    super(colorParam + ' must be a primary color')
+  }
+  get name () { return 'PrimaryError' }
+  get code () { return 'ERR_MUST_BE_PRIMARY' }
+}
+
+function isValidPrimary(color) {
+  const PRIMARY_COLORS = ['red','yellow','blue']
+  if (!PRIMARY_COLORS.includes(color)) {
+    throw new PrimaryError(color)
+  }
+  return true
+}
+isValidPrimary('lightgreen');
+// Uncaught PrimaryError: lightgreen must be a primary color
+//     at isValidPrimary (REPL15:4:11)
+isValidPrimary('blue');
+// true
 ```
