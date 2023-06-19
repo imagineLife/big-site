@@ -5,7 +5,7 @@ slug: k8s/intro-to-k8s-in-the-cloud
 shortSlug: intro-to-k8s-in-the-cloud
 author: Jake Laursen
 excerpt: Kubernetes can be deployed using tools like GCP, AWS, and Azure
-tags: ["Kubernetes", "k8s", "cloud", "gsp", "aws", "Azure"]
+tags: ["Kubernetes", "k8s", "cloud", "gcp", "aws", "Azure"]
 order: 15
 ---
 
