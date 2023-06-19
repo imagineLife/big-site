@@ -10,11 +10,30 @@ order: 1
 
 # nginx
 - [nginx](#nginx)
+  - [A Diagram](#a-diagram)
   - [A WebServer For Web Developers](#a-webserver-for-web-developers)
   - [Spin Up The Out-Of-The-Box Docker Image](#spin-up-the-out-of-the-box-docker-image)
   - [Leverage the default html dir to serve custom assets](#leverage-the-default-html-dir-to-serve-custom-assets)
     - [make an html dir and file to serve](#make-an-html-dir-and-file-to-serve)
     - [Run the container and mount the html dir](#run-the-container-and-mount-the-html-dir)
+
+## A Diagram
+```mermaid
+flowchart LR
+
+  STATICFILES["static files (<i>index.html, etc.</i>)"]
+  WORLD["outside world"]
+
+  subgraph nginxServer["nginx server"]
+
+    subgraph dirPath["/usr/share/nginx/html"]
+      STATICFILES
+    end
+
+  end
+
+  WORLD --:8081-->nginxServer
+```
 
 ## A WebServer For Web Developers
 Coming from a "full-stack"-first developer set of experiences, [nginx](https://www.nginx.com/resources/glossary/nginx/) nginx might feel most similar to a web-server - something like an [express](https://expressjs.com/) server with [node](https://nodejs.org/en/). nginx, though, is used for different use-cases - a reverse proxy, caching assets, load balancing... things that can compliment what node apps might be more traditionally built to do.  
