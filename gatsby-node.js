@@ -65,6 +65,31 @@ const sidebarNestedSections = {
     order: ["using-the-cli", "http", ""],
     finished: false,
   },
+  "the-social-world": {
+    communication: {
+      sectionName: "Communication",
+      items: [],
+      parentDir: "communcation",
+    },
+    conflict: {
+      sectionName: "On Conflict",
+      items: [],
+      parentDir: "conflict",
+    },
+    "decision-making": {
+      sectionName: "Decision Making",
+      items: [],
+      parentDir: "decision-making",
+    },
+    "": {
+      sectionName: "More",
+      items: [],
+      parentDir: "node",
+    },
+    findOrder: ["decision-making", "communication", "conflict", ""],
+    order: ["decision-making", "communication", "conflict", ""],
+    finished: false,
+  },
   js: {
     intro: {
       sectionName: "Intro",

@@ -4,7 +4,7 @@ author: Jake Laursen
 excerpt: What we make of the information we gather
 tags: ["the social world", "conflict", "meaning"]  
 parentDir: the-social-world
-slug: the-social-world/conflict-and-meaning
+slug: the-social-world/conflict/conflict-and-meaning
 order: 2
 ---
 

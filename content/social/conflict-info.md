@@ -4,7 +4,7 @@ author: Jake Laursen
 excerpt: The differing info we collect might contribute to conflict
 tags: ["the social world", "conflict", "information"]  
 parentDir: the-social-world
-slug: the-social-world/conflict-and-information
+slug: the-social-world/conflict/conflict-and-information
 order: 1
 ---
 
