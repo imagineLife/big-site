@@ -28,6 +28,35 @@ Here, 2 nginx instances will...
 - [Compose For A Different Approach](#compose-for-a-different-approach)
 
 
+## A Diagram
+```mermaid
+flowchart LR
+
+  SERVERI["nodeapp1"]
+  SERVERII["nodeapp2"]
+  SERVERIII["nodeapp3"]
+  SERVERIV["nodeapp4"]
+  SERVERV["nodeapp5"]
+  SERVERVI["nodeapp6"]
+
+  NXI["nginx proxy I"]
+  NXII["nginx proxy II"]
+
+  WORLD((("outside world")))
+
+
+  WORLD --:8081--> NXI
+  WORLD --:8082--> NXII
+
+  NXI --:8080--> SERVERI
+  NXI --:8080--> SERVERII
+  NXI --:8080--> SERVERIII
+
+  NXII --:8080--> SERVERIV
+  NXII --:8080--> SERVERV
+  NXII --:8080--> SERVERVI
+```
+
 ## The Node Server
 See [the previous post](/nginx/reverse-proxy) for a trivial node api, which includes...
 - **The Server:** a trivial node rest api

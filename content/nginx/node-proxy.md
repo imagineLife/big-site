@@ -15,11 +15,10 @@ The web servers are skeleton node http servers.
 The web servers and the nginx instance will all run in docker.  
 
 - [The Goals](#the-goals)
+- [A Diagram](#a-diagram)
 - [The Node Server](#the-node-server)
   - [Build The Node Server](#build-the-node-server)
   - [Build A Dockerfile](#build-a-dockerfile)
-  - [Run The Docker Image](#run-the-docker-image)
-    - [Not Exposed with Bash and Curl](#not-exposed-with-bash-and-curl)
   - [Verify The Node Server](#verify-the-node-server)
   - [Verify The Node Server In Docker](#verify-the-node-server-in-docker)
 - [The NGINX Load-Balancer](#the-nginx-load-balancer)
@@ -30,6 +29,25 @@ The web servers and the nginx instance will all run in docker.
   - [The NGINX container](#the-nginx-container)
 - [Test The Setup](#test-the-setup)
 - [Compose For A Different Approach](#compose-for-a-different-approach)
+
+
+## A Diagram
+```mermaid
+flowchart LR
+
+  SERVERI["node server I"]
+  SERVERII["node server II"]
+  SERVERIII["node server III"]
+  NX["nginx proxy"]
+
+  WORLD((("outside world")))
+
+
+  WORLD --:8081--> NX
+  NX --:8080--> SERVERI
+  NX --:8080--> SERVERII
+  NX --:8080--> SERVERIII
+```
 
 ## The Node Server
 ### Build The Node Server
@@ -81,12 +99,6 @@ RUN npm i
 # NOTE: entrypoint OVER CMD to pass along process signals to the node process!
 ENTRYPOINT [ "node", "index.js" ]
 ```
-
-### Run The Docker Image
-Here are a few ways to run the image as a container:
-
-#### Not Exposed with Bash and Curl
-- run the image as a container with 
 
 ### Verify The Node Server
 To test the node server without docker and just node on your machine
