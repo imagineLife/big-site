@@ -21,8 +21,7 @@ order: 2
     - [Skipping The Catch](#skipping-the-catch)
     - [Skipping The Finally](#skipping-the-finally)
   - [Handling Errors](#handling-errors)
-
-
+    - [Be Aware Of Code That Runs Later](#be-aware-of-code-that-runs-later)
 
 ## Connecting Errors To Try/Catch
 ### Catching An Error
@@ -114,10 +113,7 @@ This will output...
 ```
 
 ## Handling Errors 
-Error `code` properties can be interpreted as one way to "handle" errors more gracefully:
-## Errors Can Get Handled
 Errors can be caught in the code and handled.  
-Another post reviews [using try/catch](/node/errors/catching) syntax to intercept errors.  
 ```js
 // constants
 const NOT_NUMBER_ERR_CODE = 'NOT_A_NUMBER';
@@ -209,4 +205,111 @@ finally run here
 caught a too-low err
 7
 finally run here
+```
+
+### Be Aware Of Code That Runs Later
+This is mostly identical to the previous code example.  
+Here, though, in the try/catch block, a `setTimeout` causes the function call to "wait" 2 seconds, triggering a `throw` that is NOT caught by the `catch` block:
+```js
+const NOT_NUMBER_ERR_CODE = 'NOT_A_NUMBER';
+const TOO_LOW_ERR_CODE = 'TOO_LOW';
+
+
+
+// error classes
+class NotANumber extends Error{
+  constructor (num) {
+    super(num + ' must be a number')
+  }
+  get name () { return 'NotANumber' }
+  get code () { return NOT_NUMBER_ERR_CODE }
+}
+
+class TooLow extends Error {
+  constructor(num) {
+    super(num + ' must be above zero');
+  }
+  get name() {
+    return 'TooLow';
+  }
+  get code() {
+    return TOO_LOW_ERR_CODE;
+  }
+}
+
+
+
+
+// logging function example
+function logErrorDetails(e) {
+  if (e.code == NOT_NUMBER_ERR_CODE) console.log('caught a wrong type');
+  if (e.code == TOO_LOW_ERR_CODE) console.log('caught a too-low err');
+}
+
+
+
+// the function being tested below!
+function addTwo(a, b) {
+  if (typeof a !== 'number') throw new NotANumber(a);
+  if (typeof b !== 'number') throw new NotANumber(b);
+
+  if (a < 0) throw new TooLow(a);
+  if (b < 0) throw new TooLow(b);
+  return a + b;
+}
+
+
+
+
+
+// perhaps the "meaningful" control-flow of the code
+console.log('1');
+try {
+  console.log('2');
+  setTimeout(() => {
+    addTwo('test', -3);
+  }, 2000)
+} catch (error) {
+  logErrorDetails(error)
+} finally {
+  console.log('3');
+  console.log('finally run here');
+}
+console.log('4');
+
+
+
+try {
+  console.log('5');
+  addTwo(-3,2);
+} catch (error) {
+  logErrorDetails(error);
+} finally {
+  console.log('6');
+  console.log('finally run here');
+}
+```
+
+this will return
+```bash
+1
+2
+3
+finally run here
+4
+5
+caught a too-low err
+6
+finally run here
+<path-to>/<the-filename>.js:181
+  if (typeof a !== 'number') throw new NotANumber(a);
+                             ^
+
+NotANumber: test must be a number
+    at addTwo (<path-to>/<the-filename>.js:181:36)
+    at Timeout._onTimeout (<path-to>/<the-filename>.js:198:5)
+    at listOnTimeout (node:internal/timers:569:17)
+    at process.processTimers (node:internal/timers:512:7)
+
+Node.js v18.14.2
 ```
