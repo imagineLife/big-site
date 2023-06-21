@@ -51,6 +51,11 @@ const sidebarNestedSections = {
       items: [],
       parentDir: "node",
     },
+    errors: {
+      sectionName: "Errors",
+      items: [],
+      parentDir: "node",
+    },
     http: {
       sectionName: "HTTP Servers",
       items: [],
@@ -61,8 +66,8 @@ const sidebarNestedSections = {
       items: [],
       parentDir: "node",
     },
-    findOrder: ["using-the-cli", "http", ""],
-    order: ["using-the-cli", "http", ""],
+    findOrder: ["using-the-cli", "http", "errors", ""],
+    order: ["using-the-cli", "http", "errors", ""],
     finished: false,
   },
   "the-social-world": {
