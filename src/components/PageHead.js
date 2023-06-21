@@ -22,7 +22,7 @@ export default function PageHead({ title, excerpt, slug, words, tags }) {
     author: {
       "@type": "Person",
       name: "Eric (Jake) Laursen",
-      url: "http://laursen.tech/about",
+      url: "https://laursen.tech/about/",
     },
     description: excerpt,
     headline: title,
@@ -33,7 +33,7 @@ export default function PageHead({ title, excerpt, slug, words, tags }) {
 
   const optionalImg = imgFromSlug(slug)
   if (optionalImg) {
-    jsonLd.image = `http://laursen.tech${optionalImg}`
+    jsonLd.image = `https://laursen.tech${optionalImg}`
   }
 
     return (
@@ -41,8 +41,8 @@ export default function PageHead({ title, excerpt, slug, words, tags }) {
         <title>{title || "Jake Laursen Blog"}</title>
         <meta name="description" content={excerpt} />
         <meta property="og:title" content={title} />
-        <meta property="og:url" content={`http://laursen.tech/${slug}`} />
-        <link rel="canonical" href={`http://laursen.tech/${slug}`} />
+        <meta property="og:url" content={`https://laursen.tech/${slug}/`} />
+        <link rel="canonical" href={`https://laursen.tech/${slug}/`} />
         <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap-index.xml" />
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Fragment>
