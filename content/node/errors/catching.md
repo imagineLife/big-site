@@ -20,6 +20,8 @@ order: 2
     - [Catching An Error](#catching-an-error)
     - [Skipping The Catch](#skipping-the-catch)
     - [Skipping The Finally](#skipping-the-finally)
+  - [Handling Errors](#handling-errors)
+
 
 
 ## Connecting Errors To Try/Catch
@@ -109,4 +111,102 @@ This will output...
 1
 2
 4
+```
+
+## Handling Errors 
+Error `code` properties can be interpreted as one way to "handle" errors more gracefully:
+## Errors Can Get Handled
+Errors can be caught in the code and handled.  
+Another post reviews [using try/catch](/node/errors/catching) syntax to intercept errors.  
+```js
+// constants
+const NOT_NUMBER_ERR_CODE = 'NOT_A_NUMBER';
+const TOO_LOW_ERR_CODE = 'TOO_LOW';
+
+
+
+// error classes
+class NotANumber extends Error{
+  constructor (num) {
+    super(num + ' must be a number')
+  }
+  get name () { return 'NotANumber' }
+  get code () { return NOT_NUMBER_ERR_CODE }
+}
+
+class TooLow extends Error {
+  constructor(num) {
+    super(num + ' must be above zero');
+  }
+  get name() {
+    return 'TooLow';
+  }
+  get code() {
+    return TOO_LOW_ERR_CODE;
+  }
+}
+
+
+
+
+// logging function example
+function logErrorDetails(e) {
+  if (e.code == NOT_NUMBER_ERR_CODE) console.log('caught a wrong type');
+  if (e.code == TOO_LOW_ERR_CODE) console.log('caught a too-low err');
+}
+
+
+
+// the function being tested below!
+function addTwo(a, b) {
+  if (typeof a !== 'number') throw new NotANumber(a);
+  if (typeof b !== 'number') throw new NotANumber(b);
+
+  if (a < 0) throw new TooLow(a);
+  if (b < 0) throw new TooLow(b);
+  return a + b;
+}
+
+
+
+
+
+// perhaps the "meaningful" control-flow of the code
+console.log('1');
+try {
+  console.log('2');
+  addTwo('test', -3);
+} catch (error) {
+  logErrorDetails(error)
+} finally {
+  console.log('4');
+  console.log('finally run here');
+}
+console.log('5');
+
+
+
+try {
+  console.log('6');
+  addTwo(-3,2);
+} catch (error) {
+  logErrorDetails(error);
+} finally {
+  console.log('7');
+  console.log('finally run here');
+}
+```
+
+this will return
+```bash
+1
+2
+caught a wrong type
+4
+finally run here
+5
+6
+caught a too-low err
+7
+finally run here
 ```

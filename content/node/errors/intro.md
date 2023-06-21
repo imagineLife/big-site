@@ -23,7 +23,6 @@ Errors are both objects and instances. Most of the time during dev work I think 
     - [Range Error](#range-error)
     - [Type Error](#type-error)
   - [User-Written Errors](#user-written-errors)
-  - [Errors Can Get Handled](#errors-can-get-handled)
 
 
 ## There Are Several Types Of Errors
@@ -142,7 +141,3 @@ isValidPrimary('lightgreen');
 isValidPrimary('blue');
 // true
 ```
-
-## Errors Can Get Handled
-Errors can be caught in the code and handled.  
-Another post reviews [using try/catch](/node/errors/catching) syntax to intercept errors.  
