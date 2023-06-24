@@ -33,7 +33,8 @@ Not only does node give us the ability to run JavaScript on the server, but Node
 
 ## Build An HTTP Server
 
-[Here](/http-server/about) is a brief rundown on building an http server using node. Listen for requests and serve up some content!
+[Here](/http-server) is a brief rundown on building an http server using node.   
+TL;DR: Listen for requests and serve up some content.
 
 ## Coming Soon
 

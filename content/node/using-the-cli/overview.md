@@ -15,7 +15,7 @@ Use node as a "Read-Evaluate-Print-Loop" environment
 node [options] [V8 options] [<program-entry-point> | -e "script" | -] [--] [arguments]  
 ```
 
-## [Running A Program](/node/terminal-input/cmd-entrypoint)  
+## [Running A Program](/node/using-the-cli/cmd-entrypoint)  
 Use node to evaluate cli input  
 ```bash
 node -e "const x = 'this is a string'"
