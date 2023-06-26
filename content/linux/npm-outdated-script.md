@@ -14,7 +14,7 @@ NOTE: this is a work-in-progress. I'm hoping to spend a bit of time converting t
 This would even be nice to print out a simple visual "report" that can be visible as a pipeline asset.
 ```js
 const { exec } = require('child_process');
-exec('npm -- run outdated', (error, stdout, stderr) => {
+exec('npm -- outdated', (error, stdout, stderr) => {
   console.log('stdout');
   console.log(stdout);
   console.log('stderr');

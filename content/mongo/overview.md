@@ -69,6 +69,6 @@ We'll see what happens.
 - [Replication](/mongo/replication): Setting up mongo to be resillient against a db instance outage
 - [Sharding](/mongo/Sharding): breaking up a collection across many physical instances
 - [Aggregation Pipelines](/mongo/agg): getting complex with data selection and computation before returning results to the client
-- [DB Performance](mongo/performance): identifying performance metrics & leveraging tools to increase db & query performance
-- [Schema Design](mongo/schema-design)
-- [Intro to the node module](mongo/node-mod): Some details
+- [DB Performance](/mongo/performance): identifying performance metrics & leveraging tools to increase db & query performance
+- [Schema Design](/mongo/data-modeling/schema-design-patterns)
+- Intro to the node module: Some details
