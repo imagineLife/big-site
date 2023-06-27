@@ -160,7 +160,7 @@ const technologies = [
 
 const certs = [
   {
-    title: "Kubernetes Application Develpper",
+    title: "Kubernetes Application Developer",
     subText: "Through Linux Foundation",
     textContext: "cert no. LF-2jtyhllngl",
     // aLink: 'https://university.mongodb.com/certification/certificate/330208369',
