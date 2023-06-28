@@ -23,6 +23,8 @@ Errors are both objects and instances. Most of the time during dev work I think 
     - [Range Error](#range-error)
     - [Type Error](#type-error)
   - [User-Written Errors](#user-written-errors)
+  - [Errors in the Real World](#errors-in-the-real-world)
+    - [Understand the Error's Audience](#understand-the-errors-audience)
 
 
 ## There Are Several Types Of Errors
@@ -141,3 +143,16 @@ isValidPrimary('lightgreen');
 isValidPrimary('blue');
 // true
 ```
+
+## Errors in the Real World
+Errors are complex to deal with in the real world.  
+### Understand the Error's Audience
+Some errors can be for a developer writing code.  
+A developer who is new to a part of a project can benefit from friendly errors: 
+- type errors when using methods & functions
+- missing values required to connect successfully to "external" sources like auth sources, dbs, services, etc.
+- calling an api from a frontend repo with unexpected payloads and/or paramaters and/or header contents *
+
+Developers deserve reasonable errors.  
+In the js world, things like typescript have helped implement "type aware(ish)" tooling that, when used effectively, can help developers understand expectations (_maybe dreading the "all" type_).  
+
