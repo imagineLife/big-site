@@ -130,6 +130,14 @@ class PrimaryError extends Error {
   get code () { return 'ERR_MUST_BE_PRIMARY' }
 }
 
+class CannotMixError extends Error {
+  constructor (colorOne, colorTwo) {
+    super(`cannot mix ${colorOne} and ${colorTwo}: one of them must be primary`)
+  }
+  get name () { return 'CannotMixError' }
+  get code () { return 'ERR_MUST_BE_MIXBLE' }
+}
+
 function isValidPrimary(color) {
   const PRIMARY_COLORS = ['red','yellow','blue']
   if (!PRIMARY_COLORS.includes(color)) {

@@ -130,6 +130,8 @@ async function runIt() {
 }
 runIt()
 ```
+Running the bove will "hit" the catch block, log the error message, and log the next string.  
+The above will _not_ log the promiseResult.
 
 ## Error Properties Are Available
 Building an error object that [takes advantage of error properties](/node/errors/catching) like the error code can be helpful when catching an error thrown by a promise.  
