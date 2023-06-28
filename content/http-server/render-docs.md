@@ -8,12 +8,14 @@ tags: ["http", "web", "server", "node", "express", "npm", "html"]
 order: 3
 ---
 
+# Send Some Documents To The Frontend
 ## Current Server
 
-- [Current Server](#current-server)
-  - [Send an HTML File](#send-an-html-file)
-  - [Create and Populate the HTML file](#create-and-populate-the-html-file)
-  - [Next-Step Options](#next-step-options)
+- [Send Some Documents To The Frontend](#send-some-documents-to-the-frontend)
+  - [Current Server](#current-server)
+    - [Send an HTML File](#send-an-html-file)
+    - [Create and Populate the HTML file](#create-and-populate-the-html-file)
+    - [Next-Step Options](#next-step-options)
 
 So far, an http server...
 
