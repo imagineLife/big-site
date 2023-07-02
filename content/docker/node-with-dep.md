@@ -1,8 +1,8 @@
 ---
 title: "Node Server III: With Dependenceis"
-parentDir: docker
+parentDir: docker/node-server
 shortSlug: node-server-with-deps
-slug: docker/node-server-with-deps
+slug: docker/node-server/with-deps
 author: Jake Laursen
 excerpt: The Impact of Dependencies in A Node Image
 tags: ["Docker", "Dockerfile", "NodeJS", "Container", "Image", "Dependencies"]

@@ -1,8 +1,8 @@
 ---
 title: "Node Server I: Containerization"
-parentDir: docker
+parentDir: docker/node-server
 shortSlug: node-server-containerized
-slug: docker/node-server-containerized
+slug: docker/node-server/containerized
 author: Jake Laursen
 excerpt: A Piece-by-Piece Approach to a simple node server in a docker Image + Container
 tags: ["Docker", "Dockerfile", "NodeJS", "Container", "Image"]

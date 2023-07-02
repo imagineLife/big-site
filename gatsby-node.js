@@ -20,6 +20,26 @@ const sidebarNestedSections = {
       parentDir: hmm...
     }
   */
+  docker: {
+    "": {
+      sectionName: "More",
+      items: [],
+      parentDir: "docker",
+    },
+    "node-server": {
+      sectionName: "Docker And Node",
+      items: [],
+      parentDir: "docker/node-server",
+    },
+    "mongo": {
+      sectionName: "MongoDB And Node",
+      items: [],
+      parentDir: "docker/mongo",
+    },
+    findOrder: ["node-server", "mongo",""],
+    order: ["node-server", "mongo",""],
+    finished: false,
+  },
   k8s: {
     "in-depth": {
       sectionName: "In Depth",

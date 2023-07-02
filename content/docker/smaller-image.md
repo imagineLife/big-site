@@ -1,8 +1,8 @@
 ---
 title: "Node Server IV: A Smaller Image"
-parentDir: docker
+parentDir: docker/node-server
 shortSlug: a-smaller-node-image
-slug: docker/a-smaller-node-image
+slug: docker/node-server/a-smaller-node-image
 author: Jake Laursen
 excerpt: Considering the Impact that the base image has on the final image
 tags: ["Docker", "Dockerfile", "NodeJS", "Container", "Image", "Dependencies", "Optimization", "Size", "Footprint"]
