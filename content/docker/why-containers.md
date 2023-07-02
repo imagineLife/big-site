@@ -11,6 +11,8 @@ order: 1
 
 - [Virtualizing Servers](#virtualizing-servers)
   - [Servers Here, Server There, Servers Everywhere](#servers-here-server-there-servers-everywhere)
+  - [We Code In Environments](#we-code-in-environments)
+  - [We Can Minimize Code Changes due to Environment Changes](#we-can-minimize-code-changes-due-to-environment-changes)
   - [Virtual Machines](#virtual-machines)
   - [Containers](#containers)
 - [Containers As The Focus](#containers-as-the-focus)
@@ -22,6 +24,21 @@ order: 1
 # Virtualizing Servers
 ## Servers Here, Server There, Servers Everywhere
 As a "full-stack" (_how "full" is the stack, really?!_) developer, working with servers is constant, dynamic, and complex. Systems are complex: maybe 1 "service" sends emails, while another stores user-application data, and maybe another stores user authentication data. Maaybe another one or two are "cache" layers between apis and data stores.  
+
+## We Code In Environments
+This might feel overly simplistic, but our "environment" matters. What makes up my environment?  
+- I use a mac laptop
+  - it has an amount of ram, hard-drive, and CPU (_hardware resources_)
+  - it runs an operating system
+- I use a version of node, with api's that work in this version that may become outdated new versions and may not be present in older versions
+- I make apis that connect to a database, which introduces networking, `localhost`, permissions, db users & passwords, etc.
+
+**Other people will have different environments**: different machines, different versions of node, different databases to connect to.  
+**Work environments can be significantly different**: security matters more, scale is different, hardware and OS details are probably different, etc.  
+
+## We Can Minimize Code Changes due to Environment Changes
+Environment variables in application code can help encapsulate environment-specific details: database connection parameters. etc.  
+Containers have become a common way to abstract _even more_ than application code: hardware limits, OS versions, server names, networking, resource versions (db's, coding language, etc), and more.  
 
 ## Virtual Machines
 Virtual Machines (_vms_) are a type of software that emulates hardware and the OS: CPU, RAM, Disk, Networking, etc.  
