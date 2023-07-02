@@ -163,4 +163,3 @@ A developer who is new to a part of a project can benefit from friendly errors:
 
 Developers deserve reasonable errors.  
 In the js world, things like typescript have helped implement "type aware(ish)" tooling that, when used effectively, can help developers understand expectations (_maybe dreading the "all" type_).  
-

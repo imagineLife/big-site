@@ -17,6 +17,9 @@ Understand how [promises that throw errors can be interacted with](/node/errors/
 - [Errors Get Propagated](#errors-get-propagated)
   - [Propagation](#propagation)
     - [Breaking Down The Error Propagation Example](#breaking-down-the-error-propagation-example)
+      - [Thinking Through The Propagation](#thinking-through-the-propagation)
+    - [Making use of the error output](#making-use-of-the-error-output)
+  - [Make Meaningful Impact on the code](#make-meaningful-impact-on-the-code)
 
 
 ## Propagation
@@ -87,6 +90,7 @@ runIt()
 ```
 
 ### Breaking Down The Error Propagation Example
+#### Thinking Through The Propagation
 One way of looking at the order of operations above:
 - `runIt` gets called
   - `runIt` runs `mixPrimaries` && passes 2 args
@@ -119,8 +123,8 @@ throw new CannotMixError(a,b, error.message)
     ^
 
 CannotMixError: cannot mix red and pink: pink must be a primary color
-    at mixPrimaries (<path-to-file>/index.js:line:character)
-    at runIt (<path-to-file>/index.js:line:character)
+    at mixPrimaries (<path-to-file>/index.js:434:11)
+    at runIt (<path-to-file>/index.js:439:20)
     at Object.<anonymous> (<path-to-file>/index.js:444:1)
     at Module._compile (node:internal/modules/cjs/loader:1254:14)
     at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
@@ -129,3 +133,21 @@ CannotMixError: cannot mix red and pink: pink must be a primary color
     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
     at node:internal/main/run_main_module:23:47
 ```
+
+### Making use of the error output
+The error output is helpful for several reasons:
+- **the name** of the error is written frist, the `CannotMixError`
+- **The "reason"** of the error is second: `cannot mix red and pink: pink must be a primary color`
+- **the code liness** that interact with the error:
+  - `at mixPrimaries (...434:11)` shows that the `mixPrimaries` fn, at line `434` character `11` is a code "touchpoint" of the error
+  - `at runIt (...434:11)` shows that the `runIt` fn, at line `439` character `20` is a code "touchpoint" of the error
+  - `at Object.<anonymous> (...434:11)` shows that the `Object.<anonymous>` fn, which in our case is the `runIt()` being called, at line `444` character `1` is a code "touchpoint" of the error
+  - the notes beyond that reveals some node "inner workings" that interact with the error, which is beyond the scope of this post!
+
+
+## Make Meaningful Impact on the code
+When code expects things and those things aren't met, developer-friendly code can be built-in to errors.  
+This will make exterminating bugs easier:
+- **understandable error messages** give developers clear points to investigate
+- **line numbers** point and filenames _point exactly to where the error is written_
+- **embracing the tradeoff** of time-to-make error code vs. time-to-deliver usable code will pay for itself "down the road" by reducing the time it takes for a dev to find something that isn't working as expected. The time it takes to both creat error code and deliver meaningful functionality will both decrease over time.
