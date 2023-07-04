@@ -150,7 +150,7 @@ btn.addEventListener('click', doThisOnClick);
 
 ## Overview of the NPM Init command
 
-When initializing the server directory as an npm repo in the [above step](febs/prod-server-setup#creating-the-server-directory-and-files), a `package.json` file gets created. This `package.json` file has many functionalities that npm uses: naming, version definition, keyword registration, a homepage url reference, and many others.
+When initializing the server directory as an npm repo in the [above step](#creating-the-server-directory-and-files), a `package.json` file gets created. This `package.json` file has many functionalities that npm uses: naming, version definition, keyword registration, a homepage url reference, and many others.
 
 Here, the `package.json` will be updated to:
 
