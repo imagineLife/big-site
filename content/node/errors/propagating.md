@@ -19,6 +19,7 @@ Understand how [promises that throw errors can be interacted with](/node/errors/
     - [Breaking Down The Error Propagation Example](#breaking-down-the-error-propagation-example)
       - [Thinking Through The Propagation](#thinking-through-the-propagation)
     - [Making use of the error output](#making-use-of-the-error-output)
+    - [Move The Error "Up"](#move-the-error-up)
   - [Make Meaningful Impact on the code](#make-meaningful-impact-on-the-code)
 
 
@@ -144,6 +145,85 @@ The error output is helpful for several reasons:
   - `at Object.<anonymous> (...434:11)` shows that the `Object.<anonymous>` fn, which in our case is the `runIt()` being called, at line `444` character `1` is a code "touchpoint" of the error
   - the notes beyond that reveals some node "inner workings" that interact with the error, which is beyond the scope of this post!
 
+
+### Move The Error "Up"
+In the above example, the error gets thrown at `mixPrimaries` and node throws the error.  
+The error can be moved "up", propagated, to the parent `runIt` funcitonality.  
+Only a few things can change to "handle" the error so that an error is logged and not thrown:  
+- A value will be returned from `mixPrimaries`, "passed along" to the `runIt` function
+- `runIt` will get updated
+  - it will become an `async` function, to introduce the ability to catch an error
+  - it will use the `().then().catch()` syntax to catch the error thrown in `mixPrimaries`
+
+```js
+const PRIMARY_COLORS = ['red', 'yellow', 'blue'];
+const NOT_MIXABLE_ERR = 'ERR_MUST_BE_MIXBLE';
+const NOT_PRIMARY_ERR = 'ERR_MUST_BE_PRIMARY';
+const mixedColors = {
+  red: {
+    blue: 'purple',
+    yellow: 'orange',
+  },
+  blue: {
+    red: 'purple',
+    yellow: 'green',
+  },
+  yellow: {
+    blue: 'green',
+    red: 'orange',
+  },
+};
+
+class PrimaryError extends Error {
+  constructor (colorParam = '') {
+    super(colorParam + ' must be a primary color')
+  }
+  get name () { return 'PrimaryError' }
+  get code () { return NOT_PRIMARY_ERR; }
+}
+
+class CannotMixError extends Error {
+  constructor(a,b,reason) {
+    super(`cannot mix ${a} and ${b}: ${reason}`);
+  }
+  get name() {
+    return 'CannotMixError';
+  }
+  get code() {
+    return NOT_MIXABLE_ERR;
+  }
+}
+
+function isValidPrimary(color) {
+  if (!PRIMARY_COLORS.includes(color)) {
+    throw new PrimaryError(color)
+  }
+  return true
+}
+
+function mixPrimaries(a, b) {
+  try {
+    isValidPrimary(a);
+    isValidPrimary(b);
+    if (a === b) throw new Error('must be different colors');
+    return mixedColors[a][b]
+  } catch (error) { 
+    throw new CannotMixError(a,b, error.message)
+  }
+}
+
+async function runIt(){
+  try {
+    return mixPrimaries('red', 'red')
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+runIt().then(d => console.log('runIt done: ',d)).catch(e => {
+  console.log('runIt error: ',e.message)
+})
+```
 
 ## Make Meaningful Impact on the code
 When code expects things and those things aren't met, developer-friendly code can be built-in to errors.  
