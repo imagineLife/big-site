@@ -69,7 +69,7 @@ A K8s service, specifically the NodePort service, can "map" the outside world re
 ## A Method For Setting Up A Cluster And Services
 Here's one way to go about developing pods, replica sets, deployments, and services:  
 1. Create [Deployments](/k8s/deployments) of pods && replica sets
-2. Create [ClusterIP Services](/k8s/cluster-ip-service) to manage communication between nodes
+2. Create [ClusterIP Services](/k8s/networking-intro/cluster-ip-service) to manage communication between nodes
 3. Create [LoadBalancer Services](/k8s/load-balancer-service)
 
 
