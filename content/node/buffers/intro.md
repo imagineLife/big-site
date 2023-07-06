@@ -31,6 +31,13 @@ Object.keys(Buffer)
 ]
 ```
 
+- [Buffers](#buffers)
+  - [Buffers Allocate Memory](#buffers-allocate-memory)
+  - [Create A Buffer Using a Safe Allocation](#create-a-buffer-using-a-safe-allocation)
+  - [Create A Buffer Using an UnSafe Allocation](#create-a-buffer-using-an-unsafe-allocation)
+  - [Create A Buffer From A String](#create-a-buffer-from-a-string)
+
+
 ## Buffers Allocate Memory
 Allocate is a fancy term for distribute.  
 Buffers get distributed.  
@@ -54,3 +61,50 @@ const a = Buffer.allocUnsafe(HOW_MANY_BYTES)
 a
 // <Buffer 00 00 00 00 00 00 00 00 00 00 00 00>
 ```
+
+## Create A Buffer From A String
+```js
+> const STR = "This is a six word string."
+// undefined
+> Buffer.from(STR)
+<Buffer 54 68 69 73 20 69 73 20 61 20 73 69 78 20 77 6f 72 64 20 73 74 72 69 6e 67 >
+
+
+// interesting views here...
+"abcdefghijklmnop".split("").forEach(c => console.log(Buffer.from(c)))
+<Buffer 61>
+<Buffer 62>
+<Buffer 63>
+<Buffer 64>
+<Buffer 65>
+<Buffer 66>
+<Buffer 67>
+<Buffer 68>
+<Buffer 69>
+<Buffer 6a>
+<Buffer 6b>
+<Buffer 6c>
+<Buffer 6d>
+<Buffer 6e>
+<Buffer 6f>
+<Buffer 70>
+
+"ABCDEFGHIJKLMNOP".split("").forEach(c => console.log(Buffer.from(c)))
+<Buffer 41>
+<Buffer 42>
+<Buffer 43>
+<Buffer 44>
+<Buffer 45>
+<Buffer 46>
+<Buffer 47>
+<Buffer 48>
+<Buffer 49>
+<Buffer 4a>
+<Buffer 4b>
+<Buffer 4c>
+<Buffer 4d>
+<Buffer 4e>
+<Buffer 4f>
+<Buffer 50>
+```
+
