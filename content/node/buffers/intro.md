@@ -37,6 +37,7 @@ Object.keys(Buffer)
   - [Create A Buffer Using an UnSafe Allocation](#create-a-buffer-using-an-unsafe-allocation)
   - [Create A Buffer From A String](#create-a-buffer-from-a-string)
   - [Create Strings From Buffers](#create-strings-from-buffers)
+  - [Buffers And JSON](#buffers-and-json)
 
 
 ## Buffers Allocate Memory
@@ -135,3 +136,45 @@ strBuffer.toString('utf8')
 // 'this is a string'
 ```
 Above, note that buffers can take encodings via strings. The default encoding is utf8. This won't cover the other encodings in detail.  
+
+
+## Buffers And JSON
+Buffers and json can work together. Here a "full circle" takes a string into a buffer into a stringified object, BACK to a json object, BACK to a buffer, BACK to the string.
+
+Buffer a string:
+```js
+const s = 'this is a string'
+// 'this is a string'
+
+const bufferedS = Buffer.from(s)
+// <Buffer 74 68 69 73 20 69 73 20 61 20 73 74 72 69 6e 67>
+```
+
+Passing that buffer into `JSON.stringify` & using `JSON.parse` on the stringified buffer:
+```js
+// stringifying a buffer
+const jsonStringifiedBuffer = JSON.stringify(bufferedS)
+// '{"type":"Buffer","data":[116,104,105,115,32,105,115,32,97,32,115,116,114,105,110,103]}'
+
+// parsing a stringified buffer INTO an object
+// the object has 2 keys: type, and data
+const parsedJsonString = JSON.parse(jsonStringifiedBuffer)
+// {
+//   type: 'Buffer',
+//   data: [
+//     116, 104, 105, 115,  32,
+//     105, 115,  32,  97,  32,
+//     115, 116, 114, 105, 110,
+//     103
+//   ]
+// }
+```
+
+Re-Building the buffer from the parsed stringified buffer
+```js
+const almostThere = Buffer.from(parsedJsonString.data)
+// <Buffer 74 68 69 73 20 69 73 20 61 20 73 74 72 69 6e 67>
+
+Buffer.toString(almostThere)
+// 'this is a string'
+```
