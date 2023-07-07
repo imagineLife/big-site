@@ -36,6 +36,7 @@ Object.keys(Buffer)
   - [Create A Buffer Using a Safe Allocation](#create-a-buffer-using-a-safe-allocation)
   - [Create A Buffer Using an UnSafe Allocation](#create-a-buffer-using-an-unsafe-allocation)
   - [Create A Buffer From A String](#create-a-buffer-from-a-string)
+  - [Create Strings From Buffers](#create-strings-from-buffers)
 
 
 ## Buffers Allocate Memory
@@ -108,3 +109,29 @@ a
 <Buffer 50>
 ```
 
+## Create Strings From Buffers
+```js
+const str = 'this is a string'
+// 'this is a string'
+
+const strBuffer = Buffer.from(str)
+// undefined
+
+strBuffer
+// <Buffer 74 68 69 73 20 69 73 20 61 20 73 74 72 69 6e 67>
+
+strBuffer.toString()
+// 'this is a string'
+
+const baseString = 'this will be base64 encoded.'
+const bufferSixtyFour = Buffer.from(baseString, 'base64');
+
+bufferSixtyFour.toString('base64')
+
+strBuffer.toString('hex')
+// '74686973206973206120737472696e67'
+
+strBuffer.toString('utf8')
+// 'this is a string'
+```
+Above, note that buffers can take encodings via strings. The default encoding is utf8. This won't cover the other encodings in detail.  
