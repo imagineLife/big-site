@@ -38,6 +38,7 @@ Object.keys(Buffer)
   - [Create A Buffer From A String](#create-a-buffer-from-a-string)
   - [Create Strings From Buffers](#create-strings-from-buffers)
   - [Buffers And JSON](#buffers-and-json)
+  - [Encoding And Decoding Strings](#encoding-and-decoding-strings)
 
 
 ## Buffers Allocate Memory
@@ -177,4 +178,17 @@ const almostThere = Buffer.from(parsedJsonString.data)
 
 Buffer.toString(almostThere)
 // 'this is a string'
+```
+
+## Encoding And Decoding Strings
+```js
+const THE_STRING = 'this is a string!'
+'this is a string!'
+
+
+const b64Buffd = Buffer.from(THE_STRING).toString('base64')
+// 'dGhpcyBpcyBhIHN0cmluZyE='
+
+const redone = Buffer.from(b64Buffd, 'base64').toString()
+// 'this is a string!'
 ```
