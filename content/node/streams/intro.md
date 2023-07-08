@@ -21,6 +21,7 @@ I think that this is not the easiset way to consider streams in node.
 Streams in node are interactive through "chunks". Node has a built-in [buffering system](/node/buffers) that "capture" the streamed data in "chunks" (_more on this later, perhaps!_).  
 ## Streams Can Be Readable
 Readable streams "get" data from a datasource and we as devs can interact with the "chunks" of data through a readable stream.  
+[More on Readable Streams Here](/node/streams/readable)
 
 ## Streams Can Be Writable
 Writables streams represent _sending data_ somewhere - to a file, through an http response, etc. We as devs can send data in "chunks" using a writable stream.  
