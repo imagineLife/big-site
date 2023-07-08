@@ -64,7 +64,7 @@ export function Head() {
     <PageHead {...{
       title: "Javascript Blog",
       excerpt: "A Blog on Learning JavaScript",
-      slug: 'javascropt',
+      slug: 'javascript',
       tags: ["javascript"]
     }} />
   )
