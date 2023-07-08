@@ -63,6 +63,9 @@ const createReadStream = () => {
     read() {
       console.log('---Readable fn---')
       
+      // 
+      // note: the "this" is the readable instance
+      // 
       if (madeUpData.length === 0) this.push(null);
       else this.push(madeUpData.shift());
     },
@@ -83,14 +86,44 @@ readable.on('end', endData);
 
 that will log...
 ```bash
----Readable fn---
----Readable fn---
-got data some
----Readable fn---
-got data data
----Readable fn---
-got data to
----Readable fn---
-got data read
+---Readable read fn---
+---Readable read fn---
+got data <Buffer 73 6f 6d 65>
+---Readable read fn---
+got data <Buffer 64 61 74 61>
+---Readable read fn---
+got data <Buffer 74 6f>
+---Readable read fn---
+got data <Buffer 72 65 61 64>
 finished reading
+```
+
+## Creating a Readable stream instance with encoding
+Notice the note on the [setEncoding](https://nodejs.org/dist/latest-v18.x/docs/api/stream.html#readablesetencodingencoding) property of the `Readable` function arg object property:
+```js
+const { Readable } = require('stream');
+
+const madeUpData = ['some', 'data', 'to', 'read'];
+
+const createReadStream = () => {
+  return new Readable({
+    encoding: 'utf8',
+    read() {
+      console.log('---Readable read fn---');
+      if (madeUpData.length === 0) this.push(null);
+      else this.push(madeUpData.shift());
+    },
+  });
+};
+
+function readData(data) {
+  console.log('got data', data);
+}
+
+function endData() {
+  console.log('finished reading');
+}
+const readable = createReadStream();
+readable.on('data', readData);
+readable.on('end', endData);
 ```
