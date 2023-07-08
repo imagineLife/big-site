@@ -56,11 +56,13 @@ Node comes with a [readable](https://nodejs.org/dist/latest-v18.x/docs/api/strea
 ```js
 const { Readable } = require('stream');
 
-const madeUpData = ['this', 'is', 'an','array','of','strings'];
+const madeUpData = ['some', 'data', 'to', 'read'];
 
-const myReadStream = () => {
+const createReadStream = () => {
   return new Readable({
     read() {
+      console.log('---Readable fn---')
+      
       if (madeUpData.length === 0) this.push(null);
       else this.push(madeUpData.shift());
     },
@@ -68,13 +70,27 @@ const myReadStream = () => {
 };
 
 function readData(data) {
-    console.log('got data', data);
+    console.log('got data', data.toString());
 }
 
 function endData() {
   console.log('finished reading');
 }
-const readableObject = myReadStream();
-readableObject.on('data', readData);
-readableObject.on('end', endData);
+const readable = createReadStream();
+readable.on('data', readData);
+readable.on('end', endData);
+```
+
+that will log...
+```bash
+---Readable fn---
+---Readable fn---
+got data some
+---Readable fn---
+got data data
+---Readable fn---
+got data to
+---Readable fn---
+got data read
+finished reading
 ```
