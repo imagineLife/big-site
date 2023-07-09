@@ -98,7 +98,20 @@ const About = () => {
         <div className="md-wrapper alternating">
           <section className="box">
             <div className="text">
-              <h2>A Do-er</h2>
+              <h2>A TL;DR</h2>
+              <p>
+                I'm a <a href="#a-doer">do-er</a>. I'm a{" "}
+                <a href="#a-learner">learner</a>. I'm a{" "}
+                <a href="#sf">CliftonStrengths Advocate</a>. Meyers Briggs says
+                I prefer to be an <a href="#mb">INJT</a>. I'm also a bit of a{" "}
+                <a href="#coffee">coffee fanatic</a>.
+              </p>
+              <ContactForm />
+            </div>
+          </section>
+          <section className="box">
+            <div className="text">
+              <h2 id="a-doer">A Do-er</h2>
               <p>
                 I am usually a little restless if I'm not getting something
                 done. Even my down time is has intentional elements: even
@@ -109,10 +122,9 @@ const About = () => {
               <img src={doerImg} alt="do-er" />
             </div>
           </section>
-
           <section className="box">
             <div className="text">
-              <h2>A Learner</h2>
+              <h2 id="a-learner">A Learner</h2>
               <p>
                 I feel like I love the journey of traversing from casual
                 interest to mastery. There's a killer excitement for me in the
@@ -124,6 +136,17 @@ const About = () => {
               </p>
               <p>Some topics I'm currently learning about:</p>
               <ul>
+                <li>
+                  What{" "}
+                  <a
+                    href="https://ecornell.cornell.edu/certificates/leadership-and-strategic-management/engineering-leadership/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <b>a bit of academia</b>
+                  </a>{" "}
+                  has to say about engineering leadership
+                </li>
                 <li>
                   {" "}
                   <a href="/k8s" target="_blank" rel="noreferrer">
@@ -137,7 +160,7 @@ const About = () => {
                     CKAD certified
                   </a>{" "}
                   and learned a ton about a stack of technologies "beyond" my
-                  most-practiced MERN stack and/or PERN stacks (
+                  most-practiced (M/P)ERN stack (
                   <a href="/mongo" target="_blank">
                     Mongo
                   </a>
@@ -159,8 +182,9 @@ const About = () => {
                   <a href="/node" target="_blank">
                     Node
                   </a>{" "}
-                  chops: some small projects on "scaling" a node http server,
-                  etc
+                  chops: some small studies on "scaling" node, using streams to
+                  minimize buffered content & maximize throughput, worker
+                  threads, etc
                 </li>
                 <li>
                   <b>
@@ -177,10 +201,9 @@ const About = () => {
               <img src={learnerImg} alt="learner" />
             </div>
           </section>
-
           <section className="box">
             <div className="text">
-              <h2>A StrengthsFinder Advocate</h2>
+              <h2 id="sf">A CliftonStrengths Advocate</h2>
               <p>
                 I've been enjoying the principles of a strengths-first way of
                 being, both in my own life and when working with others. When
@@ -257,10 +280,9 @@ const About = () => {
               <img src={strengthsImg} alt="StrengthsFinder advocate" />
             </div>
           </section>
-
           <section className="box">
             <div className="text">
-              <h2>An INTJ</h2>
+              <h2 id="mb">An INTJ</h2>
               <p>
                 Per{" "}
                 <a
@@ -301,10 +323,9 @@ const About = () => {
               <img src={introvertImg} alt="introvert" />
             </div>
           </section>
-
           <section className="box">
             <div className="text">
-              <h2>A Coffee Fanatic</h2>
+              <h2 id="coffee">A Coffee Fanatic</h2>
               <p>
                 I roast coffee & I love my morning ritual of brewing myself some
                 fresh-roasted coffee. Currently, I'm enjoying light-roasted
@@ -323,10 +344,6 @@ const About = () => {
               <img src={coffeeImg} alt="coffee fanatic" />
             </div>
           </section>
-
-          <ContactForm />
-
-          
           <section className="box">
             <div className="text">
               <h4>Links</h4>
