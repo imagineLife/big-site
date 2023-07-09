@@ -182,7 +182,8 @@ finished reading
 ```
 
 ## A Readable Stream with less code
-The `Readable` constructor function includes a `from` function that [takes some data directly](https://nodejs.org/dist/latest-v18.x/docs/api/stream.html#streamreadablefromiterable-options):
+The `Readable` constructor function includes a `from` function that [takes some data directly](https://nodejs.org/dist/latest-v18.x/docs/api/stream.html#streamreadablefromiterable-options). This ends up feeling like a more concise bit of code than the above `Readable` constructor being writting into our own function where a custom implementation of the `read()` function is also required.  
+
 ```js
 const { Readable } = require('stream');
 const madeUpData = [13,26,43,96];
