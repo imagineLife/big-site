@@ -105,6 +105,15 @@ const About = () => {
                 <a href="#sf">CliftonStrengths Advocate</a>. Meyers Briggs says
                 I prefer to be an <a href="#mb">INJT</a>. I'm also a bit of a{" "}
                 <a href="#coffee">coffee fanatic</a>.
+                <br />
+                I'm also on{" "}
+                <a href="https://www.linkedin.com/in/eric-laursen-6a1b20b8/">
+                  LinkedIn
+                </a>{" "}
+                and{" "}
+                <a href="https://github.com/imagineLife">
+                  github
+                </a>.
               </p>
               <ContactForm />
             </div>
