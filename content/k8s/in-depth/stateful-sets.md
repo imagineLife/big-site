@@ -11,8 +11,7 @@ order: 23
 
 # Stateful Sets Are Similar To Deployments
 Deployments can manage replicas of pods.  
-Stateful sets can too.  
-Stateful sets, though, ["maintain a sticky identifier"](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) for each of the pods that the set "watches over".  
+Stateful sets can too. Stateful sets, though, <a href="https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/" target="_blank">"maintain a sticky identifier"</a> for each of the pods that the set "watches over".  
 
 - [Stateful Sets Are Similar To Deployments](#stateful-sets-are-similar-to-deployments)
   - [Explanation Through Diagrams](#explanation-through-diagrams)
