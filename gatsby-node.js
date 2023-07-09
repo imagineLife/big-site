@@ -31,13 +31,13 @@ const sidebarNestedSections = {
       items: [],
       parentDir: "docker/node-server",
     },
-    "mongo": {
+    mongo: {
       sectionName: "MongoDB And Node",
       items: [],
       parentDir: "docker/mongo",
     },
-    findOrder: ["node-server", "mongo",""],
-    order: ["node-server", "mongo",""],
+    findOrder: ["node-server", "mongo", ""],
+    order: ["node-server", "mongo", ""],
     finished: false,
   },
   k8s: {
@@ -81,13 +81,18 @@ const sidebarNestedSections = {
       items: [],
       parentDir: "node",
     },
+    streams: {
+      sectionName: "Streams",
+      items: [],
+      parentDir: "node",
+    },
     "": {
       sectionName: "More",
       items: [],
       parentDir: "node",
     },
-    findOrder: ["using-the-cli", "http", "errors", ""],
-    order: ["using-the-cli", "http", "errors", ""],
+    findOrder: ["using-the-cli", "http", "streams", "errors", ""],
+    order: ["using-the-cli", "http", "streams", "errors", ""],
     finished: false,
   },
   "the-social-world": {
