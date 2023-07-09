@@ -98,7 +98,7 @@ const About = () => {
         <div className="md-wrapper alternating">
           <section className="box">
             <div className="text">
-              <h2>A TL;DR</h2>
+              <h2>TL;DR</h2>
               <p>
                 I'm a <a href="#a-doer">do-er</a>. I'm a{" "}
                 <a href="#a-learner">learner</a>. I'm a{" "}
@@ -123,8 +123,8 @@ const About = () => {
               <h2 id="a-doer">A Do-er</h2>
               <p>
                 I am usually a little restless if I'm not getting something
-                done. Even my down time is has intentional elements: even
-                solitude and meditation are focused and part of my goals.
+                done. Even my down time has intentional elements:
+                solitude, meditation, study, reading...usually it's all toward some goal.
               </p>
             </div>
             <div className="figure">
@@ -136,12 +136,12 @@ const About = () => {
               <h2 id="a-learner">A Learner</h2>
               <p>
                 I feel like I love the journey of traversing from casual
-                interest to mastery. There's a killer excitement for me in the
+                interest to mastery. There's an excitement for me in the
                 first piece of material I understand in a new topic. I also love
                 feeling accomplished when I'm able to execute a complete set of
-                principles or ideas I've recently learned. I also always enjoy
-                communicating my understanding of new ideas I've learned to
-                someone else.
+                principles or ideas I've recently learned. I also work to
+                communicate newly learned ideas to
+                others.
               </p>
               <p>Some topics I'm currently learning about:</p>
               <ul>
@@ -177,9 +177,8 @@ const About = () => {
                 </li>
                 <li>
                   <b>CI/CD Automated pipelines</b>: building & deploying
-                  automated ci/cd "pipelines" for tooling like a frontend build
-                  system, a node_module, a rest api, an api in a docker
-                  container...
+                  automated ci/cd tooling for things like a frontend build
+                  system, a node_module, a rest api, wrapping and deploying projects as docker images...
                 </li>
                 <li>
                   <b>keeping up </b>
