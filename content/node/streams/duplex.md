@@ -13,6 +13,10 @@ order: 4
 [duplex streams](https://nodejs.org/dist/latest-v18.x/docs/api/stream.html#duplex-and-transform-streams) implement both the [readable](/node/streams/readable) and [writable](/node/streams/writable) streams in one interface.  
 Duplex streams can "listen" for `data` events, like a readStream, and can also `write()` to the stream, like writeStreams.
 
+- [Duplex Streams for Reading And Writing](#duplex-streams-for-reading-and-writing)
+  - [An Example Of A Duplex Stream with the net module](#an-example-of-a-duplex-stream-with-the-net-module)
+  - [An Example Of A Duplex Stream with the native gzip module](#an-example-of-a-duplex-stream-with-the-native-gzip-module)
+
 
 ## An Example Of A Duplex Stream with the net module
 Here, the [`net`](https://nodejs.org/dist/latest-v18.x/docs/api/net.html) module is used as a quick example of a duplex stream.  
@@ -91,4 +95,28 @@ client received data: server beat
 client received data: ALL DONE
 client .end() here
 server socket ended!
+```
+
+## An Example Of A Duplex Stream with the native gzip module 
+```js
+const { createGzip } = require('zlib');
+
+const gzipStream = createGzip();
+
+function onData(data) {
+  const base64Data = data.toString('base64');
+  console.log('base64Data :', base64Data);
+  
+}
+
+gzipStream.on('data', onData);
+gzipStream.write('a string here');
+setTimeout(() => {
+  gzipStream.end('another string here');
+}, 500);
+```
+Running the above will output: 
+```bash
+base64Data : H4sIAAAAAAAAEw==
+base64Data : S1QoLinKzEtXyEgtSk3Myy8B0shCAA8rMZwgAAAA
 ```
