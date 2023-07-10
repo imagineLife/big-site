@@ -11,11 +11,12 @@ order: 4
 
 # Duplex Streams for Reading And Writing
 [duplex streams](https://nodejs.org/dist/latest-v18.x/docs/api/stream.html#duplex-and-transform-streams) implement both the [readable](/node/streams/readable) and [writable](/node/streams/writable) streams in one interface.  
-Duplex streams can "listen" for `data` events, like a readStream, and can also `write()` to the stream, like writeStreams.
+Duplex streams can both "listen" for `data` events, like a readStream, and can also `write()` to the stream, like writeStreams.
 
 - [Duplex Streams for Reading And Writing](#duplex-streams-for-reading-and-writing)
   - [An Example Of A Duplex Stream with the net module](#an-example-of-a-duplex-stream-with-the-net-module)
   - [An Example Of A Duplex Stream with the native gzip module](#an-example-of-a-duplex-stream-with-the-native-gzip-module)
+  - [An Example of A Duplex Stream with the native crypto module](#an-example-of-a-duplex-stream-with-the-native-crypto-module)
 
 
 ## An Example Of A Duplex Stream with the net module
@@ -119,4 +120,42 @@ Running the above will output:
 ```bash
 base64Data : H4sIAAAAAAAAEw==
 base64Data : S1QoLinKzEtXyEgtSk3Myy8B0shCAA8rMZwgAAAA
+```
+
+
+## An Example of A Duplex Stream with the native crypto module
+```js
+const { Transform } = require('stream');
+const { scrypt } = require('crypto');
+const CRYPTO_SALT = 'random-string-here'
+const dataToWrite = ['first string', 'second string', 'third string'];
+
+const createTransformStream = () => {
+  return new Transform({
+    decodeStrings: false,
+    encoding: 'hex',
+    transform(chunk, enc, next) {
+      scrypt(chunk, CRYPTO_SALT, 32, (err, key) => {
+        if (err) {
+          next(err);
+          return;
+        }
+        next(null, key);
+      });
+    },
+  });
+};
+const transformStream = createTransformStream();
+
+transformStream.on('data', (data) => {
+  console.log('got data:', data);
+});
+
+dataToWrite.forEach((str, itmIdx) => {
+  if (itmIdx !== dataToWrite.length - 1) {
+    transformStream.write(str);
+  } else {
+    transformStream.end(str);
+  }
+});
 ```
