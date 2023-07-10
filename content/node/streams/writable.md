@@ -16,6 +16,12 @@ Writable streams include...
 - the `fs` module `createWriteStream` method
 - compression with `zlib` & `crypto` stream methods
 
+- [Writing Data In Chunks With Writable Streams](#writing-data-in-chunks-with-writable-streams)
+  - [An example of Writing to a file with the fs module](#an-example-of-writing-to-a-file-with-the-fs-module)
+  - [A WriteStream From Scratch](#a-writestream-from-scratch)
+  - [Writing In Chunks While Maintaining Input Strings](#writing-in-chunks-while-maintaining-input-strings)
+  - [Writing In Chunk For Several JS Input Types](#writing-in-chunk-for-several-js-input-types)
+
 ## An example of Writing to a file with the fs module
 ```js
 // setup
