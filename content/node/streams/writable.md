@@ -16,6 +16,8 @@ Writable streams include...
 - the `fs` module `createWriteStream` method
 - compression with `zlib` & `crypto` stream methods
 
+Writable streams are the data-writing sibling to [readable streams](/node/streams/readable).  
+
 - [Writing Data In Chunks With Writable Streams](#writing-data-in-chunks-with-writable-streams)
   - [An example of Writing to a file with the fs module](#an-example-of-writing-to-a-file-with-the-fs-module)
   - [A WriteStream From Scratch](#a-writestream-from-scratch)
