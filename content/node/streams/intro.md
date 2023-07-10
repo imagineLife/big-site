@@ -25,6 +25,11 @@ Readable streams "get" data from a datasource and we as devs can interact with t
 
 ## Streams Can Be Writable
 Writables streams represent _sending data_ somewhere - to a file, through an http response, etc. We as devs can send data in "chunks" using a writable stream.  
+[More on Writable Streams Here](/node/streams/writable)
+
+## Streams Can Be Writable and Readable - Duplex
+Writables streams represent _sending data_ somewhere - to a file, through an http response, etc. We as devs can send data in "chunks" using a writable stream.  
+[More on Duplex Streams Here](/node/streams/duplex)
 
 ## Streams Handle Data Types of Buffers, Strings, and Objects
 The default "mode" of stream data-handling is to handle Buffers and strings.  
