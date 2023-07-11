@@ -17,6 +17,7 @@ Duplex streams can both "listen" for `data` events, like a readStream, and can a
   - [An Example Of A Duplex Stream with the net module](#an-example-of-a-duplex-stream-with-the-net-module)
   - [An Example Of A Duplex Stream with the native gzip module](#an-example-of-a-duplex-stream-with-the-native-gzip-module)
   - [An Example of A Duplex Stream with the native crypto module](#an-example-of-a-duplex-stream-with-the-native-crypto-module)
+  - [An Example using the finished utility](#an-example-using-the-finished-utility)
 
 
 ## An Example Of A Duplex Stream with the net module
@@ -33,7 +34,7 @@ The client
 - listens for `data`, here from the server, and logs a string with the data
 - after 2 intervals will signal to itself `all done`, then call the `.end()` method, signaling to the server that this client instance is done connecting to the server
 
-The client
+
 ```js
 const { createServer, connect } = require('net');
 
@@ -158,4 +159,47 @@ dataToWrite.forEach((str, itmIdx) => {
     transformStream.end(str);
   }
 });
+```
+
+## An Example using the finished utility
+This is a minor adjustment of the above [net server example](#an-example-of-a-duplex-stream-with-the-net-module)
+```js
+const { createServer, connect } = require('net');
+const { finished } = require('stream')
+const TIMEOUTS = {
+  serverBeat: 1000,
+  client: {
+    allDone: 3250,
+    end: 250
+  },
+};
+
+// SERVER
+createServer((socket) => {
+  
+  const interval = setInterval(() => {
+    console.log('server writing beat')
+    
+    socket.write('server beat');
+  }, TIMEOUTS.serverBeat);
+
+  socket.on('data', (data) => {
+    socket.write(data.toString().toUpperCase());
+  });
+  
+  // instead of using .on('end'...
+  // socket.on('end', () => {
+  //   console.log('server socket ended!') 
+  //   clearInterval(interval);
+  // });
+
+  // here is the 'finished' function in action
+  finished(socket, (err) => {
+    if (err) {
+      console.error('there was a socket error', err)
+    }
+    clearInterval(interval) 
+  })
+})
+  .listen(3000);
 ```

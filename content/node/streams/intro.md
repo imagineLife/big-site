@@ -36,3 +36,17 @@ The default "mode" of stream data-handling is to handle Buffers and strings.
 Node does, though, offer an [object mode](https://nodejs.org/dist/latest-v18.x/docs/api/stream.html#object-mode) where a stream in object mode can interact with javascript values: `null` is not included as a valid type that streams work with.  
 
 
+## Streams End, Consider the "finished" method
+Streams end with several events:
+- `close`
+  - writable
+  - readable
+- `error`
+  - writable
+  - readable
+- `finish`
+  - writable
+- `end`
+  - readable 
+
+Streams also can use the `finished` function, covered a bit in the [duplex streams section](/node/streams/duplex).
