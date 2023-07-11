@@ -68,6 +68,9 @@ export function Head() {
       <meta name="description" content="A Set Of Blog Posts Reviewing Nginx" />
       <meta property="og:title" content="Nginx Blog" />
       <meta property="og:url" content="http://laursen.tech/nginx" />
+      <meta http-equiv="cache-control" content="no-cache" />
+      <meta http-equiv="expires" content="0" />
+      <meta http-equiv="pragma" content="no-cache" />
     </Fragment>
-  );
+  )
 }

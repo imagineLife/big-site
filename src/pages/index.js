@@ -63,6 +63,9 @@ export function Head() {
       <meta property="og:title" content="Eric Laursen" />
       <meta property="og:url" content="http://laursen.tech" />
       <meta property="og:image" content={`${IMG_HOST}${headshot}`} />
+      <meta http-equiv="cache-control" content="no-cache" />
+      <meta http-equiv="expires" content="0" />
+      <meta http-equiv="pragma" content="no-cache" />
       <meta
         name="google-site-verification"
         content="2GHmkybMS3wSWW3Ld1eKNBEB0JygEYUAgQIGN2j-n98"
