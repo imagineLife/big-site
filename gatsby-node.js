@@ -86,13 +86,18 @@ const sidebarNestedSections = {
       items: [],
       parentDir: "node",
     },
+    fs: {
+      sectionName: "File System",
+      items: [],
+      parentDir: "node",
+    },
     "": {
       sectionName: "More",
       items: [],
       parentDir: "node",
     },
-    findOrder: ["using-the-cli", "http", "streams", "errors", ""],
-    order: ["using-the-cli", "http", "streams", "errors", ""],
+    findOrder: ["using-the-cli", "http", "streams", "fs", "errors", ""],
+    order: ["using-the-cli", "http", "streams", "fs", "errors", ""],
     finished: false,
   },
   "the-social-world": {
