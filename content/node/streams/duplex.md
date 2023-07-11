@@ -187,7 +187,7 @@ createServer((socket) => {
     socket.write(data.toString().toUpperCase());
   });
   
-  // instead of using .on('end'...
+  // instead of using...
   // socket.on('end', () => {
   //   console.log('server socket ended!') 
   //   clearInterval(interval);
