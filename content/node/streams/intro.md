@@ -32,9 +32,10 @@ Streams in node interactive with the data through "chunks". Node has a built-in 
 To compare this to a flowing river, streams in node might be more like using a bucket to catch a small amount of the data and do work on that small amount, 1 bucket, or chunk, at a time.  
 
 ### Streams Compare to Buffering larger data elements
-Taking the `fs` module as an example, `fs` is used to interact with the file-system. `fs.readFile` will read contents of a file, and put the file contents in a buffer (_memory_). The larger the file, the larger the buffer.  
-`fs.createReadStream`, though, will create a [readable stream](/node/streams/readable) that will get the file in "chunks" and only keep a "chunk" in memory.  
-When a file is larger than the "chunk" size of the readable stream, streaming the reading of the file with `fs.createReadStream` will consume less memory than buffering (_storing in memory_) the whole file with `fs.readFile`.  
+Taking the `fs` module as an example, `fs` is used to interact with the file-system. `fs.readFile` will read contents of a file, and put the file contents in a buffer (_memory_), and the entire file content can be used in code. The larger the file, the larger the buffer.  
+`fs.createReadStream`, though, will create a [readable stream](/node/streams/readable) that will get the file in "chunks" and only keep a "chunk" in memory, one-at-a-time.  
+When a file is larger than the "chunk" size of the readable stream, streaming the reading of the file with `fs.createReadStream` will consume less memory than buffering (_storing in memory_) the whole file with `fs.readFile`.   
+Leveraging streams can minimize the memory footprint of a program. Streams also include a [pipe method](/node/streams/piping), which passes along the chunk from one stream to another stream. In an example like this `fs` example, the file could get read with the readable stream from `fs.createReadStream`, stored in small chunks, then piped to an http response stream.
 
 ## Streams Can Be Readable
 Readable streams "get" data from a datasource and we as devs can interact with the "chunks" of data through a readable stream.  
