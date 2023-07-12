@@ -45,7 +45,7 @@ export default function PageHead({ title, excerpt, slug, words, tags }) {
         <meta http-equiv='cache-control' content='no-cache' />
         <meta http-equiv='expires' content='0'/>
         <meta http-equiv='pragma' content='no-cache'/>
-        <link rel="canonical" href={`https://laursen.tech/${slug}/`} />
+        <link rel="canonical" href={`http://laursen.tech/${slug}/`} />
         <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap-index.xml" />
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Fragment>
