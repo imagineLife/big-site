@@ -16,7 +16,6 @@ Filesystems can be interacted with the `fs` module as well as using the `path` m
 - [File System Interactions](#file-system-interactions)
   - [\_\_filename and \_\_dirname for current location](#__filename-and-__dirname-for-current-location)
   - [The path module helps with cross-platform paths](#the-path-module-helps-with-cross-platform-paths)
-    - [The join method for combinig paths strings](#the-join-method-for-combinig-paths-strings)
 
 ## __filename and __dirname for current location
 Files and directories "live" at a location which is accessible by a path.  
@@ -72,52 +71,4 @@ root index file
 
 ## The path module helps with cross-platform paths
 [path](https://nodejs.org/dist/latest-v18.x/docs/api/path.html) is a native node module that [_"...provides utilities for working with file and directory paths..."_](https://nodejs.org/dist/latest-v18.x/docs/api/path.html) (_thanks node docs!_).  
-
-### The join method for combinig paths strings
-Lets update the above example to include a couple `join()` functions:
-`test/index.js`
-```js
-require('./nested');
-const { join } = require('path');
-
-console.log('test index file')
-
-console.log({
-  filename: __filename,
-  dirname: __dirname,
-  joinBackward: join(__dirname, '..'),
-  joinFileName: join(__dirname, 'file.txt'),
-});
-
-```
-
-`test/nested/index.js`:
-```js
-console.log('nested index file');
-const { join } = require('path');
-
-console.log({
-  filename: __filename,
-  dirname: __dirname,
-  joinBackward: join(__dirname, '..'),
-  joinFileName: join(__dirname, 'file.txt'),
-})
-
-```
-
-running the above will output:
-```bash
-{
-  filename: '/Users/<my-username>/Desktop/test/nested/index.js',
-  dirname: '/Users/<my-username>/Desktop/test/nested',
-  joinBackward: '/Users/<my-username>/Desktop/test',
-  joinFileName: '/Users/<my-username>/Desktop/test/nested/file.txt'
-}
-test index file
-{
-  filename: '/Users/<my-username>/Desktop/test/index.js',
-  dirname: '/Users/<my-username>/Desktop/test',
-  joinBackward: '/Users/<my-username>/Desktop',
-  joinFileName: '/Users/<my-username>/Desktop/test/file.txt'
-}
-```
+[More on path here](/node/fs/path)
