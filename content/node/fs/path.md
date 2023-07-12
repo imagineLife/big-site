@@ -2,7 +2,7 @@
 title: Learn How To Work With Paths
 slug: node/fs/path
 author: Jake Laursen
-excerpt: 
+excerpt: Node Has A Bunch of built-in tooling for dealing with paths
 tags: ["node", "fs", "path"]
 parentDir: node/fs
 order: 1
@@ -60,6 +60,7 @@ console.log({
 
 running the above will output:
 ```bash
+nested index file
 {
   filename: '/Users/<my-username>/Desktop/test/nested/index.js',
   dirname: '/Users/<my-username>/Desktop/test/nested',
