@@ -15,7 +15,6 @@ _This is a follow-up to a brief [intro to the file-system](/node/fs)_.
   - [join: for combinig paths strings](#join-for-combinig-paths-strings)
   - [resolve: for calculating a path from segments](#resolve-for-calculating-a-path-from-segments)
   - [normalize: for cleaning up funky syntax](#normalize-for-cleaning-up-funky-syntax)
-  - [Node Docs For Reference](#node-docs-for-reference)
   - [parse: breaking down a path into parse](#parse-breaking-down-a-path-into-parse)
 
 ## join: for combinig paths strings
@@ -161,9 +160,6 @@ test index file
 }
 ```
 
-## Node Docs For Reference
-_Check out the <a href="https://nodejs.org/dist/latest-v18.x/docs/api/path.html" target="_blank">node docs</a> for more deets!_  
-
 ## parse: breaking down a path into parse
 a modified version of the previous examples, here including the parse method on `__filename`. parse converts a path string into an object with keys of `root`, `dir`, `base`, `ext`, and `name`:  
 
@@ -225,3 +221,5 @@ test index file
   }
 }
 ```
+
+_Check out the <a href="https://nodejs.org/dist/latest-v18.x/docs/api/path.html" target="_blank">node docs</a> for more deets on the path module!_  
