@@ -12,6 +12,7 @@ order: 1
 
 - [Paths](#paths)
   - [The join method for combinig paths strings](#the-join-method-for-combinig-paths-strings)
+  - [Building A Path From Multiple Path Segments](#building-a-path-from-multiple-path-segments)
 
 ## The join method for combinig paths strings
 Lets consider a simple directory structure with a few js files to see what the [`__filename`](https://nodejs.org/dist/latest-v18.x/docs/api/modules.html#__filename) and [`__dirname`](https://nodejs.org/dist/latest-v18.x/docs/api/modules.html#__dirname) globally available vars do:
@@ -73,5 +74,41 @@ test index file
   dirname: '/Users/<my-username>/Desktop/test',
   joinBackward: '/Users/<my-username>/Desktop',
   joinFileName: '/Users/<my-username>/Desktop/test/file.txt'
+}
+```
+
+## Building A Path From Multiple Path Segments
+Similar to the [join method](#the-join-method-for-combinig-paths-strings), the `resolve` method can be used to get a single path from multiple path segments.  
+To see how 2 path strings can be "resolved", consider a directory+file combo at `/Users/<you>/Desktop/test/index.js` that includes code like the following
+
+```js
+const { join, resolve } = require('path');
+
+console.log('test index file')
+
+console.log({
+  filename: __filename,
+  dirname: __dirname,
+  joinBackward: join(__dirname, '..'),
+  joinFileName: join(__dirname, 'file.txt'),
+  resolvedRelativePaths: resolve('./first', 'second'),
+  resolvedRootPaths: resolve('/first', '/second'),
+  resolvedMixed: resolve('/first', 'second'),
+  resolvedDoubleDots: resolve('../', 'second'),
+});
+```
+
+That will return:
+```bash
+test index file
+{
+  filename: '/Users/<me>/Desktop/test/index.js',
+  dirname: '/Users/<me>/Desktop/test',
+  joinBackward: '/Users/<me>/Desktop',
+  joinFileName: '/Users/<me>/Desktop/test/file.txt',
+  resolvedRelativePaths: '/Users/<me>/Desktop/test/first/second',
+  resolvedRootPaths: '/second',
+  resolvedMixed: '/first/second',
+  resolvedDoubleDots: '/Users/<me>/Desktop/second'
 }
 ```
