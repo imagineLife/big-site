@@ -3,7 +3,7 @@ title: Learn The Basics Of Piping
 slug: node/streams/piping
 author: Jake Laursen
 excerpt: Connect two streams with "pipe"
-tags: ["node", "streams"]
+tags: ["node", "streams", "core"]
 parentDir: node/streams
 order: 5
 ---

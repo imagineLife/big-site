@@ -3,7 +3,7 @@ title: Learn File System Interaction
 slug: node/fs
 author: Jake Laursen
 excerpt: 
-tags: ["node", "fs"]
+tags: ["node", "fs", "core"]
 parentDir: node
 order: 1
 ---

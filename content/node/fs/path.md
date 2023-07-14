@@ -3,7 +3,7 @@ title: Learn How To Work With Paths
 slug: node/fs/path
 author: Jake Laursen
 excerpt: Node Has A Bunch of built-in tooling for dealing with paths
-tags: ["node", "fs", "path"]
+tags: ["node", "fs", "path", "core"]
 parentDir: node/fs
 order: 1
 ---

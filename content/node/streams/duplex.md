@@ -3,7 +3,7 @@ title: Learn The Basics Of Duplex Streams
 slug: node/streams/duplex
 author: Jake Laursen
 excerpt: Streams That Allow For Reading And Writing
-tags: ["node", "streams"]
+tags: ["node", "streams", "core"]
 parentDir: node/streams
 order: 4
 ---

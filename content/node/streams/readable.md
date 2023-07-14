@@ -3,7 +3,7 @@ title: Learn The Basics Of Readable Streams
 slug: node/streams/readable
 author: Jake Laursen
 excerpt: Reading Data As A Stream of Chunks
-tags: ["node", "streams"]
+tags: ["node", "streams", "core"]
 parentDir: node/streams
 order: 2
 ---

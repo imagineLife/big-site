@@ -3,7 +3,7 @@ title: Learn The Basics Of Writable Streams
 slug: node/streams/writable
 author: Jake Laursen
 excerpt: Writing Data As A Stream of Chunks
-tags: ["node", "streams"]
+tags: ["node", "streams", "core"]
 parentDir: node/streams
 order: 3
 ---
