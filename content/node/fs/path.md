@@ -16,6 +16,7 @@ _This is a follow-up to a brief [intro to the file-system](/node/fs)_.
   - [resolve: for calculating a path from segments](#resolve-for-calculating-a-path-from-segments)
   - [normalize: for cleaning up funky syntax](#normalize-for-cleaning-up-funky-syntax)
   - [Node Docs For Reference](#node-docs-for-reference)
+  - [parse: breaking down a path into parse](#parse-breaking-down-a-path-into-parse)
 
 ## join: for combinig paths strings
 Lets consider a simple directory structure with a few js files to see what the [`__filename`](https://nodejs.org/dist/latest-v18.x/docs/api/modules.html#__filename) and [`__dirname`](https://nodejs.org/dist/latest-v18.x/docs/api/modules.html#__dirname) globally available vars do:
@@ -106,15 +107,15 @@ That will return:
 ```bash
 test index file
 {
-  filename: '/Users/<me>/Desktop/test/index.js',
-  dirname: '/Users/<me>/Desktop/test',
-  joinBackward: '/Users/<me>/Desktop',
-  joinFileName: '/Users/<me>/Desktop/test/file.txt',
-  resolveEmpty: '/Users/<me>/Desktop/test',
-  resolvedRelativePaths: '/Users/<me>/Desktop/test/first/second',
+  filename: '/Users/my-user/Desktop/test/index.js',
+  dirname: '/Users/my-user/Desktop/test',
+  joinBackward: '/Users/my-user/Desktop',
+  joinFileName: '/Users/my-user/Desktop/test/file.txt',
+  resolveEmpty: '/Users/my-user/Desktop/test',
+  resolvedRelativePaths: '/Users/my-user/Desktop/test/first/second',
   resolvedRootPaths: '/second',
   resolvedMixed: '/first/second',
-  resolvedDoubleDots: '/Users/<me>/Desktop/second'
+  resolvedDoubleDots: '/Users/my-user/Desktop/second'
 }
 ```
 
@@ -145,15 +146,15 @@ which returns
 ```bash
 test index file
 {
-  filename: '/Users/Jake/Desktop/test/index.js',
-  dirname: '/Users/Jake/Desktop/test',
-  joinBackward: '/Users/Jake/Desktop',
-  joinFileName: '/Users/Jake/Desktop/test/file.txt',
-  resolveEmpty: '/Users/Jake/Desktop/test',
-  resolvedRelativePaths: '/Users/Jake/Desktop/test/first/second',
+  filename: '/Users/my-user/Desktop/test/index.js',
+  dirname: '/Users/my-user/Desktop/test',
+  joinBackward: '/Users/my-user/Desktop',
+  joinFileName: '/Users/my-user/Desktop/test/file.txt',
+  resolveEmpty: '/Users/my-user/Desktop/test',
+  resolvedRelativePaths: '/Users/my-user/Desktop/test/first/second',
   resolvedRootPaths: '/second',
   resolvedMixed: '/first/second',
-  resolvedDoubleDots: '/Users/Jake/Desktop/second',
+  resolvedDoubleDots: '/Users/my-user/Desktop/second',
   normalizeEmpty: '.',
   normalizeMessy: '/this/looks/bad',
   normalizeWithRelatives: 'root/first/second'
@@ -162,3 +163,65 @@ test index file
 
 ## Node Docs For Reference
 _Check out the <a href="https://nodejs.org/dist/latest-v18.x/docs/api/path.html" target="_blank">node docs</a> for more deets!_  
+
+## parse: breaking down a path into parse
+a modified version of the previous examples, here including the parse method on `__filename`. parse converts a path string into an object with keys of `root`, `dir`, `base`, `ext`, and `name`:  
+
+```js
+const { join, resolve, normalize, parse } = require('path');
+
+console.log('test index file')
+
+console.log({
+  filename: __filename,
+  dirname: __dirname,
+  join: {
+    backward: join(__dirname, '..'),
+    fileName: join(__dirname, 'file.txt'),
+  },
+  resolve: {
+    empty: resolve(),
+    relativePaths: resolve('./first', 'second'),
+    rootPaths: resolve('/first', '/second'),
+    mixed: resolve('/first', 'second'),
+    doubleDots: resolve('../', 'second'),
+  },
+  normalize: {
+    empty: normalize(''),
+    messy: normalize('/this//looks///bad'),
+    withRelatives: normalize('root/first/second/third/..'),
+  },
+  parse: parse(__filename)
+});
+```
+returning
+```bash
+test index file
+{
+  filename: '/Users/my-user/Desktop/test/index.js',
+  dirname: '/Users/my-user/Desktop/test',
+  join: {
+    backward: '/Users/my-user/Desktop',
+    fileName: '/Users/my-user/Desktop/test/file.txt'
+  },
+  resolve: {
+    empty: '/Users/my-user/Desktop/test',
+    relativePaths: '/Users/my-user/Desktop/test/first/second',
+    rootPaths: '/second',
+    mixed: '/first/second',
+    doubleDots: '/Users/my-user/Desktop/second'
+  },
+  normalize: {
+    empty: '.',
+    messy: '/this/looks/bad',
+    withRelatives: 'root/first/second'
+  },
+  parse: {
+    root: '/',
+    dir: '/Users/my-user/Desktop/test',
+    base: 'index.js',
+    ext: '.js',
+    name: 'index'
+  }
+}
+```
