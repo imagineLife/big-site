@@ -9,12 +9,13 @@ order: 1
 ---
 
 # Paths
+_This is a follow-up to a brief [intro to the file-system](/node/fs)_  
 
 - [Paths](#paths)
-  - [The join method for combinig paths strings](#the-join-method-for-combinig-paths-strings)
-  - [Building A Path From Multiple Path Segments](#building-a-path-from-multiple-path-segments)
+  - [join: for combinig paths strings](#join-for-combinig-paths-strings)
+  - [resolve: for calculating a path from segments](#resolve-for-calculating-a-path-from-segments)
 
-## The join method for combinig paths strings
+## join: for combinig paths strings
 Lets consider a simple directory structure with a few js files to see what the [`__filename`](https://nodejs.org/dist/latest-v18.x/docs/api/modules.html#__filename) and [`__dirname`](https://nodejs.org/dist/latest-v18.x/docs/api/modules.html#__dirname) globally available vars do:
 - a test dir containing
   - an `index.js` file
@@ -77,9 +78,9 @@ test index file
 }
 ```
 
-## Building A Path From Multiple Path Segments
+## resolve: for calculating a path from segments
 Similar to the [join method](#the-join-method-for-combinig-paths-strings), the `resolve` method can be used to get a single path from multiple path segments.  
-To see how 2 path strings can be "resolved", consider a directory+file combo at `/Users/<you>/Desktop/test/index.js` that includes code like the following
+To see how 2 path strings can be "resolved", consider a directory+file combo at `/Users/<you>/Desktop/test/index.js` that includes code like the following: (_note this is a continuation of the [example above](#the-join-method-for-combinig-paths-strings)_)
 
 ```js
 const { join, resolve } = require('path');
