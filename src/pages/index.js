@@ -35,12 +35,6 @@ const Index = () => {
               />
             ))}
           </section>
-          <p>
-            <Link className="styled" activeClassName="current-page" to="/folio">
-              A portfolio
-            </Link>{' '}
-            of work including web apps, technologies, and certifications
-          </p>
           <footer className="flex-col">
             <Link to="/misc">Miscellaneous</Link>
           </footer>
