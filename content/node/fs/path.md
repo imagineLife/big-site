@@ -15,7 +15,7 @@ _This is a follow-up to a brief [intro to the file-system](/node/fs)_.
   - [join: for combinig paths strings](#join-for-combinig-paths-strings)
   - [resolve: for calculating a path from segments](#resolve-for-calculating-a-path-from-segments)
   - [normalize: for cleaning up funky syntax](#normalize-for-cleaning-up-funky-syntax)
-  - [parse: breaking down a path into parse](#parse-breaking-down-a-path-into-parse)
+  - [parse: breaking down a path into parts](#parse-breaking-down-a-path-into-parts)
 
 ## join: for combinig paths strings
 Lets consider a simple directory structure with a few js files to see what the [`__filename`](https://nodejs.org/dist/latest-v18.x/docs/api/modules.html#__filename) and [`__dirname`](https://nodejs.org/dist/latest-v18.x/docs/api/modules.html#__dirname) globally available vars do:
@@ -160,7 +160,7 @@ test index file
 }
 ```
 
-## parse: breaking down a path into parse
+## parse: breaking down a path into parts
 a modified version of the previous examples, here including the parse method on `__filename`. parse converts a path string into an object with keys of `root`, `dir`, `base`, `ext`, and `name`:  
 
 ```js
