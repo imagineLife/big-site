@@ -1,6 +1,6 @@
 ---
-title: Learn How To Read Files Synchronously
-slug: node/fs/readSync
+title: Learn How To Read Files
+slug: node/fs/read
 author: Jake Laursen
 excerpt: Read Files Then Handle the file contents
 tags: ["node", "fs", "core", "event loop"]
@@ -8,7 +8,8 @@ parentDir: node/fs
 order: 3
 ---
 
-# Reading Files Syncrhonously
+# Read Files
+## Reading Files Syncrhonously
 The [`readFileSync`](https://nodejs.org/dist/latest-v18.x/docs/api/fs.html#fsreadfilesyncpath-options) method of the `fs` module can be used to read files from disk:
 ```js
 const { readFileSync } = require('fs');
@@ -22,3 +23,4 @@ const { readFileSync } = require('fs');
 const FILE_TO_READ = './../some-file.txt';
 const contents = readFileSync(FILE_TO_READ, { encoding: 'utf8' });
 ```
+
