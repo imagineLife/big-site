@@ -9,6 +9,9 @@ order: 3
 ---
 
 # Read Files
+- [Read Files](#read-files)
+  - [Reading Files Syncrhonously](#reading-files-syncrhonously)
+
 ## Reading Files Syncrhonously
 The [`readFileSync`](https://nodejs.org/dist/latest-v18.x/docs/api/fs.html#fsreadfilesyncpath-options) method of the `fs` module can be used to read files from disk:
 ```js
