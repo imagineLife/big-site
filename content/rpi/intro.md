@@ -18,6 +18,6 @@ Here, I'm thinking of making a little home server setup to host some data and a 
 ## Related Parts And Tools To Get
 **A Case**: I got a <a target="_blank" href="https://www.amazon.com/gp/product/B07MW24S61/ref=ox_sc_act_title_1?smid=AOP0CH6UTUPHT&psc=1">Cluster Case</a>. I hope to add more pi's to the stack and do more with more pi's.  
 **A MicroSD Card Interface**: I got <a target="_blank" href="https://www.amazon.com/gp/product/B081VHSB2V/ref=ox_sc_act_title_2?smid=A1XZCP6KF7BWEX&psc=1">this one</a>.  
-**Raspberry Pi OS**: <a target="_blank" href="https://www.raspberrypi.com/software/">here</a>  
-**Directions**: There are a bunch of places to consider getting a kubernetes setup with raspberry pi's. <a target="_blank" href="https://rpi4cluster.com/">Here's one</a>. <a target="_blank" href="https://ubuntu.com/tutorials/how-to-install-ubuntu-on-your-raspberry-pi#1-overview">Here's a different guide</a>  
-**The Kubernetes Version**: There's <a target="_link" href="https://microk8s.io/compare">a few different flavors</a> of kubernetes that folks online have used with raspberry pi's.
+**Raspberry Pi OS**: <a target="_blank" href="https://www.raspberrypi.com/software/">here</a>.  
+**The Kubernetes Version**: There's <a target="_link" href="https://microk8s.io/compare">a few different flavors</a> of kubernetes that folks online have used with raspberry pi's.  
+**Directions**: There are a bunch of places to consider getting a kubernetes setup with raspberry pi's. <a target="_blank" href="https://rpi4cluster.com/">Here's one</a>. <a target="_blank" href="https://ubuntu.com/tutorials/how-to-install-ubuntu-on-your-raspberry-pi#1-overview">Here's a different guide</a> that focuses on ubuntu on raspberry pi. <a target="_blank" href="https://www.youtube.com/watch?v=X9fSMGkjtug">Here's a video</a> of a guy who documents his experience setting up a cluster. he also has a text-based version of his experience on his website.    
