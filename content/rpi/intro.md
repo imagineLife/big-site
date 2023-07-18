@@ -2,8 +2,8 @@
 title: Learn To Work With The Raspberry Pi
 slug: rpi/intro
 author: Jake Laursen
-excerpt: 
-tags: ["raspberry pi", "hardware", ""]
+excerpt: Getting Started with the little computer
+tags: ["raspberry pi", "hardware"]
 parentDir: rpi
 order: 1
 ---
