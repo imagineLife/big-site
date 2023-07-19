@@ -12,6 +12,7 @@ order: 3
 - [Read Files](#read-files)
   - [Reading Files Syncrhonously](#reading-files-syncrhonously)
   - [Keeping The Even Loop Open With Callback](#keeping-the-even-loop-open-with-callback)
+  - [Keeping The Event Loop Open with The Promise API](#keeping-the-event-loop-open-with-the-promise-api)
 
 ## Reading Files Syncrhonously
 The [`readFileSync`](https://nodejs.org/dist/latest-v18.x/docs/api/fs.html#fsreadfilesyncpath-options) method of the `fs` module can be used to read files from disk:
@@ -62,4 +63,21 @@ function readFileCallback(err, contents){
 }
 
 readFile(FILE_TO_READ, { encoding: 'utf8' }, readFileCallback);
+```
+
+## Keeping The Event Loop Open with The Promise API
+[the node fs module has a nice built-in promise-syntax api](https://nodejs.org/dist/latest-v18.x/docs/api/fs.html#promises-api):
+```js
+const { readFile } = require('fs/promises');
+const FILE_TO_READ = './../small-file.txt';
+
+// NOTE: the optional {encoding: utf8} 
+// parses the file as a string
+// the default, without the encoding, returns a buffer
+readFile(FILE_TO_READ, { encoding: 'utf8' })
+  .then((data) => {
+    console.log(data);
+    
+  })
+  .catch(console.log);
 ```

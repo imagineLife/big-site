@@ -68,3 +68,11 @@ writeFile(FILE_TO_WRITE, 'this is a string\n', writeFileCallback);
 
 ## Keeping The Event Loop Open with The Promise API
 [the node fs module has a nice built-in promise-syntax api](https://nodejs.org/dist/latest-v18.x/docs/api/fs.html#promises-api):
+```js
+const { writeFile } = require('fs/promises');
+const FILE_TO_WRITE = './../new-file.txt';
+
+writeFile(FILE_TO_WRITE, 'this is a string\n').then(() => { 
+  console.log('done writing!')
+}).catch(console.log);
+```
