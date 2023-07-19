@@ -244,8 +244,8 @@ module.exports = {
     {
       resolve: "gatsby-plugin-robots-txt",
       options: {
-        host: "https://www.laursen.tech",
-        sitemap: "https://www.laursen.tech/sitemap-index.xml",
+        host: "https://laursen.tech",
+        sitemap: "https://laursen.tech/sitemap-index.xml",
         // { userAgent: "*", allow: "/" }
         policy: [
           ...robots.allow.map(d => ({
