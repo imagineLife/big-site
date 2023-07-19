@@ -101,7 +101,7 @@ readStream.on('data', (d) => {
 
 ### Adjust The Chunk Size 
 the `createReadStream` api gives [a few options](https://nodejs.org/dist/latest-v18.x/docs/api/fs.html#filehandlecreatereadstreamoptions) to use.  
-One of the options is called the `highWaterMark`, which describes a limit on the of memory each chunk will consume. The node docs say the default value for the `highWaterMark` is `64 * 1024`.
+One of the options is called the [`highWaterMark`](https://nodejs.org/dist/latest-v18.x/docs/api/stream.html#buffering), which describes a limit on the of memory each chunk will consume. The node docs say the default value for the `highWaterMark` is `64 * 1024`.
 
 ```js
 const { createReadStream } = require('fs');
