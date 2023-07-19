@@ -11,7 +11,7 @@ order: 3
 # Read Files
 - [Read Files](#read-files)
   - [Reading Files Syncrhonously](#reading-files-syncrhonously)
-  - [Keeping The Even Loop Open With Async Reading](#keeping-the-even-loop-open-with-async-reading)
+  - [Keeping The Even Loop Open With Callback](#keeping-the-even-loop-open-with-callback)
 
 ## Reading Files Syncrhonously
 The [`readFileSync`](https://nodejs.org/dist/latest-v18.x/docs/api/fs.html#fsreadfilesyncpath-options) method of the `fs` module can be used to read files from disk:
@@ -28,7 +28,7 @@ const FILE_TO_READ = './../some-file.txt';
 const contents = readFileSync(FILE_TO_READ, { encoding: 'utf8' });
 ```
 
-## Keeping The Even Loop Open With Async Reading
+## Keeping The Even Loop Open With Callback
 The [`readFile`](https://nodejs.org/dist/latest-v18.x/docs/api/fs.html#fsreadfilepath-options-callback) method of the `fs` module can be used to read files from disk:
 ```js
 const { readFile } = require('fs');
@@ -61,4 +61,5 @@ function readFileCallback(err, contents){
     console.log(contents)
 }
 
-readFile(FILE_TO_READ, { encoding: 'utf8' }, readFileCallback);```
+readFile(FILE_TO_READ, { encoding: 'utf8' }, readFileCallback);
+```
