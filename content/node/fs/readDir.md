@@ -9,7 +9,7 @@ order: 5
 ---
 
 # Reading Directories
-Similar to the [reading of files](/node/fs/read) and [writing of files](/node/fs/write), reading directories have a few different syntaxes & approaches, including callbacks, [promises](/js/promises-intro/), and even [streams](/node/streams/).  
+Similar to the [reading of files](/node/fs/read) and [writing of files](/node/fs/write), reading directories have a few different syntaxes & approaches, including callbacks, [promises](/js/promises-intro/), and even [streams](/node/streams/).   
 
 - [Reading Directories](#reading-directories)
   - [Use A Callback To Read A Directory](#use-a-callback-to-read-a-directory)
@@ -17,6 +17,8 @@ Similar to the [reading of files](/node/fs/read) and [writing of files](/node/fs
   - [Use A Promise To Read Directories](#use-a-promise-to-read-directories)
 
 
+(_This is part of [a brief series on the fs module](/node/fs)_)
+  
 ## Use A Callback To Read A Directory
 [readdir](https://nodejs.org/dist/latest-v18.x/docs/api/fs.html#fsreaddirpath-options-callback):  
 

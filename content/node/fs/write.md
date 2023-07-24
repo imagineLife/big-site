@@ -17,6 +17,8 @@ order: 4
   - [Keeping The Event Loop Open with writeFile](#keeping-the-event-loop-open-with-writefile)
   - [Keeping The Event Loop Open with The Promise API](#keeping-the-event-loop-open-with-the-promise-api)
 
+(_This is part of [a brief series on the fs module](/node/fs)_)  
+
 ## Writing Files Syncrhonously
 The [`writeFileSync`](https://nodejs.org/dist/latest-v18.x/docs/api/fs.html#fswritefilesyncfile-data-options) method of the `fs` module can be used to write files to disk:
 ```js

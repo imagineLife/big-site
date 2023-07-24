@@ -16,6 +16,8 @@ order: 3
   - [Stream File Data With createReadStream](#stream-file-data-with-createreadstream)
     - [Adjust The Chunk Size](#adjust-the-chunk-size)
 
+(_This is part of [a brief series on the fs module](/node/fs)_)  
+
 ## Reading Files Syncrhonously
 The [`readFileSync`](https://nodejs.org/dist/latest-v18.x/docs/api/fs.html#fsreadfilesyncpath-options) method of the `fs` module can be used to read files from disk:
 ```js

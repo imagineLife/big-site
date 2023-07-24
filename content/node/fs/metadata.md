@@ -10,7 +10,8 @@ order: 6
 
 # Get File Metadata 
 The [`fs.Stats`](https://nodejs.org/dist/latest-v18.x/docs/api/fs.html#class-fsstats) object contains a bunch of information about files.  
-The `fs.Stats` object can be found when running `fs.stat()`, `fs.lstat()`, `fs.fstat()`, and other synchronous version of those commands:
+The `fs.Stats` object can be found when running `fs.stat()`, `fs.lstat()`, `fs.fstat()`, and other synchronous version of those commands.  
+(_This is part of [a brief series on the fs module](/node/fs)_)
 ```js
 const { readdirSync, statSync } = require('fs');
 
