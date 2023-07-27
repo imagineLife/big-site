@@ -63,3 +63,7 @@ function watchHandler(evt, filename) {
 watch(DIR_TO_WATCH, watchHandler);
 
 ```
+
+## Managing File Status Requires More
+the statuses of the `watch` function are not very great.  
+The `stats` results of the `fs.stats` on a file, though, do give enough bits of info to "calculate" some more meaningful status details.  
