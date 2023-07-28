@@ -15,8 +15,9 @@ Node includes the [process](https://nodejs.org/dist/latest-v18.x/docs/api/proces
   - [Interact with the terminal using stdio](#interact-with-the-terminal-using-stdio)
     - [stdin for process input](#stdin-for-process-input)
     - [A Trivial script to print to stdout](#a-trivial-script-to-print-to-stdout)
-    - [Passing The output as input to another script with pipe](#passing-the-output-as-input-to-another-script-with-pipe)
+    - [Using stdin in a node script](#using-stdin-in-a-node-script)
     - [Putting It All Together](#putting-it-all-together)
+  - [Interact With the terminal using stdout](#interact-with-the-terminal-using-stdout)
 
 ## Interact with the terminal using stdio
 the process object contains a few [streams](/node/streams): stdin, stdout, and stderr.  
@@ -28,8 +29,8 @@ the process object contains a few [streams](/node/streams): stdin, stdout, and s
 In most node development use-cases, `process.stdin` means handling process input.  
 Take for example, as a start, this command that can be run in [bash](/linux/script-writing/) on a machine that has node installed: `node -e "console.log('this is a string')";`. This uses node to [evaluate](https://nodejs.org/dist/latest-v18.x/docs/api/cli.html#-e---eval-script), with the `-e` flag, the subsequent text of the `console.log` message. Running this will print `this is a string` to the terminal.  
 
-### Passing The output as input to another script with pipe
-Leveraging the [linux pipe](/linux/streams-pipes), the above script can be passed to a `|` pipe onto _yet another script_.  Here's a script that will _consume the stdin_ from above:  
+### Using stdin in a node script
+The above bash script can be passed to a `|` pipe onto _yet another script_.  Here's a script that will _consume the stdin_ from above:  
 ```js
 // myStdin.js
 console.log('inside stdin.js');
@@ -42,4 +43,14 @@ process.stdin.on('data', d => {
 ```bash
 node -e "console.log('this is a string');" | node myStdin.js 
 inside myStdin.js
-this is a string```
+this is a string
+```
+
+## Interact With the terminal using stdout
+The `myStdin.js` file can be adusted to leverage the `process.stdout` stream, which is somewhat like `console.log`:
+```js
+// myStdin.js
+console.log('inside stdin.js');
+process.stdin.pipe(process.stdout)
+```
+This uses the [pipe method](https://nodejs.org/dist/latest-v18.x/docs/api/stream.html#readablepipedestination-options) of the stdin readable stream and passes along the writable stream that is `process.stdout`.  
