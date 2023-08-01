@@ -490,6 +490,34 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           }
         }
       }
+      rpi: allMarkdownRemark(
+        sort: { frontmatter: { order: ASC } }
+        filter: { frontmatter: { slug: { regex: "/^rpi/" } } }
+      ) {
+        pages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              excerpt
+              tags
+              parentDir
+              shortSlug
+            }
+            content: html
+          }
+        }
+        otherPages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              shortSlug
+              parentDir
+            }
+          }
+        }
+      }
       scrum: allMarkdownRemark(
         sort: { frontmatter: { order: ASC } }
         filter: {
@@ -607,6 +635,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             page.overview.slug.startsWith("linux") ||
             page.overview.slug.startsWith("nginx") ||
             page.overview.slug.startsWith("node") ||
+            page.overview.slug.startsWith("rpi") ||
             page.overview.slug.startsWith("scrum") ||
             page.overview.slug.startsWith("the-social-world")
               ? nestedNavTemplate
@@ -635,6 +664,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           page.overview.slug.startsWith("linux") ||
           page.overview.slug.startsWith("nginx") ||
           page.overview.slug.startsWith("node") ||
+          page.overview.slug.startsWith("rpi") ||
           page.overview.slug.startsWith("scrum") ||
           page.overview.slug.startsWith("the-social-world")
         ) {
