@@ -3,7 +3,7 @@ title: Learn Processes and Operating System Interactions
 slug: node/process
 author: Jake Laursen
 excerpt: Standard IO, Process details, and os details
-tags: ["node", "stdio", "process", "os", "core"]
+tags: ["node", "stdio", "process", "os", "core", "args", "streams"]
 parentDir: node
 order: 1
 ---
