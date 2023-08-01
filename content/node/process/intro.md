@@ -18,6 +18,12 @@ Node includes the [process](https://nodejs.org/dist/latest-v18.x/docs/api/proces
     - [Using stdin in a node script](#using-stdin-in-a-node-script)
     - [Putting It All Together](#putting-it-all-together)
   - [Interact With the terminal using stdout](#interact-with-the-terminal-using-stdout)
+  - [Determine If A Process Started From The Terminal](#determine-if-a-process-started-from-the-terminal)
+  - [Use Bash To Send Output Somewhere Using '\>'](#use-bash-to-send-output-somewhere-using-)
+  - [Use Bash To Separate stdout and stderr outputs](#use-bash-to-separate-stdout-and-stderr-outputs)
+  - [Parse Command-Line Arguments](#parse-command-line-arguments)
+  - [Force A Process to Exit (or quit)](#force-a-process-to-exit-or-quit)
+    - [Exit A Process As An Error With exit code 1](#exit-a-process-as-an-error-with-exit-code-1)
 
 ## Interact with the terminal using stdio
 the process object contains a few [streams](/node/streams): stdin, stdout, and stderr.  
@@ -54,3 +60,66 @@ console.log('inside stdin.js');
 process.stdin.pipe(process.stdout)
 ```
 This uses the [pipe method](https://nodejs.org/dist/latest-v18.x/docs/api/stream.html#readablepipedestination-options) of the stdin readable stream and passes along the writable stream that is `process.stdout`.  
+
+## Determine If A Process Started From The Terminal
+Node includes [a detail](https://nodejs.org/dist/latest-v18.x/docs/api/process.html#a-note-on-process-io) that allows us as developers to "check" how a node process was started.   
+A node process can be started directly from the command line (terminal) with something like `node <file-name>.js`.  
+A node process can be piped to from the terminal with something like `node -e "console.log('this is a string');" | node <file-name>.js`.  
+There are also other ways that a node process can be started.  
+To determine, in code, whether or not the code was ran from the command-line (terminal), a variable can be used: `process.stdin.isTTY`.  
+Let's add a line to the `myStdin.js` file above:  
+```js
+// myStdin.js file
+console.log('inside stdin.js from',process.stdin.isTTY ?'terminal' : 'pipe');
+process.stdin.pipe(process.stdout);
+```
+Now, running the file with `node myStdin.js` will output 
+```
+inside stdin.js from terminal
+``` 
+and keep the process "open". Running the file via `node -e "console.log('this is a string');" | node stdin.js ` will output 
+```bash
+inside stdin.js from pipe 
+this is a string
+```
+
+## Use Bash To Send Output Somewhere Using '>'
+Let's Run the same process as above and include a bit to send the output to a file called `filled-via-bash.txt`:
+```bash
+node -e "console.log('this is a string');" | node stdin.js > filled-via-bash.txt
+```
+The new piece is `> filled-via-bash.txt`, which "takes" the "data" from the previous command(s), which will be the text seen [above](#determine-if-a-process-started-from-the-terminal), and "sends" the data to where we write next. In our case, this is a file called `filled-via-bash.txt`.  
+Perhaps an interesting detail here is that the file, `filled-via-bash.txt`, doesn't even exist. The file might not NEED to exist, necessarily.
+
+## Use Bash To Separate stdout and stderr outputs
+Let's update our trivial toy process to include a stdout via `process.stdout` and a stderr via `console.error`:
+```js
+// myStdin.js
+console.error('inside stdin.js from',process.stdin.isTTY ?'terminal' : 'pipe');
+process.stdin.pipe(process.stderr);
+```
+Now, we can update the line we use to run the process to instruct bash to send error output to a separate location than the stdout:
+`node -e "console.log('this is a string');" | node stdin.js > filled-via-bash.txt 2> filled-via-bash-err.txt`. After running that version of the process, which now includes the `2> filled-via-bash-err.txt` detail, there will be two files: one with the `console.log` output and one with the `stderr` output.  
+
+## Parse Command-Line Arguments
+Running the `myStdin.js` file, and any js-for-node file for that matter, can also leverage command-line arguments.  
+Node [includes a detail](https://nodejs.org/dist/latest-v18.x/docs/api/process.html#processargv) for devs to read command-line arguments.  
+Let's update the `myStdin.js` file and how it gets run to leverage a command-line argument.  
+
+
+## Force A Process to Exit (or quit)
+Node includes [a detail to exit a process](https://nodejs.org/dist/latest-v18.x/docs/api/process.html#processexitcode).  
+Let's add this to the `myStdin.js` file so that when the process is run from the command-line, directly, the process does not "hang" and quits after logging:  
+```js
+// myStdin.js
+console.error('inside stdin.js from', process.stdin.isTTY ? 'terminal' : 'pipe');
+process.stdin.pipe(process.stderr);
+if (process.stdin.isTTY) {
+  process.exit();
+}
+```
+This will exit the process when the the process is run from the terminal (_node myStdin.js_) and not via a pipe.
+
+### Exit A Process As An Error With exit code 1
+The `process.exit` can take a code number as a parameter, like `process.exit(1)`.  
+Let's update the 
