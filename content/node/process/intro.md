@@ -25,6 +25,7 @@ Node includes the [process](https://nodejs.org/dist/latest-v18.x/docs/api/proces
   - [Force A Process to Exit (or quit)](#force-a-process-to-exit-or-quit)
     - [Use exit(1) To Exit With An Error](#use-exit1-to-exit-with-an-error)
     - [Use exitCode To Exit With An Error](#use-exitcode-to-exit-with-an-error)
+    - [Code When The Process Exits](#code-when-the-process-exits)
 
 ## Interact with the terminal using stdio
 the process object contains a few [streams](/node/streams): stdin, stdout, and stderr.  
@@ -144,5 +145,23 @@ if (process.stdin.isTTY) {
   process.exit();
 }
 console.log('stdin ran')
+process.stdin.pipe(process.stderr);
+```
+
+### Code When The Process Exits
+When `exit()` is called, the [exit event](https://nodejs.org/dist/latest-v18.x/docs/api/process.html#event-exit) is emitted and can be listened for: (_[for more on events see here](/node/events/)_)
+```js
+// myStdin.js
+function exitListener(exitCode) {
+  console.log(`stdin process exited with code ${exitCode}`)
+}
+
+if (process.stdin.isTTY) {
+  console.error('Error: stdin not intended to run from tty');
+  process.exitCode = 1;
+  process.exit();
+}
+console.log('stdin ran');
+process.on('exit', exitListener);
 process.stdin.pipe(process.stderr);
 ```
