@@ -121,5 +121,15 @@ if (process.stdin.isTTY) {
 This will exit the process when the the process is run from the terminal (_node myStdin.js_) and not via a pipe.
 
 ### Exit A Process As An Error With exit code 1
-The `process.exit` can take a code number as a parameter, like `process.exit(1)`.  
-Let's update the 
+The `process.exit` can take a code number as a parameter, with something like `process.exit(1)`.  
+Let's update the `myStdin.js` process to exit with code `1` when it is run directly from the cli and not piped to:
+```js
+// myStdin.js
+if (process.stdin.isTTY) {
+  console.error('Error: stdin not intended to run from tty');
+  process.exit(1);
+}
+console.log('stdin ran')
+process.stdin.pipe(process.stderr);
+```
+Now, running `node myStdin.js`will print the error text to the terminal output, but `node -e "console.log('this is a string');" | node stdin.js > filled-via-bash.txt 2> filled-via-bash-err.txt` will send content to the two output files ([mentioned above](#use-bash-to-separate-stdout-and-stderr-outputs))
