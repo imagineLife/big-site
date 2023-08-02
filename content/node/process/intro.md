@@ -23,7 +23,8 @@ Node includes the [process](https://nodejs.org/dist/latest-v18.x/docs/api/proces
   - [Use Bash To Separate stdout and stderr outputs](#use-bash-to-separate-stdout-and-stderr-outputs)
   - [Parse Command-Line Arguments](#parse-command-line-arguments)
   - [Force A Process to Exit (or quit)](#force-a-process-to-exit-or-quit)
-    - [Exit A Process As An Error With exit code 1](#exit-a-process-as-an-error-with-exit-code-1)
+    - [Use exit(1) To Exit With An Error](#use-exit1-to-exit-with-an-error)
+    - [Use exitCode To Exit With An Error](#use-exitcode-to-exit-with-an-error)
 
 ## Interact with the terminal using stdio
 the process object contains a few [streams](/node/streams): stdin, stdout, and stderr.  
@@ -120,7 +121,7 @@ if (process.stdin.isTTY) {
 ```
 This will exit the process when the the process is run from the terminal (_node myStdin.js_) and not via a pipe.
 
-### Exit A Process As An Error With exit code 1
+### Use exit(1) To Exit With An Error
 The `process.exit` can take a code number as a parameter, with something like `process.exit(1)`.  
 Let's update the `myStdin.js` process to exit with code `1` when it is run directly from the cli and not piped to:
 ```js
@@ -133,3 +134,15 @@ console.log('stdin ran')
 process.stdin.pipe(process.stderr);
 ```
 Now, running `node myStdin.js`will print the error text to the terminal output, but `node -e "console.log('this is a string');" | node stdin.js > filled-via-bash.txt 2> filled-via-bash-err.txt` will send content to the two output files ([mentioned above](#use-bash-to-separate-stdout-and-stderr-outputs))
+
+### Use exitCode To Exit With An Error
+```js
+// myStdin.js
+if (process.stdin.isTTY) {
+  console.error('Error: stdin not intended to run from tty');
+  process.exitCode = 1;
+  process.exit();
+}
+console.log('stdin ran')
+process.stdin.pipe(process.stderr);
+```
