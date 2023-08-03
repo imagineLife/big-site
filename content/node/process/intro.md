@@ -26,6 +26,8 @@ Node includes the [process](https://nodejs.org/dist/latest-v18.x/docs/api/proces
     - [Use exit(1) To Exit With An Error](#use-exit1-to-exit-with-an-error)
     - [Use exitCode To Exit With An Error](#use-exitcode-to-exit-with-an-error)
     - [Code When The Process Exits](#code-when-the-process-exits)
+  - [Get Information about the Running Process](#get-information-about-the-running-process)
+  - [See And Set Environment Variables](#see-and-set-environment-variables)
 
 ## Interact with the terminal using stdio
 the process object contains a few [streams](/node/streams): stdin, stdout, and stderr.  
@@ -164,4 +166,45 @@ if (process.stdin.isTTY) {
 console.log('stdin ran');
 process.on('exit', exitListener);
 process.stdin.pipe(process.stderr);
+```
+
+## Get Information about the Running Process
+The [process module](https://nodejs.org/dist/latest-v18.x/docs/api/process.html) included in node provides a bunch of methods and properties that we as devs can use to get info about the running process. here's a few: 
+```js
+// showInfo.js
+console.log({
+  'cwd':  process.cwd(),
+  'Process Platform':  process.platform,
+  pid:  process.pid,
+  uptime: process.uptime(), //this is in seceonds with a bunch of decimal places
+  cpuUsage: process.cpuUsage(),
+  memoryUsage: process.memoryUsage()
+})
+```
+- `cpuUsage()` returns an object with two keys: `user` and `system` - each holds a set of microseconds representing the CPU time used by each. The `user` is the node process. the `system` is the kernel
+- `memoryUsage()` will return an object with 5 keys, each with values in bytes:
+  - `rss`: residential set size - ram for the process
+  - `heapTotal`: - total memory allocated for the process. THIS can be split ACROSS ram AND swap space (a V8 detail)
+  - `heapUsed`: total memory across BOTH ram and swap space (a v8 detail)
+  - `external`: memory used by the C++ "layer" of objects that are JS objects
+  - `arrayBuffers`: memory allocated for `ArrayBuffers` and `SharedArrayBuffers` through node. The `arrayBuffers` value  is also part of the `external` value. 
+
+## See And Set Environment Variables
+The [env](https://nodejs.org/dist/latest-v18.x/docs/api/process.html#processenv) property can also be used to _see_ all of the environment variables set on the current process:  
+```js
+console.log(process.env)
+```
+
+In regular node rest api development, env vars are often used to inform the code on any logic that might _only be needed_ in either a `development` or `production` or `testing` (etc) environment.  
+
+There are a bunch of ways to set env vars, here's one:  
+When running a node process the env var could be set when _calling_ or _running_ the node process: `MY_VAR_NAME=i_set_this_myself node showit.js`   
+Then in the code the env var could be used:  
+```js
+// showit.js
+if(process.env?.MY_VAR_NAME){
+  console.log(`I set MY_VAR_NAME to ${process.env.MY_VAR_NAME}`)
+}else{
+  console.log('I did not set MY_VAR_NAME')
+}
 ```
