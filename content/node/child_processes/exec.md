@@ -17,6 +17,9 @@ A step-by-step order of creating and "getting" results from child-processes:
 
 - [exec and execSync](#exec-and-execsync)
   - [a synchronous approach with execSync](#a-synchronous-approach-with-execsync)
+  - [use the current node executable path](#use-the-current-node-executable-path)
+  - [handle errors of the executable process](#handle-errors-of-the-executable-process)
+  - [an async approach with exec](#an-async-approach-with-exec)
 
 
 ## a synchronous approach with execSync
@@ -45,5 +48,129 @@ const COMMAND_TO_RUN = `node -p "${node_command}"`;
 
 const execOut = execSync(COMMAND_TO_RUN);
 console.log(Number(execOut.toString()));
+```
 
+## use the current node executable path
+When executing a node process in the `exec` command, rather than running node with the `node` keyword, the [process.execPath](https://nodejs.org/dist/latest-v18.x/docs/api/process.html#processexecpath) can (_and should?!_) be used. On my machine at the time of writing this variable returs `/usr/local/bin/node` as the value. Here's the above math example now using the node executable path from a variable:
+```js
+const { execSync } = require('child_process');
+
+const node_command = `4 + 7`;
+const COMMAND_TO_RUN = `${process.execPath} -p "${node_command}"`;
+
+const execOut = execSync(COMMAND_TO_RUN);
+console.log(Number(execOut.toString()));
+``` 
+
+## handle errors of the executable process
+```js
+// the dependency
+const { execSync } = require('child_process');
+
+// a process to run - here, node evaluating a console.log
+const COMMAND_TO_RUN = `${process.execPath} -e "throw new Error('this is an error')"`;
+
+try {
+  // running the command
+  const execOut = execSync(COMMAND_TO_RUN);
+  
+  // doing something with the output
+  console.log(execOut.toString());
+} catch (error) {
+  console.log("child process error caught by parent process: ",error.message)
+}
+```
+
+## an async approach with exec
+A simple example:
+```js
+const { exec } = require('child_process');
+
+const COMMAND_TO_RUN = `node -e "console.log('string from node -e nested string')"`;
+
+function execResponseHandler(err, stdout, stderr) {
+  console.log({
+    err,
+    stdout,
+    stderr
+  })
+}
+
+exec(COMMAND_TO_RUN, execResponseHandler);
+```
+
+
+An example running some math:
+```js
+const { exec } = require('child_process');
+
+const node_command = `4 + 7`;
+const COMMAND_TO_RUN = `node -p "${node_command}"`;
+
+function execResponseHandler(err, stdout, stderr) {
+  console.log({
+    err,
+    stdout,
+    stderr,
+  });
+  console.log(Number(stdout.toString())); 
+}
+
+exec(COMMAND_TO_RUN, execResponseHandler);
+```
+
+Using the `execPath` instead of `node` directly:
+```js
+const { exec } = require('child_process');
+
+const node_command = `4 + 7`;
+
+const COMMAND_TO_RUN = `${process.execPath} -p "${node_command}"`;
+
+function execResponseHandler(err, stdout, stderr) {
+  console.log({
+    err,
+    stdout,
+    stderr,
+  });
+  console.log(Number(stdout.toString())); 
+}
+
+exec(COMMAND_TO_RUN, execResponseHandler);
+```
+
+
+
+Handle a process error:
+```js
+const { exec } = require('child_process');
+const COMMAND_TO_RUN = `${process.execPath} -e "throw new Error('this is an error')"`;
+
+function execResponseHandler(err, stdout, stderr) {
+  console.log({
+    err,
+    stdout,
+    stderr: stderr.toString(),
+  });
+}
+
+exec(COMMAND_TO_RUN, execResponseHandler);
+```
+
+Handling stderr output via a `console.error` statement
+```js
+const { exec } = require('child_process');
+
+// // a process to run - here, node evaluating a console.log
+const COMMAND_TO_RUN = `${process.execPath} -e "console.log('this is a stout string'); console.error('this is a stderr string')"`;
+
+function execResponseHandler(err, stdout, stderr) {
+  console.log({
+    err,
+    stdout: stdout.toString(),
+    stderr: stderr.toString(),
+  });
+}
+
+exec(COMMAND_TO_RUN, execResponseHandler);
 ```
