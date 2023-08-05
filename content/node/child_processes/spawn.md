@@ -16,6 +16,7 @@ This is meant as a follow-up to the [exec](/node/child_processes/exec) post.
   - [Some differences between spawn and exec](#some-differences-between-spawn-and-exec)
   - [a synchronous approach with spawnSync](#a-synchronous-approach-with-spawnsync)
   - [respond to errors thrown from the child\_process](#respond-to-errors-thrown-from-the-child_process)
+  - [an async approach with spawn](#an-async-approach-with-spawn)
 
 
 ## Some differences between spawn and exec
@@ -91,3 +92,19 @@ const spawnOut = spawnSync(`${process.execPath}`, COMMAND_TO_RUN);
 // console.log(spawnOut.output[2].toString());
 ```
 
+## an async approach with spawn
+```js
+const { spawn } = require('child_process');
+
+const COMMAND_TO_RUN = ['-p', "4 + 7"];
+
+const spawnObj = spawn(`${process.execPath}`, COMMAND_TO_RUN);
+console.log(`parent pid: ${process.pid}`)
+console.log(`spawned pid: `, spawnObj.pid);
+
+spawnObj.stdout.pipe(process.stdout)
+spawnObj.on('close', (exitStatusCode) => {
+  console.log(`spawned process exit status: ${exitStatusCode}`);
+});
+```
+the `spawn` api is a bit different than the `spawnSync` api in that the spawnSync approach only returns the result of the spawned process upon completion of the process.
