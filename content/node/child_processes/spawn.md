@@ -107,4 +107,4 @@ spawnObj.on('close', (exitStatusCode) => {
   console.log(`spawned process exit status: ${exitStatusCode}`);
 });
 ```
-the `spawn` api is a bit different than the `spawnSync` api in that the spawnSync approach only returns the result of the spawned process upon completion of the process.
+the `spawn` api is a bit different than the `spawnSync` api in that the spawnSync approach only returns the result of the spawned process upon completion of the process. The spawn method also does not stop the buffering of the child process like the other methods of child-process creation. spawn will stream child-process output regardless of the size of the child-process output size, whereas the other methods of child-process creation all have maxBuffer settings and configurations.  
