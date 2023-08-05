@@ -5,7 +5,7 @@ author: Jake Laursen
 excerpt: child processes
 tags: ["node", "core", "child_process"]
 parentDir: node/child_processes
-order: 3
+order: 4
 ---
 
 # Customize child_processes
@@ -33,4 +33,23 @@ parent process env var:  undefined
   CUSTOM_VAL: 'i wrote this value in the parent process',
   __CF_USER_TEXT_ENCODING: '0x1F5:0x0:0x0'
 }
+```
+
+## Change the working directory of the child process
+```js
+const { spawn } = require('child_process');
+
+const COMMAND_TO_RUN = ['-p', 'console.log("child process cwd: ",process.cwd())'];
+const spawnObj = spawn(`${process.execPath}`, COMMAND_TO_RUN, {
+ cwd: './../'
+});
+console.log('parent process cwd: ', process.cwd());
+spawnObj.stdout.pipe(process.stdout);
+```
+
+The output of this will return something like:  
+```bash
+parent process cwd:  /Dir/To/Starting/path
+child process cwd:  /Dir/To/Starting/
+undefined
 ```
