@@ -4,7 +4,7 @@ slug: node/child_processes/exec
 author: Jake Laursen
 excerpt: exec and execSync are a great introduction into creating child processes and retrieving output from them
 tags: ["node", "core", "child_process"]
-parentDir: node
+parentDir: node/child_processes
 order: 2
 ---
 

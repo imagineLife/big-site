@@ -91,13 +91,18 @@ const sidebarNestedSections = {
       items: [],
       parentDir: "node",
     },
+    "child_processes": {
+      sectionName: "Child Processes",
+      items: [],
+      parentDir: "node",
+    },
     "": {
       sectionName: "More",
       items: [],
       parentDir: "node",
     },
-    findOrder: ["using-the-cli", "http", "streams", "fs", "errors", ""],
-    order: ["using-the-cli", "http", "streams", "fs", "errors", ""],
+    findOrder: ["using-the-cli", "http", "streams", "child_processes", "fs", "errors", ""],
+    order: ["using-the-cli", "http", "streams", "child_processes", "fs", "errors", ""],
     finished: false,
   },
   "the-social-world": {
