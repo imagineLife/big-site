@@ -12,6 +12,10 @@ order: 4
 This is meant as a follow-up to the [exec](/node/child_processes/exec) post and the [spawn](/node/child_processes/spawn) post.  
 child_processes can be given a config object to customize some 
 
+- [Customize child\_processes](#customize-child_processes)
+  - [Pass Environment Variables](#pass-environment-variables)
+  - [Change the working directory of the child process](#change-the-working-directory-of-the-child-process)
+
 ## Pass Environment Variables
 By default, child_processes inherit the `process.env.___` from the parent process. The config object, though, can be updated to include new env vars: 
 ```js
