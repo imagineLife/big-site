@@ -15,7 +15,8 @@ This is meant as a follow-up to the [exec](/node/child_processes/exec) post.
 - [spawn and spawnSync](#spawn-and-spawnsync)
   - [Some differences between spawn and exec](#some-differences-between-spawn-and-exec)
   - [a synchronous approach with spawnSync](#a-synchronous-approach-with-spawnsync)
-  - [respond to errors thrown from the child\_process](#respond-to-errors-thrown-from-the-child_process)
+    - [passing input to the process](#passing-input-to-the-process)
+    - [respond to errors thrown from the child\_process](#respond-to-errors-thrown-from-the-child_process)
   - [an async approach with spawn](#an-async-approach-with-spawn)
 
 
@@ -63,10 +64,10 @@ const { spawnSync } = require('child_process');
 const COMMAND_TO_RUN = `node -e "console.log('string from node -e nested string')"`;
 
 // running the command
-const F = spawnSync(COMMAND_TO_RUN);
+const spawnOut = spawnSync(COMMAND_TO_RUN);
 
 // doing something with the output
-console.log(execOut.stdout.toString())
+console.log(spawnOut.stdout.toString())
 ```
 
 Here's an example of runing some math:
@@ -79,7 +80,20 @@ const spawnOut = spawnSync(`${process.execPath}`, COMMAND_TO_RUN);
 console.log(Number(spawnOut.stdout.toString()));
 ```
 
-## respond to errors thrown from the child_process
+### passing input to the process
+For a more verbose set of examples on custom configuration see [this other post on the topic](/node/child_processes/custom-config).  
+Here, the child processes `input` is sent as key/value pair of the `spawnSync` optional config object.  
+The child processes `stdin`, `stdout`, and `stderr` are also configured in the optional config object.
+```js
+const { spawnSync } = require('child_process');
+const COMMAND_TO_RUN = `console.error('err output'); process.stdin.pipe(process.stdout)`;
+const INPUT_FOR_PROCESS = 'an input string from the parent\n';
+spawnSync(process.execPath, ['-e', COMMAND_TO_RUN], {
+  input: INPUT_FOR_PROCESS,
+  stdio: ['pipe', 'inherit', process.stdout],
+});
+```
+### respond to errors thrown from the child_process
 ```js
 const { spawnSync } = require('child_process');
 
@@ -108,3 +122,4 @@ spawnObj.on('close', (exitStatusCode) => {
 });
 ```
 the `spawn` api is a bit different than the `spawnSync` api in that the spawnSync approach only returns the result of the spawned process upon completion of the process. The spawn method also does not stop the buffering of the child process like the other methods of child-process creation. spawn will stream child-process output regardless of the size of the child-process output size, whereas the other methods of child-process creation all have maxBuffer settings and configurations.  
+
