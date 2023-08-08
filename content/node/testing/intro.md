@@ -25,6 +25,7 @@ Testing with node can be done using the [assert module](https://nodejs.org/dist/
     - [Objects](#objects)
   - [Errors Are Thrown As Expected](#errors-are-thrown-as-expected)
     - [An Interesting Error Assertion with ifError](#an-interesting-error-assertion-with-iferror)
+    - [Testing Rejections](#testing-rejections)
 
 ## Testing By Category
 Testing could be grouped into categories:
@@ -174,4 +175,36 @@ mockReq(URLS.GOOD, (err, data) => {
 mockReq(URLS.BAD, (err, data) => {
   assert.deepStrictEqual(err, MY_ERR);
 });
+```
+
+### Testing Rejections 
+Here is a promise-based version of the above scenario. Here are two rejection-testing functions:
+- `doesNotReject`, passing a function that is expected to NOT reject
+- `rejects`, passing a fn that is expected to reject. This fn also takes a 2nd parameter, the Error that is expected to be rejected with
+```js
+const { setTimeout: timeout } = require('timers/promises')
+// 
+// variables
+// 
+const URLS = {
+  GOOD: 'http://laursen.tech',
+  BAD: 'http://unwanted.url'
+}
+const MY_ERR = new Error('dont use this email');
+const MOCK_RETURN_STRING = 'sounds good';
+
+// 
+// the mock request fn
+// 
+const mockReq = async (url, cb) => {
+  await timeout(300);
+    if (url === URLS.BAD) throw MY_ERR;
+    return Buffer.from(MOCK_RETURN_STRING);
+};
+
+// 
+// the tests!
+// 
+assert.doesNotReject(mockReq(URLS.GOOD));
+assert.rejects(mockReq(URLS.BAD), MY_ERR);
 ```
