@@ -43,6 +43,33 @@ const ADDED = addTwo(2, 3);
 assert.equal(ADDED, 5);
 assert.equal(ADDED, '5');
 
-
+// these FAIL
 assert.strict.equal(ADDED, '5')
+assert.strictEqual(ADDED, '5')
+```
+
+
+
+```js
+// with objects
+
+const obj = {
+  id: 1,
+  type: 'person',
+  name: { first: 'Joe', last: 'Schmoe' },
+};
+// this assert will fail because they are different objects:
+assert.equal(obj, {
+  id: 1,
+  type: 'person',
+  name: { first: 'Joe', last: 'Schmoe' },
+});
+
+
+// This one PASSES!
+assert.deepEqual(obj, {
+  id: 1,
+  type: 'person',
+  name: { first: 'Joe', last: 'Schmoe' },
+});
 ```
