@@ -24,6 +24,7 @@ Testing with node can be done using the [assert module](https://nodejs.org/dist/
     - [Primitive Values](#primitive-values)
     - [Objects](#objects)
   - [Errors Are Thrown As Expected](#errors-are-thrown-as-expected)
+    - [An Interesting Error Assertion with ifError](#an-interesting-error-assertion-with-iferror)
 
 ## Testing By Category
 Testing could be grouped into categories:
@@ -135,3 +136,42 @@ assert.doesNotThrow(() => {
   - the first arg to `throws` here is a function, NOT the function that is tested
   - the tested function goes _inside_ the function passed to `throws`
   - the second arg to `throws` is an error (_or a string, but it is [suggested not to do that](https://nodejs.org/dist/latest-v18.x/docs/api/assert.html#assertthrowsfn-error-message)_). This error is compared against the error thrown from the tested function for equality. This is a nice tidbit, that a function will not only throw but will throw a _specific expected error_!
+
+
+### An Interesting Error Assertion with ifError
+Here, the `ifError` gets used (_`ifError(errValue)`_).  
+This passes when the `errValue` passed to it is NOT an error, basically (_when it is undefined or null_). When the value passed to ifErr is, indeed, an error, the assertion fails.  
+Here, a mock api _that includes a callback_ is tested. This uses the error-first paradigm of classic node apis.  
+
+```js
+// 
+// variables
+// 
+const URLS = {
+  GOOD: 'http://laursen.tech',
+  BAD: 'http://unwanted.url'
+}
+const MY_ERR = new Error('dont use this email');
+const MOCK_RETURN_STRING = 'sounds good';
+
+// 
+// the mock request fn
+// 
+const mockReq = (url, cb) => {
+  setTimeout(() => {
+    if (url === URLS.BAD) cb(MY_ERR);
+    else cb(null, Buffer.from(MOCK_RETURN_STRING));
+  }, 300);
+};
+
+// 
+// the tests!
+// 
+mockReq(URLS.GOOD, (err, data) => {
+  assert.ifError(err);
+});
+
+mockReq(URLS.BAD, (err, data) => {
+  assert.deepStrictEqual(err, MY_ERR);
+});
+```
