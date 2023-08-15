@@ -394,10 +394,10 @@ export function Head() {
         {JSON.stringify({
           "@context": "https://schema.org",
           "@type": "BlogPosting",
-          name: title,
+          name: "About Eric (Jake) Laursen",
           author: {
             "@type": "Person",
-            name: "Eric (Jake) Laursen",
+            name: "Eric Laursen (Jake)",
             url: "http://laursen.tech/about/",
           },
           description:
