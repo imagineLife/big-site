@@ -390,6 +390,32 @@ export function Head() {
       <meta http-equiv="cache-control" content="no-cache" />
       <meta http-equiv="expires" content="0" />
       <meta http-equiv="pragma" content="no-cache" />
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          name: title,
+          author: {
+            "@type": "Person",
+            name: "Eric (Jake) Laursen",
+            url: "http://laursen.tech/about/",
+          },
+          description:
+            "I'm a, a learner, a do-er, and I enjoy working with people, data, and tech",
+          headline: "About Eric (Jake) Laursen",
+          keywords: [
+            "blog",
+            "blog post",
+            "blogpost",
+            "software",
+            "software engineer",
+            "react",
+            "node",
+            "software developer",
+          ],
+          inLanguage: "en-US",
+        })}
+      </script>
     </Fragment>
   )
 }
