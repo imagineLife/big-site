@@ -19,6 +19,7 @@ order: 2
 
 ## A Readable Stream Of Data From A Local File
 In this example, a text file, called `longfile.txt`, gets read in chunks. The size of the file will impact the number of chunks that gets read.  
+This uses a native readable stream, [createReadStream](https://nodejs.org/dist/latest-v18.x/docs/api/fs.html#filehandlecreatereadstreamoptions), to read data from a file one chunk at a time.  
 
 ```js
 
