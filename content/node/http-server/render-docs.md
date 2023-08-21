@@ -1,6 +1,6 @@
 ---
 title: Send HTML with an HTTP server
-slug: http-server/render-docs
+slug: node/http-server/render-docs
 author: Jake Laursen
 excerpt: With a simple http server, send a webpage to the browser
 parentDir: http-server

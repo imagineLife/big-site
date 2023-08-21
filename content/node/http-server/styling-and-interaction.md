@@ -1,6 +1,6 @@
 ---
 title: Send CSS and JS
-slug: http-server/styling-and-interaction
+slug: node/http-server/styling-and-interaction
 author: Jake Laursen
 parentDir: http-server
 excerpt: Include a style-sheet and a js file while serving a frontend from an express server

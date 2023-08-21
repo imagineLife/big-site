@@ -2,7 +2,7 @@
 title: Styles Of Handling Conflict
 author: Jake Laursen
 excerpt: From domineering to door mat
-tags: ["the social world", "conflict", "preference"]  
+tags: ["the social world", "conflict"]  
 parentDir: the-social-world
 slug: the-social-world/conflict/styles
 order: 5

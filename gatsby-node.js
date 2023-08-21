@@ -295,25 +295,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           }
         }
       }
-      httpserver: allMarkdownRemark(
-        sort: { frontmatter: { order: ASC } }
-        filter: {
-          frontmatter: { order: { gt: 0 }, slug: { regex: "/http-server/" } }
-        }
-      ) {
-        pages: edges {
-          page: node {
-            overview: frontmatter {
-              slug
-              title
-              excerpt
-              tags
-              parentDir
-              shortSlug
-            }
-          }
-        }
-      }
       js: allMarkdownRemark(
         sort: { frontmatter: { order: ASC } }
         filter: { frontmatter: { order: { gt: 0 }, slug: { regex: "/^js/" } } }

@@ -1,6 +1,6 @@
 ---
 title: Setup An NPM Repo
-slug: http-server/build-it
+slug: node/http-server/build-it
 author: Jake Laursen
 excerpt: Get A project started with npm, a package.json file, and some dependencies
 parentDir: http-server
