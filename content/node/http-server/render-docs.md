@@ -80,21 +80,13 @@ Populate the html file with some boilerplate contents
 
     <meta property="og:title" content="Demo Template" />
     <meta property="og:type" content="website" />
-    <!-- <meta property="og:url" content="some-remote-image-here"> -->
     <meta property="og:description" content="Demo Html" />
-    <!-- <meta property="og:image" content="some-remote-image-here"> -->
-
-    <!-- <link rel="icon" href="/favicon.ico"> -->
-    <!-- <link rel="icon" href="/favicon.svg" type="image/svg+xml"> -->
-
-    <!-- <link rel="stylesheet" href="some-stylesheet-here"> -->
   </head>
 
   <body>
     <header>
       <h1>Demo HTML Here!</h1>
     </header>
-    <!-- <script src="some-script-file-here"></script> -->
   </body>
 </html>
 ```
@@ -107,8 +99,6 @@ API_PORT=9876 node .
 
 then, going to a browser and going to the url
 `localhost:9876`.
-
-Note: there are a handful of placeholder commented details here. These will be included & briefly reviewed shortly.
 
 ### Next-Step Options
 

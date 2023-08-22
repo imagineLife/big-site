@@ -1,8 +1,8 @@
 ---
-title: Building an HTTP Server
+title: HTTP Server Overview
 slug: node/http-server
 author: Jake Laursen
-excerpt: An overview of http servers
+excerpt: A Server, The Internet, and Network Requests
 parentDir: node
 tags: ["http", "web", "server", "node", "express"]
 order: 1
@@ -28,4 +28,4 @@ sequenceDiagram
   Web Server-->>Browser: RESPONSE: Here's what you asked for!
 ```
 
-*Note: http could also be [http/2](https://nodejs.org/dist/latest-v18.x/docs/api/http2.html) or [https](https://nodejs.org/dist/latest-v18.x/docs/api/https.html).
+*Note: http could also be [http/2](https://nodejs.org/dist/latest-v18.x/docs/api/http2.html) or [https](https://nodejs.org/dist/latest-v18.x/docs/api/https.html).  

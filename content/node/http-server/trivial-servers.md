@@ -1,10 +1,10 @@
 ---
-title: "I: Trivial Servers"
-slug: node/http/intro
+title: Trivial Servers With Express, Fastify, And Node
+slug: node/http-server/trivial-servers
 author: Jake Laursen
 excerpt: Probably one of the most prominent use-cases of node
 tags: ["server", "node", "javascript", "http", "express"]
-parentDir: node/http
+parentDir: http-server
 order: 7
 ---
 
