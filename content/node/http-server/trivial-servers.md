@@ -5,7 +5,7 @@ author: Jake Laursen
 excerpt: Probably one of the most prominent use-cases of node
 tags: ["server", "node", "javascript", "http", "express"]
 parentDir: http-server
-order: 7
+order: 5
 ---
 
 # Building An HTTP Server
