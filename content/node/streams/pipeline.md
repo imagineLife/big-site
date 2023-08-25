@@ -63,7 +63,7 @@ pipeline(
 ```
 
 ## Read A File, Compress The Content, Write To A File
-This combines [the native createReadStream module](node/streams/readable), [the native createWriteStream module](node/streams/writable), and [the native zlib createGzip module](https://nodejs.org/dist/latest-v18.x/docs/api/zlib.html#zlib).  
+This combines [the native createReadStream module](/node/streams/readable), [the native createWriteStream module](node/streams/writable), and [the native zlib createGzip module](https://nodejs.org/dist/latest-v18.x/docs/api/zlib.html#zlib).  
 ```js
 // Dependencies
 const { createGzip } = require('zlib');
