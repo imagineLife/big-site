@@ -83,3 +83,11 @@ The event loop in a rest api is one of node's most powerful tools, but when the 
     end
     WebServer->>ClientTwo: 6. /slow response
 ```
+
+In the above diagram, node leverages the event loop and the call stack to manage the two requests from `clientOne` and `clientTwo`.  
+- (1) the event loop recieves the request from `clientOne`
+- (2) the event loop recieves the request from `clientTwo`, and "stores" the request in the call stack event queue
+- (3) the event loop, more or less, starts the loop in `/slow` handler, blocking the event loop from doing anything else. This is where the request from `clientTwo` has to _wait_ for the handling of the request from `clientOne` to be completed before starting the handling of the request for `clientTwo`
+- (4) the event loop eventually finished handling logic of the request from `clientOne` and returns a result
+- (5) Node "pulls from" the call stack & starts the processing of the request from `clientTwo`, blocking the event loop from doing anything else. This is where the serverhas to _wait_ for the handling of the request from `clientTwo` to be completed before starting the handling of any other requests (_here there are no other requests, but maybe the point is clear_)
+
