@@ -32,5 +32,5 @@ sequenceDiagram
 ```
 
 ***Notes**
-- http could also be [http/2](https://nodejs.org/dist/latest-v18.x/docs/api/http2.html) or [https](https://nodejs.org/dist/latest-v18.x/docs/api/https.html)
+- http could also leverage [http/2](https://nodejs.org/dist/latest-v18.x/docs/api/http2.html) and/or [https](https://nodejs.org/dist/latest-v18.x/docs/api/https.html)
 - for code examples of the http server, see these [trivial examples](/node/http-server/trivial-servers/) to get started  

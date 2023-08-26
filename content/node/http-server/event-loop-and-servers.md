@@ -61,7 +61,25 @@ slowHandler: 4.628s
 
 
 ### An Evet-Loop Blocking Web-Server Process
-The slow endpoint blocks the event loop.  
-Blocking the event loop can happen may ways. In rest APIs, this could happen by looping through data from a datasource prior to sending back to the client.  
-The impact that this has is not only on the request to the slow endpoint, but _any other request to the websever while the slow endpoint is being blocked_.  
+The `/slow` endpoint above blocks the event loop.  
+The event loop in a rest api is one of node's most powerful tools, but when the event loop is blocked the api and node might seem like bad choices gone wrong.  
 
+```mermaid
+  sequenceDiagram
+    participant ClientOne
+    participant ClientTwo
+    participant WebServer
+    ClientOne->>WebServer: 1. /slow request
+    ClientTwo->>WebServer: 2. /slow request
+    loop Handle Requests
+        WebServer->>WebServer: 3. Handle clientOne Request
+        WebServer->>WebServer: 3b. CONSUME the event loop with "slow" handler
+        WebServer->>WebServer: 3c. WAIT to start clientTwo Request Handling
+    end
+    WebServer->>ClientOne: 4. /slow response
+    loop Handle Requests
+        WebServer->>WebServer: 5. Handle clientTwo Request
+        WebServer->>WebServer: 5b. CONSUME the event loop with "slow" handler
+    end
+    WebServer->>ClientTwo: 6. /slow response
+```

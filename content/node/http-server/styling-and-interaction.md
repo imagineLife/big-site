@@ -21,7 +21,7 @@ So far an http server...
 
 ### Add the stylesheet to the html doc
 
-In the existing html file from [this previous example](./render-docs), there is a commented out `link` to a stylesheet in the head of the doc that we'll re-enable.
+In the existing html file from [this previous example](/node/http-server/render-docs), there is a commented out `link` to a stylesheet in the head of the doc that we'll re-enable.
 
 ```html
 <!-- Go from -->
@@ -33,7 +33,7 @@ In the existing html file from [this previous example](./render-docs), there is 
 
 ### See the failure
 
-Check the server sending this to a browser! If the express server is running from the [previous section](./render-docs), stop and restart the server. Go to the terminal where the server was started from...
+Check the server sending this to a browser! If the express server is running from the [previous section](/node/http-server/render-docs), stop and restart the server. Go to the terminal where the server was started from...
 
 ```bash
 # hold down "control" and the "c" key to stop the server
