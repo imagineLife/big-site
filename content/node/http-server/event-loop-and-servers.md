@@ -59,7 +59,6 @@ slowHandler: 1.537s
 slowHandler: 4.628s
 ```
 
-
 ### An Evet-Loop Blocking Web-Server Process
 The `/slow` endpoint above blocks the event loop.  
 The event loop in a rest api is one of node's most powerful tools, but when the event loop is blocked the api and node might seem like bad choices gone wrong.  
@@ -71,13 +70,13 @@ The event loop in a rest api is one of node's most powerful tools, but when the 
     participant WebServer
     ClientOne->>WebServer: 1. /slow request
     ClientTwo->>WebServer: 2. /slow request
-    loop Handle Requests
+    loop Process Request
         WebServer->>WebServer: 3. Handle clientOne Request
         WebServer->>WebServer: 3b. CONSUME the event loop with "slow" handler
         WebServer->>WebServer: 3c. WAIT to start clientTwo Request Handling
     end
     WebServer->>ClientOne: 4. /slow response
-    loop Handle Requests
+    loop Process Request
         WebServer->>WebServer: 5. Handle clientTwo Request
         WebServer->>WebServer: 5b. CONSUME the event loop with "slow" handler
     end
@@ -91,3 +90,39 @@ In the above diagram, node leverages the event loop and the call stack to manage
 - (4) the event loop eventually finished handling logic of the request from `clientOne` and returns a result
 - (5) Node "pulls from" the call stack & starts the processing of the request from `clientTwo`, blocking the event loop from doing anything else. This is where the serverhas to _wait_ for the handling of the request from `clientTwo` to be completed before starting the handling of any other requests (_here there are no other requests, but maybe the point is clear_)
 
+#### Blocking Adds Time To Responses
+- "/slow" handler takes... ~4s
+- request from clientOne comes in at 1:00
+- webServer starts processing clientOne request logic ~1:00
+- request from clientTwo comes in at 1:01
+- clientOne gets a response ~ 1:04 - ~4s after clientOne request
+- webServer starts processing clientTwo request logic ~1:04
+- clientTwo gets a response ~ 1:08 - ~4s after starting processing for clientTwo
+
+### A Non-Blocking Approach 
+```mermaid
+  sequenceDiagram
+    participant ClientOne
+    participant ClientTwo
+    participant WebServer
+    ClientOne->>WebServer: 1. /slow request
+    ClientTwo->>WebServer: 2. /slow request
+    loop Child-Process
+      WebServer->>WebServer: 3. Pass-Off The processing of "/slow" <br /> to a child process for clientOne
+    end
+    loop Child-Process x2
+      WebServer->>WebServer: 4. Pass-Off The processing of "/slow" <br /> to a child process for clientTwo
+    end
+    WebServer->>ClientOne: 5. /slow response
+    WebServer->>ClientTwo: 6. /slow response
+```
+
+#### Non-Blocking Reduces Time To Responses
+- "/slow" handler takes... ~4s
+- request from clientOne comes in at 1:00
+- webServer starts processing clientOne request logic ~1:00
+  - NOTE: web-server "hands-off" the processing to a child_process, creating a webserver
+- request from clientTwo comes in at 1:01
+- webServer starts processing clientTwo request logic ~1:01
+- clientOne gets a response ~ 1:04 - ~4s after clientOne request
+- clientTwo gets a response ~ 1:05 - ~4s after starting processing for clientTwo
