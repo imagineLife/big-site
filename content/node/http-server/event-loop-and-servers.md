@@ -3,7 +3,7 @@ title: The Event Loop And Web Servers
 slug: node/http-server/event-loop-and-web-servers
 author: Jake Laursen
 excerpt: 
-tags: ["server", "node", "javascript", "http", "event loop"]
+tags: ["server", "node", "javascript", "http", "event loop", "scaling"]
 parentDir: http-server
 order: 7
 ---
@@ -11,7 +11,15 @@ order: 7
 # The Event-Loop And Web Servers
 Using [the event loop](/node/event-loop) well is critical to building a highly available and performant web server.  
 The event loop [is pretty easy to block](/node/event-loop/blocking), so understanding how to keep the event loop unblocked is important.  
-To illustrate how the event loop interacts with web servers, below are a few examples:
+To illustrate how the event loop interacts with web servers, below are a few examples.
+
+- [The Event-Loop And Web Servers](#the-event-loop-and-web-servers)
+  - [A Web Server, Fast And Slow](#a-web-server-fast-and-slow)
+    - [An Evet-Loop Blocking Web-Server Process](#an-evet-loop-blocking-web-server-process)
+      - [Blocking Adds Time To Responses](#blocking-adds-time-to-responses)
+    - [A Non-Blocking Approach](#a-non-blocking-approach)
+      - [Non-Blocking Reduces Time To Responses](#non-blocking-reduces-time-to-responses)
+
 
 ## A Web Server, Fast And Slow
 Here is a simple server.  
