@@ -1,5 +1,5 @@
 ---
-title: Prioritizing
+title: "Prioritizing: An Overview"
 author: Jake Laursen
 excerpt: Some Tasks Are More Important Than Others
 tags: ["the social world", "decisions"]  
@@ -8,11 +8,11 @@ slug: the-social-world/decision-making/prioritizing
 order: 4
 ---
 
-# Prioritization
+# Prioritization: An Overview
 
-- [Prioritization](#prioritization)
+- [Prioritization: An Overview](#prioritization-an-overview)
   - [Prioritizing Work is Complicated](#prioritizing-work-is-complicated)
-  - [Prioritizing Can Be Playful And Revealing](#prioritizing-can-be-playful-and-revealing)
+  - [Prioritizing Can Be Lighthearted](#prioritizing-can-be-lighthearted)
   - [Consider Pre-Built Prioritizing Frameworks](#consider-pre-built-prioritizing-frameworks)
     - [Evaluate Reach, Impact, Confidene, and Effort Wite RICE](#evaluate-reach-impact-confidene-and-effort-wite-rice)
       - [Rice In an Engineering Org](#rice-in-an-engineering-org)
@@ -31,7 +31,7 @@ order: 4
 - What promises have we made?
 - How far-reaching are the items that we have planned?
 
-## Prioritizing Can Be Playful And Revealing
+## Prioritizing Can Be Lighthearted
 **The GAP**  
 Prioritizing can feel overwhelming when there is too much to think about, too much to do, and definitely too much to figure out what to do when.  
 People who tend to focus on executing tasks, "do-ers", might not "naturally" pick their heads up enough to think about the priorities of the work at their hands.  
