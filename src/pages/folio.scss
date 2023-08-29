@@ -306,6 +306,10 @@ section.welcome * {
   Box bg images
 */
 
+div.cornell-cert-bg {
+  background-image: url('./../../images/imgs/cornell_badge.png');
+  background-size: contain;
+}
 
 div.k8s-cert-bg {
   background-image: url('./../../images/imgs/k8s_cert_badge.png');

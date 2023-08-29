@@ -50,6 +50,7 @@ const techs = {
     "StrengthFinder Advocate",
     "INTJ",
     "How to manage a remote team (Cert: Gitlab + Coursera)",
+    "Engineering Leadership (Cornell Certificate)"
   ],
 }
 
@@ -159,6 +160,18 @@ const technologies = [
 */
 
 const certs = [
+  {
+    title: "Engineering Leadership",
+    subText: "Strengths-Based and Values-Based Approaches, Decision-Making Modes, Collaborative & Courageous Communication, Influence & Motivation",
+    aLink: "https://ecornell.cornell.edu/certificates/leadership-and-strategic-management/engineering-leadership/",
+    techList: [
+      "Values",
+      "Decision-Making",
+      "Communication",
+      "Influence Leading"
+    ],
+    imgClass: `cornell-cert-bg`,
+  },
   {
     title: "Kubernetes Application Developer",
     subText: "Through Linux Foundation",
