@@ -42,12 +42,22 @@ export default function PageHead({ title, excerpt, slug, words, tags }) {
         <meta name="description" content={excerpt} />
         <meta property="og:title" content={title} />
         <meta property="og:url" content={`https://laursen.tech/${slug}/`} />
-        <meta http-equiv='cache-control' content='no-cache' />
-        <meta http-equiv='expires' content='0'/>
-        <meta http-equiv='pragma' content='no-cache'/>
+        <meta http-equiv="cache-control" content="no-cache" />
+        <meta http-equiv="expires" content="0" />
+        <meta http-equiv="pragma" content="no-cache" />
         <link rel="canonical" href={`http://laursen.tech/${slug}/`} />
-        <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap-index.xml" />
+        <link
+          rel="sitemap"
+          type="application/xml"
+          title="Sitemap"
+          href="/sitemap-index.xml"
+        />
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1872837527469924"
+          crossorigin="anonymous"
+        ></script>
       </Fragment>
     )
 }
