@@ -21,8 +21,8 @@ order: 1
     - [Lite OS](#lite-os)
   - [User And SSH Setup](#user-and-ssh-setup)
   - [Get The Thing On Your Local Network](#get-the-thing-on-your-local-network)
+  - [Get Docker Running On The Pi](#get-docker-running-on-the-pi)
   - [Access The Pi From Your Laptop](#access-the-pi-from-your-laptop)
-  - [ToDo](#todo)
 
 
 ## Set Some Goals
@@ -53,13 +53,13 @@ I connected mine to a monitor, power, and keyboard. I set a pi user + pw & enabl
 Connect the pi via ethernet to your router.  
 Now, the device will be treated like a remote and headless server that will be accessed over ssh. 
 
-## Access The Pi From Your Laptop
-mac seems to come with an ssh client out-of-the-box.  
 
-
-## ToDo
-- download docker
+## Get Docker Running On The Pi
+- download docker on the rpi
 - create a non-root user that has access to the docker group
 - for practice, disconnect the ssh, reconnect as the docker-group-only-user
 - try a few docker commands, `docker image ls -a`, `docker container ls -a`
 
+## Access The Pi From Your Laptop
+mac seems to come with an ssh client out-of-the-box.  
+I used `ssh <docker-user>@192.168.X.XXX` then had to enter the pw for that user.  
