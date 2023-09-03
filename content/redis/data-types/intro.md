@@ -22,6 +22,7 @@ order: 1
     - [Expire Keys](#expire-keys)
   - [Strings](#strings)
     - [Editing Strings](#editing-strings)
+  - [Hashes, and/or objects](#hashes-andor-objects)
 
 
 ## Get Setup With Redis + Docker
@@ -141,3 +142,23 @@ string
 127.0.0.1:6379> object encoding mock:1
 "int"
 ```
+
+## Hashes, and/or objects
+- a key/val pair
+- memory efficient
+- no nesting allowed :/ 
+
+Some use-cases:
+- rate limiting on an api: 
+  - track how many requests per endpoint
+  - `hmset ratelimit-apis-20230903 "/todo/:todo" 88 "/lists/:listId" 31`
+- session cache
+  - `hmset app-session:qwer1234 ts 8675398 user joe`
+  - `expire app-session:qwer1234 60` (seconds)
+
+- create a hash with `hset key subkey1 "subval1" subkey2 "subval2"`
+- get the whole thing with `HGETALL` and/or `HSCAN` 
+- get a key/sub-val pair with `hget key subkey2`
+- HDEL will delete a subkey/val
+- HINCRBY & HINCRBYFLOAT can be used too
+- HKEYS & HVALS work too
