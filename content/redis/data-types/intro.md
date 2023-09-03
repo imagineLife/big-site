@@ -11,6 +11,19 @@ order: 1
 
 # Intro To Data Types
 
+- [Intro To Data Types](#intro-to-data-types)
+  - [Get Setup With Redis + Docker](#get-setup-with-redis--docker)
+  - [Keys](#keys)
+    - [Key Spaces](#key-spaces)
+    - [Key Examples](#key-examples)
+    - [SET AND GET and EXISTS](#set-and-get-and-exists)
+    - [Listing Keys with KEYS and SCAN](#listing-keys-with-keys-and-scan)
+    - [Removing Keys with DEL and UNLINK](#removing-keys-with-del-and-unlink)
+    - [Expire Keys](#expire-keys)
+  - [Strings](#strings)
+    - [Editing Strings](#editing-strings)
+
+
 ## Get Setup With Redis + Docker
 - `docker pull redis`
 - `docker run --name quick-redis -d redis`
@@ -88,3 +101,43 @@ Set expirations with
 View Expiration with
 - `TTL key`
 - `PTTL key`
+
+
+
+## Strings
+- txt, integers, binaries
+- 512MB max
+- redis stores the ENCODING of the value too!
+
+
+### Editing Strings
+Here, some "number" editing on string values
+- decrby
+- incrby
+- decr
+  - change by 1
+- incr
+  - change by 1
+- incrbyfloat
+
+Also the `object encoding` can be one way of "figuring out" the "type" of the string... strings seem a little elusive here...
+
+
+```bash
+machine> SET mock:1 1000
+OK
+machine> GET mock:1
+"1000"
+
+machine> DECRBY mock:1 2
+(integer) 998
+
+machine> GET mock:1
+"998"
+
+machine> type mock:1
+string
+
+127.0.0.1:6379> object encoding mock:1
+"int"
+```
