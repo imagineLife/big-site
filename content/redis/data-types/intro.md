@@ -9,7 +9,7 @@ order: 1
 ---
 
 
-# Data Types
+# Intro To Data Types
 
 ## Get Setup With Redis + Docker
 - `docker pull redis`
@@ -34,13 +34,16 @@ order: 1
 - `user:<userID>:<user-attr>` like...
   - `user:123:cart`
 
-### SET AND GET
+### SET AND GET and EXISTS
 ```bash
 machine> SET user:123:cart "juice,boxes"
 OK
 machine> GET user:123:cart
 "juice,boxes"
+
+machine> EXISTS user:123:cart
 ```
+
 
 ### Listing Keys with KEYS and SCAN
 get a list of keys in the db.
@@ -68,3 +71,20 @@ machine> SCAN 0 MATCH user:*:cart
 ```
 
 ### Removing Keys with DEL and UNLINK
+
+### Expire Keys
+- keys can have expiration time
+  - set in ms, unix timestamp, or s
+
+Set expirations with
+- `EXPIRE key seconds`
+- `EXPIREAT key unixts`
+- `PEXPIRE key ms`
+- `PEXPIREAT ky ms-ts` (hmm...)
+- `SET key value PX ms`
+- `SET key value EX s`
+
+
+View Expiration with
+- `TTL key`
+- `PTTL key`
