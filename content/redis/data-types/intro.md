@@ -22,7 +22,10 @@ order: 1
     - [Expire Keys](#expire-keys)
   - [Strings](#strings)
     - [Editing Strings](#editing-strings)
-  - [Hashes, and/or objects](#hashes-andor-objects)
+  - [Hashes](#hashes)
+  - [Lists](#lists)
+    - [List Method Overview](#list-method-overview)
+    - [Implementing Queues With Arrays](#implementing-queues-with-arrays)
 
 
 ## Get Setup With Redis + Docker
@@ -143,7 +146,7 @@ string
 "int"
 ```
 
-## Hashes, and/or objects
+## Hashes
 - a key/val pair
 - memory efficient
 - no nesting allowed :/ 
@@ -162,3 +165,29 @@ Some use-cases:
 - HDEL will delete a subkey/val
 - HINCRBY & HINCRBYFLOAT can be used too
 - HKEYS & HVALS work too
+
+
+## Lists
+- ordered
+- duplicates are allowed
+- elements can be added (@ left or right) or inserted
+- can be used for stacks + queues
+- implemented as a linked list
+
+### List Method Overview
+- `LPUSH`: add an element to the left of the list
+- `RPUSH`: add an element to the right of the list
+- `LPOP`: remove an element from the left of the list
+  - this command will return the item that has been removed
+- `RPOP`: remove an element from the right of the list
+  - this command will return the item that has been removed
+- `LLEN <key>` gets the length of the item
+- `LRANGE <key> <start> <stop>`
+- `LINDEX <key <idx>`
+- `LINDEX <key <idx>`
+
+### Implementing Queues With Arrays
+First in last out.  
+Add elements to the queue with `rpush`.  
+Remove elements from the queue with `lpop`.  
+
