@@ -26,11 +26,13 @@ order: 1
   - [Lists](#lists)
     - [List Method Overview](#list-method-overview)
     - [Implementing Queues With Arrays](#implementing-queues-with-arrays)
+    - [Capping Lists](#capping-lists)
   - [Sets](#sets)
     - [Operations Across Sets](#operations-across-sets)
     - [Use-Casees](#use-casees)
   - [Sorted Sets](#sorted-sets)
     - [Sorted Set Commands](#sorted-set-commands)
+    - [Sorted Set Capped Approach](#sorted-set-capped-approach)
 
 
 ## Get Setup With Redis + Docker
@@ -202,6 +204,27 @@ First in last out.
 Add elements to the queue with `rpush`.  
 Remove elements from the queue with `lpop`.  
 
+### Capping Lists 
+- use `LTRIM` to retain a specified and limited number of items
+  - `LTRIM <list-item> 0 4` retains the first 5 items
+  - `LTRIM <list-item> 1 -2` retains from the 2nd item to the 3rd-to-last item
+
+```bash
+# a pattern for capped lists
+machine> rpush cap-list a b c d e f g
+(integer) 7
+
+machine> ltrim cap-list 0 4
+OK
+
+machine> lrange cap-list 0 -1
+1) "a"
+2) "b"
+3) "c"
+4) "d"
+5) "e"
+```
+
 
 ## Sets
 - sets store unordered strings
@@ -216,6 +239,7 @@ Remove elements from the queue with `lpop`.
 - `SREM key val` removes a val from the key set: returns a number
 - `SPOP key number-to-remove` remove and return a RANDOM element or random elements
   - after the last element gets popped from a set, running `exists <the-set>` returns a 0
+- `SCARD` returns the number of items
 
 ### Operations Across Sets
 - `setOne union setTwo` gets all the unique values in both sets
@@ -328,3 +352,59 @@ machine> sdiff animals teams
   - `zremrangebylex` by spelling (lexicographically)
   - `zremrangebyrank` by position
   - `zremrangebyscore` by score value
+- `ZCARD` returns the number of items
+
+### Sorted Set Capped Approach
+`zremrangebyrank` can be used to limit the number of elements.  
+after adding an element using `zadd` the `zremrangebyrank` can be immediately followed to "cap" the sorted set:
+```bash
+# create, view in 2 directions, and add
+machine> zadd capped-ss 1 a 2 b 3 c 4 d 5 e 7 g
+(integer) 6
+
+machine> zrevrange capped-ss 0 -1
+1) "g"
+2) "e"
+3) "d"
+4) "c"
+5) "b"
+6) "a"
+
+machine> zrange capped-ss 0 -1
+1) "a"
+2) "b"
+3) "c"
+4) "d"
+5) "e"
+6) "g"
+
+machine> zadd capped-ss 6 f
+(integer) 1
+
+machine> zrange capped-ss 0 -1
+1) "a"
+2) "b"
+3) "c"
+4) "d"
+5) "e"
+6) "f"
+7) "g"
+
+
+# cap it
+machine> zremrangebyrank capped-ss 5 -1
+(integer) 2
+machine> zrange capped-ss 0 -1
+1) "a"
+2) "b"
+3) "c"
+4) "d"
+5) "e"
+machine> zremrangebyrank capped-ss 4 -1
+(integer) 1
+machine> zrange capped-ss 0 -1
+1) "a"
+2) "b"
+3) "c"
+4) "d"
+```
