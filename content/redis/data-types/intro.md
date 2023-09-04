@@ -33,6 +33,7 @@ order: 1
   - [Sorted Sets](#sorted-sets)
     - [Sorted Set Commands](#sorted-set-commands)
     - [Sorted Set Capped Approach](#sorted-set-capped-approach)
+    - [Sorted Sets Vs Lists for Capped Items](#sorted-sets-vs-lists-for-capped-items)
 
 
 ## Get Setup With Redis + Docker
@@ -407,4 +408,26 @@ machine> zrange capped-ss 0 -1
 2) "b"
 3) "c"
 4) "d"
+
+
+# UPDATING and managing the collection
+machine> zadd capped-ss 26 z
+(integer) 1
+# remove the LOWEST score here
+machine> zremrangebyrank capped-ss 0 0
+(integer) 1
+machine> zrange capped-ss 0 -1
+1) "b"
+2) "c"
+3) "d"
+4) "z"
+machine> zrevrange capped-ss 0 -1
+1) "z"
+2) "d"
+3) "c"
+4) "b"
 ```
+
+### Sorted Sets Vs Lists for Capped Items
+- ss get managed with `zadd` and `zremrangebyrank` and `zrevrange <ss-name> 0 -1`
+- lists get managed with something like `rpush` and `ltrim`
