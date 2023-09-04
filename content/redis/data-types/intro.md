@@ -35,6 +35,11 @@ order: 1
     - [Sorted Set Capped Approach](#sorted-set-capped-approach)
     - [Sorted Sets Vs Lists for Capped Items](#sorted-sets-vs-lists-for-capped-items)
     - [Computing the Intersection of several sorted sets](#computing-the-intersection-of-several-sorted-sets)
+  - [Redis And Big 0 Notation](#redis-and-big-0-notation)
+    - [O(1)](#o1)
+    - [O(n)](#on)
+    - [O(n \* m)](#on--m)
+    - [O(S+N)](#osn)
 
 
 ## Get Setup With Redis + Docker
@@ -496,3 +501,39 @@ machine> zrevrange promo:takewondo 0 -1 WITHSCORES
 2) "bill"
 3) "mary"
 ```
+
+## Redis And Big 0 Notation
+each command listed in the redis docs include the big 0 notation.  
+Requests are queued based on prior requests. The data structure and commands aren't the only thing that matter: the call queue matters as well.  
+
+### O(1)
+Constant - the data wont impact it: append, exists, get, set, hget, lpop, rpush... these are all 0(1).  
+
+### O(n)
+the number of keys/elements being manipulated is the "n".  
+`del` is O(n) when multiple keys are removed.  
+When keys contain complex data, the number of elements in the "nested" data impact the speed of the (del) process.  
+
+
+### O(n * m)
+`sinter` Creates an intersection between a number of sets. `n` is the number of elements in the smallest set. `m` is the number of sets.  
+
+```bash
+# 5 elements
+sadd sm-set a b c d e
+
+# 16 elements
+sadd lg-set a b c d e f g h i j
+```
+The O(n * m) ends up being O(5 * 2).  
+
+### O(S+N)
+`lrange` has this complexity.  
+`s` is the distance FROM THE START.  
+`n` the number of elements requested.  
+```bash
+rpush bw-set z y x w v u t s r q
+lrange 4 6
+# v u t will be returned
+```
+The O ends up being O(5 + 3).  
