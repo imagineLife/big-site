@@ -34,6 +34,7 @@ order: 1
     - [Sorted Set Commands](#sorted-set-commands)
     - [Sorted Set Capped Approach](#sorted-set-capped-approach)
     - [Sorted Sets Vs Lists for Capped Items](#sorted-sets-vs-lists-for-capped-items)
+    - [Computing the Intersection of several sorted sets](#computing-the-intersection-of-several-sorted-sets)
 
 
 ## Get Setup With Redis + Docker
@@ -206,15 +207,23 @@ Add elements to the queue with `rpush`.
 Remove elements from the queue with `lpop`.  
 
 ### Capping Lists 
-- use `LTRIM` to retain a specified and limited number of items
+- use `LTRIM` _to retain a specified and limited number of items_
   - `LTRIM <list-item> 0 4` retains the first 5 items
   - `LTRIM <list-item> 1 -2` retains from the 2nd item to the 3rd-to-last item
 
 ```bash
+# 
 # a pattern for capped lists
+# 
+
+# create the list
 machine> rpush cap-list a b c d e f g
 (integer) 7
 
+# ADD with lpush
+# skipped here
+
+# limit the list back to its desired size
 machine> ltrim cap-list 0 4
 OK
 
@@ -354,6 +363,8 @@ machine> sdiff animals teams
   - `zremrangebyrank` by position
   - `zremrangebyscore` by score value
 - `ZCARD` returns the number of items
+- `zinterstore <dest> <numKeys> <key> <weight> AGGREGATE SUM|MIN|MAX`
+  - weight + aggregate are used to apply "weights" to the output resulting set of the comand
 
 ### Sorted Set Capped Approach
 `zremrangebyrank` can be used to limit the number of elements.  
@@ -431,3 +442,57 @@ machine> zrevrange capped-ss 0 -1
 ### Sorted Sets Vs Lists for Capped Items
 - ss get managed with `zadd` and `zremrangebyrank` and `zrevrange <ss-name> 0 -1`
 - lists get managed with something like `rpush` and `ltrim`
+
+
+### Computing the Intersection of several sorted sets
+```bash
+# setup two sorted sets: sales:judo and sales:wrestling
+machine> zadd sales:judo 1500 june 2000 bill 200 mary
+(integer) 3
+machine> zrank sales:judo 1500
+(nil)
+machine> zrank sales:judo june
+(integer) 1
+machine> zrank sales:judo bill
+(integer) 2
+machine> zrank sales:judo mary
+(integer) 0
+machine> zrevrange sales:judo 0 -1
+1) "bill"
+2) "june"
+3) "mary"
+machine> zrevrange sales:judo 0 -1 WITHSCORES
+1) "bill"
+2) "2000"
+3) "june"
+4) "1500"
+5) "mary"
+6) "200"
+
+machine> zadd sales:wrestling 1800 bill 1000 bob 800 mary
+(integer) 3
+machine> zrevrange sales:wrestling 0 -1 WITHSCORES
+1) "bill"
+2) "1800"
+3) "bob"
+4) "1000"
+5) "mary"
+6) "800"
+
+# create an intersection sorted set based on the sum of people who paid for both
+machine> zinterstore promo:takewondo 2 sales:wrestling sales:judo aggregate sum
+(integer) 2
+machine> zrevrange promo:takewondo 0 -1 WITHSCORES
+1) "bill"
+2) "3800"
+3) "mary"
+4) "1000"
+
+# add a SET, not sorted set, of waitlist folks for takewondo
+127.0.0.1:6379> sadd waitlist:takewondo emma bill mary
+(integer) 3
+127.0.0.1:6379> smembers waitlist:takewondo
+1) "emma"
+2) "bill"
+3) "mary"
+```
