@@ -26,6 +26,11 @@ order: 1
   - [Lists](#lists)
     - [List Method Overview](#list-method-overview)
     - [Implementing Queues With Arrays](#implementing-queues-with-arrays)
+  - [Sets](#sets)
+    - [Operations Across Sets](#operations-across-sets)
+    - [Use-Casees](#use-casees)
+  - [Sorted Sets](#sorted-sets)
+    - [Sorted Set Commands](#sorted-set-commands)
 
 
 ## Get Setup With Redis + Docker
@@ -142,7 +147,7 @@ machine> GET mock:1
 machine> type mock:1
 string
 
-127.0.0.1:6379> object encoding mock:1
+machine> object encoding mock:1
 "int"
 ```
 
@@ -160,6 +165,7 @@ Some use-cases:
   - `expire app-session:qwer1234 60` (seconds)
 
 - create a hash with `hset key subkey1 "subval1" subkey2 "subval2"`
+  - `hsetnx` sets a value ONLY WHEN the field doesn't already exist
 - get the whole thing with `HGETALL` and/or `HSCAN` 
 - get a key/sub-val pair with `hget key subkey2`
 - HDEL will delete a subkey/val
@@ -173,6 +179,10 @@ Some use-cases:
 - elements can be added (@ left or right) or inserted
 - can be used for stacks + queues
 - implemented as a linked list
+- use-cases
+  - activity streams (lpush), most-recent (lrange)
+  - producer/consumer pattern: lpop & rpush for the correct order
+
 
 ### List Method Overview
 - `LPUSH`: add an element to the left of the list
@@ -181,13 +191,140 @@ Some use-cases:
   - this command will return the item that has been removed
 - `RPOP`: remove an element from the right of the list
   - this command will return the item that has been removed
-- `LLEN <key>` gets the length of the item
+- `LLEN <key>` gets the length of the list item
 - `LRANGE <key> <start> <stop>`
-- `LINDEX <key <idx>`
-- `LINDEX <key <idx>`
-
+- `LINDEX <key <idx>` gets an element at a specific index
+- `LINSERT <key> BEFORE|AFTER pivot value`
+- `LSET` sets a value at a specified index
+- `LREM` removes a number of elements with a value...
 ### Implementing Queues With Arrays
 First in last out.  
 Add elements to the queue with `rpush`.  
 Remove elements from the queue with `lpop`.  
 
+
+## Sets
+- sets store unordered strings
+- sorted sets are ordered (se below)
+- can use DIFFERENCE, INTERSECT, and UNION
+- no "other" datatypes: lists, sets, hashes
+- no hierarchies
+- `SADD kkey val` add elements to a set
+- `SMEMBERS key` get all members of a set
+- `SSCAN key` use a CURSOR, non-blocking, to get values from the set
+- `SISMEMBER key value` checks for the value in the key set
+- `SREM key val` removes a val from the key set: returns a number
+- `SPOP key number-to-remove` remove and return a RANDOM element or random elements
+  - after the last element gets popped from a set, running `exists <the-set>` returns a 0
+
+### Operations Across Sets
+- `setOne union setTwo` gets all the unique values in both sets
+- `setOne intersection setTwo` gets values present in both sets (middle of venn diag)
+- `setOne DIFFERENCE setTwo` gets Just elements in setOne
+- `sdiff` show elements that are ONLY in one of several sets
+  - `sdiffstore`
+- `sinter`
+  - `sinterstore`
+- `sunion`
+  - `sunionstore`
+
+```bash
+# sdiff
+machine> sadd set-one a b c d e
+(integer) 5
+machine> sadd set-two e f g
+(integer) 3
+machine> sadd set-three c e
+(integer) 2
+machine> sdiff set-one set-two set-three
+1) "a"
+2) "b"
+3) "d"
+
+# smembers & sinter & sunion
+machine> sadd teams bulls hawks trailblazers lakers
+(integer) 4
+machine> sadd animals hawks dogs bulls ants
+(integer) 4
+machine> SMEMBERS teams
+1) "bulls"
+2) "hawks"
+3) "trailblazers"
+4) "lakers"
+machine> SMEMBERS animals
+1) "hawks"
+2) "dogs"
+3) "bulls"
+4) "ants"
+
+machine> sinter animals teams
+1) "hawks"
+2) "bulls"
+
+machine> sdiff animals teams
+1) "dogs"
+2) "ants"
+
+machine> sunion animals teams
+1) "hawks"
+2) "dogs"
+3) "bulls"
+4) "ants"
+5) "trailblazers"
+6) "lakers"
+
+machine> sdiff animals teams
+1) "dogs"
+2) "ants"
+```
+
+### Use-Casees
+- creating a "tag cloud"
+  - each objec that is taged, a separate list of tages
+  - use `SADD` to add tags to two different key objects
+  - use `SSCAN` to fing tags on a key item
+  - use `SINTER` to find tags that are in 2 different items
+- unique visior collection
+  - `url + timeperiod`: `SADD url:time sally fred ted`
+  - get all users at the url with `sscan`
+  - expire can define the retention period for the url+timeperiod combo (a day, or a time-period of interest)
+- track online players in a game
+  - `srem` to remove a member from a set when they logoff
+  - create a new set every X (say 5) min
+    - each set is scoped to a 5-min window
+    - who's online? the current 5-min window
+
+
+
+## Sorted Sets
+- an ordered key/val set of UNIQUE members, storing a `value/score` pair
+  - like for a high-score leaderboard
+
+### Sorted Set Commands
+- zadd value/scores (experience points, then user id)
+  - `zadd leaders:experience 0 42`
+    - repeat for new users
+    - conditional args for `zadd` (`zadd key NX|XX CH INCR`)
+      - `NX` only adds new elements when a new element exists
+      - `XX` only updates existing elements
+- when users gets more points, update their experience value
+  - `zincrby leaders:experience 300 42`
+  - when users loose points, use the same command with a negative val
+- get a list of top ten
+  - `zrange` from lowest to highest
+  - `zrevrange` gets from highest to lowest
+  - `zrevrange leaders:experience 0 9 WITHSCORES`
+    - 0 and 9 are the indexes we want to see
+- get the user's score "rank"
+  - `zrank` gets a members rank
+  - `zrank <userid>` will return a reversed, in meaning, score
+  - `zrevrank <userid>` will rturn a more sensible result
+- get the experience of an enemie's score
+  - `zscore <userid>` will return the user's score value
+- get all users with score above 30
+  - `zrangebyscore <set-name> (30 + inf`
+- remove items
+  - `zrem` by value
+  - `zremrangebylex` by spelling (lexicographically)
+  - `zremrangebyrank` by position
+  - `zremrangebyscore` by score value
