@@ -260,7 +260,7 @@ machine> lrange cap-list 0 -1
 - `setOne union setTwo` gets all the unique values in both sets
 - `setOne intersection setTwo` gets values present in both sets (middle of venn diag)
 - `setOne DIFFERENCE setTwo` gets Just elements in setOne
-- `sdiff` show elements that are ONLY in one of several sets
+- `sdiff` show elements that are ONLY in the first of several sets
   - `sdiffstore`
 - `sinter`
   - `sinterstore`
@@ -315,6 +315,13 @@ machine> sunion animals teams
 machine> sdiff animals teams
 1) "dogs"
 2) "ants"
+
+
+
+
+sadd set-letters:1 A b C
+sadd set-letters:2 a b C
+sdiff 
 ```
 
 ### Use-Casees
