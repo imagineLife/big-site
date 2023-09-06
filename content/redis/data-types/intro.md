@@ -40,6 +40,8 @@ order: 1
     - [O(n)](#on)
     - [O(n \* m)](#on--m)
     - [O(S+N)](#osn)
+  - [Transactions](#transactions)
+    - [Controlling Transactions](#controlling-transactions)
 
 
 ## Get Setup With Redis + Docker
@@ -544,3 +546,38 @@ lrange 4 6
 # v u t will be returned
 ```
 The O ends up being O(5 + 3).  
+
+
+## Transactions
+Transactions encapsulate several commands.  
+When an app considers several redis commands (and other dbs) to be a single operation, then they can get treated as a transaction.  
+- commands are serialized & executed in order
+- another connection cannot make changes during a transaction  
+- compared to relational dbs, redis only queus commands and does not execute them
+
+
+```bash
+machine> multi
+OK
+
+machine> set do:something 99
+QUEUED
+
+machine> incr do:something
+QUEUED
+
+machine> get do:something
+QUEUED
+
+machine> exec
+1) OK
+2) (integer) 99
+3) 100
+```
+
+### Controlling Transactions
+- `MULTI` starts a transaction
+- `EXEC` runs queued commands
+  - `exec` can be run AFTER commands are queued, so that the impact of several commands is not had until the `exec` is run. Other clients could be querying the db between the start of a transaction and the `exec` of the command
+- `DISCARD` gets rid of queued commands
+
