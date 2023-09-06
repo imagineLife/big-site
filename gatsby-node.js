@@ -499,6 +499,34 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           }
         }
       }
+      redis: allMarkdownRemark(
+        sort: { frontmatter: { order: ASC } }
+        filter: { frontmatter: { slug: { regex: "/^redis/" } } }
+      ) {
+        pages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              excerpt
+              tags
+              parentDir
+              shortSlug
+            }
+            content: html
+          }
+        }
+        otherPages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              shortSlug
+              parentDir
+            }
+          }
+        }
+      }
       rpi: allMarkdownRemark(
         sort: { frontmatter: { order: ASC } }
         filter: { frontmatter: { slug: { regex: "/^rpi/" } } }
@@ -644,6 +672,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             page.overview.slug.startsWith("linux") ||
             page.overview.slug.startsWith("nginx") ||
             page.overview.slug.startsWith("node") ||
+            page.overview.slug.startsWith("redis") ||
             page.overview.slug.startsWith("rpi") ||
             page.overview.slug.startsWith("scrum") ||
             page.overview.slug.startsWith("the-social-world")
@@ -673,6 +702,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           page.overview.slug.startsWith("linux") ||
           page.overview.slug.startsWith("nginx") ||
           page.overview.slug.startsWith("node") ||
+          page.overview.slug.startsWith("redis") ||
           page.overview.slug.startsWith("rpi") ||
           page.overview.slug.startsWith("scrum") ||
           page.overview.slug.startsWith("the-social-world")
