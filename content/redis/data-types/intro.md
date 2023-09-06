@@ -554,7 +554,12 @@ When an app considers several redis commands (and other dbs) to be a single oper
 - commands are serialized & executed in order
 - another connection cannot make changes during a transaction  
 - compared to relational dbs, redis only queus commands and does not execute them
-
+- redis does NOT support nested transactions: multiple transactions from the same client at the "same" time
+- transactions can be invalidated
+  - with bad syntax
+  - with bad operations on mismatched datatypes
+  - with a system error
+- transactions don't have rollbacks
 
 ```bash
 machine> multi
@@ -573,6 +578,21 @@ machine> exec
 1) OK
 2) (integer) 99
 3) 100
+
+
+
+# another example with aborting the command
+machine> multi
+OK
+
+machine> incrby do:something 50
+QUEUED
+
+machine> discard
+OK
+
+machine> get do:something
+100
 ```
 
 ### Controlling Transactions
@@ -580,4 +600,10 @@ machine> exec
 - `EXEC` runs queued commands
   - `exec` can be run AFTER commands are queued, so that the impact of several commands is not had until the `exec` is run. Other clients could be querying the db between the start of a transaction and the `exec` of the command
 - `DISCARD` gets rid of queued commands
+- `WATCH` a key, can be used to, well, "watch" one-or-many redis key so that when a key has been modified
+  - this has to be called before the transaction
+  - when a `watch`ed key is changed by another client during a transaction compilation, and the transaction is `exec`d, the response will be `(nil)`, indicating that the `watch`ed key has been changed and the transaction has not been applied
+- `UNWATCH` un-watches a key
+  - keys are automatically `unwatch`ed on successs of transaction
 
+Optimistic concurrency control.  
