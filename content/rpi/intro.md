@@ -23,6 +23,9 @@ order: 1
   - [Get The Thing On Your Local Network](#get-the-thing-on-your-local-network)
   - [Get Docker Running On The Pi](#get-docker-running-on-the-pi)
   - [Access The Pi From Your Laptop](#access-the-pi-from-your-laptop)
+  - [Bits](#bits)
+    - [BitFields](#bitfields)
+    - [bit Arrays](#bit-arrays)
 
 
 ## Set Some Goals
@@ -63,3 +66,62 @@ Now, the device will be treated like a remote and headless server that will be a
 ## Access The Pi From Your Laptop
 mac seems to come with an ssh client out-of-the-box.  
 I used `ssh <docker-user>@192.168.X.XXX` then had to enter the pw for that user.  
+
+## Bits
+```bash
+bitfield randokey set u8 42
+
+bitfield randokey get u8 0
+# 42
+
+bitfield randokey incrby u8 0 1
+# 43
+
+object encoding randokey
+# "raw"
+```
+
+### BitFields
+`bitfield` allows for manipulating integers in the bit field:
+- `bitfield get` type then offset
+- `bitfield set` type then offset then value
+- `bitfield incrby` type then offset then incr
+
+the `type` specifies either `i`, signed, or `u`, unsigned (8bits).  
+
+```bash
+bitfield bf1 set u8 0 2
+
+bitfield bf1 get u8 0
+# (integer) 2
+
+get bf1
+# "\x02"
+
+
+
+
+
+bitfield bf2 set u8 #1 5
+# NOTE: the "#" represents a multiple value, here 1, of the provided type to calculate the bit offset
+# or more simply, the position by offset
+
+bitfield get u8 #1 get u8 8
+# 5
+# 5
+
+get bf2
+# "\x00\x05"
+```
+
+
+### bit Arrays
+with a 0-based index:
+
+- `getbit` key offset
+- `setbit` key ofset value
+- `bitcount` count number of set bits in a range
+- `bitop` perform byte-wise operations
+- `bitpos` find index of first set or unset bit in a string
+
+bitfield is preferred, i suppose.  
