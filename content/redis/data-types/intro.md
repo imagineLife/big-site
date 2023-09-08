@@ -23,6 +23,7 @@ order: 1
   - [Strings](#strings)
     - [Editing Strings](#editing-strings)
   - [Hashes](#hashes)
+    - [Complex Objects](#complex-objects)
   - [Lists](#lists)
     - [List Method Overview](#list-method-overview)
     - [Implementing Queues With Arrays](#implementing-queues-with-arrays)
@@ -163,9 +164,13 @@ machine> object encoding mock:1
 ```
 
 ## Hashes
+A hash can be thought of like a "mini" key/val store within a key.  
+Objects, in js, can be stringified & parsed "outside" of redis.  
+Redis stores the string - not the explicit keys/values inside the string.  
+
 - a key/val pair
 - memory efficient
-- no nesting allowed :/ 
+- no "nesting" allowed :/ 
 
 Some use-cases:
 - rate limiting on an api: 
@@ -179,10 +184,41 @@ Some use-cases:
   - `hsetnx` sets a value ONLY WHEN the field doesn't already exist
 - get the whole thing with `HGETALL` and/or `HSCAN` 
 - get a key/sub-val pair with `hget key subkey2`
-- HDEL will delete a subkey/val
-- HINCRBY & HINCRBYFLOAT can be used too
-- HKEYS & HVALS work too
+- `HDEL` will delete a subkey/val
+- `HINCRBY` & `HINCRBYFLOAT` can be used too
+- `HKEYS` & `HVALS` work too
+- `HVALS` gets the "cardinality", or length, of the hash
 
+Let's take an example:  
+```js
+{
+  id: '1234',
+  type: 'action',
+  title: 'cook',
+  inHome: true,
+  location: 'kitchen',
+  excitedRank: 3
+}
+```
+In Redis, `HSET` allows many fields to be stored, in pairs, in a single command: `hset action:1234 title cook inHome true location kitchen excitedRank 3`. The order of the keys/values is irrelevant. Interestingly, field names in the stored hash can have delimiters in the same way the hash key name has: `hset action:1234 time:prep 20` and `hset action:1234 time:active 15` can both be used.  
+`HGET` can retrieve a single field from the hash:  `hget action:1234 title`. O(1) - no matter how many fields, time comlexity is the same.    
+`HMGET` can retrieve a specific or multiple key/value pairs in the hash: `hmget action:1234 title excitedRank location`.  
+`HGETALL` can also be used with O(n). With less than 100 values in the object, hgetall works fine.  
+`HSCAN` is a non-blocking cursor approach.  
+`HSCAN action:1234 0 match time:*` uses the cursor, starts at index `0`, and looks for all keys that start with `time:` with the wildcard `*`.     
+`HEXISTS` returns true/false if the given field exists in the hash.  
+`hsetnx` will only set a value if the key does not alraedy exist.  
+- hashes have a few advantages compared to strings
+  - individual fields can bet `get` and `set`
+  - individual fields can be `incr` or `decr`
+  - individual fields can be tested with `hexists`
+
+### Complex Objects
+There are a few strategies to consider with complex objects.  
+- put it in a string: `JSON.stringify` before storing in redis
+- create multiple objects, storing a "lookup table" in a set between objects
+- flatten a nested hierarchy into a single hash key/vaue in the "parent" hash (_as noted above_)
+  - `hmset action:1234 time:prep 20 time:active 15`
 
 ## Lists
 - ordered
