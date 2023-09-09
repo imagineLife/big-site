@@ -32,6 +32,10 @@ $margin-small: 5px;
   p {
     margin: $margin-small 0;
     line-height: 1.5rem;
+
+    code {
+      text-wrap: balance;
+    }
   }
 
   pre {
