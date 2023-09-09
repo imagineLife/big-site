@@ -56,13 +56,12 @@ const IndexPage = () => (
               <h3>On Conflict And Conflict Resolution</h3>
               <p>
                 Conflict is inevitable. Much is written on conflict and
-                resolution. <i>More to come here...</i>
+                resolution.
               </p>
               {pages
                 .filter(onlyWithString("conflict"))
                 .map(createLinksWithType({ thisType: "social" }))}
               <h3>On Communication</h3>
-              <p><i>more to come...</i></p>
               {pages
                 .filter(onlyWithString("communication"))
                 .map(createLinksWithType({ thisType: "social" }))}

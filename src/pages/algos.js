@@ -15,13 +15,13 @@ import createLinksWithType from "./../components/createLinksWithType"
 const IndexPage = () => (
   <StaticQuery
     query={graphql`
-      query nginxTOC {
-        nginx: allMarkdownRemark(
+      query algosTOC {
+        algos: allMarkdownRemark(
           sort: { frontmatter: { order: ASC } }
           filter: {
             frontmatter: {
               order: { gt: 0 }
-              parentDir: { regex: "/nginx/" }
+              parentDir: { regex: "/algos/" }
               title: { ne: null }
             }
           }
@@ -40,17 +40,16 @@ const IndexPage = () => (
         }
       }
     `}
-    render={({ nginx: { pages } }) => {
+    render={({ algos: { pages } }) => {
       return (
         <Fragment>
           <Hero />
           <Layout>
             <section className="toc-wrapper">
-              <h1>nginx</h1>
-              <h2 title="Thanks to Hussein Nasser for sparking some curiosity here!">
-                Getting Started
+              <h1>Algorithms</h1>
+              <h2 title="Thanks to ThePrimeagen for sparking some curiosity here!">
               </h2>
-              {pages.map(createLinksWithType({ thisType: "nginx" }))}
+              {pages.map(createLinksWithType({ thisType: "algos" }))}
             </section>
           </Layout>
         </Fragment>
@@ -63,10 +62,10 @@ export default IndexPage;
 export function Head() {
   return (
     <Fragment>
-      <title>Nginx Blog</title>
-      <meta name="description" content="A Set Of Blog Posts Reviewing Nginx" />
-      <meta property="og:title" content="Nginx Blog" />
-      <meta property="og:url" content="http://laursen.tech/nginx" />
+      <title>Algorithms Blog</title>
+      <meta name="description" content="A Set Of Blog Posts Reviewing Algorithms" />
+      <meta property="og:title" content="algos Blog" />
+      <meta property="og:url" content="http://laursen.tech/algos" />
       <meta http-equiv="cache-control" content="no-cache" />
       <meta http-equiv="expires" content="0" />
       <meta http-equiv="pragma" content="no-cache" />

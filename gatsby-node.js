@@ -248,6 +248,36 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   */
   const result = await graphql(`
     {
+      algos: allMarkdownRemark(
+        sort: { frontmatter: { order: ASC } }
+        filter: {
+          frontmatter: { order: { gt: 0 }, slug: { regex: "/algos/" } }
+        }
+      ) {
+        pages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              excerpt
+              tags
+              parentDir
+              shortSlug
+            }
+            content: html
+          }
+        }
+        otherPages: edges {
+          page: node {
+            overview: frontmatter {
+              slug
+              title
+              shortSlug
+              parentDir
+            }
+          }
+        }
+      }
       docker: allMarkdownRemark(
         sort: { frontmatter: { order: ASC } }
         filter: {
@@ -666,6 +696,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         let pageObj = {
           path: page.overview.slug,
           component:
+            page.overview.slug.startsWith("algos") ||
             page.overview.slug.startsWith("docker") ||
             page.overview.slug.startsWith("js") ||
             page.overview.slug.startsWith("k8s") ||
@@ -696,6 +727,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         // more all-inclusive nested-layout accommodations
         //
         if (
+          page.overview.slug.startsWith("algos") ||
           page.overview.slug.startsWith("docker") ||
           page.overview.slug.startsWith("js") ||
           page.overview.slug.startsWith("k8s") ||

@@ -72,4 +72,4 @@ Shortest transaction:	        0.00
 This reveals a bit about how much traffic the web server can "handle".  
 There are also several ways to scale a node server (_post coming soon_)
 
-(_more to come here, this is to get started_)
+(_this is just to get started_)

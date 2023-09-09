@@ -34,7 +34,7 @@ Testing could be grouped into categories:
 - equality
   - do 2 things equal as expected
   - this could include "deep" equality
-    - like equality, including more "strict" assertions (more to come)
+    - like equality, including more "strict" assertions
 - error validation
   - things erro and/or throw and/or reject as expected
 - failability

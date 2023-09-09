@@ -39,8 +39,6 @@ http
 Key details here:
 - `http` or `node:http` is the built-into-node http server library
 
-_more to come here..._
-
 
 ## Leveraging Express
 - create a directory to hold the project
