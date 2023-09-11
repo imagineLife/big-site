@@ -17,3 +17,17 @@ Consume messages from redis. From a channel.
 - `PSUBSCRIBE <pattern>` (_with regex_)
 - `PUNSUBSCRIBE <pattern>` (_with regex_)
 - `PUBSUB <command>` - introspection into the mechanism itself
+
+## The Paradigm In A diagram
+```mermaid
+sequenceDiagram
+    participant ClientA
+    participant Redis
+    ClientA->>Redis: Create Channel123 + Subscribe
+    loop
+        Redis->>Redis: Channel123
+    end
+    ClientC-->>Redis: Subscribe to Channel123
+    ClientA-->Redis: PUBLISH to channel123: "Hello world!"
+    Redis-->>ClientC: "Hello world!"
+```
