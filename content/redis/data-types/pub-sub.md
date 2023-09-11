@@ -63,3 +63,49 @@ redis-cli> publish channelTwo "channel two message from term two"
 redis-cli> publish channelOne "channel one message from term two"
 ```
 Those two messages from terminal one will appear in terminal two
+
+## PubSub Commands
+- `pubsub channels`
+- `pubsub numsu <channel>`
+- `pubsub numpat <>`
+
+## Pattern-Matching Commands
+`psubscribe` can be used to subscribe to a pattern-matched set of channels.  
+Here, 2 clients
+
+```bash
+# clientOne
+redis-cli> psubscribe channel?
+1) "psubscribe"
+2) "channel?"
+3) (integer) 1
+```
+
+```bash
+# clientTwo
+redis-cli> publish channelA "Horse"
+(integer) 1
+redis-cli> 
+redis-cli> publish channelB "Dog"
+(integer) 1
+```
+
+```bash
+# back in clientOne
+redis-cli> psubscribe channel?
+1) "psubscribe"
+2) "channel?"
+3) (integer) 1
+
+# ....these wil be new!
+1) "pmessage"
+2) "channel?"
+3) "channelA"
+4) "Horse"
+1) "pmessage"
+2) "channel?"
+3) "channelB"
+4) "Dog"
+```
+
+One use-case for this pattern-matched subscription could be channels that have delimiters: people:*` can subscribe to all people` channels.  
