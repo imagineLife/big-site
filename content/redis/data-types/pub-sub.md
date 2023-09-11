@@ -66,8 +66,12 @@ Those two messages from terminal one will appear in terminal two
 
 ## PubSub Commands
 - `pubsub channels`
+  - show channels 
 - `pubsub numsu <channel>`
 - `pubsub numpat <>`
+  - show the number of patterns?
+- `pubsub numsub <channel>`
+  - show the number of subscribers to a channel
 
 ## Pattern-Matching Commands
 `psubscribe` can be used to subscribe to a pattern-matched set of channels.  
@@ -108,4 +112,9 @@ redis-cli> psubscribe channel?
 4) "Dog"
 ```
 
-One use-case for this pattern-matched subscription could be channels that have delimiters: people:*` can subscribe to all people` channels.  
+One use-case for this pattern-matched subscription could be channels that have delimiters: `psubscribe people:*` can subscribe to all channels that start with `people:`.  
+
+
+## Some Use-Cases
+- an order system can publish to a `new_orders` channel, and order-handlers can subscribe to the `new_orders` channel
+- feeds, streams, real-time message updates in a video chat thread
