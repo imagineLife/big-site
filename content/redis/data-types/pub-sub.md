@@ -67,7 +67,7 @@ Those two messages from terminal one will appear in terminal two
 ## PubSub Commands
 - `pubsub channels`
   - show channels 
-- `pubsub numsu <channel>`
+- `pubsub numsub <channel>`
 - `pubsub numpat <>`
   - show the number of patterns?
 - `pubsub numsub <channel>`
