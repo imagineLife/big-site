@@ -4,7 +4,7 @@ slug: redis/pub-sub
 author: Jake Laursen
 excerpt: Intro to the pub-sub pattern
 tags: ["redis", "db", "pubsub"]
-parentDir: redis/pub-sub
+parentDir: redis
 order: 2
 ---
 
