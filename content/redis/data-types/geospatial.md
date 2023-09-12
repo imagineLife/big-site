@@ -12,12 +12,19 @@ order: 3
 Store geospatial objects: pairs of longitude and latitude.  
 Perform operations on those objects: find items close or far from those places.  
 Redis provides a way to store/get these geospatial items with very low latency.  
+- longitude can range from -180 to 180
+  - some say this is "unlimited"
+- latitude can range from -85.05... 85.05...
+  - some say this is "limited"
+- coords outside of those limits will fail 
 
 ### Storing
 for each geospatial object stored
 - a geohash is computed: 52bit in length
 - encodes geospatial into letters+digits combo
 - use geoadd to add data to a key (the key is a sorted set): `geoadd <key> <long> <lat> <id> [...moreIfYouWant]`
+  - sorted set commands are available: `intersect`, `union`, etc.
+  - NOTE: `zinterstore` and `zunionstore` ADD values together, which will change the location - probably not valuable commands to use with geospatial data
 
 ```bash
 # add 3 points
@@ -46,6 +53,30 @@ geohash geopoints "Nippon Budokan" "Olympic Stadium"
 # returns hashed values
 ```
 
+### Searching for Vals
+- `geodist` 
+  - calc distance between two values
+  - `geodist key loc1 loc2 [measurement-unit]`
+  - can be in meters, km, feet, miles
+  - can't perform across 2 different keys
+- `georadius`, `georadiusbymembers`
+  - return geospatial members within a radius
+  - `georadius key long lat radius m|km|ft|mi [withcoord|withdist|withhash] [count asc|desc]`
+    - search by long+lat
+  - `georadiusbymember key memberId radius m|km|ft|mi [withcoord|withdist|withhash] [count asc|desc]`
+    - search by stored geospatial item
+
+```bash
+# get distance between 2 stored items
+geodist geopoints "Yokohama Stadium" "Nippon Budokan" mi
+# 18...
+
+# get items within given radius and location
+georadius geopoints 139.818943 35.648532 30 km withdist
+
+# get FARTHEST item within given radius and location
+georadius geopoints 139.818943 35.648532 30 km count 1 desc
+```
 
 
 ## A Quick Set Of Exmaples Interacting with geospatial data
@@ -65,3 +96,4 @@ geohash geopoints "Nippon Budokan" "Olympic Stadium"
 - get the coordinates of found locations from my loc with `withcords`
   - `georadius yosemite:attractions myLat myLong 4 km withcord`
   - returns each item's long, lat, and id
+
