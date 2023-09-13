@@ -25,7 +25,7 @@ for each geospatial object stored
 - use geoadd to add data to a key (the key is a sorted set): `geoadd <key> <long> <lat> <id> [...moreIfYouWant]`
   - sorted set commands are available: `intersect`, `union`, etc.
   - NOTE: `zinterstore` and `zunionstore` ADD values together, which will change the location - probably not valuable commands to use with geospatial data
-
+- `zrem`, a sorted-set command, can be used to remove a single geo key/val pair from a parent redis key
 ```bash
 # add 3 points
 geoadd geopoints 139.75 35.693333 "Nippon Budokan"
@@ -65,6 +65,7 @@ geohash geopoints "Nippon Budokan" "Olympic Stadium"
     - search by long+lat
   - `georadiusbymember key memberId radius m|km|ft|mi [withcoord|withdist|withhash] [count asc|desc]`
     - search by stored geospatial item
+  - these two searches, `georadius` and `georadiusbymember` commands can used a `store` `storedist` args that store results in a new key: `storedist` stores ONLY the distance form the original key 
 
 ```bash
 # get distance between 2 stored items
@@ -77,6 +78,7 @@ georadius geopoints 139.818943 35.648532 30 km withdist
 # get FARTHEST item within given radius and location
 georadius geopoints 139.818943 35.648532 30 km count 1 desc
 ```
+Under the hood, searching removes bits from least-significant parts of a geohash.  
 
 
 ## A Quick Set Of Exmaples Interacting with geospatial data
@@ -96,4 +98,10 @@ georadius geopoints 139.818943 35.648532 30 km count 1 desc
 - get the coordinates of found locations from my loc with `withcords`
   - `georadius yosemite:attractions myLat myLong 4 km withcord`
   - returns each item's long, lat, and id
+
+
+## A More Complex Use-Case: Events, Venues, and Locations
+- find venues from a given point
+- find events from a public-transic hub
+- find venues along a subway line 
 
