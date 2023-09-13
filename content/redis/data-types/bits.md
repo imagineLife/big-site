@@ -48,15 +48,33 @@ unsigned integer, 4 bits in length
   - type is either signed or unsigned: `i` or `u`
   - the sizes dont HAVE to be counts of 4 or 8 or whatever
   - max sizes are `i64` or `u63`
+  - `u8`, as an example, means unsigned 8-bit value of the key
 
 ```bash
 # set "2" to the first bitfield in an unsigned 8-bit key called bf1
-bitfield bf1 set u8 0 2
-bitfield bf1 get u8 0
+redis-cli> bitfield bf1 set u8 0 2
+redis-cli> bitfield bf1 get u8 0
 # 2
-get bf1
+
+# get the KEY, the hexadecimal representation of the value
+redis-cli> get bf1
 # \x02\
+
+
+
+# 2 different ways to GET a value
+redis-cli> bitfield bf2 set u8 #1 5
+#  (integer) 0
+redis-cli> bitfield bf2 get u8 #1
+1) (integer) 5
+redis-cli> bitfield bf2 get u8 8
+1) (integer) 5
+# 5
+
+get bf2
+# "\x00\x05"
 ```
+
 
 
 ## BitArrays
