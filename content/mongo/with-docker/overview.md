@@ -11,27 +11,29 @@ order: 1
 # Why Mongo With Docker
 
 - [Why Mongo With Docker](#why-mongo-with-docker)
-    - ["Decoupled" From The Host](#decoupled-from-the-host)
-    - [DB Setup Explicitly Defined in Code](#db-setup-explicitly-defined-in-code)
-    - [Freedom to decide on Statefulness](#freedom-to-decide-on-statefulness)
+  - ["Decoupled" From The Host](#decoupled-from-the-host)
+  - [DB Setup Explicitly Defined in Code](#db-setup-explicitly-defined-in-code)
+  - [Freedom to decide on Statefulness](#freedom-to-decide-on-statefulness)
 - [Running Mongo In Docker](#running-mongo-in-docker)
-    - [Pulling and Starting a Mongo Instance](#pulling-and-starting-a-mongo-instance)
-      - [Pull An Image](#pull-an-image)
-      - [Run the Image as a Container](#run-the-image-as-a-container)
-      - [Access the DB through the Mongo CLI](#access-the-db-through-the-mongo-cli)
+  - [Pulling and Starting a Mongo Instance](#pulling-and-starting-a-mongo-instance)
+    - [Pull An Image](#pull-an-image)
+    - [Run the Image as a Container](#run-the-image-as-a-container)
+    - [Access the DB through the Mongo CLI](#access-the-db-through-the-mongo-cli)
 
-### "Decoupled" From The Host
+
+
+## "Decoupled" From The Host
 
 The mongo instance, itself, is not explicitly on a host. For a group of software engineers building content, this can be important when people may end up with different versions of the db, different versions of the cli, different data, different auth setup, etc.
 
-### DB Setup Explicitly Defined in Code
+## DB Setup Explicitly Defined in Code
 
 Does the DB instance require authentication? See the code.  
 Is there 'seed' type data that we can assume we need for our setup? See the code.  
 What Version of of `mongod` are we using? See the code.  
 What version of the cli tool are we using? See the code.
 
-### Freedom to decide on Statefulness
+## Freedom to decide on Statefulness
 
 Does one person on the team want to retain some data & another person on the team want a "fresh" instance of data? Putting Mongo up in a container allows for some quick-win flexibility between a "stateless" instance and an instance which uses data that is mounted from "outside" the container, making a "stateful" instance more available.
 
@@ -39,13 +41,13 @@ Does one person on the team want to retain some data & another person on the tea
 
 First, [download docker](https://www.docker.com/products/docker-desktop). Docker unlocks the "magic" for making the [development environment similar across hosts](#why-mongo-with-docker).
 
-### Pulling and Starting a Mongo Instance
+## Pulling and Starting a Mongo Instance
 
 - **Pull An Image**: an [officially supported image](https://hub.docker.com/_/mongo) will get pulled as an image onto the host by using the docker cli. Enter this into the terminal
 - **Run The Image as a Container**: with an image stored on your machine, docker can use the image and run it as an [ephemeral container](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#create-ephemeral-containers)
 - **Use the Mongo CLI**: run a few commands to interact with the db
 
-#### Pull An Image
+### Pull An Image
 
 This will "pull" the docker image onto your host machine, assumedly a laptop or desktop. Run this in a command line terminal:
 
@@ -64,7 +66,7 @@ REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
 mongo        4         29915542a1ef   4 weeks ago    413MB
 ```
 
-#### Run the Image as a Container
+### Run the Image as a Container
 
 This will start a mongo instance from the docker image `mongo:4`. Run this in a terminal:
 
@@ -91,7 +93,7 @@ a474b4331069   mongo:4   "docker-entrypoint.s…"   About a minute ago   Up Abou
 
 this shows the container ID, the image used to run the container, and some more details about the container.
 
-#### Access the DB through the Mongo CLI
+### Access the DB through the Mongo CLI
 
 **Start a shell in the running mongo container**  
 Start a terminal instance _inside the mongo container_. In a new terminal, run

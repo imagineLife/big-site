@@ -24,7 +24,7 @@ for each geospatial object stored
 - encodes geospatial into letters+digits combo
 - use geoadd to add data to a key (the key is a sorted set): `geoadd <key> <long> <lat> <id> [...moreIfYouWant]`
   - sorted set commands are available: `intersect`, `union`, etc.
-  - NOTE: `zinterstore` and `zunionstore` ADD values together, which will change the location - probably not valuable commands to use with geospatial data
+  - NOTE: `zinterstore` and `zunionstore` ADD/SUM values together by default, which will change the location - probably not valuable commands to use with geospatial data
 - `zrem`, a sorted-set command, can be used to remove a single geo key/val pair from a parent redis key
 ```bash
 # add 3 points

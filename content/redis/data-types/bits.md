@@ -76,9 +76,50 @@ get bf2
 ```
 
 
+### Another Example
+```bash
+bitfield bfx set u8 #0 3
+bitfied bfx get u8 0
+# 3
+
+bitfield bfy set u8 #1 3
+bitfied bfy get u8 #1
+# 3
+
+bitop or bfz bfx bfy
+bitfield bfq-3 get u16 0
+# 771
+# HUH!?
+```
 
 ## BitArrays
+individual bits within a string data-type.  
+Like a string, left-to-right, with the most significant byte at index 0.  
+- `GETBIT key offset`
+- `SETBIT key offset val`
+- `bitcount` for counting number of SET BITS within a range
+- `bitor` for bitewise operations, and/or/not
+- `bitpos` finds index of first set-or-unset index in the string
+- bitfield seems more desirable and/or usable than this bitarray
 
+```bash
+bitfield ba1 set u1 6 1
+bitcount ba1
+# 1 - number of bits set in the string
+
+bitfield ba2 set u1 7 1
+
+bitfield or ba3  ba1 ba2
+bitcount ba3
+# 3
+
+
+# another example
+bitfield ba4 set u1 7 1 set u1 15 1 set u1 23 1
+bitcount ba4
+# 3
+
+```
 ## References
 - [`BITCOUNT doc`](https://redis.io/commands/bitcount/)
 - [`BITOP doc`](https://redis.io/commands/bitop/)
