@@ -19,6 +19,7 @@ Node includes the [child_process module](https://nodejs.org/dist/latest-v18.x/do
       - [Exec](#exec)
       - [ExecFile](#execfile)
       - [Spawn](#spawn)
+      - [Fork](#fork)
   - [Programs, Processes, and Threads](#programs-processes-and-threads)
 
 
@@ -51,6 +52,11 @@ This does not spawn a shell (_shell can be enabled with an option key/val pair t
 This does not spawn a shell.  
 This streams data to the parent process via eventEmitter events.  
 There is no limit to the data that can be streamed to the parent process.
+
+#### Fork
+Fork is like spawn.  
+Fork spawns node processes.  
+Fork, maybe as the most unique approach to child processes, includes the `send` method to pass daa from the parent process to the forked process.  
 
 ## Programs, Processes, and Threads
 Thanks to [bytebytego](https://www.youtube.com/watch?v=4rLW7zg21gI) for a great rundown of this - 
