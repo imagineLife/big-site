@@ -9,7 +9,7 @@ order: 2
 ---
 
 # Node Terminal Input
-## [Running a REPL](/node/terminal-input/repl)
+## [Running a REPL](/node/using-the-cli/repl)
 Use node as a "Read-Evaluate-Print-Loop" environment
 ```bash  
 node [options] [V8 options] [<program-entry-point> | -e "script" | -] [--] [arguments]  
