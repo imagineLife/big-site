@@ -103,4 +103,4 @@ then, going to a browser and going to the url
 ### Next-Step Options
 
 One path to consider is to [dig into some HTML](./../html): elements, attributes, etc.  
-Another direction to go is to [serve css + js](/http-server/styling-and-interaction) from this same express server.
+Another direction to go is to [serve css + js](/node/http-server/styling-and-interaction) from this same express server.
