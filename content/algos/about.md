@@ -16,7 +16,7 @@ Algorithms can help developers understand data structures and ways to logically 
 
 During regular development lifecycles of an employed engineer, it is probably not common for software engineers to _build or use_ some of the "low level" algorithms that are often talked about during interviews or algorithm learning certificates/courses. This might make mastering algorithms seem like a conflict-of-interest: `why do I need to learn how to do these seemingly low-level complicated things when I can just build functioning software?!`.  
 
-I like what [The Primeagen says in his Frontend Masters Course](https://frontendmasters.com/courses/algorithms/), that algorithms are something like a "secret handshake" during the interview process. There might be a bit of a strategic reason to learn these things: to get past some technical interviews and get into the "real work" of software engineering. Even if this were _the only reason_ to learn algorithms, to pass a technical interview, I imagine that coding algorithms can then seem like a valuable skill to learn.
+I like what [The Primeagen says in his Frontend Masters Course](https://frontendmasters.com/courses/algorithms/), that algorithms are something like a "secret handshake" during the interview process of a software engineer. There might be a bit of a strategic reason to learn these things: to get past some technical interviews and get into the "real work" of software engineering. Even if this were _the only reason_ to learn algorithms, to pass a technical interview, I imagine that coding algorithms can then seem like a valuable skill to learn.
 
 ## Builing Search
 Searching through data can be complex.  
