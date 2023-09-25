@@ -21,6 +21,7 @@ Node includes the [child_process module](https://nodejs.org/dist/latest-v18.x/do
       - [Spawn](#spawn)
       - [Fork](#fork)
   - [Programs, Processes, and Threads](#programs-processes-and-threads)
+    - [Child Processes](#child-processes-1)
 
 
 ## Flexible Processes
@@ -70,3 +71,6 @@ Thanks to [bytebytego](https://www.youtube.com/watch?v=4rLW7zg21gI) for a great 
 **A Thread** is a part of a process. Processes have _at least 1 thread, the "main" thread._ When a program and a process use only the main thread, it could be considered "single-threaded".       
 In the context of node, this "single-threaded" approach is how node is most commonly talked about.  
 It is not uncommon for a process, though, to have many threads. Threads within a process share memory. inter-thread-communication can happen. Because of this connection between threads and the "parent" process, if a thread errors the parent process can also encounter errors.  
+
+
+### Child Processes 
