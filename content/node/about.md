@@ -1,5 +1,5 @@
 ---
-title: An Overview
+title: An Overview Of Node
 slug: node/overview
 author: Jake Laursen
 excerpt: JavaScript on the Server and more

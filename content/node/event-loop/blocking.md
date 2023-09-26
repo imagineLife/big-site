@@ -4,7 +4,7 @@ slug: node/event-loop/blocking
 author: Jake Laursen
 excerpt: 
 tags: ["server", "node", "event loop", "blocking", "single thread"]
-parentDir: node
+parentDir: node/event-loop
 order: 5
 ---
 

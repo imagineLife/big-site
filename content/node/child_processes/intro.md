@@ -21,12 +21,12 @@ Node includes the [child_process module](https://nodejs.org/dist/latest-v18.x/do
       - [Spawn](#spawn)
       - [Fork](#fork)
   - [Programs, Processes, and Threads](#programs-processes-and-threads)
-    - [Child Processes](#child-processes-1)
 
 
 ## Flexible Processes
 Child_processes run commands.  
 These can be _any executable command_ in _any language!_.  Epic.  
+The only exception here is thatt the [fork](#fork) api runs a node process, specifically.  
 
 ## Many Ways To Create A Child_Process  
 More on these below, but here's the node doc links on each:
@@ -58,8 +58,9 @@ There is no limit to the data that can be streamed to the parent process.
 Fork is like spawn.  
 Fork spawns _node processes_.  
 Fork, maybe as the most unique approach to child processes, includes the `send` method to pass data from the parent process to the forked process.  
-This `fork` method seems to me to be, by far, the fastest way to manag3 some async data workflows between a parent and a child or set of child processes.  
-Perhaps a write-up comparing the two could help me prove this case. (_if that seems interesting to you as a reader, [let me know!](/about)_)
+Forks have their own memory & v8 processes separate from the parent process. This can make forks more expensive than other child-process methods.    
+This `fork` method seems to me to be, by far, the fastest way to manage some async node data workflows between a parent and a child or set of child processes.  
+Perhaps a write-up comparing the two could help me prove this case. (_if that seems interesting to you as a reader, [let me know!](/about)_).  
 
 ## Programs, Processes, and Threads
 Thanks to [bytebytego](https://www.youtube.com/watch?v=4rLW7zg21gI) for a great rundown of this - 
@@ -71,6 +72,3 @@ Thanks to [bytebytego](https://www.youtube.com/watch?v=4rLW7zg21gI) for a great 
 **A Thread** is a part of a process. Processes have _at least 1 thread, the "main" thread._ When a program and a process use only the main thread, it could be considered "single-threaded".       
 In the context of node, this "single-threaded" approach is how node is most commonly talked about.  
 It is not uncommon for a process, though, to have many threads. Threads within a process share memory. inter-thread-communication can happen. Because of this connection between threads and the "parent" process, if a thread errors the parent process can also encounter errors.  
-
-
-### Child Processes 

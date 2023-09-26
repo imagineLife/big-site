@@ -76,6 +76,11 @@ const sidebarNestedSections = {
       items: [],
       parentDir: "node",
     },
+    "event-loop": {
+      sectionName: "The Event Loop",
+      items: [],
+      parentDir: "node",
+    },
     http: {
       sectionName: "HTTP Servers",
       items: [],
@@ -109,6 +114,7 @@ const sidebarNestedSections = {
     findOrder: [
       "using-the-cli",
       "http",
+      "event-loop",
       "streams",
       "child_processes",
       "fs",
@@ -119,6 +125,7 @@ const sidebarNestedSections = {
     order: [
       "using-the-cli",
       "http",
+      "event-loop",
       "streams",
       "child_processes",
       "fs",
