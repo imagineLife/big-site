@@ -20,6 +20,7 @@ Node includes the [child_process module](https://nodejs.org/dist/latest-v18.x/do
       - [ExecFile](#execfile)
       - [Spawn](#spawn)
       - [Fork](#fork)
+    - [Blocking Version](#blocking-version)
   - [Programs, Processes, and Threads](#programs-processes-and-threads)
 
 
@@ -61,6 +62,10 @@ Fork, maybe as the most unique approach to child processes, includes the `send` 
 Forks have their own memory & v8 processes separate from the parent process. This can make forks more expensive than other child-process methods.    
 This `fork` method seems to me to be, by far, the fastest way to manage some async node data workflows between a parent and a child or set of child processes.  
 Perhaps a write-up comparing the two could help me prove this case. (_if that seems interesting to you as a reader, [let me know!](/about)_).  
+
+### Blocking Version
+There are [synchronous versions](https://nodejs.org/dist/latest-v18.x/docs/api/child_process.html#synchronous-process-creation) of the exec and spawn methods, [execSync](https://nodejs.org/dist/latest-v18.x/docs/api/child_process.html#child_processexecsynccommand-options) and [spawnSync](https://nodejs.org/dist/latest-v18.x/docs/api/child_process.html#child_processspawnsynccommand-args-options).  
+The fundamental difference in these apis is that they [block the event loop](/node)
 
 ## Programs, Processes, and Threads
 Thanks to [bytebytego](https://www.youtube.com/watch?v=4rLW7zg21gI) for a great rundown of this - 
