@@ -83,9 +83,9 @@ export function Head() {
       <meta name="description" content="Blog posts on MongoDB" />
       <meta property="og:title" content="MongoDB Blog" />
       <meta property="og:url" content="http://laursen.tech/mongo" />
-      <meta http-equiv="cache-control" content="no-cache" />
-      <meta http-equiv="expires" content="0" />
-      <meta http-equiv="pragma" content="no-cache" />
+      <meta httpEquiv="cache-control" content="no-cache" />
+      <meta httpEquiv="expires" content="0" />
+      <meta httpEquiv="pragma" content="no-cache" />
     </Fragment>
   )
 }

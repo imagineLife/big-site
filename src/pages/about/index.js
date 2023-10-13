@@ -387,9 +387,9 @@ export function Head() {
       />
       <meta property="og:title" content="Eric Laursen" />
       <meta property="og:url" content="http://laursen.tech" />
-      <meta http-equiv="cache-control" content="no-cache" />
-      <meta http-equiv="expires" content="0" />
-      <meta http-equiv="pragma" content="no-cache" />
+      <meta httpEquiv="cache-control" content="no-cache" />
+      <meta httpEquiv="expires" content="0" />
+      <meta httpEquiv="pragma" content="no-cache" />
       <script type="application/ld+json">
         {JSON.stringify({
           "@context": "https://schema.org",
