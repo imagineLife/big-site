@@ -66,9 +66,9 @@ export function Head() {
       <meta name="description" content="A Set Of Blog Posts Reviewing Algorithms" />
       <meta property="og:title" content="algos Blog" />
       <meta property="og:url" content="http://laursen.tech/algos" />
-      <meta http-equiv="cache-control" content="no-cache" />
-      <meta http-equiv="expires" content="0" />
-      <meta http-equiv="pragma" content="no-cache" />
+      <meta httpEquiv="cache-control" content="no-cache" />
+      <meta httpEquiv="expires" content="0" />
+      <meta httpEquiv="pragma" content="no-cache" />
     </Fragment>
   )
 }

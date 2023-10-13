@@ -18,9 +18,6 @@ const initialReducerState = {
 export default function NlpUi() {
   const inputRef = useRef(null)
   const [state, dispatch] = useReducer(nlpReducer, initialReducerState)
-  // console.log('state?.apiInitialized')
-  // console.log(state?.apiInitialized)
-  
   const useQOpts = {
     refetchOnWindowFocus: false,
     refetchOnMount: false,
@@ -30,7 +27,9 @@ export default function NlpUi() {
   }
 
   const API_HANDSHAKE_START_API = `${process.env.GATSBY_NLP_API_URL}/app/init?id=local-gats`
-  function startApiHandshake() { return fetch(API_HANDSHAKE_START_API).then(d => d.json()) }
+  function startApiHandshake() {
+    return fetch(API_HANDSHAKE_START_API).then(d => d.json())
+  }
   function finishApiHandshake() {
     return fetch(API_HANDSHAKE_FINISH_API).then(d => d.json())
   }
@@ -40,8 +39,11 @@ export default function NlpUi() {
   })
 
   const API_HANDSHAKE_FINISH_API = `${process.env.GATSBY_NLP_API_URL}/app/allow-access?id=${apiInitKey?.id}`
-  const { data: apiReadyKey } = useQuery("apiReady", finishApiHandshake, {...useQOpts, enabled: apiInitKey?.id !== undefined})
-  
+  const { data: apiReadyKey } = useQuery("apiReady", finishApiHandshake, {
+    ...useQOpts,
+    enabled: apiInitKey?.id !== undefined,
+  })
+
   // START the api-handshake workflow
   useEffect(() => {
     if (state.apiInitialized === false) {
@@ -69,8 +71,6 @@ export default function NlpUi() {
   function readWithFileReader(files) {
     let theFile = files[0]
     const reader = new FileReader()
-    // console.log('theFile')
-    // console.log(theFile.name)
 
     if (theFile.name.includes("txt")) {
       // pass reader for a hack "this" workaround for now...
@@ -104,16 +104,16 @@ export default function NlpUi() {
     inputRef.current.click()
   }
 
-  function getDotColor({ state, apiData: { initialized, ready} }) {
-    if (ready) return 'green';
-    if (initialized) return 'goldenrod';
-    if (state == 'started') return 'orange'
-    return 'red';
+  function getDotColor({ state, apiData: { initialized, ready } }) {
+    if (ready) return "green"
+    if (initialized) return "goldenrod"
+    if (state === "started") return "orange"
+    return "red"
   }
   const connectedDotBg = {
     backgroundColor: getDotColor({
-      state: state.apiInitialized,
-      apiData: { initialized: apiInitKey?.id, ready: apiReadyKey?.id },
+      state: apiReadyKey? apiReadyKey?.id : state.apiInitialized,
+      apiData: { initialized: apiInitKey?.appId, ready: apiReadyKey?.appId },
     }),
   }
 

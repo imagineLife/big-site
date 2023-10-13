@@ -42,9 +42,9 @@ export default function PageHead({ title, excerpt, slug, words, tags }) {
         <meta name="description" content={excerpt} />
         <meta property="og:title" content={title} />
         <meta property="og:url" content={`https://laursen.tech/${slug}/`} />
-        <meta http-equiv="cache-control" content="no-cache" />
-        <meta http-equiv="expires" content="0" />
-        <meta http-equiv="pragma" content="no-cache" />
+        <meta httpEquiv="cache-control" content="no-cache" />
+        <meta httpEquiv="expires" content="0" />
+        <meta httpEquiv="pragma" content="no-cache" />
         <link rel="canonical" href={`http://laursen.tech/${slug}/`} />
         <link
           rel="sitemap"
