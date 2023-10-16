@@ -1,7 +1,9 @@
-import React, { createContext, useState } from "react"
+import React from "react"
 import { QueryClient } from "react-query"
 import "./index.scss"
 import NlpUi from "../../components/nlpUi"
+import { NlpProvider } from './Provider'
+
 // components
 import ReactQueryWrapper from "../../components/ReactQueryWrapper"
 import { Router } from "@reach/router"
@@ -13,12 +15,6 @@ function ThemeEditor() {
       <h2>Theme Editor</h2>
     </section>
   )
-}
-
-function NlpProvider({ children }) { 
-  const { Provider } = createContext()
-  const [loaded, setLoaded] = useState(null)
-  return <Provider value={{loaded}}>{children}</Provider>
 }
 
 // Create a client

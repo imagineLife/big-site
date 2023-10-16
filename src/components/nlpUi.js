@@ -1,55 +1,16 @@
-import React, { useRef, useReducer, useEffect } from "react" // lazy, Suspense
+import React, { useRef, useContext } from "react" // lazy, Suspense
 
 import * as XLSX from "xlsx"
-import { useQuery } from "react-query"
 import "./../pages/nlp/index.scss"
 
 // components
 import DragDDropFile from "./DragNDropForm"
 import TextAnalysis from "./nlp/TextAnalysis"
-import nlpReducer from "./reducer"
-
-const initialReducerState = {
-  fileData: null,
-  tileType: null,
-  apiInitialized: false,
-}
+import { NlpContext } from "./../pages/nlp/Provider"
 
 export default function NlpUi() {
+  const { state, dispatch, apiReadyKey, apiInitKey } = useContext(NlpContext)
   const inputRef = useRef(null)
-  const [state, dispatch] = useReducer(nlpReducer, initialReducerState)
-  const useQOpts = {
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-    refetchOnReconnect: false,
-    staleTime: Infinity,
-    retry: false,
-  }
-
-  const API_HANDSHAKE_START_API = `${process.env.GATSBY_NLP_API_URL}/app/init?id=local-gats`
-  function startApiHandshake() {
-    return fetch(API_HANDSHAKE_START_API).then(d => d.json())
-  }
-  function finishApiHandshake() {
-    return fetch(API_HANDSHAKE_FINISH_API).then(d => d.json())
-  }
-  const { data: apiInitKey } = useQuery("apiInit", startApiHandshake, {
-    ...useQOpts,
-    enabled: state?.apiInitialized === "started",
-  })
-
-  const API_HANDSHAKE_FINISH_API = `${process.env.GATSBY_NLP_API_URL}/app/allow-access?id=${apiInitKey?.id}`
-  const { data: apiReadyKey } = useQuery("apiReady", finishApiHandshake, {
-    ...useQOpts,
-    enabled: apiInitKey?.id !== undefined,
-  })
-
-  // START the api-handshake workflow
-  useEffect(() => {
-    if (state.apiInitialized === false) {
-      dispatch({ type: "startApiHandshake" })
-    }
-  }, [state.apiInitialized])
 
   function loadExcelFile(e) {
     const data = e.target.result
@@ -104,26 +65,10 @@ export default function NlpUi() {
     inputRef.current.click()
   }
 
-  function getDotColor({ state, apiData: { initialized, ready } }) {
-    if (ready) return "green"
-    if (initialized) return "goldenrod"
-    if (state === "started") return "orange"
-    return "red"
-  }
-  const connectedDotBg = {
-    backgroundColor: getDotColor({
-      state: apiReadyKey? apiReadyKey?.id : state.apiInitialized,
-      apiData: { initialized: apiInitKey?.appId, ready: apiReadyKey?.appId },
-    }),
-  }
-
   return (
     <section id="nlp-wrapper">
-      <div className="page-head">
-        <h2>NLP Here</h2>
-        <span className="connected-dot" style={{ ...connectedDotBg }}></span>
-      </div>
-      {/* no text data yet */}
+      {/* WAS older content
+      no text data yet
       {state.fileData === null && (
         <DragDDropFile
           setLoaded={d => dispatch({ type: "fileData", payload: d })}
@@ -132,8 +77,7 @@ export default function NlpUi() {
           handleFile={readWithFileReader}
         />
       )}
-
-      {/* text data present */}
+      text data present
       {state.fileData !== null && (
         <TextAnalysis
           reset={() => dispatch({ type: "reset", payload: null })}
@@ -144,6 +88,7 @@ export default function NlpUi() {
       <sub>
         <a href="/">go to my website</a>
       </sub>
+      */}
     </section>
   )
 }
