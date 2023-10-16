@@ -110,10 +110,7 @@ const About = () => {
                 <a href="https://www.linkedin.com/in/eric-laursen-6a1b20b8/">
                   LinkedIn
                 </a>{" "}
-                and{" "}
-                <a href="https://github.com/imagineLife">
-                  github
-                </a>.
+                and <a href="https://github.com/imagineLife">github</a>.
               </p>
               <ContactForm />
             </div>
@@ -123,8 +120,8 @@ const About = () => {
               <h2 id="a-doer">A Do-er</h2>
               <p>
                 I am usually a little restless if I'm not getting something
-                done. Even my down time has intentional elements:
-                solitude, meditation, study, reading...usually it's all toward some goal.
+                done. Even my down time has intentional elements: solitude,
+                meditation, study, reading...usually it's all toward some goal.
               </p>
             </div>
             <div className="figure">
@@ -136,12 +133,11 @@ const About = () => {
               <h2 id="a-learner">A Learner</h2>
               <p>
                 I feel like I love the journey of traversing from casual
-                interest to mastery. There's an excitement for me in the
-                first piece of material I understand in a new topic. I also love
+                interest to mastery. There's an excitement for me in the first
+                piece of material I understand in a new topic. I also love
                 feeling accomplished when I'm able to execute a complete set of
                 principles or ideas I've recently learned. I also work to
-                communicate newly learned ideas to
-                others.
+                communicate newly learned ideas to others.
               </p>
               <p>Some topics I'm currently learning about:</p>
               <ul>
@@ -178,7 +174,8 @@ const About = () => {
                 <li>
                   <b>CI/CD Automated pipelines</b>: building & deploying
                   automated ci/cd tooling for things like a frontend build
-                  system, a node_module, a rest api, wrapping and deploying projects as docker images...
+                  system, a node_module, a rest api, wrapping and deploying
+                  projects as docker images...
                 </li>
                 <li>
                   <b>keeping up </b>
@@ -346,6 +343,10 @@ const About = () => {
                   Fellow Ode Gen2
                 </a>{" "}
                 and I love it for the pour-over grinds!
+              </p>
+              <p>
+                I've also just recently started dabbling with{" "}
+                <a href="https://thirdwavewater.com/" target="blank">"optimizing" my coffee water</a>. So far, pretty great outcomes!
               </p>
             </div>
             <div className="figure">
