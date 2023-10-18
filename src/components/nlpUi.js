@@ -4,8 +4,8 @@ import * as XLSX from "xlsx"
 import "./../pages/nlp/index.scss"
 
 // components
-import DragDDropFile from "./DragNDropForm"
-import TextAnalysis from "./nlp/TextAnalysis"
+// import DragDDropFile from "./DragNDropForm"
+// import TextAnalysis from "./nlp/TextAnalysis"
 import { NlpContext } from "./../pages/nlp/Provider"
 
 export default function NlpUi() {

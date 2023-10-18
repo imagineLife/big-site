@@ -8,6 +8,8 @@ import { NlpProvider } from './Provider'
 import ReactQueryWrapper from "../../components/ReactQueryWrapper"
 import { Router } from "@reach/router"
 import NlpLayout from './NlpLayout';
+import Speeches from './Speeches'
+import Auth from "./Auth"
 
 function ThemeEditor() {
   return (
@@ -27,6 +29,8 @@ export default function Nlp() {
         <NlpLayout>
           <Router basepath="/nlp">
             <ThemeEditor path="/themes" />
+            <Speeches path="/speeches" />
+            <Auth path="/auth" />
             <NlpUi path="/" />
           </Router>
         </NlpLayout>

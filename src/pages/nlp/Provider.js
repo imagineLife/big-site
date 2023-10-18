@@ -4,15 +4,14 @@ import nlpReducer from "./../../components/reducer"
 
 const initialReducerState = {
   fileData: null,
-  tileType: null,
   apiInitialized: false,
-  state: null,
-  dispatch: null
+  authorized: false
 }
 const NlpContext = createContext()
 
 function NlpProvider({ children }) {
   const [state, dispatch] = useReducer(nlpReducer, initialReducerState)
+
   const useQOpts = {
     refetchOnWindowFocus: false,
     refetchOnMount: false,
@@ -47,7 +46,9 @@ function NlpProvider({ children }) {
   }, [state.apiInitialized])
 
   return (
-    <NlpContext.Provider value={{ state, dispatch, apiReadyKey, apiInitKey }}>
+    <NlpContext.Provider
+      value={{ dispatch, apiReadyKey, apiInitKey, ...state }}
+    >
       {children}
     </NlpContext.Provider>
   )
