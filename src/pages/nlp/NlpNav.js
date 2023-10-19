@@ -4,7 +4,7 @@ import Container from "react-bootstrap/Container"
 import Nav from "react-bootstrap/Nav"
 import Navbar from "react-bootstrap/Navbar"
 import { NlpContext } from "./Provider"
-import { navigate } from "gatsby"
+import { navigate, Link } from "gatsby"
 
 export default function NlpNav({ title }) {
   const { apiReadyKey, apiInitKey, authorized, ...state } =
@@ -52,9 +52,9 @@ export default function NlpNav({ title }) {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto" activeKey={window.location.pathname}>
             {routeLinks.map(d => (
-              <Nav.Link key={`route-link-${d.path}`} href={d.path}>
+              <Link key={`route-link-${d.path}`} className="nav-link" to={d.path}>
                 {d.text}
-              </Nav.Link>
+              </Link>
             ))}
           </Nav>
         </Navbar.Collapse>

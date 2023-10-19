@@ -10,6 +10,8 @@ const initialReducerState = {
 const NlpContext = createContext()
 
 function NlpProvider({ children }) {
+  console.log('%c Provider Loading', 'background-color: pink; color: black;')
+  
   const [state, dispatch] = useReducer(nlpReducer, initialReducerState)
 
   const useQOpts = {
