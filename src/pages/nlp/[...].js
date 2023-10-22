@@ -1,15 +1,15 @@
 import React, { lazy, Suspense } from "react"
 import { QueryClient } from "react-query"
+import { Router } from "@reach/router"
 import "./index.scss"
-import NlpUi from "../../components/nlpUi"
-import { NlpProvider } from './Provider'
 
 // components
-import ReactQueryWrapper from "../../components/ReactQueryWrapper"
-import { Router } from "@reach/router"
-import NlpLayout from './NlpLayout';
-const Speeches = lazy(() => import('./Speeches')) 
-const Auth = lazy(() => import("./Auth")) 
+import ReactQueryWrapper from "../../components/nlp/ReactQueryWrapper"
+import NlpUi from "../../components/nlp/nlpUi"
+import { NlpProvider } from "../../components/nlp/state/Provider"
+import NlpLayout from "../../components/nlp/layout"
+const Speeches = lazy(() => import("./Speeches"))
+const Auth = lazy(() => import("./Auth"))
 
 function ThemeEditor() {
   return (

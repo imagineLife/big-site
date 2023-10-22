@@ -1,17 +1,17 @@
 import React, { createContext, useReducer, useEffect } from "react"
 import { useQuery } from "react-query"
-import nlpReducer from "./../../components/reducer"
+import nlpReducer from "./reducer"
 
 const initialReducerState = {
   fileData: null,
   apiInitialized: false,
-  authorized: false
+  authorized: false,
 }
 const NlpContext = createContext()
 
 function NlpProvider({ children }) {
-  console.log('%c Provider Loading', 'background-color: pink; color: black;')
-  
+  console.log("%c Provider Loading", "background-color: pink; color: black;")
+
   const [state, dispatch] = useReducer(nlpReducer, initialReducerState)
 
   const useQOpts = {
@@ -26,6 +26,7 @@ function NlpProvider({ children }) {
   function startApiHandshake() {
     return fetch(API_HANDSHAKE_START_API).then(d => d.json())
   }
+
   function finishApiHandshake() {
     return fetch(API_HANDSHAKE_FINISH_API).then(d => d.json())
   }
@@ -38,6 +39,12 @@ function NlpProvider({ children }) {
   const { data: apiReadyKey } = useQuery("apiReady", finishApiHandshake, {
     ...useQOpts,
     enabled: apiInitKey?.id !== undefined,
+  })
+
+  console.log({
+    apiInitKey,
+    apiReadyKey,
+    ...state,
   })
 
   // START the api-handshake workflow

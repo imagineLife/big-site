@@ -1,15 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext } from "react"
 import Button from "react-bootstrap/Button"
 import Container from "react-bootstrap/Container"
 import Nav from "react-bootstrap/Nav"
 import Navbar from "react-bootstrap/Navbar"
-import { NlpContext } from "./Provider"
+import { NlpContext } from "./state/Provider"
 import { navigate, Link } from "gatsby"
 
 export default function NlpNav({ title }) {
+  console.log("NlpNav")
+
   const { apiReadyKey, apiInitKey, authorized, ...state } =
     useContext(NlpContext)
-  
+  console.log("apiReadyKey")
+  console.log(apiReadyKey)
+
   function getDotColor({ state, apiData: { initialized, ready } }) {
     if (ready) return "green"
     if (initialized) return "goldenrod"
@@ -52,7 +56,11 @@ export default function NlpNav({ title }) {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto" activeKey={window.location.pathname}>
             {routeLinks.map(d => (
-              <Link key={`route-link-${d.path}`} className="nav-link" to={d.path}>
+              <Link
+                key={`route-link-${d.path}`}
+                className="nav-link"
+                to={d.path}
+              >
                 {d.text}
               </Link>
             ))}

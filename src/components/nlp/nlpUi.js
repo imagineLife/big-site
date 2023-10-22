@@ -1,15 +1,15 @@
 import React, { useRef, useContext } from "react" // lazy, Suspense
 
 import * as XLSX from "xlsx"
-import "./../pages/nlp/index.scss"
+import "./../../pages/nlp/index.scss"
 
 // components
 // import DragDDropFile from "./DragNDropForm"
 // import TextAnalysis from "./nlp/TextAnalysis"
-import { NlpContext } from "./../pages/nlp/Provider"
+import { NlpContext } from "./state/Provider"
 
 export default function NlpUi() {
-  const { state, dispatch, apiReadyKey, apiInitKey } = useContext(NlpContext)
+  const { dispatch } = useContext(NlpContext) //apiReadyKey, apiInitKey, state,
   const inputRef = useRef(null)
 
   function loadExcelFile(e) {
