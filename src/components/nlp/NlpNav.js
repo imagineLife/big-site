@@ -54,7 +54,7 @@ export default function NlpNav({ title }) {
         {/* Nav Items */}
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto" activeKey={window.location.pathname}>
+          <Nav className="me-auto" activeKey={window?.location?.pathname}>
             {routeLinks.map(d => (
               <Link
                 key={`route-link-${d.path}`}
