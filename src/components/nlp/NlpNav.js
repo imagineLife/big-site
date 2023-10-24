@@ -27,6 +27,7 @@ export default function NlpNav({ title }) {
     { path: "/nlp/themes/", text: "Themes" },
     { path: "/nlp/speeches/", text: "Speeches" },
   ]
+  let isBrowser = typeof window !== "undefined"
 
   return (
     <Navbar sticky="top" expand="lg" className="bg-body-tertiary">
@@ -54,7 +55,10 @@ export default function NlpNav({ title }) {
         {/* Nav Items */}
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto" activeKey={window?.location?.pathname}>
+          <Nav
+            className="me-auto"
+            activeKey={isBrowser && window?.location?.pathname}
+          >
             {routeLinks.map(d => (
               <Link
                 key={`route-link-${d.path}`}
