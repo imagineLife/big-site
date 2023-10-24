@@ -9,7 +9,7 @@ import NlpUi from "../../components/nlp/nlpUi"
 import { NlpProvider } from "../../components/nlp/state/Provider"
 import NlpLayout from "../../components/nlp/layout"
 const Speeches = lazy(() => import("./Speeches"))
-const Auth = lazy(() => import("./Auth"))
+const Auth = lazy(() => import("../../components/nlp/Auth"))
 
 function ThemeEditor() {
   return (
