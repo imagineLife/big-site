@@ -33,6 +33,11 @@ const IndexPage = () => (
       return (
         <Fragment>
           <Toc sub="Topics" title="NodeJS" childrenTop>
+            <p>A few topics into node below.</p>
+            <p>
+              Node would be mysterious and overly confusing without some{" "}
+              <Link to="/js">JavaScript</Link> knowledge.
+            </p>
             <section id="sections-wrapper">
               {dirs.map(
                 ({ overview: { title, excerpt, slug, parentDir } }, idx) => (
@@ -56,11 +61,10 @@ const IndexPage = () => (
                 >
                   OpenJS Node.js Application Developer
                 </Link>{" "}
-                certification 
+                certification
                 <i>(number LF-0te91c2whv)</i>.
               </sub>
             </section>
-
           </Toc>
           {/* <Link to="/node/event-loop/overview">Event Loop I: An Overview</Link> */}
           <br />

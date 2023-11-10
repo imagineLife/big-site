@@ -3,9 +3,9 @@ import { StaticQuery, graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import Hero from "../components/hero"
-import PageHead from "./../components/PageHead"
+import PageHead from "../components/PageHead"
 import "./scrum/scrum.scss"
-import createLinksWithType from "./../components/createLinksWithType"
+import createLinksWithType from "../components/createLinksWithType"
 /*
   before filter
 
@@ -41,15 +41,13 @@ const IndexPage = () => (
       }
     `}
     render={({ js: { pages } }) => {
-      
-      
       return (
         <Fragment>
           <Hero />
           <Layout>
             <section className="toc-wrapper">
-              <h1>JavaScript</h1>
-              {pages.map(createLinksWithType({ thisType: "javascript" }))}
+              <h1>JS</h1>
+              {pages.map(createLinksWithType({ thisType: "JS" }))}
             </section>
           </Layout>
         </Fragment>
@@ -61,11 +59,13 @@ const IndexPage = () => (
 export default IndexPage
 export function Head() {
   return (
-    <PageHead {...{
-      title: "Javascript Blog",
-      excerpt: "A Blog on Learning JavaScript",
-      slug: 'javascript',
-      tags: ["javascript"]
-    }} />
+    <PageHead
+      {...{
+        title: "JS Blog",
+        excerpt: "A Blog on Learning JS",
+        slug: "JS",
+        tags: ["JS"],
+      }}
+    />
   )
 }

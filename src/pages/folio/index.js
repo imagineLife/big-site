@@ -50,7 +50,7 @@ const techs = {
     "StrengthFinder Advocate",
     "INTJ",
     "How to manage a remote team (Cert: Gitlab + Coursera)",
-    "Engineering Leadership (Cornell Certificate)"
+    "Engineering Leadership (Cornell Certificate)",
   ],
 }
 
@@ -66,7 +66,7 @@ const technologies = [
     imgClass: `css-bg`,
   },
   {
-    title: "JavaScript",
+    title: "JS",
     subText: "Interacting with the dom && server logic",
     imgClass: `js-bg`,
   },
@@ -98,12 +98,12 @@ const technologies = [
   },
   {
     title: "Cypress",
-    subText: "End-To-End Testing with JavaScript",
+    subText: "End-To-End Testing with JS",
     imgClass: `cypress-bg`,
   },
   {
     title: "Jest",
-    subText: "JavaScript Testing",
+    subText: "JS Testing",
     imgClass: `jest-bg`,
   },
   {
@@ -118,7 +118,7 @@ const technologies = [
   },
   {
     title: "Node",
-    subText: "Server-Side JavaScript",
+    subText: "Server-Side JS",
     imgClass: `node-bg`,
   },
   {
@@ -162,13 +162,15 @@ const technologies = [
 const certs = [
   {
     title: "Engineering Leadership",
-    subText: "Strengths-Based and Values-Based Approaches, Decision-Making Modes, Collaborative & Courageous Communication, Influence & Motivation",
-    aLink: "https://ecornell.cornell.edu/certificates/leadership-and-strategic-management/engineering-leadership/",
+    subText:
+      "Strengths-Based and Values-Based Approaches, Decision-Making Modes, Collaborative & Courageous Communication, Influence & Motivation",
+    aLink:
+      "https://ecornell.cornell.edu/certificates/leadership-and-strategic-management/engineering-leadership/",
     techList: [
       "Values",
       "Decision-Making",
       "Communication",
-      "Influence Leading"
+      "Influence Leading",
     ],
     imgClass: `cornell-cert-bg`,
   },
@@ -249,7 +251,7 @@ const folioItems = [
       "React",
       "HTML",
       "CSS",
-      "JavaScript",
+      "JS",
       "Data Analysis",
     ],
     imgClass: "slice-n-dice-bg",
@@ -264,7 +266,7 @@ const folioItems = [
       "D3",
       "Mapping",
       "GeoJSON (topJSON)",
-      "JavaScript",
+      "JS",
       "HTML",
       "CSS",
       "Data Visualization",
@@ -292,7 +294,7 @@ const folioItems = [
     aLink: "https://github.com/imagineLife/nodeWork/tree/master/pizzaAPI",
     techList: [
       "Node",
-      "JavaScript",
+      "JS",
       "Auth",
       "Encryption",
       "Compression + Decompression",
@@ -329,7 +331,7 @@ const folioItems = [
       "D3",
       "Mapping",
       "GeoJSON (topJSON",
-      "JavaScript",
+      "JS",
       "HTML",
       "CSS",
       "Data Visualization",
@@ -429,10 +431,11 @@ export function Head() {
     <PageHead
       {...{
         title: "Eric (Jake) Laursen Portfolio",
-        excerpt: "Some examples of webapps, some writing about tech, personality, team development, and more",
+        excerpt:
+          "Some examples of webapps, some writing about tech, personality, team development, and more",
         slug: "folio",
         tags: ["portfolio", "about"],
       }}
-      />
+    />
   )
 }
