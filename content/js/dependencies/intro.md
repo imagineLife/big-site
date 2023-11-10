@@ -149,8 +149,10 @@ The [node_modules](https://docs.npmjs.com/cli/v8/configuring-npm/folders#node-mo
 #### Specifying The Version Of A Dependency
 
 **The latest** version of express can be installed with either `npm install express` or `npm install express@latest`.  
-**A Specific** version of express can be installed with `npm install express@<Major.minor.patch>` like `npm install express@4.0.0`.
-**Include All Patch Updates**, which is the last dot of the semver range, which a tilde: `npm install ~express@4.0.0` will install the latest `4.0.*` version.  
+**A Specific** version of express can be installed with `npm install express@<Major.minor.patch>` like `npm install express@4.0.0`. A flag can be added to _only save the exact version_, which does not seem to be the default: `npm install --save-exact express@4.0.0`.
+
+**Include All Patch Updates**, which is the last dot of the semver range, which a tilde: `npm install ~express@4.0.0` will install the latest `4.0.*` version.
+
 **Include All Minor Updates**, which is the middle dot of the semver range, which a caret: `npm install ^express@4.0.0` will install the latest `4.*.*` version.
 
 #### Using "npm install" to Install All Dependencies
