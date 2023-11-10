@@ -1,16 +1,16 @@
-import React, { Suspense, lazy } from 'react';
-import { useQuery } from 'react-query';
+import React, { Suspense, lazy } from "react"
+import { useQuery } from "react-query"
 
 // import WordsPerSentenceLine from "./../../wordsPerSentenceLine"
-import WordsPerSentenceScatter from './../../WordsPerSentenceScatter'
+import WordsPerSentenceScatter from "./../../WordsPerSentenceScatter"
 import SentimentScoreLine from "./../../sentimentScoreLine/"
 import SentimentPie from "./../../SentimentPie"
 import Scalar from "../../../components/Scalar"
 import ExcelAnalysis from "../ExcelAnalysis"
-import WordLists from './../WordLists'
-import './index.scss'
+import WordLists from "./../WordLists"
+import "./index.scss"
 
-const Table = lazy(() => import("../../../components/Table")) 
+// const Table = lazy(() => import("../../../components/Table"))
 
 function ResetPreviewForm({ reset, content, fileType }) {
   return (
@@ -29,16 +29,17 @@ function ResetPreviewForm({ reset, content, fileType }) {
   )
 }
 
-function fetchTextAnalysis({data, type}) {
-  const SENTIMENT_PATH = type === "text" ? "/api/nlp/sentiment" : "/api/nlp/sentiment/excel"
+function fetchTextAnalysis({ data, type }) {
+  const SENTIMENT_PATH =
+    type === "text" ? "/api/nlp/sentiment" : "/api/nlp/sentiment/excel"
   const FETCH = {
     URL: `${process.env.GATSBY_NLP_API_URL}${SENTIMENT_PATH}`,
-    METHOD: 'post',
+    METHOD: "post",
     HEADERS: {
-        "Content-Type": "application/json",
-      }
+      "Content-Type": "application/json",
+    },
   }
-    
+
   return () =>
     fetch(FETCH.URL, {
       method: FETCH.METHOD,
@@ -60,15 +61,15 @@ function fetchTextAnalysis({data, type}) {
     }))}
     isLoading={isLoading}
   />
-*/ 
+*/
 
 function TextBlockOption({ data, isLoading }) {
-  const sentimentPercentages = Object.keys(
-    data?.summary?.sentiments
-  ).map(k => ({ name: k, ...data.summary.sentiments[k] }))
-  console.log('data')
+  const sentimentPercentages = Object.keys(data?.summary?.sentiments).map(
+    k => ({ name: k, ...data.summary.sentiments[k] })
+  )
+  console.log("data")
   console.log(data)
-  
+
   return (
     <div className="text-block-analysis">
       <section id="scalar-wrapper">
@@ -117,8 +118,6 @@ function TextBlockOption({ data, isLoading }) {
   )
 }
 
-
-
 export default function TextAnalysis({ fileData, reset, fileType }) {
   const useQOpts = {
     enabled: !!fileData,
@@ -130,10 +129,9 @@ export default function TextAnalysis({ fileData, reset, fileType }) {
   // Queries
   const { isLoading, data } = useQuery(
     "textAnalysis",
-    fetchTextAnalysis({data: fileData, type: fileType}),
+    fetchTextAnalysis({ data: fileData, type: fileType }),
     useQOpts
   )
-  
 
   return (
     <section id="text-analysis">
@@ -142,9 +140,7 @@ export default function TextAnalysis({ fileData, reset, fileType }) {
         content={fileData}
         fileType={fileType}
       />
-      {fileType === "text" && !isLoading && (
-        <TextBlockOption data={data} />
-      )}
+      {fileType === "text" && !isLoading && <TextBlockOption data={data} />}
       {fileType === "excel" && !isLoading && <ExcelAnalysis data={data} />}
     </section>
   )
