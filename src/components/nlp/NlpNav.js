@@ -11,8 +11,6 @@ export default function NlpNav({ title }) {
 
   const { apiReadyKey, apiInitKey, authorized, ...state } =
     useContext(NlpContext)
-  console.log("apiReadyKey")
-  console.log(apiReadyKey)
 
   function getDotColor({ state, apiData: { initialized, ready } }) {
     if (ready) return "green"
