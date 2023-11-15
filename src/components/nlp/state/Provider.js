@@ -11,7 +11,7 @@ function useAppRegistration() {
     retry: false,
   }
 
-  const API_HANDSHAKE_START_API = `${process.env.GATSBY_NLP_API_URL}/app/init?id=${process.env.API_APP_NAME}`
+  const API_HANDSHAKE_START_API = `${process.env.GATSBY_NLP_API_URL}/app/init?id=${process.env.GATSBY_API_APP_NAME}`
   function startApiHandshake() {
     return fetch(API_HANDSHAKE_START_API).then(d => d.json())
   }
