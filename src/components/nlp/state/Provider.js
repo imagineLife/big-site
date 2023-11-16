@@ -13,11 +13,15 @@ function useAppRegistration() {
 
   const API_HANDSHAKE_START_API = `${process.env.GATSBY_NLP_API_URL}/app/init?id=${process.env.GATSBY_API_APP_NAME}`
   function startApiHandshake() {
-    return fetch(API_HANDSHAKE_START_API).then(d => d.json())
+    return fetch(API_HANDSHAKE_START_API, { credentials: "include" }).then(d =>
+      d.json()
+    )
   }
 
   function finishApiHandshake() {
-    return fetch(API_HANDSHAKE_FINISH_API).then(d => d.json())
+    return fetch(API_HANDSHAKE_FINISH_API, { credentials: "include" }).then(d =>
+      d.json()
+    )
   }
   const { data: apiInitKey } = useQuery("apiInit", startApiHandshake, {
     ...useQOpts,
