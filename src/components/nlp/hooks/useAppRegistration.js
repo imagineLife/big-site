@@ -33,9 +33,16 @@ export default function useAppRegistration() {
     enabled: apiInitKey?.id !== undefined,
   })
 
-  const initialized = useMemo(
-    () => Boolean(apiInitKey && apiReadyKey),
-    [apiInitKey, apiReadyKey]
-  )
+  const initialized = useMemo(() => {
+    if (!apiInitKey && !apiReadyKey) {
+      return "no"
+    }
+    if (apiInitKey && !apiReadyKey) {
+      return "loading"
+    }
+    if (apiInitKey && apiReadyKey) {
+      return "yes"
+    }
+  }, [apiInitKey, apiReadyKey])
   return initialized
 }

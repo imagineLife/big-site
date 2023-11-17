@@ -9,13 +9,10 @@ import { navigate, Link } from "gatsby"
 export default function NlpNav({ title }) {
   const { appInitialized, authorized, ...state } = useContext(NlpContext)
 
-  // { state, apiData: { initialized, ready } }
-  function getDotColor() {
-    return "green"
-    // if (ready) return "green"
-    // if (initialized) return "goldenrod"
-    // if (state === "started") return "orange"
-    // return "red"
+  function getDotColor(initializedStatus) {
+    if (initializedStatus === "yes") return "green"
+    if (initializedStatus === "loading") return "goldenrod"
+    return "red"
   }
   const CIRCLE_SIZE = "10px"
 
@@ -35,18 +32,10 @@ export default function NlpNav({ title }) {
         <Navbar.Brand>
           {title}
           <span
-            // title={apiReadyKey?.id ? "connecting..." : "connected"}
-            title="connected"
+            title={appInitialized !== "yes" ? "connecting..." : "connected"}
             className="connected-dot"
             style={{
-              backgroundColor: getDotColor(),
-              // {
-              // state: apiReadyKey ? apiReadyKey?.id : state.apiInitialized,
-              // apiData: {
-              //   initialized: apiInitKey?.appId,
-              //   ready: apiReadyKey?.appId,
-              // },
-              // }),
+              backgroundColor: getDotColor(appInitialized),
               height: CIRCLE_SIZE,
               width: CIRCLE_SIZE,
               borderRadius: "50%",

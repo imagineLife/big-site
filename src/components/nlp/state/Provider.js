@@ -17,8 +17,6 @@ function NlpProvider({ children }) {
 
   // const { apiInitKey, apiReadyKey } = useAppRegistration()
   const appInitialized = useAppRegistration()
-  console.log("appInitialized")
-  console.log(appInitialized)
 
   const authRequest = async ({ url, body }) => {
     const response = await jsonPost(url, body)
