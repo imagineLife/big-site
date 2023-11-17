@@ -1,143 +1,103 @@
-import React from "react"
+import React, { useState, useContext } from "react"
 import { useForm, Controller } from "react-hook-form"
 import { Form, Button } from "react-bootstrap"
-import { useMutation } from "react-query"
-
-/*
-  login api fn
-*/
-const loginUser = async data => {
-  console.log("loginUser data")
-  console.log(data)
-
-  const API_HOST = "http://localhost:3000"
-  const response = await fetch(`${API_HOST}/nlp/api/login`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  })
-
-  if (!response.ok) {
-    throw new Error(`HTTP error! Status: ${response.status}`)
-  }
-
-  return response.json()
-}
+import { NlpContext } from "./state/Provider"
 
 /*
   component
 */
 export default function Auth() {
-  const { handleSubmit, errors, control } = useForm()
+  const { startLoginMutation, finishLoginMutation } = useContext(NlpContext)
+  const API_HOST = "http://localhost:3000"
+  const START_URL = "/api/users/email"
+  const FINISH_URL = "/api/users/pw"
+  const {
+    handleSubmit: handleFormSubmit,
+    errors,
+    register,
+    getValues,
+    control,
+  } = useForm({ email: "", password: "" })
+  const [emailVal, setEmail] = useState()
 
-  const mutation = useMutation(loginUser)
+  const handleEmailSubmit = async ({ email }) => {
+    startLoginMutation.mutate({
+      url: `${API_HOST}${START_URL}`,
+      body: { email },
+    })
+    setEmail(email)
+  }
 
-  const onSubmit = data => {
-    console.log("onSubmit data")
-    console.log(data)
-
-    mutation.mutate(data)
+  const handlePasswordSubmit = async ({ password }) => {
+    finishLoginMutation.mutate({
+      url: `${API_HOST}${FINISH_URL}`,
+      body: { email: emailVal, password },
+    })
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
-      <Form.Group controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Controller
-          control={control}
-          name="email"
-          defaultValue=""
-          render={({ field: { onChange, value, ref } }) => (
-            <Form.Control
-              onChange={onChange}
-              value={value}
-              ref={ref}
-              type="email"
-              placeholder="Enter email"
-              name="email"
-            />
-          )}
-        />
-        <Form.Text className="text-danger">{errors?.email?.message}</Form.Text>
-      </Form.Group>
+    <>
+      <Form
+        onSubmit={
+          !startLoginMutation.isSuccess
+            ? handleFormSubmit(handleEmailSubmit)
+            : handleFormSubmit(handlePasswordSubmit)
+        }
+      >
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Controller
+            control={control}
+            name="email"
+            defaultValue=""
+            disabled={startLoginMutation.isSuccess}
+            render={({ field: { onChange, value, ref, disabled } }) => (
+              <Form.Control
+                onChange={onChange}
+                value={value}
+                ref={ref}
+                type="email"
+                placeholder="Enter email"
+                name="email"
+                disabled={disabled}
+              />
+            )}
+          />
+          <Form.Text className="text-danger">
+            {errors?.email?.message}
+          </Form.Text>
+        </Form.Group>
 
-      <Form.Group controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
+        {startLoginMutation.isSuccess && (
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
 
-        <Controller
-          control={control}
-          name="password"
-          defaultValue=""
-          render={({ field: { onChange, value, ref } }) => (
-            <Form.Control
-              onChange={onChange}
-              value={value}
-              ref={ref}
-              type="password"
-              placeholder="Password"
+            <Controller
+              control={control}
               name="password"
+              defaultValue=""
+              render={({ field: { onChange, value, ref } }) => (
+                <Form.Control
+                  onChange={onChange}
+                  value={value}
+                  ref={ref}
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                />
+              )}
             />
-          )}
-        />
 
-        <Form.Text className="text-danger">
-          {errors?.password?.message}
-        </Form.Text>
-      </Form.Group>
+            <Form.Text className="text-danger">
+              {errors?.password?.message}
+            </Form.Text>
+          </Form.Group>
+        )}
 
-      {/* <Form.Group className="mb-3" controlId="formEmail">
-        <Form.Label>Email</Form.Label>
-        <Controller
-          control={control}
-          name="email"
-          defaultValue=""
-          render={({ field: { onChange, onBlur, value, ref } }) => (
-            <Form.Control
-              onChange={onChange}
-              value={value}
-              ref={ref}
-              type="email"
-              isInvalid={errors?.email}
-              placeholder="Enter email"
-            />
-          )}
-        />
-        <Form.Text className="text-muted">
-          We need a valid email address.
-        </Form.Text>
-        <Form.Control.Feedback type="invalid">
-          {errors?.email?.message}
-        </Form.Control.Feedback>
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="password">
-        <Form.Label>Password</Form.Label>
-        <Controller
-          control={control}
-          name="password"
-          defaultValue=""
-          render={({ field: { onChange, onBlur, value, ref } }) => (
-            <Form.Control
-              onChange={onChange}
-              value={value}
-              ref={ref}
-              type="password"
-              isInvalid={errors?.password}
-              placeholder="Enter password"
-            />
-          )}
-        />
-        <Form.Text className="text-muted">Don't forget it!!</Form.Text>
-        <Form.Control.Feedback type="invalid">
-          {errors?.password?.message}
-        </Form.Control.Feedback>
-      </Form.Group> */}
-
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
-    </Form>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+      </Form>
+    </>
   )
 }

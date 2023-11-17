@@ -12,6 +12,9 @@ export default function NlpNav({ title }) {
   const { apiReadyKey, apiInitKey, authorized, ...state } =
     useContext(NlpContext)
 
+  console.log("authorized")
+  console.log(authorized)
+
   function getDotColor({ state, apiData: { initialized, ready } }) {
     if (ready) return "green"
     if (initialized) return "goldenrod"
@@ -20,11 +23,14 @@ export default function NlpNav({ title }) {
   }
   const CIRCLE_SIZE = "10px"
 
-  let routeLinks = [
-    { path: "/nlp/", text: "Dashboard" },
-    { path: "/nlp/themes/", text: "Themes" },
-    { path: "/nlp/speeches/", text: "Speeches" },
-  ]
+  let routeLinks = [{ path: "/nlp/", text: "Dashboard" }]
+
+  if (authorized) {
+    routeLinks.push(
+      { path: "/nlp/themes/", text: "Themes" },
+      { path: "/nlp/speeches/", text: "Speeches" }
+    )
+  }
   let isBrowser = typeof window !== "undefined"
 
   return (

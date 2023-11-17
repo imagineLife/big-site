@@ -1,6 +1,7 @@
 import React, { createContext, useReducer, useEffect } from "react"
 import { useQuery } from "react-query"
 import nlpReducer from "./reducer"
+import { useMutation } from "react-query"
 
 function useAppRegistration() {
   const useQOpts = {
@@ -48,16 +49,43 @@ function NlpProvider({ children }) {
   console.log("%c Provider Loading", "background-color: pink; color: black;")
 
   const [state, dispatch] = useReducer(nlpReducer, initialReducerState)
-  console.log("state")
-  console.log(state)
 
   const { apiInitKey, apiReadyKey } = useAppRegistration()
   console.log("apiInitKey, apiReadyKey")
   console.log(apiInitKey, apiReadyKey)
 
+  const authRequest = async ({ url, body }) => {
+    const response = await jsonPost(url, body)
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`)
+    }
+    return Boolean(response.status)
+  }
+
+  const jsonPost = (url, body) => {
+    return fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+      credentials: "include",
+    })
+  }
+
+  const startLoginMutation = useMutation(authRequest)
+  const finishLoginMutation = useMutation(authRequest)
+
   return (
     <NlpContext.Provider
-      value={{ dispatch, apiReadyKey, apiInitKey, ...state }}
+      value={{
+        dispatch,
+        apiReadyKey,
+        apiInitKey,
+        startLoginMutation,
+        finishLoginMutation,
+        ...state,
+      }}
     >
       {children}
     </NlpContext.Provider>
