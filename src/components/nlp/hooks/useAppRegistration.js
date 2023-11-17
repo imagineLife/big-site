@@ -1,7 +1,12 @@
-import React, { useMemo } from "react"
+import { useMemo } from "react"
 import { useQuery } from "react-query"
 
 export default function useAppRegistration() {
+  console.log(
+    "%c useAppRegistration",
+    "background-color: orange; color: black;"
+  )
+
   const useQOpts = {
     refetchOnWindowFocus: false,
     refetchOnMount: false,
@@ -19,14 +24,21 @@ export default function useAppRegistration() {
 
   function finishApiHandshake() {
     return fetch(API_HANDSHAKE_FINISH_API, { credentials: "include" }).then(d =>
-      d.json()
+      d.text()
     )
   }
+
+  //
+  // start app init handshake
+  //
   const { data: apiInitKey } = useQuery("apiInit", startApiHandshake, {
     ...useQOpts,
     enabled: true,
   })
 
+  //
+  // finish app init handshake
+  //
   const API_HANDSHAKE_FINISH_API = `${process.env.GATSBY_NLP_API_URL}/app/allow-access?id=${apiInitKey?.id}`
   const { data: apiReadyKey } = useQuery("apiReady", finishApiHandshake, {
     ...useQOpts,
