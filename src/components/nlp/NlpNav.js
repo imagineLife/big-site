@@ -7,19 +7,15 @@ import { NlpContext } from "./state/Provider"
 import { navigate, Link } from "gatsby"
 
 export default function NlpNav({ title }) {
-  console.log("NlpNav")
+  const { appInitialized, authorized, ...state } = useContext(NlpContext)
 
-  const { apiReadyKey, apiInitKey, authorized, ...state } =
-    useContext(NlpContext)
-
-  console.log("authorized")
-  console.log(authorized)
-
-  function getDotColor({ state, apiData: { initialized, ready } }) {
-    if (ready) return "green"
-    if (initialized) return "goldenrod"
-    if (state === "started") return "orange"
-    return "red"
+  // { state, apiData: { initialized, ready } }
+  function getDotColor() {
+    return "green"
+    // if (ready) return "green"
+    // if (initialized) return "goldenrod"
+    // if (state === "started") return "orange"
+    // return "red"
   }
   const CIRCLE_SIZE = "10px"
 
@@ -39,16 +35,18 @@ export default function NlpNav({ title }) {
         <Navbar.Brand>
           {title}
           <span
-            title={apiReadyKey?.id ? "connecting..." : "connected"}
+            // title={apiReadyKey?.id ? "connecting..." : "connected"}
+            title="connected"
             className="connected-dot"
             style={{
-              backgroundColor: getDotColor({
-                state: apiReadyKey ? apiReadyKey?.id : state.apiInitialized,
-                apiData: {
-                  initialized: apiInitKey?.appId,
-                  ready: apiReadyKey?.appId,
-                },
-              }),
+              backgroundColor: getDotColor(),
+              // {
+              // state: apiReadyKey ? apiReadyKey?.id : state.apiInitialized,
+              // apiData: {
+              //   initialized: apiInitKey?.appId,
+              //   ready: apiReadyKey?.appId,
+              // },
+              // }),
               height: CIRCLE_SIZE,
               width: CIRCLE_SIZE,
               borderRadius: "50%",
@@ -74,7 +72,6 @@ export default function NlpNav({ title }) {
             ))}
           </Nav>
         </Navbar.Collapse>
-        {/* Hmm */}
         <Button variant="primary" onClick={() => navigate("/nlp/auth/")}>
           Login / Register
         </Button>{" "}
