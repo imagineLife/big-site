@@ -1,3 +1,5 @@
+import ReactDOM from "react-dom/client"
+
 // custom typefaces
 require("@fontsource/montserrat/variable.css")
 require("@fontsource/merriweather")
@@ -27,16 +29,21 @@ exports.onInitialClientRender = () => {
     event.waitUntil(
       caches.keys().then(function (cacheNames) {
         return Promise.all(
-          cacheNames
-            .map(function (cacheName) {
-              return caches.delete(cacheName)
-            })
+          cacheNames.map(function (cacheName) {
+            return caches.delete(cacheName)
+          })
         )
       })
     )
   })
 }
 
+exports.replaceHydrateFunction = () => {
+  return (element, container) => {
+    const root = ReactDOM.createRoot(container)
+    root.render(element)
+  }
+}
 
 // exports.onServiceWorkerUpdateReady = () => {
 //   const answer = window.confirm(

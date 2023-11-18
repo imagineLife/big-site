@@ -7,7 +7,7 @@ function SpeechCreator() {
   const { handleSubmit, errors, control } = useForm()
 
   const onSubmit = data => {
-    console.log('onSubmit Data!')
+    console.log("onSubmit Data!")
     console.log(data)
   }
   return (
@@ -57,6 +57,8 @@ function SpeechCreator() {
 }
 
 function Speeches() {
+  console.log("Speeches?!")
+
   return (
     <>
       <h3>Speech editor</h3>

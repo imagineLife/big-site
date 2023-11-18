@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react"
 import { useForm, Controller } from "react-hook-form"
 import { Form, Button } from "react-bootstrap"
-import { NlpContext } from "./state/Provider"
+import { NlpContext } from "./../state/Provider"
 
 /*
   component

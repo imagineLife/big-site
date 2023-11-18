@@ -8,8 +8,11 @@ import ReactQueryWrapper from "../../components/nlp/ReactQueryWrapper"
 import NlpUi from "../../components/nlp/nlpUi"
 import { NlpProvider } from "../../components/nlp/state/Provider"
 import NlpLayout from "../../components/nlp/layout"
-const Speeches = lazy(() => import("./Speeches"))
-const Auth = lazy(() => import("../../components/nlp/Auth"))
+const Speeches = lazy(() => import("../../components/nlp/routes/Speeches"))
+const Auth = lazy(() => import("../../components/nlp/routes/Auth"))
+const SpeechDetail = lazy(() =>
+  import("./../../components/nlp/routes/SpeechById")
+)
 
 function ThemeEditor() {
   return (
@@ -30,6 +33,7 @@ export default function Nlp() {
           <Suspense fallback={<span />}>
             <Router basepath="/nlp">
               <ThemeEditor path="/themes" />
+              <SpeechDetail path="/speeches/:speechId" />
               <Speeches path="/speeches" />
               <Auth path="/auth" />
               <NlpUi path="/" />

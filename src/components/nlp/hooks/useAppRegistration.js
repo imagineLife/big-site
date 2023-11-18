@@ -2,10 +2,10 @@ import { useMemo } from "react"
 import { useQuery } from "react-query"
 
 export default function useAppRegistration() {
-  console.log(
-    "%c useAppRegistration",
-    "background-color: orange; color: black;"
-  )
+  // console.log(
+  //   "%c useAppRegistration",
+  //   "background-color: orange; color: black;"
+  // )
 
   const useQOpts = {
     refetchOnWindowFocus: false,
@@ -56,5 +56,11 @@ export default function useAppRegistration() {
       return "yes"
     }
   }, [apiInitKey, apiReadyKey])
+  console.log({
+    apiInitKey,
+    apiReadyKey,
+    initialized,
+  })
+
   return initialized
 }

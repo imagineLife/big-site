@@ -21,7 +21,12 @@ const initialReducerState = {
 const NlpContext = createContext()
 
 function NlpProvider({ children }) {
+  console.log("%c Provider", "background-color: pink; color: black;")
+
   const [state, dispatch] = useReducer(nlpReducer, initialReducerState)
+  console.log("state")
+  console.log(state)
+
   const appInitialized = useAppRegistration()
 
   const authRequest = async ({ url, body }) => {
