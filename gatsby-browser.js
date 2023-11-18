@@ -1,4 +1,4 @@
-import ReactDOM from "react-dom/client"
+const ReactDOM = require("react-dom/client")
 
 // custom typefaces
 require("@fontsource/montserrat/variable.css")
