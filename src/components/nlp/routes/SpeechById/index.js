@@ -1,25 +1,53 @@
-import React, { useState, useEffect } from "react"
-import defaultSpeech from "./default.json"
-function useSpeechData(speechId) {
-  console.log("%c useSpeechData", "background-color: orange; color: white;")
-  const [speechData, setSpeechData] = useState(defaultSpeech)
-
-  useEffect(() => {
-    if (speechId !== "default") console.log("NEED TO FETCH SPEECH DATAb!")
-  }, [])
-
-  return [speechData]
-}
+import React from "react"
+import useSpeechData from "../../hooks/useSpeechData"
+import CardSmall from "../../components/CardSmall"
+import SentimentPie from "../../../SentimentPie"
+import Card from "../../../Card"
+import { Row } from "react-bootstrap"
+import "./index.scss"
 const SpeechDetail = p => {
   const { speechId, ...params } = p
-  console.log("params")
-  console.log(params)
 
   const speechData = useSpeechData(speechId)
-  console.log("speechData")
-  console.log(speechData)
 
-  return <div>Speech Detail for speech {speechId}</div>
+  const pieData = Object.keys(speechData.analytics.sentiments).map(
+    sentimentKey => ({
+      name: sentimentKey,
+      count: speechData.analytics.sentiments[sentimentKey].count,
+    })
+  )
+
+  let speechDate = new Date(speechData.date)
+  let formattedDate = new Intl.DateTimeFormat("en-US").format(speechDate)
+  console.log("formattedDate")
+  console.log(formattedDate)
+
+  return (
+    <>
+      {!speechData && <p>loading...</p>}
+      {speechData && (
+        <div className="speech-by-id container">
+          {/* 
+          Top Row?!
+        */}
+          <Row>
+            <CardSmall title="Author" value={speechData.author} />
+            <CardSmall title="Date" value={formattedDate} />
+            <CardSmall
+              title="Sentences"
+              value={speechData.analytics.sentenceCount}
+            />
+            <CardSmall title="Words" value={speechData.analytics.wordCount} />
+          </Row>
+          <Row>
+            <Card>
+              <SentimentPie data={pieData} small legend />
+            </Card>
+          </Row>
+        </div>
+      )}
+    </>
+  )
 }
 
 export default SpeechDetail
