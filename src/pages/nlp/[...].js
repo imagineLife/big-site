@@ -5,9 +5,9 @@ import "./index.scss"
 
 // components
 import ReactQueryWrapper from "../../components/nlp/ReactQueryWrapper"
-import NlpUi from "../../components/nlp/nlpUi"
 import { NlpProvider } from "../../components/nlp/state/Provider"
 import NlpLayout from "../../components/nlp/layout"
+const NlpUi = lazy(() => import("../../components/nlp/nlpUi"))
 const Speeches = lazy(() => import("../../components/nlp/routes/Speeches"))
 const Auth = lazy(() => import("../../components/nlp/routes/Auth"))
 const SpeechDetail = lazy(() =>
