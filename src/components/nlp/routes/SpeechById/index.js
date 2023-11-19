@@ -1,6 +1,7 @@
 import React from "react"
 import useSpeechData from "../../hooks/useSpeechData"
 import CardSmall from "../../components/CardSmall"
+import CardMedium from "../../components/CardMedium"
 import SentimentPie from "../../../SentimentPie"
 import Card from "../../../Card"
 import { Row } from "react-bootstrap"
@@ -39,10 +40,12 @@ const SpeechDetail = p => {
             />
             <CardSmall title="Words" value={speechData.analytics.wordCount} />
           </Row>
+
+          {/* 2nd row */}
           <Row>
-            <Card>
+            <CardMedium>
               <SentimentPie data={pieData} small legend />
-            </Card>
+            </CardMedium>
           </Row>
         </div>
       )}
