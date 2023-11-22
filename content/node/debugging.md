@@ -51,21 +51,28 @@ node --stack-trace-limit=99999 app.js
 
 ### adding debugger to the code
 
-- add a line in the code, `debugger`, where the code should pause
-- add a flag to the cli when running the code `node inspect the-file.js`
-- example
-  - running a file `node inspect file.js` will run the whole file with cli output
-  - running a file `node inspect file.js` and including `debugger` somewhere in the code will run the file _up to the breakpoint_
+Create an automatic "breakpoint" on a specific line in a program's source code.  
+Pause the execution of the program on that breakpoint:
+
+- create a new line and write `debugger;`, where the code should pause
+- add a few details to the node cli when running the program: `NODE_INSPECT_RESUME_ON_START=1 node inspect file.js`
+  - `NODE_INSPECT_RESUME_ON_START` tells node and the debugger to run and STOP on the `debugger;` line in the program
+  - `inspect` instructs node to use the debugger, the "inspect" tool
+
+A different way to use the `inspect` argument is to use it withouth the `NODE_INSPECT_RESUME_ON_START=1` env var.  
+Without that env var set, node will pause on the first "runnable" piece/function of code.
 
 # Debugging with cli
 
-- these break from 'outside' the code files
-  - `--inspect`
-    - triggers the v8 inspector
-    - takes an optional port: `--inspect=9876`
-  - `--inspect-brk`
-    - inspect mode
-    - breaks on first line of the code
+A program can be paused immediately when starting the program by utilizing the cli.  
+This is different than the above `debugger`. One primary way it is different is that the `debugger` method requires adding a line to the source code - here, though, no new line in required.
+
+- `--inspect`
+  - triggers the v8 inspector
+  - takes an optional port: `--inspect=9876`
+- `--inspect-brk`
+  - inspect mode
+  - breaks on first line of the code
 
 ### CLI Output After Flags
 

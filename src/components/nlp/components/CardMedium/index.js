@@ -2,7 +2,7 @@ import React from "react"
 import { Col, Card, Row } from "react-bootstrap"
 import "./index.scss"
 
-export default function CardSmall({
+export default function CardMedium({
   title,
   value,
   image,
@@ -19,7 +19,8 @@ export default function CardSmall({
     <Col lg="6" sm="12">
       <Card className="card-stats">
         <Card.Title as="h4">{title}</Card.Title>
-        {children && <Card.Body>{children}</Card.Body>}
+        {/* {children && <Card.Body>{children}</Card.Body>} */}
+        {children}
       </Card>
     </Col>
   )

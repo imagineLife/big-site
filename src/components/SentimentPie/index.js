@@ -10,15 +10,33 @@ import {
   Legend,
 } from "recharts"
 
-function PieLabel({ x, y, cx, percent }) {
+function PieLabel({
+  cx,
+  cy,
+  midAngle,
+  innerRadius,
+  outerRadius,
+  value,
+  index,
+  percent,
+  name,
+  // ...rest
+}) {
+  const RADIAN = Math.PI / 180
+  const radius = 8 + innerRadius + (outerRadius - innerRadius)
+  const x = cx + radius * Math.cos(-midAngle * RADIAN)
+  const y = cy + radius * Math.sin(-midAngle * RADIAN)
+
   return (
     <text
       x={x}
       y={y}
-      fill="black"
       textAnchor={x > cx ? "start" : "end"}
       dominantBaseline="central"
-    >{`${percent} %`}</text>
+      fontSize="14px"
+    >
+      {Math.round(percent * 100)}%
+    </text>
   )
 }
 
@@ -35,11 +53,11 @@ export default function SentimentPie({ data, small, legend }) {
   const dims = small
     ? {
         width: "100%",
-        height: 100,
+        height: 150,
       }
     : {
-        width: 300,
-        height: 300,
+        width: "100%",
+        height: 400,
       }
 
   const CustomTooltip = ({ active, payload, label }) => {
@@ -54,9 +72,6 @@ export default function SentimentPie({ data, small, legend }) {
 
     return null
   }
-
-  console.log("COMPONENT data")
-  console.log(data)
 
   return (
     <ResponsiveContainer {...dims}>
