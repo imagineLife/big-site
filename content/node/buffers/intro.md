@@ -8,26 +8,25 @@ parentDir: node
 order: 1
 ---
 
-
 # Buffers
-[Buffers are included with node](https://nodejs.org/api/buffer.html). Buffers are a spot in memory where data can live.  
+
+[Buffers are included with node](https://nodejs.org/api/buffer.html). Buffers are a spot in memory where data can live.
 
 ```js
 // using a node repl
 // Buffer is a globally available reserved word!
-Object.keys(Buffer)
-[
-  'poolSize',
-  'from',
-  'of',
-  'alloc',
-  'allocUnsafe',
-  'allocUnsafeSlow',
-  'isBuffer',
-  'compare',
-  'isEncoding',
-  'concat',
-  'byteLength'
+Object.keys(Buffer)[
+  ("poolSize",
+  "from",
+  "of",
+  "alloc",
+  "allocUnsafe",
+  "allocUnsafeSlow",
+  "isBuffer",
+  "compare",
+  "isEncoding",
+  "concat",
+  "byteLength")
 ]
 ```
 
@@ -40,16 +39,17 @@ Object.keys(Buffer)
   - [Buffers And JSON](#buffers-and-json)
   - [Encoding And Decoding Strings](#encoding-and-decoding-strings)
 
-
 ## Buffers Allocate Memory
+
 Allocate is a fancy term for distribute.  
 Buffers get distributed.  
 A buffer is a piece of memory - ram.  
 Buffers are distributed with either "safe" or "unsafe" methods.  
 "unsafe" allocation runs the risk of being filled with memory "fragments" from data that had been used previously. These can contain bytes of data.  
-"safe" allocation uses "new" memory that has not been used previously.  
+"safe" allocation uses "new" memory that has not been used previously.
 
 ## Create A Buffer Using a Safe Allocation
+
 ```js
 const HOW_MANY_BYTES = 10
 const a = Buffer.alloc(HOW_MANY_BYTES)
@@ -58,6 +58,7 @@ a
 ```
 
 ## Create A Buffer Using an UnSafe Allocation
+
 ```js
 const HOW_MANY_BYTES = 12
 const a = Buffer.allocUnsafe(HOW_MANY_BYTES)
@@ -66,6 +67,7 @@ a
 ```
 
 ## Create A Buffer From A String
+
 ```js
 > const STR = "This is a six word string."
 // undefined
@@ -112,8 +114,9 @@ a
 ```
 
 ## Create Strings From Buffers
+
 ```js
-const str = 'this is a string'
+const str = "this is a string"
 // 'this is a string'
 
 const strBuffer = Buffer.from(str)
@@ -125,26 +128,28 @@ strBuffer
 strBuffer.toString()
 // 'this is a string'
 
-const baseString = 'this will be base64 encoded.'
-const bufferSixtyFour = Buffer.from(baseString, 'base64');
+const baseString = "this will be base64 encoded."
+const bufferSixtyFour = Buffer.from(baseString, "base64")
 
-bufferSixtyFour.toString('base64')
+bufferSixtyFour.toString("base64")
 
-strBuffer.toString('hex')
+strBuffer.toString("hex")
 // '74686973206973206120737472696e67'
 
-strBuffer.toString('utf8')
+strBuffer.toString("utf8")
 // 'this is a string'
 ```
-Above, note that buffers can take encodings via strings. The default encoding is utf8. This won't cover the other encodings in detail.  
 
+Above, note that buffers can take encodings via strings. The default encoding is utf8. This won't cover the other encodings in detail.
 
 ## Buffers And JSON
+
 Buffers and json can work together. Here a "full circle" takes a string into a buffer into a stringified object, BACK to a json object, BACK to a buffer, BACK to the string.
 
 Buffer a string:
+
 ```js
-const s = 'this is a string'
+const s = "this is a string"
 // 'this is a string'
 
 const bufferedS = Buffer.from(s)
@@ -152,6 +157,7 @@ const bufferedS = Buffer.from(s)
 ```
 
 Passing that buffer into `JSON.stringify` & using `JSON.parse` on the stringified buffer:
+
 ```js
 // stringifying a buffer
 const jsonStringifiedBuffer = JSON.stringify(bufferedS)
@@ -172,6 +178,7 @@ const parsedJsonString = JSON.parse(jsonStringifiedBuffer)
 ```
 
 Re-Building the buffer from the parsed stringified buffer
+
 ```js
 const almostThere = Buffer.from(parsedJsonString.data)
 // <Buffer 74 68 69 73 20 69 73 20 61 20 73 74 72 69 6e 67>
@@ -181,14 +188,29 @@ Buffer.toString(almostThere)
 ```
 
 ## Encoding And Decoding Strings
+
+Converting a string to a base46-encoded string and back to a string
+
 ```js
-const THE_STRING = 'this is a string!'
-'this is a string!'
-
-
-const b64Buffd = Buffer.from(THE_STRING).toString('base64')
-// 'dGhpcyBpcyBhIHN0cmluZyE='
-
-const redone = Buffer.from(b64Buffd, 'base64').toString()
+const THE_STRING = "this is a string!"
 // 'this is a string!'
+
+// in two commands
+const b64Buffd = Buffer.from(THE_STRING).toString("base64")
+// 'dGhpcyBpcyBhIHN0cmluZyE='
+const redone = Buffer.from(b64Buffd, "base64").toString()
+// 'this is a string!'
+
+// same thing, across several lines
+let starting = "we've begun at the end"
+// we've begun at the end
+let bufferedStart = Buffer.from(starting)
+// <Buffer 77 65 27 76 65 20 62 65 67 75 6e 20 61 74 20 74 68 65 20 65 6e 64>
+
+let startInSixtyfour = bufferedStart.toString("base64")
+// 'd2UndmUgYmVndW4gYXQgdGhlIGVuZA=='
+let backToBuffer = Buffer.from(startInSixtyfour, "base64")
+// <Buffer 77 65 27 76 65 20 62 65 67 75 6e 20 61 74 20 74 68 65 20 65 6e 64>
+let backToStart = backToBuffer.toString()
+// "we've begun at the end"
 ```
