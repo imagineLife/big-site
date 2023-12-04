@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from "react"
+import React, { createContext, useReducer, useMemo } from "react"
 import nlpReducer from "./reducer"
 import { useMutation } from "react-query"
 import useAppRegistration from "../hooks/useAppRegistration"
@@ -16,7 +16,6 @@ const jsonPost = (url, body) => {
 
 const initialReducerState = {
   fileData: null,
-  authorized: false,
 }
 const NlpContext = createContext()
 
@@ -40,6 +39,10 @@ function NlpProvider({ children }) {
   const startLoginMutation = useMutation(authRequest)
   const finishLoginMutation = useMutation(authRequest)
 
+  const authorized = useMemo(
+    () => Boolean(finishLoginMutation?.isSuccess),
+    [finishLoginMutation]
+  )
   return (
     <NlpContext.Provider
       value={{
@@ -47,6 +50,7 @@ function NlpProvider({ children }) {
         appInitialized,
         startLoginMutation,
         finishLoginMutation,
+        authorized,
         ...state,
       }}
     >

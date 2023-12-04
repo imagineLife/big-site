@@ -12,7 +12,7 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
-const robots = require('./robots-txt');
+const robots = require("./robots-txt")
 
 module.exports = {
   siteMetadata: {
@@ -188,8 +188,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
-        short_name: `Gatsby`,
+        name: `laursen.tech`,
+        short_name: `laursen.ltech`,
         start_url: `/`,
         background_color: `#ffffff`,
         // This will impact how browsers show your PWA/website

@@ -11,6 +11,7 @@
     "@fontsource/merriweather": "^4.5.14",
     "@fontsource/montserrat": "^4.5.13",
     "bootstrap": "^5.3.2",
+    "bootstrap-icons": "^1.11.2",
     "browserslist": "^4.21.9",
     "chrome-aws-lambda": "^10.1.0",
     "d3-array": "^3.2.1",
