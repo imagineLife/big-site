@@ -18,10 +18,10 @@ const SpeechDetail = lazy(() =>
 // Create a client
 const nlpQueryClient = new QueryClient()
 
-export default function Nlp() {
+export default function Nlp(props) {
   return (
     <ReactQueryWrapper queryClient={nlpQueryClient}>
-      <NlpProvider>
+      <NlpProvider {...props}>
         <NlpLayout>
           <Suspense fallback={<span />}>
             <Router basepath="/nlp">

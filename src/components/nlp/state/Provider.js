@@ -1,6 +1,6 @@
 import React, { createContext, useReducer, useMemo } from "react"
 import nlpReducer from "./reducer"
-import { useMutation } from "react-query"
+import { useMutation, useQuery } from "react-query"
 import useAppRegistration from "../hooks/useAppRegistration"
 
 const jsonPost = (url, body) => {
@@ -17,18 +17,42 @@ const jsonPost = (url, body) => {
 const initialReducerState = {
   fileData: null,
 }
+
+const API_HOST = "http://localhost:3000"
+
+function useSessionCheck(enabled) {
+  return useQuery(
+    "sessionAuthCheck",
+    () =>
+      fetch(`${API_HOST}/api/session`, {
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+      }).then(d => d.json()),
+    {
+      enabled,
+    }
+  )
+}
+
 const NlpContext = createContext()
 
-function NlpProvider({ children }) {
+function NlpProvider({ children, location, ...rest }) {
+  console.log("rest")
+  console.log(rest)
+
   console.log("%c Provider", "background-color: pink; color: black;")
 
   const [state, dispatch] = useReducer(nlpReducer, initialReducerState)
-  console.log("state")
-  console.log(state)
 
   const appInitialized = useAppRegistration()
 
   const authRequest = async ({ url, body }) => {
+    console.log("authRequest params")
+    console.log({
+      url,
+      body,
+    })
+
     const response = await jsonPost(url, body)
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`)
@@ -38,11 +62,26 @@ function NlpProvider({ children }) {
 
   const startLoginMutation = useMutation(authRequest)
   const finishLoginMutation = useMutation(authRequest)
+  console.log({
+    startLoginMutation,
+    finishLoginMutation,
+  })
 
-  const authorized = useMemo(
-    () => Boolean(finishLoginMutation?.isSuccess),
-    [finishLoginMutation]
-  )
+  const shouldFetchSessionAuth =
+    startLoginMutation?.isIdle === true &&
+    startLoginMutation?.isSuccess === false &&
+    finishLoginMutation?.isIdle === true &&
+    finishLoginMutation?.isSuccess === false &&
+    location?.pathname !== "/nlp/auth/"
+
+  const sessionAuthStatus = useSessionCheck(shouldFetchSessionAuth)
+  console.log("sessionAuthStatus")
+  console.log(sessionAuthStatus)
+
+  const authorized = useMemo(() => {
+    if (finishLoginMutation?.isSuccess) return true
+    return false
+  }, [finishLoginMutation])
   return (
     <NlpContext.Provider
       value={{
