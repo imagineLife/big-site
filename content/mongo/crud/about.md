@@ -16,6 +16,11 @@ tags: ["database", "mongodb", "crud"]
   - [On Creating](#on-creating)
   - [On Updating](#on-updating)
   - [On Deleting](#on-deleting)
+  - [Array Examples](#array-examples)
+    - [Delete a value from an array with $pull](#delete-a-value-from-an-array-with-pull)
+    - [Add a value if not already present with $addToSet](#add-a-value-if-not-already-present-with-addtoset)
+    - [Remove an item from the beginning or end with $pop](#remove-an-item-from-the-beginning-or-end-with-pop)
+    - [Change the value of an array item with $set and $](#change-the-value-of-an-array-item-with-set-and-)
 
 ## Data Storage
 
@@ -114,13 +119,13 @@ This can be done through atlas
   using the `insert` command
 */
 // on success
-WriteResult({ nInserted: 1 });
+WriteResult({ nInserted: 1 })
 
 /*
   Inserting Many
 */
 
-db.coll.insert([{ docOne: 'val' }, { docTwo: 'val' }, { docThree: 'val' }]);
+db.coll.insert([{ docOne: "val" }, { docTwo: "val" }, { docThree: "val" }])
 // returns something like...
 BulkWriteResult({
   writeErrors: [],
@@ -131,7 +136,7 @@ BulkWriteResult({
   nModified: 0,
   nRemoved: 0,
   upserted: [],
-});
+})
 
 /*
   Forcing a duplicate key err on inserting many
@@ -139,13 +144,13 @@ BulkWriteResult({
 db.coll.insert([
   {
     _id: 123,
-    water: 'melonOne',
+    water: "melonOne",
   },
   {
     _id: 123,
-    water: 'melonTwo',
+    water: "melonTwo",
   },
-]);
+])
 
 // returns...
 BulkWriteResult({
@@ -153,7 +158,7 @@ BulkWriteResult({
     {
       index: 1,
       code: 11000,
-      errmsg: 'E11000 duplicate key error collection: ...etc',
+      errmsg: "E11000 duplicate key error collection: ...etc",
       op: {
         _id: 123,
         water: melonTwo,
@@ -167,7 +172,7 @@ BulkWriteResult({
   nModified: 0,
   nRemoved: 0,
   upserted: [],
-});
+})
 
 /*
   NOTICE 
@@ -181,12 +186,12 @@ BulkWriteResult({
 // the insert CONTINUES after a failed doc
 db.asd.insert(
   [
-    { _id: 1, test: 'oneTwo' },
-    { _id: 1, test: 'twoThree' },
-    { _id: 5, test: 'worksWell' },
+    { _id: 1, test: "oneTwo" },
+    { _id: 1, test: "twoThree" },
+    { _id: 5, test: "worksWell" },
   ],
-  { ordered: false },
-);
+  { ordered: false }
+)
 ```
 
 ## On Updating
@@ -204,15 +209,15 @@ db.asd.insert(
 db.sdf.updateMany(
   {
     water: {
-      $regex: '^m',
+      $regex: "^m",
     },
   },
   {
     $set: {
-      sink: 'kitchen',
+      sink: "kitchen",
     },
-  },
-);
+  }
+)
 ```
 
 ## On Deleting
@@ -227,3 +232,48 @@ The Only time deleteOne is a good approach is when deleting by the `_id` field: 
 **Collections** can be dropped with `drop()` like `db.coll.drop()`
 
 Delete all docs in a collection can be done with `db.coll.deleteMany({})`
+
+## Array Examples
+
+There are a bunch of [array operators](https://www.mongodb.com/docs/manual/reference/operator/update-array/). Here's some snippets of the array operators in action.
+
+track the array throughoug the following examples:
+
+### Delete a value from an array with $pull
+
+```js
+// CREATE an array at key "arrKey"
+db.test.insertOne({ _id: 2, arrKey: [123, 234, 345, 456] })
+
+// DELETE a key from that array
+db.test.updateOne({ _id: 2 }, { $pull: { arrKey: { $eq: 234 } } })
+```
+
+### Add a value if not already present with $addToSet
+
+```js
+// ADD a val to the arr if not already present with $addToSet
+db.test.updateOne({ _id: 2 }, { $addToSet: { arrKey: "just-added" } })
+db.test.findOne({ _id: 2 })
+// { _id: 2, arrKey: [ 123, 345, 456, 'just-added' ] }
+```
+
+### Remove an item from the beginning or end with $pop
+
+```js
+db.test.updateOne({_id:2}, { $pop: { arrKey: -1  }  })
+db.test.findOne({_id:2})
+// { _id: 2, arrKey: [ 345, 456, 'just-added' ] }
+
+db.test.updateOne({_id:2}, { $pop: { arrKey: 1  }  })
+db.test.findOne({_id:2})
+{ _id: 2, arrKey: [ 345, 456 ] }
+```
+
+### Change the value of an array item with $set and $
+
+```js
+// change 345 to 999
+db.test.updateOne({ _id: 2, arrKey: 345 }, { $set: { "arrKey.$": 999 } })
+db.test.findOne({ _id: 2 })
+```
