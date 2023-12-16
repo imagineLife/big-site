@@ -51,3 +51,34 @@ db.test.findOne({_id:2})
 db.test.updateOne({ _id: 2, arrKey: 345 }, { $set: { "arrKey.$": 999 } })
 db.test.findOne({ _id: 2 })
 ```
+
+## Getting Nested
+
+### Update All Array Elements with $[]
+
+Mongo has a few special characters.
+[`$[]`](https://www.mongodb.com/docs/manual/reference/operator/update/positional-all/#---) is one of them. It means to `update all elements in the array`.  
+In this example, the `$[]` is used in combination with `$pull` and `$eq` to remove an element that equals 2:
+
+```js
+// obj.arrKey[arrOfObjects]
+insertObj = {
+  _id: "sally",
+  arrKey: [
+    {
+      _id: "water",
+      arr: [1, 2, 3],
+    },
+    {
+      _id: "melon",
+      arr: [4, 5, 6],
+    },
+  ],
+}
+db.test.insertOne(insertObj)
+
+// remove the element "2" from the "water" object arr
+findObj = { _id: "sally", "arrKey._id": "water" }
+updateObj = { $pull: { "arrKey.$[].arr": { $eq: 2 } } }
+db.test.updateOne(findObj, updateObj)
+```
