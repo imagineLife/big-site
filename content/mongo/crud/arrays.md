@@ -19,9 +19,9 @@ track the array throughoug the following examples.
   - [Remove an item from the beginning or end with $pop](#remove-an-item-from-the-beginning-or-end-with-pop)
   - [Change the value of an array item with $set and $](#change-the-value-of-an-array-item-with-set-and-)
   - [Getting Nested](#getting-nested)
-    - [Update All Array Elements with $\[\]](#update-all-array-elements-with-)
+    - [Create array element with $ and push](#create-array-element-with--and-push)
     - [Edit an Element in an array with $](#edit-an-element-in-an-array-with-)
-    - [Add to an array with x.$.x](#add-to-an-array-with-xx)
+    - [Delete Array Elements with $\[\]](#delete-array-elements-with-)
 
 ## Delete a value from an array with $pull
 
@@ -64,7 +64,38 @@ db.test.findOne({ _id: 2 })
 
 ## Getting Nested
 
-### Update All Array Elements with $[]
+### Create array element with $ and push
+
+The [$](https://www.mongodb.com/docs/manual/reference/operator/update/positional/#update-documents-in-an-array) operator ca be used to add an element to a nested array. Here, the `$` is used in combination with `$push`:
+
+```js
+// starting object in the "test" collection
+;[
+  {
+    _id: "joe",
+    wordArr: [
+      {
+        item: "A",
+        words: ["quick", "brown", "fox", "trot"],
+      },
+      { item: "B", words: ["slow", "orange", "goat"] },
+    ],
+  },
+]
+
+//
+joeItemA = { _id: "joe", "wordArr.item": "A" }
+addPrince = { $push: { "wordArr.$.words": "prince" } }
+Nlp > db.Themes.updateOne(joeItemA, addPrince)
+```
+
+### Edit an Element in an array with $
+
+```js
+findWater = { _id: "sally", "arrKey._id": "water" }
+```
+
+### Delete Array Elements with $[]
 
 Mongo has a few special characters.
 [`$[]`](https://www.mongodb.com/docs/manual/reference/operator/update/positional-all/#---) is one of them. It means to `update all elements in the array`.  
@@ -91,35 +122,4 @@ db.test.insertOne(insertObj)
 findObj = { _id: "sally", "arrKey._id": "water" }
 updateObj = { $pull: { "arrKey.$[].arr": { $eq: 2 } } }
 db.test.updateOne(findObj, updateObj)
-```
-
-### Edit an Element in an array with $
-
-```js
-findWater = { _id: "sally", "arrKey._id": "water" }
-```
-
-### Add to an array with x.$.x
-
-The [$](https://www.mongodb.com/docs/manual/reference/operator/update/positional/#update-documents-in-an-array) operator ca be used to add an element to a nested array. Here, the `$` is used in combination with `$push`:
-
-```js
-// starting object in the "test" collection
-;[
-  {
-    _id: "joe",
-    wordArr: [
-      {
-        item: "A",
-        words: ["quick", "brown", "fox", "trot"],
-      },
-      { item: "B", words: ["slow", "orange", "goat"] },
-    ],
-  },
-]
-
-//
-joeItemA = { _id: "joe", "wordArr.item": "A" }
-addPrince = { $push: { "wordArr.$.words": "prince" } }
-Nlp > db.Themes.updateOne(joeItemA, addPrince)
 ```
