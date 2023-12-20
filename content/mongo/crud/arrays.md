@@ -21,7 +21,8 @@ track the array throughoug the following examples.
   - [Getting Nested](#getting-nested)
     - [Create array element with $ and push](#create-array-element-with--and-push)
     - [Edit an Element in an array with $](#edit-an-element-in-an-array-with-)
-    - [Delete An Element with $\[\]](#delete-an-element-with-)
+    - [Delete A Douubly-nested Element with $\[\]](#delete-a-douubly-nested-element-with-)
+    - [Delete an element from an array with $pull](#delete-an-element-from-an-array-with-pull)
 
 ## Delete a value from an array with $pull
 
@@ -95,7 +96,7 @@ Nlp > db.Themes.updateOne(joeItemA, addPrince)
 findWater = { _id: "sally", "arrKey._id": "water" }
 ```
 
-### Delete An Element with $[]
+### Delete A Douubly-nested Element with $[]
 
 Mongo has a few special characters.
 [`$[]`](https://www.mongodb.com/docs/manual/reference/operator/update/positional-all/#---) is one of them. It means to `update all elements in the array`.  
@@ -122,4 +123,10 @@ db.test.insertOne(insertObj)
 findObj = { _id: "sally", "arrKey._id": "water" }
 updateObj = { $pull: { "arrKey.$[].arr": { $eq: 2 } } }
 db.test.updateOne(findObj, updateObj)
+```
+
+### Delete an element from an array with $pull
+
+```js
+db.Users.update({ _id: "sally" }, { $pull: { arrKey: { _id: "melon" } } })
 ```
