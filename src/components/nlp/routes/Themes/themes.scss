@@ -1,0 +1,7 @@
+table tbody th {
+  position: -webkit-sticky;
+  position: sticky;
+  left: 0;
+  // background: white;
+  z-index: 1;
+}

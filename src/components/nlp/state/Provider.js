@@ -30,6 +30,11 @@ function useSessionCheck(enabled) {
       }).then(d => d.json()),
     {
       enabled,
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      staleTime: Infinity,
+      retry: false,
     }
   )
 }
@@ -68,20 +73,25 @@ function NlpProvider({ children, location, ...rest }) {
   })
 
   const shouldFetchSessionAuth =
-    startLoginMutation?.isIdle === true &&
-    startLoginMutation?.isSuccess === false &&
-    finishLoginMutation?.isIdle === true &&
-    finishLoginMutation?.isSuccess === false &&
-    location?.pathname !== "/nlp/auth/"
+    // not on auth page
+    (location?.pathname !== "/nlp/auth/" &&
+      startLoginMutation?.isIdle === true &&
+      startLoginMutation?.isSuccess === false &&
+      finishLoginMutation?.isIdle === true &&
+      finishLoginMutation?.isSuccess === false) ||
+    // on auth page, prior to disabling the form
+    (location?.pathname == "/nlp/auth/" &&
+      startLoginMutation?.isIdle === true &&
+      // startLoginMutation?.isSuccess === false &&
+      finishLoginMutation?.isIdle == true)
 
   const sessionAuthStatus = useSessionCheck(shouldFetchSessionAuth)
-  console.log("sessionAuthStatus")
-  console.log(sessionAuthStatus)
 
   const authorized = useMemo(() => {
-    if (finishLoginMutation?.isSuccess) return true
+    if (sessionAuthStatus?.data?.email) return sessionAuthStatus.data.email
     return false
-  }, [finishLoginMutation])
+  }, [finishLoginMutation, sessionAuthStatus])
+
   return (
     <NlpContext.Provider
       value={{
