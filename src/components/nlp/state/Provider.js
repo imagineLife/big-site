@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useMemo } from "react"
+import React, { createContext, useReducer, useMemo, useState } from "react"
 import nlpReducer from "./reducer"
 import { useMutation, useQuery } from "react-query"
 import useAppRegistration from "../hooks/useAppRegistration"
@@ -21,6 +21,8 @@ const initialReducerState = {
 const API_HOST = "http://localhost:3000"
 
 function useSessionCheck(enabled) {
+  console.log("useSessionCheck enabled: ", enabled)
+
   return useQuery(
     "sessionAuthCheck",
     () =>
@@ -29,7 +31,7 @@ function useSessionCheck(enabled) {
         headers: { "Content-Type": "application/json" },
       }).then(d => d.json()),
     {
-      enabled,
+      enabled: enabled,
       refetchOnWindowFocus: false,
       refetchOnMount: false,
       refetchOnReconnect: false,
@@ -42,12 +44,11 @@ function useSessionCheck(enabled) {
 const NlpContext = createContext()
 
 function NlpProvider({ children, location, ...rest }) {
-  console.log("rest")
-  console.log(rest)
-
   console.log("%c Provider", "background-color: pink; color: black;")
-
+  const [emailVal, setEmail] = useState()
   const [state, dispatch] = useReducer(nlpReducer, initialReducerState)
+  console.log("state")
+  console.log(state)
 
   const appInitialized = useAppRegistration()
 
@@ -72,22 +73,51 @@ function NlpProvider({ children, location, ...rest }) {
     finishLoginMutation,
   })
 
-  const shouldFetchSessionAuth =
-    // not on auth page
-    (location?.pathname !== "/nlp/auth/" &&
-      startLoginMutation?.isIdle === true &&
-      startLoginMutation?.isSuccess === false &&
-      finishLoginMutation?.isIdle === true &&
-      finishLoginMutation?.isSuccess === false) ||
-    // on auth page, prior to disabling the form
-    (location?.pathname == "/nlp/auth/" &&
-      startLoginMutation?.isIdle === true &&
-      // startLoginMutation?.isSuccess === false &&
-      finishLoginMutation?.isIdle == true)
+  const shouldCheckSessionOnLogin =
+    location?.pathname === "/nlp/auth/" &&
+    startLoginMutation.isSuccess &&
+    // startLoginMutation.isSuccess &&
+    finishLoginMutation.isSuccess
+  // finishLoginMutation.isSuccess
+  console.log("shouldCheckSessionOnLogin:", shouldCheckSessionOnLogin)
+  console.log("startLoginMutation")
+  console.log(startLoginMutation)
+  console.log("finishLoginMutation")
+  console.log(finishLoginMutation)
 
-  const sessionAuthStatus = useSessionCheck(shouldFetchSessionAuth)
+  const shouldCheckSessionOther =
+    location?.pathname !== "/nlp/auth/" &&
+    startLoginMutation?.isSuccess == false &&
+    finishLoginMutation?.isSuccess == false
+
+  console.log("shouldCheckSessionOther:", shouldCheckSessionOther)
+
+  // const shouldFetchSessionAuth =
+  //   // not on auth page
+  //   (location?.pathname !== "/nlp/auth/" &&
+  //     startLoginMutation?.isIdle === true &&
+  //     startLoginMutation?.isSuccess === false &&
+  //     finishLoginMutation?.isIdle === true &&
+  //     finishLoginMutation?.isSuccess === false) ||
+  //   // on auth page, prior to disabling the form
+  //   (location?.pathname == "/nlp/auth/" &&
+  //     startLoginMutation?.isIdle === true &&
+  //     // startLoginMutation?.isSuccess === false &&
+  //     finishLoginMutation?.isIdle == true)
+
+  const sessionAuthStatus = useSessionCheck(
+    shouldCheckSessionOther || shouldCheckSessionOnLogin
+  )
+  console.log("sessionAuthStatus")
+  console.log(sessionAuthStatus)
 
   const authorized = useMemo(() => {
+    if (
+      startLoginMutation.isSuccess &&
+      finishLoginMutation.isSuccess &&
+      emailVal
+    )
+      return emailVal
     if (sessionAuthStatus?.data?.email) return sessionAuthStatus.data.email
     return false
   }, [finishLoginMutation, sessionAuthStatus])
@@ -100,6 +130,8 @@ function NlpProvider({ children, location, ...rest }) {
         startLoginMutation,
         finishLoginMutation,
         authorized,
+        emailVal,
+        setEmail,
         ...state,
       }}
     >

@@ -1,4 +1,5 @@
-import React, { useState, useContext } from "react"
+import React, { useContext } from "react"
+import { Redirect } from "@reach/router"
 import { useForm, Controller } from "react-hook-form"
 import { Form, Button } from "react-bootstrap"
 import { NlpContext } from "./../state/Provider"
@@ -7,7 +8,13 @@ import { NlpContext } from "./../state/Provider"
   component
 */
 export default function Auth() {
-  const { startLoginMutation, finishLoginMutation } = useContext(NlpContext)
+  const {
+    startLoginMutation,
+    finishLoginMutation,
+    emailVal,
+    setEmail,
+    authorized,
+  } = useContext(NlpContext)
   const API_HOST = "http://localhost:3000"
   const START_URL = "/api/users/email"
   const FINISH_URL = "/api/users/pw"
@@ -18,7 +25,6 @@ export default function Auth() {
     getValues,
     control,
   } = useForm({ email: "", password: "" })
-  const [emailVal, setEmail] = useState()
 
   const handleEmailSubmit = async ({ email }) => {
     startLoginMutation.mutate({
@@ -34,6 +40,11 @@ export default function Auth() {
       body: { email: emailVal, password },
     })
   }
+
+  console.log("authorized")
+  console.log(authorized)
+
+  if (authorized) return <Redirect to="/nlp/themes" />
 
   return (
     <>

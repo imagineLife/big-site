@@ -9,8 +9,12 @@ import "./../../pages/nlp/index.scss"
 import { NlpContext } from "./state/Provider"
 
 export default function NlpUi() {
-  const { dispatch } = useContext(NlpContext) //apiReadyKey, apiInitKey, state,
+  const { dispatch, authorized } = useContext(NlpContext) //apiReadyKey, apiInitKey, state,
   const inputRef = useRef(null)
+  console.log(
+    `%c "NLP WRAPPER authorized:", ${authorized}`,
+    "background-color: orange; color: black;"
+  )
 
   function loadExcelFile(e) {
     const data = e.target.result

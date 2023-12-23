@@ -25,10 +25,10 @@ export default function Nlp(props) {
         <NlpLayout>
           <Suspense fallback={<span />}>
             <Router basepath="/nlp">
+              <Auth path="/auth" />
               <Themes path="/themes" />
               <SpeechDetail path="/speeches/:speechId" />
               <Speeches path="/speeches" />
-              <Auth path="/auth" />
               <NlpUi path="/" />
             </Router>
           </Suspense>
