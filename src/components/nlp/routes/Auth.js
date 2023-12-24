@@ -1,5 +1,5 @@
-import React, { useContext } from "react"
-import { Redirect } from "@reach/router"
+import React, { useContext, useEffect } from "react"
+import { redirectTo } from "@reach/router"
 import { useForm, Controller } from "react-hook-form"
 import { Form, Button } from "react-bootstrap"
 import { NlpContext } from "./../state/Provider"
@@ -24,6 +24,7 @@ export default function Auth() {
     register,
     getValues,
     control,
+    setFocus,
   } = useForm({ email: "", password: "" })
 
   const handleEmailSubmit = async ({ email }) => {
@@ -41,10 +42,14 @@ export default function Auth() {
     })
   }
 
-  console.log("authorized")
-  console.log(authorized)
+  // focus pw input after email success
+  useEffect(() => {
+    if (startLoginMutation.isSuccess && !authorized) {
+      setFocus("password")
+    }
+  }, [startLoginMutation?.isSuccess, authorized])
 
-  if (authorized) return <Redirect to="/nlp/themes" />
+  if (authorized) return redirectTo("/nlp/themes")
 
   return (
     <>
