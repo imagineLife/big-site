@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useState, useEffect } from "react"
 import { useQuery } from "react-query"
 import { NlpContext } from "./../../state/Provider"
 import ThemesTable from "./Table"
@@ -8,9 +8,6 @@ const API_HOST = "http://localhost:3000"
 const userThemesApi = email => `${API_HOST}/api/users/${email}/themes`
 function Themes() {
   const { authorized } = useContext(NlpContext)
-  console.log("%c authorized", "background-color: pink; color: black;")
-  console.log(authorized)
-
   const userThemes = useQuery(
     `${authorized}-themes`,
     () =>
@@ -28,12 +25,34 @@ function Themes() {
     }
   )
 
+  const [localThemeData, setLocalThemeData] = useState(userThemes?.data)
+  useEffect(() => {
+    setLocalThemeData(userThemes.data)
+  }, [userThemes.data])
+
+  const updateLocalThemeData = dataObj => {
+    const newThemeData = localThemeData.map(d => {
+      // EDIT
+      if (d.theme !== dataObj.theme) return d
+      d.words = d.words.map(w => {
+        if (w !== dataObj.originalWord) return w
+        return dataObj.word
+      })
+      return d
+    })
+
+    setLocalThemeData(newThemeData)
+  }
+
   return (
     <section id="theme-editor">
       <h2>Theme Editor</h2>
-      {!authorized || (!userThemes?.data && <p>loading...</p>)}
-      {authorized && userThemes?.data && (
-        <ThemesTable themes={userThemes.data} />
+      {!authorized || (!localThemeData && <p>loading...</p>)}
+      {authorized && localThemeData && (
+        <ThemesTable
+          themes={localThemeData}
+          updateLocalThemeData={updateLocalThemeData}
+        />
       )}
     </section>
   )

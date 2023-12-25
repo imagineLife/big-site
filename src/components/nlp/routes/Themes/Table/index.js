@@ -17,27 +17,23 @@ async function updateMutation({ email, theme, value, newValue }) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ value: newValue }),
+    credentials: "include",
   })
-  return response.json()
+
+  return response.status === 200
 }
 
-function ThemeRow({ theme, words }) {
+function ThemeRow({ theme, words, updateLocalThemeData }) {
   const { authorized } = useContext(NlpContext)
   const [rowAction, setRowAction] = useState({})
-  console.log("rowAction")
-  console.log(rowAction)
 
   const updateThemeMutation = useMutation({
     mutationFn: updateMutation,
     onSuccess: () => {
-      console.log("DONE?!")
-      // queryClient.invalidateQueries({ queryKey: ["posts"] })
-      // navigate("/")
+      updateLocalThemeData(rowAction)
+      setRowAction({})
     },
   })
-
-  console.log("updateThemeMutation")
-  console.log(updateThemeMutation)
 
   const onInputChange = val => {
     setRowAction(d => ({ ...d, word: val }))
@@ -48,9 +44,12 @@ function ThemeRow({ theme, words }) {
   }
 
   const onEditSave = () => {
-    // updateThemeMutation.mutate({ email: authorized, theme: rowAction.theme, value: rowAction.originalWord, newValue: rowAction.word })
-    console.log("EDIT THIS rowAction")
-    console.log(rowAction)
+    updateThemeMutation.mutate({
+      email: authorized,
+      theme: rowAction.theme,
+      value: rowAction.originalWord,
+      newValue: rowAction.word,
+    })
   }
   // const selectedRowStyles = {
   //   // backgroundColor: "rgba(var(--bs-secondary-rgb))",
@@ -126,7 +125,7 @@ function ThemeRow({ theme, words }) {
   )
 }
 
-function ThemesTable({ themes }) {
+function ThemesTable({ themes, updateLocalThemeData }) {
   return (
     <Table bordered hover responsive>
       <thead>
@@ -137,7 +136,10 @@ function ThemesTable({ themes }) {
       </thead>
       <tbody>
         {themes.map(({ theme, words }) => (
-          <ThemeRow key={`Theme-Row-${theme}`} {...{ theme, words }} />
+          <ThemeRow
+            key={`Theme-Row-${theme}`}
+            {...{ theme, words, updateLocalThemeData }}
+          />
         ))}
       </tbody>
     </Table>

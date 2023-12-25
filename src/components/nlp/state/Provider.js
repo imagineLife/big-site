@@ -76,40 +76,16 @@ function NlpProvider({ children, location, ...rest }) {
   const shouldCheckSessionOnLogin =
     location?.pathname === "/nlp/auth/" &&
     startLoginMutation.isSuccess &&
-    // startLoginMutation.isSuccess &&
     finishLoginMutation.isSuccess
-  // finishLoginMutation.isSuccess
-  console.log("shouldCheckSessionOnLogin:", shouldCheckSessionOnLogin)
-  console.log("startLoginMutation")
-  console.log(startLoginMutation)
-  console.log("finishLoginMutation")
-  console.log(finishLoginMutation)
 
   const shouldCheckSessionOther =
     location?.pathname !== "/nlp/auth/" &&
     startLoginMutation?.isSuccess == false &&
     finishLoginMutation?.isSuccess == false
 
-  console.log("shouldCheckSessionOther:", shouldCheckSessionOther)
-
-  // const shouldFetchSessionAuth =
-  //   // not on auth page
-  //   (location?.pathname !== "/nlp/auth/" &&
-  //     startLoginMutation?.isIdle === true &&
-  //     startLoginMutation?.isSuccess === false &&
-  //     finishLoginMutation?.isIdle === true &&
-  //     finishLoginMutation?.isSuccess === false) ||
-  //   // on auth page, prior to disabling the form
-  //   (location?.pathname == "/nlp/auth/" &&
-  //     startLoginMutation?.isIdle === true &&
-  //     // startLoginMutation?.isSuccess === false &&
-  //     finishLoginMutation?.isIdle == true)
-
   const sessionAuthStatus = useSessionCheck(
     shouldCheckSessionOther || shouldCheckSessionOnLogin
   )
-  console.log("sessionAuthStatus")
-  console.log(sessionAuthStatus)
 
   const authorized = useMemo(() => {
     if (
@@ -120,7 +96,11 @@ function NlpProvider({ children, location, ...rest }) {
       return emailVal
     if (sessionAuthStatus?.data?.email) return sessionAuthStatus.data.email
     return false
-  }, [finishLoginMutation, sessionAuthStatus])
+  }, [
+    startLoginMutation.isSuccess,
+    finishLoginMutation.isSuccess,
+    sessionAuthStatus,
+  ])
 
   return (
     <NlpContext.Provider
