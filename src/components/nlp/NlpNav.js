@@ -13,16 +13,15 @@ function LoginButton({ onClick }) {
     </Button>
   )
 }
+
+function getDotColor(initializedStatus) {
+  if (initializedStatus === "yes") return "green"
+  if (initializedStatus === "loading") return "goldenrod"
+  return "red"
+}
+
 export default function NlpNav({ title }) {
   const { appInitialized, authorized, ...state } = useContext(NlpContext)
-  console.log("authorized")
-  console.log(authorized)
-
-  function getDotColor(initializedStatus) {
-    if (initializedStatus === "yes") return "green"
-    if (initializedStatus === "loading") return "goldenrod"
-    return "red"
-  }
   const CIRCLE_SIZE = "10px"
 
   let routeLinks = [{ path: "/nlp/", text: "Dashboard" }]

@@ -1,9 +1,130 @@
-import React from "react"
-
+import React, { useState, useContext } from "react"
+import { NlpContext } from "./../../../state/Provider"
+import { useMutation } from "react-query"
 import Badge from "react-bootstrap/Badge"
-import CloseButton from "react-bootstrap/CloseButton"
+
+// import CloseButton from "react-bootstrap/CloseButton"
 import Stack from "react-bootstrap/Stack"
 import Table from "react-bootstrap/Table"
+import "./index.scss"
+import EditableRow from "./EditableRow"
+
+async function updateMutation({ email, theme, value, newValue }) {
+  let fetchUrl = `http://localhost:3000/api/users/${email}/themes/${theme}/values/${value}`
+  const response = await fetch(fetchUrl, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ value: newValue }),
+  })
+  return response.json()
+}
+
+function ThemeRow({ theme, words }) {
+  const { authorized } = useContext(NlpContext)
+  const [rowAction, setRowAction] = useState({})
+  console.log("rowAction")
+  console.log(rowAction)
+
+  const updateThemeMutation = useMutation({
+    mutationFn: updateMutation,
+    onSuccess: () => {
+      console.log("DONE?!")
+      // queryClient.invalidateQueries({ queryKey: ["posts"] })
+      // navigate("/")
+    },
+  })
+
+  console.log("updateThemeMutation")
+  console.log(updateThemeMutation)
+
+  const onInputChange = val => {
+    setRowAction(d => ({ ...d, word: val }))
+  }
+
+  const onCancel = () => {
+    setRowAction({})
+  }
+
+  const onEditSave = () => {
+    // updateThemeMutation.mutate({ email: authorized, theme: rowAction.theme, value: rowAction.originalWord, newValue: rowAction.word })
+    console.log("EDIT THIS rowAction")
+    console.log(rowAction)
+  }
+  // const selectedRowStyles = {
+  //   // backgroundColor: "rgba(var(--bs-secondary-rgb))",
+  //   // color: "white",
+  // }
+
+  return (
+    <tr key={`theme-row-${theme}`}>
+      <th>{theme}</th>
+      {/* <td style={!rowAction?.word ? {} : selectedRowStyles}> */}
+      <td>
+        {/* Editable Row */}
+        {rowAction?.type && (
+          <EditableRow
+            val={rowAction.word}
+            onInputChange={onInputChange}
+            onCancel={onCancel}
+            onEditSave={onEditSave}
+          />
+        )}
+
+        {/* show all themes */}
+        {!rowAction?.type && (
+          <Stack
+            direction="horizontal"
+            gap={2}
+            style={{ flexWrap: "wrap", padding: "10px 5px" }}
+          >
+            {words.map(w => (
+              <Badge
+                bg="secondary"
+                className="theme-word"
+                key={`badge-${theme}-${w}`}
+                onClick={() =>
+                  setRowAction({
+                    type: "edit-theme-word",
+                    theme,
+                    word: w,
+                    originalWord: w,
+                  })
+                }
+                pill
+                style={{
+                  width: "fit-content",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  fontSize: "1em",
+                }}
+              >
+                <span>{w}</span>
+
+                {/* <CloseButton
+                onClick={() => {
+                  setRowAction({ type: "delete-theme-word", theme, word: w })
+                }}
+                style={{
+                  width: "20px",
+                  backgroundSize: "50%",
+                  boxSizing: "border-box",
+                  // border: "1px solid darkgray",
+                  borderRadius: "40%",
+                  backgroundColor: "rgba(255,255,255,.2)",
+                }}
+              /> */}
+              </Badge>
+            ))}
+          </Stack>
+        )}
+      </td>
+    </tr>
+  )
+}
 
 function ThemesTable({ themes }) {
   return (
@@ -16,38 +137,7 @@ function ThemesTable({ themes }) {
       </thead>
       <tbody>
         {themes.map(({ theme, words }) => (
-          <tr key={`theme-row-${theme}`}>
-            <th>{theme}</th>
-            <td>
-              <Stack
-                direction="horizontal"
-                gap={2}
-                style={{ flexWrap: "wrap", padding: "10px 5px" }}
-              >
-                {words.map(w => (
-                  <Badge
-                    key={`badge-${theme}-${w}`}
-                    // onClick={() => console.log(`CLICKED BADGE!`)}
-                    pill
-                    style={{
-                      width: "fit-content",
-                      padding: "0.5em 0.8em",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "10px",
-                      fontSize: "1em",
-                    }}
-                  >
-                    <span>{w}</span>
-                    <CloseButton
-                      onClick={() => console.log(`THEME: ${theme}, word: ${w}`)}
-                      style={{ width: "5px" }}
-                    />
-                  </Badge>
-                ))}
-              </Stack>
-            </td>
-          </tr>
+          <ThemeRow key={`Theme-Row-${theme}`} {...{ theme, words }} />
         ))}
       </tbody>
     </Table>
