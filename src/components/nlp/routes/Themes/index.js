@@ -4,14 +4,15 @@ import { NlpContext } from "./../../state/Provider"
 import ThemesTable from "./Table"
 import "./themes.scss"
 
-const API_HOST = "http://localhost:3000"
-const userThemesApi = email => `${API_HOST}/api/users/${email}/themes`
+const USER_THEMES_API_URL = email =>
+  `${process.env.GATSBY_NLP_API_URL}/api/users/${email}/themes`
+
 function Themes() {
   const { authorized } = useContext(NlpContext)
   const userThemes = useQuery(
     `${authorized}-themes`,
     () =>
-      fetch(userThemesApi(authorized), {
+      fetch(USER_THEMES_API_URL(authorized), {
         credentials: "include",
         headers: { "Content-Type": "application/json" },
       }).then(d => d.json()),

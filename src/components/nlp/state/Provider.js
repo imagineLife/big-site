@@ -18,15 +18,13 @@ const initialReducerState = {
   fileData: null,
 }
 
-const API_HOST = "http://localhost:3000"
-
 function useSessionCheck(enabled) {
   console.log("useSessionCheck enabled: ", enabled)
 
   return useQuery(
     "sessionAuthCheck",
     () =>
-      fetch(`${API_HOST}/api/session`, {
+      fetch(`${process.env.GATSBY_NLP_API_URL}/api/session`, {
         credentials: "include",
         headers: { "Content-Type": "application/json" },
       }).then(d => d.json()),

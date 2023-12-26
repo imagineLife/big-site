@@ -10,7 +10,7 @@ import "./index.scss"
 import EditableRow from "./EditableRow"
 
 async function updateMutation({ email, theme, value, newValue }) {
-  let fetchUrl = `http://localhost:3000/api/users/${email}/themes/${theme}/values/${value}`
+  let fetchUrl = `${process.env.GATSBY_NLP_API_URL}/api/users/${email}/themes/${theme}/values/${value}`
   const response = await fetch(fetchUrl, {
     method: "PUT",
     headers: {

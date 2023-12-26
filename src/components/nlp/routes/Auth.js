@@ -15,7 +15,6 @@ export default function Auth() {
     setEmail,
     authorized,
   } = useContext(NlpContext)
-  const API_HOST = "http://localhost:3000"
   const START_URL = "/api/users/email"
   const FINISH_URL = "/api/users/pw"
   const {
@@ -29,7 +28,7 @@ export default function Auth() {
 
   const handleEmailSubmit = async ({ email }) => {
     startLoginMutation.mutate({
-      url: `${API_HOST}${START_URL}`,
+      url: `${process.env.GATSBY_NLP_API_URL}${START_URL}`,
       body: { email },
     })
     setEmail(email)
