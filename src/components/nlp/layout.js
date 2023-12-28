@@ -6,11 +6,13 @@ import NlpNav from "./NlpNav"
 
 function NlpLayout({ children }) {
   const { appInitialized } = useContext(NlpContext)
+  console.log("appInitialized")
+  console.log(appInitialized)
 
   return (
     <main id="nlp">
       <NlpNav title="NLP" />
-      <Container>{appInitialized === "yes" && children}</Container>
+      {appInitialized === "yes" && <Container>{children}</Container>}
     </main>
   )
 }

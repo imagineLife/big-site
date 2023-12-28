@@ -1,42 +1,11 @@
 import React, { createContext, useReducer, useMemo, useState } from "react"
 import nlpReducer from "./reducer"
-import { useMutation, useQuery } from "react-query"
+import { useMutation } from "react-query"
 import useAppRegistration from "../hooks/useAppRegistration"
-
-const jsonPost = (url, body) => {
-  return fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(body),
-    credentials: "include",
-  })
-}
-
+import jsonPost from "./jsonPost"
+import useSessionCheck from "./useSessionCheck"
 const initialReducerState = {
   fileData: null,
-}
-
-function useSessionCheck(enabled) {
-  console.log("useSessionCheck enabled: ", enabled)
-
-  return useQuery(
-    "sessionAuthCheck",
-    () =>
-      fetch(`${process.env.GATSBY_NLP_API_URL}/api/session`, {
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-      }).then(d => d.json()),
-    {
-      enabled: enabled,
-      refetchOnWindowFocus: false,
-      refetchOnMount: false,
-      refetchOnReconnect: false,
-      staleTime: Infinity,
-      retry: false,
-    }
-  )
 }
 
 const NlpContext = createContext()
@@ -45,8 +14,6 @@ function NlpProvider({ children, location, ...rest }) {
   console.log("%c Provider", "background-color: pink; color: black;")
   const [emailVal, setEmail] = useState()
   const [state, dispatch] = useReducer(nlpReducer, initialReducerState)
-  console.log("state")
-  console.log(state)
 
   const appInitialized = useAppRegistration()
 
@@ -64,12 +31,13 @@ function NlpProvider({ children, location, ...rest }) {
     return Boolean(response.status)
   }
 
-  const startLoginMutation = useMutation(authRequest)
-  const finishLoginMutation = useMutation(authRequest)
-  console.log({
-    startLoginMutation,
-    finishLoginMutation,
+  const startLoginMutation = useMutation(authRequest, {
+    onSuccess: (_, vars, __) => {
+      setEmail(vars.body.email)
+    },
   })
+
+  const finishLoginMutation = useMutation(authRequest)
 
   const shouldCheckSessionOnLogin =
     location?.pathname === "/nlp/auth/" &&
@@ -109,7 +77,6 @@ function NlpProvider({ children, location, ...rest }) {
         finishLoginMutation,
         authorized,
         emailVal,
-        setEmail,
         ...state,
       }}
     >
