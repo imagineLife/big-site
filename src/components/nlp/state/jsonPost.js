@@ -1,9 +1,16 @@
-const jsonPost = (url, body) => {
+const jsonPost = (url, body, optionalHeaders) => {
+  let headers = {
+    "Content-Type": "application/json",
+  }
+  if (optionalHeaders) {
+    headers = {
+      ...headers,
+      ...optionalHeaders,
+    }
+  }
   return fetch(url, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers,
     body: JSON.stringify(body),
     credentials: "include",
   })

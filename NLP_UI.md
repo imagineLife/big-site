@@ -2,9 +2,12 @@
 
 ## Goals
 
-Start somewhere.  
-Show the text content of the most recent president inaugural address.  
-Show some text "highlights" &/or "analytics":
+### Allow For Specified Registration & Login
 
-- Longest words
-- Common words
+### Provide A Theme-Editing UI
+
+### Provide an Excel-Uploading UI
+
+### Provide a Typo-Editing UI
+
+### Provide a csv-export functionality

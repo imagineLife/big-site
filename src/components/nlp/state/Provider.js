@@ -3,7 +3,8 @@ import nlpReducer from "./reducer"
 import { useMutation } from "react-query"
 import useAppRegistration from "../hooks/useAppRegistration"
 import jsonPost from "./jsonPost"
-import useSessionCheck from "./useSessionCheck"
+import useSessionCheck from "../hooks/useSessionCheck"
+import { useSessionStorage } from "../hooks/useStorage"
 const initialReducerState = {
   fileData: null,
 }
@@ -13,6 +14,10 @@ const NlpContext = createContext()
 function NlpProvider({ children, location, ...rest }) {
   console.log("%c Provider", "background-color: pink; color: black;")
   const [emailVal, setEmail] = useState()
+  const [appToken] = useSessionStorage("nlp-app-token")
+  console.log("NlpProvider appToken")
+  console.log(appToken)
+
   const [state, dispatch] = useReducer(nlpReducer, initialReducerState)
 
   const appInitialized = useAppRegistration()
@@ -24,7 +29,7 @@ function NlpProvider({ children, location, ...rest }) {
       body,
     })
 
-    const response = await jsonPost(url, body)
+    const response = await jsonPost(url, body, { authorization: appToken })
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`)
     }
@@ -32,12 +37,21 @@ function NlpProvider({ children, location, ...rest }) {
   }
 
   const startLoginMutation = useMutation(authRequest, {
-    onSuccess: (_, vars, __) => {
+    onSuccess: (data, vars, context) => {
       setEmail(vars.body.email)
     },
   })
 
-  const finishLoginMutation = useMutation(authRequest)
+  const finishLoginMutation = useMutation(authRequest, {
+    onSuccess: (data, vars, ctx) => {
+      console.log("finishLoginMutation")
+      console.log({
+        data,
+        vars,
+        ctx,
+      })
+    },
+  })
 
   const shouldCheckSessionOnLogin =
     location?.pathname === "/nlp/auth/" &&
