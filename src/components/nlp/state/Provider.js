@@ -25,7 +25,9 @@ function NlpProvider({ children, location, ...rest }) {
       body,
     })
 
-    const response = await jsonPost(url, body, { authorization: appAuthToken })
+    const response = await jsonPost(url, body, {
+      authorization: `Bearer ${appAuthToken}`,
+    })
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`)
     }
