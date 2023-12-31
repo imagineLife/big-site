@@ -3,12 +3,9 @@ import { useQuery } from "react-query"
 import { useSessionStorage } from "./useStorage"
 
 export default function useAppRegistration() {
-  // console.log(
-  //   "%c useAppRegistration",
-  //   "background-color: orange; color: black;"
-  // )
   const [storageToken, setStorageToken] = useSessionStorage("nlp-app-token")
-  const [appToken, setAppToken] = useState()
+  const [appToken, setAppToken] = useState(storageToken)
+
   const useQOpts = {
     refetchOnWindowFocus: false,
     refetchOnMount: false,
@@ -47,32 +44,34 @@ export default function useAppRegistration() {
   // finish app init handshake
   //
   const API_HANDSHAKE_FINISH_API = `${process.env.GATSBY_NLP_API_URL}/app/allow-access`
-  const { data: apiReadyKey } = useQuery(
+  const { data: appAuthToken } = useQuery(
     "appHandshakeFinish",
     finishApiHandshake,
     {
       ...useQOpts,
       enabled: appToken !== undefined,
       onSuccess: data => {
-        setStorageToken(data)
+        if (!data.includes("Error")) {
+          setStorageToken(data)
+        }
       },
     }
   )
 
   const initialized = useMemo(() => {
-    if (!appToken && !apiReadyKey) {
+    if (!appToken && !appAuthToken) {
       return "no"
     }
-    if (appToken && !apiReadyKey) {
+    if (appToken && !appAuthToken) {
       return "loading"
     }
-    if (appToken && apiReadyKey) {
+    if (appAuthToken.includes("Error")) {
+      return "no"
+    }
+    if (appToken && appAuthToken) {
       return "yes"
     }
-  }, [appToken, apiReadyKey])
+  }, [appToken, appAuthToken])
 
-  console.log("storageToken")
-  console.log(storageToken)
-
-  return initialized
+  return [initialized, appAuthToken]
 }

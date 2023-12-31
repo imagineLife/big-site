@@ -12,15 +12,11 @@ const initialReducerState = {
 const NlpContext = createContext()
 
 function NlpProvider({ children, location, ...rest }) {
-  console.log("%c Provider", "background-color: pink; color: black;")
   const [emailVal, setEmail] = useState()
-  const [appToken] = useSessionStorage("nlp-app-token")
-  console.log("NlpProvider appToken")
-  console.log(appToken)
-
   const [state, dispatch] = useReducer(nlpReducer, initialReducerState)
-
-  const appInitialized = useAppRegistration()
+  const [appInitialized, appAuthToken] = useAppRegistration()
+  console.log("%c Provider", "background-color: pink; color: black;")
+  console.log({ appInitialized, appAuthToken })
 
   const authRequest = async ({ url, body }) => {
     console.log("authRequest params")
@@ -29,7 +25,7 @@ function NlpProvider({ children, location, ...rest }) {
       body,
     })
 
-    const response = await jsonPost(url, body, { authorization: appToken })
+    const response = await jsonPost(url, body, { authorization: appAuthToken })
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`)
     }
