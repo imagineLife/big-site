@@ -1,7 +1,6 @@
 import { useQuery } from "react-query"
 
 function useSessionCheck(enabled, apiReadyKey) {
-  console.log("useSessionCheck enabled: ", enabled)
   return useQuery(
     "sessionAuthCheck",
     () =>
