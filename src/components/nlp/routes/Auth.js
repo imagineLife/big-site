@@ -8,8 +8,13 @@ import { NlpContext } from "./../state/Provider"
   component
 */
 export default function Auth() {
-  const { startLoginMutation, finishLoginMutation, emailVal, authorized } =
-    useContext(NlpContext)
+  const {
+    startLoginMutation,
+    finishLoginMutation,
+    emailVal,
+    authorized,
+    emailSuccessToken,
+  } = useContext(NlpContext)
   const START_URL = "/api/users/email"
   const FINISH_URL = "/api/users/pw"
   const {
@@ -31,7 +36,7 @@ export default function Auth() {
   const handlePasswordSubmit = async ({ password }) => {
     finishLoginMutation.mutate({
       url: `${process.env.GATSBY_NLP_API_URL}${FINISH_URL}`,
-      body: { email: emailVal, password },
+      body: { email: emailVal, password, emailToken: emailSuccessToken },
     })
   }
 
