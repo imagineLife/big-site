@@ -10,7 +10,11 @@ function useSessionCheck(enabled, apiReadyKey) {
           "Content-Type": "application/json",
           Authorization: `Bearer ${apiReadyKey}`,
         },
-      }).then(d => d.json()),
+      }).then(async res => {
+        if (res.status !== 200) return false
+        const jsonRes = await res.json()
+        return jsonRes
+      }),
     {
       enabled: enabled,
       refetchOnWindowFocus: false,

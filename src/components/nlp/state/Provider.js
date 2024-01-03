@@ -1,4 +1,10 @@
-import React, { createContext, useReducer, useMemo, useState } from "react"
+import React, {
+  createContext,
+  useReducer,
+  useMemo,
+  useState,
+  useEffect,
+} from "react"
 import nlpReducer from "./reducer"
 import { useMutation } from "react-query"
 import useAppRegistration from "../hooks/useAppRegistration"
@@ -13,41 +19,40 @@ const NlpContext = createContext()
 
 function NlpProvider({ children, location, ...rest }) {
   const [emailVal, setEmail] = useState()
+  const [emailSuccessToken, setEmailSuccessToken] = useState()
   const [state, dispatch] = useReducer(nlpReducer, initialReducerState)
   const [appInitialized, appAuthToken] = useAppRegistration()
+  const [, setStorageToken, removeSessionStorage] =
+    useSessionStorage("nlp-token")
   console.log("%c Provider", "background-color: pink; color: black;")
   console.log({ appInitialized, appAuthToken })
 
   const authRequest = async ({ url, body }) => {
-    console.log("authRequest params")
-    console.log({
-      url,
-      body,
-    })
-
     const response = await jsonPost(url, body, {
       authorization: `Bearer ${appAuthToken}`,
     })
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`)
     }
-    return Boolean(response.status)
+    if (response.status === 200) {
+      const responseJwt = await response.text()
+      console.log("responseJwt")
+      console.log(responseJwt)
+      return responseJwt
+    }
   }
 
   const startLoginMutation = useMutation(authRequest, {
-    onSuccess: (data, vars, context) => {
-      setEmail(vars.body.email)
+    onSuccess: (data, variables) => {
+      //vars, context
+      setEmailSuccessToken(data)
+      setEmail(variables.body.email)
     },
   })
 
   const finishLoginMutation = useMutation(authRequest, {
-    onSuccess: (data, vars, ctx) => {
-      console.log("finishLoginMutation")
-      console.log({
-        data,
-        vars,
-        ctx,
-      })
+    onSuccess: data => {
+      setStorageToken(data)
     },
   })
 
@@ -59,10 +64,12 @@ function NlpProvider({ children, location, ...rest }) {
   const shouldCheckSessionOther =
     location?.pathname !== "/nlp/auth/" &&
     startLoginMutation?.isSuccess == false &&
-    finishLoginMutation?.isSuccess == false
+    finishLoginMutation?.isSuccess == false &&
+    Boolean(appAuthToken)
 
   const sessionAuthStatus = useSessionCheck(
-    shouldCheckSessionOther || shouldCheckSessionOnLogin
+    shouldCheckSessionOther || shouldCheckSessionOnLogin,
+    appAuthToken
   )
 
   const authorized = useMemo(() => {
@@ -83,12 +90,13 @@ function NlpProvider({ children, location, ...rest }) {
   return (
     <NlpContext.Provider
       value={{
-        dispatch,
         appInitialized,
-        startLoginMutation,
-        finishLoginMutation,
         authorized,
+        dispatch,
+        emailSuccessToken,
         emailVal,
+        finishLoginMutation,
+        startLoginMutation,
         ...state,
       }}
     >

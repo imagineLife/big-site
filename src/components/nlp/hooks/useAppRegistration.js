@@ -3,7 +3,7 @@ import { useQuery } from "react-query"
 import { useSessionStorage } from "./useStorage"
 
 export default function useAppRegistration() {
-  const [storageToken, setStorageToken] = useSessionStorage("nlp-app-token")
+  const [storageToken, setStorageToken] = useSessionStorage("nlp-token")
   const [appToken, setAppToken] = useState(storageToken)
 
   const useQOpts = {

@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react"
 import { useQuery } from "react-query"
 import { NlpContext } from "./../../state/Provider"
 import ThemesTable from "./Table"
+import { useSessionStorage } from "../../hooks/useStorage"
 import "./themes.scss"
 
 const USER_THEMES_API_URL = email =>
@@ -9,12 +10,16 @@ const USER_THEMES_API_URL = email =>
 
 function Themes() {
   const { authorized } = useContext(NlpContext)
+  const [sessionJwt] = useSessionStorage("nlp-token")
   const userThemes = useQuery(
     `${authorized}-themes`,
     () =>
       fetch(USER_THEMES_API_URL(authorized), {
         credentials: "include",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${sessionJwt}`,
+        },
       }).then(d => d.json()),
     {
       enabled: Boolean(authorized),
