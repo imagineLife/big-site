@@ -4,11 +4,11 @@ import { useCallback, useState, useEffect } from "react"
   abstractions: useLocalStorage & useSessionStorage
 */
 export function useLocalStorage(key, defaultValue) {
-  return useStorage(key, defaultValue, window.localStorage)
+  return useStorage(key, defaultValue, window?.localStorage)
 }
 
 export function useSessionStorage(key, defaultValue) {
-  return useStorage(key, defaultValue, window.sessionStorage)
+  return useStorage(key, defaultValue, window?.sessionStorage)
 }
 
 //

@@ -7,29 +7,24 @@ import Table from "react-bootstrap/Table"
 import "./index.scss"
 import EditableRow from "./EditableRow"
 import { useSessionStorage } from "./../../../hooks/useStorage"
-
-async function updateMutation({ email, theme, value, newValue, jwt }) {
-  let fetchUrl = `${process.env.GATSBY_NLP_API_URL}/api/users/${email}/themes/${theme}/values/${value}`
-  const response = await fetch(fetchUrl, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${jwt}`,
-    },
-    body: JSON.stringify({ value: newValue }),
-    credentials: "include",
-  })
-
-  return response.status === 200
-}
+import updateThemeValueFetch from "./updateThemeValueFetch"
+import deleteThemeValueFetch from "./deleteThemeValueFetch"
 
 function ThemeRow({ theme, words, updateLocalThemeData }) {
   const [tokenVal] = useSessionStorage("nlp-token")
   const { authorized } = useContext(NlpContext)
   const [rowAction, setRowAction] = useState({})
 
-  const updateThemeMutation = useMutation({
-    mutationFn: updateMutation,
+  const updateThemeValueMutation = useMutation({
+    mutationFn: updateThemeValueFetch,
+    onSuccess: () => {
+      updateLocalThemeData(rowAction)
+      setRowAction({})
+    },
+  })
+
+  const deleteThemeValueMutation = useMutation({
+    mutationFn: deleteThemeValueFetch,
     onSuccess: () => {
       updateLocalThemeData(rowAction)
       setRowAction({})
@@ -45,13 +40,17 @@ function ThemeRow({ theme, words, updateLocalThemeData }) {
   }
 
   const onEditSave = () => {
-    updateThemeMutation.mutate({
+    updateThemeValueMutation.mutate({
       email: authorized,
       theme: rowAction.theme,
       value: rowAction.originalWord,
       newValue: rowAction.word,
       jwt: tokenVal,
     })
+  }
+
+  const onEditDelete = () => {
+    deleteThemeValueMutation.mutate({})
   }
   // const selectedRowStyles = {
   //   // backgroundColor: "rgba(var(--bs-secondary-rgb))",
@@ -70,6 +69,7 @@ function ThemeRow({ theme, words, updateLocalThemeData }) {
             onInputChange={onInputChange}
             onCancel={onCancel}
             onEditSave={onEditSave}
+            onDelete={onEditDelete}
           />
         )}
 
