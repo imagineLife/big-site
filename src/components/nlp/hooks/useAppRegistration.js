@@ -3,8 +3,14 @@ import { useQuery } from "react-query"
 import { useSessionStorage } from "./useStorage"
 
 export default function useAppRegistration() {
-  const [storageToken, setStorageToken] = useSessionStorage("nlp-token")
+  console.log("%c useAppRegistration", "background-color: pink; color: black;")
+
+  const [storageToken, setStorageToken, clearSessionToken] =
+    useSessionStorage("nlp-token")
   const [appToken, setAppToken] = useState(storageToken)
+  console.log("%c appToken", "background-color: pink; color: black;")
+
+  console.log(appToken)
 
   const useQOpts = {
     refetchOnWindowFocus: false,
@@ -26,7 +32,10 @@ export default function useAppRegistration() {
       headers: {
         Authorization: `Bearer ${appToken}`,
       },
-    }).then(d => d.text())
+    }).then(d => {
+      if (d.status === 200) return d.text()
+      return d.json()
+    })
   }
 
   //
@@ -51,7 +60,11 @@ export default function useAppRegistration() {
       ...useQOpts,
       enabled: appToken !== undefined,
       onSuccess: data => {
-        if (!data.includes("Error")) {
+        if (data?.Error) {
+          clearSessionToken()
+          return
+        }
+        if (!data?.includes("Error")) {
           setStorageToken(data)
         }
       },
@@ -65,7 +78,7 @@ export default function useAppRegistration() {
     if (appToken && !appAuthToken) {
       return "loading"
     }
-    if (appAuthToken.includes("Error")) {
+    if (appAuthToken.Error) {
       return "no"
     }
     if (appToken && appAuthToken) {

@@ -16,7 +16,7 @@ function useSessionCheck(enabled, apiReadyKey) {
         return jsonRes
       }),
     {
-      enabled: enabled,
+      enabled: Boolean(enabled && Boolean(apiReadyKey)),
       refetchOnWindowFocus: false,
       refetchOnMount: false,
       refetchOnReconnect: false,

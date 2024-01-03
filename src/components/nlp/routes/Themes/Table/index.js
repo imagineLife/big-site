@@ -2,19 +2,19 @@ import React, { useState, useContext } from "react"
 import { NlpContext } from "./../../../state/Provider"
 import { useMutation } from "react-query"
 import Badge from "react-bootstrap/Badge"
-
-// import CloseButton from "react-bootstrap/CloseButton"
 import Stack from "react-bootstrap/Stack"
 import Table from "react-bootstrap/Table"
 import "./index.scss"
 import EditableRow from "./EditableRow"
+import { useSessionStorage } from "./../../../hooks/useStorage"
 
-async function updateMutation({ email, theme, value, newValue }) {
+async function updateMutation({ email, theme, value, newValue, jwt }) {
   let fetchUrl = `${process.env.GATSBY_NLP_API_URL}/api/users/${email}/themes/${theme}/values/${value}`
   const response = await fetch(fetchUrl, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${jwt}`,
     },
     body: JSON.stringify({ value: newValue }),
     credentials: "include",
@@ -24,6 +24,7 @@ async function updateMutation({ email, theme, value, newValue }) {
 }
 
 function ThemeRow({ theme, words, updateLocalThemeData }) {
+  const [tokenVal] = useSessionStorage("nlp-token")
   const { authorized } = useContext(NlpContext)
   const [rowAction, setRowAction] = useState({})
 
@@ -49,6 +50,7 @@ function ThemeRow({ theme, words, updateLocalThemeData }) {
       theme: rowAction.theme,
       value: rowAction.originalWord,
       newValue: rowAction.word,
+      jwt: tokenVal,
     })
   }
   // const selectedRowStyles = {

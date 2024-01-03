@@ -52,20 +52,27 @@ function NlpProvider({ children, location, ...rest }) {
 
   const finishLoginMutation = useMutation(authRequest, {
     onSuccess: data => {
+      console.log("storing password jwt")
+
       setStorageToken(data)
     },
   })
 
   const shouldCheckSessionOnLogin =
     location?.pathname === "/nlp/auth/" &&
-    startLoginMutation.isSuccess &&
-    finishLoginMutation.isSuccess
+    appAuthToken &&
+    appInitialized === "yes"
 
   const shouldCheckSessionOther =
     location?.pathname !== "/nlp/auth/" &&
     startLoginMutation?.isSuccess == false &&
     finishLoginMutation?.isSuccess == false &&
     Boolean(appAuthToken)
+  console.log({
+    shouldCheckSessionOnLogin,
+    shouldCheckSessionOther,
+    appAuthToken,
+  })
 
   const sessionAuthStatus = useSessionCheck(
     shouldCheckSessionOther || shouldCheckSessionOnLogin,
