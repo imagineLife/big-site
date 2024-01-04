@@ -50,7 +50,12 @@ function ThemeRow({ theme, words, updateLocalThemeData }) {
   }
 
   const onEditDelete = () => {
-    deleteThemeValueMutation.mutate({})
+    deleteThemeValueMutation.mutate({
+      email: authorized,
+      theme: rowAction.theme,
+      value: rowAction.originalWord,
+      jwt: tokenVal,
+    })
   }
   // const selectedRowStyles = {
   //   // backgroundColor: "rgba(var(--bs-secondary-rgb))",
@@ -69,7 +74,7 @@ function ThemeRow({ theme, words, updateLocalThemeData }) {
             onInputChange={onInputChange}
             onCancel={onCancel}
             onEditSave={onEditSave}
-            onDelete={onEditDelete}
+            onEditDelete={onEditDelete}
           />
         )}
 

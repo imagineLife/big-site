@@ -2,7 +2,13 @@ import React, { useEffect } from "react"
 import { Check2, X, Trash3 } from "react-bootstrap-icons"
 import Button from "react-bootstrap/Button"
 
-function EditableRow({ val, onInputChange, onCancel, onEditSave }) {
+function EditableRow({
+  val,
+  onInputChange,
+  onCancel,
+  onEditSave,
+  onEditDelete,
+}) {
   return (
     <div style={{ display: "flex", justifyContent: "flex-start" }}>
       <input
@@ -33,7 +39,7 @@ function EditableRow({ val, onInputChange, onCancel, onEditSave }) {
           Save
           <Check2 size="1.5em" />
         </Button>
-        <Button variant="secondary">
+        <Button variant="secondary" onClick={() => onEditDelete()}>
           Delete
           <Trash3 size="1.25em" />
         </Button>
