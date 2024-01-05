@@ -40,10 +40,19 @@ function Themes() {
     const newThemeData = localThemeData.map(d => {
       // EDIT
       if (d.theme !== dataObj.theme) return d
-      d.words = d.words.map(w => {
-        if (w !== dataObj.originalWord) return w
-        return dataObj.word
-      })
+      let localWords = d.words
+      d.words = []
+      for (let i = 0; i < localWords.length; i++) {
+        const thisWord = localWords[i]
+        if (thisWord !== dataObj.originalWord) {
+          d.words.push(thisWord)
+        } else {
+          // DELETE
+          if (!Boolean(dataObj?.method === "delete")) {
+            d.words.push(dataObj.word)
+          }
+        }
+      }
       return d
     })
 

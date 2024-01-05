@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { Check2, X, Trash3 } from "react-bootstrap-icons"
 import Button from "react-bootstrap/Button"
 

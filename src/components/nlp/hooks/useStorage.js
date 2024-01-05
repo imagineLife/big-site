@@ -1,14 +1,26 @@
 import { useCallback, useState, useEffect } from "react"
 
+const mockStorageForSSR = {
+  getItem: key => {},
+}
+const isBrowser = () => typeof window !== "undefined"
 /*
   abstractions: useLocalStorage & useSessionStorage
 */
 export function useLocalStorage(key, defaultValue) {
-  return useStorage(key, defaultValue, window?.localStorage)
+  return useStorage(
+    key,
+    defaultValue,
+    isBrowser() ? window?.localStorage : mockStorageForSSR
+  )
 }
 
 export function useSessionStorage(key, defaultValue) {
-  return useStorage(key, defaultValue, window?.sessionStorage)
+  return useStorage(
+    key,
+    defaultValue,
+    isBrowser() ? window?.sessionStorage : mockStorageForSSR
+  )
 }
 
 //
