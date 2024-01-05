@@ -1,16 +1,24 @@
 section#theme-editor{
   table {
+    tbody{ 
+      tr {
+        th {
+          div {
+            svg {
+              visibility: hidden;
+              cursor: pointer;
+            }
+          }
 
-    span.theme-word.badge{
-
-      //   svg{
-      //     visibility: hidden;
-      //   }
-      // &:hover{
-      //   svg{
-      //     visibility: visible;
-      //   }
-      // }
+          &:hover{
+            div {
+              svg {
+                visibility: visible;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

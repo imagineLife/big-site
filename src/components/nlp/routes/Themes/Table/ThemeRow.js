@@ -2,12 +2,14 @@ import React, { useState, useContext } from "react"
 import { NlpContext } from "./../../../state/Provider"
 import { useMutation } from "react-query"
 import Badge from "react-bootstrap/Badge"
+import Container from "react-bootstrap/Container"
+import Row from "react-bootstrap/Row"
 import Stack from "react-bootstrap/Stack"
 import EditableRow from "./EditableRow"
 import { useSessionStorage } from "./../../../hooks/useStorage"
 import updateThemeValueFetch from "./updateThemeValueFetch"
 import deleteThemeValueFetch from "./deleteThemeValueFetch"
-import { Pencil } from "react-bootstrap-icons"
+import { Pencil, Trash3 } from "react-bootstrap-icons"
 function ThemeRow({ theme, words, updateLocalThemeData }) {
   const [tokenVal] = useSessionStorage("nlp-token")
   const { authorized } = useContext(NlpContext)
@@ -64,10 +66,29 @@ function ThemeRow({ theme, words, updateLocalThemeData }) {
       {/* 
         Theme Keyword 
       */}
-      <th style={{ display: "flex", justifyContent: "space-between" }}>
-        <p style={{ flexGrow: "inherit" }}>{theme}</p>
-        {/* {theme} */}
-        <Pencil />
+      <th>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <p style={{ width: "fit-content" }}>{theme}</p>
+          <div
+            style={{
+              justifyContent: "space-around",
+              display: "flex",
+              minWidth: "75px",
+            }}
+          >
+            <Pencil
+              onClick={() => {
+                console.log(`POINTER CLICKED`)
+              }}
+            />
+            <Trash3
+              size="1.25em"
+              onClick={() => {
+                console.log(`TRASH CLICKED`)
+              }}
+            />
+          </div>
+        </div>
       </th>
       <td>
         {/* Editable Row */}
