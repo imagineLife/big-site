@@ -10,7 +10,7 @@ function EditableRow({
   onEditDelete,
 }) {
   return (
-    <div style={{ display: "flex", justifyContent: "flex-start" }}>
+    <div style={{ display: "flex", justifyContent: "space-between" }}>
       <input
         autoFocus
         onChange={e => {

@@ -3,7 +3,7 @@ import Table from "react-bootstrap/Table"
 import "./index.scss"
 import ThemeRow from "./ThemeRow"
 
-function ThemesTable({ themes, updateLocalThemeData }) {
+function ThemesTable({ themes, updateLocalThemeData, editTheme }) {
   return (
     <Table bordered hover responsive>
       <thead>
@@ -16,7 +16,7 @@ function ThemesTable({ themes, updateLocalThemeData }) {
         {themes.map(({ theme, words }) => (
           <ThemeRow
             key={`Theme-Row-${theme}`}
-            {...{ theme, words, updateLocalThemeData }}
+            {...{ theme, words, updateLocalThemeData, editTheme }}
           />
         ))}
       </tbody>

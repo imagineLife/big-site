@@ -10,7 +10,7 @@ import deleteThemeValueFetch from "./deleteThemeValueFetch"
 import { Pencil, Trash3 } from "react-bootstrap-icons"
 // import CloseButton from "react-bootstrap/CloseButton"
 
-function ThemeRow({ theme, words, updateLocalThemeData }) {
+function ThemeRow({ theme, words, updateLocalThemeData, editTheme }) {
   const [tokenVal] = useSessionStorage("nlp-token")
   const { authorized } = useContext(NlpContext)
   const [rowAction, setRowAction] = useState({})
@@ -78,13 +78,13 @@ function ThemeRow({ theme, words, updateLocalThemeData }) {
           >
             <Pencil
               onClick={() => {
-                console.log(`POINTER CLICKED`)
+                editTheme({ theme, editOrDelete: "Edit" })
               }}
             />
             <Trash3
               size="1.25em"
               onClick={() => {
-                console.log(`TRASH CLICKED`)
+                editTheme({ theme, editOrDelete: "Delete" })
               }}
             />
           </div>

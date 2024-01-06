@@ -2,6 +2,8 @@ import React, { useContext, useState, useEffect } from "react"
 import { useQuery } from "react-query"
 import { NlpContext } from "./../../state/Provider"
 import ThemesTable from "./Table"
+import ConfirmationModal from "./ConfirmationModal"
+import Description from "./Description"
 import { useSessionStorage } from "../../hooks/useStorage"
 import "./themes.scss"
 
@@ -11,6 +13,7 @@ const USER_THEMES_API_URL = email =>
 function Themes() {
   const { authorized } = useContext(NlpContext)
   const [sessionJwt] = useSessionStorage("nlp-token")
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false)
   const userThemes = useQuery(
     `${authorized}-themes`,
     () =>
@@ -59,6 +62,8 @@ function Themes() {
     setLocalThemeData(newThemeData)
   }
 
+  const handleModalClose = () => setShowConfirmationModal(false)
+
   return (
     <section id="theme-editor">
       <h2>Theme Editor</h2>
@@ -67,57 +72,24 @@ function Themes() {
         Theme action summary
       */}
       <h3>Create, Edit, And Delete Themes</h3>
-      <i>
-        A "theme" here is a word representing a "topic" within the text. Themes
-        associate with keywords. When the assocaited keyword(s) appear in text,
-        the theme will be associated with that text. The theme word, itself, may
-        not appear in the text.
-      </i>
-      <ul>
-        <li>
-          <b>Create a new theme</b>: select the "+" that appears when hovering
-          over the "theme" header.
-        </li>
-        <li>
-          <b>Edit a theme word</b>: select the pencil icon that appears when
-          hovering over the theme word.
-        </li>
-        <li>
-          <b>Delete a theme</b>: select the trashcan icon that appears when
-          hovering over the theme word.
-        </li>
-      </ul>
+      <Description />
 
-      {/* 
-        Theme keyword action summary
-      */}
-      <h3>Create, Edit, and Delete Theme Keywords</h3>
-      <i>
-        A theme "keyword" here is a word that (sh/c)ould exist in the text. Any
-        time the keyword appears in the text, the theme associated with the
-        keyword will be associated with the text.
-      </i>
-      <ul>
-        <li>
-          <b>Create a theme keyword</b>: select the "+" that appears when
-          hovering over the "keywords" cell assocaited with a theme.
-        </li>
-        <li>
-          <b>Edit a theme keyword</b>: select the "pill" showing the keyword you
-          want to edit. Input the edited keyword, and select "save".
-        </li>
-        <li>
-          <b>Delete a theme keyword</b>: select the "pill" showing the keyword
-          you want to delete. Select "delete".
-        </li>
-      </ul>
-      <i></i>
       {!authorized || (!localThemeData && <p>loading...</p>)}
+
       {authorized && localThemeData && (
-        <ThemesTable
-          themes={localThemeData}
-          updateLocalThemeData={updateLocalThemeData}
-        />
+        <>
+          <ThemesTable
+            themes={localThemeData}
+            updateLocalThemeData={updateLocalThemeData}
+            editTheme={props => setShowConfirmationModal(props)}
+          />
+
+          <ConfirmationModal
+            showConfirmationModal={showConfirmationModal}
+            setShowConfirmationModal={setShowConfirmationModal}
+            handleModalClose={handleModalClose}
+          />
+        </>
       )}
     </section>
   )
