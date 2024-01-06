@@ -2,6 +2,7 @@ section#theme-editor{
   table {
     tbody{ 
       tr {
+        // theme header cell
         th {
           div {
             svg {
@@ -10,12 +11,30 @@ section#theme-editor{
             }
           }
 
+          // theme header hover
           &:hover{
             div {
               svg {
                 visibility: visible;
               }
             }
+          }
+        }
+
+        .theme-pill{ 
+            width: -webkit-fit-content; 
+            width: -moz-fit-content; 
+            width: fit-content;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1em;
+            color: black;
+            border: 1px solid gray;
+            transition: 200ms;
+          &:hover{
+            border-color: blue;
           }
         }
       }

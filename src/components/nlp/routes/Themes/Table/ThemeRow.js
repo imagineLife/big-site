@@ -2,14 +2,14 @@ import React, { useState, useContext } from "react"
 import { NlpContext } from "./../../../state/Provider"
 import { useMutation } from "react-query"
 import Badge from "react-bootstrap/Badge"
-import Container from "react-bootstrap/Container"
-import Row from "react-bootstrap/Row"
 import Stack from "react-bootstrap/Stack"
 import EditableRow from "./EditableRow"
 import { useSessionStorage } from "./../../../hooks/useStorage"
 import updateThemeValueFetch from "./updateThemeValueFetch"
 import deleteThemeValueFetch from "./deleteThemeValueFetch"
 import { Pencil, Trash3 } from "react-bootstrap-icons"
+// import CloseButton from "react-bootstrap/CloseButton"
+
 function ThemeRow({ theme, words, updateLocalThemeData }) {
   const [tokenVal] = useSessionStorage("nlp-token")
   const { authorized } = useContext(NlpContext)
@@ -112,7 +112,7 @@ function ThemeRow({ theme, words, updateLocalThemeData }) {
             {words.map(w => (
               <Badge
                 bg="light"
-                className="theme-word"
+                className="theme-pill"
                 key={`badge-${theme}-${w}`}
                 onClick={() =>
                   setRowAction({
@@ -123,32 +123,22 @@ function ThemeRow({ theme, words, updateLocalThemeData }) {
                   })
                 }
                 pill
-                style={{
-                  width: "fit-content",
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "10px",
-                  fontSize: "1em",
-                  color: "black",
-                  border: "1px solid gray",
-                }}
               >
                 <span>{w}</span>
 
                 {/* <CloseButton
-                onClick={() => {
-                  setRowAction({ type: "delete-theme-word", theme, word: w })
-                }}
-                style={{
-                  width: "20px",
-                  backgroundSize: "50%",
-                  boxSizing: "border-box",
-                  // border: "1px solid darkgray",
-                  borderRadius: "40%",
-                  backgroundColor: "rgba(255,255,255,.2)",
-                }}
-              /> */}
+                  onClick={() => {
+                    setRowAction({ type: "delete-theme-word", theme, word: w })
+                  }}
+                  style={{
+                    width: "20px",
+                    backgroundSize: "50%",
+                    boxSizing: "border-box",
+                    // border: "1px solid darkgray",
+                    borderRadius: "40%",
+                    backgroundColor: "rgba(255,255,255,.2)",
+                  }}
+                /> */}
               </Badge>
             ))}
           </Stack>
