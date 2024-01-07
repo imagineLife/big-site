@@ -1,21 +1,15 @@
 [
   {
-    "title": "A Frontend Build System",
-    "snippet": "Leveraging React, Webpack, Babel, and NPM for a hot-reloading frontend dev environment",
-    "to": "/febs",
-    "image": "./sections/febs.jpg"
+    "title": "Node",
+    "snippet": "JavaScript on the Server - interacting with files, network requests, operating system tooling, sync & async, and more",
+    "to": "/node",
+    "image": "./sections/Node.jpg"
   },
   {
     "title": "MongoDB",
     "snippet": "JavaScript Document Data Store - an application-first style of storing data",
     "to": "/mongo",
     "image": "./sections/Mongo.jpg"
-  },
-  {
-    "title": "Node",
-    "snippet": "JavaScript on the Server - interacting with files, network requests, operating system tooling, sync & async, and more",
-    "to": "/node",
-    "image": "./sections/Node.jpg"
   },
   {
     "title": "Linux & Bash",
@@ -52,5 +46,11 @@
     "snippet": "Thoughts on the ins-and-outs of this agile framework",
     "to": "/scrum",
     "image": "./sections/Scrum.jpg"
+  },
+  {
+    "title": "A Frontend Build System",
+    "snippet": "Leveraging React, Webpack, Babel, and NPM for a hot-reloading frontend dev environment",
+    "to": "/febs",
+    "image": "./sections/febs.jpg"
   }
 ]
