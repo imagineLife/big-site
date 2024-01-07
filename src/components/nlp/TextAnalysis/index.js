@@ -67,8 +67,6 @@ function TextBlockOption({ data, isLoading }) {
   const sentimentPercentages = Object.keys(data?.summary?.sentiments).map(
     k => ({ name: k, ...data.summary.sentiments[k] })
   )
-  console.log("data")
-  console.log(data)
 
   return (
     <div className="text-block-analysis">

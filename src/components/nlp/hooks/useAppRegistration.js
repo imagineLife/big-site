@@ -3,14 +3,9 @@ import { useQuery } from "react-query"
 import { useSessionStorage } from "./useStorage"
 
 export default function useAppRegistration() {
-  console.log("%c useAppRegistration", "background-color: pink; color: black;")
-
   const [storageToken, setStorageToken, clearSessionToken] =
     useSessionStorage("nlp-token")
   const [appToken, setAppToken] = useState(storageToken)
-  console.log("%c appToken", "background-color: pink; color: black;")
-
-  console.log(appToken)
 
   const useQOpts = {
     refetchOnWindowFocus: false,

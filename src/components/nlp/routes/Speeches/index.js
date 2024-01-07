@@ -1,5 +1,4 @@
 import React from "react"
-import Button from "react-bootstrap/Button"
 import Form from "react-bootstrap/Form"
 import { useForm, Controller } from "react-hook-form"
 
@@ -57,8 +56,6 @@ function SpeechCreator() {
 }
 
 function Speeches() {
-  console.log("Speeches?!")
-
   return (
     <>
       <h3>Speech editor</h3>

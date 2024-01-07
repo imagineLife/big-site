@@ -25,8 +25,6 @@ function NlpProvider({ children, location, ...rest }) {
   const [, setStorageToken, removeSessionStorage] =
     useSessionStorage("nlp-token")
   console.log("%c Provider", "background-color: pink; color: black;")
-  console.log({ appInitialized, appAuthToken })
-
   const authRequest = async ({ url, body }) => {
     const response = await jsonPost(url, body, {
       authorization: `Bearer ${appAuthToken}`,
@@ -36,8 +34,6 @@ function NlpProvider({ children, location, ...rest }) {
     }
     if (response.status === 200) {
       const responseJwt = await response.text()
-      console.log("responseJwt")
-      console.log(responseJwt)
       return responseJwt
     }
   }
@@ -52,8 +48,6 @@ function NlpProvider({ children, location, ...rest }) {
 
   const finishLoginMutation = useMutation(authRequest, {
     onSuccess: data => {
-      console.log("storing password jwt")
-
       setStorageToken(data)
     },
   })
@@ -68,12 +62,6 @@ function NlpProvider({ children, location, ...rest }) {
     startLoginMutation?.isSuccess == false &&
     finishLoginMutation?.isSuccess == false &&
     Boolean(appAuthToken)
-  console.log({
-    shouldCheckSessionOnLogin,
-    shouldCheckSessionOther,
-    appAuthToken,
-  })
-
   const sessionAuthStatus = useSessionCheck(
     shouldCheckSessionOther || shouldCheckSessionOnLogin,
     appAuthToken

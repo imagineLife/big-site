@@ -35,6 +35,9 @@ function Themes() {
   )
 
   const [localThemeData, setLocalThemeData] = useState(userThemes?.data)
+  // TODO: use useQueryClient here
+  // https://tanstack.com/query/v4/docs/react/guides/updates-from-mutation-responses
+  // store a copy of the theme data from react-query
   useEffect(() => {
     setLocalThemeData(userThemes.data)
   }, [userThemes.data])
@@ -62,8 +65,15 @@ function Themes() {
     setLocalThemeData(newThemeData)
   }
 
-  const handleModalClose = () => setShowConfirmationModal(false)
+  const handleModalClose = theme => setShowConfirmationModal(false)
 
+  const deleteTheme = theme => {
+    console.log("will delete theme here...", theme)
+  }
+
+  const editTheme = theme => {
+    console.log("will EDIT theme here...", theme)
+  }
   return (
     <section id="theme-editor">
       <h2>Theme Editor</h2>
@@ -88,6 +98,13 @@ function Themes() {
             showConfirmationModal={showConfirmationModal}
             setShowConfirmationModal={setShowConfirmationModal}
             handleModalClose={handleModalClose}
+            confirmFunction={theme => {
+              if (showConfirmationModal?.editOrDelete === "edit-them") {
+                editTheme(theme)
+              } else {
+                deleteTheme(theme)
+              }
+            }}
           />
         </>
       )}

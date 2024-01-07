@@ -6,6 +6,7 @@ export default function ConfirmationModal({
   showConfirmationModal,
   setShowConfirmationModal,
   handleModalClose,
+  confirmFunction,
 }) {
   return (
     <Modal
@@ -19,14 +20,17 @@ export default function ConfirmationModal({
       </Modal.Header>
       <Modal.Body>
         Are you sure you want to{" "}
-        <b>{showConfirmationModal?.editOrDelete?.toUpperCase()}</b> theme{" "}
+        <b>{showConfirmationModal?.editOrDelete?.toUpperCase()}</b> the theme{" "}
         {showConfirmationModal.theme}?
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleModalClose}>
           Cancel
         </Button>
-        <Button variant="primary" onClick={handleModalClose}>
+        <Button
+          variant="primary"
+          onClick={() => confirmFunction(showConfirmationModal.theme)}
+        >
           {showConfirmationModal?.editOrDelete?.toUpperCase()}
         </Button>
       </Modal.Footer>

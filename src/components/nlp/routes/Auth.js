@@ -25,8 +25,6 @@ export default function Auth() {
   } = useForm({ email: "", password: "" })
 
   const handleEmailSubmit = async ({ email }) => {
-    console.log("handleEmailSubmit?!")
-
     startLoginMutation.mutate({
       url: `${process.env.GATSBY_NLP_API_URL}${START_URL}`,
       body: { email },

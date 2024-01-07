@@ -7,7 +7,7 @@ import EditableRow from "./EditableRow"
 import { useSessionStorage } from "./../../../hooks/useStorage"
 import updateThemeValueFetch from "./updateThemeValueFetch"
 import deleteThemeValueFetch from "./deleteThemeValueFetch"
-import { Pencil, Trash3 } from "react-bootstrap-icons"
+import ThemeCell from "./ThemeCell"
 // import CloseButton from "react-bootstrap/CloseButton"
 
 function ThemeRow({ theme, words, updateLocalThemeData, editTheme }) {
@@ -66,67 +66,52 @@ function ThemeRow({ theme, words, updateLocalThemeData, editTheme }) {
       {/* 
         Theme Keyword 
       */}
-      <th>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <p style={{ width: "fit-content" }}>{theme}</p>
-          <div
-            style={{
-              justifyContent: "space-around",
-              display: "flex",
-              minWidth: "75px",
-            }}
-          >
-            <Pencil
-              onClick={() => {
-                editTheme({ theme, editOrDelete: "Edit" })
-              }}
-            />
-            <Trash3
-              size="1.25em"
-              onClick={() => {
-                editTheme({ theme, editOrDelete: "Delete" })
-              }}
-            />
-          </div>
-        </div>
-      </th>
-      <td>
-        {/* Editable Row */}
-        {rowAction?.type && (
-          <EditableRow
-            val={rowAction.word}
-            onInputChange={onInputChange}
-            onCancel={onCancel}
-            onEditSave={onEditSave}
-            onEditDelete={onEditDelete}
-          />
-        )}
+      <ThemeCell
+        editTheme={editTheme}
+        theme={theme}
+        setRowAction={setRowAction}
+        rowAction={rowAction}
+      />
 
-        {/* show all theme values */}
-        {!rowAction?.type && (
-          <Stack
-            direction="horizontal"
-            gap={2}
-            style={{ flexWrap: "wrap", padding: "10px 5px" }}
-          >
-            {words.map(w => (
-              <Badge
-                bg="light"
-                className="theme-pill"
-                key={`badge-${theme}-${w}`}
-                onClick={() =>
-                  setRowAction({
-                    type: "edit-theme-word",
-                    theme,
-                    word: w,
-                    originalWord: w,
-                  })
-                }
-                pill
-              >
-                <span>{w}</span>
+      {/* theme values */}
+      {!(rowAction.type === "delete-theme") && (
+        <td>
+          {/* Edit view */}
+          {rowAction?.type && (
+            <EditableRow
+              val={rowAction.word}
+              onInputChange={onInputChange}
+              onCancel={onCancel}
+              onEditSave={onEditSave}
+              onEditDelete={onEditDelete}
+            />
+          )}
 
-                {/* <CloseButton
+          {/* Pills-List view */}
+          {!rowAction?.type && (
+            <Stack
+              direction="horizontal"
+              gap={2}
+              style={{ flexWrap: "wrap", padding: "10px 5px" }}
+            >
+              {words.map(w => (
+                <Badge
+                  bg="light"
+                  className="theme-pill"
+                  key={`badge-${theme}-${w}`}
+                  onClick={() =>
+                    setRowAction({
+                      type: "edit-theme-word",
+                      theme,
+                      word: w,
+                      originalWord: w,
+                    })
+                  }
+                  pill
+                >
+                  <span>{w}</span>
+
+                  {/* <CloseButton
                   onClick={() => {
                     setRowAction({ type: "delete-theme-word", theme, word: w })
                   }}
@@ -139,11 +124,12 @@ function ThemeRow({ theme, words, updateLocalThemeData, editTheme }) {
                     backgroundColor: "rgba(255,255,255,.2)",
                   }}
                 /> */}
-              </Badge>
-            ))}
-          </Stack>
-        )}
-      </td>
+                </Badge>
+              ))}
+            </Stack>
+          )}
+        </td>
+      )}
     </tr>
   )
 }
