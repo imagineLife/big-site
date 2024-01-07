@@ -138,24 +138,36 @@ main.folio {
 
 }
 
-#projects-wrapper, #certs-wrapper {
-  padding: 0 5%;
-  display: inline-block;
+#projects-wrapper, #certs-wrapper, #technologies-wrapper {
+   h2 {
+    display: inline-block;
+    width: 100%;
+  }
 }
 
 #projects-wrapper {
+  display: flex;
+  padding: 20px 0;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  
   div.box {
     background-size: cover;
   }
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 20px;
+
+  div.folio-item{
+    margin: 1em;
+  }
+  // display: grid;
+  // grid-template-columns: 1fr;
+  // grid-gap: 20px;
 }
 
 #certs-wrapper{
   display: flex;
   flex-wrap: wrap;
-
+  
   .box{
     min-width: 300px;
   }
@@ -246,7 +258,6 @@ section.welcome {
   background-size: cover;
   height: 530px;
   position: relative;
-  margin-bottom: 50px;
 }
 
 section.welcome * {
@@ -581,10 +592,6 @@ div.box:hover p.overlay-text {
     background-size: cover;
     background-position: unset;
   }
-
-  #projects-wrapper{
-    grid-template-columns: 1fr 1fr;
-  }
 }
 
 @media only screen and (min-width: 640px) {
@@ -701,9 +708,9 @@ div.box:hover p.overlay-text {
 }
 
 @media only screen and (min-width: 880px) {
-  #projects-wrapper{
-    grid-template-columns: 1fr 1fr 1fr;
-  }
+  // #projects-wrapper{
+  //   grid-template-columns: 1fr 1fr 1fr;
+  // }
 
   .stackWrapper {
     width: 45%;
