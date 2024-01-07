@@ -121,14 +121,48 @@ body {
   margin: 0;
 }
 
+@-webkit-keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
 main.folio {
   display: inline-block;
   /*width: 90%;*/
   margin: unset;
   max-width: unset;
   width: 100%;
-  background-color: rgb(15, 31, 50);
+  // background-color: rgb(15, 31, 50);
   padding: 0 0 20px 0;
+
+  // BRIGHT: #ee7752, #e73c7e, #23a6d5, #23d5ab
+  // MID-B: #894430, #9c2955, #135c77, #13765
+
+	background: linear-gradient(-45deg, #663223, #6d1c3b, #0d4154, #0c4e3e);
+	background-size: 400% 400%;
+	-webkit-animation: gradient 8s ease infinite;
+	        animation: gradient 8s ease infinite;
+	// height: 100vh;
+
 
   h2 {
     color: white;
@@ -139,9 +173,13 @@ main.folio {
 }
 
 #projects-wrapper, #certs-wrapper, #technologies-wrapper {
-   h2 {
+   div.frosted-bg {
     display: inline-block;
     width: 100%;
+    background-color: white;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.2);  
   }
 }
 
@@ -563,7 +601,7 @@ div.box:hover p.overlay-text {
   .tech-list-box {
     padding: 10px 15px;
     margin: 5px 0 0 0;
-    background-color: unset;
+    // background-color: unset;
     display: block;
     bottom: 0;
     position: absolute;
@@ -818,9 +856,13 @@ div.caption li:last-child::after {
     Hover interaction @ bigger screens
 */
 
+.hover-v2 {
+  width: 100%;
+}
 @media only screen and (min-width: 640px) {
   /* caption */
   .hover-v2 {
+    width: unset;
     .box {
       .caption {
         background-color: unset;
@@ -906,7 +948,7 @@ div.caption li:last-child::after {
 
 
 #technologies-wrapper{
-  background-color: rgba(255, 255, 255, 0.25);
+  // background-color: rgba(255, 255, 255, 0.25);
   display: flex;
   padding: 20px 0;
   flex-wrap: wrap;

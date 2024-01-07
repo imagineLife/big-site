@@ -427,21 +427,27 @@ export default function Folio() {
       </section>
 
       <section id="certs-wrapper">
-        <h2>Certifications</h2>
+        <div className="frosted-bg">
+          <h2>Certifications</h2>
+        </div>
         {certs.map((itm, itmIdex) => (
           <CertItem key={`folio-item-${itmIdex}`} {...itm} />
         ))}
       </section>
 
       <section id="projects-wrapper">
-        <h2>Projects</h2>
+        <div className="frosted-bg">
+          <h2>Projects</h2>
+        </div>
         {folioItems.map((itm, itmIdex) => (
           <FolioItem key={`folio-item-${itmIdex}`} {...itm} />
         ))}
       </section>
 
       <section id="technologies-wrapper">
-        <h2>Technologies</h2>
+        <div className="frosted-bg">
+          <h2>Technologies</h2>
+        </div>
         {technologies.map((itm, itmIdex) => (
           <FolioItem key={`folio-item-${itmIdex}`} {...itm} />
         ))}
