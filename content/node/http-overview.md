@@ -10,11 +10,6 @@ order: 7
 
 # More To Come With Node
 
-Some details on http servers with node:
-
-- [Building an HTTP Server](/node/http/intro): A skeleton set of http servers - with node and with express
-- [Blocking The Event Loop](/node/event-loop/blocking): how blocking the event loop impacts a node server
-
 (_some more topics I hope to write up_)
 
 - **CRUD**: leveraging http methods on resources to create, read, update and delete data

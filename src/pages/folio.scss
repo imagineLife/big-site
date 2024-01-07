@@ -427,10 +427,19 @@ div.psmi-bg {
 .babel-bg {
   background: center / auto no-repeat url('./../../images/imgs/babel.png');
 }
+.ts-bg {
+  background: center / auto no-repeat url('./../../images/imgs/ts.png');
+}
+.testing-lib-bg {
+  background: center / auto no-repeat url('./../../images/imgs/testing-lib.png');
+}
+.postman-bg {
+  background: center / auto no-repeat url('./../../images/imgs/postman.png');
+}
 
 
 
-
+// Systems
 .netlify-bg {
   background: center / auto no-repeat url('./../../images/imgs/netlify.jpg');
 }
@@ -440,9 +449,15 @@ div.psmi-bg {
 .gitlab-bg {
   background: center / auto no-repeat url('./../../images/imgs/gitlab.jpg');
 }
-// .scrum-bg {
-//   background: center / auto no-repeat url('./../../images/imgs/psmiBadge.png');
-// }
+.github-bg {
+  background: center / auto no-repeat url('./../../images/imgs/github.png');
+}
+.datadog-bg {
+  background: center / auto no-repeat url('./../../images/imgs/datadog.png');
+}
+.keynote-bg {
+  background: center / auto no-repeat url('./../../images/imgs/keynote.png');
+}
 
 
 //  Backend
@@ -455,6 +470,13 @@ div.psmi-bg {
 .mongo-bg {
   background: center / auto no-repeat url('./../../images/imgs/mongoDB.png');
 }
+.postgres-bg {
+  background: center / auto no-repeat url('./../../images/imgs/postgres.png');
+}
+.nginx-bg {
+  background: center / auto no-repeat url('./../../images/imgs/nginx.png');
+}
+
 
 // systems
 .docker-bg {
@@ -466,7 +488,6 @@ div.psmi-bg {
 .bash-bg {
   background: center / auto no-repeat url('./../../images/imgs/bash.png');
 }
-
 
 
 

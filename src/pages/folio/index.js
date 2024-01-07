@@ -71,6 +71,11 @@ const technologies = [
     imgClass: `js-bg`,
   },
   {
+    title: "TypeScript",
+    subText: "linting on steroids",
+    imgClass: `ts-bg`,
+  },
+  {
     title: "D3",
     subText: "Data Driven Documents",
     imgClass: `d3-bg`,
@@ -107,6 +112,16 @@ const technologies = [
     imgClass: `jest-bg`,
   },
   {
+    title: "Testing Library",
+    subText: "The modern easy-to-use testing library",
+    imgClass: `testing-lib-bg`,
+  },
+  {
+    title: "Postman",
+    subText: "API Testing",
+    imgClass: `postman-bg`,
+  },
+  {
     title: "Enzyme",
     subText: "React Component Testing",
     imgClass: `enzyme-bg`,
@@ -122,6 +137,11 @@ const technologies = [
     imgClass: `node-bg`,
   },
   {
+    title: "Nginx",
+    subText: "Rever Proxying, Load Balancing",
+    imgClass: `nginx-bg`,
+  },
+  {
     title: "Express",
     subText: "Node Server Framework",
     imgClass: `express-bg`,
@@ -130,6 +150,11 @@ const technologies = [
     title: "MongoDB",
     subText: "Document data storage - consumer-first schemas.",
     imgClass: `mongo-bg`,
+  },
+  {
+    title: "PostGres",
+    subText: "The relational datastore",
+    imgClass: `postgres-bg`,
   },
   {
     title: "GitLab",
@@ -151,13 +176,12 @@ const technologies = [
     subText: "The Shell",
     imgClass: `bash-bg`,
   },
+  {
+    title: "Keynote",
+    subText: "Presenting Ideas alongside Visuals",
+    imgClass: `keynote-bg`,
+  },
 ]
-/*
-    ADD:
-    - docker
-    - bash - when i get some bash chops!
-    - process automation - github actions + gitlab ci
-*/
 
 const certs = [
   {
