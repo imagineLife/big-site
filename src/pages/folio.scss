@@ -878,13 +878,17 @@ div.caption li:last-child::after {
 
 
 #technologies-wrapper{
-  background-color: rgba(255,255,255,.25);
+  background-color: rgba(255, 255, 255, 0.25);
   display: flex;
   padding: 20px 0;
   flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
 
   div{
     margin: 5px 0;
+    width: 300px;
+    min-height: 125px;
 
     &.box {
       height: 100px;

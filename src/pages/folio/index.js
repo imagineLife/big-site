@@ -82,7 +82,7 @@ const technologies = [
   },
   {
     title: "Storybook",
-    subText: "Component Playground",
+    subText: "Component Playground & Documentation",
     imgClass: `storybook-bg`,
   },
   {
@@ -133,7 +133,7 @@ const technologies = [
   },
   {
     title: "GitLab",
-    subText: "All-In-One SaaS Workflow Management & Code Integration",
+    subText: "Repo Hosting, CI/CD Automation Pipelines, Workflow Management",
     imgClass: `gitlab-bg`,
   },
   {
