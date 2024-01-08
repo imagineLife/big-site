@@ -1,5 +1,5 @@
 async function updateThemeFetch({ email, theme, value, newValue, jwt }) {
-  let fetchUrl = `${process.env.GATSBY_NLP_API_URL}/api/users/${email}/themes/${theme}/values/${value}`
+  let fetchUrl = `${process.env.GATSBY_NLP_API_URL}/api/users/${email}/themes/${theme}`
   const response = await fetch(fetchUrl, {
     method: "PUT",
     headers: {

@@ -2,8 +2,8 @@
 title: We All Have Talents
 slug: strengths/we-have-talents
 author: Jake Laursen
-excerpt: Parts of the ways that we show up in the world seem to be without effort  
-tags: ["personality", "strengths", "thoughts", "overview", "topic", "community"]
+excerpt: Parts of the ways that we show up in the world seem to be without effort
+tags: ["personality", "strengths", "thoughts", "overview", "community"]
 order: 2
 ---
 
@@ -18,6 +18,7 @@ Other times, the talents of others have seemed more subtle, mysterious, sometime
     - [The Trailblazer](#the-trailblazer)
 
 ## Some Illustrations Of People And Their Talents
+
 ### When Connecting Ideas Makes Things Simpler
 
 Alice has an uncanny talent for drawing connections between topics. She'll be in a conversation about a topic & can offer parallels between a current problem and another solution.  
@@ -41,4 +42,4 @@ This drive beyond the goal has proven to be a helpful approach to life where she
 Mark always took action as a first resort. Growth required an immediate next step. Waiting, pausing, or stalling were never the best options.  
 This fire-aim-ready style can serve as the spark to a room full of ideas who may seem 'stuck' ideating and need this boost to take some first steps.
 
-[_This is part of a brief series of posts on strengths and natural talents_](/strengths).  
+[_This is part of a brief series of posts on strengths and natural talents_](/strengths).
