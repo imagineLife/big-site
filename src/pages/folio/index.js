@@ -435,20 +435,20 @@ export default function Folio() {
         ))}
       </section>
 
-      <section id="projects-wrapper">
-        <div className="frosted-bg">
-          <h2>Projects</h2>
-        </div>
-        {folioItems.map((itm, itmIdex) => (
-          <FolioItem key={`folio-item-${itmIdex}`} {...itm} />
-        ))}
-      </section>
-
       <section id="technologies-wrapper">
         <div className="frosted-bg">
           <h2>Technologies</h2>
         </div>
         {technologies.map((itm, itmIdex) => (
+          <FolioItem key={`folio-item-${itmIdex}`} {...itm} />
+        ))}
+      </section>
+
+      <section id="projects-wrapper">
+        <div className="frosted-bg">
+          <h2>Projects</h2>
+        </div>
+        {folioItems.map((itm, itmIdex) => (
           <FolioItem key={`folio-item-${itmIdex}`} {...itm} />
         ))}
       </section>
