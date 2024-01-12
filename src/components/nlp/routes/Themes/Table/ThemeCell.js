@@ -22,7 +22,7 @@ export default function ThemeCell({
             >
               <Pencil
                 onClick={() => {
-                  // editTheme({ theme, editOrDelete: "Edit" })
+                  // editTheme({ theme, themeAction: "Edit" })
                   setRowAction({
                     type: "edit-theme",
                     theme,
@@ -34,7 +34,7 @@ export default function ThemeCell({
               <Trash3
                 size="1.25em"
                 onClick={() => {
-                  editTheme({ theme, editOrDelete: "Delete" })
+                  editTheme({ theme, themeAction: "Delete" })
                   // setRowAction({
                   //   type: "delete-theme",
                   //   theme,

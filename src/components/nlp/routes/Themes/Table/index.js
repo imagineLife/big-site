@@ -2,13 +2,21 @@ import React from "react"
 import Table from "react-bootstrap/Table"
 import "./index.scss"
 import ThemeRow from "./ThemeRow"
+import { PlusCircle } from "react-bootstrap-icons"
 
-function ThemesTable({ themes, updateLocalThemeData, editTheme }) {
+function ThemesTable({
+  themes,
+  updateLocalThemeData,
+  editTheme,
+  startAddingTheme,
+}) {
   return (
     <Table bordered hover responsive>
       <thead>
         <tr>
-          <th>Theme</th>
+          <th>
+            <span>Theme</span> <PlusCircle onClick={startAddingTheme} />
+          </th>
           <th>Keywords</th>
         </tr>
       </thead>

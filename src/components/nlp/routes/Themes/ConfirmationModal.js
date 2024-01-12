@@ -16,11 +16,11 @@ export default function ConfirmationModal({
       }}
     >
       <Modal.Header closeButton>
-        <Modal.Title>{showConfirmationModal?.editOrDelete} Theme</Modal.Title>
+        <Modal.Title>{showConfirmationModal?.themeAction} Theme</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         Are you sure you want to{" "}
-        <b>{showConfirmationModal?.editOrDelete?.toUpperCase()}</b> the theme{" "}
+        <b>{showConfirmationModal?.themeAction?.toUpperCase()}</b> the theme{" "}
         {showConfirmationModal.theme}?
       </Modal.Body>
       <Modal.Footer>
@@ -31,7 +31,7 @@ export default function ConfirmationModal({
           variant="primary"
           onClick={() => confirmFunction(showConfirmationModal.theme)}
         >
-          {showConfirmationModal?.editOrDelete?.toUpperCase()}
+          {showConfirmationModal?.themeAction?.toUpperCase()}
         </Button>
       </Modal.Footer>
     </Modal>

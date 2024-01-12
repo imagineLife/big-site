@@ -74,6 +74,11 @@ function Themes() {
   const editTheme = theme => {
     console.log("will EDIT theme here...", theme)
   }
+
+  const startAddingTheme = () => {
+    setShowConfirmationModal({ themeAction: "Create" })
+    console.log("start adding theme here...")
+  }
   return (
     <section id="theme-editor">
       <h2>Theme Editor</h2>
@@ -92,6 +97,7 @@ function Themes() {
             themes={localThemeData}
             updateLocalThemeData={updateLocalThemeData}
             editTheme={props => setShowConfirmationModal(props)}
+            startAddingTheme={startAddingTheme}
           />
 
           <ConfirmationModal
@@ -99,7 +105,7 @@ function Themes() {
             setShowConfirmationModal={setShowConfirmationModal}
             handleModalClose={handleModalClose}
             confirmFunction={theme => {
-              if (showConfirmationModal?.editOrDelete === "edit-them") {
+              if (showConfirmationModal?.themeAction === "edit-them") {
                 editTheme(theme)
               } else {
                 deleteTheme(theme)
