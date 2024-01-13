@@ -34,24 +34,27 @@ section#theme-editor{
             }
           }
         }
-
-        .theme-pill{ 
-            width: -webkit-fit-content; 
-            width: -moz-fit-content; 
-            width: fit-content;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1em;
-            color: black;
-            border: 1px solid gray;
-            transition: 200ms;
-          &:hover{
-            border-color: blue;
-          }
-        }
       }
     }
+  }
+}
+
+// 
+// displayed IN the table AND in the create-theme modal
+// 
+.theme-pill{ 
+    width: -webkit-fit-content; 
+    width: -moz-fit-content; 
+    width: fit-content;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1em;
+    color: black;
+    border: 1px solid gray;
+    transition: 200ms;
+  &:hover{
+    border-color: blue;
   }
 }

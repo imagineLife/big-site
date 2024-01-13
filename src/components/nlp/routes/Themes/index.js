@@ -34,6 +34,10 @@ function Themes() {
     }
   )
 
+  console.log("%c Themes route", "background-color: pink; color: black;")
+  console.log("showConfirmationModal")
+  console.log(showConfirmationModal)
+
   const [localThemeData, setLocalThemeData] = useState(userThemes?.data)
   // TODO: use useQueryClient here
   // https://tanstack.com/query/v4/docs/react/guides/updates-from-mutation-responses
@@ -71,6 +75,12 @@ function Themes() {
     console.log("will delete theme here...", theme)
   }
 
+  const createTheme = theme => {
+    console.log("will create theme here...", showConfirmationModal?.themeAction)
+    console.log("theme")
+    console.log(theme)
+  }
+
   const editTheme = theme => {
     console.log("will EDIT theme here...", theme)
   }
@@ -79,6 +89,7 @@ function Themes() {
     setShowConfirmationModal({ themeAction: "Create" })
     console.log("start adding theme here...")
   }
+
   return (
     <section id="theme-editor">
       <h2>Theme Editor</h2>
@@ -105,8 +116,10 @@ function Themes() {
             setShowConfirmationModal={setShowConfirmationModal}
             handleModalClose={handleModalClose}
             confirmFunction={theme => {
-              if (showConfirmationModal?.themeAction === "edit-them") {
+              if (showConfirmationModal?.themeAction === "Edit") {
                 editTheme(theme)
+              } else if (showConfirmationModal?.themeAction === "Create") {
+                createTheme(theme)
               } else {
                 deleteTheme(theme)
               }
