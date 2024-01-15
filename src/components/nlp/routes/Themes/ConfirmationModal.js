@@ -17,10 +17,11 @@ const CreateBody = ({
   theme,
   errors,
   control,
-  localKeyword,
+  localTheme,
   setLocalKeyword,
   keywordList,
   setLocalKeywordList,
+  getValues,
 }) => {
   return (
     <Modal.Body>
@@ -35,8 +36,11 @@ const CreateBody = ({
               type="text"
               name="theme"
               ref={ref}
-              onChange={onChange}
-              value={value}
+              onChange={e => {
+                e.preventDefault()
+                onChange(e)
+              }}
+              value={localTheme}
             />
           )}
         />
@@ -75,7 +79,8 @@ const CreateBody = ({
 
         <Button
           onClick={() => {
-            setLocalKeywordList(l => [...l, localKeyword])
+            const formVals = getValues()
+            setLocalKeywordList(l => [...l, formVals["keyword-entry"]])
           }}
           style={{
             padding: ".375rem .75rem",
@@ -120,7 +125,11 @@ export default function ConfirmationModal({
   handleModalClose,
   confirmFunction,
 }) {
-  const { errors, control } = useForm()
+  const { errors, control, getValues, reset } = useForm({
+    theme: "",
+    "keyword-entry": "",
+  })
+  const [localTheme, setLocalTheme] = useState()
   const [localKeyword, setLocalKeyword] = useState()
   const [keywordList, setLocalKeywordList] = useState([])
 
@@ -150,9 +159,12 @@ export default function ConfirmationModal({
           errors={errors}
           control={control}
           localKeyword={localKeyword}
+          localTheme={localTheme}
           setLocalKeyword={setLocalKeyword}
+          setLocalTheme={setLocalTheme}
           keywordList={keywordList}
           setLocalKeywordList={setLocalKeywordList}
+          getValues={getValues}
         />
       )}
       <Modal.Footer>
@@ -161,7 +173,19 @@ export default function ConfirmationModal({
         </Button>
         <Button
           variant="primary"
-          onClick={() => confirmFunction(showConfirmationModal.theme)}
+          onClick={() => {
+            if (showConfirmationModal.themeAction == "Delete") {
+              confirmFunction(showConfirmationModal.theme)
+            } else if (showConfirmationModal.themeAction !== "Create") {
+              confirmFunction(showConfirmationModal.themeAction)
+            } else {
+              confirmFunction({
+                theme: localTheme || getValues().theme,
+                keywordList,
+              })
+            }
+            reset()
+          }}
         >
           {showConfirmationModal?.themeAction?.toUpperCase()}
         </Button>

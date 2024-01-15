@@ -5,9 +5,9 @@ import Badge from "react-bootstrap/Badge"
 import Stack from "react-bootstrap/Stack"
 import EditableRow from "./EditableRow"
 import { useSessionStorage } from "./../../../hooks/useStorage"
-import updateThemeValueFetch from "./updateThemeValueFetch"
-import updateThemeFetch from "./updateTheme"
-import deleteThemeValueFetch from "./deleteThemeValueFetch"
+import updateThemeValueFetch from "../../../fetches/updateThemeValue"
+import updateThemeFetch from "../../../fetches/updateTheme"
+import deleteThemeValueFetch from "../../../fetches/deleteThemeValue"
 import ThemeCell from "./ThemeCell"
 // import CloseButton from "react-bootstrap/CloseButton"
 
@@ -63,14 +63,14 @@ function ThemeRow({ theme, words, updateLocalThemeData, editTheme }) {
       console.log("NEED TO FINISH UPDATE_THEME functionality")
       console.log("rowAction")
       console.log(rowAction)
+
       // TODO: finish update-theme request
-      // updateThemeMutation.mutate({
-      //   email: authorized,
-      //   theme: rowAction.theme,
-      //   value: rowAction.originalWord,
-      //   newValue: rowAction.word,
-      //   jwt: tokenVal,
-      // })
+      updateThemeMutation.mutate({
+        email: authorized,
+        theme: rowAction.theme,
+        newValue: rowAction.word,
+        jwt: tokenVal,
+      })
     }
   }
 
