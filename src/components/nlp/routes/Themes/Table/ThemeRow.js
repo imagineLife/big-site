@@ -26,9 +26,12 @@ function ThemeRow({ theme, words, updateLocalThemeData, editTheme }) {
 
   const updateThemeMutation = useMutation({
     mutationFn: updateThemeFetch,
-    onSuccess: () => {
-      console.log("THEME UPDATED: need to update localThemeData")
-      // updateLocalThemeData(rowAction)
+    onSuccess: (data, vars) => {
+      updateLocalThemeData({
+        method: "edit-theme",
+        theme: vars.theme,
+        newTheme: vars.newValue,
+      })
       setRowAction({})
     },
   })
@@ -36,7 +39,7 @@ function ThemeRow({ theme, words, updateLocalThemeData, editTheme }) {
   const deleteThemeValueMutation = useMutation({
     mutationFn: deleteThemeValueFetch,
     onSuccess: () => {
-      updateLocalThemeData({ ...rowAction, method: "delete" })
+      updateLocalThemeData({ ...rowAction, method: "delete-value" })
       setRowAction({})
     },
   })
@@ -60,11 +63,6 @@ function ThemeRow({ theme, words, updateLocalThemeData, editTheme }) {
       })
       //
     } else {
-      console.log("NEED TO FINISH UPDATE_THEME functionality")
-      console.log("rowAction")
-      console.log(rowAction)
-
-      // TODO: finish update-theme request
       updateThemeMutation.mutate({
         email: authorized,
         theme: rowAction.theme,

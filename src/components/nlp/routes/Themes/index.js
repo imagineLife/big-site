@@ -48,32 +48,34 @@ function Themes() {
 
   const updateLocalThemeData = useCallback(
     dataObj => {
-      if (dataObj.method === "delete") {
-        setLocalThemeData(curThemeData =>
-          curThemeData.filter(d => d.theme !== dataObj.theme)
-        )
-      } else if (dataObj.method === "create") {
-        setLocalThemeData(curThemeData => [
-          ...curThemeData,
-          { theme: dataObj.theme, words: dataObj.words },
-        ])
+      if (dataObj.method === "edit-theme") {
+        qc.setQueryData(`${authorized}-themes`, curData => {
+          return curData.map(t => {
+            if (t.theme !== dataObj.theme) {
+              return t
+            } else {
+              let thisObj = t
+              thisObj.theme = dataObj.newTheme
+              return thisObj
+            }
+          })
+        })
       } else {
+        console.log('NOT the "create" method...')
+
+        // update theme word
         const newThemeData = localThemeData.map(d => {
           if (d.theme !== dataObj.theme) return d
-
-          // EDIT
-          console.log("updateLocalThemeData dataObj")
-          console.log(dataObj)
-
           let localWords = d.words
           d.words = []
           for (let i = 0; i < localWords.length; i++) {
             const thisWord = localWords[i]
+            // "do nothing"
             if (thisWord !== dataObj.originalWord) {
               d.words.push(thisWord)
             } else {
-              // DELETE
-              if (!Boolean(dataObj?.method === "delete")) {
+              // store "edited" word in words arr
+              if (!Boolean(dataObj?.method === "delete-value")) {
                 d.words.push(dataObj.word)
               }
             }
@@ -112,20 +114,12 @@ function Themes() {
 
   const startAddingTheme = () => {
     setShowConfirmationModal({ themeAction: "Create" })
-    console.log("start adding theme here...")
   }
 
   const createThemeMutation = useMutation({
     mutationFn: createThemeFetch,
     onSuccess: (data, vars) => {
-      // updateLocalThemeData({
-      //   method: "create",
-      //   theme: vars.theme,
-      //   words: vars.words,
-      // })
       qc.setQueryData(`${authorized}-themes`, curData => {
-        console.log("curData")
-        console.log(curData)
         return [...curData, { theme: vars.theme, words: vars.words }]
       })
       setShowConfirmationModal(false)
@@ -135,14 +129,12 @@ function Themes() {
   const deleteThemeMutation = useMutation({
     mutationFn: deleteThemeFetch,
     onSuccess: (data, vars) => {
-      updateLocalThemeData({ method: "delete", theme: vars.theme })
+      qc.setQueryData(`${authorized}-themes`, curData => {
+        return curData.filter(d => d.theme !== vars.theme)
+      })
       setShowConfirmationModal(false)
     },
   })
-
-  console.log("%c Themes render", "background-color: lightgreen; color: black;")
-  console.log("localThemeData")
-  console.log(localThemeData)
 
   return (
     <section id="theme-editor">

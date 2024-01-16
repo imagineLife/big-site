@@ -6,8 +6,6 @@ async function createThemeFetch({ email, theme, words, jwt }) {
   if (words) {
     createBody.words = words
   }
-  console.log("createBody")
-  console.log(createBody)
 
   const response = await fetch(fetchUrl, {
     method: "POST",
