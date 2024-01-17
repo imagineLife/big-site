@@ -3,11 +3,10 @@ import "./index.scss"
 // components
 import Table from "../../Table"
 import Card from "../../Card"
-import SentimentPie from '../../SentimentPie';
-import WordLists from './../WordLists';
+import SentimentPie from "../../SentimentPie"
+import WordLists from "./../components/WordLists"
 
 function SentimentSummary({ stats, pieData }) {
-  
   return (
     <section id="stats-summary">
       <h4>Sentiment Aggregates</h4>
@@ -26,7 +25,7 @@ function SentimentSummary({ stats, pieData }) {
         {Object.keys(stats).map(stat => (
           <Card key={stat} title={stat} content={stats[stat]} />
         ))}
-        <SentimentPie data={pieData} small/>
+        <SentimentPie data={pieData} small />
       </section>
     </section>
   )
@@ -66,11 +65,10 @@ export default function ExcelAnalysis({ data, isLoading }) {
               data: [answers],
             }
 
+            const sentimentSummaryData = Object.keys(sentimentCounts)
+              .map(k => ({ name: k, ...sentimentCounts[k] }))
+              .filter(d => d.count !== 0)
 
-            const sentimentSummaryData = Object.keys(sentimentCounts).map(
-              k => ({ name: k, ...sentimentCounts[k] })
-            ).filter(d => d.count !== 0)
-            
             return (
               <section key={question}>
                 <h3 className="question">{question}</h3>

@@ -13,6 +13,7 @@ import useSessionCheck from "../hooks/useSessionCheck"
 import { useSessionStorage } from "../hooks/useStorage"
 const initialReducerState = {
   fileData: null,
+  fileType: null,
 }
 
 const NlpContext = createContext()

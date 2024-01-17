@@ -48,6 +48,10 @@ function Themes() {
 
   const updateLocalThemeData = useCallback(
     dataObj => {
+      console.log("updateLocalThemeData")
+      console.log("dataObj")
+      console.log(dataObj)
+
       if (dataObj.method === "edit-theme") {
         qc.setQueryData(`${authorized}-themes`, curData => {
           return curData.map(t => {
@@ -60,8 +64,34 @@ function Themes() {
             }
           })
         })
+      } else if (dataObj?.type === "edit-theme-word") {
+        qc.setQueryData(`${authorized}-themes`, curData => {
+          return curData.map(t => {
+            if (t.theme !== dataObj.theme) return t
+            t.words = t.words.map(w => {
+              if (w !== dataObj.originalWord) return w
+              return dataObj.word
+            })
+            return t
+          })
+        })
+      } else if (dataObj?.type === "delete-value") {
+        qc.setQueryData(`${authorized}-themes`, curData => {
+          return curData.map(t => {
+            if (t.theme !== dataObj.theme) return t
+            t.words = t.words
+              .map(w => {
+                if (w !== dataObj.originalWord) return w
+                return
+              })
+              .filter(d => d)
+            return t
+          })
+        })
       } else {
-        console.log('NOT the "create" method...')
+        console.log('NOT the "edit-theme" OR "edit-theme-word" method...')
+        console.log("dataObj")
+        console.log(dataObj)
 
         // update theme word
         const newThemeData = localThemeData.map(d => {
@@ -120,7 +150,12 @@ function Themes() {
     mutationFn: createThemeFetch,
     onSuccess: (data, vars) => {
       qc.setQueryData(`${authorized}-themes`, curData => {
-        return [...curData, { theme: vars.theme, words: vars.words }]
+        return [...curData, { theme: vars.theme, words: vars.words }].sort(
+          (a, b) => {
+            if (a.theme < b.theme) return -1
+            return 1
+          }
+        )
       })
       setShowConfirmationModal(false)
     },

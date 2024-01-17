@@ -1,14 +1,15 @@
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef, useState } from "react"
 
-export default forwardRef(function DragDDropFile({
-  onButtonClick,
-  handleFile,
-  setLoaded
-}, ref) {
+export default forwardRef(function DragDDropFile(
+  { onButtonClick, handleFile, setLoaded },
+  ref
+) {
   // drag state
   const [dragActive, setDragActive] = useState(false)
 
   const handleDrag = function (e) {
+    console.log("handleDrag")
+
     e.preventDefault()
     e.stopPropagation()
     if (e.type === "dragenter" || e.type === "dragover") {
@@ -19,6 +20,7 @@ export default forwardRef(function DragDDropFile({
   }
 
   const handleDrop = function (e) {
+    console.log("handleDrop")
     e.preventDefault()
     e.stopPropagation()
     setDragActive(false)
@@ -29,6 +31,8 @@ export default forwardRef(function DragDDropFile({
 
   // triggers when file is selected with click
   const handleChange = function (e) {
+    console.log("handleChange")
+
     e.preventDefault()
     if (e.target.files && e.target.files[0]) {
       handleFile(e.target.files)
@@ -36,11 +40,13 @@ export default forwardRef(function DragDDropFile({
   }
 
   return (
-    <form onDragEnter={handleDrag} onSubmit={e => e.preventDefault()} id="drag-drop">
+    <form
+      onDragEnter={handleDrag}
+      onSubmit={e => e.preventDefault()}
+      id="drag-drop"
+    >
       <input ref={ref} type="file" multiple={true} onChange={handleChange} />
-      <label
-        className={dragActive ? "drag-active" : ""}
-      >
+      <label className={dragActive ? "drag-active" : ""}>
         <div>
           <p>Drag and drop your file here or</p>
           <button className="upload-button" onClick={onButtonClick}>

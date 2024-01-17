@@ -39,7 +39,7 @@ function ThemeRow({ theme, words, updateLocalThemeData, editTheme }) {
   const deleteThemeValueMutation = useMutation({
     mutationFn: deleteThemeValueFetch,
     onSuccess: () => {
-      updateLocalThemeData({ ...rowAction, method: "delete-value" })
+      updateLocalThemeData({ ...rowAction, type: "delete-value" })
       setRowAction({})
     },
   })
@@ -97,62 +97,48 @@ function ThemeRow({ theme, words, updateLocalThemeData, editTheme }) {
       />
 
       {/* theme values */}
-      {!(rowAction.type === "delete-theme") && (
-        <td>
-          {/* Edit view */}
-          {rowAction?.type && (
-            <EditableRow
-              val={rowAction.word}
-              onInputChange={onInputChange}
-              onCancel={onCancel}
-              onEditSave={onEditSave}
-              onEditDelete={onEditDelete}
-            />
-          )}
+      {/* {!(rowAction.type === "delete-theme") && ( */}
+      <td>
+        {/* Edit view */}
+        {rowAction?.type && (
+          <EditableRow
+            val={rowAction.word}
+            onInputChange={onInputChange}
+            onCancel={onCancel}
+            onEditSave={onEditSave}
+            onEditDelete={onEditDelete}
+          />
+        )}
 
-          {/* Pills-List view */}
-          {!rowAction?.type && (
-            <Stack
-              direction="horizontal"
-              gap={2}
-              style={{ flexWrap: "wrap", padding: "10px 5px" }}
-            >
-              {words.map(w => (
-                <Badge
-                  bg="light"
-                  className="theme-pill"
-                  key={`badge-${theme}-${w}`}
-                  onClick={() =>
-                    setRowAction({
-                      type: "edit-theme-word",
-                      theme,
-                      word: w,
-                      originalWord: w,
-                    })
-                  }
-                  pill
-                >
-                  <span>{w}</span>
-
-                  {/* <CloseButton
-                  onClick={() => {
-                    setRowAction({ type: "delete-theme-word", theme, word: w })
-                  }}
-                  style={{
-                    width: "20px",
-                    backgroundSize: "50%",
-                    boxSizing: "border-box",
-                    // border: "1px solid darkgray",
-                    borderRadius: "40%",
-                    backgroundColor: "rgba(255,255,255,.2)",
-                  }}
-                /> */}
-                </Badge>
-              ))}
-            </Stack>
-          )}
-        </td>
-      )}
+        {/* Pills-List view */}
+        {!rowAction?.type && (
+          <Stack
+            direction="horizontal"
+            gap={2}
+            style={{ flexWrap: "wrap", padding: "10px 5px" }}
+          >
+            {words.map(w => (
+              <Badge
+                bg="light"
+                className="theme-pill"
+                key={`badge-${theme}-${w}`}
+                onClick={() =>
+                  setRowAction({
+                    type: "edit-theme-word",
+                    theme,
+                    word: w,
+                    originalWord: w,
+                  })
+                }
+                pill
+              >
+                <span>{w}</span>
+              </Badge>
+            ))}
+          </Stack>
+        )}
+      </td>
+      {/* )} */}
     </tr>
   )
 }

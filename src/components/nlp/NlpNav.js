@@ -24,12 +24,12 @@ export default function NlpNav({ title }) {
   const { appInitialized, authorized, ...state } = useContext(NlpContext)
   const CIRCLE_SIZE = "10px"
 
-  let routeLinks = [{ path: "/nlp/", text: "Dashboard" }]
+  let routeLinks = [{ path: "/nlp/", text: "Upload" }]
 
   if (authorized) {
     routeLinks.push(
-      { path: "/nlp/themes/", text: "Themes" },
-      { path: "/nlp/speeches/", text: "Speeches" }
+      { path: "/nlp/themes/", text: "Themes" }
+      // { path: "/nlp/speeches/", text: "Speeches" }
     )
   }
   let isBrowser = typeof window !== "undefined"

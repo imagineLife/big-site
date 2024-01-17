@@ -1,6 +1,6 @@
-import React from 'react';
-import Table from "../../Table"
-import './index.scss'
+import React from "react"
+import Table from "./../../../Table"
+import "./index.scss"
 function WordLists({ themes, wordsByCount, longest }) {
   return (
     <section className="word-lists">
@@ -40,7 +40,7 @@ function WordLists({ themes, wordsByCount, longest }) {
         <section id="longest-words">
           <h4>Longest Words</h4>
           <Table
-            data={[longest.map(d => ({Word: d}))]}
+            data={[longest.map(d => ({ Word: d }))]}
             columns={[
               {
                 Header: "Word",

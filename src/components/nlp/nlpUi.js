@@ -4,12 +4,12 @@ import * as XLSX from "xlsx"
 import "./../../pages/nlp/index.scss"
 
 // components
-// import DragDDropFile from "./DragNDropForm"
-// import TextAnalysis from "./nlp/TextAnalysis"
+import DragDDropFile from "./../DragNDropForm"
+import TextAnalysis from "./TextAnalysis"
 import { NlpContext } from "./state/Provider"
 
-export default function NlpUi() {
-  const { dispatch } = useContext(NlpContext) //apiReadyKey, apiInitKey, state,
+export default function UploadPreview() {
+  const { dispatch, fileData, fileType } = useContext(NlpContext) //apiReadyKey, apiInitKey, ,
   const inputRef = useRef(null)
 
   function loadExcelFile(e) {
@@ -30,6 +30,8 @@ export default function NlpUi() {
   }
 
   function readWithFileReader(files) {
+    console.log("READING with file reader")
+
     let theFile = files[0]
     const reader = new FileReader()
 
@@ -67,9 +69,8 @@ export default function NlpUi() {
 
   return (
     <section id="nlp-wrapper">
-      {/* WAS older content
-      no text data yet
-      {state.fileData === null && (
+      {/* WAS older content no text data yet */}
+      {fileData === null && (
         <DragDDropFile
           setLoaded={d => dispatch({ type: "fileData", payload: d })}
           onButtonClick={onButtonClick}
@@ -77,18 +78,18 @@ export default function NlpUi() {
           handleFile={readWithFileReader}
         />
       )}
-      text data present
-      {state.fileData !== null && (
+
+      {/* text data present */}
+      {fileData !== null && (
         <TextAnalysis
           reset={() => dispatch({ type: "reset", payload: null })}
-          fileData={state.fileData}
-          fileType={state.fileType}
+          fileData={fileData}
+          fileType={fileType}
         />
       )}
       <sub>
         <a href="/">go to my website</a>
       </sub>
-      */}
     </section>
   )
 }

@@ -7,7 +7,8 @@ import SentimentScoreLine from "./../../sentimentScoreLine/"
 import SentimentPie from "./../../SentimentPie"
 import Scalar from "../../../components/Scalar"
 import ExcelAnalysis from "../ExcelAnalysis"
-import WordLists from "./../WordLists"
+import WordLists from "./../components/WordLists"
+import { useSessionStorage } from "../hooks/useStorage"
 import "./index.scss"
 
 // const Table = lazy(() => import("../../../components/Table"))
@@ -29,7 +30,7 @@ function ResetPreviewForm({ reset, content, fileType }) {
   )
 }
 
-function fetchTextAnalysis({ data, type }) {
+function fetchTextAnalysis({ data, type, token }) {
   const SENTIMENT_PATH =
     type === "text" ? "/api/nlp/sentiment" : "/api/nlp/sentiment/excel"
   const FETCH = {
@@ -37,6 +38,7 @@ function fetchTextAnalysis({ data, type }) {
     METHOD: "post",
     HEADERS: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
   }
 
@@ -117,19 +119,26 @@ function TextBlockOption({ data, isLoading }) {
 }
 
 export default function TextAnalysis({ fileData, reset, fileType }) {
+  console.log("%c TextAnalysis", "background-color: pink; color: black;")
+
+  const [jwt] = useSessionStorage("nlp-token")
+
+  console.log("fileData")
+  console.log(fileData)
+
   const useQOpts = {
-    enabled: !!fileData,
+    enabled: Boolean(!!fileData && jwt),
     refetchOnWindowFocus: false,
     refetchOnMount: false,
     refetchOnReconnect: false,
     staleTime: Infinity,
   }
   // Queries
-  const { isLoading, data } = useQuery(
-    "textAnalysis",
-    fetchTextAnalysis({ data: fileData, type: fileType }),
-    useQOpts
-  )
+  // const { isLoading, data } = useQuery(
+  //   "textAnalysis",
+  //   fetchTextAnalysis({ data: fileData, type: fileType, token: jwt }),
+  //   useQOpts
+  // )
 
   return (
     <section id="text-analysis">
@@ -138,8 +147,8 @@ export default function TextAnalysis({ fileData, reset, fileType }) {
         content={fileData}
         fileType={fileType}
       />
-      {fileType === "text" && !isLoading && <TextBlockOption data={data} />}
-      {fileType === "excel" && !isLoading && <ExcelAnalysis data={data} />}
+      {/* {fileType === "text" && !isLoading && <TextBlockOption data={data} />} */}
+      {/* {fileType === "excel" && !isLoading && <ExcelAnalysis data={data} />} */}
     </section>
   )
 }
