@@ -5,8 +5,9 @@ import "./../../pages/nlp/index.scss"
 
 // components
 import DragDDropFile from "./../DragNDropForm"
-import TextAnalysis from "./TextAnalysis"
+// import TextAnalysis from "./TextAnalysis"
 import { NlpContext } from "./state/Provider"
+import Table from "./../../components/Table"
 
 export default function UploadPreview() {
   const { dispatch, fileData, fileType } = useContext(NlpContext) //apiReadyKey, apiInitKey, ,
@@ -81,11 +82,13 @@ export default function UploadPreview() {
 
       {/* text data present */}
       {fileData !== null && (
-        <TextAnalysis
-          reset={() => dispatch({ type: "reset", payload: null })}
-          fileData={fileData}
-          fileType={fileType}
-        />
+        // <TableWithData data={fileData} />
+        <Table data={fileData} className="nlp" />
+        // <TextAnalysis
+        //   reset={() => dispatch({ type: "reset", payload: null })}
+        //   fileData={fileData}
+        //   fileType={fileType}
+        // />
       )}
       <sub>
         <a href="/">go to my website</a>

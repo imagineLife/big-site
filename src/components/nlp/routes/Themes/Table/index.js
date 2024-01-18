@@ -11,7 +11,7 @@ function ThemesTable({
   startAddingTheme,
 }) {
   return (
-    <Table bordered hover responsive>
+    <Table bordered hover responsive className="theme">
       <thead>
         <tr>
           <th>

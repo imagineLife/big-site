@@ -1,13 +1,14 @@
-import React from 'react';
+import React from "react"
 import { useTable } from "react-table"
-import './index.scss';
+import "./index.scss"
 
-export default function Table({ data, columns }) {
-  
-  let innerColumns = columns || Object.keys(data[0][0]).map((d) => ({
-    Header: d,
-    accessor: d,
-  }))
+export default function Table({ data, columns, className }) {
+  let innerColumns =
+    columns ||
+    Object.keys(data[0][0]).map(d => ({
+      Header: d,
+      accessor: d,
+    }))
 
   // Use the state and functions returned from useTable to build your UI
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
@@ -16,9 +17,10 @@ export default function Table({ data, columns }) {
       data: data[0],
     })
 
+  const classString = className || "table-wrapper"
   // Render the UI for your table
   return (
-    <table {...getTableProps()} className="table-wrapper">
+    <table {...getTableProps()} className={classString}>
       <thead>
         {headerGroups.map(headerGroup => (
           <tr {...headerGroup.getHeaderGroupProps()}>
