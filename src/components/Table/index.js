@@ -2,7 +2,9 @@ import React from "react"
 import { useTable } from "react-table"
 import "./index.scss"
 
-export default function Table({ data, columns, className }) {
+export default function Table({ data, columns, className, firstFive }) {
+  console.log("%c TABLE", "background-color: yellow; color: black;")
+
   let innerColumns =
     columns ||
     Object.keys(data[0][0]).map(d => ({
@@ -31,16 +33,24 @@ export default function Table({ data, columns, className }) {
         ))}
       </thead>
       <tbody {...getTableBodyProps()}>
-        {rows.map((row, i) => {
-          prepareRow(row)
-          return (
-            <tr {...row.getRowProps()}>
-              {row.cells.map(cell => {
-                return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-              })}
-            </tr>
-          )
-        })}
+        {rows
+          .map((row, i) => {
+            if (firstFive && i <= 4) {
+              prepareRow(row)
+              return (
+                <tr {...row.getRowProps()}>
+                  {row.cells.map(cell => {
+                    return (
+                      <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                    )
+                  })}
+                </tr>
+              )
+            } else {
+              return null
+            }
+          })
+          .filter(d => d)}
       </tbody>
     </table>
   )

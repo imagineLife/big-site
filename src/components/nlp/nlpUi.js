@@ -6,18 +6,25 @@ import "./../../pages/nlp/index.scss"
 // components
 import DragDDropFile from "./../DragNDropForm"
 // import TextAnalysis from "./TextAnalysis"
+import BrowserAnalytics from "./components/BrowserAnalytics"
 import { NlpContext } from "./state/Provider"
-import Table from "./../../components/Table"
+import { useSessionStorage } from "./hooks/useStorage"
 
 export default function UploadPreview() {
-  const { dispatch, fileData, fileType } = useContext(NlpContext) //apiReadyKey, apiInitKey, ,
+  const { dispatch } = useContext(NlpContext) //apiReadyKey, apiInitKey, fileData, fileType
+  const [fileData, setFileData] = useSessionStorage("nlp-data")
   const inputRef = useRef(null)
 
   function loadExcelFile(e) {
     const data = e.target.result
+    console.log("...here")
+
     const workbook = XLSX.read(data, {
       type: "binary",
     })
+
+    console.log("workbook.SheetNames")
+    console.log(workbook.SheetNames)
 
     const convertedToArr = workbook.SheetNames.map(function (sheetName) {
       // Here is your object
@@ -27,7 +34,8 @@ export default function UploadPreview() {
       return XL_row_object
     })
 
-    dispatch({ type: "excel", payload: convertedToArr })
+    // dispatch({ type: "excel", payload: convertedToArr })
+    setFileData(convertedToArr)
   }
 
   function readWithFileReader(files) {
@@ -71,7 +79,8 @@ export default function UploadPreview() {
   return (
     <section id="nlp-wrapper">
       {/* WAS older content no text data yet */}
-      {fileData === null && (
+      {/* {fileData === null && ( */}
+      {fileData === undefined && (
         <DragDDropFile
           setLoaded={d => dispatch({ type: "fileData", payload: d })}
           onButtonClick={onButtonClick}
@@ -81,9 +90,11 @@ export default function UploadPreview() {
       )}
 
       {/* text data present */}
-      {fileData !== null && (
+      {/* {fileData !== null && ( */}
+      {fileData !== undefined && (
         // <TableWithData data={fileData} />
-        <Table data={fileData} className="nlp" />
+        <BrowserAnalytics data={fileData} />
+
         // <TextAnalysis
         //   reset={() => dispatch({ type: "reset", payload: null })}
         //   fileData={fileData}

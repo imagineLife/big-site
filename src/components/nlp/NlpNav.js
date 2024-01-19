@@ -1,11 +1,66 @@
 import React, { useContext } from "react"
 import Button from "react-bootstrap/Button"
 import Container from "react-bootstrap/Container"
+import Dropdown from "react-bootstrap/Dropdown"
 import Nav from "react-bootstrap/Nav"
 import Navbar from "react-bootstrap/Navbar"
 import { NlpContext } from "./state/Provider"
 import { navigate, Link } from "gatsby"
 
+function UserAvatar() {
+  return (
+    <svg
+      cursor="pointer"
+      xmlns="http://www.w3.org/2000/svg"
+      width="30"
+      height="30"
+      fill="rgba(0,0,0,.5)"
+      className="bi bi-person-circle"
+      viewBox="0 0 16 16"
+    >
+      <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+      <path
+        fillRule="evenodd"
+        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"
+      />
+    </svg>
+  )
+}
+
+function MyDropdown() {
+  return (
+    <Dropdown as={Nav.Item}>
+      <Dropdown.Toggle
+        as={Nav.Link}
+        data-toggle="dropdown"
+        id="dropdown-67443507"
+        variant="default"
+        className="m-0"
+      >
+        <i className="nc-icon nc-planet"></i>
+        <span className="notification">5</span>
+        <span className="d-lg-none ml-1">Notification</span>
+      </Dropdown.Toggle>
+      <Dropdown.Menu>
+        <Dropdown.Item href="#pablo" onClick={e => e.preventDefault()}>
+          Notification 1
+        </Dropdown.Item>
+        <Dropdown.Item href="#pablo" onClick={e => e.preventDefault()}>
+          Notification 2
+        </Dropdown.Item>
+        <Dropdown.Item href="#pablo" onClick={e => e.preventDefault()}>
+          Notification 3
+        </Dropdown.Item>
+        <Dropdown.Item href="#pablo" onClick={e => e.preventDefault()}>
+          Notification 4
+        </Dropdown.Item>
+        <Dropdown.Item href="#pablo" onClick={e => e.preventDefault()}>
+          Another notification
+        </Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
+  )
+}
 function LoginButton({ onClick }) {
   return (
     <Button variant="primary" onClick={() => navigate("/nlp/auth/")}>
@@ -24,7 +79,7 @@ export default function NlpNav({ title }) {
   const { appInitialized, authorized, ...state } = useContext(NlpContext)
   const CIRCLE_SIZE = "10px"
 
-  let routeLinks = [{ path: "/nlp/", text: "Upload" }]
+  let routeLinks = [{ path: "/nlp/", text: "Import" }]
 
   if (authorized) {
     routeLinks.push(
@@ -70,22 +125,7 @@ export default function NlpNav({ title }) {
           </Nav>
         </Navbar.Collapse>
         {!authorized && <LoginButton onClick={() => navigate("/nlp/auth/")} />}
-        {authorized && (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="30"
-            height="30"
-            fill="rgba(0,0,0,.5)"
-            className="bi bi-person-circle"
-            viewBox="0 0 16 16"
-          >
-            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
-            <path
-              fillRule="evenodd"
-              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"
-            />
-          </svg>
-        )}
+        {authorized && <UserAvatar />}
       </Container>
     </Navbar>
   )
