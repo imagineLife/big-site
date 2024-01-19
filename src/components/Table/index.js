@@ -19,6 +19,9 @@ export default function Table({ data, columns, className, firstFive }) {
       data: data[0],
     })
 
+  console.log("rows")
+  console.log(rows)
+
   const classString = className || "table-wrapper"
   // Render the UI for your table
   return (
@@ -35,7 +38,7 @@ export default function Table({ data, columns, className, firstFive }) {
       <tbody {...getTableBodyProps()}>
         {rows
           .map((row, i) => {
-            if (firstFive && i <= 4) {
+            if ((firstFive && i <= 4) || !firstFive) {
               prepareRow(row)
               return (
                 <tr {...row.getRowProps()}>
@@ -46,7 +49,8 @@ export default function Table({ data, columns, className, firstFive }) {
                   })}
                 </tr>
               )
-            } else {
+            }
+            {
               return null
             }
           })
