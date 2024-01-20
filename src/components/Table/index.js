@@ -3,8 +3,6 @@ import { useTable } from "react-table"
 import "./index.scss"
 
 export default function Table({ data, columns, className, firstFive }) {
-  console.log("%c TABLE", "background-color: yellow; color: black;")
-
   let innerColumns =
     columns ||
     Object.keys(data[0][0]).map(d => ({
@@ -18,9 +16,6 @@ export default function Table({ data, columns, className, firstFive }) {
       columns: innerColumns,
       data: data[0],
     })
-
-  console.log("rows")
-  console.log(rows)
 
   const classString = className || "table-wrapper"
   // Render the UI for your table
@@ -43,9 +38,8 @@ export default function Table({ data, columns, className, firstFive }) {
               return (
                 <tr {...row.getRowProps()}>
                   {row.cells.map(cell => {
-                    return (
-                      <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                    )
+                    const cellContent = cell.render("Cell")
+                    return <td {...cell.getCellProps()}>{cellContent}</td>
                   })}
                 </tr>
               )

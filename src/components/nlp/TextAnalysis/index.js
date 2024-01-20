@@ -119,12 +119,7 @@ function TextBlockOption({ data, isLoading }) {
 }
 
 export default function TextAnalysis({ fileData, reset, fileType }) {
-  console.log("%c TextAnalysis", "background-color: pink; color: black;")
-
   const [jwt] = useSessionStorage("nlp-token")
-
-  console.log("fileData")
-  console.log(fileData)
 
   const useQOpts = {
     enabled: Boolean(!!fileData && jwt),
