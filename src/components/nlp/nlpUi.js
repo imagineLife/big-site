@@ -17,30 +17,20 @@ export default function UploadPreview() {
 
   function loadExcelFile(e) {
     const data = e.target.result
-    console.log("...here")
-
     const workbook = XLSX.read(data, {
       type: "binary",
     })
 
-    console.log("workbook.SheetNames")
-    console.log(workbook.SheetNames)
-
     const convertedToArr = workbook.SheetNames.map(function (sheetName) {
-      // Here is your object
       const XL_row_object = XLSX.utils.sheet_to_row_object_array(
         workbook.Sheets[sheetName]
       )
       return XL_row_object
     })
-
-    // dispatch({ type: "excel", payload: convertedToArr })
     setFileData(convertedToArr)
   }
 
   function readWithFileReader(files) {
-    console.log("READING with file reader")
-
     let theFile = files[0]
     const reader = new FileReader()
 

@@ -2,7 +2,13 @@ import React from "react"
 import { useTable } from "react-table"
 import "./index.scss"
 
-export default function Table({ data, columns, className, firstFive }) {
+export default function Table({
+  data,
+  columns,
+  className,
+  firstFive,
+  selectionHandler,
+}) {
   let innerColumns =
     columns ||
     Object.keys(data[0][0]).map(d => ({

@@ -1,3 +1,16 @@
 section.question-analysis{
   padding: 3em 0;
+
+  header{
+    display: flex;
+    align-items: center;
+
+    h3{
+      margin: 0 0 0 .5em;
+      text-decoration: underline;
+    }
+  }
+  section{
+    padding: 1em 0;
+  }
 }

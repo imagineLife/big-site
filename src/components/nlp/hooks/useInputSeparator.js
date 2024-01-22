@@ -2,7 +2,6 @@ import React, { useState, useMemo, useEffect } from "react"
 
 function useInputSeparator(data) {
   const [answersByQuestion, setAnswersByQuestion] = useState([])
-  const [processingState, setProcessingState] = useState("processing")
   const questions = useMemo(
     () => Object.keys(data[0]).filter((d, idx) => idx !== 0),
     [data]
@@ -21,11 +20,8 @@ function useInputSeparator(data) {
         ]
       })
     }
-    // } else {
-    //   console.log("DONE!")
-    // }
   }, [answersByQuestion])
-  return [answersByQuestion, processingState]
+  return [answersByQuestion]
 }
 
 export default useInputSeparator
