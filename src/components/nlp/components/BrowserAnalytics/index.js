@@ -41,7 +41,6 @@ const AddToThemeModal = ({ selectedWord, handleModalClose, themes }) => {
     mutationFn: addThemeValueFetch,
     mutationKey: `add-theme-value-${selectedThemes}-${selectedWord}`,
     onSuccess: (data, vars) => {
-      console.log("Added?!")
       setSelectedThemes([])
       handleModalClose()
     },
@@ -146,7 +145,7 @@ function BrowserAnalytics({ data }) {
 
   return (
     <>
-      <section onMouseUp={handleMouseUp}>
+      <section>
         <h2>Data Preview</h2>
         <sub>
           <i>(header + first 5 rows)</i>
@@ -156,7 +155,11 @@ function BrowserAnalytics({ data }) {
         {answersByQuestion.length < 1 && <p>preparing data</p>}
         {answersByQuestion.length > 0 &&
           answersByQuestion.map((qObj, abxIdx) => (
-            <QuestionAnalysis key={`qObj-${qObj.question}`} {...qObj} />
+            <QuestionAnalysis
+              key={`qObj-${qObj.question}`}
+              onMouseUp={handleMouseUp}
+              {...qObj}
+            />
           ))}
       </section>
       {selectedWord && (

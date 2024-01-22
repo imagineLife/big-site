@@ -7,7 +7,7 @@ export default function Table({
   columns,
   className,
   firstFive,
-  selectionHandler,
+  onMouseUp,
 }) {
   let innerColumns =
     columns ||
@@ -41,11 +41,16 @@ export default function Table({
           .map((row, i) => {
             if ((firstFive && i <= 4) || !firstFive) {
               prepareRow(row)
+              let rowProps = {}
               return (
                 <tr {...row.getRowProps()}>
-                  {row.cells.map(cell => {
+                  {row.cells.map((cell, cellIdx) => {
                     const cellContent = cell.render("Cell")
-                    return <td {...cell.getCellProps()}>{cellContent}</td>
+                    let cellProps = { ...cell.getCellProps() }
+                    if (onMouseUp && cellIdx === 3) {
+                      cellProps.onMouseUp = onMouseUp
+                    }
+                    return <td {...cellProps}>{cellContent}</td>
                   })}
                 </tr>
               )

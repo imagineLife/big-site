@@ -48,10 +48,6 @@ function Themes() {
 
   const updateLocalThemeData = useCallback(
     dataObj => {
-      console.log("updateLocalThemeData")
-      console.log("dataObj")
-      console.log(dataObj)
-
       if (dataObj.method === "edit-theme") {
         qc.setQueryData(`${authorized}-themes`, curData => {
           return curData.map(t => {
@@ -89,10 +85,6 @@ function Themes() {
           })
         })
       } else {
-        console.log('NOT the "edit-theme" OR "edit-theme-word" method...')
-        console.log("dataObj")
-        console.log(dataObj)
-
         // update theme word
         const newThemeData = localThemeData.map(d => {
           if (d.theme !== dataObj.theme) return d

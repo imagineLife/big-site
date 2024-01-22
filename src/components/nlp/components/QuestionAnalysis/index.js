@@ -1,18 +1,15 @@
 import React, { useMemo, useState, useEffect, useCallback } from "react"
 import { useQuery } from "react-query"
-import Table from "./../../../../components/Table"
-import { useSessionStorage } from "../../hooks/useStorage"
 import Spinner from "react-bootstrap/Spinner"
 import { QuestionDiamond } from "react-bootstrap-icons"
-// import CardSmall from "./../CardSmall"
-import {
-  Label,
-  ResponsiveContainer,
-  Scatter,
-  ScatterChart,
-  XAxis,
-  YAxis,
-} from "recharts"
+
+import SentimentScoreViz from "../SentimentScoreViz"
+import ThemesSummary from "../ThemesSummary"
+import Table from "./../../../../components/Table"
+import { useSessionStorage } from "../../hooks/useStorage"
+import getSentenceSentimentScore from "../../fetches/getAdHocSentiment"
+import getSentenceThemes from "../../fetches/getAdHocTheme"
+
 import "./index.scss"
 
 function ValueOrSpinner({ value }) {
@@ -22,30 +19,6 @@ function ValueOrSpinner({ value }) {
   )
 }
 
-function SentimentScoreViz({ scores }) {
-  return (
-    <div style={{ width: "100%", height: "100px" }}>
-      {/* border: "1px solid gray" */}
-      <ResponsiveContainer width="100%" height="100%">
-        <ScatterChart
-          margin={{
-            top: 10,
-            right: 50,
-            bottom: 0,
-            left: 0,
-          }}
-        >
-          <Scatter data={scores.map(d => ({ point: d, y: 0 }))} fill="blue" />
-          <YAxis type="number" dataKey="y" tickCount={0} />
-          <XAxis dataKey="point" type="number" domain={[-5, 5]} tickCount={11}>
-            <Label value="Negative" position="insideTopLeft" offset={-30} />
-            <Label value="Positive" position="insideTopRight" offset={-30} />
-          </XAxis>
-        </ScatterChart>
-      </ResponsiveContainer>
-    </div>
-  )
-}
 const qaColumns = [
   {
     Header: "Sent.",
@@ -68,34 +41,7 @@ const qaColumns = [
   },
 ]
 
-const NLP_API = `${process.env.GATSBY_NLP_API_URL}/api/nlp`
-function getSentenceSentimentScore(text, jwt) {
-  return fetch(`${NLP_API}/sentiment/ad-hoc/${encodeURI(text)}`, {
-    credentials: "include",
-    headers: {
-      Authorization: `Bearer ${jwt}`,
-      "Content-Type": "application/json",
-    },
-  }).then(d => d.json())
-}
-
-function getSentenceThemes(text, jwt) {
-  return fetch(`${NLP_API}/themes/ad-hoc/${encodeURI(text)}`, {
-    credentials: "include",
-    headers: {
-      Authorization: `Bearer ${jwt}`,
-      "Content-Type": "application/json",
-    },
-  }).then(d => d.json())
-}
-
-function QuestionAnalysis({ question, answers }) {
-  console.log(
-    "%c QuestionAnalysis",
-    "background-color: darkgreen; color: white;"
-  )
-  console.log(`question: ${question}`)
-
+function QuestionAnalysis({ question, answers, onMouseUp }) {
   const [jwt] = useSessionStorage("nlp-token")
   const [localAnswers, setLocalAnswers] = useState(
     answers.map(a => ({
@@ -108,6 +54,7 @@ function QuestionAnalysis({ question, answers }) {
   const [sentimentIdxToFetch, setSentimentIdxToFetch] = useState(0)
   const [themeIdxToFetch, setThemeIdxToFetch] = useState(null)
   const [doneSentiments, setDoneSentiments] = useState(false)
+  const [doneThemes, setDoneThemes] = useState(false)
 
   const onSentimentQuerySucces = useCallback(
     data => {
@@ -183,9 +130,13 @@ function QuestionAnalysis({ question, answers }) {
       setDoneSentiments(true)
       setThemeIdxToFetch(0)
     }
-  }, [localAnswers, sentimentIdxToFetch])
+  }, [localAnswers, sentimentIdxToFetch, setDoneSentiments, setThemeIdxToFetch])
 
-  // const tableRows = useMemo(() => localAnswers, [localAnswers])
+  useEffect(() => {
+    if (themeIdxToFetch === localAnswers.length - 1) {
+      setDoneThemes(true)
+    }
+  }, [localAnswers, themeIdxToFetch, setDoneThemes])
 
   return (
     <section className="question-analysis">
@@ -193,6 +144,7 @@ function QuestionAnalysis({ question, answers }) {
         <QuestionDiamond size={50} color="rgb(25,25,200)" />
         <h3>{question}</h3>
       </header>
+
       <section>
         <h5>Sentiment Summary</h5>
         {!doneSentiments && <p>loading...</p>}
@@ -202,12 +154,29 @@ function QuestionAnalysis({ question, answers }) {
           />
         )}
       </section>
+
+      <section>
+        <h5>Theme Summary</h5>
+        {!doneThemes && <p>loading...</p>}
+        {doneThemes && (
+          <ThemesSummary
+            key={`Theme-Summary-${question}`}
+            themes={localAnswers
+              .map(o => o.themes)
+              .flat()
+              .sort()}
+            question={question}
+          />
+        )}
+      </section>
+
       <section>
         <h5>Tabular</h5>
         <Table
           columns={qaColumns}
           data={[localAnswers]}
           className="nlp"
+          onMouseUp={onMouseUp}
           selectionHandler
         />
       </section>
