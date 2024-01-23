@@ -10,7 +10,32 @@ section.question-analysis{
       text-decoration: underline;
     }
   }
+
   section{
-    padding: 1em 0;
+    margin: 3em 0 3em 3.5em;
+
+    h5{
+      padding-bottom: 4px;
+      position: relative;
+      text-decoration: none;
+
+      &::after {
+        background: #f00;
+        background: linear-gradient(to right, black 0%, gray 50%, transparent 100%);  
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        width: 20%;
+      }
+    }
+
+    > div.themes-summary{
+      text.recharts-label{
+        fill: white;
+      }
+    }
+
   }
 }

@@ -5,6 +5,7 @@ import {
   XAxis,
   YAxis,
   // CartesianGrid,
+  LabelList,
   Tooltip,
   Legend,
   ResponsiveContainer,
@@ -55,7 +56,7 @@ export default function ThemesSummary({ themes, question }) {
     chartableFormat[t.theme] = t.count
   })
   return (
-    <div style={{ width: "100%", height: "100px" }}>
+    <div style={{ width: "100%", height: "100px" }} className="themes-summary">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           width={100}
@@ -72,14 +73,23 @@ export default function ThemesSummary({ themes, question }) {
           {/* <CartesianGrid strokeDasharray="3 3" /> */}
           <XAxis hide type="number" domain={[0, themes.length]} />
           <YAxis hide dataKey="theme" type="category" />
-          <Tooltip />
+          {/* <Tooltip /> */}
           <Legend />
           {/* <Bar dataKey="pv" stackId="a" fill="#8884d8" />
         <Bar dataKey="uv" stackId="a" fill="#82ca9d" /> */}
           {Object.keys(chartableFormat)
             .map((k, tIdx) => {
               if (k === "name") return null
-              return <Bar dataKey={k} stackId="a" fill={idxToColorMap[tIdx]} />
+              return (
+                <Bar
+                  dataKey={k}
+                  stackId="a"
+                  fill={idxToColorMap[tIdx]}
+                  key={`question-${k}-bar`}
+                >
+                  <LabelList dataKey={k} position="inside" />
+                </Bar>
+              )
             })
             .filter(d => d)}
         </BarChart>
