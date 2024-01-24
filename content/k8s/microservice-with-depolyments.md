@@ -5,18 +5,28 @@ slug: k8s/architecture-intro/microservice-with-deployments
 shortSlug: microservice-with-deployments
 author: Jake Laursen
 excerpt: Use Kubernetes Deployment Objects to deploy replica sets of each service in a microservice-style application
-tags: ["Kubernetes", "k8s", "Microservices", "deployment", "visualization", "diagram"]
+tags:
+  [
+    "Kubernetes",
+    "k8s",
+    "Microservices",
+    "deployment",
+    "visualization",
+    "diagram",
+  ]
 order: 14
 ---
 
 # From Sensitive Single-Pod Deployments to Replica Set Resilliancy
-In a [previous post](/k8s/microservice-demo), a k8s cluster manages a handful of objects:
+
+In a [previous post](/k8s/architecture-intro/microservice-demo/), a k8s cluster manages a handful of objects:
+
 - 5 pods, each 1 "service" in a "microservice" style application
 - 4 services, allowing explicit connectivity between the pods
   - 2 open-to-the-world services, webapps
   - 2 internal-only data stores, postgres and redis
 
-This style of deployment is great for illustrating one "simple" way of deploying apps with pods, services, and kubernetes - for me specifically using minukube and k8s in docker, due to my current M1 mac restrictions and some online suggestions!  
+This style of deployment is great for illustrating one "simple" way of deploying apps with pods, services, and kubernetes - for me specifically using minukube and k8s in docker, due to my current M1 mac restrictions and some online suggestions!
 
 - [From Sensitive Single-Pod Deployments to Replica Set Resilliancy](#from-sensitive-single-pod-deployments-to-replica-set-resilliancy)
   - [More Pods for Frontend Apps](#more-pods-for-frontend-apps)
@@ -32,21 +42,27 @@ This style of deployment is great for illustrating one "simple" way of deploying
   - [Scaling Up Live!](#scaling-up-live)
     - [Edit The Results App Config File](#edit-the-results-app-config-file)
   - [A Diagram](#a-diagram)
-## More Pods for Frontend Apps
-Here, The frontend-facing apps (_voting-app and result-app_) will get replica-sets through deployments. Deployments will "manage" the replica sets of the pods.  
 
-## Comparing Pod-Based Deployments to Deployment-Managed Deployemnts  
-In some ways, using kubernetes deployemnt objects is "easier" that pod definition files. Deployments at least have more features:  
+## More Pods for Frontend Apps
+
+Here, The frontend-facing apps (_voting-app and result-app_) will get replica-sets through deployments. Deployments will "manage" the replica sets of the pods.
+
+## Comparing Pod-Based Deployments to Deployment-Managed Deployemnts
+
+In some ways, using kubernetes deployemnt objects is "easier" that pod definition files. Deployments at least have more features:
+
 - the deployment will "manage" pods with a bit more automation than manual pod management
 - the deployment config file can include the number of replica pods to manage
   - when 1+ pod(s) "dies" in a deployment, it gets automagically re-created by k8s
 
 The deployment of the pods and services is also a bit different between this deployment-managed approach and a single-od-deployment approach:
+
 - in a single-pod approach, each pod gets a definition file and a deploy command
 - in a deployment-managed approach each **deployment** gets a definition file and a deploy command
   - the difference here is implicit in that each deployment can have many pods per single definition file!!
 
 ## Config Directory Structure
+
 ```bash
 /cfgs
   /deployments
@@ -56,9 +72,11 @@ The deployment of the pods and services is also a bit different between this dep
     voting-app.yaml
     results-app.yaml
 ```
+
 ## Deployment Files
 
 Redis
+
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -89,6 +107,7 @@ spec:
 ```
 
 postgres
+
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -123,10 +142,10 @@ spec:
               # hmm... this....
             - name: POSTGRES_HOST_AUTH_METHOD
               value: trust
-
 ```
 
 worker
+
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -154,6 +173,7 @@ spec:
 ```
 
 results-app
+
 ```yaml
 apiVersion: v1
 kind: Deployment
@@ -183,6 +203,7 @@ spec:
 ```
 
 voting-app
+
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -216,13 +237,15 @@ spec:
 ```
 
 ## Deploying the Deployments
-Validate that no pods or services are running. If you happen to be following along from the previous article, ["A Microservice K8s Demo"](k8s/microservice-demo), The previous article leaves pods & services running. delete them before running these.  
+
+Validate that no pods or services are running. If you happen to be following along from the previous article, ["A Microservice K8s Demo"](/k8s/architecture-intro/microservice-demo/), The previous article leaves pods & services running. delete them before running these.
 
 ### The Voting App
+
 ```bash
-Jakes-4:k8s Jake$ kubectl create -f cfgs/deployments/voting-app.yaml 
+Jakes-4:k8s Jake$ kubectl create -f cfgs/deployments/voting-app.yaml
 deployment.apps/voting-app-deploy created
-Jakes-4:k8s Jake$ kubectl create -f cfgs/services/voting-app.yaml 
+Jakes-4:k8s Jake$ kubectl create -f cfgs/services/voting-app.yaml
 service/voting-service created
 
 # check the deployment!
@@ -231,10 +254,11 @@ voting-app-deploy   1/1     1            1           30s
 ```
 
 ### Redis
+
 ```bash
-Jakes-4:k8s Jake$ kubectl create -f cfgs/deployments/redis.yaml 
+Jakes-4:k8s Jake$ kubectl create -f cfgs/deployments/redis.yaml
 deployment.apps/redis-deploy created
-Jakes-4:k8s Jake$ kubectl create -f cfgs/services/redis.yaml 
+Jakes-4:k8s Jake$ kubectl create -f cfgs/services/redis.yaml
 service/redis created
 
 # check it
@@ -245,10 +269,11 @@ voting-app-deploy   1/1     1            1           99s
 ```
 
 ### Postgres
+
 ```bash
-Jakes-4:k8s Jake$ kubectl create -f cfgs/deployments/pg.yaml 
+Jakes-4:k8s Jake$ kubectl create -f cfgs/deployments/pg.yaml
 deployment.apps/pg-deploy created
-Jakes-4:k8s Jake$ kubectl create -f cfgs/services/pg.yaml 
+Jakes-4:k8s Jake$ kubectl create -f cfgs/services/pg.yaml
 service/db created
 Jakes-4:k8s Jake$ kubectl get deployments
 NAME                READY   UP-TO-DATE   AVAILABLE   AGE
@@ -258,12 +283,13 @@ voting-app-deploy   1/1     1            1           2m48s
 ```
 
 ### worker
+
 ```bash
-Jakes-4:k8s Jake$ kubectl create -f cfgs/deployments/worker.yaml 
+Jakes-4:k8s Jake$ kubectl create -f cfgs/deployments/worker.yaml
 deployment.apps/worker-deploy created
 
 # check em!
-# NOTE: the worker has no service running - its a pod with no service :) 
+# NOTE: the worker has no service running - its a pod with no service :)
 Jakes-4:k8s Jake$ kubectl get pods,svc
 NAME                                     READY   STATUS    RESTARTS      AGE
 pod/pg-deploy-66b86c6c96-d6hpx           1/1     Running   0             115s
@@ -278,24 +304,25 @@ service/redis            ClusterIP   10.97.51.245    <none>        6379/TCP     
 service/voting-service   NodePort    10.97.220.203   1.2.3.110     80:30005/TCP   4m24s
 ```
 
-
 ### results app
-do the same with the results config :) 
 
+do the same with the results config :)
 
 ## Scaling Up Live!
+
 One major benefit of deployments is that the deployment "object" will "manage" pods, like when pods crash or when pods get scaled...live!! zero down time!!!
 
 ### Edit The Results App Config File
+
 The deployment "watches" deployment config files & wiill adjust the deployed pods & services accordingly.  
-Here, the `replicas` will be edited in the result-app config file.  
+Here, the `replicas` will be edited in the result-app config file.
 
 ```bash
 # Edit the result app deployment to have 1 replica instead of 3
 kubectl edit deployment result-app-deploy --record
 
 # the config will show in the terminal
-# find the replicas line and edit to be 1 instead of the 
+# find the replicas line and edit to be 1 instead of the
 # :wq! to exit
 
 # check the deployment, see 1/1 instead of 3/3 for the result-app-deploy
@@ -308,9 +335,8 @@ voting-app-deploy   1/1     1            1           25h
 worker-deploy       1/1     1            1           25h
 ```
 
-
-
 ## A Diagram
+
 ```mermaid
 flowchart
   direction TB
@@ -347,7 +373,7 @@ flowchart
     VTG1
     VTG2
   end
-  
+
   subgraph DPRSL["Deployment: Results-App"]
     RSL1
     RSL2
