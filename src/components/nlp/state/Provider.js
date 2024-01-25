@@ -67,21 +67,47 @@ function NlpProvider({ children, location, ...rest }) {
     shouldCheckSessionOther || shouldCheckSessionOnLogin,
     appAuthToken
   )
+  console.log("sessionAuthStatus")
+  console.log(sessionAuthStatus)
 
-  const authorized = useMemo(() => {
-    if (
-      startLoginMutation.isSuccess &&
-      finishLoginMutation.isSuccess &&
-      emailVal
-    )
-      return emailVal
-    if (sessionAuthStatus?.data?.email) return sessionAuthStatus.data.email
-    return false
-  }, [
-    startLoginMutation.isSuccess,
-    finishLoginMutation.isSuccess,
-    sessionAuthStatus,
-  ])
+  // const authorized = useMemo(() => {
+  //   if (
+  //     startLoginMutation.isSuccess &&
+  //     finishLoginMutation.isSuccess &&
+  //     emailVal
+  //   ) {
+  //     console.log("DONE FETCHING")
+  //     return emailVal
+  //   } else if (
+  //     sessionAuthStatus.status === "success" &&
+  //     sessionAuthStatus?.data?.email
+  //   ) {
+  //     console.log("SESSION HAS EMAIL")
+  //     return sessionAuthStatus.data.email
+  //   } else {
+  //     console.log("FALSE")
+  //     return false
+  //   }
+  // }, [
+  //   startLoginMutation.isSuccess,
+  //   finishLoginMutation.isSuccess,
+  //   sessionAuthStatus.status,
+  //   sessionAuthStatus.data,
+  // ])
+  let authorized = false
+  if (
+    startLoginMutation.isSuccess &&
+    finishLoginMutation.isSuccess &&
+    emailVal
+  ) {
+    authorized = emailVal
+  }
+  if (
+    sessionAuthStatus.status === "success" &&
+    sessionAuthStatus?.data?.email
+  ) {
+    authorized = sessionAuthStatus.data.email
+  }
 
   return (
     <NlpContext.Provider

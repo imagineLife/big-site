@@ -6,6 +6,53 @@ import Nav from "react-bootstrap/Nav"
 import Navbar from "react-bootstrap/Navbar"
 import { NlpContext } from "./state/Provider"
 import { navigate, Link } from "gatsby"
+import { PersonCircle } from "react-bootstrap-icons"
+import { useSessionStorage } from "./hooks/useStorage"
+
+function AuthDD() {
+  const { authorized } = useContext(NlpContext)
+  const [, , removeToken] = useSessionStorage("nlp-token")
+  const [, , removeUiData] = useSessionStorage("nlp-token")
+
+  console.log("%c authDD", "background-color: orange; color: black;")
+  console.log(`auth: ${authorized}`)
+
+  console.log("%c ---", "background-color: orange; color: black;")
+
+  const logoutFn = () => {
+    removeToken()
+    removeUiData()
+  }
+  return (
+    <Dropdown as={Nav.Item}>
+      <Dropdown.Toggle as={Nav.Link} id="dropdown-165516306" variant="default">
+        <PersonCircle />
+      </Dropdown.Toggle>
+      <Dropdown.Menu style={{ left: "-85px" }}>
+        {!authorized && (
+          <>
+            <Dropdown.Item onClick={e => e.preventDefault()}>
+              Login
+            </Dropdown.Item>
+            <Dropdown.Item onClick={e => e.preventDefault()}>
+              Register
+            </Dropdown.Item>
+          </>
+        )}
+        {authorized && (
+          <Dropdown.Item
+            onClick={e => {
+              e.preventDefault()
+              logoutFn()
+            }}
+          >
+            Logout
+          </Dropdown.Item>
+        )}
+      </Dropdown.Menu>
+    </Dropdown>
+  )
+}
 
 function UserAvatar() {
   return (
@@ -79,12 +126,16 @@ export default function NlpNav({ title }) {
   const { appInitialized, authorized, ...state } = useContext(NlpContext)
   const CIRCLE_SIZE = "10px"
 
-  let routeLinks = [{ path: "/nlp/", text: "Import" }]
+  let routeLinks = []
+  console.log("%c NlpNav", "background-color: pink; color: black;")
+  console.log("authorized")
+  console.log(authorized)
+  console.log("%c ---", "background-color: pink; color: black;")
 
   if (authorized) {
     routeLinks.push(
+      { path: "/nlp/", text: "Import" },
       { path: "/nlp/themes/", text: "Themes" }
-      // { path: "/nlp/speeches/", text: "Speeches" }
     )
   }
   let isBrowser = typeof window !== "undefined"
@@ -124,8 +175,10 @@ export default function NlpNav({ title }) {
             ))}
           </Nav>
         </Navbar.Collapse>
-        {!authorized && <LoginButton onClick={() => navigate("/nlp/auth/")} />}
-        {authorized && <UserAvatar />}
+        {/* {!authorized && <LoginButton onClick={() => navigate("/nlp/auth/")} />} */}
+        {/* {!authorized && <AuthDD />} */}
+        {/* {authorized && <UserAvatar />} */}
+        <AuthDD />
       </Container>
     </Navbar>
   )

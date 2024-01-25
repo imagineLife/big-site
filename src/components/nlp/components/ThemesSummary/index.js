@@ -11,6 +11,23 @@ import {
   ResponsiveContainer,
 } from "recharts"
 
+const renderCustomLabel = props => {
+  const { x, y, width, height, value, offset } = props
+  return (
+    <g class="recharts-layer recharts-label-list">
+      <text
+        name="themes"
+        x={x}
+        y={y}
+        width={width}
+        height={height}
+        offset={offset}
+      >
+        <tspan>{value}</tspan>
+      </text>
+    </g>
+  )
+}
 export default function ThemesSummary({ themes, question }) {
   const stackIdMap = {
     1: "a",
@@ -74,7 +91,7 @@ export default function ThemesSummary({ themes, question }) {
           <XAxis hide type="number" domain={[0, themes.length]} />
           <YAxis hide dataKey="theme" type="category" />
           {/* <Tooltip /> */}
-          <Legend />
+          <Legend align="right" />
           {/* <Bar dataKey="pv" stackId="a" fill="#8884d8" />
         <Bar dataKey="uv" stackId="a" fill="#82ca9d" /> */}
           {Object.keys(chartableFormat)
@@ -87,7 +104,15 @@ export default function ThemesSummary({ themes, question }) {
                   fill={idxToColorMap[tIdx]}
                   key={`question-${k}-bar`}
                 >
-                  <LabelList dataKey={k} position="inside" />
+                  <LabelList
+                    dataKey={k}
+                    position="inside"
+                    // content={props => {
+                    //   let theseProps = { ...props }
+                    //   theseProps.total = themes.length + 1
+                    //   return renderCustomLabel(theseProps)
+                    // }}
+                  />
                 </Bar>
               )
             })

@@ -16,17 +16,22 @@ const MemoTable = memo(function InnerTable({ data }) {
 })
 
 const useMyThemes = (emailString, jwt) => {
-  const [localThemes, setLocalThemes] = useSessionStorage("nlp-themes")
-  useEffect(() => {
-    fetch(`${process.env.GATSBY_NLP_API_URL}/api/users/${emailString}/themes`, {
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${jwt}`,
-      },
-    })
-      .then(d => d.json())
-      .then(setLocalThemes)
+  // const [localThemes, setLocalThemes] = useSessionStorage("nlp-themes")
+  const [localThemes, setLocalThemes] = useState([])
+
+  useEffect(async () => {
+    const res = await fetch(
+      `${process.env.GATSBY_NLP_API_URL}/api/users/${emailString}/themes`,
+      {
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${jwt}`,
+        },
+      }
+    )
+    const jsonRes = await res.json()
+    setLocalThemes(jsonRes)
   }, [])
 
   return localThemes
