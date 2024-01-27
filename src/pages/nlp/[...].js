@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from "react"
 import { QueryClient } from "react-query"
-import { Router } from "@reach/router"
+import { Router, Redirect } from "@reach/router"
 import "./index.scss"
 
 // components
@@ -24,12 +24,13 @@ export default function Nlp(props) {
       <NlpProvider {...props}>
         <NlpLayout>
           <Suspense fallback={<span />}>
-            <Router basepath="/nlp">
-              <Auth path="/auth" />
-              <Themes path="/themes" />
-              <SpeechDetail path="/speeches/:speechId" />
-              <Speeches path="/speeches" />
-              <NlpUi path="/" />
+            <Router basepath="/nlp/">
+              <Auth path="/auth/" />
+              <Themes path="/themes/" />
+              <SpeechDetail path="/speeches/:speechId/" />
+              <Speeches path="/speeches/" />
+              <NlpUi path="/upload/" />
+              {/* <Redirect from="*" to="/nlp/auth/" /> */}
             </Router>
           </Suspense>
         </NlpLayout>

@@ -1,19 +1,20 @@
-import React, { useRef, useContext } from "react" // lazy, Suspense
+import React, { useRef, useContext, useEffect } from "react"
 
 import * as XLSX from "xlsx"
 import "./../../pages/nlp/index.scss"
 
 // components
-import DragDDropFile from "./../DragNDropForm"
+import DragNDropForm from "./../DragNDropForm"
 // import TextAnalysis from "./TextAnalysis"
 import BrowserAnalytics from "./components/BrowserAnalytics"
 import { NlpContext } from "./state/Provider"
 import { useSessionStorage } from "./hooks/useStorage"
 
 export default function UploadPreview() {
-  const { dispatch } = useContext(NlpContext) //apiReadyKey, apiInitKey, fileData, fileType
+  const { dispatch, authorized } = useContext(NlpContext) //apiReadyKey, apiInitKey, fileData, fileType
   const [fileData, setFileData] = useSessionStorage("nlp-data")
   const inputRef = useRef(null)
+  console.log("%c UploadPreview", "background-color: green; color: white;")
 
   function loadExcelFile(e) {
     const data = e.target.result
@@ -66,12 +67,15 @@ export default function UploadPreview() {
     inputRef.current.click()
   }
 
+  if (!authorized) {
+    return <p>loading...</p>
+  }
   return (
     <section id="nlp-wrapper">
       {/* WAS older content no text data yet */}
       {/* {fileData === null && ( */}
       {fileData === undefined && (
-        <DragDDropFile
+        <DragNDropForm
           setLoaded={d => dispatch({ type: "fileData", payload: d })}
           onButtonClick={onButtonClick}
           ref={inputRef}

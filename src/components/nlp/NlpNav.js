@@ -126,7 +126,7 @@ export default function NlpNav({ title }) {
   const { appInitialized, authorized, ...state } = useContext(NlpContext)
   const CIRCLE_SIZE = "10px"
 
-  let routeLinks = []
+  let routeLinks = [{ path: "/nlp/auth", text: "Account" }]
   console.log("%c NlpNav", "background-color: pink; color: black;")
   console.log("authorized")
   console.log(authorized)
@@ -134,7 +134,7 @@ export default function NlpNav({ title }) {
 
   if (authorized) {
     routeLinks.push(
-      { path: "/nlp/", text: "Import" },
+      { path: "/nlp/upload", text: "Import" },
       { path: "/nlp/themes/", text: "Themes" }
     )
   }
