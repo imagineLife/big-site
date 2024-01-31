@@ -1,8 +1,13 @@
 import { useQuery } from "react-query"
 
 function useSessionCheck(enabled, apiReadyKey) {
+  console.log("%c useSessionCheck", "background-color: pink; color: black;")
+  console.log({
+    enabled,
+    apiReadyKey,
+  })
   return useQuery(
-    "sessionAuthCheck",
+    `sessionAuthCheck-${apiReadyKey}`,
     () =>
       fetch(`${process.env.GATSBY_NLP_API_URL}/api/session`, {
         credentials: "include",
@@ -20,7 +25,7 @@ function useSessionCheck(enabled, apiReadyKey) {
       refetchOnWindowFocus: false,
       refetchOnMount: false,
       refetchOnReconnect: false,
-      staleTime: Infinity,
+      staleTime: 1000,
       retry: false,
     }
   )

@@ -12,6 +12,9 @@ import { useSessionStorage } from "./hooks/useStorage"
 
 export default function UploadPreview() {
   const { dispatch, authorized } = useContext(NlpContext) //apiReadyKey, apiInitKey, fileData, fileType
+  console.log("authorized")
+  console.log(authorized)
+
   const [fileData, setFileData] = useSessionStorage("nlp-data")
   const inputRef = useRef(null)
   console.log("%c UploadPreview", "background-color: green; color: white;")

@@ -51,13 +51,14 @@ const AddToThemeModal = ({ selectedWord, handleModalClose, themes }) => {
   const { authorized } = useContext(NlpContext)
   const [selectedThemes, setSelectedThemes] = useState(null)
   const [jwt] = useSessionStorage("nlp-token")
-
+  const [showConfirmUi, setShowConfirmUi] = useState(false)
   const addThemeValueMutation = useMutation({
     mutationFn: addThemeValueFetch,
     mutationKey: `add-theme-value-${selectedThemes}-${selectedWord}`,
     onSuccess: () => {
+      // TODO: change to show new "confirm" modal
       setSelectedThemes([])
-      handleModalClose()
+      setShowConfirmUi(true)
     },
   })
 
@@ -79,43 +80,81 @@ const AddToThemeModal = ({ selectedWord, handleModalClose, themes }) => {
     })
   }
 
-  return (
-    <Modal show>
-      <Modal.Header>
-        <p>
-          Associate <b>"{selectedWord}"</b> With A Theme
-        </p>
-      </Modal.Header>
-      <Modal.Body>
-        <Tabs
-          defaultActiveKey="existing"
-          // id="uncontrolled-tab-example"
-          className="mb-3"
-          variant="underline"
-        >
-          <Tab eventKey="existing" title="Existing Theme">
-            <AddThemeTabContent
-              selectedWord={selectedWord}
-              themes={themes}
-              clickedTheme={clickedTheme}
-              selectedThemes={selectedThemes}
-            />
-          </Tab>
-          <Tab eventKey="new" title="New Theme">
-            <CreateThemeTabContent />
-          </Tab>
-        </Tabs>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={handleModalClose}>
-          Cancel
-        </Button>
-        <Button variant="primary" onClick={handleConfirmClick}>
-          Confirm
-        </Button>
-      </Modal.Footer>
-    </Modal>
-  )
+  //
+  // "confirmation" modal
+  //
+  if (showConfirmUi === true) {
+    return (
+      <Modal show>
+        <Modal.Header>Done!</Modal.Header>
+        <Modal.Body>
+          <p>Your keyword-to-theme association is done.</p>
+          <p>
+            <b>Refresh</b> to see updated theme analysis applied, <br />
+            or
+            <br />
+            <b>Close</b> to continue editing before refreshing.
+          </p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="primary"
+            onClick={() => {
+              handleModalClose()
+            }}
+          >
+            Close
+          </Button>
+          <Button
+            variant="primary"
+            onClick={() => {
+              console.log("add refresh functionality")
+            }}
+          >
+            Refresh
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    )
+  } else {
+    return (
+      <Modal show>
+        <Modal.Header>
+          <p>
+            Associate <b>"{selectedWord}"</b> With A Theme
+          </p>
+        </Modal.Header>
+        <Modal.Body>
+          <Tabs
+            defaultActiveKey="existing"
+            // id="uncontrolled-tab-example"
+            className="mb-3"
+            variant="underline"
+          >
+            <Tab eventKey="existing" title="Existing Theme">
+              <AddThemeTabContent
+                selectedWord={selectedWord}
+                themes={themes}
+                clickedTheme={clickedTheme}
+                selectedThemes={selectedThemes}
+              />
+            </Tab>
+            <Tab eventKey="new" title="New Theme">
+              <CreateThemeTabContent />
+            </Tab>
+          </Tabs>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleModalClose}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={handleConfirmClick}>
+            Confirm
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    )
+  }
 }
 
 export default AddToThemeModal

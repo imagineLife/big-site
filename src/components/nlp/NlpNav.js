@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import Button from "react-bootstrap/Button"
 import Container from "react-bootstrap/Container"
 import Dropdown from "react-bootstrap/Dropdown"
@@ -8,21 +8,52 @@ import { NlpContext } from "./state/Provider"
 import { navigate, Link } from "gatsby"
 import { PersonCircle } from "react-bootstrap-icons"
 import { useSessionStorage } from "./hooks/useStorage"
+import { useMutation } from "react-query"
+
+async function fetchDeleteSession({ jwt }) {
+  let fetchUrl = `${process.env.GATSBY_NLP_API_URL}/api/session`
+
+  const response = await fetch(fetchUrl, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${jwt}`,
+      credentials: "include",
+    },
+    body: JSON.stringify({ jwt }),
+  })
+
+  return response.status === 200
+}
 
 function AuthDD() {
   const { authorized } = useContext(NlpContext)
-  const [, , removeToken] = useSessionStorage("nlp-token")
-  const [, , removeUiData] = useSessionStorage("nlp-token")
-
-  console.log("%c authDD", "background-color: orange; color: black;")
-  console.log(`auth: ${authorized}`)
-
-  console.log("%c ---", "background-color: orange; color: black;")
+  const [jwt, , removeToken] = useSessionStorage("nlp-token")
+  const [, , removeUiData] = useSessionStorage("nlp-data")
+  const [loggedOut, setLoggedOut] = useState(false)
+  const logoutMutation = useMutation({
+    mutationFn: fetchDeleteSession,
+    mutationKey: `delete-session-${jwt}`,
+    onSucces: (data, vars) => {
+      console.log(
+        "%c deleted session!",
+        "background-color: pink; color: black;"
+      )
+      console.log("data")
+      console.log(data)
+      console.log("vars")
+      console.log(vars)
+    },
+  })
 
   const logoutFn = () => {
     removeToken()
     removeUiData()
+    setLoggedOut(true)
+    logoutMutation.mutate({ jwt })
+    navigate("/nlp/auth")
   }
+
   return (
     <Dropdown as={Nav.Item}>
       <Dropdown.Toggle as={Nav.Link} id="dropdown-165516306" variant="default">

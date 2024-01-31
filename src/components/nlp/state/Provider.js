@@ -63,12 +63,16 @@ function NlpProvider({ children, location, ...rest }) {
     startLoginMutation?.isSuccess == false &&
     finishLoginMutation?.isSuccess == false &&
     Boolean(appAuthToken)
+  console.log({ shouldCheckSessionOther, shouldCheckSessionOnLogin })
+
   const sessionAuthStatus = useSessionCheck(
     shouldCheckSessionOther || shouldCheckSessionOnLogin,
     appAuthToken
   )
   console.log("sessionAuthStatus")
   console.log(sessionAuthStatus)
+  console.log("emailVal")
+  console.log(emailVal)
 
   // const authorized = useMemo(() => {
   //   if (
@@ -118,6 +122,7 @@ function NlpProvider({ children, location, ...rest }) {
         emailSuccessToken,
         emailVal,
         finishLoginMutation,
+        setEmail,
         startLoginMutation,
         ...state,
       }}

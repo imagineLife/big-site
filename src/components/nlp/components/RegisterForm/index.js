@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useContext } from "react"
+import { NlpContext } from "../../state/Provider"
 import { useForm, Controller } from "react-hook-form"
 import { Button, Form } from "react-bootstrap"
 // import { NlpContext } from "../../state/Provider"
 import { useMutation } from "react-query"
 import { useSessionStorage } from "../../hooks/useStorage"
 import jsonPost from "../../state/jsonPost"
+import { navigate } from "gatsby"
 
 const RegisterForm = ({ authorized }) => {
-  const [jwt] = useSessionStorage("nlp-token")
+  const [jwt, setJwt] = useSessionStorage("nlp-token")
+  const { setEmail } = useContext(NlpContext)
   const [localEmail, setLocalEmail] = useState()
 
   // const {
@@ -19,14 +22,20 @@ const RegisterForm = ({ authorized }) => {
 
   const registrationReq = async ({ url, body, jwt }) => {
     const response = await jsonPost(url, body, {
-      authorization: `Bearer ${jwt}`,
+      Authorization: `Bearer ${jwt}`,
     })
+    let jsonRes
     if (!response.ok) {
-      let jsonRes = await response.json()
+      jsonRes = await response.json()
       throw new Error(jsonRes.Error)
     }
     if (response.status === 200) {
-      return true
+      if (body.password) {
+        jsonRes = await response.json()
+        return jsonRes
+      } else {
+        return true
+      }
     }
   }
 
@@ -35,7 +44,13 @@ const RegisterForm = ({ authorized }) => {
       setLocalEmail(vars.body.email)
     },
   })
-  const finishRegistrationMutation = useMutation(registrationReq)
+  const finishRegistrationMutation = useMutation(registrationReq, {
+    onSuccess: (data, vars) => {
+      setJwt(data.jwt)
+      setEmail(vars.body.email)
+      navigate("/nlp/upload")
+    },
+  })
 
   const registerPath = "/api/users/register"
   const {
@@ -64,7 +79,8 @@ const RegisterForm = ({ authorized }) => {
   const handlePasswordSubmit = async ({ email, password }) => {
     finishRegistrationMutation.mutate({
       url: `${process.env.GATSBY_NLP_API_URL}${registerPath}`,
-      body: { email: localEmail, password, jwt },
+      body: { email: localEmail, password },
+      jwt,
     })
   }
 
