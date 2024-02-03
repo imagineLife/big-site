@@ -27,13 +27,19 @@ export function useSessionStorage(key, defaultValue) {
 // "base" function
 //
 function useStorage(key, defaultValue, storageObject) {
+  // console.log("%c useStorage", "background-color: white; color: black;")
   const [localValue, setLocalValue] = useState(() => {
     const jsonValue = storageObject.getItem(key)
+    // console.log("jsonValue")
+    // console.log(jsonValue)
     if (jsonValue != null) return JSON.parse(jsonValue)
 
     if (typeof defaultValue === "function") {
+      // console.log("no 1")
+
       return defaultValue()
     } else {
+      // console.log("no 2")
       return defaultValue
     }
   })

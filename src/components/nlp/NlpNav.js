@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useCallback } from "react"
 import Button from "react-bootstrap/Button"
 import Container from "react-bootstrap/Container"
 import Dropdown from "react-bootstrap/Dropdown"
@@ -11,6 +11,13 @@ import { useSessionStorage } from "./hooks/useStorage"
 import { useMutation } from "react-query"
 
 async function fetchDeleteSession({ jwt }) {
+  console.log(
+    "%c fetchDeleteSession",
+    "background-color: orange; color: black;"
+  )
+  console.log("jwt")
+  console.log(jwt)
+
   let fetchUrl = `${process.env.GATSBY_NLP_API_URL}/api/session`
 
   const response = await fetch(fetchUrl, {
@@ -23,21 +30,28 @@ async function fetchDeleteSession({ jwt }) {
     body: JSON.stringify({ jwt }),
   })
 
-  return response.status === 200
+  if (response.status === 200) {
+    let jsonRes = await response.json()
+    return jsonRes
+  } else {
+    return false
+  }
 }
 
-function AuthDD() {
-  const { authorized } = useContext(NlpContext)
-  const [jwt, , removeToken] = useSessionStorage("nlp-token")
+function AuthDD({ jwt }) {
+  console.log("%c AuthDD", "background-color: brown; color: black;")
+
+  const { authorized, setEmail } = useContext(NlpContext)
+  console.log("jwt from session:", jwt)
+
   const [, , removeUiData] = useSessionStorage("nlp-data")
-  const [loggedOut, setLoggedOut] = useState(false)
   const logoutMutation = useMutation({
     mutationFn: fetchDeleteSession,
     mutationKey: `delete-session-${jwt}`,
-    onSucces: (data, vars) => {
+    onSuccess: (data, vars) => {
       console.log(
-        "%c deleted session!",
-        "background-color: pink; color: black;"
+        "%c deleted session",
+        "background-color: white; color: black;"
       )
       console.log("data")
       console.log(data)
@@ -46,13 +60,13 @@ function AuthDD() {
     },
   })
 
-  const logoutFn = () => {
-    removeToken()
+  const logoutFn = useCallback(() => {
+    console.log("logoutFn jwt: ", jwt)
     removeUiData()
-    setLoggedOut(true)
+    setEmail(null)
     logoutMutation.mutate({ jwt })
     navigate("/nlp/auth")
-  }
+  }, [jwt])
 
   return (
     <Dropdown as={Nav.Item}>
@@ -62,10 +76,20 @@ function AuthDD() {
       <Dropdown.Menu style={{ left: "-85px" }}>
         {!authorized && (
           <>
-            <Dropdown.Item onClick={e => e.preventDefault()}>
+            <Dropdown.Item
+              onClick={e => {
+                e.preventDefault()
+                navigate("/nlp/auth?tab=login")
+              }}
+            >
               Login
             </Dropdown.Item>
-            <Dropdown.Item onClick={e => e.preventDefault()}>
+            <Dropdown.Item
+              onClick={e => {
+                e.preventDefault()
+                navigate("/nlp/auth?tab=register")
+              }}
+            >
               Register
             </Dropdown.Item>
           </>
@@ -85,68 +109,6 @@ function AuthDD() {
   )
 }
 
-function UserAvatar() {
-  return (
-    <svg
-      cursor="pointer"
-      xmlns="http://www.w3.org/2000/svg"
-      width="30"
-      height="30"
-      fill="rgba(0,0,0,.5)"
-      className="bi bi-person-circle"
-      viewBox="0 0 16 16"
-    >
-      <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
-      <path
-        fillRule="evenodd"
-        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"
-      />
-    </svg>
-  )
-}
-
-function MyDropdown() {
-  return (
-    <Dropdown as={Nav.Item}>
-      <Dropdown.Toggle
-        as={Nav.Link}
-        data-toggle="dropdown"
-        id="dropdown-67443507"
-        variant="default"
-        className="m-0"
-      >
-        <i className="nc-icon nc-planet"></i>
-        <span className="notification">5</span>
-        <span className="d-lg-none ml-1">Notification</span>
-      </Dropdown.Toggle>
-      <Dropdown.Menu>
-        <Dropdown.Item href="#pablo" onClick={e => e.preventDefault()}>
-          Notification 1
-        </Dropdown.Item>
-        <Dropdown.Item href="#pablo" onClick={e => e.preventDefault()}>
-          Notification 2
-        </Dropdown.Item>
-        <Dropdown.Item href="#pablo" onClick={e => e.preventDefault()}>
-          Notification 3
-        </Dropdown.Item>
-        <Dropdown.Item href="#pablo" onClick={e => e.preventDefault()}>
-          Notification 4
-        </Dropdown.Item>
-        <Dropdown.Item href="#pablo" onClick={e => e.preventDefault()}>
-          Another notification
-        </Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
-  )
-}
-function LoginButton({ onClick }) {
-  return (
-    <Button variant="primary" onClick={() => navigate("/nlp/auth/")}>
-      Login / Register
-    </Button>
-  )
-}
-
 function getDotColor(initializedStatus) {
   if (initializedStatus === "yes") return "green"
   if (initializedStatus === "loading") return "goldenrod"
@@ -155,13 +117,14 @@ function getDotColor(initializedStatus) {
 
 export default function NlpNav({ title }) {
   const { appInitialized, authorized, ...state } = useContext(NlpContext)
+  const [jwt, , removeToken] = useSessionStorage("nlp-token")
   const CIRCLE_SIZE = "10px"
 
   let routeLinks = [{ path: "/nlp/auth", text: "Account" }]
-  console.log("%c NlpNav", "background-color: pink; color: black;")
+  console.log("%c ---NlpNav", "background-color: yellow; color: black;")
   console.log("authorized")
   console.log(authorized)
-  console.log("%c ---", "background-color: pink; color: black;")
+  console.log("%c ---", "background-color: yellow; color: black;")
 
   if (authorized) {
     routeLinks.push(
@@ -188,7 +151,9 @@ export default function NlpNav({ title }) {
             }}
           />
         </Navbar.Brand>
-        {/* Nav Items */}
+        {/* 
+          Nav Items 
+        */}
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav
@@ -206,10 +171,8 @@ export default function NlpNav({ title }) {
             ))}
           </Nav>
         </Navbar.Collapse>
-        {/* {!authorized && <LoginButton onClick={() => navigate("/nlp/auth/")} />} */}
-        {/* {!authorized && <AuthDD />} */}
-        {/* {authorized && <UserAvatar />} */}
         <AuthDD />
+        {/* {jwt && <AuthDD jwt={jwt} />} */}
       </Container>
     </Navbar>
   )

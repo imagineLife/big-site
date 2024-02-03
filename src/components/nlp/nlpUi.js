@@ -11,13 +11,16 @@ import { NlpContext } from "./state/Provider"
 import { useSessionStorage } from "./hooks/useStorage"
 
 export default function UploadPreview() {
-  const { dispatch, authorized } = useContext(NlpContext) //apiReadyKey, apiInitKey, fileData, fileType
+  console.log(
+    "%c UploadPreview / nlpUi",
+    "background-color: green; color: white;"
+  )
+  const { dispatch, authorized, email } = useContext(NlpContext) //apiReadyKey, apiInitKey, fileData, fileType
   console.log("authorized")
   console.log(authorized)
 
   const [fileData, setFileData] = useSessionStorage("nlp-data")
   const inputRef = useRef(null)
-  console.log("%c UploadPreview", "background-color: green; color: white;")
 
   function loadExcelFile(e) {
     const data = e.target.result
@@ -69,6 +72,8 @@ export default function UploadPreview() {
   const onButtonClick = () => {
     inputRef.current.click()
   }
+
+  console.log("%c --- ---", "background-color: green; color: white;")
 
   if (!authorized) {
     return <p>loading...</p>

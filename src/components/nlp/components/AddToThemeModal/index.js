@@ -1,12 +1,15 @@
 import React, { useContext, useState, useEffect } from "react"
-import { useMutation } from "react-query"
+import { useMutation, useQueryClient } from "react-query"
 import Modal from "react-bootstrap/Modal"
 import Button from "react-bootstrap/Button"
 import Tabs from "react-bootstrap/Tabs"
 import Tab from "react-bootstrap/Tab"
+import Form from "react-bootstrap/Form"
 import addThemeValueFetch from "./../../fetches/addThemeValue"
 import { useSessionStorage } from "../../hooks/useStorage"
 import { NlpContext } from "./../../state/Provider"
+import { useForm, Controller } from "react-hook-form"
+import createThemeFetch from "../../fetches/createTheme"
 
 const AddThemeTabContent = ({
   selectedWord,
@@ -43,8 +46,79 @@ const AddThemeTabContent = ({
   )
 }
 
-const CreateThemeTabContent = () => {
-  return <p>Create a new theme & this word will be associated with it</p>
+const CreateThemeTabContent = ({
+  authorized,
+  jwt,
+  selectedWord,
+  handleModalClose,
+}) => {
+  const qc = useQueryClient()
+
+  const {
+    handleSubmit: handleFormSubmit,
+    errors,
+    control,
+  } = useForm({ email: "", password: "" })
+
+  const createThemeMutation = useMutation({
+    mutationFn: createThemeFetch,
+    onSuccess: (data, vars) => {
+      handleModalClose()
+      // CREATED THEME!
+      // qc.setQueryData(`${authorized}-themes`, curData => {
+      //   return [...curData, { theme: vars.theme, words: vars.words }].sort(
+      //     (a, b) => {
+      //       if (a.theme < b.theme) return -1
+      //       return 1
+      //     }
+      //   )
+      // })
+    },
+  })
+
+  const createTheme = obj => {
+    createThemeMutation.mutate({
+      email: authorized,
+      jwt: jwt,
+      theme: obj.theme,
+      words: [selectedWord],
+    })
+  }
+
+  return (
+    <>
+      <p>Create a new theme & this word will be associated with it</p>
+      <Form onSubmit={handleFormSubmit(createTheme)}>
+        <Form.Group controlId="theme">
+          <Form.Label>Theme</Form.Label>
+          <Controller
+            control={control}
+            name="theme"
+            defaultValue=""
+            disabled={createThemeMutation.isSuccess}
+            render={({ field: { onChange, value, ref, disabled } }) => (
+              <Form.Control
+                onChange={onChange}
+                value={value}
+                ref={ref}
+                type="theme"
+                placeholder="Enter theme"
+                name="theme"
+                disabled={disabled}
+              />
+            )}
+          />
+          <Form.Text className="text-danger">
+            {errors?.theme?.message}
+          </Form.Text>
+        </Form.Group>
+
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+      </Form>
+    </>
+  )
 }
 
 const AddToThemeModal = ({ selectedWord, handleModalClose, themes }) => {
@@ -108,7 +182,7 @@ const AddToThemeModal = ({ selectedWord, handleModalClose, themes }) => {
           <Button
             variant="primary"
             onClick={() => {
-              console.log("add refresh functionality")
+              window.location.reload()
             }}
           >
             Refresh
@@ -140,7 +214,12 @@ const AddToThemeModal = ({ selectedWord, handleModalClose, themes }) => {
               />
             </Tab>
             <Tab eventKey="new" title="New Theme">
-              <CreateThemeTabContent />
+              <CreateThemeTabContent
+                authorized={authorized}
+                jwt={jwt}
+                selectedWord={selectedWord}
+                handleModalClose={handleModalClose}
+              />
             </Tab>
           </Tabs>
         </Modal.Body>

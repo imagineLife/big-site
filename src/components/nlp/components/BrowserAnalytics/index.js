@@ -3,37 +3,13 @@ import Table from "./../../../../components/Table"
 import QuestionAnalysis from "../QuestionAnalysis"
 import useInputSeparator from "../../hooks/useInputSeparator"
 import { useSessionStorage } from "../../hooks/useStorage"
+import useMyThemes from "../../hooks/useMyThemes"
 import { NlpContext } from "./../../state/Provider"
 import AddToThemeModal from "../AddToThemeModal"
 
 const MemoTable = memo(function InnerTable({ data }) {
   return <Table data={data} className="nlp" firstFive />
 })
-
-const useMyThemes = (emailString, jwt) => {
-  // const [localThemes, setLocalThemes] = useSessionStorage("nlp-themes")
-  const [localThemes, setLocalThemes] = useState([])
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch(
-        `${process.env.GATSBY_NLP_API_URL}/api/users/${emailString}/themes`,
-        {
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${jwt}`,
-          },
-        }
-      )
-      const jsonRes = await res.json()
-      setLocalThemes(jsonRes)
-    }
-    fetchData()
-  }, [])
-
-  return localThemes
-}
 
 function BrowserAnalytics({ data }) {
   /*

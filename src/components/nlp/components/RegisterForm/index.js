@@ -2,60 +2,23 @@ import React, { useEffect, useState, useContext } from "react"
 import { NlpContext } from "../../state/Provider"
 import { useForm, Controller } from "react-hook-form"
 import { Button, Form } from "react-bootstrap"
-// import { NlpContext } from "../../state/Provider"
 import { useMutation } from "react-query"
 import { useSessionStorage } from "../../hooks/useStorage"
-import jsonPost from "../../state/jsonPost"
-import { navigate } from "gatsby"
 
 const RegisterForm = ({ authorized }) => {
-  const [jwt, setJwt] = useSessionStorage("nlp-token")
-  const { setEmail } = useContext(NlpContext)
+  const [jwt] = useSessionStorage("nlp-token")
+  const { finishRegistrationMutation, registrationReq } = useContext(NlpContext)
   const [localEmail, setLocalEmail] = useState()
-
-  // const {
-  //   startRegistrationMutation,
-  //   finishLoginMutation,
-  //   emailVal,
-  //   emailSuccessToken,
-  // } = useContext(NlpContext)
-
-  const registrationReq = async ({ url, body, jwt }) => {
-    const response = await jsonPost(url, body, {
-      Authorization: `Bearer ${jwt}`,
-    })
-    let jsonRes
-    if (!response.ok) {
-      jsonRes = await response.json()
-      throw new Error(jsonRes.Error)
-    }
-    if (response.status === 200) {
-      if (body.password) {
-        jsonRes = await response.json()
-        return jsonRes
-      } else {
-        return true
-      }
-    }
-  }
 
   const startRegistrationMutation = useMutation(registrationReq, {
     onSuccess: (data, vars) => {
       setLocalEmail(vars.body.email)
     },
   })
-  const finishRegistrationMutation = useMutation(registrationReq, {
-    onSuccess: (data, vars) => {
-      setJwt(data.jwt)
-      setEmail(vars.body.email)
-      navigate("/nlp/upload")
-    },
-  })
 
   const registerPath = "/api/users/register"
   const {
     control,
-    getValues,
     handleSubmit: handleFormSubmit,
     setFocus,
     reset: resetForm,
@@ -89,28 +52,30 @@ const RegisterForm = ({ authorized }) => {
     resetForm()
   }
 
+  let registerText = "Register Email"
+  if (startRegistrationMutation?.status === "error") {
+    registerText = "Restart"
+  }
+  if (startRegistrationMutation?.status === "success") {
+    registerText = "Complete Registration"
+  }
+
   return (
     <>
       <p>
         <b>Register your email address</b> & create a password below
       </p>
       <Form
-        onSubmit={
-          e => {
-            e.preventDefault()
-            if (startRegistrationMutation?.error?.message) {
-              resetRegistration()
-            } else if (startRegistrationMutation.status !== "success") {
-              handleFormSubmit(handleEmailSubmit)(e)
-            } else {
-              handleFormSubmit(handlePasswordSubmit)(e)
-            }
+        onSubmit={e => {
+          e.preventDefault()
+          if (startRegistrationMutation?.error?.message) {
+            resetRegistration()
+          } else if (startRegistrationMutation.status !== "success") {
+            handleFormSubmit(handleEmailSubmit)(e)
+          } else {
+            handleFormSubmit(handlePasswordSubmit)(e)
           }
-          // (startRegistrationMutation?.error?.message && resetRegistration) ||
-          // !startRegistrationMutation.isSuccess
-          //   ? handleFormSubmit(handleEmailSubmit)
-          //   : handleFormSubmit(handlePasswordSubmit)
-        }
+        }}
       >
         <Form.Group controlId="email">
           <Form.Label>Email address</Form.Label>
@@ -127,7 +92,7 @@ const RegisterForm = ({ authorized }) => {
                 type="email"
                 placeholder="Enter email"
                 name="email"
-                disabled={disabled}
+                disabled={disabled || startRegistrationMutation?.error}
               />
             )}
           />
@@ -168,11 +133,7 @@ const RegisterForm = ({ authorized }) => {
         )}
 
         <Button variant="primary" type="submit">
-          {startRegistrationMutation?.error?.message && "Restart"}
-          {!startRegistrationMutation?.error?.message &&
-          startRegistrationMutation.status !== "success"
-            ? "Register Email"
-            : "Complete Registration"}
+          {registerText}
         </Button>
       </Form>
     </>

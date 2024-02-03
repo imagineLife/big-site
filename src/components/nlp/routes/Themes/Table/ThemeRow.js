@@ -3,6 +3,7 @@ import { NlpContext } from "./../../../state/Provider"
 import { useMutation } from "react-query"
 import Badge from "react-bootstrap/Badge"
 import Stack from "react-bootstrap/Stack"
+import { PlusCircle } from "react-bootstrap-icons"
 import EditableRow from "./EditableRow"
 import { useSessionStorage } from "./../../../hooks/useStorage"
 import updateThemeValueFetch from "../../../fetches/updateThemeValue"
@@ -112,33 +113,39 @@ function ThemeRow({ theme, words, updateLocalThemeData, editTheme }) {
 
         {/* Pills-List view */}
         {!rowAction?.type && (
-          <Stack
-            direction="horizontal"
-            gap={2}
-            style={{ flexWrap: "wrap", padding: "10px 5px" }}
-          >
-            {words.map(w => (
-              <Badge
-                bg="light"
-                className="theme-pill"
-                key={`badge-${theme}-${w}`}
-                onClick={() =>
-                  setRowAction({
-                    type: "edit-theme-word",
-                    theme,
-                    word: w,
-                    originalWord: w,
-                  })
-                }
-                pill
-              >
-                <span>{w}</span>
-              </Badge>
-            ))}
-          </Stack>
+          <>
+            <Stack
+              direction="horizontal"
+              gap={2}
+              style={{ flexWrap: "wrap", padding: "10px 5px", maxWidth: "85%" }}
+            >
+              {words.map(w => (
+                <Badge
+                  bg="light"
+                  className="theme-pill"
+                  key={`badge-${theme}-${w}`}
+                  onClick={() =>
+                    setRowAction({
+                      type: "edit-theme-word",
+                      theme,
+                      word: w,
+                      originalWord: w,
+                    })
+                  }
+                  pill
+                >
+                  <span>{w}</span>
+                </Badge>
+              ))}
+            </Stack>
+            <PlusCircle
+              onClick={() =>
+                console.log(`start adding theme VALUE to theme ${theme}`)
+              }
+            />
+          </>
         )}
       </td>
-      {/* )} */}
     </tr>
   )
 }

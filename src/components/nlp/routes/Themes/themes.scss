@@ -5,7 +5,21 @@ table.theme {
     left: 0;
     z-index: 1;
   }
+  // Values chip list cell
   td:nth-child(2){
-    width: 85%; 
+    // width: 85%; 
+    display: flex;
+    justify-content: space-between;
+
+    svg {
+      visibility: hidden;
+      cursor: pointer;
+    }
+
+    &:hover{
+      svg{
+        visibility:visible;
+      }
+    }
   }
 }

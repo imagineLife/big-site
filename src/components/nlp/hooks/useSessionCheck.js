@@ -21,11 +21,11 @@ function useSessionCheck(enabled, apiReadyKey) {
         return jsonRes
       }),
     {
-      enabled: Boolean(enabled && Boolean(apiReadyKey)),
+      enabled: Boolean(Boolean(enabled) && Boolean(apiReadyKey)),
       refetchOnWindowFocus: false,
       refetchOnMount: false,
       refetchOnReconnect: false,
-      staleTime: 1000,
+      staleTime: 500,
       retry: false,
     }
   )
