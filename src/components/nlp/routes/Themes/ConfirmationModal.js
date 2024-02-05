@@ -183,6 +183,8 @@ export default function ConfirmationModal({
                 theme: localTheme || getValues().theme,
                 keywordList,
               })
+              setLocalKeywordList([])
+              setLocalKeyword()
             }
             reset()
           }}
