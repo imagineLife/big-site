@@ -10,16 +10,35 @@ order: 13
 ---
 
 # The Microservices
-A Brief review of the microservices here:  
 
-- A frontend app with an api + a frontend, where users can login and vote 1 of 2 options (_simple webapp here_)
-- A redis datastore
-- A postgres DB
-- A "worker" service that syncs data from the redis service to the postgres service
-- Another frontend that show vote tallies, mocking an "analytics" frontend   
+A Brief review of the microservices _"architecture"_ here:
 
-Each service will get a pod.  
+```mermaid
+flowchart
+  direction LR
+  RDS["redis-caching"]
+  PGD["postgres-data"]
+  WRKR["worker"]
+  RSLTS["results-app"]
+  VTNG["voting-app"]
 
+  subgraph CPN["control plane (cp) node"]
+    PGD --> RDS
+    RDS --> RSLTS
+    RDS --> VTNG
+
+    PGD <-.-> WRKR
+    WRKR <-.-> RDS
+  end
+```
+
+- **A Voting App**: A frontend app with an api + a frontend, where users can login and vote 1 of 2 options (_simple webapp here_)
+- **A redis datastore**
+- **A postgres DB**
+- **A "worker" service** that syncs data from the redis service to the postgres service
+- **A Voting-Results App**: Another frontend that show vote tallies, mocking an "analytics" frontend
+
+Each service will get a pod.
 
 - [The Microservices](#the-microservices)
   - [Definition File Directory Structure](#definition-file-directory-structure)
@@ -35,8 +54,8 @@ Each service will get a pod.
     - [The Results Services](#the-results-services)
   - [Some Consistent Details to Remember](#some-consistent-details-to-remember)
 
-
 ## Definition File Directory Structure
+
 ```bash
 # all configs go in a "cfgs" dir
 /cfgs
@@ -53,10 +72,13 @@ Each service will get a pod.
 ```
 
 ## The Definition Files
+
 Note: the externalIps key/val pair are to publicize the nodes through docker - some detail I'm not 1000% sure about...
 
 ### Pods
+
 Postgres:
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -80,7 +102,9 @@ spec:
         - name: POSTGRES_PASSWORD
           value: "postgres"
 ```
+
 redis:
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -100,6 +124,7 @@ spec:
 ```
 
 results App:
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -118,6 +143,7 @@ spec:
 ```
 
 voting app:
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -136,6 +162,7 @@ spec:
 ```
 
 worker service:
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -149,8 +176,11 @@ spec:
     - name: worker-box
       image: kodekloud/examplevotingapp_worker:v1
 ```
+
 ### Services
+
 Postgres Service:
+
 ```yaml
 # NOTE: no ports as this is not available to other apps
 apiVersion: v1
@@ -172,6 +202,7 @@ spec:
 ```
 
 Redis Service:
+
 ```yaml
 # NOTE: no ports as this is not available to other apps
 apiVersion: v1
@@ -192,6 +223,7 @@ spec:
 ```
 
 Results Service:
+
 ```yaml
 # NOTE: no ports as this is not available to other apps
 apiVersion: v1
@@ -216,6 +248,7 @@ spec:
 ```
 
 Voting Service:
+
 ```yaml
 # NOTE: no ports as this is not available to other apps
 apiVersion: v1
@@ -239,15 +272,18 @@ spec:
   externalIPs:
     - 1.2.3.110
 ```
+
 ## Building The Services with Kubectl
+
 ### The Voting-App Services
+
 ```bash
 # the voting-app pod
-Jakes-4:k8s Jake$ kubectl create -f cfgs/pods/voting-app.yaml 
+Jakes-4:k8s Jake$ kubectl create -f cfgs/pods/voting-app.yaml
 pod/voting-app-pod created
 
 # the voting-app service
-Jakes-4:k8s Jake$ kubectl create -f cfgs/services/voting-app.yaml 
+Jakes-4:k8s Jake$ kubectl create -f cfgs/services/voting-app.yaml
 service/voting-service created
 
 # see em
@@ -259,9 +295,9 @@ NAME                     TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)       
 service/kubernetes       ClusterIP   10.96.0.1      <none>        443/TCP        12d
 service/voting-service   NodePort    10.101.11.48   <none>        80:30005/TCP   35s
 
-# 
+#
 # see em, differently
-# 
+#
 Jakes-4:k8s Jake$ kubectl get pods,svc
 NAME                 READY   STATUS    RESTARTS   AGE
 pod/voting-app-pod   1/1     Running   0          3m9s
@@ -270,18 +306,22 @@ NAME                     TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)       
 service/kubernetes       ClusterIP   10.96.0.1      <none>        443/TCP        12d
 service/voting-service   NodePort    10.101.11.48   <none>        80:30005/TCP   116s
 ```
+
 #### See the Voting App with minikube
+
 ```bash
 Jakes-4:k8s Jake$ minikube service voting-service --url
 http://127.0.0.1:51286
 ```
+
 go there!
 
 ### The Redis Services
+
 ```bash
-Jakes-4:k8s Jake$ kubectl create -f cfgs/pods/redis.yaml 
+Jakes-4:k8s Jake$ kubectl create -f cfgs/pods/redis.yaml
 pod/redis-pod created
-Jakes-4:k8s Jake$ kubectl create -f cfgs/services/redis.yaml 
+Jakes-4:k8s Jake$ kubectl create -f cfgs/services/redis.yaml
 service/redis-service created
 
 # see it all
@@ -297,10 +337,11 @@ service/voting-service   NodePort    10.110.227.44   1.2.3.110     80:30005/TCP 
 ```
 
 ### The Postgres Services
+
 ```bash
-Jakes-4:k8s Jake$ kubectl create -f cfgs/pods/pg.yaml 
+Jakes-4:k8s Jake$ kubectl create -f cfgs/pods/pg.yaml
 pod/pg-pod created
-Jakes-4:k8s Jake$ kubectl create -f cfgs/services/pg.yaml 
+Jakes-4:k8s Jake$ kubectl create -f cfgs/services/pg.yaml
 service/db created
 
 # see it all
@@ -318,20 +359,23 @@ service/voting-service   NodePort    10.110.227.44   1.2.3.110     80:30005/TCP 
 ```
 
 ### The Worker Service
+
 ```bash
-Jakes-4:k8s Jake$ kubectl create -f cfgs/pods/worker.yaml 
+Jakes-4:k8s Jake$ kubectl create -f cfgs/pods/worker.yaml
 pod/worker-pod created
 ```
 
 ### The Results Services
+
 ```bash
-Jakes-4:k8s Jake$ kubectl create -f cfgs/pods/result-app.yaml 
+Jakes-4:k8s Jake$ kubectl create -f cfgs/pods/result-app.yaml
 pod/result-app-pod created
-Jakes-4:k8s Jake$ kubectl create -f cfgs/services/result-app.yaml 
+Jakes-4:k8s Jake$ kubectl create -f cfgs/services/result-app.yaml
 service/result-service created
 ```
 
 ## Some Consistent Details to Remember
+
 Pay.  
 Attention.  
 To details.  
@@ -339,4 +383,4 @@ To spelling.
 To port numbers.  
 To Directions.  
 Pod names, deployment names, service names, namespace names.  
-These things, although they don't take up a lot of code (_perhaps compared to building a backend system or a complex single-page app_), these _details_ make-or-break the kubernetes world.  
+These things, although they don't take up a lot of code (_perhaps compared to building a backend system or a complex single-page app_), these _details_ make-or-break the kubernetes world.
