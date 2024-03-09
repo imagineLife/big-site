@@ -7,13 +7,15 @@ import RegisterForm from "../components/RegisterForm"
 export default function Auth({ location: { search } }) {
   let defaultActiveKey = "loginForm"
 
-  const { authorized } = useContext(NlpContext)
+  const { useAuthorization } = useContext(NlpContext)
+  const isAuthorized = useAuthorization()
+
   if (search) {
     let tabToUse = search.split("=")[1]
     if (tabToUse == "register") defaultActiveKey = "registerForm"
   }
-  // const params = useParams()
-  if (authorized) return <p>You're logged in!</p>
+
+  if (isAuthorized) return <p>You're logged in!</p>
 
   return (
     <Container>
@@ -24,7 +26,7 @@ export default function Auth({ location: { search } }) {
         className="mb-3"
       >
         <Tab eventKey="loginForm" title="Login">
-          <LoginForm authorized={authorized} />
+          <LoginForm authorized={isAuthorized} />
         </Tab>
         <Tab eventKey="registerForm" title="Register">
           <RegisterForm />

@@ -11,13 +11,6 @@ import { useSessionStorage } from "./hooks/useStorage"
 import { useMutation } from "react-query"
 
 async function fetchDeleteSession({ jwt }) {
-  console.log(
-    "%c fetchDeleteSession",
-    "background-color: orange; color: black;"
-  )
-  console.log("jwt")
-  console.log(jwt)
-
   let fetchUrl = `${process.env.GATSBY_NLP_API_URL}/api/session`
 
   const response = await fetch(fetchUrl, {
@@ -39,10 +32,8 @@ async function fetchDeleteSession({ jwt }) {
 }
 
 function AuthDD({ jwt }) {
-  console.log("%c AuthDD", "background-color: brown; color: black;")
-
-  const { authorized, setEmail } = useContext(NlpContext)
-  console.log("jwt from session:", jwt)
+  const { useAuthorization, setEmail } = useContext(NlpContext)
+  const isAuthorized = useAuthorization()
 
   const [, , removeUiData] = useSessionStorage("nlp-data")
   const logoutMutation = useMutation({
@@ -53,15 +44,10 @@ function AuthDD({ jwt }) {
         "%c deleted session",
         "background-color: white; color: black;"
       )
-      console.log("data")
-      console.log(data)
-      console.log("vars")
-      console.log(vars)
     },
   })
 
   const logoutFn = useCallback(() => {
-    console.log("logoutFn jwt: ", jwt)
     removeUiData()
     setEmail(null)
     logoutMutation.mutate({ jwt })
@@ -74,7 +60,7 @@ function AuthDD({ jwt }) {
         <PersonCircle />
       </Dropdown.Toggle>
       <Dropdown.Menu style={{ left: "-85px" }}>
-        {!authorized && (
+        {!isAuthorized && (
           <>
             <Dropdown.Item
               onClick={e => {
@@ -94,7 +80,7 @@ function AuthDD({ jwt }) {
             </Dropdown.Item>
           </>
         )}
-        {authorized && (
+        {isAuthorized && (
           <Dropdown.Item
             onClick={e => {
               e.preventDefault()
@@ -116,16 +102,11 @@ function getDotColor(initializedStatus) {
 }
 
 export default function NlpNav({ title }) {
-  const { appInitialized, authorized, ...state } = useContext(NlpContext)
+  const { appInitialized, useAuthorization, ...state } = useContext(NlpContext)
   const [jwt, , removeToken] = useSessionStorage("nlp-token")
   const CIRCLE_SIZE = "10px"
-
+  const authorized = useAuthorization()
   let routeLinks = [{ path: "/nlp/auth", text: "Account" }]
-  console.log("%c ---NlpNav", "background-color: yellow; color: black;")
-  console.log("authorized")
-  console.log(authorized)
-  console.log("%c ---", "background-color: yellow; color: black;")
-
   if (authorized) {
     routeLinks.push(
       { path: "/nlp/upload", text: "Import" },
@@ -171,7 +152,7 @@ export default function NlpNav({ title }) {
             ))}
           </Nav>
         </Navbar.Collapse>
-        <AuthDD />
+        <AuthDD jwt={jwt} />
         {/* {jwt && <AuthDD jwt={jwt} />} */}
       </Container>
     </Navbar>

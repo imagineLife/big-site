@@ -20,7 +20,6 @@ function NlpProvider({ children, location, ...rest }) {
   const [state, dispatch] = useReducer(nlpReducer, initialReducerState)
   const [appInitialized, appAuthToken] = useAppRegistration()
   const [, setStorageToken] = useSessionStorage("nlp-token")
-  console.log("%c---NlpProvider---", "background-color: pink; color: black;")
 
   const registrationReq = async ({ url, body, jwt }) => {
     const response = await jsonPost(url, body, {
@@ -86,16 +85,11 @@ function NlpProvider({ children, location, ...rest }) {
     startLoginMutation?.isSuccess == false &&
     finishLoginMutation?.isSuccess == false &&
     Boolean(appAuthToken)
-  console.log({ shouldCheckSessionOther, shouldCheckSessionOnLogin })
 
   const sessionAuthStatus = useSessionCheck(
     shouldCheckSessionOther || shouldCheckSessionOnLogin,
     appAuthToken
   )
-  console.log("sessionAuthStatus")
-  console.log(sessionAuthStatus)
-  console.log("emailVal")
-  console.log(emailVal)
 
   let authorized = false
   if (
@@ -119,7 +113,9 @@ function NlpProvider({ children, location, ...rest }) {
     authorized = emailVal
   }
 
-  console.log("%c ------", "background-color: pink; color: black;")
+  const useAuthorization = () => {
+    return authorized
+  }
 
   return (
     <NlpContext.Provider
@@ -134,6 +130,7 @@ function NlpProvider({ children, location, ...rest }) {
         registrationReq,
         setEmail,
         startLoginMutation,
+        useAuthorization,
         ...state,
       }}
     >

@@ -42,7 +42,7 @@ This doc will be in the context of an http REST API:
         - [Child Processes](#child-processes)
         - [Worker Threads](#worker-threads)
       - [Identify and Adjust Long-Running Logic Tidbits](#identify-and-adjust-long-running-logic-tidbits)
-- [See It In Action](#see-it-in-action)
+- [MORE! See It In Action](#more-see-it-in-action)
 
 ## Node Parses Files (A Precursor)
 
@@ -105,10 +105,9 @@ Worker threads are like child processes - they are separate processes that can h
 
 #### Identify and Adjust Long-Running Logic Tidbits
 
-Some logic may need to be in the node server or be best-fit for the node server. This should not be the norm, though. Finding oursellves in a place where we think node is slow might reveal our misuse of its strongest assets.  
-For parts of an api that are consistently long running
+Some "blocking" logic may need to live in the node server, and/or is "_best-fit_" for the node server. "Blocking" logic, though, deserves some critical though and consideration, particularly to address "scaling" issues. Finding ourselves in a place where we think node is slow might reveal our misuse of its strongest assets.
 
-# See It In Action
+# MORE! See It In Action
 
-- [How setImmediate and setTimeout](/node/event-loop/in-action) might affect logic in node
-- [Blocking The Event Loop](/node/event-loop/blocking)
+- [How setImmediate and setTimeout](/node/event-loop/in-action) might affect the event-loop and blocking logic in node
+- [Blocking The Event Loop](/node/event-loop/blocking) is definitely a thing
