@@ -165,12 +165,10 @@ function Themes() {
 
   return (
     <section id="theme-editor">
-      <h2>Theme Editor</h2>
-
       {/* 
         Theme action summary
       */}
-      <h3>Create, Edit, And Delete Themes</h3>
+      <h3>Themes</h3>
       <Description />
 
       {!authorized || (!localThemeData && <p>loading...</p>)}

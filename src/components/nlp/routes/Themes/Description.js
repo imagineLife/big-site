@@ -6,8 +6,9 @@ export default function ThemesDescription() {
       <i>
         A "theme" here is a word representing a "topic" within the text. Themes
         associate with keywords. When the assocaited keyword(s) appear in text,
-        the theme will be associated with that text. The theme word, itself, may
-        not appear in the text.
+        the theme will be associated with that text. The theme word, itself, is
+        not required to appear in the text in order for the theme to be
+        associated with the text.
       </i>
       <ul>
         <li>
@@ -27,7 +28,7 @@ export default function ThemesDescription() {
       {/* 
         Theme keyword action summary
       */}
-      <h3>Create, Edit, and Delete Theme Keywords</h3>
+      <h3>Theme Keywords</h3>
       <i>
         A theme "keyword" here is a word that (sh/c)ould exist in the text. Any
         time the keyword appears in the text, the theme associated with the
