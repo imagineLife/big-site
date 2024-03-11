@@ -31,19 +31,22 @@ async function fetchDeleteSession({ jwt }) {
   }
 }
 
-function AuthDD({ jwt }) {
-  const { useAuthorization, setEmail } = useContext(NlpContext)
+function AuthDD({ jwt, updateJwt }) {
+  const {
+    useAuthorization,
+    setEmail,
+    startLoginMutation,
+    finishLoginMutation,
+  } = useContext(NlpContext)
   const isAuthorized = useAuthorization()
 
   const [, , removeUiData] = useSessionStorage("nlp-data")
   const logoutMutation = useMutation({
     mutationFn: fetchDeleteSession,
     mutationKey: `delete-session-${jwt}`,
-    onSuccess: (data, vars) => {
-      console.log(
-        "%c deleted session",
-        "background-color: white; color: black;"
-      )
+    onSuccess: data => {
+      updateJwt(data.jwt)
+      setEmail(null)
     },
   })
 
@@ -51,6 +54,9 @@ function AuthDD({ jwt }) {
     removeUiData()
     setEmail(null)
     logoutMutation.mutate({ jwt })
+    startLoginMutation.reset()
+    finishLoginMutation.reset()
+
     navigate("/nlp/auth")
   }, [jwt])
 
@@ -103,7 +109,7 @@ function getDotColor(initializedStatus) {
 
 export default function NlpNav({ title }) {
   const { appInitialized, useAuthorization, ...state } = useContext(NlpContext)
-  const [jwt, , removeToken] = useSessionStorage("nlp-token")
+  const [jwt, updateJwt, removeToken] = useSessionStorage("nlp-token")
   const CIRCLE_SIZE = "10px"
   const authorized = useAuthorization()
   let routeLinks = [{ path: "/nlp/auth", text: "Account" }]
@@ -152,8 +158,7 @@ export default function NlpNav({ title }) {
             ))}
           </Nav>
         </Navbar.Collapse>
-        <AuthDD jwt={jwt} />
-        {/* {jwt && <AuthDD jwt={jwt} />} */}
+        <AuthDD jwt={jwt} updateJwt={updateJwt} />
       </Container>
     </Navbar>
   )

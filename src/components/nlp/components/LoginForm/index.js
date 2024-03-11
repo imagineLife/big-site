@@ -97,9 +97,13 @@ const LoginForm = ({ authorized }) => {
               )}
             />
 
-            <Form.Text className="text-danger">
-              {errors?.password?.message}
-            </Form.Text>
+            {errors?.password ||
+              (finishLoginMutation?.error?.message && (
+                <Form.Text className="text-danger">
+                  {errors?.password?.message ||
+                    finishLoginMutation?.error?.message.split(":")[2]}
+                </Form.Text>
+              ))}
           </Form.Group>
         )}
 

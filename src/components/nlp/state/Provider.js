@@ -45,7 +45,12 @@ function NlpProvider({ children, location, ...rest }) {
       authorization: `Bearer ${appAuthToken}`,
     })
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`)
+      if (response.status === 422) {
+        const errorData = await response.json()
+        throw new Error(`password:server:${errorData.Error}`)
+      } else {
+        throw new Error(`password:server:Server Error`)
+      }
     }
     if (response.status === 200) {
       const responseJwt = await response.text()
@@ -64,6 +69,7 @@ function NlpProvider({ children, location, ...rest }) {
   const finishLoginMutation = useMutation(authRequest, {
     onSuccess: data => {
       setStorageToken(data)
+      // setEmail(null)
     },
   })
 
