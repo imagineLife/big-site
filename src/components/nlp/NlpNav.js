@@ -117,7 +117,7 @@ export default function NlpNav({ title }) {
   let routeLinks = [{ path: "/nlp/auth", text: "Account" }]
   if (authorized) {
     routeLinks.push(
-      { path: "/nlp/upload", text: "Import" },
+      { path: "/nlp/upload", text: "Data" },
       { path: "/nlp/themes/", text: "Labels" }
     )
   }

@@ -10,7 +10,14 @@ import {
 
 function SentimentScoreViz({ scores }) {
   return (
-    <div style={{ width: "100%", height: "100px" }}>
+    <div
+      style={{
+        width: "100%",
+        height: "100px",
+        minWidth: "100px",
+        minHeight: "30px",
+      }}
+    >
       {/* border: "1px solid gray" */}
       <ResponsiveContainer width="100%" height="100%">
         <ScatterChart
