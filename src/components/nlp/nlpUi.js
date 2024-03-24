@@ -1,4 +1,4 @@
-import React, { useRef, useContext, useEffect } from "react"
+import React, { useRef, useContext } from "react" //useEffect
 
 import * as XLSX from "xlsx"
 import "./../../pages/nlp/index.scss"
@@ -6,7 +6,8 @@ import "./../../pages/nlp/index.scss"
 // components
 import DragNDropForm from "./../DragNDropForm"
 // import TextAnalysis from "./TextAnalysis"
-import BrowserAnalytics from "./components/BrowserAnalytics"
+// import BrowserAnalytics from "./components/BrowserAnalytics"
+import DataActionTabs from "./components/DataActionTabs"
 import { NlpContext } from "./state/Provider"
 import { useSessionStorage } from "./hooks/useStorage"
 
@@ -53,7 +54,8 @@ export default function UploadPreview() {
       reader.onerror = function (ex) {
         console.log(ex)
       }
-      reader.readAsBinaryString(theFile)
+      // reader.readAsBinaryString(theFile)
+      reader.readAsArrayBuffer(theFile)
     }
   }
 
@@ -92,20 +94,21 @@ export default function UploadPreview() {
       )}
 
       {/* text data present */}
-      {/* {fileData !== null && ( */}
+      {/* {fileData !== undefined && <BrowserAnalytics data={fileData} />} */}
       {fileData !== undefined && (
-        // <TableWithData data={fileData} />
-        <BrowserAnalytics data={fileData} />
-
-        // <TextAnalysis
-        //   reset={() => dispatch({ type: "reset", payload: null })}
-        //   fileData={fileData}
-        //   fileType={fileType}
-        // />
+        <section>
+          {/* <h2>Data Preview</h2>
+          <sub>
+            <i>Below are the header & first 5 rows of the data.</i>
+          </sub>
+          <MemoTablePreview data={fileData} /> */}
+          <DataActionTabs data={fileData} />
+        </section>
       )}
-      <sub>
-        <a href="/">go to my website</a>
-      </sub>
     </section>
   )
 }
+
+// <sub>
+//   <a href="/">go to my website</a>
+// </sub>

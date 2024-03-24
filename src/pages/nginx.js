@@ -1,8 +1,8 @@
-import React, { Fragment } from 'react';
-import { StaticQuery, graphql } from 'gatsby';
+import React, { Fragment } from "react"
+import { StaticQuery, graphql } from "gatsby"
 
-import Layout from './../components/layout';
-import Hero from './../components/hero';
+import Layout from "./../components/layout"
+import Hero from "./../components/hero"
 import createLinksWithType from "./../components/createLinksWithType"
 // import './scrum.scss';
 
@@ -59,14 +59,14 @@ const IndexPage = () => (
   />
 )
 
-export default IndexPage;
+export default IndexPage
 export function Head() {
   return (
     <Fragment>
       <title>Nginx Blog</title>
       <meta name="description" content="A Set Of Blog Posts Reviewing Nginx" />
       <meta property="og:title" content="Nginx Blog" />
-      <meta property="og:url" content="http://laursen.tech/nginx" />
+      <meta property="og:url" content="https://laursen.tech/nginx/" />
       <meta httpEquiv="cache-control" content="no-cache" />
       <meta httpEquiv="expires" content="0" />
       <meta httpEquiv="pragma" content="no-cache" />

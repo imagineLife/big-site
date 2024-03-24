@@ -47,7 +47,7 @@ export default function Table({
                   {row.cells.map((cell, cellIdx) => {
                     const cellContent = cell.render("Cell")
                     let cellProps = { ...cell.getCellProps() }
-                    if (onMouseUp && cellIdx === 3) {
+                    if (onMouseUp && cellIdx === row.cells.length - 1) {
                       cellProps.onMouseUp = onMouseUp
                     }
                     return <td {...cellProps}>{cellContent}</td>

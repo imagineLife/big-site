@@ -25,7 +25,7 @@ module.exports = {
       summary: `Learner, Do-er, Software Developer`,
     },
     description: `Notes and Thoughts on SaaS Tech & People-Oriented SaaS Work`,
-    siteUrl: `http://laursen.tech`,
+    siteUrl: `https://laursen.tech/`,
   },
   plugins: [
     `gatsby-read-time-estimate`,
@@ -227,7 +227,7 @@ module.exports = {
             }
           }
         `,
-        resolveSiteUrl: () => `http://laursen.tech`,
+        resolveSiteUrl: () => `https://laursen.tech/`,
         resolvePages: ({ allMarkdownRemark }) => {
           return allMarkdownRemark.pages.map(sitePage => {
             return {

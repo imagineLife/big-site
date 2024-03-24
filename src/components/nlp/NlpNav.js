@@ -41,6 +41,7 @@ function AuthDD({ jwt, updateJwt }) {
   const isAuthorized = useAuthorization()
 
   const [, , removeUiData] = useSessionStorage("nlp-data")
+  const [, , removeUiThemeData] = useSessionStorage("nlp-themes")
   const logoutMutation = useMutation({
     mutationFn: fetchDeleteSession,
     mutationKey: `delete-session-${jwt}`,
@@ -52,6 +53,7 @@ function AuthDD({ jwt, updateJwt }) {
 
   const logoutFn = useCallback(() => {
     removeUiData()
+    removeUiThemeData()
     setEmail(null)
     logoutMutation.mutate({ jwt })
     startLoginMutation.reset()
@@ -116,7 +118,7 @@ export default function NlpNav({ title }) {
   if (authorized) {
     routeLinks.push(
       { path: "/nlp/upload", text: "Import" },
-      { path: "/nlp/themes/", text: "Themes" }
+      { path: "/nlp/themes/", text: "Labels" }
     )
   }
   let isBrowser = typeof window !== "undefined"

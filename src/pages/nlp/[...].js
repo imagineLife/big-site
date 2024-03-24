@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from "react"
 import { QueryClient } from "react-query"
-import { Router, Redirect } from "@reach/router"
+import { Router } from "@reach/router"
 import "./index.scss"
 
 // components
@@ -11,6 +11,8 @@ const NlpUi = lazy(() => import("../../components/nlp/nlpUi"))
 const Speeches = lazy(() => import("../../components/nlp/routes/Speeches"))
 const Themes = lazy(() => import("../../components/nlp/routes/Themes"))
 const Auth = lazy(() => import("../../components/nlp/routes/Auth"))
+// const Analytics = lazy(() => import("../../components/nlp/routes/Analytics"))
+const Labeler = lazy(() => import("../../components/nlp/routes/Labeling"))
 const SpeechDetail = lazy(() =>
   import("./../../components/nlp/routes/SpeechById")
 )
@@ -29,7 +31,9 @@ export default function Nlp(props) {
               <Themes path="/themes/" />
               <SpeechDetail path="/speeches/:speechId/" />
               <Speeches path="/speeches/" />
+              <Labeler path="/labeling/" />
               <NlpUi path="/upload/" />
+              {/* <Analytics path="/analysis/" /> */}
               {/* <Redirect from="*" to="/nlp/auth/" /> */}
             </Router>
           </Suspense>

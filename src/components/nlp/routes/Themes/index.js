@@ -168,7 +168,7 @@ function Themes() {
       {/* 
         Theme action summary
       */}
-      <h3>Themes</h3>
+      <h3>Labels</h3>
       <Description />
 
       {!authorized || (!localThemeData && <p>loading...</p>)}

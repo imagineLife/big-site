@@ -1,50 +1,50 @@
 import React from "react"
 
-export default function ThemesDescription() {
+export default function LabelsDescription() {
   return (
     <>
       <i>
-        A "theme" here is a word representing a "topic" within the text. Themes
+        A "label" here is a word representing a "topic" within the text. Labels
         associate with keywords. When the assocaited keyword(s) appear in text,
-        the theme will be associated with that text. The theme word, itself, is
-        not required to appear in the text in order for the theme to be
+        the label will be associated with that text. The label word, itself, is
+        not required to appear in the text in order for the label to be
         associated with the text.
       </i>
       <ul>
         <li>
-          <b>Create a new theme</b>: select the "+" that appears when hovering
-          over the "theme" header.
+          <b>Create a new label</b>: select the "+" that appears when hovering
+          over the "label" header.
         </li>
         <li>
-          <b>Edit a theme word</b>: select the pencil icon that appears when
-          hovering over the theme word.
+          <b>Edit a label word</b>: select the pencil icon that appears when
+          hovering over the label word.
         </li>
         <li>
-          <b>Delete a theme</b>: select the trashcan icon that appears when
-          hovering over the theme word.
+          <b>Delete a label</b>: select the trashcan icon that appears when
+          hovering over the label word.
         </li>
       </ul>
 
       {/* 
-        Theme keyword action summary
+        Label keyword action summary
       */}
-      <h3>Theme Keywords</h3>
+      <h3>Label Keywords</h3>
       <i>
-        A theme "keyword" here is a word that (sh/c)ould exist in the text. Any
-        time the keyword appears in the text, the theme associated with the
+        A label "keyword" here is a word that (sh/c)ould exist in the text. Any
+        time the keyword appears in the text, the label associated with the
         keyword will be associated with the text.
       </i>
       <ul>
         <li>
-          <b>Create a theme keyword</b>: select the "+" that appears when
-          hovering over the "keywords" cell assocaited with a theme.
+          <b>Create a label keyword</b>: select the "+" that appears when
+          hovering over the "keywords" cell assocaited with a label.
         </li>
         <li>
-          <b>Edit a theme keyword</b>: select the "pill" showing the keyword you
+          <b>Edit a label keyword</b>: select the "pill" showing the keyword you
           want to edit. Input the edited keyword, and select "save".
         </li>
         <li>
-          <b>Delete a theme keyword</b>: select the "pill" showing the keyword
+          <b>Delete a label keyword</b>: select the "pill" showing the keyword
           you want to delete. Select "delete".
         </li>
       </ul>

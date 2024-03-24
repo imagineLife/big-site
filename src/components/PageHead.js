@@ -33,7 +33,7 @@ export default function PageHead({ title, excerpt, slug, words, tags }) {
 
   const optionalImg = imgFromSlug(slug)
   if (optionalImg) {
-    jsonLd.image = `https://laursen.tech${optionalImg}`
+    jsonLd.image = `https://laursen.tech${optionalImg}/`
   }
 
   return (
@@ -45,7 +45,7 @@ export default function PageHead({ title, excerpt, slug, words, tags }) {
       <meta httpEquiv="cache-control" content="no-cache" />
       <meta httpEquiv="expires" content="0" />
       <meta httpEquiv="pragma" content="no-cache" />
-      <link rel="canonical" href={`http://laursen.tech/${slug}/`} />
+      <link rel="canonical" href={`https://laursen.tech/${slug}/`} />
       <link
         rel="sitemap"
         type="application/xml"
