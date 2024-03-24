@@ -1,5 +1,5 @@
-import React, { useState, useContext } from "react"
-import { Badge, Modal, Button, Alert } from "react-bootstrap"
+import React, { useState, useEffect, useContext } from "react"
+import { Badge, Modal, Button, Alert, Spinner } from "react-bootstrap"
 import { useSessionStorage } from "../../hooks/useStorage"
 import Table from "./../../../../components/Table"
 import useRemappedThemes from "../../hooks/useRemappedThemes"
@@ -27,45 +27,53 @@ const columns = [
 
 const Labeler = ({ data: propsData }) => {
   const { authorized } = useContext(NlpContext)
-  const [themes] = useSessionStorage("nlp-themes")
+  const [themes, setStorageThemes] = useSessionStorage("nlp-themes")
   const [jwt] = useSessionStorage("nlp-token")
   const [selectedWord, setSelectedWord] = useState("")
   const [showModal, setShowModal] = useState(false)
   const [successAlert, setSuccessAlert] = useState(false)
   const [selectedLabelAssignment, setSelectedLabelAssignment] = useState(false)
   const remappedThemes = useRemappedThemes({ themes })
+  const [updatedCount, setUpdatedCount] = useState(0)
+  const formattedTableData = useLabelingTableFormatter(
+    {
+      data: propsData[0],
+      remappedThemes,
+    },
+    updatedCount
+  )
 
-  const formattedTableData = useLabelingTableFormatter({
-    data: propsData[0],
-    remappedThemes,
-  })
-
-  // const handleCloseModal = () => {
-  //   setShowModal(false)
-  //   setSuccessAlert(true)
-  //   setTimeout(() => setSuccessAlert(false), 2000) // Hide success alert after 2 seconds
-  // }
+  // useEffect(() => {
+  //   setFormattedTableData(
+  //     useLabelingTableFormatter({
+  //       data: propsData[0],
+  //       remappedThemes,
+  //     })
+  //   )
+  // }, [updatedCount])
 
   const addThemeValueMutation = useMutation({
     mutationFn: addThemeValueFetch,
     mutationKey: `add-theme-value-${selectedLabelAssignment}-${selectedWord}`,
-    onSuccess: () => {
-      // TODO: change to show new "confirm" modal
-      // setSelectedThemes([])
-      // setShowConfirmUi(true)
-      console.log("ADDED THEME?!")
+    onSuccess: (data, vars) => {
+      setStorageThemes(
+        themes.map(themeObj => {
+          if (themeObj.theme !== vars.theme) {
+            return themeObj
+          }
+          let newThemeObj = themeObj
+          newThemeObj.words.push(vars.value)
+          return newThemeObj
+        })
+      )
+      setShowModal(false)
+      setUpdatedCount(curCount => curCount + 1)
+      // setSuccessAlert(true)
+      // setTimeout(() => setSuccessAlert(false), 2000) // Hide success alert after 2 seconds
     },
   })
 
   function assignLabel() {
-    console.log(
-      "%c Assign Label Here...",
-      "background-color: orange; color: black;"
-    )
-    console.log("selectedWord")
-    console.log(selectedWord)
-    console.log("selectedLabelAssignment")
-    console.log(selectedLabelAssignment)
     addThemeValueMutation.mutate({
       email: authorized,
       theme: selectedLabelAssignment,
@@ -135,9 +143,16 @@ const Labeler = ({ data: propsData }) => {
           <Button
             variant="primary"
             onClick={assignLabel}
-            disabled={!selectedLabelAssignment}
+            disabled={
+              !selectedLabelAssignment ||
+              addThemeValueMutation.status === "loading"
+            }
           >
-            Assign
+            {addThemeValueMutation.status === "loading" ? (
+              <Spinner animation="border" size="sm" />
+            ) : (
+              "Assign"
+            )}
           </Button>
         </Modal.Footer>
       </Modal>

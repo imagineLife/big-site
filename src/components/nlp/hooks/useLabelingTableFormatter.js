@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 
 function wordWithOptionalSpace(word, idx, arrLength) {
   // first word
@@ -8,8 +8,8 @@ function wordWithOptionalSpace(word, idx, arrLength) {
   return ` ${word} `
 }
 
-export default function useLabelingTableFormatter({ data, remappedThemes }) {
-  let res = []
+function doTheWork(data, remappedThemes) {
+  let localRes = []
   data.forEach(personObj => {
     delete personObj.person_id
     const questionKeys = Object.keys(personObj)
@@ -23,7 +23,7 @@ export default function useLabelingTableFormatter({ data, remappedThemes }) {
       const formattedAnswerText = answerTextWordsArr.map(
         (originalWord, wordIdx) => {
           let word
-
+          let wordWithoutPunc = originalWord.replace(/[^\w\s]/g, "")
           const calculatedWord = wordWithOptionalSpace(
             originalWord,
             wordIdx,
@@ -31,7 +31,7 @@ export default function useLabelingTableFormatter({ data, remappedThemes }) {
           )
 
           const shouldHighlight = Boolean(
-            remappedThemes[originalWord.toLowerCase()]
+            remappedThemes[wordWithoutPunc.toLowerCase()]
           )
           if (shouldHighlight) {
             word = (
@@ -39,11 +39,11 @@ export default function useLabelingTableFormatter({ data, remappedThemes }) {
             )
             if (
               !thisAnswerObject.labels.includes(
-                remappedThemes[originalWord.toLowerCase()]
+                remappedThemes[wordWithoutPunc.toLowerCase()]
               )
             ) {
               thisAnswerObject.labels.push(
-                remappedThemes[originalWord.toLowerCase()]
+                remappedThemes[wordWithoutPunc.toLowerCase()]
               )
             }
           } else {
@@ -55,9 +55,23 @@ export default function useLabelingTableFormatter({ data, remappedThemes }) {
         }
       )
       thisAnswerObject.text = <p>{formattedAnswerText}</p>
-      res.push(thisAnswerObject)
+      localRes.push(thisAnswerObject)
     })
   })
+
+  return localRes
+}
+export default function useLabelingTableFormatter(
+  { data, remappedThemes },
+  newUpdatedCount
+) {
+  let [res, setRes] = useState(() => {
+    return doTheWork(data, remappedThemes)
+  })
+
+  useEffect(() => {
+    setRes(doTheWork(data, remappedThemes))
+  }, [newUpdatedCount])
 
   return res
 }
