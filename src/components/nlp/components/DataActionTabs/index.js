@@ -3,6 +3,7 @@ import Tab from "react-bootstrap/Tab"
 import Tabs from "react-bootstrap/Tabs"
 import Table from "./../../../Table"
 import Labeling from "./../../routes/Labeling"
+import BrowserAnalytics from "../BrowserAnalytics"
 const MemoTablePreview = memo(function InnerTable({ data }) {
   return <Table data={data} className="nlp" firstFive />
 })
@@ -24,9 +25,9 @@ export default function DataActionTabs({ data }) {
       <Tab eventKey="labeling" title="Labeling">
         <Labeling data={data} />
       </Tab>
-      {/* <Tab eventKey="contact" title="Contact" disabled>
-        Tab content for Contact
-      </Tab> */}
+      <Tab eventKey="analysis" title="Analysis">
+        <BrowserAnalytics data={data} />
+      </Tab>
     </Tabs>
   )
 }

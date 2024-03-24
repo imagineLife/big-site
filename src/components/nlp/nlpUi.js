@@ -6,7 +6,7 @@ import "./../../pages/nlp/index.scss"
 // components
 import DragNDropForm from "./../DragNDropForm"
 // import TextAnalysis from "./TextAnalysis"
-// import BrowserAnalytics from "./components/BrowserAnalytics"
+import BrowserAnalytics from "./components/BrowserAnalytics"
 import DataActionTabs from "./components/DataActionTabs"
 import { NlpContext } from "./state/Provider"
 import { useSessionStorage } from "./hooks/useStorage"
