@@ -7,6 +7,7 @@ import useLabelingTableFormatter from "../../hooks/useLabelingTableFormatter"
 import { useMutation } from "react-query"
 import addThemeValueFetch from "../../fetches/addThemeValue"
 import { NlpContext } from "../../state/Provider"
+import AddToThemeModal from "../../components/AddToThemeModal"
 
 const columns = [
   {
@@ -98,7 +99,7 @@ const Labeler = ({ data: propsData }) => {
         selectionHandler
       />
 
-      <Modal show={showModal} onHide={() => setShowModal(false)}>
+      {/* <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Assign Label</Modal.Title>
         </Modal.Header>
@@ -155,7 +156,17 @@ const Labeler = ({ data: propsData }) => {
             )}
           </Button>
         </Modal.Footer>
-      </Modal>
+      </Modal> */}
+
+      {selectedWord && (
+        <AddToThemeModal
+          selectedWord={selectedWord}
+          handleModalClose={() => {
+            setSelectedWord(false)
+          }}
+          themes={themes.map(t => t.theme)}
+        />
+      )}
 
       {successAlert && (
         <Alert
