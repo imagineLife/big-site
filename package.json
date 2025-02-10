@@ -1,13 +1,13 @@
 {
-  "name": "nextjs-big-site",
+  "name": "big-site",
   "description": "A Blog",
   "author": "Eric (Jake) Laursen",
   "contributors": [
     "Eric (Jake) Laursen"
   ],
-  "homepage": "https://github.com/imagineLife/next-big-site",
+  "homepage": "https://github.com/imagineLife/big-site",
   "bugs": {
-    "url": "https://github.com/imagineLife/next-big-site/issues"
+    "url": "https://github.com/imagineLife/big-site/issues"
   },
   "scripts": {
     "dev": "next",
