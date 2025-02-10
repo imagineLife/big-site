@@ -57,7 +57,7 @@ export const getStaticPaths = (props) => {
   };
 };
 
-export async function getStaticProps(props) {
+export function getStaticProps(props) {
   const globalData = getGlobalData();
   return {
     props: {

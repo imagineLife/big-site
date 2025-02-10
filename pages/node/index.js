@@ -26,7 +26,7 @@ export default function NodeIndex({ sections }) {
   );
 }
 
-export const getStaticProps = async ({ params, ...rest }) => {
+export function getStaticProps({ params, ...rest }) {
   const globalData = getGlobalData();
   const nodeSections = getNodeSections();
 
@@ -36,4 +36,4 @@ export const getStaticProps = async ({ params, ...rest }) => {
       sections: nodeSections,
     },
   };
-};
+}

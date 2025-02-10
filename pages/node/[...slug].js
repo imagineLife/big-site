@@ -27,7 +27,7 @@ export default function NodeBySlug({
   );
 }
 
-export const getStaticProps = async ({ params }) => {
+export async function getStaticProps({ params }) {
   const globalData = getGlobalData();
   const siblings = await getSiblingTitleSlugs(['node', ...params.slug]);
 
@@ -43,7 +43,7 @@ export const getStaticProps = async ({ params }) => {
       siblings,
     },
   };
-};
+}
 
 // https://nextjs.org/docs/pages/building-your-application/data-fetching/get-static-paths
 export const getStaticPaths = async (props) => {

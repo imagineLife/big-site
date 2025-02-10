@@ -37,7 +37,7 @@ export default function MongoBySlug({
   );
 }
 
-export const getStaticProps = async ({ params }) => {
+export async function getStaticProps({ params }) {
   const globalData = getGlobalData();
 
   const { title, slug, author, excerpt, tags, contentHtml } =
@@ -59,7 +59,7 @@ export const getStaticProps = async ({ params }) => {
       conditionalChildren,
     },
   };
-};
+}
 
 // https://nextjs.org/docs/pages/building-your-application/data-fetching/get-static-paths
 export const getStaticPaths = async (props) => {

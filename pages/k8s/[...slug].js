@@ -24,7 +24,7 @@ export default function k8sBySlug({
   );
 }
 
-export const getStaticProps = async ({ params, ...rest }) => {
+export async function getStaticProps({ params, ...rest }) {
   const globalData = getGlobalData();
   const { title, slug, author, excerpt, tags, contentHtml } =
     await getMdBySlugs(`k8s/${params.slug[0]}`, params?.slug[1]);
@@ -37,7 +37,7 @@ export const getStaticProps = async ({ params, ...rest }) => {
       source: contentHtml,
     },
   };
-};
+}
 
 // https://nextjs.org/docs/pages/building-your-application/data-fetching/get-static-paths
 export const getStaticPaths = (props) => {

@@ -78,7 +78,7 @@ export default function Index({ globalData }) {
   );
 }
 
-export async function getStaticProps() {
+export function getStaticProps() {
   const globalData = getGlobalData();
 
   return {
