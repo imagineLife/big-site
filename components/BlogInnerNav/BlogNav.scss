@@ -1,0 +1,35 @@
+$blog_nav_white: #f2f2f2;
+$blog_nav_black: black;
+$blog_nav_gray: #333;
+$background-color_2: #ddd;
+$background-blog_nav_green: #04AA6D;
+
+/* Add a black background color to the top navigation */
+/* Style the links inside the navigation bar */
+/* Change the color of links on hover */
+/* Add an active class to highlight the current page */
+/* Hide the link that should open and close the topnav on small screens */
+.topnav {
+	background-color: $blog_nav_gray;
+	overflow: hidden;
+	a {
+		float: left;
+		display: block;
+		color: $blog_nav_white;
+		text-align: center;
+		padding: 14px 16px;
+		text-decoration: none;
+		font-size: 17px;
+		&:hover {
+			background-color: $background-color_2;
+			color: $blog_nav_black;
+		}
+	}
+	a.active {
+		background-color: $background-blog_nav_green;
+		color: $blog_nav_white;
+	}
+	.icon {
+		display: none;
+	}
+}

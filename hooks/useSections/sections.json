@@ -1,0 +1,50 @@
+[
+  {
+    "title": "Node",
+    "snippet": "JavaScript, server-side",
+    "to": "/node",
+    "image": "Node.png"
+  },
+  {
+    "title": "MongoDB",
+    "snippet": "Storing data using documents with javascript",
+    "to": "/mongo",
+    "image": "mongo-cred.png"
+  },
+  {
+    "title": "Linux & Bash",
+    "snippet": "A focus on bash and an intro to linux",
+    "to": "/linux",
+    "image": "bash.png"
+  },
+  {
+    "title": "Docker",
+    "snippet": "Sort-Of Like a virtual machine, a \"layer\" between app logic & operating system",
+    "to": "/docker",
+    "image": "docker.png"
+  },
+  {
+    "title": "Nginx",
+    "snippet": "The Web server, Proxy, Reverse Proxy, Load Balancer...",
+    "to": "/nginx",
+    "image": "nginx.png"
+  },
+  {
+    "title": "Scrum",
+    "snippet": "Organizing Complex Problems with iterations, agility, and collaboration",
+    "to": "/scrum",
+    "image": "scrum.png"
+  },
+  {
+    "title": "Kubernetes",
+    "snippet": "Orchestrating containers acrosss hosts: networking, deployments, pods, ingress...",
+    "to": "/k8s",
+    "image": "k8s.png"
+  },
+  {
+    "title": "Life And Living",
+    "snippet": "On Personality, Our Natural Talents, On Conflict, Decision Making...",
+    "to": "/the-social-world",
+    "image": "Personality.jpg"
+  }
+]

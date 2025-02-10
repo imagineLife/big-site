@@ -1,0 +1,56 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+// * + * {
+//   margin-top: 1rem;
+// }
+
+html,
+body {
+  margin: 0;
+  font-family: sans-serif;
+  line-height: 1.4;
+  width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.1;
+  margin: 2rem 0;
+  + * {
+    margin-top: 0.5rem;
+  }
+}
+
+h1{
+  font-size: 2.5rem;
+}
+h2{
+  font-size: 2.25rem;
+}
+h3{
+  font-size: 1.75rem;
+}
+h4{
+  font-size: 1.5rem;
+}
+
+li {
+  margin-top: 0.25rem;
+}
+
+
+
+// 
+// notebook updates
+// 
+
+#__next > main > div > article > main > article > div > div > div.output_wrapper > div > div > div.output_html.rendered_html.output_subarea > div > div > table > thead > tr > th {
+  color: rgb(209, 213, 219) !important;
+}

@@ -1,8 +1,0 @@
-.countryPath{
-  transition: 0.2s;
-  stroke-width: .5;
-}
-.countryPath:hover{
-  opacity: 1;
-  stroke: whitesmoke;
-}
