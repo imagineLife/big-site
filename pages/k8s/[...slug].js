@@ -2,15 +2,11 @@ import { getGlobalData } from '../../utils/global-data';
 import { k8sMdPaths, getMdBySlugs } from '../../utils/mdx-utils';
 import GenericPost from '../../components/GenericPost';
 
-const k8s_VAR = 'k8s';
 export default function k8sBySlug({
   frontMatter,
   globalData,
-  prevPost,
-  nextPost,
   slugArr,
   source,
-  ...rest
 }) {
   let props = {
     globalData,
