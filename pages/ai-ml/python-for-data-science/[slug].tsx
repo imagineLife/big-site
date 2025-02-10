@@ -69,6 +69,6 @@ export const getStaticPaths = () => {
   const paths = pathsArr.map(d => d.path)
   return {
     paths: paths.map(p => `${rootPath}/${p}`),
-    fallback: false,
+    fallback: "blocking",
   }
 };

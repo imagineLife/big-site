@@ -53,7 +53,7 @@ export const getStaticPaths = (props) => {
   const posts = getPosts('notebooks');
   return {
     paths: posts.map((p) => `/ml/notebooks/${p}`),
-    fallback: false,
+    fallback: 'blocking',
   };
 };
 

@@ -50,6 +50,6 @@ export const getStaticPaths = async (props) => {
   const newNodePaths = await getMdPostSummaries('node', true);
   return {
     paths: newNodePaths.map((d) => `/${d.slug}`),
-    fallback: false,
+    fallback: 'blocking',
   };
 };

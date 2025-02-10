@@ -70,6 +70,6 @@ export const getStaticPaths = async (props) => {
 
   return {
     paths: returnablePaths,
-    fallback: false,
+    fallback: 'blocking',
   };
 };

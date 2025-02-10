@@ -39,6 +39,6 @@ export async function getStaticProps({ params, ...rest }) {
 export const getStaticPaths = (props) => {
   return {
     paths: k8sMdPaths,
-    fallback: false,
+    fallback: 'blocking',
   };
 };

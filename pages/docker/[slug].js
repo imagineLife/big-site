@@ -43,6 +43,6 @@ export async function getStaticProps({ params, ...rest }) {
 export const getStaticPaths = (props) => {
   return {
     paths: dockerMdPaths,
-    fallback: false,
+    fallback: 'blocking',
   };
 };
