@@ -1,5 +1,5 @@
 [build]
-  command = "NODE_OPTIONS=--max-old-space-size=4096 DEBUG=next:* npm run build"
+  command = "4096 DEBUG=next:* npm run build"
   publish = ".next"
 
 [[plugins]]
