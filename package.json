@@ -67,12 +67,9 @@
     "typescript": "^5.7.3"
   },
   "devDependencies": {
-    "@react-three/drei": "^9.121.4",
-    "@react-three/fiber": "^8.17.14",
     "eslint": "^9.20.0",
     "eslint-config-next": "^15.0.3",
     "eslint-config-prettier": "^8.3.0",
-    "gsap": "^3.12.7",
-    "three": "^0.164.1"
+    "gsap": "^3.12.7"
   }
 }
