@@ -1,5 +1,5 @@
 [build]
-  command = "4096 DEBUG=next:* npm run build"
+  command = "DEBUG=next:* npm run build"
   publish = ".next"
 
 [[plugins]]
