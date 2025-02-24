@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-export default function Layout({ children, fullHeight, leftAlign, prose }) {
+export default function Layout({ children, fullHeight, prose }) {
   const setAppTheme = () => {
     const darkMode = localStorage.getItem('theme') === 'dark';
     const lightMode = localStorage.getItem('theme') === 'light';

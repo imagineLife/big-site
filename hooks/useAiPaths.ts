@@ -93,6 +93,12 @@ export default function getAiPaths(rootDir: string): PathObj[]{
         path: 'k-fold-cross-validation',
         title: 'K-Fold Cross-Validation'
       }
+    ],
+    'eda': [
+      {
+        path: 'honey-production',
+        title: 'Exploratiory Data Analysis with Python: Analyzing Honey Production',
+      },
     ]
   }
   return pathsLookup[rootDir]

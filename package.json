@@ -1,5 +1,5 @@
 {
-  "name": "big-site",
+  "name": "nextjs-big-site",
   "description": "A Blog",
   "author": "Eric (Jake) Laursen",
   "contributors": [
@@ -29,13 +29,11 @@
     "@netlify/plugin-nextjs": "^5.9.4",
     "@next/mdx": "^15.0.2",
     "@svgr/webpack": "^8.1.0",
-    "@tailwindcss/postcss": "^4.0.5",
-    "@tailwindcss/typography": "^0.5.16",
+    "@tailwindcss/typography": "^0.5.0",
     "@tensorflow-models/coco-ssd": "^2.2.3",
     "@tensorflow-models/face-detection": "^1.0.2",
     "@tensorflow/tfjs": "^4.18.0",
     "@types/mdx": "^2.0.13",
-    "autoprefixer": "^10.4.20",
     "classnames": "^2.3.1",
     "d3-brush": "^3.0.0",
     "d3-fetch": "^3.0.1",
@@ -55,6 +53,7 @@
     "react-dom": "^18.3.1",
     "react-ipynb-renderer": "^2.2.1",
     "react-jupyter-notebook": "^0.4.0",
+    "recharts": "^2.15.1",
     "rehype-mermaid": "^3.0.0",
     "rehype-slug": "^6.0.0",
     "remark": "^15.0.1",
@@ -67,9 +66,15 @@
     "typescript": "^5.7.3"
   },
   "devDependencies": {
+    "@react-three/drei": "^9.105.6",
+    "@react-three/fiber": "^8.16.6",
+    "autoprefixer": "^10.4.0",
     "eslint": "^9.20.0",
     "eslint-config-next": "^15.0.3",
     "eslint-config-prettier": "^8.3.0",
-    "gsap": "^3.12.7"
+    "gsap": "^3.12.5",
+    "postcss": "^8.4.4",
+    "tailwindcss": "^3.0.0",
+    "three": "^0.164.1"
   }
 }

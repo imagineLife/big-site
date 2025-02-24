@@ -23,7 +23,7 @@ export default function DockerBySlug({
   );
 }
 
-export async function getStaticProps({ params }) {
+export const getStaticProps = async ({ params }) => {
   const globalData = getGlobalData();
   const { title, slug, author, excerpt, tags, contentHtml } =
     await getMdBySlugs(`ml/${params.slug}`);
@@ -36,11 +36,11 @@ export async function getStaticProps({ params }) {
       slugArr: ['ml', params.slug],
     },
   };
-}
+};
 
 // https://nextjs.org/docs/pages/building-your-application/data-fetching/get-static-paths
 // props
 export const getStaticPaths = () => ({
   paths: mlMdPaths,
-  fallback: 'blocking',
+  fallback: false,
 });

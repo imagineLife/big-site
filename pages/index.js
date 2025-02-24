@@ -11,7 +11,7 @@ import useSections from '../hooks/useSections';
 function BlogSectionCard({ title, snippet, to, image }) {
   return (
     <Link href={to}>
-      <section className=" transition duration-300 max-w-sm rounded overflow-hidden border hover:dark:bg-slate-800 cursor-pointer">
+      <section className=" transition duration-300 max-w-sm rounded overflow-hidden border hover:dark:bg-slate-800 cursor-pointer h-[100%]">
         <section className="py-4 px-8 h-full flex flex-col justify-between">
           <h4 className="text-xl mb-3 font-semibold">{title}</h4>
           <div className="w-full text-center">
@@ -78,7 +78,7 @@ export default function Index({ globalData }) {
   );
 }
 
-export function getStaticProps() {
+export async function getStaticProps() {
   const globalData = getGlobalData();
 
   return {

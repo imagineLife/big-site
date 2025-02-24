@@ -23,7 +23,7 @@ export default function LinuxBySlug({
   );
 }
 
-export async function getStaticProps({ params }) {
+export const getStaticProps = async ({ params }) => {
   const globalData = getGlobalData();
   const { title, slug, author, excerpt, tags, contentHtml } =
     await getMdBySlugs(`nginx/${params.slug}`);
@@ -36,12 +36,12 @@ export async function getStaticProps({ params }) {
       source: contentHtml,
     },
   };
-}
+};
 
 // https://nextjs.org/docs/pages/building-your-application/data-fetching/get-static-paths
 export const getStaticPaths = (props) => {
   return {
     paths: nginxMdPaths,
-    fallback: 'blocking',
+    fallback: false,
   };
 };

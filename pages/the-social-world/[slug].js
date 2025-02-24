@@ -23,7 +23,7 @@ export default function SocialWorldBySlug({
   );
 }
 
-export async function getStaticProps({ params, ...rest }) {
+export const getStaticProps = async ({ params, ...rest }) => {
   const globalData = getGlobalData();
   const { title, slug, author, excerpt, tags, contentHtml } =
     await getMdBySlugs(`the-social-world/${params.slug}`);
@@ -36,12 +36,12 @@ export async function getStaticProps({ params, ...rest }) {
       source: contentHtml,
     },
   };
-}
+};
 
 // https://nextjs.org/docs/pages/building-your-application/data-fetching/get-static-paths
 export const getStaticPaths = (props) => {
   return {
     paths: theSocialWorldMdPaths,
-    fallback: 'blocking',
+    fallback: false,
   };
 };

@@ -4,12 +4,25 @@ import { useEffect, useState } from 'react';
 import getAiPaths, { PathObj } from '../../../hooks/useAiPaths';
 import GenericPost from '../../../components/GenericPost';
 
+  const tfPaths = [
+    {
+      path: 'tensorflow-and-tensors',
+      title: "An Introduction to Tensorflow and Tensors"
+    },
+    {
+      path: 'tensorflow-matrixes',
+      title: "Working with matrixes"
+    },
+  ]
+
 export default function NotebookBySlug(props) {
+  
   const pathsArr = getAiPaths('python-for-data-science');
+  const edaPaths = getAiPaths('eda');
   let otherPages = []
   let thisPathObj = {} as PathObj;
 
-  pathsArr.forEach(o => {
+  [...pathsArr, ...edaPaths, ...tfPaths].forEach(o => {
     if(o.path === props.slug) thisPathObj = o
       otherPages.push(o)
   })
@@ -65,10 +78,12 @@ export const getStaticProps = async ({ params }) => {
 // props
 export const getStaticPaths = () => {
   const pathsArr = getAiPaths('python-for-data-science');
+  const edaPaths = getAiPaths('eda');
   const rootPath = '/ai-ml/python-for-data-science'
-  const paths = pathsArr.map(d => d.path)
+  const paths = [...pathsArr, ...edaPaths, ...tfPaths].map(d => d.path)
+  
   return {
     paths: paths.map(p => `${rootPath}/${p}`),
-    fallback: "blocking",
+    fallback: false,
   }
 };

@@ -1,5 +1,11 @@
 [
   {
+    "title": "AI & ML",
+    "snippet": "Python, Exploratory Data Analysis, & more",
+    "to": "/ai-ml",
+    "image": "machine-learning.png"
+  },
+  {
     "title": "Node",
     "snippet": "JavaScript, server-side",
     "to": "/node",
@@ -45,6 +51,6 @@
     "title": "Life And Living",
     "snippet": "On Personality, Our Natural Talents, On Conflict, Decision Making...",
     "to": "/the-social-world",
-    "image": "Personality.jpg"
+    "image": "personality.jpg"
   }
 ]
