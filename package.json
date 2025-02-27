@@ -28,6 +28,8 @@
     "@mediapipe/face_detection": "^0.4.1646425229",
     "@netlify/plugin-nextjs": "^5.9.4",
     "@next/mdx": "^15.0.2",
+    "@react-three/drei": "^9.105.6",
+    "@react-three/fiber": "^8.16.6",
     "@svgr/webpack": "^8.1.0",
     "@tailwindcss/typography": "^0.5.0",
     "@tensorflow-models/coco-ssd": "^2.2.3",
@@ -63,18 +65,16 @@
     "remark-mermaidjs": "^7.0.0",
     "remark-prism": "^1.3.6",
     "sass": "^1.74.1",
+    "three": "^0.164.1",
     "topojson-client": "^3.1.0",
     "typescript": "^5.7.3"
   },
   "devDependencies": {
-    "@react-three/drei": "^9.105.6",
-    "@react-three/fiber": "^8.16.6",
     "eslint": "^9.20.0",
     "eslint-config-next": "^15.0.3",
     "eslint-config-prettier": "^8.3.0",
     "gsap": "^3.12.5",
     "postcss": "^8.4.4",
-    "tailwindcss": "^3.0.0",
-    "three": "^0.164.1"
+    "tailwindcss": "^3.0.0"
   }
 }
