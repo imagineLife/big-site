@@ -14,6 +14,7 @@ const svgLoader = {
 
 const nextConfig = {
   // output: 'export',
+  output: 'standalone',
   webpack: (
     config,
     { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack }
