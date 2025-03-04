@@ -2,7 +2,7 @@ import React from 'react';
 // import "./index.scss"
 
 // Components
-import SelectableArea from './SelectableArea';
+// import SelectableArea from './SelectableArea';
 import WordListPicker from './MultiWordPicker';
 import TextDisplay from './TextDisplay';
 import AreaBox from './Area';
@@ -11,8 +11,6 @@ import ThemeBox from './ThemeBox';
 import ImageBox from './ImageBox';
 
 import useDimensions from './../hooks/useDims';
-
-// const moved = () => console.log('moved');
 
 const Together = () => {
   const [areaBoxRef, { width: areaBoxWidth, height: areaBoxHeight }] =
