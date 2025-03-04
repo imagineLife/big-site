@@ -1,7 +1,7 @@
 ---
 title: Running a Reverse Proxy with nginx
 parentDir: /nginx
-slug: nginx/reverse-proxy
+slug: nginx/node-reverse-proxy
 author: Jake Laursen
 excerpt: 3 node servers and a round-robin style load-balancer
 tags:

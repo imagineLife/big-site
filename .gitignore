@@ -38,7 +38,7 @@ yarn-error.log*
 
 # static files
 /public/notebooks/.ipynb_checkpoints/
-/public/notebooks/env/
+/public/notebooks/env/*
 *.zip
 
 __MACOSX
