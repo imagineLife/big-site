@@ -42,5 +42,5 @@ export const getStaticProps = async ({ params }) => {
 // props
 export const getStaticPaths = () => ({
   paths: mlMdPaths,
-  fallback: false,
+  fallback: 'blocking',
 });

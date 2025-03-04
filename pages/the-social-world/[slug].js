@@ -42,6 +42,6 @@ export const getStaticProps = async ({ params, ...rest }) => {
 export const getStaticPaths = (props) => {
   return {
     paths: theSocialWorldMdPaths,
-    fallback: false,
+    fallback: 'blocking',
   };
 };

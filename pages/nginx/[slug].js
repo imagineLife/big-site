@@ -42,6 +42,6 @@ export const getStaticProps = async ({ params }) => {
 export const getStaticPaths = (props) => {
   return {
     paths: nginxMdPaths,
-    fallback: false,
+    fallback: 'blocking',
   };
 };
