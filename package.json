@@ -14,7 +14,7 @@
     "nd": "next dev",
     "devFast": "next dev --turbo",
     "dev:watch": "next-remote-watch ./posts",
-    "build": "next build && next export",
+    "build": "next build",
     "prebuild": "mkdir -p netlify/functions",
     "postbuild": "next-sitemap",
     "start": "next start",

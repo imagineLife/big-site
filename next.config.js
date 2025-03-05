@@ -13,7 +13,7 @@ const svgLoader = {
 };
 
 const nextConfig = {
-  // output: 'export',
+  output: 'export',
   // output: 'standalone',
   webpack: (
     config,
