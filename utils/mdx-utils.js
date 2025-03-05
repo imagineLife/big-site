@@ -2,7 +2,6 @@ import { readFileSync, readdirSync } from 'fs';
 import { join } from 'path';
 import matter from 'gray-matter';
 import remarkPrism from 'remark-prism';
-import rehypeMermaid from 'rehype-mermaid';
 // import remarkMermaid from 'remark-mermaidjs';
 import { remark } from 'remark';
 import html from 'remark-html';
@@ -97,7 +96,7 @@ export async function getMdBySlugs(mdSlugString, nestedDirString) {
 
   const processedContent = await remark()
     // .use(remarkMermaid)
-    .use(rehypeMermaid)
+    // .use(rehypeMermaid)
     .use(remarkPrism)
     .use(html)
     .process(matterResult.content);
