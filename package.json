@@ -24,7 +24,6 @@
   },
   "dependencies": {
     "@mediapipe/face_detection": "^0.4.1646425229",
-    "@netlify/plugin-nextjs": "^5.9.4",
     "@react-three/drei": "^9.105.6",
     "@react-three/fiber": "^8.16.6",
     "@svgr/webpack": "^8.1.0",
