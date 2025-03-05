@@ -1,3 +1,3 @@
 [build]
-  command = "DEBUG=next:* npm run build"
-  publish = "out"
+  command = "npm run build"
+  publish = ".next"
