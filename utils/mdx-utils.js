@@ -140,19 +140,33 @@ function onlyNbFiles(s) {
   return /\.ipynb?$/.test(s);
 }
 export async function mdPathsFromDirRoot(rootStr, includeNestedContent) {
+  console.log(
+    `mdPathsFromDirRoot ${rootStr}, includeNested: ${includeNestedContent}`
+  );
+
   let rootContents = await readdir(join(mdDir, rootStr));
   rootContents = rootContents
     .filter((s) => s.includes('.md'))
     .map((s) => s.replace(/\.md$/, ''))
     .map((s) => `/${rootStr}/${s}`);
 
+  console.log('rootContents');
+  console.log(rootContents);
+
   if (!includeNestedContent) {
+    console.log(`RESOLVING`);
+
     return Promise.resolve(rootContents);
   } else {
+    console.log(`CONTINUING`);
+
     let mdPaths = await readdir(join(mdDir, rootStr), { withFileTypes: true });
     const nestedDirPaths = mdPaths
       .filter((d) => d.isDirectory())
       .map((d) => `${rootStr}/${d.name}`);
+
+    console.log('nestedDirPaths');
+    console.log(nestedDirPaths);
 
     let nestedContents = await Promise.all(
       nestedDirPaths.map((dirPath) => getMdPostSummaries(dirPath, true))
@@ -198,14 +212,22 @@ export async function getSiblingTitleSlugs(pathParam) {
 
 // returns list like ['/k8s/architecture-overview']
 export async function getMdPostSummaries(pathDir, includeNestedDirs) {
+  console.log(
+    `getMdPostSummaries for ${pathDir}, nested: ${includeNestedDirs}`
+  );
+
   let mdPaths = await readdir(join(mdDir, pathDir), { withFileTypes: true });
   let nestedDirMdSummaries;
   if (!includeNestedDirs) {
+    console.log(`NO nested Dirs`);
+
     mdPaths = mdPaths
       .map((d) => d.name)
       .filter((s) => s.includes('.md'))
       .map((s) => s.replace(/\.md$/, ''))
       .map((s) => `/${pathDir}/${s}`);
+    console.log('mdPaths');
+    console.log(mdPaths);
   } else {
     const nestedDirPaths = mdPaths
       .filter((d) => d.isDirectory())
@@ -377,4 +399,4 @@ export const scrumMdPaths = () => mdPathsFromDirRoot('scrum');
 export const mlMdPaths = () => mdPathsFromDirRoot('ml');
 export const k8sMdPaths = () => mdPathsFromDirRoot('k8s', true);
 export const theSocialWorldMdPaths = () =>
-  mdPathsFromDirRoot('the-social-world');
+  mdPathsFromDirRoot('the-social-world', true);

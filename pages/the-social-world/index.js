@@ -23,6 +23,9 @@ export default SocialWorldIndex;
 
 export async function getStaticProps() {
   const posts = await getMdPostSummaries('the-social-world', true);
+  console.log('posts');
+  console.log(posts);
+
   const globalData = getGlobalData();
   // globalData
   return { props: { posts, globalData } };
