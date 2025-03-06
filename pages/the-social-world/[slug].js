@@ -39,9 +39,10 @@ export const getStaticProps = async ({ params, ...rest }) => {
 };
 
 // https://nextjs.org/docs/pages/building-your-application/data-fetching/get-static-paths
-export const getStaticPaths = (props) => {
+export const getStaticPaths = async (props) => {
+  const swPaths = await theSocialWorldMdPaths();
   return {
-    paths: theSocialWorldMdPaths,
-    fallback: 'blocking',
+    paths: swPaths,
+    fallback: false,
   };
 };

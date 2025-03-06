@@ -49,11 +49,11 @@ const NotebookBySlug = (props) => {
 export default NotebookBySlug;
 
 // runs server-side
-export const getStaticPaths = (props) => {
-  const posts = getPosts('notebooks');
+export const getStaticPaths = async (props) => {
+  const posts = await getPosts('notebooks');
   return {
     paths: posts.map((p) => `/ml/notebooks/${p}`),
-    fallback: 'blocking',
+    fallback: false,
   };
 };
 

@@ -40,9 +40,9 @@ export const getStaticProps = async ({ params, ...rest }) => {
 };
 
 // https://nextjs.org/docs/pages/building-your-application/data-fetching/get-static-paths
-export const getStaticPaths = (props) => {
+export const getStaticPaths = async (props) => {
   return {
-    paths: k8sMdPaths,
-    fallback: 'blocking',
+    paths: await k8sMdPaths(),
+    fallback: false,
   };
 };

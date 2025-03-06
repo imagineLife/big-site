@@ -36,8 +36,8 @@ const MlNotebooksIndex = ({ posts }) => {
 
 export default MlNotebooksIndex;
 
-export function getStaticProps() {
-  const posts = getPosts('notebooks');
+export async function getStaticProps() {
+  const posts = await getPosts('notebooks');
   const globalData = getGlobalData();
   // globalData
   return { props: { posts, globalData } };

@@ -39,9 +39,10 @@ export const getStaticProps = async ({ params }) => {
 };
 
 // https://nextjs.org/docs/pages/building-your-application/data-fetching/get-static-paths
-export const getStaticPaths = (props) => {
+export const getStaticPaths = async (props) => {
+  const slugPaths = await scrumMdPaths();
   return {
-    paths: scrumMdPaths,
-    fallback: 'blocking',
+    paths: slugPaths,
+    fallback: false,
   };
 };

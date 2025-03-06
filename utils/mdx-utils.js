@@ -1,4 +1,4 @@
-import { readFileSync, readdirSync } from 'fs';
+import { readFile, readdir } from 'fs/promises';
 import { join } from 'path';
 import matter from 'gray-matter';
 import remarkPrism from 'remark-prism';
@@ -13,6 +13,11 @@ const cwd = process.cwd();
 const pages_dir = join(cwd, 'pages');
 const public_dir = join(cwd, 'public');
 const nb_dir = join(cwd, 'notebooks');
+
+//
+// used in getMdBySlugs
+//
+const mdBySlugCache = {};
 
 // directories in /public/<dir-here>
 export const mongo_path = join(pages_dir, 'mongo');
@@ -68,7 +73,7 @@ async function getFileUsingNode(fileSlugString) {
     fullFilePath = join(mdDir, dir, fileName, `intro.md`);
   }
 
-  fileContents = readFileSync(fullFilePath, 'utf8');
+  fileContents = await readFile(fullFilePath, 'utf8');
   return fileContents;
 }
 
@@ -81,40 +86,52 @@ async function getNbUsingNode(fileSlugString) {
 
   fullFilePath = join(nb_dir, dir, `${fileName}.ipynb`);
 
-  fileContents = readFileSync(fullFilePath, 'utf8');
+  fileContents = await readFile(fullFilePath, 'utf8');
   return fileContents;
 }
 
 export async function getMdBySlugs(mdSlugString, nestedDirString) {
-  let fileToFind = nestedDirString
-    ? `${mdSlugString}/${nestedDirString}`
+  const cacheString = nestedDirString
+    ? `${mdSlugString}-${nestedDirString}`
     : mdSlugString;
+  if (mdBySlugCache[cacheString]) {
+    return mdBySlugCache[cacheString];
+  } else {
+    let fileToFind = nestedDirString
+      ? `${mdSlugString}/${nestedDirString}`
+      : mdSlugString;
 
-  const fileContents = await getFileUsingNode(fileToFind);
+    const fileContents = await getFileUsingNode(fileToFind);
 
-  const matterResult = matter(fileContents);
+    const matterResult = matter(fileContents);
 
-  const processedContent = await remark()
-    // .use(remarkMermaid)
-    // .use(rehypeMermaid)
-    .use(remarkPrism)
-    .use(html)
-    .process(matterResult.content);
-  const contentHtml = processedContent.toString();
+    const processedContent = await remark()
+      // .use(remarkMermaid)
+      // .use(rehypeMermaid)
+      .use(remarkPrism)
+      .use(html)
+      .process(matterResult.content);
+    const contentHtml = processedContent.toString();
 
-  const slugBySection = mdSlugString.split('/');
-  // Combine the data with the id and contentHtml
-  return {
-    id: slugBySection[slugBySection.length - 1],
-    contentHtml,
-    ...matterResult.data,
-  };
+    const slugBySection = mdSlugString.split('/');
+
+    const returnObj = {
+      id: slugBySection[slugBySection.length - 1],
+      contentHtml,
+      ...matterResult.data,
+    };
+
+    //
+    // set cache
+    //
+    if (!mdBySlugCache[cacheString]) mdBySlugCache[cacheString] = returnObj;
+
+    // Combine the data with the id and contentHtml
+    return returnObj;
+  }
 }
 
 export async function getNotebookBySlug(notebookFileName) {
-  console.log('notebookFileName');
-  console.log(notebookFileName);
-
   const fileContents = await getNbUsingNode(notebookFileName);
   return fileContents;
 }
@@ -123,61 +140,53 @@ function onlyNbFiles(s) {
   return /\.ipynb?$/.test(s);
 }
 export async function mdPathsFromDirRoot(rootStr, includeNestedContent) {
-  let rootContents = readdirSync(join(mdDir, rootStr))
+  let rootContents = await readdir(join(mdDir, rootStr));
+  rootContents = rootContents
     .filter((s) => s.includes('.md'))
     .map((s) => s.replace(/\.md$/, ''))
     .map((s) => `/${rootStr}/${s}`);
 
-  if (!includeNestedContent) return rootContents;
+  if (!includeNestedContent) {
+    return Promise.resolve(rootContents);
+  } else {
+    let mdPaths = await readdir(join(mdDir, rootStr), { withFileTypes: true });
+    const nestedDirPaths = mdPaths
+      .filter((d) => d.isDirectory())
+      .map((d) => `${rootStr}/${d.name}`);
 
-  let mdPaths = readdirSync(join(mdDir, rootStr), { withFileTypes: true });
-  const nestedDirPaths = mdPaths
-    .filter((d) => d.isDirectory())
-    .map((d) => `${rootStr}/${d.name}`);
-
-  let nestedContents = await Promise.all(
-    nestedDirPaths.map((dirPath) => getMdPostSummaries(dirPath))
-  );
-  let flattened = nestedContents.flat(Infinity);
-  let flat = flattened.map((o) => `/${o.slug}`);
-
-  let resArr = flat.concat(rootContents);
-  return resArr;
+    let nestedContents = await Promise.all(
+      nestedDirPaths.map((dirPath) => getMdPostSummaries(dirPath, true))
+    );
+    let flattened = nestedContents.flat(Infinity);
+    let flat = flattened.map((o) => `/${o.slug}`);
+    let resArr = flat.concat(rootContents);
+    const returning = resArr.filter((s) => s !== '.DS_Store');
+    return returning;
+  }
 }
 
-export const dockerMdPaths = await mdPathsFromDirRoot('docker');
-export const linuxMdPaths = await mdPathsFromDirRoot('linux');
-export const nginxMdPaths = await mdPathsFromDirRoot('nginx');
-export const scrumMdPaths = await mdPathsFromDirRoot('scrum');
-export const mlMdPaths = await mdPathsFromDirRoot('ml');
-export const k8sMdPaths = await mdPathsFromDirRoot('k8s', true);
-export const theSocialWorldMdPaths = await mdPathsFromDirRoot(
-  'the-social-world'
-);
-export const notebookPaths = readdirSync(notebooks_path).filter(onlyNbFiles);
+const notebookPaths = async function getNotebookPaths() {
+  const nbPaths = await readdir(notebooks_path);
+  return nbPaths.filter(onlyNbFiles);
+};
 
-export const getPosts = (pathDir) => {
+export const getPosts = async (pathDir) => {
   if (!pathDir) throw new Error('getPosts called without a param');
-  return notebookPaths.map((s) => s.split('.ipynb')[0]);
+  const nbPaths = await notebookPaths();
+  return nbPaths.map((s) => s.split('.ipynb')[0]);
 };
 
 export async function getSiblingTitleSlugs(pathParam) {
-  // console.log('...getSiblingTitleSlugs...');
-
   let dirToParse = join(mdDir, ...pathParam);
   if (pathParam.length > 2) {
     let lastPath = pathParam.pop();
     dirToParse = join(mdDir, ...pathParam);
   }
-  // console.log('dirToParse');
-  // console.log(dirToParse);
 
-  let res = readdirSync(dirToParse, { withFileTypes: true });
+  let res = await readdir(dirToParse, { withFileTypes: true });
   res = res
     .filter((dirEnt) => !dirEnt.isDirectory())
     .filter((dirEnt) => dirEnt.name !== 'intro.md');
-  // console.log('res');
-  // console.log(res);
 
   const resMds = await Promise.all(
     res.map((dirEnt) =>
@@ -189,7 +198,7 @@ export async function getSiblingTitleSlugs(pathParam) {
 
 // returns list like ['/k8s/architecture-overview']
 export async function getMdPostSummaries(pathDir, includeNestedDirs) {
-  let mdPaths = readdirSync(join(mdDir, pathDir), { withFileTypes: true });
+  let mdPaths = await readdir(join(mdDir, pathDir), { withFileTypes: true });
   let nestedDirMdSummaries;
   if (!includeNestedDirs) {
     mdPaths = mdPaths
@@ -203,7 +212,7 @@ export async function getMdPostSummaries(pathDir, includeNestedDirs) {
       .map((d) => `${pathDir}/${d.name}`);
 
     nestedDirMdSummaries = await Promise.all(
-      nestedDirPaths.map(getMdPostSummaries)
+      nestedDirPaths.map(async (p) => await getMdPostSummaries(p))
     );
 
     mdPaths = mdPaths
@@ -348,3 +357,24 @@ export function getNodeSections() {
 
   return nodeSections;
 }
+
+let mdPathsObj = {
+  dockerMdPaths: [],
+  linuxMdPaths: [],
+  nginxMdPaths: [],
+  scrumMdPaths: [],
+  mlMdPaths: [],
+  k8sMdPaths: [],
+  theSocialWorldMdPaths: [],
+};
+
+const cachedMdPaths = {};
+
+export const dockerMdPaths = () => mdPathsFromDirRoot('docker');
+export const linuxMdPaths = () => mdPathsFromDirRoot('linux');
+export const nginxMdPaths = () => mdPathsFromDirRoot('nginx');
+export const scrumMdPaths = () => mdPathsFromDirRoot('scrum');
+export const mlMdPaths = () => mdPathsFromDirRoot('ml');
+export const k8sMdPaths = () => mdPathsFromDirRoot('k8s', true);
+export const theSocialWorldMdPaths = () =>
+  mdPathsFromDirRoot('the-social-world');

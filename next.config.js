@@ -13,8 +13,6 @@ const svgLoader = {
 };
 
 const nextConfig = {
-  // output: 'export',
-  // output: 'standalone',
   webpack: (
     config,
     { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack }
@@ -46,7 +44,7 @@ const nextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
-  staticPageGenerationTimeout: 170,
+  staticPageGenerationTimeout: 120,
 };
 
 module.exports = nextConfig;
