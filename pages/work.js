@@ -475,7 +475,7 @@ export default function WorkPage() {
           'experience',
           'cv',
           'angularjs',
-          'tortoise SVM',
+          'tortoise SVN',
           'webpack',
           'D3',
           'CRUD APIs',
