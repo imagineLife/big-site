@@ -46,13 +46,13 @@ function Alteryx() {
         {/* </Link>{' '} */} via UI & API: workspace management, workspace-admin
         management, & workspace-user management.
       </p>
-      <details className="mt-[20px]">
+      <details className="mt-[20px]" open>
         <summary className="text-[18px]">
           <b>Live Workspace Management Docs</b>
         </summary>
         <iframe
-          width="500"
-          height="800"
+          width="400"
+          height="600"
           src="https://help.alteryx.com/aac/en/platform/admin/admin-reference/account-management/workspace-management.html#workspace-management"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
