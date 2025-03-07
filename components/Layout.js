@@ -5,6 +5,11 @@ export default function Layout({ children, fullHeight, prose }) {
     const darkMode = localStorage.getItem('theme') === 'dark';
     const lightMode = localStorage.getItem('theme') === 'light';
 
+    if (!darkMode && !lightMode) {
+      document.documentElement.classList.add('dark');
+      return;
+    }
+
     if (darkMode) {
       document.documentElement.classList.add('dark');
     } else if (lightMode) {
