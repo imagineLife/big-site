@@ -47,12 +47,8 @@ const ScrumIndex = ({ posts }) => {
           </p>
           <br />
           <p>
-            I personally don&apost feel like I have enough experience with other
-            &quot;frameworks&quot; to really support how the{' '}
-            <a href="https://scrumguides.org/scrum-guide.html">scrum guide</a>{' '}
-            refers to scrum as a &quot;lightweight&quot; framework. I know that
-            there are a few concrete details with lots of room to embody the
-            theories & values underneath the events, artifacts, and team
+            There are just a few concrete details with lots of room to embody
+            the theories & values that support the events, artifacts, and team
             structure. Transparency, Inspection, Adaptation, Respect, Courage,
             Empiricism, Lean Thinking... these things are so much more than
             Scrum, but without those things the implementation of Scrum can

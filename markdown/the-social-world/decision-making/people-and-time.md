@@ -4,7 +4,7 @@ author: Jake Laursen
 excerpt: Fast work is often at odds with personal development
 tags: ['the social world', 'decisions']
 parentDir: the-social-world
-slug: the-social-world/people-and-time
+slug: the-social-world/decision-making/people-and-time
 order: 2
 ---
 
