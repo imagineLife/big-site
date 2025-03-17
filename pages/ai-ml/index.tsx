@@ -23,7 +23,7 @@ export default function AiPage() {
         <Link href="/ai-ml/python-for-data-science" className="no-underline hover:underline"><h2>Python for Data Science</h2></Link>
         <p>using python & common python libraries to explore & analyze data: statistics, probabiliy, Percentiles, Moments, Covariance, Correlation, Conditional Probability, & Bayes&apos; Theorem. Also, an introduction to tensorflow.</p>
 
-        <h2>Intro to Machine Learning</h2>
+        <Link href="/ai-ml/intro-to-ml" className="no-underline hover:underline"><h2>Intro to Machine Learning</h2></Link>
         <p>Linear Regressions, Decision Trees, K-Means clustering, Ensemble learning (bagging & boosting), & building models.</p>
         
         <h2>Intro to Neural Networks</h2>

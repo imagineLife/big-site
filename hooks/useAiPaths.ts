@@ -99,6 +99,12 @@ export default function getAiPaths(rootDir: string): PathObj[]{
         path: 'honey-production',
         title: 'Exploratiory Data Analysis with Python: Analyzing Honey Production',
       },
+    ],
+    'intro-to-ml': [
+      {
+        path: 'intro-to-machine-learning/linear-regression',
+        title: 'Predicting Boston Housing Prices: Linear Regression Modeling'
+      }
     ]
   }
   return pathsLookup[rootDir]

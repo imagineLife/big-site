@@ -48,8 +48,8 @@ function About() {
             <p>
               I&apos;m a <a href="#a-doer">do-er</a>. I&apos;m a{' '}
               <a href="#a-learner">learner</a>. I&apos;m a{' '}
-              <a href="#sf">CliftonStrengths Advocate</a>. Meyers Briggs says I
-              prefer to be an <a href="#mb">INJT</a>. I&apos;m also a bit of a{' '}
+              <a href="#sf">CliftonStrengths Advocate</a>. Meyers Briggs is an{' '}
+              <a href="#mb">INJT</a>. I&apos;m also a bit of a{' '}
               <a href="#coffee">coffee fanatic</a>.
               <br />
               I&apos;m also on{' '}
@@ -109,8 +109,8 @@ function About() {
               <Link href="/ai-ml">
                 python for data-science & Machine-Learning
               </Link>
+              .
             </p>
-            .
           </div>
           <div className="figure">
             {/* <Image src={learnerImg} alt="learner" /> */}
