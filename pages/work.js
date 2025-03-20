@@ -274,6 +274,7 @@ function ThisSite() {
       <WorkTitle title="This Blog" />
       <p>Notes & thoughts along the way of my learning.</p>
       <TagList
+        inline
         hideTitle
         tags={[
           'javascript',

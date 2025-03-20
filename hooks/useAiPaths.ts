@@ -102,7 +102,7 @@ export default function getAiPaths(rootDir: string): PathObj[]{
     ],
     'intro-to-ml': [
       {
-        path: 'intro-to-machine-learning/linear-regression',
+        path: 'predicting-boston-housing-prices',
         title: 'Predicting Boston Housing Prices: Linear Regression Modeling'
       }
     ]
