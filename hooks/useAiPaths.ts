@@ -104,7 +104,11 @@ export default function getAiPaths(rootDir: string): PathObj[]{
       {
         path: 'predicting-boston-housing-prices',
         title: 'Predicting Boston Housing Prices: Linear Regression Modeling'
-      }
+      },
+      {
+        path: 'loan-default-prediction',
+        title: 'Predicting Loan-Defaulting with Bagging'
+      },
     ]
   }
   return pathsLookup[rootDir]
