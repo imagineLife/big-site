@@ -107,7 +107,7 @@ export default function getAiPaths(rootDir: string): PathObj[]{
       },
       {
         path: 'loan-default-prediction',
-        title: 'Predicting Loan-Defaulting with Bagging'
+        title: 'Predicting Loan-Defaulting: Bagging Modeling'
       },
     ]
   }
