@@ -16,6 +16,8 @@ export default function Seo({ title, excerpt, tags = [], slug = '' }) {
     keywords: [...tags, 'blog', 'blog post', 'blogpost'],
     inLanguage: 'en-US',
   };
+  console.log('excerpt');
+  console.log(excerpt);
 
   return (
     <Head>

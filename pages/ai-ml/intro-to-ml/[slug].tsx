@@ -33,13 +33,12 @@ export default function NotebookBySlug(props) {
     }
   }, [loadedNotebook, props.slug]);
 
-
   return (
     <GenericPost {...{
       title: thisPathObj.title,
       name: thisPathObj.title,
-      description: thisPathObj?.description || '...',
-      excerpt: '...',
+      description: thisPathObj?.description,
+      excerpt: thisPathObj?.excerpt,
       slug: thisPathObj.path,
       slugArr: props.slugArr,
       siblings: otherPages.map(p => ({

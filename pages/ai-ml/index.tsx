@@ -20,6 +20,14 @@ export default function AiPage() {
         slugArr: ['ai'],
       }}>
         
+        {/* <Link href="/ai-ml/face-detection" className="no-underline hover:underline"><h2>In-Browser Real-Tiem Face Detection</h2></Link>
+        <p>Try it out!</p>
+        <p>A Machine-learning model recognizes your face from your webcam video stream & overlays a "mesh" of recognized points across your face.</p> */}
+        
+        {/* <Link href="/ai-ml/training-head-gestures" className="no-underline hover:underline"><h2>In-Browser Real-Tiem Head-Tilt Training & Recognition</h2></Link>
+        <p>Try it out!</p>
+        <p>Train a machine-learning model on your own face and head gestures. Using your webcam, train a machine-learning model to recognize when your head is tilted to the left & to the right.</p> */}
+
         <Link href="/ai-ml/python-for-data-science" className="no-underline hover:underline"><h2>Python for Data Science</h2></Link>
         <p>using python & common python libraries to explore & analyze data: statistics, probabiliy, Percentiles, Moments, Covariance, Correlation, Conditional Probability, & Bayes&apos; Theorem. Also, an introduction to tensorflow.</p>
 
