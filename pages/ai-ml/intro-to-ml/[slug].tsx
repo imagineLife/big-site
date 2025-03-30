@@ -32,12 +32,13 @@ export default function NotebookBySlug(props) {
         });
     }
   }, [loadedNotebook, props.slug]);
-  
+
+
   return (
     <GenericPost {...{
       title: thisPathObj.title,
       name: thisPathObj.title,
-      descript  : '...',
+      description: thisPathObj?.description || '...',
       excerpt: '...',
       slug: thisPathObj.path,
       slugArr: props.slugArr,
