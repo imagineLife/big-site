@@ -18,7 +18,7 @@ export default function PyForDS(){
   }}>
     <>
     <p>A handful of jupyter notebooks exploring some python & ML topics. numpy, matplotlib, sklearn, pylab, scipy, pandas, statsmodels...</p>
-    {introToMlPaths.map(o => <Link href={`${rootPath}/${o.path}`} key={`${rootPath}/${o.path}`}><h3>{o.title}</h3></Link>)}
+    {introToMlPaths.map(o => <><Link href={`${rootPath}/${o.path}`} key={`${rootPath}/${o.path}`}><h3>{o.title}</h3></Link><p>{o?.description}</p></>)}
     </>
   </GenericPost>
 }

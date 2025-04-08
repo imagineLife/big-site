@@ -22,9 +22,9 @@ export default function PyForDS(){
       <Link href={"/ai-ml/python-for-data-science/tensorflow-and-tensors"}><h3>Tensorflow & Tensors</h3></Link>
       <Link href={"/ai-ml/python-for-data-science/tensorflow-matrixes"}><h3>Tensorflow & Matrixes</h3></Link>
     <h2>Exploratory Data Analysis Examples</h2>
-    {edaPaths.map(o => <Link href={`${rootPath}/${o.path}`} key={`${rootPath}/${o.path}`}><h3>{o.title}</h3></Link>)}
+    {edaPaths.map(o => <><Link href={`${rootPath}/${o.path}`} key={`${rootPath}/${o.path}`}><h3>{o.title}</h3></Link><p>{o?.excerpt}</p></>)}
     <h2>Specific Data-Analysis Features</h2>
-      {pfdsPaths.map(o => <Link href={`${rootPath}/${o.path}`} key={`${rootPath}/${o.path}`}><h3>{o.title}</h3></Link>)}
+      {pfdsPaths.map(o => <><Link href={`${rootPath}/${o.path}`} key={`${rootPath}/${o.path}`}><h3>{o.title}</h3></Link><p>{o?.excerpt}</p></>)}
     </>
   </GenericPost>
 }
