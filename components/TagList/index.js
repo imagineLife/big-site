@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Link from 'next/link';
 function TagList({ tags, hideTitle, linkPattern, inline }) {
   return (
@@ -20,12 +20,12 @@ function TagList({ tags, hideTitle, linkPattern, inline }) {
           );
         } else {
           return (
-            <>
+            <Fragment key={t}>
               <span className="text-gray-700 dark:text-white dark:opacity-60">
                 {t.toUpperCase()}
               </span>
               {tidx !== tags.length - 1 && ' | '}
-            </>
+            </Fragment>
           );
         }
       })}

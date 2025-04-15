@@ -2,7 +2,7 @@ import Head from 'next/head';
 
 export default function Seo({ title, excerpt, tags = [], slug = '' }) {
   const jsonLd = {
-    '@context': 'https://schema.org',
+    '@context': 'http://schema.org',
     '@type': 'BlogPosting',
     name: title,
     author: {
@@ -16,8 +16,6 @@ export default function Seo({ title, excerpt, tags = [], slug = '' }) {
     keywords: [...tags, 'blog', 'blog post', 'blogpost'],
     inLanguage: 'en-US',
   };
-  console.log('excerpt');
-  console.log(excerpt);
 
   return (
     <Head>

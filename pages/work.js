@@ -141,7 +141,7 @@ function Medacist() {
   return (
     <>
       <WorkTitle
-        logo="/about/medacist.jpeg"
+        logo="/about/medacist.jpg"
         title="Medacist Solutions Group (Bluesight)"
         date="Jun 2019 - Mar 2022"
       />
