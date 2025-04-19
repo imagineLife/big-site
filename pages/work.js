@@ -35,35 +35,49 @@ function Alteryx() {
         date="Mar 2022 - now"
         logo="/about/alteryx.png"
       />
-      <h3>Workspace Management</h3>
+      <h3>Account-Admin Workspace Management</h3>
       <p>
         Leading the enablement of an enterprise-ready self-service RBAC{' '}
-        {/* <Link
-          target="_blank"
-          href="https://help.alteryx.com/aac/en/platform/admin/admin-reference/account-management/workspace-management.html#workspace-management"
-        > */}
-        workspace configuration feature-set
-        {/* </Link>{' '} */} via UI & API: workspace management, workspace-admin
-        management, & workspace-user management.
+        workspace configuration feature-set via UI & API for an{' '}
+        <b>Account Administrator</b> user persona:
       </p>
+      <ul>
+        <li>
+          Enable Account-Administrator access to workspace-management APIs via
+          new authz API rules (authz middleware, service validations)
+        </li>
+        <li>
+          Build new UIs for account administrators to manage workspaces &
+          workspace administrators that belong to their account (collaborate
+          with Product Managers & UX/UI teammates)
+        </li>
+      </ul>
       <details className="mt-[20px]" open>
         <summary className="text-[18px]">
-          <b>Live Workspace Management Docs</b>
+          <b>Live Account-Admin Workspace Management Docs</b>
         </summary>
         <iframe
           width="400"
           height="600"
           src="https://help.alteryx.com/aac/en/platform/admin/admin-reference/account-management/workspace-management.html#workspace-management"
-          frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerPolicy="strict-origin-when-cross-origin"
           allowFullScreen
         ></iframe>
       </details>
+      <sub>
+        Or{' '}
+        <Link
+          href="https://help.alteryx.com/aac/en/platform/admin/admin-reference/account-management/workspace-management.html#workspace-management"
+          target="_blank"
+        >
+          go to the docs in a new tab
+        </Link>
+      </sub>
       <h3>Authentication Micro-Frontend</h3>
       <p>
         Spearheaded a monolith-to-microfrontend transition of several
-        authentication-based UIs & APIs:{' '}
+        authentication-based UIs from backbone to react:{' '}
         <Link
           target="_blank"
           href="https://us1.alteryxcloud.com/auth-portal/sign-in?"
