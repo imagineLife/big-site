@@ -21,7 +21,7 @@ function BlogSectionCard({ title, snippet, to, image }) {
               width={50}
               height={50}
               style={{ margin: '0 auto 0 auto' }}
-              alt={`${title} section image`}
+              alt={`${title}`}
             />
           </div>
           <p className="mb-2 text-sm text-gray-600 dark:text-gray-400 h-full mt-[50px]">
