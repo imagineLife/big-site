@@ -252,7 +252,7 @@ function CompuWeigh() {
       <TagList
         inline
         hideTitle
-        tags={['angularjs', 'tortoise SVM', 'webpack', 'D3']}
+        tags={['angularjs', 'tortoise SVN', 'webpack', 'D3']}
       />
     </>
   );
