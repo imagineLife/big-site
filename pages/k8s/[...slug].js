@@ -14,14 +14,11 @@ export default function k8sBySlug({
 }) {
   let props = {
     globalData,
+    source,
     slugArr,
     ...frontMatter,
   };
-  return (
-    <GenericPost {...props}>
-      <div dangerouslySetInnerHTML={{ __html: source }} />
-    </GenericPost>
-  );
+  return <GenericPost {...props} />;
 }
 
 export const getStaticProps = async ({ params, ...rest }) => {
