@@ -11,16 +11,12 @@ import Header from './Header';
 import Head from 'next/head';
 import CustomLink from './CustomLink';
 
-// Custom components/renderers to pass to MDX.
-// Since the MDX files aren't loaded by webpack, they have no knowledge of how
-// to handle import statements. Instead, you must include components in scope
-// here.
+import Mermaid from './mermaid';
+
 const components = {
   a: CustomLink,
-  // It also works with dynamically-imported components, which is especially
-  // useful for conditionally loading components for certain routes.
-  // See the notes in README.md for more details.
   Head,
+  Mermaid,
 };
 
 export default function GenericPost(props) {
@@ -68,7 +64,7 @@ export default function GenericPost(props) {
         </main>
         <div className="grid md:grid-cols-2 lg:mx-24 mt-12">
           {prevPost && (
-            <Link href={`/${prevPost.slug}`}>
+            <Link href={`/${prevPost.slug}`} legacyBehavior>
               <a className="py-2 px-3 text-right md:text-right first:rounded-t-lg md:first:rounded-tr-none md:first:rounded-l-lg last:rounded-r-lg first last:rounded-b-lg backdrop-blur-lg bg-white dark:bg-black dark:bg-opacity-30 bg-opacity-10 hover:bg-opacity-20 dark:hover:bg-opacity-50 transition border border-gray-800 dark:border-white border-opacity-10 dark:border-opacity-10 last:border-t md:border-r-0 md:last:border-r md:last:rounded-r-none flex flex-col items-start md:items-end lg:items-end">
                 <p className="uppercase text-gray-500 mb-4 dark:text-white dark:opacity-60 w-fit">
                   Previous
@@ -81,7 +77,7 @@ export default function GenericPost(props) {
             </Link>
           )}
           {nextPost && (
-            <Link href={`/${nextPost.slug}`}>
+            <Link href={`/${nextPost.slug}`} legacyBehavior>
               <a className="py-2 px-3 text-center md:text-left md:first:rounded-t-lg last:rounded-b-lg first:rounded-l-lg md:last:rounded-bl-none md:last:rounded-r-lg backdrop-blur-lg bg-white dark:bg-black dark:bg-opacity-30 bg-opacity-10 hover:bg-opacity-20 dark:hover:bg-opacity-50 transition border border-gray-800 dark:border-white border-opacity-10 dark:border-opacity-10 border-t-0 first:border-t first:rounded-t-lg md:border-t border-b-0 last:border-b flex flex-col items-start">
                 <p className="uppercase text-gray-500 mb-4 dark:text-white dark:opacity-60 w-fit">
                   Next
@@ -95,16 +91,6 @@ export default function GenericPost(props) {
           )}
         </div>
       </article>
-      {/* <Footer copyrightText={globalData.footerText} /> */}
-      {/* <GradientBackground
-        variant="large"
-        className="absolute -top-32 opacity-30 dark:opacity-50"
-      />
-      <GradientBackground
-        variant="small"
-        className="absolute bottom-0 opacity-20 dark:opacity-10"
-      />
-    */}
     </Layout>
   );
 }
