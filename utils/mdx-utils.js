@@ -1,3 +1,4 @@
+import { serialize } from 'next-mdx-remote/serialize';
 import { readFile, readdir } from 'fs/promises';
 import { join } from 'path';
 import matter from 'gray-matter';
@@ -67,7 +68,12 @@ async function getFileUsingNode(fileSlugString) {
   const fileName = splitPathArr.pop();
   const dir = splitPathArr.join('/');
 
-  fullFilePath = join(mdDir, dir, `${fileName}.md`);
+  // fullFilePath = join(mdDir, dir, `${fileName}.md`);
+  if (fileName.endsWith('.md') || fileName.endsWith('.mdx')) {
+    fullFilePath = join(mdDir, dir, fileName);
+  } else {
+    fullFilePath = join(mdDir, dir, `${fileName}.md`);
+  }
 
   if (introFiles[dir]?.includes(fileName)) {
     fullFilePath = join(mdDir, dir, fileName, `intro.md`);
@@ -96,39 +102,69 @@ export async function getMdBySlugs(mdSlugString, nestedDirString) {
     : mdSlugString;
   if (mdBySlugCache[cacheString]) {
     return mdBySlugCache[cacheString];
-  } else {
-    let fileToFind = nestedDirString
-      ? `${mdSlugString}/${nestedDirString}`
-      : mdSlugString;
-
-    const fileContents = await getFileUsingNode(fileToFind);
-
-    const matterResult = matter(fileContents);
-
-    const processedContent = await remark()
-      // .use(remarkMermaid)
-      // .use(rehypeMermaid)
-      .use(remarkPrism)
-      .use(html)
-      .process(matterResult.content);
-    const contentHtml = processedContent.toString();
-
-    const slugBySection = mdSlugString.split('/');
-
-    const returnObj = {
-      id: slugBySection[slugBySection.length - 1],
-      contentHtml,
-      ...matterResult.data,
-    };
-
-    //
-    // set cache
-    //
-    if (!mdBySlugCache[cacheString]) mdBySlugCache[cacheString] = returnObj;
-
-    // Combine the data with the id and contentHtml
-    return returnObj;
   }
+
+  // let fileToFind = nestedDirString
+  //   ? `${mdSlugString}/${nestedDirString}`
+  //   : mdSlugString;
+
+  // const fileContents = await getFileUsingNode(fileToFind);
+
+  const basePath = nestedDirString
+    ? `${mdSlugString}/${nestedDirString}`
+    : mdSlugString;
+  const cleanedBasePath = basePath.replace(/\.(mdx|md)$/, '');
+
+  let fileToFind = '';
+  let fileContents = '';
+
+  try {
+    // Try .mdx first
+    fileToFind = `${cleanedBasePath}.mdx`;
+    fileContents = await getFileUsingNode(fileToFind);
+  } catch {
+    try {
+      // Fallback to .md
+      fileToFind = `${cleanedBasePath}.md`;
+      fileContents = await getFileUsingNode(fileToFind);
+    } catch {
+      throw new Error(`No .mdx or .md file found for: ${cleanedBasePath}`);
+    }
+  }
+
+  const matterResult = matter(fileContents);
+
+  // const processedContent = await remark()
+  //   // .use(rehypeMermaid)
+  //   .use(remarkPrism)
+  //   // .use(remarkMermaid)
+  //   .use(html)
+  //   .process(matterResult.content);
+  // const contentHtml = processedContent.toString();
+  const mdxSource = await serialize(matterResult.content, {
+    mdxOptions: {
+      remarkPlugins: [remarkPrism], //remarkGfm
+      rehypePlugins: [],
+    },
+    scope: matterResult.data,
+  });
+
+  const slugBySection = mdSlugString.split('/');
+
+  const returnObj = {
+    id: slugBySection[slugBySection.length - 1],
+    // contentHtml,
+    contentHtml: mdxSource,
+    ...matterResult.data,
+  };
+
+  //
+  // set cache
+  //
+  if (!mdBySlugCache[cacheString]) mdBySlugCache[cacheString] = returnObj;
+
+  // Combine the data with the id and contentHtml
+  return returnObj;
 }
 
 export async function getNotebookBySlug(notebookFileName) {
