@@ -31,21 +31,21 @@ Stateful sets can too. Stateful sets, though, <a href="https://kubernetes.io/doc
 ## Explanation Through Diagrams
 ### Starting With A Databse
 Starting small, consider a db being required in a "Full-Stack" application. Here, a DB, lets say mongoDB for those JS and application-first data architecture fans - 
-```mermaid
+<Mermaid chart={`
 flowchart
   DB["Database Instance"]
 
   subgraph Server
     DB
   end
-```
+`}/>
 
 ### Add Servers For Higher Availability
 For more reliability, replication is required for DB resilliancy. New Servers with DBs get setup, and Mongo Replica Sets get introduced (_this is a "high-level" example here._):
 - application-to-db communication go to the now "master" node
 - the "master" node gets replicated to 2 "slave" instances, where the data is cloned
 
-```mermaid
+<Mermaid chart={`
 flowchart
   DB["Database Instance"]
   DB2["Database Instance"]
@@ -66,7 +66,7 @@ flowchart
   ND1["Application Traffic"] ---> MS1
   MS1 -.-> RP1
   MS1 -.-> RP2
-```
+`}/>
 
 ### The Deployment Order And Instructions Are Critical
 In Db replicas, the order of how this whole thing gets built really matters. This is a db-specific detail, not explicitly about K8s or Stateful sets.
@@ -167,7 +167,8 @@ spec:
         persistentVolumeClaim:
           claimName: db-vol-claim
 ```
-```mermaid
+
+<Mermaid chart={`
   flowchart LR
   
   SC["StorageClass"]
@@ -182,7 +183,7 @@ spec:
   PVC --> Pd1
   PVC --> Pd2
   PVC --> Pd3
-```
+`}/>
 
 ### Each Pod Gets Its Own PVC + PV
 Here, a stateful set can deploy pods that each reference their own pvc, where each is bound to their own pv.   
@@ -236,7 +237,7 @@ spec:
           storage: 500Mi
 ```
 
-```mermaid
+<Mermaid chart={`
   flowchart LR
 
   SC["StorageClass"]
@@ -260,4 +261,4 @@ spec:
   PVC1 --> Pd1
   PVC2 --> Pd2
   PVC3 --> Pd3
-```
+`}/>

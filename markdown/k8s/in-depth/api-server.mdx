@@ -5,15 +5,24 @@ slug: k8s/in-depth/api-server
 shortSlug: api-server
 author: Jake Laursen
 excerpt: A built-in api can allow for api-driven discovery and config
-tags: ["Kubernetes", "k8s", "authentication", "authorization", "visualization", "diagram"]
+tags:
+  [
+    'Kubernetes',
+    'k8s',
+    'authentication',
+    'authorization',
+    'visualization',
+    'diagram',
+  ]
 order: 26
 ---
 
-
 # There Is A Kubernetes Api Server
-Check out the [K8s docs](https://kubernetes.io/docs/reference/access-authn-authz/authentication/) for more.  
+
+Check out the [K8s docs](https://kubernetes.io/docs/reference/access-authn-authz/authentication/) for more.
 
 There are a bunch of endpoints that can be accessed at `curl https://kube-master-node-ip:6443/<many-endpoints>`:
+
 - metrics
   - monitor health of cluster
 - healthz
@@ -23,8 +32,8 @@ There are a bunch of endpoints that can be accessed at `curl https://kube-master
 - api
 - apis
 - logs
-  - integrating with 3rd-party logging apps
 
+  - integrating with 3rd-party logging apps
 
 - [There Is A Kubernetes Api Server](#there-is-a-kubernetes-api-server)
   - [Access to the api is protected](#access-to-the-api-is-protected)
@@ -48,40 +57,45 @@ There are a bunch of endpoints that can be accessed at `curl https://kube-master
   - [kubectl Create Token](#kubectl-create-token)
   - [Todo](#todo)
 
-
 ## Access to the api is protected
-Through a 3-stage process of authentication, authorization, and admission controls. (_Check out the [K8s docs](https://kubernetes.io/docs/concepts/security/controlling-access/) on this for more_).  
+
+Through a 3-stage process of authentication, authorization, and admission controls. (_Check out the [K8s docs](https://kubernetes.io/docs/concepts/security/controlling-access/) on this for more_).
 
 ### Authentication
+
 - certs
 - tokens
 - username+password
 - users are managed elsewhere, not created in k8s
 - webhooks can varify bearer tokens & oidc providers
-Some Auth settings defined in the `kube-apiserver` file are
+  Some Auth settings defined in the `kube-apiserver` file are
 - `--basic-auth-file`
 - `--oidc-issuer-url`
 - `--token-auth-file`
 - `authorization-webhook-config-file`
 
-
-
 ### Authorization
+
 3 modes of authorization:
+
 - node
 - rbac
 - webhook
 
 These settings can be config'd in the `kube-apiserver` file:
+
 - `--authorization-mode=Node,RBAC` or something like `--authorization-mode=Webhook`
-The apiserver is(_can be?_) a pod & the pod definition can be seen with something like...
+  The apiserver is(_can be?_) a pod & the pod definition can be seen with something like...
+
 ```bash
 kubectl get pod kube-apiserver-controlplane --namespace=kube-system -o yaml
 ```
 
 #### A Few Notes On RBAC
+
 RBAC seems to be the preferred authz method.  
-Note the [K8s Docs on RBAC Auth](https://kubernetes.io/docs/reference/access-authn-authz/rbac/).  
+Note the [K8s Docs on RBAC Auth](https://kubernetes.io/docs/reference/access-authn-authz/rbac/).
+
 - figure out the namespace the user needs access to
 - create cert creds for the user
 - set creds of the user+namespace with a context
@@ -89,9 +103,10 @@ Note the [K8s Docs on RBAC Auth](https://kubernetes.io/docs/reference/access-aut
   - see [this other post](/k8s/in-depth/authorization) for way more details on roles and authorization as a whole
 - bind the user to the role
 - ALL resources are api objects in K8s: roles, rolebindings, etc.
-- 
+-
 
 ### Admission Controls
+
 - software
 - this can access, modify, and/or validate contents of objects being CRUD by api requests
 - this can deny the api request when above validation fails
@@ -100,20 +115,26 @@ Settings like these can be set for the kube-apiserver pod, as args.
 The default kube-apiserver file is located at `/etc/kubernetes/manifests/kube-apiserver.yaml`.
 
 #### Enable a plugin
+
 ```bash
 --enable-admissions-plugins=LimitRanger,NamespaceLifecycle
 ```
+
 #### Disable a plugin
+
 ```bash
 --disable-admissions-plugins=PodNodeSelector
 ```
-#### Dynamic Admission Controllers
-[K8s Docs](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/).  
-These are http callbacks that get requests & do something with them. Validation and mutating are the two types.    
 
+#### Dynamic Admission Controllers
+
+[K8s Docs](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/).  
+These are http callbacks that get requests & do something with them. Validation and mutating are the two types.
 
 ## Use Auth When requesting to the api
+
 One option is to pass cert details to curl
+
 ```bash
 curl https://localhost:6443 -k
   --key admin.key
@@ -122,6 +143,7 @@ curl https://localhost:6443 -k
 ```
 
 Another option is to use a built-in kubectl proxy client. This launches a proxy service on port 8001 && uses creds +certs from the default kubecconfig file. This way, keys + certs are not required for every api request
+
 ```bash
 # setup the proxy
 kubectl proxy
@@ -132,10 +154,12 @@ curl https://localhost:8001 -k
 ```
 
 ### Note Differences Between Kube Proxy and Kubectl Proxy
+
 The kubectl proxy is for api access.  
-The Kube Proxy is a k8s object enabling connectivity between k8s objects in the k8s cluster.  
+The Kube Proxy is a k8s object enabling connectivity between k8s objects in the k8s cluster.
 
 ## Apis Responsible For Cluster Functionality
+
 kubectl uses these apis under the hood, i think!
 
 - `/api`
@@ -172,86 +196,85 @@ kubectl uses these apis under the hood, i think!
     - v1
       - certificatesigningrequests
 
-
-
-
 ## A Visual
-The api resource url "hierarchy": 
-```mermaid
+
+The api resource url "hierarchy":
+<Mermaid chart={`
 flowchart TD
-  APIS["/apis"]
-  APPS["/apps"]
-  EXT["/extensions"]
-  NTWK["/networking.k8s.io"]
-  STR["/storage.k8s.io"]
-  AUTH["/authentication.k8s.io"]
-  CRT["/certificates.k8s.io"]
-  
-  
-  V11["/v1"]
-  V12["/v1"]
-  V13["/v1"]
+APIS["/apis"]
+APPS["/apps"]
+EXT["/extensions"]
+NTWK["/networking.k8s.io"]
+STR["/storage.k8s.io"]
+AUTH["/authentication.k8s.io"]
+CRT["/certificates.k8s.io"]
 
-  DEP["/deployments"]
-  REPL["/replicasets"]
-  STF["/statefulsets"]
+V11["/v1"]
+V12["/v1"]
+V13["/v1"]
 
-  NTWKP["/networkpolicies"]
-  CRTSR["/certificatesigningrequests"]
+DEP["/deployments"]
+REPL["/replicasets"]
+STF["/statefulsets"]
 
-  LS["list"]
-  GT["get"]
-  CRT["create"]
-  DL["delete"]
-  UPD["update"]
-  WTCH["watch"]
+NTWKP["/networkpolicies"]
+CRTSR["/certificatesigningrequests"]
 
-  subgraph APIG["API Groups ."]
-    direction TB
-    APPS
-    EXT
-    NTWK
-    STR
-    AUTH
-    CRT
-  end
+LS["list"]
+GT["get"]
+CRT["create"]
+DL["delete"]
+UPD["update"]
+WTCH["watch"]
 
-  subgraph VRBS[" use verbs  ."]
-    direction TB
-    LS
-    GT
-    CRT
-    DL
-    UPD
-    WTCH
-  end
+subgraph APIG["API Groups ."]
+direction TB
+APPS
+EXT
+NTWK
+STR
+AUTH
+CRT
+end
 
-  subgraph APPV1RES["Resources  ."]
-    direction LR
-    DEP
-    REPL
-    STF
-  end
+subgraph VRBS[" use verbs ."]
+direction TB
+LS
+GT
+CRT
+DL
+UPD
+WTCH
+end
 
-  APIS --> APIG
+subgraph APPV1RES["Resources ."]
+direction LR
+DEP
+REPL
+STF
+end
 
-  APPS --> V11
-  V11 --> APPV1RES
-  DEP --> VRBS
-  REPL --> VRBS
-  STF --> VRBS
+APIS --> APIG
 
-  NTWK --> V12
-  V12 --> NTWKP
-  NTWKP --> VRBS
+APPS --> V11
+V11 --> APPV1RES
+DEP --> VRBS
+REPL --> VRBS
+STF --> VRBS
 
-  CRT --> V13
-  V13 --> CRTSR
-  CRTSR --> VRBS
-```
+NTWK --> V12
+V12 --> NTWKP
+NTWKP --> VRBS
+
+CRT --> V13
+V13 --> CRTSR
+CRTSR --> VRBS
+`} />
 
 ## APIs might be versioned
-Each API can have versions: 
+
+Each API can have versions:
+
 - `v1Alpha1`
   - can implement in an object def file with `apiVersion: internal.apiserver.k8s.io/v1alpha1`
   - first developed + merged to k8s codebase
@@ -264,7 +287,7 @@ Each API can have versions:
   - not GA
   - may have minor bugs
   - commitment that the api may be moved to GA
-- `v1` is the GA stable verison 
+- `v1` is the GA stable verison
   - expected to be highly reliable
 - **multiple versions might be supported at a time**
   - **the preferred** version is set in `cluster/apis/<api-here>`, like `batch`
@@ -281,14 +304,18 @@ ETCDCTL_API=3 etcdctl
 ```
 
 ### APIs can be enabled and disabled
+
 The version must be added to the runtime config parameter of the kube-apiserver service with new lines like this mock: `--rintime-config=<api/version>`
+
 - `--runtime-config=batch/v2alpha1`
 
 ### APIs Get Deprecated
+
 API deprecation policies express when to stop supporting apis.  
 As an example, say we make an api for k8s called `/imaginelife` with sub-routes at `/imaginelife/courses` and `/imaginelife/webinar`.  
 When its ready to be merged to k8s, it gets merged as `/imaginelife/v1alpha1/courses`, etc.  
 This can now be used with something like
+
 ```yaml
 apiVersion: imaginelife/v1alpha1
 kind: Course
@@ -299,45 +326,48 @@ spec:
 ```
 
 #### Removing Endpoint by excluding in new verisons
-To "remove" an endpoint really only works by NOT INCLUDING the deprecated enpoint in a new version of the api. To "remove" the `webinar` endpoint, per say, that endpoint would just not be included in a `v1alpha2` release alongside the `imaginelife/v1alpha2/courses` release.  
+
+To "remove" an endpoint really only works by NOT INCLUDING the deprecated enpoint in a new version of the api. To "remove" the `webinar` endpoint, per say, that endpoint would just not be included in a `v1alpha2` release alongside the `imaginelife/v1alpha2/courses` release.
 
 #### Prior Version Maintenance SChedules
+
 Other than the most recent API version of each endpoint, co-inciding with kubernetes version releases, prior API versions are required to be supported after their "announced deprecation" for a min duration of ....
+
 - `GA`: 12 months or 3 releases, the longer of the two
 - `beta`: 9mo or 3 releases, the longer of the two
 - `alpha` none-zo!
   - must announce api version changes in k8s release notes
 
-Api Version can only deprecate same-"level" of availability or lower: 
+Api Version can only deprecate same-"level" of availability or lower:
+
 - new alpha releases can deprecate prior alpha releases
 - new beta releases can deprecate prior alpha AND beta releases
 - new GA releases can deprecate prior alpha, beta, and GA releases
 - new alpha CANNOT deprecate beta or GA releases
 - new beta CANNOT deprecate GA releases
 
-
 #### Use Kubectl Convert to get new apis
-[K8s docs on kubectl-convert](https://kubernetes.io/docs/reference/using-api/deprecation-guide/#migrate-to-non-deprecated-apis).  
+
+[K8s docs on kubectl-convert](https://kubernetes.io/docs/reference/using-api/deprecation-guide/#migrate-to-non-deprecated-apis).
 
 When an api is deprecated, the `kubectl convert` command can be used to help migrate a k8s config file to a new api version:
 
 ```bash
 # kubectl-convert -f old-config-file.yaml --output-version new-version-here
 kubectl-convert -f app-deployment.yaml --output-version apps/v1
-```  
-
+```
 
 ## kubectl Create Token
+
 [Kubectl command docs](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#-em-token-em-): Request a service account token.  
 [Kubernetes docs](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#service-account-tokens).  
 `kubectl create serviceaccount devopsuser`.  
 `kubectl create token devopsuser`.  
 That will create a token (_a jwt_) for the serviceaccount & returns the token.  
-THe token can be used to auth as the service account as a Bearer token.  
-
-
+THe token can be used to auth as the service account as a Bearer token.
 
 ## Todo
+
 - show the "short names" of resources in k8s, say deployments and cronjobs
   - `kubectl api-resources | grep 'deployments\|replicasets'`
 - identify parts of a semver

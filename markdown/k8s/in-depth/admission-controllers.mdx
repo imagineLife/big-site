@@ -9,7 +9,6 @@ tags: ["Kubernetes", "k8s", "admission controllers", "requests", "mutations", "v
 order: 28
 ---
 
-# Admission Controllers
 Every time a _request goes through_ the kubectl cli...
 - the req. goes to api server
 - the req. gets **authenticated**, usually through certificates
@@ -17,7 +16,7 @@ Every time a _request goes through_ the kubectl cli...
 - the req is **authorized**
   - does the user have the permission to do what they are trying to? RBAC check, usually
 - the api serve runs **mutation admissionControllers**
-  - these change the reques
+  - these change the request
 - the api serve runs **validation admissionControllers**
   - these allow/deny events from happening
 - info is persistent in the etcd database
@@ -25,13 +24,12 @@ Every time a _request goes through_ the kubectl cli...
 NOTE: built-in admission controllers run in an order. The order makes logical sense in order of applicability.  
   
   
-  <!-- 
+{/* 
     AUTHNOTE>"Kubectl gets user authN \n from $HOME/.kube/config"]  
     AUTHZNOTE>"Kube ApiServer Checks for RBAC \n via roles and roleBindings"]
-  
-  VDC["Validation AdmissionControllers"] -->
+   */}
 
-```mermaid
+<Mermaid chart={`
 flowchart LR
 
   KTL["Kubectl gui"]
@@ -39,7 +37,8 @@ flowchart LR
   AUTHZ["Authorization"]
   WRK["Do The Work"]
   MTC["Mutation AdmissionControllers"]
-  AUTHNOTE>Kubectl gets user authN from $HOME/.kube/config]  
+  AUTHNOTE>Kubectl gets user authN from $HOME/.kube/config]
+  VDC["Validation AdmissionControllers"]
   
   KTL --> AUTHN
   AUTHN -.-> AUTHNOTE
@@ -48,10 +47,9 @@ flowchart LR
   AUTHZ --> MTC
   MTC --> VDC
   VDC --> WRK
-```
+`} />
 
 
-- [Admission Controllers](#admission-controllers)
   - [Permissions can be more granular than user RBAC with Admission Controllers](#permissions-can-be-more-granular-than-user-rbac-with-admission-controllers)
     - [Why We Need Admission Controllers](#why-we-need-admission-controllers)
     - [AdmissionControllers Validate and Mutate](#admissioncontrollers-validate-and-mutate)
@@ -309,7 +307,7 @@ spec:
     - name: busybox
       image: busybox
       command: ["sh", "-c", "echo I am running as user $(id -u)"]
+```
 
-
-kk logs pod-with-override
-I am running as user 0
+kk logs pod-with-override  
+```I am running as user 0```

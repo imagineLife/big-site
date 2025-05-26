@@ -62,41 +62,41 @@ This file gets passed into the api server.
 ABAC are more difficult to manage than RBAC, and might require more manual updates to manage.  
 Each user can get a policy file. Editing these policies require restarting the kubeapi server.
 
-```mermaid
+<Mermaid chart={`
 flowchart
-  USR1["Dev-User-Joe"]
-  USR2["Dev-User-Sally"]
-  USRGRP["Dev-User-Group"]
-  SECGRP["Security-Group"]
+USR1["Dev-User-Joe"]
+USR2["Dev-User-Sally"]
+USRGRP["Dev-User-Group"]
+SECGRP["Security-Group"]
 
-  subgraph SGONE["Dev-User-Policy"]
-    VP1["View Pods"]
-    CP1["Create Pods"]
-    DP1["Delete Pods"]
-  end
+subgraph SGONE["Dev-User-Policy"]
+VP1["View Pods"]
+CP1["Create Pods"]
+DP1["Delete Pods"]
+end
 
-  subgraph SGTWO["Dev-User-Policy"]
-    VP2["View Pods"]
-    CP2["Create Pods"]
-    DP2["Delete Pods"]
-  end
+subgraph SGTWO["Dev-User-Policy"]
+VP2["View Pods"]
+CP2["Create Pods"]
+DP2["Delete Pods"]
+end
 
-  subgraph SGTHREE["Dev-Grp-Policy"]
-    VP3["View Pods"]
-    CP3["Create Pods"]
-    DP3["Delete Pods"]
-  end
+subgraph SGTHREE["Dev-Grp-Policy"]
+VP3["View Pods"]
+CP3["Create Pods"]
+DP3["Delete Pods"]
+end
 
-  subgraph SECPOL["Dev-Grp-Policy"]
-    CSR1["View CSR"]
-    CSR2["Approve CSR"]
-  end
+subgraph SECPOL["Dev-Grp-Policy"]
+CSR1["View CSR"]
+CSR2["Approve CSR"]
+end
 
-  USR1 --> SGONE
-  USR2 --> SGTWO
-  USRGRP --> SGTHREE
-  SECGRP --> SECPOL
-```
+USR1 --> SGONE
+USR2 --> SGTWO
+USRGRP --> SGTHREE
+SECGRP --> SECPOL
+`} />
 
 A nuisance of this ABAC approach is that in order to update user access privileges requires updating files and restarting the apiserver. If many users have similar permissions, this requires many files being touched.
 
@@ -105,29 +105,29 @@ A nuisance of this ABAC approach is that in order to update user access privileg
 Wrap a bunch of permissions into a role.  
 Assign roles to users - a developer role for developers, a security role for security users.
 
-```mermaid
+<Mermaid chart={`
 flowchart
-  USR1["Dev-User-Joe"]
-  USR2["Dev-User-Sally"]
-  USRGRP["Dev-User-Group"]
-  SECGRP["Security-Group"]
+USR1["Dev-User-Joe"]
+USR2["Dev-User-Sally"]
+USRGRP["Dev-User-Group"]
+SECGRP["Security-Group"]
 
-  subgraph SGONE["Dev-User Role"]
-    VP1["View Pods"]
-    CP1["Create Pods"]
-    DP1["Delete Pods"]
-  end
+subgraph SGONE["Dev-User Role"]
+VP1["View Pods"]
+CP1["Create Pods"]
+DP1["Delete Pods"]
+end
 
-  subgraph SECPOL["Dev-Grp Role"]
-    CSR1["View CSR"]
-    CSR2["Approve CSR"]
-  end
+subgraph SECPOL["Dev-Grp Role"]
+CSR1["View CSR"]
+CSR2["Approve CSR"]
+end
 
-  USR1 --> SGONE
-  USR2 --> SGONE
-  USRGRP --> SGONE
-  SECGRP --> SECPOL
-```
+USR1 --> SGONE
+USR2 --> SGONE
+USRGRP --> SGONE
+SECGRP --> SECPOL
+`} />
 
 The benefit of rbac over abac is that one role can apply to many users, so changing a bunch of user access rules can happen by editing a single role.
 

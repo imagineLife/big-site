@@ -33,33 +33,32 @@ Here, 2 nginx instances will...
 
 ## A Diagram
 
-```mermaid
+<Mermaid chart={`
 flowchart LR
 
-  SERVERI["nodeapp1"]
-  SERVERII["nodeapp2"]
-  SERVERIII["nodeapp3"]
-  SERVERIV["nodeapp4"]
-  SERVERV["nodeapp5"]
-  SERVERVI["nodeapp6"]
+SERVERI["nodeapp1"]
+SERVERII["nodeapp2"]
+SERVERIII["nodeapp3"]
+SERVERIV["nodeapp4"]
+SERVERV["nodeapp5"]
+SERVERVI["nodeapp6"]
 
-  NXI["nginx proxy I"]
-  NXII["nginx proxy II"]
+NXI["nginx proxy I"]
+NXII["nginx proxy II"]
 
-  WORLD((("outside world")))
+WORLD((("outside world")))
 
+WORLD --:8081--> NXI
+WORLD --:8082--> NXII
 
-  WORLD --:8081--> NXI
-  WORLD --:8082--> NXII
+NXI --:8080--> SERVERI
+NXI --:8080--> SERVERII
+NXI --:8080--> SERVERIII
 
-  NXI --:8080--> SERVERI
-  NXI --:8080--> SERVERII
-  NXI --:8080--> SERVERIII
-
-  NXII --:8080--> SERVERIV
-  NXII --:8080--> SERVERV
-  NXII --:8080--> SERVERVI
-```
+NXII --:8080--> SERVERIV
+NXII --:8080--> SERVERV
+NXII --:8080--> SERVERVI
+`}/>
 
 ## The Node Server
 

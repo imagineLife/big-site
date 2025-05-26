@@ -34,22 +34,21 @@ The web servers and the nginx instance will all run in docker.
 
 ## A Diagram
 
-```mermaid
+<Mermaid chart={`
 flowchart LR
 
-  SERVERI["node server I"]
-  SERVERII["node server II"]
-  SERVERIII["node server III"]
-  NX["nginx proxy"]
+SERVERI["node server I"]
+SERVERII["node server II"]
+SERVERIII["node server III"]
+NX["nginx proxy"]
 
-  WORLD((("outside world")))
+WORLD((("outside world")))
 
-
-  WORLD --:8081--> NX
-  NX --:8080--> SERVERI
-  NX --:8080--> SERVERII
-  NX --:8080--> SERVERIII
-```
+WORLD --:8081--> NX
+NX --:8080--> SERVERI
+NX --:8080--> SERVERII
+NX --:8080--> SERVERIII
+`}/>
 
 ## The Node Server
 

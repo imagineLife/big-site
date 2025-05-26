@@ -20,22 +20,22 @@ order: 1
 
 ## A Diagram
 
-```mermaid
+<Mermaid chart={`
 flowchart LR
 
-  STATICFILES["static files (<i>index.html, etc.</i>)"]
-  WORLD["outside world"]
+STATICFILES["static files (<i>index.html, etc.</i>)"]
+WORLD["outside world"]
 
-  subgraph nginxServer["nginx server"]
+subgraph nginxServer["nginx server"]
 
     subgraph dirPath["/usr/share/nginx/html"]
       STATICFILES
     end
 
-  end
+end
 
-  WORLD --:8081-->nginxServer
-```
+WORLD --:8081-->nginxServer
+`}/>
 
 ## A WebServer For Web Developers
 
