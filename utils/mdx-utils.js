@@ -3,9 +3,6 @@ import { readFile, readdir } from 'fs/promises';
 import { join } from 'path';
 import matter from 'gray-matter';
 import remarkPrism from 'remark-prism';
-// import remarkMermaid from 'remark-mermaidjs';
-import { remark } from 'remark';
-import html from 'remark-html';
 
 //
 // vars
@@ -134,16 +131,9 @@ export async function getMdBySlugs(mdSlugString, nestedDirString) {
 
   const matterResult = matter(fileContents);
 
-  // const processedContent = await remark()
-  //   // .use(rehypeMermaid)
-  //   .use(remarkPrism)
-  //   // .use(remarkMermaid)
-  //   .use(html)
-  //   .process(matterResult.content);
-  // const contentHtml = processedContent.toString();
   const mdxSource = await serialize(matterResult.content, {
     mdxOptions: {
-      remarkPlugins: [remarkPrism], //remarkGfm
+      remarkPlugins: [remarkPrism],
       rehypePlugins: [],
     },
     scope: matterResult.data,
@@ -163,7 +153,6 @@ export async function getMdBySlugs(mdSlugString, nestedDirString) {
   //
   if (!mdBySlugCache[cacheString]) mdBySlugCache[cacheString] = returnObj;
 
-  // Combine the data with the id and contentHtml
   return returnObj;
 }
 
