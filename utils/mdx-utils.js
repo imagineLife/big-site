@@ -26,7 +26,7 @@ export const k8sMdPath = join(mdDir, 'k8s');
 export const linuxMdPath = join(mdDir, 'linux');
 export const nginxMdPath = join(mdDir, 'nginx');
 export const scrumMdPath = join(mdDir, 'scrum');
-export const social_world_md_paths = join(mdDir, 'node');
+// export const social_world_md_paths = join(mdDir, 'node');
 export const mlMdPath = join(mdDir, 'ml');
 
 const introFiles = {
@@ -65,18 +65,20 @@ async function getFileUsingNode(fileSlugString) {
   const fileName = splitPathArr.pop();
   const dir = splitPathArr.join('/');
 
-  // fullFilePath = join(mdDir, dir, `${fileName}.md`);
   if (fileName.endsWith('.md') || fileName.endsWith('.mdx')) {
     fullFilePath = join(mdDir, dir, fileName);
   } else {
     fullFilePath = join(mdDir, dir, `${fileName}.md`);
   }
+  const fileNameWithoutSuffix = fileName.split('.')[0];
+  const useIntroFileInstead = introFiles[dir]?.includes(fileNameWithoutSuffix);
 
-  if (introFiles[dir]?.includes(fileName)) {
-    fullFilePath = join(mdDir, dir, fileName, `intro.md`);
+  if (useIntroFileInstead) {
+    fullFilePath = join(mdDir, dir, fileNameWithoutSuffix, `intro.md`);
   }
 
   fileContents = await readFile(fullFilePath, 'utf8');
+
   return fileContents;
 }
 
@@ -100,12 +102,6 @@ export async function getMdBySlugs(mdSlugString, nestedDirString) {
   if (mdBySlugCache[cacheString]) {
     return mdBySlugCache[cacheString];
   }
-
-  // let fileToFind = nestedDirString
-  //   ? `${mdSlugString}/${nestedDirString}`
-  //   : mdSlugString;
-
-  // const fileContents = await getFileUsingNode(fileToFind);
 
   const basePath = nestedDirString
     ? `${mdSlugString}/${nestedDirString}`

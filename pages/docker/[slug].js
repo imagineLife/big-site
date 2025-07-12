@@ -6,17 +6,16 @@ const DOCKER_VAR = 'docker';
 export default function DockerBySlug({
   frontMatter,
   globalData,
-  prevPost,
-  nextPost,
   slugArr,
   source,
-  ...rest
 }) {
   let props = {
     globalData,
     slugArr,
+    source,
     ...frontMatter,
   };
+
   return (
     <GenericPost {...props}>
       <div dangerouslySetInnerHTML={{ __html: source }} />

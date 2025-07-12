@@ -14,6 +14,7 @@ export default function LinuxBySlug({
   let props = {
     globalData,
     slugArr,
+    source,
     ...frontMatter,
   };
   return (
@@ -40,8 +41,9 @@ export const getStaticProps = async ({ params }) => {
 
 // https://nextjs.org/docs/pages/building-your-application/data-fetching/get-static-paths
 export const getStaticPaths = async (props) => {
+  const linuxPaths = await linuxMdPaths();
   return {
-    paths: await linuxMdPaths(),
+    paths: linuxPaths,
     fallback: false,
   };
 };
