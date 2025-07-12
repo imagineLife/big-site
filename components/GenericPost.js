@@ -57,13 +57,8 @@ export default function GenericPost(props) {
         <main className="prose dark:prose-dark mx-auto lg:prose-lg lg:max-w-none">
           <article>
             {source && <MDXRemote {...source} components={components} />}
-            {/* GOAL: get rid of children?! */}
-            {/* {!source && children && (
-              <>
-                <p>children!</p>
-                {children}
-              </>
-            )} */}
+            {/* GOAL: get rid of children?! used for 'node' parent dir */}
+            {!source && children}
           </article>
           <div className="m-32" />
           {tags && <TagList tags={tags} />}

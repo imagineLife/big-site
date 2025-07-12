@@ -50,16 +50,20 @@ export default function SiblingButton({ siblings, curSlug }) {
         >
           {siblings
             .filter((s) => `/${s.slug}` !== curPath)
-            .map((s) => (
-              <li key={`${s.title}`} className="underline">
-                <a
-                  href={`${s.slug}`}
-                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 text-gray-600 hover:text-blue-500"
-                >
-                  {s.title}
-                </a>
-              </li>
-            ))}
+            .map((s) => {
+              let href = `${s.slug}`;
+              if (s.slug.includes('node')) href = `/${s.slug}`;
+              return (
+                <li key={`${s.title}`} className="underline">
+                  <a
+                    href={href}
+                    className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 text-gray-600 hover:text-blue-500"
+                  >
+                    {s.title}
+                  </a>
+                </li>
+              );
+            })}
         </ul>
       </div>
     </section>

@@ -9,7 +9,6 @@ export default function LinuxBySlug({
   nextPost,
   slugArr,
   source,
-  ...rest
 }) {
   let props = {
     globalData,

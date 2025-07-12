@@ -17,6 +17,7 @@ export default function NodeBySlug({
     globalData,
     slugArr,
     siblings,
+    source,
     ...frontMatter,
   };
 
@@ -48,6 +49,7 @@ export const getStaticProps = async ({ params }) => {
 // https://nextjs.org/docs/pages/building-your-application/data-fetching/get-static-paths
 export const getStaticPaths = async (props) => {
   const newNodePaths = await getMdPostSummaries('node', true);
+
   return {
     paths: newNodePaths.map((d) => `/${d.slug}`),
     fallback: false,
