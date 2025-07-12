@@ -66,7 +66,11 @@ async function getFileUsingNode(fileSlugString) {
   const dir = splitPathArr.join('/');
 
   if (fileName.endsWith('.md') || fileName.endsWith('.mdx')) {
-    fullFilePath = join(mdDir, dir, fileName);
+    if (!fileSlugString.includes('/docker/')) {
+      fullFilePath = join(mdDir, dir, fileName);
+    } else {
+      fullFilePath = join(mdDir, 'docker', fileName);
+    }
   } else {
     fullFilePath = join(mdDir, dir, `${fileName}.md`);
   }
@@ -197,8 +201,24 @@ export const getPosts = async (pathDir) => {
   return nbPaths.map((s) => s.split('.ipynb')[0]);
 };
 
+export async function getFlatSiblingTitleSlugs(pathsArr) {
+  let dirToParse = join(mdDir, pathsArr[0]);
+  let res = await readdir(dirToParse, { withFileTypes: true });
+  res = res
+    .filter((dirEnt) => !dirEnt.isDirectory())
+    .filter((dirEnt) => dirEnt.name !== 'intro.md');
+
+  const resMds = await Promise.all(
+    res.map((dirEnt) =>
+      getMdBySlugs(`${dirEnt.path}/${dirEnt.name.split('.md')[0]}`)
+    )
+  );
+  return resMds.map((md) => ({ title: md.title, slug: md.slug }));
+}
+
 export async function getSiblingTitleSlugs(pathParam) {
   let dirToParse = join(mdDir, ...pathParam);
+
   if (pathParam.length > 2) {
     let lastPath = pathParam.pop();
     dirToParse = join(mdDir, ...pathParam);
