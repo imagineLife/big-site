@@ -12,11 +12,13 @@ export default function DockerBySlug({
   globalData,
   slugArr,
   source,
+  siblings,
 }) {
   let props = {
     globalData,
     slugArr,
     source,
+    siblings,
     ...frontMatter,
   };
 
@@ -30,8 +32,6 @@ export default function DockerBySlug({
 export const getStaticProps = async ({ params, ...rest }) => {
   const globalData = getGlobalData();
   const siblings = await getFlatSiblingTitleSlugs(['docker', ...params.slug]);
-  console.log('docker siblings');
-  console.log(siblings);
 
   const { title, slug, author, excerpt, tags, contentHtml } =
     await getMdBySlugs(`docker/${params.slug}`);
@@ -42,6 +42,7 @@ export const getStaticProps = async ({ params, ...rest }) => {
       frontMatter: { title, slug, author, excerpt, tags },
       slugArr: ['docker', params.slug],
       source: contentHtml,
+      siblings,
     },
   };
 };
