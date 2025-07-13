@@ -185,7 +185,9 @@ export async function mdPathsFromDirRoot(rootStr, includeNestedContent) {
     let flattened = nestedContents.flat(Infinity);
     let flat = flattened.map((o) => `/${o.slug}`);
     let resArr = flat.concat(rootContents);
-    const returning = resArr.filter((s) => s !== '.DS_Store');
+    const returning = resArr
+      .filter((s) => s !== '.DS_Store')
+      .map((s) => s.split('.')[0]);
     return returning;
   }
 }

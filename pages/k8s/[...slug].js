@@ -4,19 +4,16 @@ import GenericPost from '../../components/GenericPost';
 
 const k8s_VAR = 'k8s';
 export default function k8sBySlug({
-  frontMatter,
+  // frontMatter,
   globalData,
-  prevPost,
-  nextPost,
   slugArr,
   source,
-  ...rest
 }) {
   let props = {
     globalData,
     source,
     slugArr,
-    ...frontMatter,
+    // ...frontMatter,
   };
   return <GenericPost {...props} />;
 }
@@ -25,6 +22,8 @@ export const getStaticProps = async ({ params, ...rest }) => {
   const globalData = getGlobalData();
   const { title, slug, author, excerpt, tags, contentHtml } =
     await getMdBySlugs(`k8s/${params.slug[0]}`, params?.slug[1]);
+  console.log('title, slug');
+  console.log(title, slug);
 
   return {
     props: {
@@ -38,8 +37,12 @@ export const getStaticProps = async ({ params, ...rest }) => {
 
 // https://nextjs.org/docs/pages/building-your-application/data-fetching/get-static-paths
 export const getStaticPaths = async (props) => {
+  const k8sPaths = await k8sMdPaths();
+  console.log('k8sPaths');
+  console.log(k8sPaths);
+
   return {
-    paths: await k8sMdPaths(),
+    paths: k8sPaths,
     fallback: false,
   };
 };

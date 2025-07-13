@@ -39,7 +39,8 @@ yarn-error.log*
 # static files
 /public/notebooks/.ipynb_checkpoints/
 /public/notebooks/env/*
-/public/sitemap*
+/public/sitemap.xml
+public/sitemap-0.xml
 *.zip
 
 __MACOSX
