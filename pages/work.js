@@ -320,9 +320,9 @@ const certs = [
   {
     title:
       'Artificial Intelligence and Machine Learning: Business Applications',
-    subText: 'A Post Graduate Program (w.i.p)',
+    subText: 'A Post Graduate Program',
     aLink:
-      'https://onlineexeced.mccombs.utexas.edu/uta-artificial-intelligence-machine-learning',
+      'https://la.utexas.edu/texasexeced/digitalVerification.html?key=ewtwazrj',
     techList: [
       'Python',
       'Google Colab',
