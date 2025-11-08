@@ -343,6 +343,36 @@ export default function getAiPaths(rootDir: string): PathObj[] {
           'Explore how to predict loan defaults using bagging ensemble methods in scikit-learn. Learn about financial risk modeling and improve model accuracy with ensemble learning techniques.',
       },
     ],
+    projects: [
+      {
+        path: 'handwritten-digit-recognition',
+        title: 'MNIST Handwritten Digit Classification',
+        tags: [
+          'ai',
+          'cnn',
+          'classification',
+          'dataviz',
+          'deeplearning',
+          'experiments',
+          'gpu',
+          'hyperparameters',
+          'machinelearning',
+          'mnist',
+          'modeling',
+          'mps',
+          'mlp',
+          'notebook',
+          'optimization',
+          'python',
+          'pytorch',
+          'training',
+          'tutorial',
+          'vision',
+        ],
+        excerpt:
+          'An end-to-end PyTorch notebook that loads, visualizes, trains, evaluates, and optimizes MLP and CNN models on the MNIST handwritten digit dataset. Includes data preparation, model comparison, learning-rate tuning, and best-model tracking.',
+      },
+    ],
   };
   return pathsLookup[rootDir];
 }
