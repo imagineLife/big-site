@@ -22,8 +22,6 @@ export const getStaticProps = async ({ params, ...rest }) => {
   const globalData = getGlobalData();
   const { title, slug, author, excerpt, tags, contentHtml } =
     await getMdBySlugs(`k8s/${params.slug[0]}`, params?.slug[1]);
-  console.log('title, slug');
-  console.log(title, slug);
 
   return {
     props: {
