@@ -34,6 +34,47 @@ export default function AiPage() {
         <p>A full end-to-end notebook demonstrating data preprocessing, model training, optimization tuning, and performance comparison between an MLP and CNN using the MNIST dataset.</p>
         <TagList hideTitle tags={["ai", "cnn", "classification", "computer vision", "dataviz", "deeplearning", "experiments", "gpu", "hyperparameters", "machinelearning", "mnist", "modeling", "mps", "mlp", "notebook", "optimization", "python", "pytorch", "training", "tutorial"]}></TagList>
 
+          <Link href="/ai-ml/projects/imdb-sentiment-prediction" 
+            className="no-underline hover:underline"
+          >
+            <h3>IMDB Sentiment Analysis: From Bag-of-Words to Mini-Transformer</h3>
+          </Link>
+
+          <p>
+            An end-to-end NLP notebook that loads the IMDB dataset with Hugging Face,
+            builds a Bag-of-Words MLP baseline, and then trains a custom Mini-Transformer
+            for text classification. Includes preprocessing, tokenization, training
+            loops, optimization experiments, LR range testing, and a full comparison
+            between classical and modern architectures for sentiment prediction.
+          </p>
+
+          <TagList 
+            hideTitle 
+            tags={[
+              "ai",
+              "nlp",
+              "transformers",
+              "huggingface",
+              "sentiment analysis",
+              "imdb",
+              "text classification",
+              "bag-of-words",
+              "deeplearning",
+              "experiments",
+              "gpu",
+              "hyperparameters",
+              "machinelearning",
+              "modeling",
+              "mps",
+              "mlp",
+              "optimization",
+              "python",
+              "pytorch",
+              "training",
+              "tutorial"
+            ]}
+          />
+
 {/* 
 
 */}

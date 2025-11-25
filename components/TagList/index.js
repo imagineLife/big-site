@@ -1,6 +1,11 @@
 import React, { Fragment } from 'react';
 import Link from 'next/link';
-function TagList({ tags, hideTitle, linkPattern, inline }) {
+function TagList({
+  tags = [],
+  hideTitle = false,
+  linkPattern = null,
+  inline = false,
+}) {
   return (
     <div role="list" className="flex flex-wrap justify-start gap-4 pt-[15px]">
       {!hideTitle && <i>Page Tags: </i>}

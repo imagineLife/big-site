@@ -4,6 +4,7 @@ export type PathObj = {
   description?: string;
   excerpt?: string;
 };
+
 export default function getAiPaths(rootDir: string): PathObj[] {
   const pathsLookup = {
     'python-for-data-science': [
@@ -371,6 +372,24 @@ export default function getAiPaths(rootDir: string): PathObj[] {
         ],
         excerpt:
           'An end-to-end PyTorch notebook that loads, visualizes, trains, evaluates, and optimizes MLP and CNN models on the MNIST handwritten digit dataset. Includes data preparation, model comparison, learning-rate tuning, and best-model tracking.',
+      },
+      {
+        path: 'imdb-sentiment-prediction',
+        title:
+          'From Bag-of-Words to Mini-Transformer: Sentiment on IMDB Reviews',
+        tags: [
+          'nlp',
+          'sentiment analysis',
+          'imdb dataset',
+          'bag-of-words',
+          'text classification',
+          'transformers',
+          'huggingface',
+          'pytorch',
+          'machine learning project',
+        ],
+        excerpt:
+          'A complete end-to-end NLP project that builds and compares two models — a Bag-of-Words MLP baseline and a custom Mini-Transformer — to predict positive or negative sentiment on IMDB movie reviews. Includes data loading with Hugging Face, model training, evaluation, optimization, and architecture comparison.',
       },
     ],
   };
