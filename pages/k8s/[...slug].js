@@ -36,9 +36,6 @@ export const getStaticProps = async ({ params, ...rest }) => {
 // https://nextjs.org/docs/pages/building-your-application/data-fetching/get-static-paths
 export const getStaticPaths = async (props) => {
   const k8sPaths = await k8sMdPaths();
-  console.log('k8sPaths');
-  console.log(k8sPaths);
-
   return {
     paths: k8sPaths,
     fallback: false,
