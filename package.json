@@ -31,7 +31,6 @@
     "@next/mdx": "^15.0.2",
     "@react-three/drei": "^9.105.6",
     "@react-three/fiber": "^8.16.6",
-    "@svgr/webpack": "^8.1.0",
     "@tailwindcss/typography": "^0.5.0",
     "@tensorflow-models/coco-ssd": "^2.2.3",
     "@tensorflow-models/face-detection": "^1.0.2",
@@ -47,9 +46,9 @@
     "gray-matter": "^4.0.2",
     "gsap": "^3.12.5",
     "mermaid": "^11.6.0",
-    "next": "15.0.3",
-    "next-mdx-remote": "^4.1.0",
-    "next-remote-watch": "1.0.0",
+    "next": "^16.1.0",
+    "next-mdx-remote": "^4.4.1",
+    "next-remote-watch": "^1.0.0",
     "next-sitemap": "^4.2.3",
     "playwright": "^1.50.0",
     "prismjs": "^1.29.0",
@@ -66,10 +65,12 @@
     "typescript": "^5.7.3"
   },
   "devDependencies": {
+    "@svgr/webpack": "^8.1.0",
     "eslint": "^9.20.0",
     "eslint-config-next": "^15.0.3",
     "eslint-config-prettier": "^8.3.0",
     "postcss": "^8.4.4",
+    "raw-loader": "^4.0.2",
     "tailwindcss": "^3.0.0"
   }
 }
