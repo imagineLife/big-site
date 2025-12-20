@@ -10,8 +10,8 @@ import GenericPost from './../components/GenericPost';
 // import coffeeImg from '/public/about/coffee.jpg';
 // import introvertImg from '/public/about/introvert.jpg';
 // import strengthsImg from '/public/about/strengths.jpg';
-import LinkedIn from '/public/about/linkedin.js';
-import Github from '/public/about/github.js';
+import LinkedIn from './../assets/linkedin.js';
+import Github from './../assets/github.js';
 
 const aboutContactLinks = [
   {

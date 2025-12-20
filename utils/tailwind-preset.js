@@ -31,7 +31,7 @@ const themesConfig = plugin(function ({ addComponents }) {
   addComponents(themeCompiled);
 });
 
-module.exports = {
+export default {
   theme: {
     extend: {
       backgroundImage: {

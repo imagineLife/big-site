@@ -10,11 +10,11 @@
     "url": "https://github.com/imagineLife/big-site/issues"
   },
   "scripts": {
-    "dev": "next",
     "nd": "next dev",
     "devFast": "next dev --turbo",
     "dev:watch": "next-remote-watch ./posts",
-    "build": "next build",
+    "dev": "next --webpack",
+    "build": "next build --webpack",
     "prebuild": "mkdir -p netlify/functions",
     "sg": "next-sitemap",
     "start": "next start",
