@@ -13,6 +13,7 @@ const svgLoader = {
 };
 
 const nextConfig = {
+  output: 'export',
   webpack: (
     config,
     { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack }
@@ -24,21 +25,7 @@ const nextConfig = {
     return config;
   },
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'www.svgrepo.com',
-        pathname: '/show/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 's3-us-west-2.amazonaws.com',
-        pathname: '/grainnet-com/**',
-      },
-    ],
-    dangerouslyAllowSVG: true,
-    contentDispositionType: 'attachment',
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    unoptimized: true, // required for static export if you use next/image
   },
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   staticPageGenerationTimeout: 120,

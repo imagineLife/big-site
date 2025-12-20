@@ -5,9 +5,6 @@ import getAiPaths, { PathObj } from '../../../hooks/useAiPaths';
 import GenericPost from '../../../components/GenericPost';
 
 export default function NotebookBySlug(props) {
-  console.log('props')
-  console.log(props)
-  
   const pathsArr = getAiPaths('projects');
   let thisPathObj = {} as PathObj;
 
