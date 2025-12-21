@@ -29,6 +29,8 @@ export default function AiPage() {
         <p>Try it out!</p>
         <p>Train a machine-learning model on your own face and head gestures. Using your webcam, train a machine-learning model to recognize when your head is tilted to the left & to the right.</p> */}
 
+        <p>Here are my applied AI and machine learning projects, focused on real datasets, model comparison, experimentation, and performance tradeoffs. These use tools like pytorch, tensorflow, scikit, and are written in jupyter notebook format.</p>
+
         <h2>Projects</h2>
         <Link href="/ai-ml/projects/handwritten-digit-recognition" className="no-underline hover:underline"><h3>MNIST Handwritten Digit Classifier</h3></Link>
         <p>A full end-to-end notebook demonstrating data preprocessing, model training, optimization tuning, and performance comparison between an MLP and CNN using the MNIST dataset.</p>
@@ -129,7 +131,7 @@ export default function AiPage() {
         <Link href="/ai-ml/intro-to-ml" className="no-underline hover:underline"><h3>Intro to Machine Learning</h3></Link>
         <p>Linear Regressions, Decision Trees, K-Means clustering, Ensemble learning (bagging & boosting), & building models.</p>
         
-        <h3>Intro to Neural Networks</h3>
+        {/* <h3>Intro to Neural Networks</h3>
         <p>What they are, & how to create & fine-tune them.</p>
 
         <h3>Natural Language Processing (NLP)</h3>
@@ -138,7 +140,7 @@ export default function AiPage() {
         <h3>Computer Vision</h3>
         <p>Processing images, using convolutional neural networks (CNNs).</p>
 
-        <h3>Deploying models to the world</h3>
+        <h3>Deploying models to the world</h3> */}
         
       </GenericPost>)
 }

@@ -347,7 +347,7 @@ export default function getAiPaths(rootDir: string): PathObj[] {
     projects: [
       {
         path: 'handwritten-digit-recognition',
-        title: 'MNIST Handwritten Digit Classification',
+        title: 'MNIST Handwritten Digit Classification: MLP vs CNN in PyTorch',
         tags: [
           'ai',
           'cnn',
@@ -393,7 +393,8 @@ export default function getAiPaths(rootDir: string): PathObj[] {
       },
       {
         path: 'breast-cancer-wisconsin',
-        title: 'Breast Cancer Classification (Wisconsin Dataset)',
+        title:
+          'Breast Cancer Wisconsin Classification with PyTorch | Machine Learning Project',
         tags: [
           'ai',
           'binary-classification',

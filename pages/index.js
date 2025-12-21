@@ -52,8 +52,23 @@ export default function Index({ globalData }) {
   return (
     <section className="px-[10%]">
       <Layout>
-        <Seo title={globalData.name} description={globalData.blogTitle} />
+        <Seo
+          title={
+            'Eric (Jake) Laursen | Senior Software Engineer • AI & Machine Learning Projects'
+          }
+          description={globalData.blogTitle}
+        />
         <Header name={globalData.name} />
+        <h1>
+          Senior Software Engineer specializing full stack web development,
+        </h1>
+        <ul>
+          <li>
+            * Full-stack web apps (TypeScript, React, Node.js, docker, k8s){' '}
+          </li>
+          <li>* Data visualization & exploratory analysis</li>
+          <li>* Applied machine learning with Python (PyTorch, TensorFlow)</li>
+        </ul>
         {/* 80px for nav, 20px for extra */}
         <section id="blog-summary" className="mt-[100px] text-left w-full">
           <h2>Work</h2>
