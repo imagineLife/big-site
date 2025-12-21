@@ -75,6 +75,49 @@ export default function AiPage() {
             ]}
           />
 
+          <Link
+            href="/ai-ml/projects/breast-cancer-wisconsin"
+            className="no-underline hover:underline"
+          >
+            <h3>Breast Cancer Classification (Wisconsin Dataset)</h3>
+          </Link>
+
+          <p>
+            An end-to-end tabular machine learning notebook using scikit-learn to classify
+            malignant vs benign tumors from diagnostic features. Covers data inspection,
+            stratified splitting, baseline modeling, model comparison, decision-threshold
+            tuning based on domain tradeoffs, probability calibration, and a final
+            held-out test evaluation.
+          </p>
+
+          <TagList
+            hideTitle
+            tags={[
+              "ai",
+              "binary classification",
+              "calibration",
+              "clinical ml",
+              "confusion matrix",
+              "cross validation",
+              "decision thresholds",
+              "evaluation",
+              "experiments",
+              "interpretability",
+              "logistic regression",
+              "machine learning",
+              "model comparison",
+              "notebook",
+              "precision recall",
+              "probability modeling",
+              "python",
+              "scikit learn",
+              "tabular data",
+              "threshold tuning",
+              "validation",
+            ]}
+          />
+
+
 {/* 
 
 */}

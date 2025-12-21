@@ -391,6 +391,35 @@ export default function getAiPaths(rootDir: string): PathObj[] {
         excerpt:
           'A complete end-to-end NLP project that builds and compares two models — a Bag-of-Words MLP baseline and a custom Mini-Transformer — to predict positive or negative sentiment on IMDB movie reviews. Includes data loading with Hugging Face, model training, evaluation, optimization, and architecture comparison.',
       },
+      {
+        path: 'breast-cancer-wisconsin',
+        title: 'Breast Cancer Classification (Wisconsin Dataset)',
+        tags: [
+          'ai',
+          'binary-classification',
+          'calibration',
+          'clinical-ml',
+          'confusion-matrix',
+          'cross-validation',
+          'decision-thresholds',
+          'evaluation',
+          'experiments',
+          'interpretability',
+          'logistic-regression',
+          'machinelearning',
+          'model-comparison',
+          'notebook',
+          'precision-recall',
+          'probability-modeling',
+          'python',
+          'scikit-learn',
+          'tabular-data',
+          'threshold-tuning',
+          'validation',
+        ],
+        excerpt:
+          'An end-to-end scikit-learn notebook exploring binary classification on the Breast Cancer Wisconsin dataset. Demonstrates disciplined train/validation/test evaluation, model comparison (Logistic Regression vs Gradient Boosting), threshold selection based on domain tradeoffs, probability calibration, and final test-set reporting with interpretability and error analysis.',
+      },
     ],
   };
   return pathsLookup[rootDir];
