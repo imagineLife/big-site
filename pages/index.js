@@ -60,7 +60,7 @@ export default function Index({ globalData }) {
         />
         <Header name={globalData.name} />
         <h1>
-          Senior Software Engineer specializing full stack web development,
+          Senior Software Engineer specializing full stack web development
         </h1>
         <ul>
           <li>
