@@ -1,15 +1,23 @@
 const fs = require('fs');
 const path = require('path');
 
-const POSTS_DIR = path.join(process.cwd(), 'markdown');
 const MARKDOWN_DIR = path.join(process.cwd(), 'markdown');
-const NOTEBOOKS_DIR = path.join(
-  process.cwd(),
-  'public',
-  'notebooks',
-  'ai-ml',
-  'projects'
-);
+const NOTEBOOKS_DIRS = [
+  path.join(
+    process.cwd(),
+    'public',
+    'notebooks',
+    'ai-ml',
+    'projects'
+  ),
+  path.join(
+    process.cwd(),
+    'public',
+    'notebooks',
+    'ai-ml',
+    'python-for-data-science'
+  ),
+];
 
 function getAllFilesWithExt(dir, ext, basePath = '') {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
@@ -114,21 +122,24 @@ module.exports = {
     /* -----------------------------
      * Jupyter notebooks
      * ----------------------------- */
-    const notebookFiles = getAllFilesWithExt(NOTEBOOKS_DIR, '.ipynb');
+    for (const notebooksDir of NOTEBOOKS_DIRS) {
+      const notebookFiles = getAllFilesWithExt(notebooksDir, '.ipynb');
+      const routeBase = path.basename(notebooksDir);
 
-    for (const { absPath, relPath } of notebookFiles) {
-      // relPath: "my-project.ipynb"
-      const slug = relPath.replace(/\.ipynb$/, '');
+      for (const { absPath, relPath } of notebookFiles) {
+        // relPath: "my-project.ipynb"
+        const slug = relPath.replace(/\.ipynb$/, '');
 
-      // maps to /ai-ml/projects/my-project
-      const urlPath = `/ai-ml/projects/${slug}`;
+        // maps to /ai-ml/<section>/<slug>
+        const urlPath = `/ai-ml/${routeBase}/${slug}`;
 
-      paths.push({
-        loc: urlPath,
-        lastmod: fs.statSync(absPath).mtime.toISOString(),
-        changefreq: 'yearly',
-        priority: 0.4,
-      });
+        paths.push({
+          loc: urlPath,
+          lastmod: fs.statSync(absPath).mtime.toISOString(),
+          changefreq: 'yearly',
+          priority: 0.4,
+        });
+      }
     }
 
     return paths;
