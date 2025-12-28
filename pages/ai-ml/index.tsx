@@ -119,6 +119,47 @@ export default function AiPage() {
             ]}
           />
 
+          <Link
+            href="/ai-ml/projects/urbansound8k-audio-classification"
+            className="no-underline hover:underline"
+          >
+            <h3>UrbanSound8K Environmental Sound Classification</h3>
+          </Link>
+
+          <p>
+            An end-to-end deep learning notebook using PyTorch to classify urban
+            environmental sounds from raw audio. Covers audio decoding and resampling,
+            log-mel spectrogram feature extraction, CNN baselines, controlled experiments
+            (baseline vs SpecAugment-lite), and detailed evaluation with confusion
+            matrices, class-pair analysis, confidence inspection, and spectrogram-based
+            error analysis.
+          </p>
+
+          <TagList
+            hideTitle
+            tags={[
+              "ai",
+              "audio",
+              "audio classification",
+              "cnn",
+              "deep learning",
+              "error analysis",
+              "experiments",
+              "feature extraction",
+              "log mel spectrogram",
+              "machine learning",
+              "model evaluation",
+              "notebook",
+              "pytorch",
+              "signal processing",
+              "specaugment",
+              "spectrogram",
+              "training loops",
+              "urban sound",
+            ]}
+          />
+
+
 
 {/* 
 

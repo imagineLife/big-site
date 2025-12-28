@@ -421,6 +421,35 @@ export default function getAiPaths(rootDir: string): PathObj[] {
         excerpt:
           'An end-to-end scikit-learn notebook exploring binary classification on the Breast Cancer Wisconsin dataset. Demonstrates disciplined train/validation/test evaluation, model comparison (Logistic Regression vs Gradient Boosting), threshold selection based on domain tradeoffs, probability calibration, and final test-set reporting with interpretability and error analysis.',
       },
+      {
+        path: 'urbansound8k-audio-classification',
+        title:
+          'UrbanSound8K Audio Classification with PyTorch | Deep Learning Project',
+        tags: [
+          'ai',
+          'audio',
+          'audio-classification',
+          'cnn',
+          'computer-vision-for-audio',
+          'confusion-matrix',
+          'deep-learning',
+          'error-analysis',
+          'experiments',
+          'feature-extraction',
+          'log-mel-spectrogram',
+          'machinelearning',
+          'model-evaluation',
+          'notebook',
+          'pytorch',
+          'signal-processing',
+          'specaugment',
+          'spectrogram',
+          'training-loops',
+          'urban-sound',
+        ],
+        excerpt:
+          'An end-to-end PyTorch notebook for multi-class environmental sound classification using the UrbanSound8K dataset. Covers audio decoding, resampling, log-mel spectrogram feature extraction, CNN training, controlled experimentation (baseline vs SpecAugment-lite), and detailed error analysis using confusion matrices, class-pair frequencies, confidence analysis, and spectrogram inspection.',
+      },
     ],
   };
   return pathsLookup[rootDir];
