@@ -79,3 +79,38 @@
           filter: blur(44px);
   z-index: -1;
 }
+
+
+// 
+// suggested mermaid styling
+// 
+/* Full-width diagram block */
+.mermaidBlock {
+  margin: 16px 0 24px;
+}
+
+/* Optional: full-bleed across the page (nice for diagrams) */
+.mermaidFullBleed {
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding: 0 16px;
+}
+
+/* Don’t shrink the SVG; allow scroll instead */
+.mermaidScroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 12px 0;
+}
+
+/* Make the diagram render crisp + not constrained */
+.mermaidScroll svg {
+  max-width: none !important;
+  height: auto !important;
+}
+
+/* Click affordance */
+// .mermaidClickable {
+//   cursor: zoom-in;
+// }

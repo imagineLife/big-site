@@ -61,6 +61,8 @@ const introFiles = {
 };
 
 async function getFileUsingNode(fileSlugString) {
+  console.log(`getFileUsingNode: ${fileSlugString}`);
+
   const splitPathArr = fileSlugString.split('/');
   let fullFilePath, fileContents;
 
@@ -83,6 +85,9 @@ async function getFileUsingNode(fileSlugString) {
     fullFilePath = join(mdDir, dir, fileNameWithoutSuffix, `intro.md`);
   }
 
+  console.log('fullFilePath');
+  console.log(fullFilePath);
+
   fileContents = await readFile(fullFilePath, 'utf8');
 
   return fileContents;
@@ -102,6 +107,9 @@ async function getNbUsingNode(fileSlugString) {
 }
 
 export async function getMdBySlugs(mdSlugString, nestedDirString) {
+  console.log(`getMdBySlugs`);
+  console.log(`mdSlugString: ${mdSlugString}`);
+
   const cacheString = nestedDirString
     ? `${mdSlugString}-${nestedDirString}`
     : mdSlugString;
@@ -169,8 +177,8 @@ function onlyNbFiles(s) {
 export async function mdPathsFromDirRoot(rootStr, includeNestedContent) {
   let rootContents = await readdir(join(mdDir, rootStr));
   rootContents = rootContents
-    .filter((s) => s.includes('.md'))
-    .map((s) => s.replace(/\.md$/, ''))
+    .filter((s) => /\.mdx?$/.test(s))
+    .map((s) => s.replace(/\.mdx?$/, ''))
     .map((s) => `/${rootStr}/${s}`);
 
   if (!includeNestedContent) {

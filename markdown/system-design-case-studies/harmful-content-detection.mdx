@@ -142,11 +142,27 @@ Use a **low-latency moderation gate** in front of publishing, powered by:
 
 ---
 
-### Diagram placeholder: V1 pre-publish architecture
+### Diagram
 
-> **Diagram (boxes and arrows):**  
-> Client → Post API → Moderation Gateway → (Rules) → (Fast Model) → (Heavy Model?) → Policy Engine → Decision → Post API (Publish/Reject)  
-> Side outputs: Audit Log → Data Lake → Training Pipeline → Model Registry → Deployment
+<Mermaid chart={`
+  %%{init: {"flowchart":{"nodeSpacing":55,"rankSpacing":75},"themeVariables":{"fontSize":"18px"}}}%%
+    flowchart TB;
+      U["User"] --> C["Client"];
+      C -->|POST /posts| PA["Post API"];
+
+      PA -->|sync moderation request| MG["Moderation Gateway"];
+      MG -->|decision: allow, block, edit| PA;
+
+      PA -->|Allow -> persist + publish| DB[("Posts DB (published)")];
+      PA -->|Block/Edit response| C;
+
+      MG --> AL[("Audit Log")];
+      MG --> MET[("Metrics / Traces")];
+`} zoom={false} />
+
+
+
+
 
 ---
 
