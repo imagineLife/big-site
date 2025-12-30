@@ -20,6 +20,8 @@ const mdBySlugCache = {};
 // directories in /public/<dir-here>
 export const mongo_path = join(pages_dir, 'mongo');
 export const notebooks_path = join(public_dir, 'notebooks');
+
+// markdow files
 export const mdDir = join(cwd, 'markdown');
 export const dockerMdPath = join(mdDir, 'docker');
 export const k8sMdPath = join(mdDir, 'k8s');
@@ -124,7 +126,7 @@ export async function getMdBySlugs(mdSlugString, nestedDirString) {
       // Fallback to .md
       fileToFind = `${cleanedBasePath}.md`;
       fileContents = await getFileUsingNode(fileToFind);
-    } catch {
+    } catch (e) {
       throw new Error(`No .mdx or .md file found for: ${cleanedBasePath}`);
     }
   }
@@ -401,23 +403,13 @@ export function getNodeSections() {
   return nodeSections;
 }
 
-let mdPathsObj = {
-  dockerMdPaths: [],
-  linuxMdPaths: [],
-  nginxMdPaths: [],
-  scrumMdPaths: [],
-  mlMdPaths: [],
-  k8sMdPaths: [],
-  theSocialWorldMdPaths: [],
-};
-
-const cachedMdPaths = {};
-
 export const dockerMdPaths = () => mdPathsFromDirRoot('docker');
 export const linuxMdPaths = () => mdPathsFromDirRoot('linux');
 export const nginxMdPaths = () => mdPathsFromDirRoot('nginx');
 export const scrumMdPaths = () => mdPathsFromDirRoot('scrum');
 export const mlMdPaths = () => mdPathsFromDirRoot('ml');
+export const mlSystemDesignMdPaths = () =>
+  mdPathsFromDirRoot('system-design-case-studies');
 export const k8sMdPaths = () => mdPathsFromDirRoot('k8s', true);
 export const theSocialWorldMdPaths = () =>
   mdPathsFromDirRoot('the-social-world', true);

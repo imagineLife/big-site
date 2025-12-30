@@ -3,13 +3,7 @@ const path = require('path');
 
 const MARKDOWN_DIR = path.join(process.cwd(), 'markdown');
 const NOTEBOOKS_DIRS = [
-  path.join(
-    process.cwd(),
-    'public',
-    'notebooks',
-    'ai-ml',
-    'projects'
-  ),
+  path.join(process.cwd(), 'public', 'notebooks', 'ai-ml', 'projects'),
   path.join(
     process.cwd(),
     'public',
@@ -35,58 +29,6 @@ function getAllFilesWithExt(dir, ext, basePath = '') {
   }
 
   return files;
-}
-
-function getAllMarkdownFiles(dir, basePath = '') {
-  const entries = fs.readdirSync(dir, { withFileTypes: true });
-  const files = [];
-
-  for (const entry of entries) {
-    const absPath = path.join(dir, entry.name);
-    const relPath = path.join(basePath, entry.name);
-
-    if (entry.isDirectory()) {
-      files.push(...getAllMarkdownFiles(absPath, relPath));
-      continue;
-    }
-
-    if (
-      entry.isFile() &&
-      (entry.name.endsWith('.md') || entry.name.endsWith('.mdx'))
-    ) {
-      files.push({ absPath, relPath });
-    }
-  }
-
-  return files;
-}
-
-function toUrlPath(relMarkdownPath) {
-  // "k8s/in-depth/commands.md" -> "k8s/in-depth/commands"
-  const withoutExt = relMarkdownPath.replace(/\.mdx?$/, '');
-
-  // IMPORTANT: normalize Windows backslashes just in case
-  const normalized = withoutExt.split(path.sep).join('/');
-
-  // Choose ONE of these depending on your site routes:
-  // If markdown maps directly to "/<dir>/<slug>":
-  return `/${normalized}`;
-
-  // If markdown maps to "/blog/<dir>/<slug>":
-  // return `/blog/${normalized}`;
-}
-
-function inferSitemapMeta(relPath) {
-  const depth = relPath.split(path.sep).length;
-
-  // Top-level content (e.g. docker.md)
-  if (depth === 1) {
-    return { changefreq: 'monthly', priority: 0.9 };
-  }
-
-  // Deeper docs (k8s/in-depth/...)
-  // return { changefreq: 'yearly', priority: 0.4 };
-  return { changefreq: 'yearly', priority: (1 / depth).toFixed(1) };
 }
 
 /** @type {import('next-sitemap').IConfig} */

@@ -1,0 +1,458 @@
+---
+title: Harmful Content Detection (Text-only, Pre-Publish Moderation)
+slug: ai-ml/system-design/harmful-content-detection
+shortSlug: harmful-content-detection
+author: Jake Laursen
+excerpt: A principal-level ML system design case study for pre-publish harmful content detection on a social platform, covering architecture, inference cascades, policy-driven enforcement, and monitoring.
+tags:
+  [
+    'ai',
+    'ml systems',
+    'system design',
+    'content moderation',
+    'trust and safety',
+    'text classification',
+    'multi label classification',
+    'policy engine',
+    'thresholding',
+    'calibration',
+    'model serving',
+    'low latency',
+    'monitoring',
+    'data drift',
+    'human in the loop',
+    'security',
+    'privacy',
+    'architecture',
+    'case study',
+  ]
+parentDir: ai-ml/system-design
+order: 1
+---
+
+> **Case study goal:** Design an end-to-end machine learning system that **blocks harmful posts before publishing**, using **low-latency inference**, a **policy-driven decision layer**, and **feedback loops** for continuous improvement.
+
+---
+
+## Table of contents
+
+- [At a glance](#toc-at-a-glance)
+- [Problem definition & requirements](#toc-problem-definition--requirements)
+- [High-level architecture](#toc-high-level-architecture)
+- [Data & feature design](#toc-data--feature-design)
+- [Modeling approach](#toc-modeling-approach)
+- [Training & evaluation](#toc-training--evaluation)
+- [Model serving & inference](#toc-model-serving--inference)
+- [Monitoring & feedback loops](#toc-monitoring--feedback-loops)
+- [Scalability, reliability & tradeoffs](#toc-scalability-reliability--tradeoffs)
+- [Security, privacy & ethics](#toc-security-privacy--ethics)
+- [V2 extension: images/video (architecture changes)](#toc-v2-extension-imagesvideo-architecture-changes)
+- [Summary](#toc-summary)
+- [Appendix: “What I’d say in an interview” (short callouts)](#toc-appendix-what-id-say-in-an-interview-short-callouts)
+
+---
+
+<a id="toc-at-a-glance"></a>
+
+## At a glance
+
+- **Problem:** Detect policy-violating content in user posts before they go live.
+- **Scope (V1):** **Text-only** moderation at publish time.
+- **Primary actions:** **Allow**, **Block**, **Request edit** (optional), **Log + audit**.
+- **Latency SLO (target):** **P95 ≤ 300ms** end-to-end decision for text posts.
+- **Key design choices:**
+  - **Policy engine decoupled from ML models** (thresholds/actions versioned and auditable)
+  - **Inference cascade** (rules → fast ML → heavy ML on uncertain cases)
+  - **Human-in-the-loop** for appeals + sampling + training labels (not synchronous gating in V1)
+
+---
+
+<a id="toc-problem-definition--requirements"></a>
+
+## Problem definition & requirements
+
+### Restate the problem
+
+We need a system that **intercepts post creation**, evaluates text for policy violations, and **prevents publishing** when content violates community guidelines.
+
+### Functional requirements
+
+- Score each new post against a **policy taxonomy** (e.g., harassment, hate, self-harm, sexual content, threats).
+- Return a **decision** before publish:
+  - **Allow** (safe)
+  - **Block** (clear violation)
+  - **Request edit** (borderline / “rewrite to comply”) _(optional UX path)_
+- Produce an **audit record** for every decision:
+  - post_id, user_id, timestamp
+  - policy_version, model_version
+  - decision, category scores, thresholds applied
+- Support **appeals** and **reversals** (with durable traceability).
+- Enable **labeling pipelines** from moderation + appeals outcomes.
+
+### Non-functional requirements
+
+- **Latency:** P95 ≤ 300ms for text-only decisioning (including feature fetches).
+- **Availability:** 99.9%+ for the gating path; degrade safely.
+- **Throughput:** handle burst traffic; scale horizontally.
+- **Consistency:** deterministic decisions given the same model/policy versions.
+- **Evolvability:** policy rules change frequently; changes must be deployable quickly.
+
+### Constraints & assumptions (explicit)
+
+- **Pre-publish enforcement** means we cannot rely on long-running inference in the hot path.
+- **Text-only V1**; multimedia comes later.
+- Policy outcomes must be **explainable at the policy level** (category + guideline reference), even if the model is complex.
+
+---
+
+<a id="toc-high-level-architecture"></a>
+
+## High-level architecture
+
+### Key idea
+
+Use a **low-latency moderation gate** in front of publishing, powered by:
+
+- a **fast rules layer** for high-precision patterns
+- an **ML cascade** for generalization and adversarial robustness
+- a **policy engine** that maps ML scores to actions
+
+### Online (pre-publish) path
+
+1. User submits post text to **Post API**
+2. Post API calls **Moderation Gateway** (synchronous)
+3. Moderation Gateway:
+   - normalizes text + detects language
+   - runs **Rules/Heuristics**
+   - runs **Fast ML model**
+   - conditionally runs **Heavy ML model** (only when needed)
+4. **Policy Engine** applies policy thresholds and returns decision
+5. Post API:
+   - **publishes** (Allow), or
+   - **rejects** (Block), or
+   - **returns edit request** (optional)
+6. Decision + scores are logged to **Audit Log**
+
+### Offline path (training + analytics)
+
+- Ingest audit logs, moderator labels, appeals outcomes into **Data Lake/Warehouse**
+- Run feature pipelines + training jobs
+- Register models + evaluation artifacts
+- Deploy via shadow → canary → rollout
+
+---
+
+### Diagram placeholder: V1 pre-publish architecture
+
+> **Diagram (boxes and arrows):**  
+> Client → Post API → Moderation Gateway → (Rules) → (Fast Model) → (Heavy Model?) → Policy Engine → Decision → Post API (Publish/Reject)  
+> Side outputs: Audit Log → Data Lake → Training Pipeline → Model Registry → Deployment
+
+---
+
+<a id="toc-data--feature-design"></a>
+
+## Data & feature design
+
+### Data sources (V1)
+
+- **Raw post text**
+- **Metadata**: language, locale/region, time, client type
+- **User/account signals** _(optional, carefully constrained)_:
+  - account age, prior enforcement counts, rate-limit signals
+
+> **Design choice:** In V1, I bias toward **content-first** modeling.  
+> User/account signals are useful for _triage and rate limiting_, but can create fairness issues if used too heavily in core content classification.
+
+### Feature extraction
+
+**Online (synchronous)**
+
+- Text normalization:
+  - unicode normalization, whitespace cleanup
+  - URL expansion (domain extraction)
+  - basic obfuscation handling (e.g., repeated punctuation, leetspeak patterns)
+- Language detection (fast)
+- Tokenization/encoding for ML model
+- Optional low-latency user features from an **online feature store**
+
+**Offline (asynchronous)**
+
+- Full text featurization for training
+- Hard-negative mining datasets
+- Drift analysis datasets
+
+### Feature storage
+
+- **Online feature store** (KV): small set of stable, low-latency user/account features
+- **Offline store**: parquet/warehouse tables for reproducible training
+
+---
+
+<a id="toc-modeling-approach"></a>
+
+## Modeling approach
+
+### V1 strategy: start simple, then earn complexity
+
+Pre-publish enforcement forces a pragmatic approach: the model must be **fast, stable, and calibratable**.
+
+### Baseline models (V1)
+
+1. **Rules/heuristics (high precision)**
+   - explicit banned phrases
+   - known slurs/threat patterns
+   - spam URL/domain rules
+2. **Fast text classifier**
+   - options:
+     - TF-IDF + logistic regression (fast, interpretable)
+     - small/distilled transformer (better generalization)
+3. **Heavy model (optional in V1, used sparingly)**
+   - a stronger transformer (still CPU-friendly or GPU-batched)
+   - only invoked for **uncertain** cases or **high-impact surfaces**
+
+### Output format
+
+- **Multi-label category probabilities** (e.g., hate, harassment, self-harm)
+- **Severity score** (optional) or severity derived via category thresholds
+
+### Why a cascade?
+
+- Most content is clearly safe → **fast pass**
+- A small slice is clearly harmful → **rules + fast model catch**
+- The ambiguous middle → **heavy model** (bounded by a budget)
+
+---
+
+### Diagram placeholder: inference cascade
+
+> **Diagram:**  
+> Input text → Rules (block?) → Fast model → (if uncertain/high-risk) Heavy model → Policy Engine thresholds → decision
+
+---
+
+<a id="toc-training--evaluation"></a>
+
+## Training & evaluation
+
+### Label sources
+
+- Moderator labels (highest quality)
+- Appeals outcomes (critical for reducing false positives)
+- User reports (noisy; used with debiasing and sampling strategies)
+
+### Data splits
+
+- **Time-based splits** to avoid leakage and simulate real production drift:
+  - Train: weeks 1–6, Validate: week 7, Test: week 8
+- Slice evaluations:
+  - language/locale
+  - short vs long posts
+  - obfuscation-heavy text (emoji, punctuation, leetspeak)
+
+### Metrics (decision-centric)
+
+Because we enforce via thresholds, model quality is not just “accuracy”:
+
+- **Precision/Recall** per category (especially for severe harms)
+- **PR-AUC** for imbalanced classes
+- **Calibration** (reliability/ECE), because thresholds assume meaningful probabilities
+- **Overturn / appeal rates** (operational quality signal)
+
+### Thresholding & policy mapping
+
+- Thresholds live in the **Policy Engine**, not inside model code.
+- Category thresholds differ by harm type:
+  - e.g., very low tolerance for credible threats; more nuance for sensitive-but-allowed content.
+- Maintain **policy_version** + **model_version** in every logged decision.
+
+---
+
+<a id="toc-model-serving--inference"></a>
+
+## Model serving & inference
+
+### Serving goals (V1)
+
+- Predictable low latency
+- Safe degradation
+- Versioned, auditable decisions
+
+### Serving components
+
+- **Moderation Gateway**: orchestrates normalization → cascade → policy decision
+- **Model Serving**:
+  - CPU-first for fast model
+  - heavy model behind a budget (CPU or GPU-batched)
+- **Policy Engine**:
+  - thresholds + actions
+  - region/locale variants
+  - explainable policy labels
+
+### Latency budget example (P95 target 300ms)
+
+- 20ms: text normalization + language detect
+- 40ms: rules + fast model inference
+- 40–150ms: heavy model (only for a small %)
+- 20ms: policy decision + logging (async logging when possible)
+
+### Caching (optional)
+
+- Cache scores for:
+  - exact duplicates (hash)
+  - near duplicates (optional later with embeddings)
+- Cache is versioned by **(model_version, policy_version)**.
+
+---
+
+<a id="toc-monitoring--feedback-loops"></a>
+
+## Monitoring & feedback loops
+
+### What to monitor (V1)
+
+**System health**
+
+- latency (P50/P95/P99) by stage
+- error rates, timeouts, fallbacks invoked
+- throughput and queue backpressure
+
+**Model health (proxy signals)**
+
+- score distribution drift (by category)
+- changes in “uncertainty rate” (heavy model invocation rate)
+- appeal success rate and moderator overturn rate
+- sampled audits of “allowed” posts to estimate false negatives
+
+### Retraining triggers
+
+- scheduled retrains (e.g., weekly)
+- drift thresholds exceeded
+- spike in false positives (appeals/overturns)
+- new policy category introduced
+
+### Human-in-the-loop (V1 posture)
+
+In V1, human moderation is **not synchronous** with publishing. Instead it supports:
+
+- appeals processing
+- QA sampling
+- generating high-quality labels for future improvements
+
+---
+
+### Diagram placeholder: feedback loop
+
+> **Diagram:**  
+> Decisions + logs → Data Lake → Labeling (moderators/appeals) → Training pipeline → Model registry → Deployment → back to serving
+
+---
+
+<a id="toc-scalability-reliability--tradeoffs"></a>
+
+## Scalability, reliability & tradeoffs
+
+### Scalability
+
+- Stateless Moderation Gateway → horizontal autoscaling
+- Use an event bus for:
+  - async logging
+  - offline training ingestion
+- Heavy model capacity planning:
+  - keep invocation rate bounded (e.g., ≤ 5% of posts)
+
+### Reliability & safe degradation
+
+Pre-publish means we must define “what happens if moderation fails?”
+
+- **Fail closed (safer):** block publishing if moderation is down
+  - best for safety-critical contexts, but hurts UX
+- **Fail open (riskier):** allow publishing if moderation is down
+  - unacceptable for many platforms/categories
+- **Pragmatic V1 recommendation:** _Fail “soft-closed”_:
+  - allow only for trusted users / low-risk surfaces, otherwise block
+  - show user a retry message for temporary outage
+  - rate limit suspicious bursts
+
+### Key tradeoffs
+
+- **Safety vs UX:** strict blocking reduces harm but increases false positives and user friction.
+- **Speed vs accuracy:** cascades improve both, but add system complexity.
+- **Policy flexibility vs simplicity:** decoupled policy engine is slightly more work up front, but pays off long-term.
+
+---
+
+<a id="toc-security-privacy--ethics"></a>
+
+## Security, privacy & ethics
+
+### Security
+
+- Rate-limit moderation endpoints to prevent probing.
+- Protect model internals; expose only policy-level outcomes externally.
+- RBAC for moderation tools and audit logs.
+
+### Privacy
+
+- Minimize stored raw text; prefer hashed identifiers + necessary excerpts for audit/appeals.
+- Encrypt at rest/in transit; retention policies by region.
+
+### Fairness & bias
+
+- Evaluate error rates by language/locale slices.
+- Avoid over-weighting user-history features in core classification without strong justification.
+- Appeals provide a corrective channel; overturned decisions feed retraining.
+
+---
+
+<a id="toc-v2-extension-imagesvideo-architecture-changes"></a>
+
+## V2 extension: images/video (architecture changes)
+
+V1 is synchronous text gating. Multimedia typically requires **hybrid moderation** because media inference is slower.
+
+### What changes in V2
+
+- Add an **Async Media Moderation Pipeline**:
+  - OCR (text-in-image), vision embeddings, keyframe sampling for video
+- Change enforcement model to:
+  - **Text pre-publish gate**
+  - **Media post-publish fast follow** (seconds-level), with rapid enforcement actions
+- Add **Fusion logic** in decision layer:
+  - combine text score + OCR score + vision score
+  - policy engine remains the same interface
+
+### Diagram placeholder: V1 vs V2
+
+> **Diagram:**  
+> V1: Post API → Text moderation (sync) → publish/reject  
+> V2: Post API → Text moderation (sync) → publish → Media pipeline (async) → enforcement update if needed
+
+---
+
+<a id="toc-summary"></a>
+
+## Summary
+
+This design delivers a practical, production-oriented harmful content detection system for **text-only, pre-publish enforcement**:
+
+- **Fast, scalable gating** with predictable latency
+- **Cascade inference** to balance accuracy and cost
+- **Policy engine separation** for fast policy iteration and auditability
+- **Monitoring + feedback loops** to improve over time
+- A clean path to **multimodal expansion** without rewriting the core decisioning layer
+
+---
+
+<a id="toc-appendix-what-id-say-in-an-interview-short-callouts"></a>
+
+## Appendix: “What I’d say in an interview” (short callouts)
+
+- **Why decouple policy from model?**  
+  Policies evolve weekly; retraining shouldn’t be required to adjust enforcement thresholds. Separation also improves auditability.
+
+- **How do you prevent unsafe behavior during outages?**  
+  Define explicit failover modes. For pre-publish, default to soft-closed behavior with graceful UX + trust-tier exceptions.
+
+- **How do you tune thresholds?**  
+  Use calibration + PR curves per category. Tune to minimize false negatives for severe harms, and use appeals/overturns to correct false positives.

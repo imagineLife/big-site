@@ -451,6 +451,39 @@ export default function getAiPaths(rootDir: string): PathObj[] {
           'An end-to-end PyTorch notebook for multi-class environmental sound classification using the UrbanSound8K dataset. Covers audio decoding, resampling, log-mel spectrogram feature extraction, CNN training, controlled experimentation (baseline vs SpecAugment-lite), and detailed error analysis using confusion matrices, class-pair frequencies, confidence analysis, and spectrogram inspection.',
       },
     ],
+    'system-design-case-studies': [
+      {
+        path: 'harmful-content-detection',
+        title:
+          'Harmful Content Detection: Pre-Publish Text Moderation System Design',
+        tags: [
+          'ai',
+          'ml',
+          'machinelearning',
+          'system design',
+          'ml systems',
+          'content moderation',
+          'trust and safety',
+          'text classification',
+          'multi label classification',
+          'policy engine',
+          'thresholding',
+          'calibration',
+          'model serving',
+          'low latency',
+          'monitoring',
+          'data drift',
+          'human in the loop',
+          'security',
+          'privacy',
+          'architecture',
+          'case study',
+          'portfolio',
+        ],
+        excerpt:
+          'A principal-level ML system design case study for pre-publish harmful content detection on a social platform. Covers requirements, policy taxonomy, a rules-to-ML inference cascade, threshold-driven enforcement, model versioning, monitoring and drift detection, and feedback loops for continuous improvement—with extensibility notes for future image/video moderation.',
+      },
+    ],
   };
   return pathsLookup[rootDir];
 }

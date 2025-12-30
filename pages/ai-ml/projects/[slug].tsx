@@ -65,6 +65,8 @@ export const getStaticPaths = () => {
   const pathsArr = getAiPaths('projects');
   const rootPath = '/ai-ml/projects'
   const paths = [...pathsArr].map(d => d.path)
+  console.log('paths')
+  console.log(paths)
   
   return {
     paths: paths.map(p => `${rootPath}/${p}`),
