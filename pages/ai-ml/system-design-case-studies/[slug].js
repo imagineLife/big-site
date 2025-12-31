@@ -18,8 +18,6 @@ export default function AiMlSystemDesignBySlug({
     ...frontMatter,
   };
 
-  console.log(`...hmmm....`);
-
   return (
     <GenericPost {...props}>
       <div dangerouslySetInnerHTML={{ __html: source }} />
@@ -44,9 +42,6 @@ export const getStaticProps = async ({ params }) => {
 // https://nextjs.org/docs/pages/building-your-application/data-fetching/get-static-paths
 export const getStaticPaths = async (props) => {
   const slugPaths = await mlSystemDesignMdPaths();
-  console.log('slugPaths');
-  console.log(slugPaths);
-
   const withPrefix = slugPaths.map((p) => `/ai-ml${p}`);
 
   return {

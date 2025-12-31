@@ -1,0 +1,360 @@
+---
+title: Drift Detection Notebook (PSI, JS Divergence, KS + Score Drift)
+slug: ai-ml/projects/drift-monitoring-for-moderation-models
+shortSlug: drift-monitoring-for-moderation-models
+author: Jake Laursen
+excerpt: A hands-on notebook demo of production drift detection using synthetic and small real datasets, implementing PSI, JS divergence, KS tests, score-quantile drift by category, slicing, and alert tiering with persistence.
+tags:
+  [
+    'ai',
+    'machine learning',
+    'mlops',
+    'monitoring',
+    'observability',
+    'drift monitoring',
+    'data drift',
+    'score drift',
+    'thresholding',
+    'alerting',
+    'slicing',
+    'python',
+    'pandas',
+    'numpy',
+    'scipy',
+    'matplotlib',
+    'notebook',
+    'experiments',
+    'trust and safety',
+    'content moderation',
+  ]
+parentDir: ai-ml/projects
+order: 99
+---
+
+## Table of contents
+- [What drift is](#what-drift-is)
+- [Why drift matters in production](#why-drift-matters-in-production)
+- [Monitoring strategy](#monitoring-strategy)
+- [Metrics](#metrics)
+- [Thresholding strategy](#thresholding-strategy)
+- [Triage runbook](#triage-runbook)
+- [How to trigger actions](#how-to-trigger-actions)
+- [Limitations and future improvements](#limitations-and-future-improvements)
+
+---
+
+## What drift is
+
+In production ML, **drift** is any persistent change in the data or system behavior that makes your model’s past assumptions less true today.
+
+### Types of drift you actually see
+
+- **Data drift (input drift)**  
+  The distribution of inputs changes. Example: more non-English text, different message lengths, more URLs, new slang.
+
+- **Label drift (target drift)**  
+  The base rate of the label changes. Example: the fraction of truly violating content increases due to an event, even if the input features “look normal.”
+
+- **Concept drift**  
+  The relationship between inputs and the label changes. Example: a new euphemism appears, so “benign-looking” text is now harmful. This is the hardest drift: you often need **human labels** to confirm it.
+
+- **Pipeline drift (system drift)**  
+  Something upstream changes and silently shifts behavior. Example: language detector updated, tokenization changed, new preprocessing bug, routing changed by region.
+
+A key operational stance: **drift is not always bad**. Sometimes it reflects real-world changes your system should adapt to. The goal is to detect *meaningful* changes and respond appropriately.
+
+<Mermaid chart={`flowchart TB;
+  A[Traffic] --> B[Ingest];
+  B --> C[Features];
+  C --> D[Model];
+  D --> E[Scores];
+  E --> F[Decision];
+  F --> G[Outcomes];
+  C --> H[Input Drift];
+  E --> I[Score Drift];
+  F --> J[Decision Drift];
+  G --> K[Human Signal];
+  H --> L[Alert];
+  I --> L;
+  J --> L;
+  K --> L;
+`} />
+
+---
+
+## Why drift matters in production
+
+Drift matters because production ML systems are rarely judged on “offline accuracy.” They are judged on **harm**, **cost**, and **reliability**.
+
+### In moderation and safety systems, drift can mean:
+- **False negatives increase**: harmful content slips through.
+- **False positives increase**: legitimate users get blocked, appeal volume rises, trust drops.
+- **Capacity pressure**: human review queues spike.
+- **Policy risk**: decision behavior changes without an intentional policy update.
+
+In practice, drift monitoring is a **stability and safety layer**:
+- It’s a guardrail against silent degradation.
+- It’s an early warning that your world changed.
+- It helps you decide whether the right response is: investigate, recalibrate thresholds, retrain, or rollback.
+
+---
+
+## Monitoring strategy
+
+A practical production strategy monitors multiple signals because no single metric reliably catches all failure modes.
+
+### 1) Input drift
+Track changes in the input distributions:
+- Numeric: text length, URL count, emoji rate, punctuation rate, token counts
+- Categorical: language, region, surface, device class, content type
+- Embeddings (optional later): representation drift (more expensive, more powerful)
+
+### 2) Score drift
+Track changes in model score distributions:
+- Overall score distribution drift
+- Per-category score drift (e.g., hate, harassment, self-harm)
+- Tail rates above decision thresholds (_not covered here_) (e.g., score > 0.9)
+- “Uncertainty rate” (_not covered here_) (scores near 0.5 can indicate boundary shifts or ambiguity)
+
+### 3) Decision drift
+Track changes in operational decisions:
+- Allow rate, block rate, escalate rate
+- Decision changes by slice (language, region, surface)
+- Rate limiting / fallback behavior can create decision drift even when scores are stable
+
+### 4) Human-signal drift
+Track signals from humans and downstream systems:
+- Appeal rate, overturn rate, reviewer disagreement
+- Time-to-resolution, backlog growth
+- “Policy exceptions” increasing
+
+The idea: drift alerts should be interpretable. If an alert fires, you want to quickly answer:
+- What changed?
+- Where did it change?
+- Does it increase harm or cost?
+- What should we do next?
+
+<Mermaid chart={`flowchart TB;
+  A[Baseline Window] --> B[Compute Metrics];
+  C[Current Window] --> B;
+  B --> D[Slices];
+  D --> E[Thresholds];
+  E --> F[Warn];
+  E --> G[Alert];
+  G --> H[Triage];
+  H --> I[Action];
+`} />
+
+---
+
+## Metrics
+
+No metric is perfect. In practice you use a small set that is:
+- cheap to compute
+- stable enough under sampling noise
+- interpretable for on-call debugging
+
+### PSI (Population Stability Index) for binned numeric features
+PSI compares how a numeric feature’s binned distribution changes between a baseline and current window.   
+It grows as probability mass shifts across bins, making it a simple, interpretable “how different is this feature now?” signal.
+
+- Good for: numeric features where bins are meaningful (or quantile bins)
+- Intuition: compares baseline vs current bin proportions; grows when mass shifts
+
+PSI is commonly interpreted with rough heuristics:
+- < 0.1: small change
+- 0.1–0.25: moderate
+- > 0.25: large  
+(These are not universal truths; you tune them for your system.)
+
+### JS divergence for categorical distributions
+JS divergence (_Jensen–Shannon Divergence_) measures how different two probability distributions are (commonly categorical like language/region), in a symmetric and bounded way.
+
+- Good for: language distribution drift, region drift, surface drift
+- Symmetric and bounded (more stable than KL in practice)
+
+### KS test for numeric features
+KS test (_Kolmogorov–Smirnov two-sample test_) Quantifies the maximum distance between two empirical CDFs for a numeric feature, detecting distribution changes without choosing bins. In production, treat the KS statistic as the drift magnitude and use persistence over p-values for alerting.
+
+- Good for: detecting distribution changes without choosing bins
+- Outputs a statistic and a p-value, but in production you usually care more about:
+  - effect size (the KS statistic)
+  - stability across windows (p-values can be misleading at scale)
+
+### Score-quantile distribution drift (per category)
+Score distribution drift tracks how key score percentiles (p50/p90/p95) move over time within each class/category slice.  
+This is often more actionable than input drift because it directly reflects changes that can shift decisions and queue load.  
+For moderation-style systems, score drift is often more actionable than raw input drift.
+
+Track per category (and per slice when possible):
+- quantile shifts (p50, p90, p95)
+- tail rate above threshold (e.g., P(score > 0.9))
+- uncertainty rate (e.g., P(0.45 \<\= score \<\= 0.55))
+
+Why these matter:
+- quantiles tell you **where** the distribution moved
+- tail rates tell you whether **decisions** will likely change
+- uncertainty rate can spike when the model sees unfamiliar inputs or boundary shifts
+
+---
+
+## Thresholding strategy
+
+Thresholds are where “drift monitoring” becomes “operational monitoring.”
+
+### Baselines
+Baselines should reflect:
+- recent reality (e.g., last 14–28 days)
+- stable periods (avoid known incidents if you want “normal”)
+- the same slicing keys you monitor (language/region/surface)
+
+### Percentile-based thresholds (pragmatic default)
+Instead of hardcoding “PSI > 0.2 means alert,” a robust approach is:
+- compute metric values for historical windows vs baseline
+- set warn/alert thresholds as percentiles of observed variability
+
+Example:
+- warn if metric exceeds p95 of historical values
+- alert if metric exceeds p99 of historical values
+
+### Persistence windows (reduce noise)
+A single noisy window should rarely page someone.
+Use persistence rules like:
+- alert only if condition holds for 3 consecutive windows
+- warn if 2 out of last 3 windows exceed warn threshold
+
+### Severity tiers
+A typical tiering:
+- **Info**: drift detected, log and track
+- **Warn**: investigate during business hours
+- **Alert**: trigger on-call triage
+
+<Mermaid chart={`flowchart TB;
+  A[Metric Value] --> B{Above Warn};
+  B -->|No| C[Ok];
+  B -->|Yes| D{Above Alert};
+  D -->|No| E[Warn];
+  D -->|Yes| F[Alert];
+  F --> G{Persistent};
+  G -->|No| E;
+  G -->|Yes| H[Page];
+`} />
+
+---
+
+## Triage runbook
+
+When a drift alert fires, the goal is not “prove drift exists.”
+The goal is to **identify the cause, scope, and risk** quickly.
+
+### Step 0: Sanity check the monitoring job
+- Did the pipeline run on time?
+- Is sample size reasonable?
+- Did upstream schemas change?
+- Did the baseline window update correctly?
+
+### Step 1: Identify which signal fired
+- Input drift only?
+- Score drift only?
+- Decision drift?
+- Human-signal drift?
+
+This matters because:
+- input drift without score drift may be benign
+- score drift without input drift can indicate pipeline changes or calibration issues
+- decision drift can indicate threshold changes or routing changes
+
+### Step 2: Localize the drift with slicing
+Slice by:
+- language
+- region
+- surface (web, app)
+- content category
+- traffic source
+Look for “one slice blew up” vs “everything moved.”
+
+### Step 3: Inspect top contributing features
+For numeric features with PSI/KS:
+- overlay histograms: baseline vs current
+- check whether the shift is in the tail or the center
+
+For categorical JS drift:
+- list top categories by absolute delta
+- check for new categories or missing ones
+
+### Step 4: Connect drift to decisions
+For moderation:
+- did tail rate above threshold increase?
+- did block rate increase?
+- did escalation rate increase?
+If score drift does not affect decisions, it may not require urgent action.
+
+### Step 5: Check pipeline and product changes
+Common causes:
+- language detector update
+- text normalization change
+- new UI entry point changes message style
+- region routing changes
+- sampling changes
+
+### Step 6: Decide the response
+Use the action ladder below.
+
+---
+
+## How to trigger actions
+
+You don’t want drift monitoring to be a “retrain machine.”
+You want it to be a **decision support system**.
+
+### Investigate (default)
+Trigger when:
+- drift is localized to a slice
+- decision rates are stable
+- human signals are stable
+
+Actions:
+- open an incident ticket
+- sample examples from drifting slices
+- verify pipeline versions
+- check if a known event explains the change
+
+### Rollback or mitigate
+Trigger when:
+- score drift + decision drift causes harm or cost spikes
+- pipeline drift is suspected (recent deploy correlated with drift)
+
+Actions:
+- rollback the last pipeline/model change
+- enable fallback or conservative thresholds temporarily
+- tighten human review sampling for the drifting slices
+
+### Retrain or recalibrate
+Trigger when:
+- drift persists
+- human signals worsen (appeals, overrides)
+- offline evaluation on newly labeled data confirms degradation
+
+Actions:
+- collect labels for drifting segments
+- retrain with refreshed data
+- recalibrate thresholds per slice if appropriate
+- validate fairness and policy consistency
+
+---
+
+## Limitations and future improvements
+
+### Limitations of this approach
+- Input drift does not guarantee performance drift.
+- Concept drift typically requires fresh labels or reliable human signals.
+- Multiple testing across many slices can create false alarms if you don’t control alerting.
+- Thresholds tuned on one period can be brittle during seasonal events or launches.
+
+### What I would add at scale
+- streaming sketches (approx quantiles, count-min) for real-time metrics
+- embedding drift for semantic shifts
+- active learning hooks to prioritize labeling of drifting segments
+- automated correlation with deploys and feature flags
+- per-slice calibration monitoring (ECE, Brier)
+- richer incident automation (links to dashboards, sampled examples, pipeline diffs)

@@ -240,10 +240,26 @@ Pre-publish enforcement forces a pragmatic approach: the model must be **fast, s
 
 ---
 
-### Diagram placeholder: inference cascade
+### Diagram 
+<Mermaid chart={`
+  %%{init: {"flowchart":{"nodeSpacing":55,"rankSpacing":70},"themeVariables":{"fontSize":"18px"}}}%%
+    flowchart TB;
+      T["Incoming text"] --> N["Normalize + Lang Detect"];
+      N --> R["Rules / Heuristics"];
 
-> **Diagram:**  
-> Input text → Rules (block?) → Fast model → (if uncertain/high-risk) Heavy model → Policy Engine thresholds → decision
+      R -->|match| OUTB["Block"];
+      R -->|no match| FM["Fast Model"];
+
+      FM --> D{"Thresholds"};
+      D -->|p < allow| OUTA["Allow"];
+      D -->|p > block| OUTB;
+      D -->|borderline| HM["Heavy Model (budgeted)"];
+
+      HM --> D2{"Thresholds"};
+      D2 -->|p < allow| OUTA;
+      D2 -->|p > block| OUTB;
+      D2 -->|still borderline| OUTE["Request edit (optional)"];
+`} />
 
 ---
 
@@ -357,10 +373,27 @@ In V1, human moderation is **not synchronous** with publishing. Instead it suppo
 
 ---
 
-### Diagram placeholder: feedback loop
+### Diagram: feedback loop
 
-> **Diagram:**  
-> Decisions + logs → Data Lake → Labeling (moderators/appeals) → Training pipeline → Model registry → Deployment → back to serving
+<Mermaid chart={`
+  %%{init: {"flowchart":{"nodeSpacing":55,"rankSpacing":70},"themeVariables":{"fontSize":"18px"}}}%%
+    flowchart TB;
+      AL[("Audit Logs")] --> DL[("Data Lake / Warehouse")];
+      REP["User Reports"] --> DL;
+      MOD["Moderator Labels"] --> DL;
+      APP["Appeals Outcomes"] --> DL;
+
+      DL --> FE["Feature Pipeline"];
+      FE --> TR["Training Jobs"];
+      TR --> EV["Eval + Calibration + Slice Checks"];
+
+      EV -->|pass| MR["Model Registry"];
+      MR --> DEP["Deploy: Shadow then Canary then Rollout"];
+      DEP --> MG["Moderation Gateway"];
+
+      MG --> AL;
+`} />
+
 
 ---
 
@@ -438,11 +471,59 @@ V1 is synchronous text gating. Multimedia typically requires **hybrid moderation
   - combine text score + OCR score + vision score
   - policy engine remains the same interface
 
-### Diagram placeholder: V1 vs V2
+### Diagram: V1 vs V2
 
-> **Diagram:**  
-> V1: Post API → Text moderation (sync) → publish/reject  
-> V2: Post API → Text moderation (sync) → publish → Media pipeline (async) → enforcement update if needed
+<Mermaid chart={`
+  %%{init: {"flowchart":{"nodeSpacing":55,"rankSpacing":70},"themeVariables":{"fontSize":"18px"}}}%%
+    flowchart TB;
+      C["Client"] --> PA["Post API"];
+      PA -->|sync| TM["Text Moderation Gate"];
+      TM -->|Allow| DB[("Posts DB (published)")];
+      TM -->|Block| C;
+
+      PA -->|async event| BUS[("Event Bus")];
+      BUS --> MP["Media Pipeline"];
+      MP --> OCR["OCR"];
+      MP --> VIS["Vision Model"];
+      MP --> ASR["ASR (optional)"];
+
+      OCR --> FUSE["Fusion + Policy Engine"];
+      VIS --> FUSE;
+      ASR --> FUSE;
+
+      FUSE -->|violation| ENF["Enforcement Update"];
+      ENF --> DB;
+
+      FUSE --> AL[("Audit Log")];
+`} />
+
+
+### Diagram: V2
+<Mermaid chart={`
+  %%{init: {"flowchart":{"nodeSpacing":55,"rankSpacing":70},"themeVariables":{"fontSize":"18px"}}}%%
+    flowchart TB;
+      C["Client"] --> PA["Post API"];
+      PA -->|sync| TM["Text Moderation Gate"];
+      TM -->|Allow| DB[("Posts DB (published)")];
+      TM -->|Block| C;
+
+      PA -->|async event| BUS[("Event Bus")];
+      BUS --> MP["Media Pipeline"];
+      MP --> OCR["OCR"];
+      MP --> VIS["Vision Model"];
+      MP --> ASR["ASR (optional)"];
+
+      OCR --> FUSE["Fusion + Policy Engine"];
+      VIS --> FUSE;
+      ASR --> FUSE;
+
+      FUSE -->|Violation| ENF["Enforcement Update"];
+      ENF --> DB;
+
+      FUSE --> AL[("Audit Log")];
+`} />
+
+
 
 ---
 
