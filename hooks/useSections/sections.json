@@ -52,5 +52,11 @@
     "snippet": "On Personality, Our Natural Talents, On Conflict, Decision Making...",
     "to": "/the-social-world",
     "image": "personality.jpg"
+  },
+  {
+    "title": "Salsa Dancing",
+    "snippet": "A History of the music behind Salsa Dancing",
+    "to": "/salsa-history",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/9/94/Salsa_en_Cali.jpg"
   }
 ]

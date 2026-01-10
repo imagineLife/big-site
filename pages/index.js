@@ -16,7 +16,7 @@ function BlogSectionCard({ title, snippet, to, image }) {
           <h4 className="text-xl mb-3 font-semibold">{title}</h4>
           <div className="w-full text-center">
             <Image
-              src={`/${image}`}
+              src={image.includes('http') ? image : `/${image}`}
               className="emx-auto"
               width={50}
               height={50}
@@ -60,7 +60,7 @@ export default function Index({ globalData }) {
         />
         <Header name={globalData.name} />
         <h1>
-          Senior Software Engineer specializing full stack web development
+          Senior Software Engineer specializing in full stack web development
         </h1>
         <ul>
           <li>
