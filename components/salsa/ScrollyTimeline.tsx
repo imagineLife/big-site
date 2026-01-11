@@ -4,8 +4,8 @@ import * as React from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { chapters } from "@/data/timeline";
-import { Active, Item } from "types/repo";
-import SectionHeader from "@/components/SectionHeader";
+import { Active, Item } from "./../../types/repo";
+import SectionHeader from "@/components/salsa/SectionHeader";
 import StepCard from "./StepCard";
 
 

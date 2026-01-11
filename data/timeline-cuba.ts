@@ -1,14 +1,36 @@
 import type { TimelineChapter } from './../types/repo';
 
 type SpotifyEmbed =
-  | { kind: 'artist'; label: string; url: string }
-  | { kind: 'playlist'; label: string; url: string }
-  | { kind: 'album'; label: string; url: string };
+  | {
+      kind: 'artist';
+      label: string;
+      url: string;
+      embedUrl?: string;
+      note?: string;
+      title?: string;
+    }
+  | {
+      kind: 'playlist';
+      label: string;
+      url: string;
+      embedUrl?: string;
+      note?: string;
+      title?: string;
+    }
+  | {
+      kind: 'album';
+      label: string;
+      url: string;
+      embedUrl?: string;
+      note?: string;
+      title?: string;
+    };
 
 type MusicianRef = {
   name: string;
   role: string;
   why: string;
+  hide?: boolean;
   spotifyEmbeds?: SpotifyEmbed[];
 };
 

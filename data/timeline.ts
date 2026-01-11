@@ -6,8 +6,8 @@ import { globalChapter } from './timeline-global';
 export const chapters: TimelineChapter[] = [
   rootsChapter,
   cubaChapter,
-  nyChapter,
-  globalChapter,
+  nyChapter as TimelineChapter,
+  globalChapter as TimelineChapter,
 
   {
     id: 'modern',

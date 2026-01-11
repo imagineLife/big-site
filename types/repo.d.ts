@@ -24,6 +24,7 @@ export type TimelineMusician = {
   role?: string; // instrument/role
   why?: string; // 1–2 lines: why this musician matters *for this step*
   spotifyEmbeds?: SpotifyEmbed[]; // optional: per-musician embed suggestions
+  url?: string;
 };
 
 export type TimelineStep = {
@@ -51,7 +52,7 @@ export type TimelineStep = {
 export type TimelineChapter = {
   id: string;
   label: string;
-  description: string;
+  description?: string;
   steps: TimelineStep[];
 };
 

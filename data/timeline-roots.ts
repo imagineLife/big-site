@@ -1,4 +1,4 @@
-import type { TimelineChapter } from 'types/repo';
+import type { TimelineChapter } from './../types/repo';
 
 export const rootsChapter: TimelineChapter = {
   id: 'roots',
