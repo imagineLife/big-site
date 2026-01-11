@@ -1,5 +1,4 @@
-// timeline-cuba.ts
-import type { TimelineChapter } from './repo'; // <-- adjust path/name to your actual type export
+import type { TimelineChapter } from './../types/repo';
 
 type SpotifyEmbed =
   | { kind: 'artist'; label: string; url: string }
@@ -57,13 +56,15 @@ export const cubaChapter: TimelineChapter = {
             {
               kind: 'artist',
               title: 'Ignacio Piñeiro y su Septeto Nacional (Spotify)',
-              embedUrl: 'https://open.spotify.com/embed/artist/6CAcYA0u2XRkxOOibwrM6w',
+              embedUrl:
+                'https://open.spotify.com/embed/artist/6CAcYA0u2XRkxOOibwrM6w',
               note: 'Best “canonical” Spotify entry point for Piñeiro’s son catalog + Septeto-era recordings.',
             },
             {
               kind: 'playlist',
               title: 'The Sound of Música Tradicional Cubana (Spotify)',
-              embedUrl: 'https://open.spotify.com/embed/playlist/5elKpfFPejpmof8qyNkpRw',
+              embedUrl:
+                'https://open.spotify.com/embed/playlist/5elKpfFPejpmof8qyNkpRw',
               note: "A reliable 'son/trova roots' playlist that tends to embed consistently.",
             },
           ],
@@ -78,7 +79,8 @@ export const cubaChapter: TimelineChapter = {
               kind: 'album',
               title: 'Puro Ritmo Cubano (Spotify)',
               openUrl: 'https://open.spotify.com/album/5v1o4L2gtkk98y1lUiMWSZ',
-              embedUrl: 'https://open.spotify.com/embed/album/5v1o4L2gtkk98y1lUiMWSZ',
+              embedUrl:
+                'https://open.spotify.com/embed/album/5v1o4L2gtkk98y1lUiMWSZ',
               note: 'Compact “era sound” snapshot: early son ensemble feel and pacing.',
             },
           ],
@@ -92,30 +94,10 @@ export const cubaChapter: TimelineChapter = {
               kind: 'album',
               title: 'Sones de Mi Habana (Spotify)',
               openUrl: 'https://open.spotify.com/album/51OWw4m3vNisHiuomSOPRH',
-              embedUrl: 'https://open.spotify.com/embed/album/51OWw4m3vNisHiuomSOPRH',
+              embedUrl:
+                'https://open.spotify.com/embed/album/51OWw4m3vNisHiuomSOPRH',
               note: '“Son blueprint” listening: septet format, coro/response structure, classic repertoire feel.',
             },
-          ],
-        },
-        {
-          name: 'Arsenio Rodríguez',
-          role: 'tresero / innovator',
-          why: 'Explodes the son montuno vocabulary and expands ensemble power (the ‘conjunto’ feel).',
-          spotifyEmbeds: [
-            {
-              kind: 'track',
-              title: 'Hay Fuego en el 23 (Spotify)',
-              openUrl: 'https://open.spotify.com/track/6ESQXFEga0YQZt876YkzAb',
-              embedUrl: 'https://open.spotify.com/embed/track/6ESQXFEga0YQZt876YkzAb',
-              note: 'Single-track “conjunto power” anchor: montuno drive + rhythmic push.',
-            },
-            // {
-            //   kind: 'album',
-            //   title: 'En Nueva York 1953 (Spotify)',
-            //   openUrl: 'https://open.spotify.com/album/44L52fi9JtiuKSBg3EhsW9',
-            //   embedUrl: 'https://open.spotify.com/embed/album/44L52fi9JtiuKSBg3EhsW9',
-            //   note: 'Bigger ensemble energy + montuno drive; great for “conjunto era” listening.',
-            // },
           ],
         },
       ],
@@ -131,7 +113,8 @@ export const cubaChapter: TimelineChapter = {
       bgCredit: {
         label: 'Conjunto de Arsenio Rodríguez (son montuno / conjunto era)',
         sourceName: 'Wikimedia Commons',
-        sourceUrl: 'https://commons.wikimedia.org/wiki/File:Conjunto_de_Arsenio_Rodr%C3%ADguez.JPG',
+        sourceUrl:
+          'https://commons.wikimedia.org/wiki/File:Conjunto_de_Arsenio_Rodr%C3%ADguez.JPG',
       },
       accent: 'cuba',
     },
@@ -161,29 +144,36 @@ export const cubaChapter: TimelineChapter = {
       ],
       keyMusicians: [
         {
+          hide: true,
           name: 'Arsenio Rodríguez',
           role: 'tresero / composer / bandleader',
           why: 'Catalyst for son montuno’s ensemble power and rhythmic density.',
           spotifyEmbeds: [
             {
               kind: 'artist',
-              label: 'Spotify artist',
-              url: 'https://open.spotify.com/artist/2qOYrGvR0d3KMfYQvE4lFX',
+              embedUrl:
+                'https://open.spotify.com/artist/2hN2DVx3lbISa1k2EuA9ug',
+              note: 'Artist page embed (catalog + top tracks).',
             },
             {
               kind: 'playlist',
-              label: 'This Is Arsenio Rodríguez',
-              url: 'https://open.spotify.com/playlist/37i9dQZF1DZ06evO1a9dHS',
+              embedUrl:
+                'https://open.spotify.com/embed/playlist/37i9dQZF1DZ06evO1iQc90',
             },
           ],
         },
       ] as MusicianRef[],
-      relatedStyles: ['son montuno', 'conjunto', 'guaguancó feel (in phrasing)'],
+      relatedStyles: [
+        'son montuno',
+        'conjunto',
+        'guaguancó feel (in phrasing)',
+      ],
       bg: 'https://commons.wikimedia.org/wiki/Special:FilePath/Conjunto%20de%20Arsenio%20Rodr%C3%ADguez.JPG?width=2400',
       bgCredit: {
         label: 'Conjunto de Arsenio Rodríguez',
         sourceName: 'Wikimedia Commons',
-        sourceUrl: 'https://commons.wikimedia.org/wiki/File:Conjunto_de_Arsenio_Rodr%C3%ADguez.JPG',
+        sourceUrl:
+          'https://commons.wikimedia.org/wiki/File:Conjunto_de_Arsenio_Rodr%C3%ADguez.JPG',
       },
       accent: 'cuba',
     },
@@ -192,7 +182,8 @@ export const cubaChapter: TimelineChapter = {
     {
       id: 'cuba-m-pineiro',
       dateLabel: '1920s–1930s (spotlight)',
-      title: 'Musician spotlight: Ignacio Piñeiro (son’s songcraft + septeto canon)',
+      title:
+        'Musician spotlight: Ignacio Piñeiro (son’s songcraft + septeto canon)',
       body:
         '**Ignacio Piñeiro** is a pillar for **son’s** *melodic and lyrical identity* — the part that makes the groove memorable.\n\n' +
         'What he emphasizes musically:\n' +
@@ -219,8 +210,7 @@ export const cubaChapter: TimelineChapter = {
             {
               kind: 'album',
               title: 'El Son de Altura (Spotify)',
-              openUrl: 'https://open.spotify.com/album/6EinRo0u3cBPsCsTrK6fdY',
-              embedUrl: 'https://open.spotify.com/embed/album/6EinRo0u3cBPsCsTrK6fdY',
+              embedUrl: 'https://open.spotify.com/album/6EinOJz9QpkIe34uqemN9L',
               note: 'Great “Piñeiro-era son” entry point: coro/response, early ensemble feel, classic songcraft.',
             },
           ],
@@ -232,8 +222,10 @@ export const cubaChapter: TimelineChapter = {
           spotifyEmbeds: [
             {
               kind: 'playlist',
-              label: 'This Is Septeto Nacional',
-              url: 'https://open.spotify.com/playlist/37i9dQZF1DZ06evO31sZWO',
+              label: 'This Is Septeto Nacional (Spotify)',
+              embedUrl:
+                'https://open.spotify.com/playlist/37i9dQZF1DZ06evO31sZWO',
+              // note: 'Spotify-curated essentials playlist; tends to embed reliably.',
             },
           ],
         },
@@ -338,8 +330,10 @@ export const cubaChapter: TimelineChapter = {
           spotifyEmbeds: [
             {
               kind: 'playlist',
-              label: 'This Is Pérez Prado',
-              url: 'https://open.spotify.com/playlist/37i9dQZF1DZ06evO1J5HXg',
+              label: 'This Is Pérez Prado (Spotify)',
+              embedUrl:
+                'https://open.spotify.com/playlist/37i9dQZF1DZ06evO17YZLu',
+              note: 'Spotify-curated essentials playlist; reliable embed.',
             },
           ],
         },
@@ -349,7 +343,8 @@ export const cubaChapter: TimelineChapter = {
       bgCredit: {
         label: 'Pérez Prado (1954)',
         sourceName: 'Wikimedia Commons',
-        sourceUrl: 'https://commons.wikimedia.org/wiki/File:Perez_Prado_1954.jpg',
+        sourceUrl:
+          'https://commons.wikimedia.org/wiki/File:Perez_Prado_1954.jpg',
       },
       accent: 'cuba',
     },
@@ -358,7 +353,8 @@ export const cubaChapter: TimelineChapter = {
     {
       id: 'cuba-m-machito-bauza',
       dateLabel: '1940s–1950s (spotlight)',
-      title: 'Musician spotlight: Machito + Mario Bauzá (Afro-Cuban jazz bridge)',
+      title:
+        'Musician spotlight: Machito + Mario Bauzá (Afro-Cuban jazz bridge)',
       body:
         '**Machito** (front) and **Mario Bauzá** (musical brain) are a cornerstone for Afro-Cuban jazz big-band language.\n\n' +
         'What they emphasize musically:\n' +
@@ -385,8 +381,10 @@ export const cubaChapter: TimelineChapter = {
           spotifyEmbeds: [
             {
               kind: 'playlist',
-              label: 'This Is Machito',
-              url: 'https://open.spotify.com/playlist/37i9dQZF1DZ06evO1nC44c',
+              label: 'This Is Machito (Spotify)',
+              embedUrl:
+                'https://open.spotify.com/playlist/37i9dQZF1DZ06evO1WOlxd',
+              note: 'Spotify-curated essentials playlist; reliable embed.',
             },
           ],
         },
@@ -397,23 +395,31 @@ export const cubaChapter: TimelineChapter = {
           spotifyEmbeds: [
             {
               kind: 'artist',
-              label: 'Spotify artist',
-              url: 'https://open.spotify.com/artist/4ac8P2JGDFcQLNdGLm227f',
+              label: 'Mario Bauzá (Spotify)',
+              embedUrl:
+                'https://open.spotify.com/artist/4ac8P2JGDFcQLNdGLm227f',
+              note: 'Artist page embed (catalog + top tracks).',
             },
             {
               kind: 'album',
-              label: 'Album: My Time Is Now',
-              url: 'https://open.spotify.com/album/2IkqDV8vYvw2nkGEGamMLj',
+              label: 'My Time Is Now (Spotify)',
+              embedUrl: 'https://open.spotify.com/album/2IkqDV8vYvw2nkGEGamMLj',
+              note: 'A solid “anchor album” for Bauzá’s Afro-Cuban jazz language.',
             },
           ],
         },
       ] as MusicianRef[],
-      relatedStyles: ['Latin jazz', 'Afro-Cuban jazz', 'big-band mambo lineage'],
+      relatedStyles: [
+        'Latin jazz',
+        'Afro-Cuban jazz',
+        'big-band mambo lineage',
+      ],
       bg: 'https://commons.wikimedia.org/wiki/Special:FilePath/Machito%20and%20Graciella%20cropped.jpg?width=2400',
       bgCredit: {
         label: 'Machito (with Graciela) – photo by William P. Gottlieb',
         sourceName: 'Wikimedia Commons',
-        sourceUrl: 'https://commons.wikimedia.org/wiki/File:Machito_and_Graciella_cropped.jpg',
+        sourceUrl:
+          'https://commons.wikimedia.org/wiki/File:Machito_and_Graciella_cropped.jpg',
       },
       accent: 'cuba',
     },
@@ -448,13 +454,17 @@ export const cubaChapter: TimelineChapter = {
           spotifyEmbeds: [
             {
               kind: 'artist',
-              label: 'Spotify artist',
-              url: 'https://open.spotify.com/artist/6SPpCqM8gOzrtICAxN5NuX',
+              title: 'Tito Puente (Spotify)',
+              embedUrl:
+                'https://open.spotify.com/artist/6SPpCqM8gOzrtICAxN5NuX',
+              note: 'Artist page embed (catalog + top tracks).',
             },
             {
               kind: 'playlist',
-              label: 'Playlist: 10 Tito Puente Essentials',
-              url: 'https://open.spotify.com/playlist/3fOLJuvAKAjYUvgEylWpb0',
+              title: '10 Tito Puente Essentials (Spotify)',
+              embedUrl:
+                'https://open.spotify.com/playlist/3fOLJuvAKAjYUvgEylWpb0',
+              note: 'Short, curated set—nice for a ‘starter listening’ box.',
             },
           ],
         },

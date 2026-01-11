@@ -24,7 +24,7 @@ function SpotifyEmbedCard({
             {e.title}
           </div>
           <div className="mt-1 text-xs text-zinc-300">
-            {by ? <>Via <span className="font-medium text-zinc-200">{by}</span></> : null}
+            {/* {by ? <>Via <span className="font-medium text-zinc-200">{by}</span></> : null} */}
             {by && e.note ? " • " : null}
             {e.note ? e.note : null}
           </div>

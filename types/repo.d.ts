@@ -1,9 +1,11 @@
 export type TimelineStepAccent = 'roots' | 'cuba' | 'nyc' | 'global' | 'modern';
 
 export type SpotifyEmbed = {
-  kind: 'album' | 'track' | 'playlist';
-  title: string;
-  embedUrl: string; // e.g. https://open.spotify.com/embed/album/<id>
+  kind: 'album' | 'track' | 'playlist' | 'artist';
+  title?: string;
+  url?: string;
+  openUrl?: string;
+  embedUrl?: string; // e.g. https://open.spotify.com/embed/album/<id>
   note?: string; // optional short context shown in UI if you want
 };
 
@@ -17,6 +19,7 @@ export type BgCredit = {
 };
 
 export type TimelineMusician = {
+  hide?: boolean; // if true, don’t show the section
   name: string;
   role?: string; // instrument/role
   why?: string; // 1–2 lines: why this musician matters *for this step*
@@ -53,7 +56,11 @@ export type TimelineChapter = {
 };
 
 // These are used by ScrollyTimeline.tsx
-export type Active = { step: TimelineStep; chapterIndex: number; stepIndex: number };
+export type Active = {
+  step: TimelineStep;
+  chapterIndex: number;
+  stepIndex: number;
+};
 
 export type Item = {
   step: TimelineStep;

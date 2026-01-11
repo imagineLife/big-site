@@ -2,7 +2,7 @@ import type { TimelineChapter } from 'types/repo';
 
 export const rootsChapter: TimelineChapter = {
   id: 'roots',
-  label: 'Roots & foundations',
+  label: 'Roots',
   description:
     'Afro-Caribbean rhythm + Spanish songcraft lays the groundwork for later Afro-Cuban forms (clave logic, call-and-response, and dance-first groove).',
   steps: [
@@ -24,7 +24,14 @@ export const rootsChapter: TimelineChapter = {
         'Claves + simple timekeepers (often improvised / community-driven)',
         'Voice as rhythmic instrument (chants, coro-style responses)',
       ],
-      relatedStyles: ['bomba', 'rumba', 'yambú', 'guaguancó', 'guajira', 'son cubano'],
+      relatedStyles: [
+        'bomba',
+        'rumba',
+        'yambú',
+        'guaguancó',
+        'guajira',
+        'son cubano',
+      ],
       keyMusicians: [
         {
           name: 'Traditional folkloric communities',
@@ -34,7 +41,8 @@ export const rootsChapter: TimelineChapter = {
             {
               kind: 'playlist',
               title: 'Bomba & Plena Radio (Spotify)',
-              embedUrl: 'https://open.spotify.com/embed/playlist/37i9dQZF1E4nIlYTT8wuKg',
+              embedUrl:
+                'https://open.spotify.com/embed/playlist/37i9dQZF1E4nIlYTT8wuKg',
               note: 'A good “roots layer” listen: Puerto Rican bomba/plena percussion-and-dance tradition with call-and-response energy that connects to later Afro-Caribbean dance vocab.',
             },
           ],
@@ -44,7 +52,8 @@ export const rootsChapter: TimelineChapter = {
       bgCredit: {
         label: 'Bomba Dance (Puerto Rico)',
         sourceName: 'Wikimedia Commons',
-        sourceUrl: 'https://commons.wikimedia.org/wiki/File:Bomba_Dancer_and_Drummers.jpg',
+        sourceUrl:
+          'https://commons.wikimedia.org/wiki/File:Bomba_Dancer_and_Drummers.jpg',
         author: 'TechyLibrarian',
         license: 'CC BY 4.0',
         licenseUrl: 'https://creativecommons.org/licenses/by/4.0',
@@ -78,7 +87,8 @@ export const rootsChapter: TimelineChapter = {
             {
               kind: 'playlist',
               title: 'Bolero Cubano (Spotify)',
-              embedUrl: 'https://open.spotify.com/embed/playlist/3qoRkWaFtGQeEy3PS3VuFd',
+              embedUrl:
+                'https://open.spotify.com/embed/playlist/3qoRkWaFtGQeEy3PS3VuFd',
               note: 'A modern listening bridge for classic Cuban bolero feeling and repertoire (useful while you refine more “primary source” examples).',
             },
           ],
@@ -112,7 +122,11 @@ export const rootsChapter: TimelineChapter = {
         'Gives later dance music a “ballad lane” that remains culturally central',
         'Sets up repertoire that salsa bands keep re-arranging for decades',
       ],
-      instrumentation: ['Voice', 'Guitar (trova tradition)', 'Small ensemble accompaniment'],
+      instrumentation: [
+        'Voice',
+        'Guitar (trova tradition)',
+        'Small ensemble accompaniment',
+      ],
       relatedStyles: ['trova', 'bolero'],
       keyMusicians: [
         {
@@ -123,7 +137,8 @@ export const rootsChapter: TimelineChapter = {
             {
               kind: 'playlist',
               title: 'Bolero Cubano (Spotify)',
-              embedUrl: 'https://open.spotify.com/embed/playlist/3qoRkWaFtGQeEy3PS3VuFd',
+              embedUrl:
+                'https://open.spotify.com/embed/playlist/3qoRkWaFtGQeEy3PS3VuFd',
               note: 'A practical “listener bridge” into bolero repertoire (you can later curate your own playlist focused on early trova/bolero standards).',
             },
           ],
@@ -174,12 +189,14 @@ export const rootsChapter: TimelineChapter = {
             {
               kind: 'playlist',
               title: 'This Is Trio Matamoros (Spotify)',
-              embedUrl: 'https://open.spotify.com/embed/playlist/37i9dQZF1DZ06evO2qB67g',
+              embedUrl:
+                'https://open.spotify.com/embed/playlist/37i9dQZF1DZ06evO2qB67g',
             },
             {
               kind: 'album',
               title: 'Aquellos Tiempos... (Spotify)',
-              embedUrl: 'https://open.spotify.com/embed/album/3BHKao5ijqNQq4eCj8m6Ij',
+              embedUrl:
+                'https://open.spotify.com/embed/album/3BHKao5ijqNQq4eCj8m6Ij',
               note: 'Useful as a quick “drop-in” album embed while you refine the exact canonical releases you want.',
             },
           ],

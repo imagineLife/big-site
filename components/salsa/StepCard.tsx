@@ -50,7 +50,7 @@ export default function StepCard({
     threshold: 0.35,
     rootMargin: "-35% 0px -45% 0px",
   });
-
+  
   React.useEffect(() => {
     if (inView) onActivate();
   }, [inView, onActivate]);
@@ -82,11 +82,8 @@ const musicianEmbeds =
       };
     })
   ) ?? [];
-  
 
-    // Keep it light (or remove slice to show everything)
-    // .slice(0, 2);
-  const embeds = musicianEmbeds
+  const showKeyMusicians = !item.step.title.includes('Musician spotlight:')
 
   return (
     <div className="min-h-[110svh]">
@@ -153,7 +150,7 @@ const musicianEmbeds =
                     </InfoPanel>
                   ) : null}
 
-                  {item.step.keyMusicians?.length ? (
+                  {showKeyMusicians && item.step.keyMusicians?.length ? (
                     <InfoPanel title="Key musicians">
                       <div className="space-y-3">
                         {item.step.keyMusicians.map((m) => (
@@ -165,18 +162,6 @@ const musicianEmbeds =
                               {m.role ? <div className="text-xs text-zinc-300">{m.role}</div> : null}
                             </div>
                             {m.why ? <p className="mt-2 text-sm text-zinc-200">{m.why}</p> : null}
-
-                            {/* {m.spotifyEmbeds?.length && (
-                              <div className="mt-3">
-                                <Collapsible title="Listen on Spotify" defaultOpen={false}>
-                                  <div className="space-y-3">
-                                    {m.spotifyEmbeds.map((e) => (
-                                      <SpotifyEmbedCard key={e.title + e.embedUrl} e={e} />
-                                    ))}
-                                  </div>
-                                </Collapsible>
-                              </div>
-                            )} */}
                           </div>
                         ))}
                       </div>
@@ -198,16 +183,16 @@ const musicianEmbeds =
                     </Collapsible>
                   ) : null}
 
-                  {item.step.keyMusicians?.length ? (
+                  {showKeyMusicians && item.step.keyMusicians?.length ? (
                     <Collapsible title="Key musicians" defaultOpen={false}>
                       <div className="space-y-3">
                         {item.step.keyMusicians.map((m) => (
                           <div key={m.name} className="rounded-xl border border-white/10 bg-white/5 p-3">
                             <div className="flex flex-wrap items-baseline justify-between gap-2">
                               <div className="text-sm font-semibold text-zinc-100">
-                                {m.url ? (
+                                {m?.url ? (
                                   <a
-                                    href={m.url}
+                                    href={m?.url}
                                     target="_blank"
                                     rel="noreferrer"
                                     className="underline decoration-white/25 underline-offset-2 hover:decoration-white/70"
@@ -231,14 +216,14 @@ const musicianEmbeds =
             ) : null}
           </div>
 
-          {embeds.length > 0 ? (
+          {musicianEmbeds.length > 0 ? (
                 <div className="mt-4 space-y-4">
                   <div className="flex items-center justify-between">
                   <div>
                     <div className="text-sm font-semibold text-zinc-100">Listen</div>
                   </div>
                 </div>
-                  {embeds.map((e) => (
+                  {musicianEmbeds.map((e) => (
                     <SpotifyEmbedCard
                       key={e?._id}
                       e={e}
