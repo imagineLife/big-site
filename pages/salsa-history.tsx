@@ -7,6 +7,7 @@ import { chapters } from '@/data/timeline';
 import { Active, Item } from './../types/repo';
 import SectionHeader from '@/components/salsa/SectionHeader';
 import StepCard from '@/components/salsa/StepCard';
+import Head from 'next/head';
 
 function buildChapterGroups() {
   return chapters.map((chapter, chapterIndex) => {
@@ -35,8 +36,109 @@ export default function ScrollyTimeline() {
     stepIndex: all[0].stepIndex,
   }));
   const totalSteps = all.length;
+  const slug = 'music/history-of-salsa';
+  const title = 'A History of Salsa Music: Cuba, New York City, and the Global Dance Floor';
+  const excerpt =
+    "An interactive timeline of salsa’s roots in Afro-Caribbean music, Cuba’s son and mambo eras, the New York City salsa explosion, and salsa’s global spread—plus musician spotlights with Spotify listening embeds.";
 
+  const canonicalUrl = `https://laursen.tech/${slug}/`;
+  const ogImage = 'https://laursen.tech/images/history-of-salsa/og.jpg';
+
+  // If you have a real publish date, use it. Otherwise omit datePublished/dateModified.
+  const datePublished = '2026-01-01';
+  const dateModified = '2026-01-11';
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': canonicalUrl,
+    },
+    headline: title,
+    name: title,
+    description: excerpt,
+    url: canonicalUrl,
+    inLanguage: 'en-US',
+    author: {
+      '@type': 'Person',
+      name: 'Jake Laursen',
+      url: 'https://laursen.tech',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Jake Laursen Blog',
+      url: 'https://laursen.tech',
+      // Optional: add a logo you control (recommended if you have one)
+      // logo: {
+      //   '@type': 'ImageObject',
+      //   url: 'https://laursen.tech/images/logo.png',
+      // },
+    },
+    image: [
+      ogImage,
+    ],
+    datePublished,
+    dateModified,
+    // Helpful for discovery. Keep these tight and relevant.
+    keywords: [
+      'salsa music',
+      'history of salsa',
+      'Afro-Cuban music',
+      'son cubano',
+      'mambo',
+      'boogaloo',
+      'Fania Records',
+      'New York City salsa',
+      'Latin music history',
+      'Latin dance',
+    ],
+    // Optional but nice if you have a hero image caption:
+    // thumbnailUrl: ogImage,
+  };
   return (
+    <>
+    <Head>
+      <title>{title}</title>
+
+      <meta name="description" content={excerpt} />
+
+      {/* Canonical */}
+      <link rel="canonical" href={canonicalUrl} />
+
+      {/* Open Graph */}
+      <meta property="og:type" content="article" />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={excerpt} />
+      <meta property="og:site_name" content="Jake Laursen Blog" />
+      <meta property="og:url" content={canonicalUrl} />
+      <meta property="og:image" content={ogImage} />
+      <meta property="og:image:alt" content="History of Salsa Music timeline" />
+
+      {/* Twitter */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={excerpt} />
+      <meta name="twitter:image" content={ogImage} />
+
+      {/* Cache controls (fine to keep if you want) */}
+      <meta httpEquiv="cache-control" content="no-cache" />
+      <meta httpEquiv="expires" content="0" />
+      <meta httpEquiv="pragma" content="no-cache" />
+
+      {/* Sitemap link (optional; not required for SEO, but harmless) */}
+      <link
+        rel="sitemap"
+        type="application/xml"
+        title="Sitemap"
+        href="/sitemap-index.xml"
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+    </Head>
     <section
       className="relative rounded-2xl border border-zinc-800"
       style={{ clipPath: 'inset(0 round 1rem)' }}
@@ -151,5 +253,6 @@ export default function ScrollyTimeline() {
         <div className="h-24 sm:h-36" />
       </div>
     </section>
+    </>
   );
 }
