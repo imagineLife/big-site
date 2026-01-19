@@ -23,7 +23,7 @@ export default function Collapsible({
         aria-controls={id}
         onClick={() => setOpen((v) => !v)}
       >
-        <span className="text-sm font-medium text-zinc-100">{title}</span>
+        <span className="font-medium text-zinc-100">{title}</span>
         <span className="text-xs text-zinc-300">{open ? "Hide" : "Show"}</span>
       </button>
 

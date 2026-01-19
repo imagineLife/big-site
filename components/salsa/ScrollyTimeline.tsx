@@ -110,7 +110,7 @@ export default function ScrollyTimeline() {
 
       {/* Scroll steps */}
       <div className="relative z-10 -mt-[100svh]">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
           {chapterGroups.map((group) => (
             <section key={group.chapter.id} className="py-10 sm:py-12">
               <SectionHeader label={group.chapter.label} />

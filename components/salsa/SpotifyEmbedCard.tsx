@@ -13,8 +13,8 @@ function SpotifyEmbedCard({
   const isEmbeddable = embedUrl ? embedUrl.includes("open.spotify.com/embed/") : false
 
   // Bigger by default; playlists/albums get tall player.
-  const height =
-    e.kind === "playlist" || e.kind === "album" ? 380 : 180;
+  const height = 380;
+    // e.kind === "playlist" || e.kind === "album" ? 380 : 180 ;
 
   return (
     <div className="w-full min-w-0 rounded-xl border border-white/10 bg-white/5 p-3">

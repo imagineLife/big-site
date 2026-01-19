@@ -8,6 +8,8 @@ import { Active, Item } from './../types/repo';
 import SectionHeader from '@/components/salsa/SectionHeader';
 import StepCard from '@/components/salsa/StepCard';
 import Head from 'next/head';
+import { useScrollSpy } from '../hooks/useScrollSpy';
+import { TimelineRail } from '@/components/TimelineRail';
 
 function buildChapterGroups() {
   return chapters.map((chapter, chapterIndex) => {
@@ -15,6 +17,7 @@ function buildChapterGroups() {
       step,
       chapterIndex,
       stepIndex,
+      chapterId: chapter.id,
       chapterLabel: chapter.label,
       chapterDescription: chapter.description,
     }));
@@ -23,7 +26,7 @@ function buildChapterGroups() {
   });
 }
 
-const chapterGroups = buildChapterGroups();
+const chapterGroups = buildChapterGroups()
 const all = chapterGroups.flatMap((group) => group.items);
 const indexById = new Map<string, number>(
   all.map((item, index) => [item.step.id, index])
@@ -36,6 +39,8 @@ export default function ScrollyTimeline() {
     stepIndex: all[0].stepIndex,
   }));
   const totalSteps = all.length;
+  const ids = React.useMemo(() => all.map((s) => s.chapterIndex).map(d => String(d)), []);
+  const { activeId, progress, refs } = useScrollSpy(ids);
   const slug = 'music/history-of-salsa';
   const title = 'A History of Salsa Music: Cuba, New York City, and the Global Dance Floor';
   const excerpt =
@@ -96,6 +101,7 @@ export default function ScrollyTimeline() {
     // Optional but nice if you have a hero image caption:
     // thumbnailUrl: ogImage,
   };
+  
   return (
     <>
     <Head>
@@ -140,9 +146,19 @@ export default function ScrollyTimeline() {
       />
     </Head>
     <section
-      className="relative rounded-2xl border border-zinc-800"
-      style={{ clipPath: 'inset(0 round 1rem)' }}
+      className="relative"
     >
+
+      <TimelineRail
+        items={all.map(({ stepIndex, chapterLabel, chapterId, step }) => ({ 
+          id: String(stepIndex), 
+          dateLabel: chapterLabel, 
+          chapterId: chapterId,
+          stepId: step.id })
+        )}
+        activeId={activeId}
+        progress={progress}
+      />
       {/* Sticky visual stage */}
       <div className="sticky top-0 z-0 h-[100svh] w-full">
         <AnimatePresence mode="sync">
@@ -218,8 +234,9 @@ export default function ScrollyTimeline() {
       {/* Scroll steps */}
       <div className="relative z-10 -mt-[100svh]">
         <div className="mx-auto max-w-5xl px-4 sm:px-6">
-          {chapterGroups.map((group) => (
-            <section key={group.chapter.id} className="py-10 sm:py-12">
+          {chapterGroups.map((group) => {
+            return (
+            <section key={group.chapter.id} className="py-10 sm:py-12" id={`group-${group.chapter.id}`}>
               <SectionHeader label={group.chapter.label} />
 
               {group.items.map((item) => {
@@ -227,6 +244,7 @@ export default function ScrollyTimeline() {
 
                 return (
                   <StepCard
+                    groupId={group.chapter.id}
                     key={item.step.id}
                     item={item}
                     index={index}
@@ -247,7 +265,8 @@ export default function ScrollyTimeline() {
                 );
               })}
             </section>
-          ))}
+          )
+          })}
         </div>
 
         <div className="h-24 sm:h-36" />

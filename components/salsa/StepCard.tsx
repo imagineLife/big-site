@@ -17,7 +17,7 @@ function InfoPanel({
 }) {
   return (
     <div className="rounded-xl border border-white/10 bg-white/5 p-3">
-      <div className="text-xs font-medium text-zinc-200">{title}</div>
+      <div className="font-lg text-zinc-200">{title}</div>
       <div className="mt-2 text-sm text-zinc-200">{children}</div>
     </div>
   );
@@ -39,12 +39,14 @@ export default function StepCard({
   total,
   isActive,
   onActivate,
+  groupId
 }: {
   item: Item;
   index: number;
   total: number;
   isActive: boolean;
   onActivate: () => void;
+  groupId: string;
 }) {
   const { ref, inView } = useInView({
     threshold: 0.35,
@@ -84,17 +86,17 @@ const musicianEmbeds =
   ) ?? [];
 
   const showKeyMusicians = !item.step.title.includes('Musician spotlight:')
-
+  
   return (
     <div className="min-h-[110svh]">
       {/* Trigger line */}
       <div ref={ref} className="h-px w-full" />
 
       {/* Reading zone: gap above/below card */}
-      <div className="pt-[26svh] pb-[30svh]">
+      <div className="pt-[26svh] pb-[30svh]" id={`${groupId}-step-${item.step.id}`}>
         <div
           className={[
-            "mx-auto w-full max-w-[46rem] rounded-2xl border p-5 shadow-xl backdrop-blur transition-colors",
+            "mx-auto w-full max-w-[46rem] rounded-2xl border p-5 shadow-xl backdrop-blur-xl transition-colors",
             "sm:p-6",
             isActive ? "border-white/25 bg-black/60" : "border-white/10 bg-black/45",
           ].join(" ")}
