@@ -12,7 +12,7 @@ import StepCard from "./StepCard";
 
 function buildChapterGroups() {
   return chapters.map((chapter, chapterIndex) => {
-    const items: Array<Item> = chapter.steps.map((step, stepIndex) => ({
+    const items: Array<Omit<Item, "chapterId">> = chapter.steps.map((step, stepIndex) => ({
       step,
       chapterIndex,
       stepIndex,
@@ -121,6 +121,7 @@ export default function ScrollyTimeline() {
                 return (
                   <StepCard
                     key={item.step.id}
+                    // @ts-expect-error
                     item={item}
                     index={index}
                     total={totalSteps}

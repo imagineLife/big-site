@@ -39,8 +39,12 @@ export default function ScrollyTimeline() {
     stepIndex: all[0].stepIndex,
   }));
   const totalSteps = all.length;
-  const ids = React.useMemo(() => all.map((s) => s.chapterIndex).map(d => String(d)), []);
+  const ids = React.useMemo(
+    () => all.map((s) => `${s.chapterId}-step-${s.step.id}`),
+    []
+  );
   const { activeId, progress, refs } = useScrollSpy(ids);
+  
   const slug = 'music/history-of-salsa';
   const title = 'A History of Salsa Music: Cuba, New York City, and the Global Dance Floor';
   const excerpt =
@@ -149,16 +153,18 @@ export default function ScrollyTimeline() {
       className="relative"
     >
 
-      <TimelineRail
-        items={all.map(({ stepIndex, chapterLabel, chapterId, step }) => ({ 
-          id: String(stepIndex), 
-          dateLabel: chapterLabel, 
-          chapterId: chapterId,
-          stepId: step.id })
-        )}
-        activeId={activeId}
-        progress={progress}
-      />
+      <div className="hidden lg:block">
+        <TimelineRail
+          items={all.map(({ chapterLabel, chapterId, step }) => ({
+            id: `${chapterId}-step-${step.id}`,
+            dateLabel: chapterLabel,
+            chapterId: chapterId,
+            stepId: step.id,
+          }))}
+          activeId={activeId}
+          progress={progress}
+        />
+      </div>
       {/* Sticky visual stage */}
       <div className="sticky top-0 z-0 h-[100svh] w-full">
         <AnimatePresence mode="sync">
@@ -241,6 +247,7 @@ export default function ScrollyTimeline() {
 
               {group.items.map((item) => {
                 const index = indexById.get(item.step.id) ?? 0;
+                const scrollId = `${group.chapter.id}-step-${item.step.id}`;
 
                 return (
                   <StepCard
@@ -250,6 +257,7 @@ export default function ScrollyTimeline() {
                     index={index}
                     total={totalSteps}
                     isActive={item.step.id === active.step.id}
+                    scrollRef={refs.get(scrollId)}
                     onActivate={() => {
                       setActive((prev) =>
                         prev.step.id === item.step.id

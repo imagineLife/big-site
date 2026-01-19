@@ -56,6 +56,51 @@ export type TimelineChapter = {
   steps: TimelineStep[];
 };
 
+export type RailItem = {
+  id: string;
+  dateLabel: string; // "1959", "Late 70s", etc.
+  chapterId: string;
+  stepId: string;
+};
+
+export type TimelineRailProps = {
+  items: RailItem[];
+  activeId: string;
+  progress?: number; // 0..1 (optional)
+};
+
+export type RailShellProps = {
+  children: React.ReactNode;
+};
+
+export type RailPanelProps = {
+  children: React.ReactNode;
+};
+
+export type RailFillProps = {
+  progress?: number;
+};
+
+export type RailDotListProps = {
+  items: RailItem[];
+  activeId: string;
+  onJump: (id: string) => void;
+  prefersReducedMotion: boolean;
+};
+
+export type RailDotItemProps = {
+  item: RailItem;
+  isActive: boolean;
+  onJump: (id: string) => void;
+  prefersReducedMotion: boolean;
+};
+
+export type RailDotLabelProps = {
+  label: string;
+  isActive: boolean;
+  prefersReducedMotion: boolean;
+};
+
 // These are used by ScrollyTimeline.tsx
 export type Active = {
   step: TimelineStep;
@@ -67,6 +112,7 @@ export type Item = {
   step: TimelineStep;
   chapterIndex: number;
   stepIndex: number;
+  chapterId: string;
   chapterLabel: string;
   chapterDescription: string;
 };

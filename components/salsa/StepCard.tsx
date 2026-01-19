@@ -39,7 +39,8 @@ export default function StepCard({
   total,
   isActive,
   onActivate,
-  groupId
+  groupId,
+  scrollRef,
 }: {
   item: Item;
   index: number;
@@ -47,6 +48,7 @@ export default function StepCard({
   isActive: boolean;
   onActivate: () => void;
   groupId: string;
+  scrollRef?: React.RefObject<HTMLElement>;
 }) {
   const { ref, inView } = useInView({
     threshold: 0.35,
@@ -93,7 +95,11 @@ const musicianEmbeds =
       <div ref={ref} className="h-px w-full" />
 
       {/* Reading zone: gap above/below card */}
-      <div className="pt-[26svh] pb-[30svh]" id={`${groupId}-step-${item.step.id}`}>
+      <div
+        ref={scrollRef}
+        className="pt-[26svh] pb-[30svh]"
+        id={`${groupId}-step-${item.step.id}`}
+      >
         <div
           className={[
             "mx-auto w-full max-w-[46rem] rounded-2xl border p-5 shadow-xl backdrop-blur-xl transition-colors",
