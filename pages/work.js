@@ -468,9 +468,19 @@ function CertItem({
               })}
             </>
           )}
+          <br />
+          {aLink && (
+            <Link
+              href={aLink}
+              target="_blank"
+              rel="noreferrer"
+              className="italic no-underline hover:underline"
+            >
+              Certification Link
+            </Link>
+          )}
         </section>
       </section>
-      {aLink && <Link href={aLink} target="_blank" rel="noreferrer" />}
     </section>
   );
 }
