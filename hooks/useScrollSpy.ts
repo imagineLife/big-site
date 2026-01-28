@@ -81,27 +81,27 @@ export function useScrollSpy(
   //
   // Optional: overall scroll progress (0..1) for a “filled” rail
   //
-  // React.useEffect(() => {
-  //   let raf = 0;
+  React.useEffect(() => {
+    let raf = 0;
 
-  //   const onScroll = () => {
-  //     cancelAnimationFrame(raf);
-  //     raf = requestAnimationFrame(() => {
-  //       const doc = document.documentElement;
-  //       const scrollTop = doc.scrollTop;
-  //       const scrollHeight = doc.scrollHeight - doc.clientHeight;
-  //       const p = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
-  //       setProgress(Math.min(1, Math.max(0, p)));
-  //     });
-  //   };
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const doc = document.documentElement;
+        const scrollTop = doc.scrollTop;
+        const scrollHeight = doc.scrollHeight - doc.clientHeight;
+        const p = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
+        setProgress(Math.min(1, Math.max(0, p)));
+      });
+    };
 
-  //   onScroll();
-  //   window.addEventListener('scroll', onScroll, { passive: true });
-  //   return () => {
-  //     cancelAnimationFrame(raf);
-  //     window.removeEventListener('scroll', onScroll);
-  //   };
-  // }, []);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, []);
 
   return { activeId, progress, refs };
 }

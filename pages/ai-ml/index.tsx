@@ -29,7 +29,7 @@ export default function AiPage() {
         <p>Try it out!</p>
         <p>Train a machine-learning model on your own face and head gestures. Using your webcam, train a machine-learning model to recognize when your head is tilted to the left & to the right.</p> */}
 
-        <h2>Case Studies</h2>
+        <h2>AI/ML System Design Case Studies</h2>
         <Link
           href="/ai-ml/system-design-case-studies/harmful-content-detection"
           className="no-underline hover:underline"

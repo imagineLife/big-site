@@ -100,13 +100,6 @@ const nyChapter = {
                 'https://open.spotify.com/embed/playlist/37i9dQZF1DZ06evO3p8SCB',
               note: 'Best quick “boogaloo entry point” playlist.',
             },
-            {
-              kind: 'artist',
-              title: 'Joe Cuba (Spotify)',
-              openUrl: 'https://open.spotify.com/artist/5MlfccEEOw6kihsT8eQtbh',
-              embedUrl:
-                'https://open.spotify.com/embed/artist/5MlfccEEOw6kihsT8eQtbh',
-            },
           ],
         },
       ],
@@ -160,13 +153,6 @@ const nyChapter = {
               embedUrl:
                 'https://open.spotify.com/embed/playlist/37i9dQZF1DZ06evO1GJL9f',
               note: 'Fast way to hear the Palmieri “arrangement + drive” signature across eras.',
-            },
-            {
-              kind: 'artist',
-              title: 'Eddie Palmieri (Spotify)',
-              openUrl: 'https://open.spotify.com/artist/2VviFtXYreO6Zn9n8Ibk6C',
-              embedUrl:
-                'https://open.spotify.com/embed/artist/2VviFtXYreO6Zn9n8Ibk6C',
             },
           ],
         },

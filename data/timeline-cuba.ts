@@ -355,13 +355,13 @@ export const cubaChapter: TimelineChapter = {
               label: 'This Is Pérez Prado (Spotify)',
               embedUrl:
                 'https://open.spotify.com/playlist/37i9dQZF1DZ06evO17YZLu',
-              note: 'Spotify-curated essentials playlist; reliable embed.',
+              note: 'Spotify-curated essentials playlist',
             },
           ],
         },
       ] as MusicianRef[],
       relatedStyles: ['mambo', 'big-band Latin dance'],
-      bg: 'https://commons.wikimedia.org/wiki/Special:FilePath/Perez_Prado_1954.jpg?width=2400',
+      bg: 'https://upload.wikimedia.org/wikipedia/commons/0/0f/P%C3%A9rez_Prado_in_1954.jpg',
       bgCredit: {
         label: 'Pérez Prado (1954)',
         sourceName: 'Wikimedia Commons',
@@ -406,7 +406,7 @@ export const cubaChapter: TimelineChapter = {
               label: 'This Is Machito (Spotify)',
               embedUrl:
                 'https://open.spotify.com/playlist/37i9dQZF1DZ06evO1WOlxd',
-              note: 'Spotify-curated essentials playlist; reliable embed.',
+              note: 'Spotify-curated essentials playlist.',
             },
           ],
         },
@@ -436,7 +436,8 @@ export const cubaChapter: TimelineChapter = {
         'Afro-Cuban jazz',
         'big-band mambo lineage',
       ],
-      bg: 'https://commons.wikimedia.org/wiki/Special:FilePath/Machito%20and%20Graciella%20cropped.jpg?width=2400',
+      // bg: 'https://commons.wikimedia.org/wiki/Special:FilePath/Machito%20and%20Graciella%20cropped.jpg?width=2400',
+      bg: 'https://upload.wikimedia.org/wikipedia/commons/f/f6/Mario_Bauz%C3%A1.jpg',
       bgCredit: {
         label: 'Machito (with Graciela) – photo by William P. Gottlieb',
         sourceName: 'Wikimedia Commons',

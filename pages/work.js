@@ -343,8 +343,7 @@ const certs = [
     title: 'Engineering Leadership',
     subText:
       'Strengths-Based and Values-Based Approaches, Decision-Making Modes, Collaborative & Courageous Communication, Influence & Motivation, via eCornell',
-    aLink:
-      'https://ecornell.cornell.edu/certificates/leadership-and-strategic-management/engineering-leadership/',
+    aLink: 'https://mycredentials.ecornell.cornell.edu/credential/GDJDcnGiYY',
     techList: [
       'Values',
       'Decision-Making',

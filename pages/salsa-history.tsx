@@ -38,6 +38,10 @@ export default function ScrollyTimeline() {
     chapterIndex: all[0].chapterIndex,
     stepIndex: all[0].stepIndex,
   }));
+
+  console.log('active')
+  console.log(active)
+  
   const totalSteps = all.length;
   const ids = React.useMemo(
     () => all.map((s) => `${s.chapterId}-step-${s.step.id}`),
