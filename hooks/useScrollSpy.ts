@@ -9,7 +9,7 @@ type ScrollSpyOptions = {
 
 export function useScrollSpy(
   sectionIds: string[],
-  options: ScrollSpyOptions = {}
+  options: ScrollSpyOptions = {},
 ) {
   const { rootMargin = '-35% 0px -55% 0px', threshold = [0, 0.1, 0.2] } =
     options;
@@ -19,8 +19,8 @@ export function useScrollSpy(
 
   // Create refs for each section
   const refs = React.useMemo(() => {
-    const map = new Map<string, React.RefObject<HTMLElement>>();
-    for (const id of sectionIds) map.set(id, React.createRef<HTMLElement>());
+    const map = new Map<string, React.RefObject<HTMLDivElement>>();
+    for (const id of sectionIds) map.set(id, React.createRef<HTMLDivElement>());
     return map;
   }, [sectionIds]);
 
@@ -70,7 +70,7 @@ export function useScrollSpy(
 
         if (bestId && bestId !== activeId) setActiveId(bestId);
       },
-      { root: null, rootMargin, threshold }
+      { root: null, rootMargin, threshold },
     );
 
     for (const el of elements) io.observe(el);

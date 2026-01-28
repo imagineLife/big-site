@@ -48,7 +48,7 @@ export default function StepCard({
   isActive: boolean;
   onActivate: () => void;
   groupId: string;
-  scrollRef?: React.RefObject<HTMLElement>;
+  scrollRef?: React.RefObject<HTMLDivElement>;
 }) {
   const { ref, inView } = useInView({
     threshold: 0.35,
