@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+set -e
+
+echo "Running typecheck..."
+npm run typecheck
+
+echo "Running lint..."
+npm run lint
+
+echo "Pre-push checks passed."

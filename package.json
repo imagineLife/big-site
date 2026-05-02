@@ -20,8 +20,9 @@
     "start": "next start",
     "export": "next build && next export",
     "typecheck": "tsc --noEmit",
-    "lint": "next lint",
-    "lf": "next lint --fix"
+    "hooks:install": "git config core.hooksPath .githooks",
+    "lint": "ESLINT_USE_FLAT_CONFIG=false eslint . --ignore-pattern out --ignore-pattern .next",
+    "lf": "ESLINT_USE_FLAT_CONFIG=false eslint . --fix --ignore-pattern out --ignore-pattern .next"
   },
   "dependencies": {
     "@mapbox/rehype-prism": "^0.9.0",
