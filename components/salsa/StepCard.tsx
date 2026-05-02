@@ -2,6 +2,7 @@ import { useInView } from "react-intersection-observer";
 import { Item } from "./../../types/repo";
 import React from "react";
 import { accentToClasses } from "@/data/timeline";
+import { rhythmicProfiles } from "@/data/rhythmic-profiles";
 import TagPill from "@/components/salsa/TagPill";
 import Collapsible from "@/components/salsa/Collapsible";
 import { SpotifyEmbedCard } from "@/components/salsa/SpotifyEmbedCard";
@@ -157,6 +158,25 @@ const musicianEmbeds =
                       <BulletList items={item.step.instrumentation} />
                     </InfoPanel>
                   ) : null}
+
+                    {/* Rhythmic profile panel */}
+                    {item.step.rhythmicProfileId ? (
+                      (() => {
+                        const p = rhythmicProfiles[item.step.rhythmicProfileId as any];
+                        return p ? (
+                          <InfoPanel title="Rhythmic profile">
+                            <div className="text-sm">
+                              <div className="font-semibold">{p.name}</div>
+                              {p.primaryAccents?.length ? (
+                                <div className="text-xs text-zinc-300">Accents: {p.primaryAccents.join(', ')}</div>
+                              ) : null}
+                              {p.description ? <p className="mt-2">{p.description}</p> : null}
+                              {p.notationHint ? <div className="mt-2 text-xs text-zinc-300">{p.notationHint}</div> : null}
+                            </div>
+                          </InfoPanel>
+                        ) : null;
+                      })()
+                    ) : null}
 
                   {showKeyMusicians && item.step.keyMusicians?.length ? (
                     <InfoPanel title="Key musicians">

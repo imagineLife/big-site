@@ -47,6 +47,10 @@ export type TimelineStep = {
 
   // Optional: lets you visually differentiate musician cards later
   stepType?: 'event' | 'musician';
+  // Optional: reference into canonical rhythmic profiles (see RhythmicProfile below)
+  rhythmicProfileId?: string;
+  // Optional: small, per-step notes about groove/accents that augment the profile
+  rhythmicNotes?: string;
 };
 
 export type TimelineChapter = {
@@ -115,4 +119,16 @@ export type Item = {
   chapterId: string;
   chapterLabel: string;
   chapterDescription: string;
+};
+
+export type RhythmicProfile = {
+  id: string; // canonical id (used in TimelineStep.rhythmicProfileId)
+  name: string; // human label
+  // primary accents in human-readable tokens (e.g. ["2", "4-and"]) for UI pills
+  primaryAccents?: string[];
+  // concise accent pattern string for machine/human reading (e.g. "1 - 2 - 3 - 4-&")
+  accentPattern?: string;
+  description?: string; // 1-2 lines describing feel and instrument emphasis
+  notationHint?: string; // optional short notation or reference
+  exampleUrls?: string[]; // optional external references (no audio files in repo by default)
 };

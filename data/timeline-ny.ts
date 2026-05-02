@@ -57,6 +57,7 @@ const nyChapter = {
         sourceUrl: 'https://commons.wikimedia.org/wiki/File:Ray_Barretto.jpg',
       },
       accent: 'nyc',
+      rhythmicProfileId: 'nyc',
     },
 
     //

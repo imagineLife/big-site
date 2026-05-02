@@ -1,39 +1,5 @@
 import type { TimelineChapter } from './../types/repo';
 
-type SpotifyEmbed =
-  | {
-      kind: 'artist';
-      label: string;
-      url: string;
-      embedUrl?: string;
-      note?: string;
-      title?: string;
-    }
-  | {
-      kind: 'playlist';
-      label: string;
-      url: string;
-      embedUrl?: string;
-      note?: string;
-      title?: string;
-    }
-  | {
-      kind: 'album';
-      label: string;
-      url: string;
-      embedUrl?: string;
-      note?: string;
-      title?: string;
-    };
-
-type MusicianRef = {
-  name: string;
-  role: string;
-  why: string;
-  hide?: boolean;
-  spotifyEmbeds?: SpotifyEmbed[];
-};
-
 export const cubaChapter: TimelineChapter = {
   id: 'cuba',
   label: 'Cuba: son → montuno → dance-band power',
@@ -139,6 +105,7 @@ export const cubaChapter: TimelineChapter = {
           'https://commons.wikimedia.org/wiki/File:Conjunto_de_Arsenio_Rodr%C3%ADguez.JPG',
       },
       accent: 'cuba',
+      rhythmicProfileId: 'cuba',
     },
 
     // ---- Musician spotlight: Arsenio Rodríguez
@@ -244,14 +211,14 @@ export const cubaChapter: TimelineChapter = {
           spotifyEmbeds: [
             {
               kind: 'playlist',
-              label: 'This Is Septeto Nacional (Spotify)',
+              title: 'This Is Septeto Nacional (Spotify)',
               embedUrl:
                 'https://open.spotify.com/playlist/37i9dQZF1DZ06evO31sZWO',
               // note: 'Spotify-curated essentials playlist; tends to embed reliably.',
             },
           ],
         },
-      ] as MusicianRef[],
+      ],
       relatedStyles: ['son cubano', 'septeto', 'bolero-son'],
       // A usable Commons image for Piñeiro itself is trickier to guarantee for every build,
       // so we credit the canonical page + you can swap later if you prefer a different photo.
@@ -264,6 +231,141 @@ export const cubaChapter: TimelineChapter = {
       accent: 'cuba',
     },
 
+    {
+      id: 'cuba-charanga',
+      dateLabel: '1930s–1950s',
+      title: 'Charanga + danzón-mambo (the “lighter orchestral” bridge)',
+      body:
+        '**Charanga** traditions keep Cuban dance music elegant and orchestral — and quietly set up rhythms + instrumentation that salsa later absorbs.\n\n' +
+        'Why this matters for salsa history:\n\n' +
+        '• **Instrumentation DNA**: flute + violins up top; **piano + bass + timbales + güiro** underneath.\n\n' +
+        '• **Time-feel**: timbales **cáscara** patterns + güiro create a steady, bright grid (less “earthy” than son percussion, but still deeply Afro-Cuban in phrasing).\n\n' +
+        '• **Section behavior**: arrangements start to “open up” — repeating riffs, vamp-like moments, and dance-forward builds that later mambo/salsa explode.\n\n' +
+        'If son is the *engine blueprint*, charanga is the *dance-floor orchestration blueprint* — it teaches how to make a groove feel elegant, fast, and social.',
+      musicalImpact: [
+        'Locks in charanga instrumentation that remains a major branch of Afro-Latin dance music.',
+        'Strengthens the role of timbales + güiro as a bright, steady rhythmic grid.',
+        'Bridges formal danzón structures toward more dance-forward, repeating, vamp-like sections.',
+      ],
+      instrumentation: [
+        'Flute + violins (charanga lead voice)',
+        'Piano (rhythmic-harmonic engine)',
+        'Bass (tumbao-like foundation)',
+        'Timbales (cáscara → bell-like brightness in open sections)',
+        'Güiro (constant time texture)',
+        'Optional: congas in later contexts / hybrids',
+      ],
+      relatedStyles: ['danzón', 'danzón-mambo', 'charanga'],
+      keyMusicians: [
+        {
+          name: 'Arcaño y sus Maravillas',
+          role: 'charanga ensemble',
+          why: 'A foundational charanga sound: flute/violins riding over piano+bass+timbales+güiro time-feel.',
+          spotifyEmbeds: [
+            {
+              kind: 'artist',
+              title: 'Arcaño y sus Maravillas (Spotify)',
+              embedUrl:
+                'https://open.spotify.com/artist/1yob7mmfOrtxnHZhiaWjHh',
+              note: 'Artist page: great for sampling danzón/charanga repertoire and hearing the orchestral groove identity.',
+            },
+            {
+              kind: 'playlist',
+              title: 'This Is Arcaño y sus Maravillas (Spotify)',
+              embedUrl:
+                'https://open.spotify.com/playlist/37i9dQZF1DZ06evO0RwfTA',
+              note: 'Spotify-curated essentials playlist; tends to embed reliably.',
+            },
+          ],
+        },
+        {
+          name: 'Orquesta Aragón',
+          role: 'charanga orchestra',
+          why: 'Iconic charanga lineage; a strong reference point for flute-led dance orchestration and bright time-feel.',
+          spotifyEmbeds: [
+            {
+              kind: 'artist',
+              title: 'Orquesta Aragón (Spotify)',
+              embedUrl:
+                'https://open.spotify.com/artist/2jXlqT8v9XIJnKQYRgLvSr',
+              note: 'Artist page: charanga feel in many tempos; great for “how the groove sits” listening.',
+            },
+          ],
+        },
+      ],
+      bg: 'https://commons.wikimedia.org/wiki/Special:FilePath/Charanga%20orchestra.jpg?width=2400',
+      bgCredit: {
+        label: 'Charanga-style orchestra (flute/violins + rhythm section)',
+        sourceName: 'Wikimedia Commons',
+        sourceUrl: 'https://commons.wikimedia.org/',
+      },
+      accent: 'cuba',
+    },
+
+    {
+      id: 'cuba-cha-cha',
+      dateLabel: 'Early–mid 1950s',
+      title: 'Cha-cha-chá (social-dance clarity with Cuban rhythm DNA)',
+      accent: 'cuba',
+      rhythmicProfileId: 'cuba-cha-cha',
+      body:
+        '**Cha-cha-chá** becomes a world-moving social dance because it’s *rhythmically clear* while staying Cuban at the core.\n\n' +
+        'What to listen for:\n\n' +
+        '• **Bright time texture**: güiro is front-and-center; timbales feel clean and dance-guiding.\n\n' +
+        '• **Less “busy” syncopation** than hot son montuno/mambo sections — more “everyone can lock in” energy.\n\n' +
+        '• **Orchestration continuity**: charanga instruments (flute/violins) often remain a signature voice, keeping the dance feel light and elegant.\n\n' +
+        'This step is important because salsa history isn’t only about complexity — it’s also about *mass adoption*. Cha-cha-chá shows how Cuban rhythmic logic can be packaged into a global social groove.',
+      musicalImpact: [
+        'Creates a widely accessible Cuban-rooted social dance groove that spreads internationally.',
+        'Reinforces güiro+timbales as a clear rhythmic grid for dancers.',
+        'Keeps charanga orchestration prominent as Afro-Latin dance music globalizes.',
+      ],
+      instrumentation: [
+        'Güiro (high, steady time texture)',
+        'Timbales (clean dance-guiding articulation)',
+        'Piano + bass (support + forward motion)',
+        'Flute + violins (charanga voice in many recordings)',
+        'Vocals (often lighter phrasing than later salsa dura)',
+      ],
+      relatedStyles: ['cha-cha-chá', 'charanga'],
+      keyMusicians: [
+        {
+          name: 'Enrique Jorrín',
+          role: 'composer / bandleader',
+          why: 'Canonical early cha-cha-chá lineage; strong “origin-era” reference point.',
+          spotifyEmbeds: [
+            {
+              kind: 'artist',
+              title: 'Enrique Jorrín (Spotify)',
+              embedUrl:
+                'https://open.spotify.com/artist/0qXDXAc75w0pBZQZmeoHVg',
+              note: 'Artist page: good entry point for early-era cha-cha-chá repertoire.',
+            },
+            {
+              kind: 'artist',
+              title: 'Enrique Jorrín y su Orquesta (Spotify)',
+              embedUrl:
+                'https://open.spotify.com/artist/53NEhVUtuCRbFLZTiOKqz9',
+              note: 'Often has richer catalog coverage for orchestra-era recordings.',
+            },
+            {
+              kind: 'album',
+              title: 'Cha Cha Cha Jorrin (Spotify)',
+              embedUrl: 'https://open.spotify.com/album/6lSqsY9YNXXYAI5Wxboddd',
+              note: 'Convenient “starter album” anchor for cha-cha-chá feel and repertoire.',
+            },
+          ],
+        },
+      ],
+      bg: 'https://commons.wikimedia.org/wiki/Special:FilePath/Cha-cha-cha%20dancers.jpg?width=2400',
+      bgCredit: {
+        label: 'Cha-cha-chá social dancers',
+        sourceName: 'Wikimedia Commons',
+        sourceUrl: 'https://commons.wikimedia.org/',
+      },
+      accent: 'cuba',
+    },
+
     // ============================================================
     // 2) MAMBO + LATIN JAZZ (ARRANGEMENT + VIRTUOSITY)
     // ============================================================
@@ -271,6 +373,8 @@ export const cubaChapter: TimelineChapter = {
       id: 'cuba-2',
       dateLabel: '1940s–1950s',
       title: 'Mambo & Latin jazz era (arrangement + virtuosity)',
+      accent: 'cuba',
+      rhythmicProfileId: 'nyc-mambo',
       body:
         'The big shift here is **band architecture**: larger horn sections, tighter arranging, and more jazz-forward harmony and improvisation.\n\n' +
         '**Mambo** and the broader Afro-Cuban jazz ecosystem amplify:\n' +
@@ -352,14 +456,14 @@ export const cubaChapter: TimelineChapter = {
           spotifyEmbeds: [
             {
               kind: 'playlist',
-              label: 'This Is Pérez Prado (Spotify)',
+              title: 'This Is Pérez Prado (Spotify)',
               embedUrl:
                 'https://open.spotify.com/playlist/37i9dQZF1DZ06evO17YZLu',
               note: 'Spotify-curated essentials playlist',
             },
           ],
         },
-      ] as MusicianRef[],
+      ],
       relatedStyles: ['mambo', 'big-band Latin dance'],
       bg: 'https://upload.wikimedia.org/wikipedia/commons/0/0f/P%C3%A9rez_Prado_in_1954.jpg',
       bgCredit: {
@@ -403,7 +507,7 @@ export const cubaChapter: TimelineChapter = {
           spotifyEmbeds: [
             {
               kind: 'playlist',
-              label: 'This Is Machito (Spotify)',
+              title: 'This Is Machito (Spotify)',
               embedUrl:
                 'https://open.spotify.com/playlist/37i9dQZF1DZ06evO1WOlxd',
               note: 'Spotify-curated essentials playlist.',
@@ -417,20 +521,20 @@ export const cubaChapter: TimelineChapter = {
           spotifyEmbeds: [
             {
               kind: 'artist',
-              label: 'Mario Bauzá (Spotify)',
+              title: 'Mario Bauzá (Spotify)',
               embedUrl:
                 'https://open.spotify.com/artist/4ac8P2JGDFcQLNdGLm227f',
               note: 'Artist page embed (catalog + top tracks).',
             },
             {
               kind: 'album',
-              label: 'My Time Is Now (Spotify)',
+              title: 'My Time Is Now (Spotify)',
               embedUrl: 'https://open.spotify.com/album/2IkqDV8vYvw2nkGEGamMLj',
               note: 'A solid “anchor album” for Bauzá’s Afro-Cuban jazz language.',
             },
           ],
         },
-      ] as MusicianRef[],
+      ],
       relatedStyles: [
         'Latin jazz',
         'Afro-Cuban jazz',
@@ -491,7 +595,7 @@ export const cubaChapter: TimelineChapter = {
             },
           ],
         },
-      ] as MusicianRef[],
+      ],
       relatedStyles: ['mambo', 'Latin jazz', 'descarga'],
       bg: 'https://commons.wikimedia.org/wiki/Special:FilePath/TitoPuente.jpg?width=2400',
       bgCredit: {

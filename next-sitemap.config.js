@@ -1,19 +1,14 @@
 const fs = require('fs');
 const path = require('path');
 
-const MARKDOWN_DIR = path.join(process.cwd(), 'markdown');
-const NOTEBOOKS_DIRS = [
-  path.join(process.cwd(), 'public', 'notebooks', 'ai-ml', 'projects'),
-  path.join(
-    process.cwd(),
-    'public',
-    'notebooks',
-    'ai-ml',
-    'python-for-data-science'
-  ),
-];
+const EXPORT_DIR = path.join(process.cwd(), 'out');
+const EXCLUDED_EXPORT_ROUTES = new Set(['/404', '/__forms']);
 
 function getAllFilesWithExt(dir, ext, basePath = '') {
+  if (!fs.existsSync(dir)) {
+    return [];
+  }
+
   const entries = fs.readdirSync(dir, { withFileTypes: true });
   const files = [];
 
@@ -31,6 +26,39 @@ function getAllFilesWithExt(dir, ext, basePath = '') {
   return files;
 }
 
+function toRoutePath(exportRelPath) {
+  const normalized = exportRelPath.split(path.sep).join('/');
+
+  if (normalized === 'index.html') {
+    return '/';
+  }
+
+  if (normalized.endsWith('/index.html')) {
+    return `/${normalized.replace(/\/index\.html$/, '')}`;
+  }
+
+  return `/${normalized.replace(/\.html$/, '')}`;
+}
+
+function getExportedHtmlRoutes() {
+  const htmlFiles = getAllFilesWithExt(EXPORT_DIR, '.html');
+  const unique = new Map();
+
+  for (const file of htmlFiles) {
+    const route = toRoutePath(file.relPath);
+
+    if (EXCLUDED_EXPORT_ROUTES.has(route)) {
+      continue;
+    }
+
+    unique.set(route, file.absPath);
+  }
+
+  return [...unique.entries()]
+    .map(([loc, absPath]) => ({ loc, absPath }))
+    .sort((a, b) => a.loc.localeCompare(b.loc));
+}
+
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
   siteUrl: process.env.SITE_URL || 'https://laursen.tech',
@@ -39,49 +67,19 @@ module.exports = {
 
   additionalPaths: async (config) => {
     const paths = [];
+    const exportedRoutes = getExportedHtmlRoutes();
 
-    /* -----------------------------
-     * Markdown pages
-     * ----------------------------- */
-    const markdownFiles = getAllFilesWithExt(MARKDOWN_DIR, '.md').concat(
-      getAllFilesWithExt(MARKDOWN_DIR, '.mdx')
-    );
+    for (const { loc, absPath } of exportedRoutes) {
+      const transformed = await config.transform(config, loc);
 
-    for (const { absPath, relPath } of markdownFiles) {
-      const urlPath = `/${relPath
-        .replace(/\.mdx?$/, '')
-        .split(path.sep)
-        .join('/')}`;
+      if (!transformed) {
+        continue;
+      }
 
       paths.push({
-        loc: urlPath,
+        ...transformed,
         lastmod: fs.statSync(absPath).mtime.toISOString(),
-        changefreq: 'monthly',
-        priority: 0.5,
       });
-    }
-
-    /* -----------------------------
-     * Jupyter notebooks
-     * ----------------------------- */
-    for (const notebooksDir of NOTEBOOKS_DIRS) {
-      const notebookFiles = getAllFilesWithExt(notebooksDir, '.ipynb');
-      const routeBase = path.basename(notebooksDir);
-
-      for (const { absPath, relPath } of notebookFiles) {
-        // relPath: "my-project.ipynb"
-        const slug = relPath.replace(/\.ipynb$/, '');
-
-        // maps to /ai-ml/<section>/<slug>
-        const urlPath = `/ai-ml/${routeBase}/${slug}`;
-
-        paths.push({
-          loc: urlPath,
-          lastmod: fs.statSync(absPath).mtime.toISOString(),
-          changefreq: 'yearly',
-          priority: 0.4,
-        });
-      }
     }
 
     return paths;

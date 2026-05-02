@@ -3,6 +3,7 @@
 import "react-vertical-timeline-component/style.min.css";
 import { VerticalTimeline, VerticalTimelineElement } from "react-vertical-timeline-component";
 import { chapters, accentToClasses } from "@/data/timeline";
+import { rhythmicProfiles } from "@/data/rhythmic-profiles";
 
 export default function OverviewTimeline() {
   const flat = chapters.flatMap((c) => c.steps.map((s) => ({ ...s, chapterId: c.id, chapterLabel: c.label })));
@@ -38,6 +39,16 @@ export default function OverviewTimeline() {
                 <span className={"inline-flex items-center rounded-full border px-2 py-0.5 text-xs " + a.pill}>
                   {s.chapterLabel}
                 </span>
+                {s.rhythmicProfileId ? (
+                  (() => {
+                    const p = rhythmicProfiles[s.rhythmicProfileId as any];
+                    return p ? (
+                      <span className={"ml-2 inline-flex items-center rounded-full border px-2 py-0.5 text-xs " + a.pill}>
+                        {p.primaryAccents?.length ? p.primaryAccents.join(', ') : p.name}
+                      </span>
+                    ) : null;
+                  })()
+                ) : null}
                 <h3 className="text-base font-semibold">{s.title}</h3>
               </div>
               <p className="mt-2 text-sm leading-relaxed text-zinc-200">{s.body}</p>

@@ -59,6 +59,7 @@ export const rootsChapter: TimelineChapter = {
         licenseUrl: 'https://creativecommons.org/licenses/by/4.0',
       },
       accent: 'roots',
+      rhythmicProfileId: 'roots',
     },
 
     {
