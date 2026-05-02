@@ -151,7 +151,7 @@ export const cubaChapter: TimelineChapter = {
             },
           ],
         },
-      ] as MusicianRef[],
+      ],
       relatedStyles: [
         'son montuno',
         'conjunto',
@@ -363,7 +363,6 @@ export const cubaChapter: TimelineChapter = {
         sourceName: 'Wikimedia Commons',
         sourceUrl: 'https://commons.wikimedia.org/',
       },
-      accent: 'cuba',
     },
 
     // ============================================================
@@ -423,7 +422,6 @@ export const cubaChapter: TimelineChapter = {
         sourceName: 'Wikimedia Commons',
         sourceUrl: 'https://commons.wikimedia.org/wiki/File:TitoPuente.jpg',
       },
-      accent: 'cuba',
     },
 
     // ---- Musician spotlight: Pérez Prado

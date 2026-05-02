@@ -130,5 +130,12 @@ export type RhythmicProfile = {
   accentPattern?: string;
   description?: string; // 1-2 lines describing feel and instrument emphasis
   notationHint?: string; // optional short notation or reference
+  bpm?: {
+    min: number;
+    max: number;
+    typical: number;
+    feel: string;
+    note?: string;
+  };
   exampleUrls?: string[]; // optional external references (no audio files in repo by default)
 };

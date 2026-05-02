@@ -19,6 +19,7 @@
     "sg": "next-sitemap",
     "start": "next start",
     "export": "next build && next export",
+    "typecheck": "tsc --noEmit",
     "lint": "next lint",
     "lf": "next lint --fix"
   },
