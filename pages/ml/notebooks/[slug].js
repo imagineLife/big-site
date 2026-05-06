@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { getPosts, getGlobalData } from '../../../utils';
-import { IpynbRenderer } from 'react-ipynb-renderer';
 import Layout from '../../../components/Layout';
 import Header from '../../../components/Header';
 import BreadCrumbs from '../../../components/Breadcrumbs/index.tsx';
+import NotebookWithToc from '../../../components/ml/NotebookWithToc';
 const NotebookBySlug = (props) => {
   let [loadedNotebook, setLoadedNotebook] = useState(null);
 
@@ -39,7 +39,7 @@ const NotebookBySlug = (props) => {
       <article className="px-6 md:px-0 mt-[40px]">
         <BreadCrumbs slugs={props.slugArr} />
         <main className="mx-auto p-3">
-          <IpynbRenderer ipynb={loadedNotebook} />
+          <NotebookWithToc ipynb={loadedNotebook} />
         </main>
       </article>
     </Layout>

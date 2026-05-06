@@ -1,8 +1,8 @@
 
-import { IpynbRenderer } from 'react-ipynb-renderer';
 import { useEffect, useState } from 'react';
 import getAiPaths, { PathObj } from '../../../hooks/useAiPaths';
 import GenericPost from '../../../components/GenericPost';
+import NotebookWithToc from '../../../components/ml/NotebookWithToc';
 
 export default function NotebookBySlug(props) {
   const pathsArr = getAiPaths('projects');
@@ -45,7 +45,7 @@ export default function NotebookBySlug(props) {
       // tags: o?.tags
     }}>
       {!loadedNotebook && <p>loading...</p>}
-      {loadedNotebook && <IpynbRenderer ipynb={loadedNotebook} />}
+      {loadedNotebook && <NotebookWithToc ipynb={loadedNotebook} />}
     </GenericPost>
   );
 }
