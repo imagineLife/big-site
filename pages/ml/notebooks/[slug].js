@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import path from 'path';
 import { getPosts, getGlobalData } from '../../../utils';
 import Layout from '../../../components/Layout';
 import Header from '../../../components/Header';
 import BreadCrumbs from '../../../components/Breadcrumbs/index.tsx';
 import NotebookWithToc from '../../../components/ml/NotebookWithToc';
+import { readNotebookSeoFromFile } from '../../../utils/notebook-seo';
 const NotebookBySlug = (props) => {
   let [loadedNotebook, setLoadedNotebook] = useState(null);
 
@@ -23,10 +25,6 @@ const NotebookBySlug = (props) => {
     }
   }, [loadedNotebook, props.slug]);
 
-  if (!loadedNotebook) {
-    return <>loading...</>;
-  }
-
   return (
     <Layout>
       {/* <Seo
@@ -39,7 +37,32 @@ const NotebookBySlug = (props) => {
       <article className="px-6 md:px-0 mt-[40px]">
         <BreadCrumbs slugs={props.slugArr} />
         <main className="mx-auto p-3">
-          <NotebookWithToc ipynb={loadedNotebook} />
+          {!loadedNotebook && (
+            <section>
+              {props.notebookSeo?.summary && (
+                <p className="mb-5">{props.notebookSeo.summary}</p>
+              )}
+              {props.notebookSeo?.toc?.length > 1 && (
+                <nav aria-label="Notebook table of contents" className="mb-6">
+                  <h2 className="text-xl font-semibold mb-2">Table Of Contents</h2>
+                  <ul>
+                    {props.notebookSeo.toc.map((item) => (
+                      <li
+                        key={item.id}
+                        style={{
+                          paddingLeft: `${Math.max(item.level - 1, 0) * 0.75}rem`,
+                        }}
+                      >
+                        {item.text}
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              )}
+              <p>Loading full notebook…</p>
+            </section>
+          )}
+          {loadedNotebook && <NotebookWithToc ipynb={loadedNotebook} />}
         </main>
       </article>
     </Layout>
@@ -59,11 +82,16 @@ export const getStaticPaths = async (props) => {
 
 export async function getStaticProps(props) {
   const globalData = getGlobalData();
+  const notebookSeo = await readNotebookSeoFromFile(
+    path.join(process.cwd(), 'public', 'notebooks', `${props.params.slug}.ipynb`)
+  );
+
   return {
     props: {
       globalData,
       slug: props.params.slug,
       slugArr: ['ml', 'notebooks', props.params.slug],
+      notebookSeo,
     },
   };
 }
