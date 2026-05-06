@@ -39,8 +39,8 @@ export default function ScrollyTimeline() {
     stepIndex: all[0].stepIndex,
   }));
 
-  console.log('active')
-  console.log(active)
+  // console.log('active')
+  // console.log(active)
   
   const totalSteps = all.length;
   const ids = React.useMemo(
