@@ -49,12 +49,12 @@ export default function ScrollyTimeline() {
   );
   const { activeId, progress, refs } = useScrollSpy(ids);
   
-  const slug = 'music/history-of-salsa';
+  const slug = 'salsa-history';
   const title = 'A History of Salsa Music: Cuba, New York City, and the Global Dance Floor';
   const excerpt =
     "An interactive timeline of salsa’s roots in Afro-Caribbean music, Cuba’s son and mambo eras, the New York City salsa explosion, and salsa’s global spread—plus musician spotlights with Spotify listening embeds.";
 
-  const canonicalUrl = `https://laursen.tech/${slug}/`;
+  const canonicalUrl = `https://laursen.tech/${slug}`;
   const ogImage = 'https://laursen.tech/images/history-of-salsa/og.jpg';
 
   // If you have a real publish date, use it. Otherwise omit datePublished/dateModified.
@@ -145,7 +145,7 @@ export default function ScrollyTimeline() {
         rel="sitemap"
         type="application/xml"
         title="Sitemap"
-        href="/sitemap-index.xml"
+        href="/sitemap.xml"
       />
 
       <script

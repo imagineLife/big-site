@@ -59,11 +59,11 @@ export default function ObjectDetectionPage() {
   return (
     <Layout fullHeight>
       <Seo
-        title={'Detecting Objects in Uploaded Images'}
+        title={'Object Detection from a Webcam Photo'}
         excerpt={
-          'Using Machine Learning with tensorflow js and the coco-ssd model to detect objects in images uploaded to the web'
+          'Capture a webcam photo and run object detection in-browser using TensorFlow.js and the coco-ssd model.'
         }
-        slug={`/ml-ui/object-detection-with-uploaded-images`}
+        slug={'ml-ui/object-detection-with-camera-photo'}
         tags={tags}
       />
       <h1>Object Detection In An Webcam-Captured Image</h1>

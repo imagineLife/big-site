@@ -146,6 +146,45 @@ function getPriorityForRoute(route, hubRoutes) {
   return Number(priority.toFixed(2));
 }
 
+function getDaysSince(isoDate, referenceNowMs = Date.now()) {
+  const updatedAt = new Date(isoDate);
+
+  if (Number.isNaN(updatedAt.getTime())) {
+    return null;
+  }
+
+  const diffMs = Math.max(0, referenceNowMs - updatedAt.getTime());
+  return diffMs / (1000 * 60 * 60 * 24);
+}
+
+function getChangefreqForLastmod(route, lastmodIso, hubRoutes, referenceNowMs) {
+  const ageDays = getDaysSince(lastmodIso, referenceNowMs);
+
+  if (ageDays === null) {
+    return 'monthly';
+  }
+
+  // Recency-first mapping that keeps output stable and easy to reason about.
+  if (ageDays <= 7) {
+    return 'daily';
+  }
+
+  if (ageDays <= 45) {
+    return 'weekly';
+  }
+
+  if (ageDays <= 365) {
+    return 'monthly';
+  }
+
+  // For older content, hubs still tend to be revisited/maintained more often.
+  if (route === '/' || hubRoutes.has(route)) {
+    return 'monthly';
+  }
+
+  return 'yearly';
+}
+
 function escapeRegex(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
@@ -359,6 +398,7 @@ module.exports = {
     const exportedRoutes = getExportedHtmlRoutes();
     const routeList = exportedRoutes.map((routeObj) => routeObj.loc);
     const hubRoutes = buildHubRouteSet(routeList);
+    const resolvedEntries = [];
 
     for (const { loc, absPath } of exportedRoutes) {
       const transformed = await config.transform(config, loc);
@@ -368,11 +408,36 @@ module.exports = {
       }
 
       const sourceFile = resolveSourceFileForRoute(loc, absPath, SOURCE_INDICES);
+      const lastmod = getFileLastmodIso(sourceFile);
 
-      paths.push({
+      resolvedEntries.push({
+        loc,
         ...transformed,
-        priority: getPriorityForRoute(loc, hubRoutes),
-        lastmod: getFileLastmodIso(sourceFile),
+        lastmod,
+      });
+    }
+
+    // Use the most recent known page update as the recency baseline so
+    // changefreq remains meaningful even if local system time is behind commit dates.
+    const newestLastmodMs = resolvedEntries.reduce((maxMs, entry) => {
+      const entryMs = new Date(entry.lastmod).getTime();
+      if (Number.isNaN(entryMs)) {
+        return maxMs;
+      }
+      return Math.max(maxMs, entryMs);
+    }, 0);
+    const referenceNowMs = newestLastmodMs || Date.now();
+
+    for (const entry of resolvedEntries) {
+      paths.push({
+        ...entry,
+        priority: getPriorityForRoute(entry.loc, hubRoutes),
+        changefreq: getChangefreqForLastmod(
+          entry.loc,
+          entry.lastmod,
+          hubRoutes,
+          referenceNowMs
+        ),
       });
     }
 

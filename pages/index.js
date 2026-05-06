@@ -56,7 +56,7 @@ export default function Index({ globalData }) {
           title={
             'Eric (Jake) Laursen | Senior Software Engineer • AI & Machine Learning Projects'
           }
-          description={globalData.blogTitle}
+          excerpt={globalData.blogTitle}
         />
         <Header name={globalData.name} />
         <h1>

@@ -199,9 +199,9 @@ export default function TrainAndRecognizeFromCameraPage() {
       <Seo
         title={'Train & Recognize Gestures From Webcam'}
         excerpt={
-          'Using Machine Learning with tensorflow js and the coco-ssd model to detect objects in images uploaded to the web'
+          'Train a browser-based TensorFlow.js model to recognize head-position gestures from your webcam feed.'
         }
-        slug={`/ml-ui/object-detection-with-uploaded-images`}
+        slug={'ml-ui/train-and-recognize-from-camera'}
         tags={[
           'javascript',
           'tensorflowjs',

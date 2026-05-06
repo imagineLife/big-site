@@ -150,9 +150,9 @@ export default function ObjectDetectionPage() {
       <Seo
         title={'Face Detection with a Webcam Photo'}
         excerpt={
-          'Using Machine Learning with tensorflow js and the coco-ssd model to detect objects in images uploaded to the web'
+          'Run in-browser face detection on a webcam snapshot using TensorFlow.js and MediaPipe Face Detector.'
         }
-        slug={`/ml-ui/object-detection-with-uploaded-images`}
+        slug={'ml-ui/face-detection-with-webcamera'}
         tags={tags}
       />
       <h1>Face Detection with a Webcam Photo</h1>

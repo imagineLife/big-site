@@ -1,6 +1,18 @@
 import Head from 'next/head';
 
-export default function Seo({ title, excerpt, tags = [], slug = '' }) {
+export default function Seo({
+  title,
+  excerpt,
+  description,
+  tags = [],
+  slug = '',
+}) {
+  const summary = excerpt || description || '';
+  const normalizedSlug = String(slug).trim().replace(/^\/+|\/+$/g, '');
+  const canonicalUrl = normalizedSlug
+    ? `https://laursen.tech/${normalizedSlug}`
+    : 'https://laursen.tech';
+
   const jsonLd = {
     '@context': 'http://schema.org',
     '@type': 'BlogPosting',
@@ -10,7 +22,7 @@ export default function Seo({ title, excerpt, tags = [], slug = '' }) {
       name: 'Eric (Jake) Laursen',
       url: 'https://laursen.tech/about/',
     },
-    description: excerpt,
+    description: summary,
     headline: title,
     // wordCount: words || null,
     keywords: [...tags, 'blog', 'blog post', 'blogpost'],
@@ -20,19 +32,23 @@ export default function Seo({ title, excerpt, tags = [], slug = '' }) {
   return (
     <Head>
       <title>{(title && `${title}`) || 'Jake Laursen Blog'}</title>
-      <meta name="description" content={excerpt} />
+      <meta name="description" content={summary} />
       <meta property="og:title" content={title} />
+      <meta property="og:description" content={summary} />
       <meta property="og:site_name" content={'Jake Laursen Blog'} />
-      <meta property="og:url" content={`https://laursen.tech/${slug}/`} />
+      <meta property="og:url" content={canonicalUrl} />
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={summary} />
       <meta httpEquiv="cache-control" content="no-cache" />
       <meta httpEquiv="expires" content="0" />
       <meta httpEquiv="pragma" content="no-cache" />
-      <link rel="canonical" href={`https://laursen.tech/${slug}/`} />
+      <link rel="canonical" href={canonicalUrl} />
       <link
         rel="sitemap"
         type="application/xml"
         title="Sitemap"
-        href="/sitemap-index.xml"
+        href="/sitemap.xml"
       />
       <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
     </Head>

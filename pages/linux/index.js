@@ -12,7 +12,7 @@ const LinuxIndex = (params) => {
     <Layout>
       <Seo
         title={params.globalData.name}
-        description={params.globalData.blogTitle}
+        excerpt={params.globalData.blogTitle}
       />
       <Header name={params.globalData.name} />
       <section className="mt-[80px] max-w-[90%]">
