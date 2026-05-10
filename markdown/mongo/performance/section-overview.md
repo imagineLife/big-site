@@ -22,5 +22,3 @@ tags: ['database', 'mongodb', 'performance', 'indexes']
 [Hardware](/mongo/performance/hardware)  
 [Optimizing CRUD](/mongo/performance/optimizing-crud)  
 [Wired Tiger](/mongo/performance/wired-tiger)
-
-<!-- [Particulars to a Distributed System](/mongo/performance/distributed-systems/) -->
