@@ -11,6 +11,7 @@ import {
   RailShellProps,
   TimelineRailProps,
 } from '../types/repo';
+import { truncateTimelineRailLabel } from '../utils/timeline-rail-label';
 
 function usePrefersReducedMotion() {
   const [reduced, setReduced] = React.useState(false);
@@ -126,13 +127,16 @@ function RailDotItem({
   onJump,
   prefersReducedMotion,
 }: RailDotItemProps) {
+  const fullLabel = item.dateLabel;
+
   return (
     <li style={{ position: 'relative', margin: '10px 0' }}>
       <button
         type="button"
         onClick={() => onJump(`${item.chapterId}-step-${item.stepId}`)}
         aria-current={isActive ? 'step' : undefined}
-        aria-label={`Jump to ${item.dateLabel}`}
+        aria-label={`Jump to ${fullLabel}`}
+        title={fullLabel}
         style={{
           width: 14,
           height: 14,
@@ -147,7 +151,7 @@ function RailDotItem({
         }}
       />
       <RailDotLabel
-        label={item.dateLabel}
+        label={fullLabel}
         isActive={isActive}
         prefersReducedMotion={prefersReducedMotion}
       />
@@ -160,9 +164,12 @@ function RailDotLabel({
   isActive,
   prefersReducedMotion,
 }: RailDotLabelProps) {
+  const visibleLabel = truncateTimelineRailLabel(label);
+
   return (
     <div
       aria-hidden="true"
+      title={label}
       style={{
         position: 'absolute',
         right: 22,
@@ -179,7 +186,7 @@ function RailDotLabel({
         transition: prefersReducedMotion ? undefined : 'opacity 160ms ease',
       }}
     >
-      {label}
+      {visibleLabel}
     </div>
   );
 }
@@ -218,4 +225,3 @@ export function TimelineRail({ items, activeId, progress }: TimelineRailProps) {
     </RailShell>
   );
 }
-

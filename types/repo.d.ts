@@ -31,6 +31,7 @@ export type TimelineStep = {
   id: string;
   dateLabel: string;
   title: string;
+  railLabel?: string;
   body: string;
 
   bg: string; // can be /public path OR remote URL

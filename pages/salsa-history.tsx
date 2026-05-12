@@ -10,6 +10,7 @@ import StepCard from '@/components/salsa/StepCard';
 import Head from 'next/head';
 import { useScrollSpy } from '../hooks/useScrollSpy';
 import { TimelineRail } from '@/components/TimelineRail';
+import { resolveTimelineRailLabel } from '../utils/timeline-rail-label';
 
 function buildChapterGroups() {
   return chapters.map((chapter, chapterIndex) => {
@@ -159,9 +160,9 @@ export default function ScrollyTimeline() {
 
       <div className="hidden lg:block">
         <TimelineRail
-          items={all.map(({ chapterLabel, chapterId, step }) => ({
+          items={all.map(({ chapterId, step }) => ({
             id: `${chapterId}-step-${step.id}`,
-            dateLabel: chapterLabel,
+            dateLabel: resolveTimelineRailLabel(step),
             chapterId: chapterId,
             stepId: step.id,
           }))}
