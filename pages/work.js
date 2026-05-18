@@ -530,18 +530,12 @@ export default function WorkPage() {
           'jira',
         ],
         slugArr: ['work'],
+        preTitleLink: {
+          href: '#contract-support',
+          label: 'Jump to contract support',
+        },
       }}
     >
-      <section className="mb-16">
-        <h2 className="!mt-0">Need Contract Support?</h2>
-        <p>
-          I&apos;m available for contract engagements focused on React, Node.js,
-          and TypeScript delivery.
-        </p>
-        <Link href="/services" className="underline hover:text-blue-400">
-          View services and start a project inquiry
-        </Link>
-      </section>
       <Alteryx />
       <div className="m-32" />
       <Medacist />
@@ -561,6 +555,20 @@ export default function WorkPage() {
       {certs.map((itm, itmIdex) => (
         <CertItem key={`folio-item-${itmIdex}`} {...itm} />
       ))}
+
+      <br />
+      <br />
+
+      <section className="mb-16" id="contract-support">
+        <h2 className="!mt-0">Need Contract Support?</h2>
+        <p>
+          I&apos;m available for contract engagements focused on React, Node.js,
+          and TypeScript delivery.
+        </p>
+        <Link href="/services" className="underline hover:text-blue-400">
+          View services and start a project inquiry
+        </Link>
+      </section>
     </GenericPost>
   );
 }

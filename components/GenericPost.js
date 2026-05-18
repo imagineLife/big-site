@@ -28,6 +28,7 @@ export default function GenericPost(props) {
     tags,
     description,
     jsonLdOverride,
+    preTitleLink,
     source,
     prevPost,
     nextPost,
@@ -50,6 +51,13 @@ export default function GenericPost(props) {
       {/* mt-[80px] */}
       <article className="px-6 md:px-0 ">
         {slugArr && <BreadCrumbs slugs={slugArr} siblings={siblings} />}
+        {preTitleLink?.href && preTitleLink?.label && (
+          <p className="mb-4 text-center">
+            <Link href={preTitleLink.href} className="underline">
+              {preTitleLink.label}
+            </Link>
+          </p>
+        )}
         <header>
           <h1 className="text-3xl md:text-5xl dark:text-white text-center mb-12">
             {title}
