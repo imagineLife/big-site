@@ -142,7 +142,7 @@ export const cubaChapter: TimelineChapter = {
               kind: 'artist',
               embedUrl:
                 'https://open.spotify.com/artist/2hN2DVx3lbISa1k2EuA9ug',
-              note: 'Artist page embed (catalog + top tracks).',
+              // note: 'Artist page embed (catalog + top tracks).',
             },
             {
               kind: 'playlist',
@@ -522,7 +522,7 @@ export const cubaChapter: TimelineChapter = {
               title: 'Mario Bauzá (Spotify)',
               embedUrl:
                 'https://open.spotify.com/artist/4ac8P2JGDFcQLNdGLm227f',
-              note: 'Artist page embed (catalog + top tracks).',
+              // note: 'Artist page embed (catalog + top tracks).',
             },
             {
               kind: 'album',
@@ -582,7 +582,7 @@ export const cubaChapter: TimelineChapter = {
               title: 'Tito Puente (Spotify)',
               embedUrl:
                 'https://open.spotify.com/artist/6SPpCqM8gOzrtICAxN5NuX',
-              note: 'Artist page embed (catalog + top tracks).',
+              // note: 'Artist page embed (catalog + top tracks).',
             },
             {
               kind: 'playlist',

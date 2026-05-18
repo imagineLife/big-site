@@ -26,6 +26,30 @@ const aboutContactLinks = [
   },
 ];
 
+const aboutProfileJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  name: 'About Eric (Jake) Laursen',
+  description:
+    'Personal profile of Eric (Jake) Laursen, senior software engineer focused on React, Node.js, and TypeScript.',
+  url: 'https://laursen.tech/about',
+  mainEntity: {
+    '@type': 'Person',
+    '@id': 'https://laursen.tech/about/#person',
+    name: 'Eric (Jake) Laursen',
+    url: 'https://laursen.tech/about',
+    jobTitle: 'Senior Software Engineer',
+    homeLocation: {
+      '@type': 'Place',
+      name: 'United States',
+    },
+    sameAs: [
+      'https://www.linkedin.com/in/eric-laursen-6a1b20b8/',
+      'https://github.com/imagineLife',
+    ],
+  },
+};
+
 function About() {
   const router = useRouter();
   return (
@@ -35,6 +59,7 @@ function About() {
         name: 'about',
         slug: '/about',
         tags: ['bio', 'blog', 'biography', 'about', 'about me'],
+        jsonLdOverride: aboutProfileJsonLd,
         slugArr: ['about'],
       }}
     >

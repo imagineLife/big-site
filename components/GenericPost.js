@@ -27,6 +27,7 @@ export default function GenericPost(props) {
     slug,
     tags,
     description,
+    jsonLdOverride,
     source,
     prevPost,
     nextPost,
@@ -43,6 +44,7 @@ export default function GenericPost(props) {
         excerpt={excerpt}
         slug={slug}
         tags={tags}
+        jsonLdOverride={jsonLdOverride}
       />
       <Header name={globalData?.name || title} />
       {/* mt-[80px] */}

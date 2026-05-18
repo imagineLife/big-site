@@ -57,6 +57,7 @@ export default function Index({ globalData }) {
             'Eric (Jake) Laursen | Senior Software Engineer • AI & Machine Learning Projects'
           }
           excerpt={globalData.blogTitle}
+          metaDescription="Senior software engineer building full-stack web applications with modern JavaScript, TypeScript, and data-driven product development."
         />
         <Header name={globalData.name} />
         <h1>
@@ -78,6 +79,14 @@ export default function Index({ globalData }) {
             title="laursen.tech/work"
           >
             A summary of some of my work experiences
+          </Link>
+          <h2 className="mt-4">Services</h2>
+          <Link
+            href="/services"
+            className="underline hover:text-blue-400"
+            title="laursen.tech/services"
+          >
+            Contracting services for React, Node.js, and TypeScript projects
           </Link>
           <h2>Blog</h2>
           <p>👋 Some writings on some topics</p>

@@ -8,7 +8,7 @@ const PAGES_DIR = path.join(ROOT_DIR, 'pages');
 const MARKDOWN_DIR = path.join(ROOT_DIR, 'markdown');
 const NOTEBOOKS_DIR = path.join(ROOT_DIR, 'public', 'notebooks');
 
-const EXCLUDED_EXPORT_ROUTES = new Set(['/404', '/__forms']);
+const EXCLUDED_EXPORT_ROUTES = new Set(['/404', '/__forms', '/thanks']);
 const PAGE_EXTENSIONS = ['.js', '.jsx', '.ts', '.tsx', '.md', '.mdx'];
 const FILE_LASTMOD_CACHE = new Map();
 
@@ -392,6 +392,7 @@ module.exports = {
   siteUrl: process.env.SITE_URL || 'https://laursen.tech',
   generateRobotsTxt: true,
   autoLastmod: false,
+  exclude: ['/thanks'],
 
   additionalPaths: async (config) => {
     const paths = [];

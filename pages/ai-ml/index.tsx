@@ -9,7 +9,7 @@ export default function AiPage() {
         globalData: {
           name: titleText,
         },
-        slug: '/work',
+        slug: '/ai-ml',
         tags: [
           'ai',
           'artificial intelligence',
