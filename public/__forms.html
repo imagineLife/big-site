@@ -7,5 +7,29 @@
       <input name="email" type="text" />
       <input name="message" type="text" />
     </form>
+    <form
+      name="services-inquiry"
+      method="POST"
+      action="/thanks"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      hidden
+    >
+      <input type="hidden" name="form-name" value="services-inquiry" />
+      <input name="bot-field" type="text" />
+      <input name="name" type="text" />
+      <input name="email" type="email" />
+      <input name="company" type="text" />
+      <select name="project_type">
+        <option value="React">React</option>
+        <option value="Node.js">Node.js</option>
+        <option value="TypeScript">TypeScript</option>
+        <option value="Full-stack">Full-stack</option>
+        <option value="Other">Other</option>
+      </select>
+      <input name="timeline" type="text" />
+      <input name="budget" type="text" />
+      <textarea name="message"></textarea>
+    </form>
   </body>
 </html>
