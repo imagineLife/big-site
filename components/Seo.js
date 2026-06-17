@@ -56,7 +56,10 @@ export default function Seo({
         title="Sitemap"
         href="/sitemap.xml"
       />
-      <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
     </Head>
   );
 }
