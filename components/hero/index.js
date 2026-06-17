@@ -1,11 +1,12 @@
 import React from 'react';
-import farmImg from './farm.jpg';
+
+const farmImgSrc = '/farm.jpg';
 
 function Hero({ windowWidth }) {
   return (
     <section
       style={{
-        backgroundImage: `url(${farmImg.src})`,
+        backgroundImage: `url(${farmImgSrc})`,
         backgroundPosition: 'center top 20%',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',

@@ -214,7 +214,7 @@ export async function getFlatSiblingTitleSlugs(pathsArr) {
 
   const resMds = await Promise.all(
     res.map((dirEnt) =>
-      getMdBySlugs(`${dirEnt.path}/${dirEnt.name.split('.md')[0]}`)
+      getMdBySlugs(`${pathsArr[0]}/${dirEnt.name.split('.md')[0]}`)
     )
   );
   return resMds.map((md) => ({ title: md.title, slug: md.slug }));
