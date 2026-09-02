@@ -1,5 +1,6 @@
 import Layout from './../../components/Layout';
 import Header from './../../components/Header';
+import Seo from './../../components/Seo';
 import * as THREE from 'three';
 import { Canvas } from '@react-three/fiber';
 import { ContactShadows, Float, Environment } from '@react-three/drei';
@@ -216,8 +217,16 @@ const allShapes = [Pill, smileyObj];
 export default function ThreeDee() {
   return (
     <Layout>
+      <Seo
+        title="3D React Experiment | Eric Laursen"
+        metaDescription="A small Three.js and React Three Fiber experiment kept available for direct visitors."
+        slug="/3d"
+        robots="noindex,follow"
+        jsonLdType="WebPage"
+      />
       <Header name={'working in 3d'} />
       <article className="px-6 md:px-0 mt-[80px]">
+        <h1>3D React Experiment</h1>
         <Shapes />
       </article>
     </Layout>

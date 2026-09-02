@@ -6,8 +6,17 @@ import Header from '../../../components/Header';
 import BreadCrumbs from '../../../components/Breadcrumbs/index.tsx';
 import NotebookWithToc from '../../../components/ml/NotebookWithToc';
 import { readNotebookSeoFromFile } from '../../../utils/notebook-seo';
+import Seo from '../../../components/Seo';
+
+function titleFromNotebookSlug(slug) {
+  return String(slug || '')
+    .replace(/[-_]+/g, ' ')
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+}
+
 const NotebookBySlug = (props) => {
   let [loadedNotebook, setLoadedNotebook] = useState(null);
+  const notebookTitle = titleFromNotebookSlug(props.slug);
 
   useEffect(() => {
     if (!loadedNotebook) {
@@ -27,16 +36,18 @@ const NotebookBySlug = (props) => {
 
   return (
     <Layout>
-      {/* <Seo
-        title={`${title} - ${globalData.name}`}
-        excerpt={excerpt}
-        slug={slug}
-        tags={tags}
-      /> */}
+      <Seo
+        title={`${notebookTitle} Notebook | Eric Laursen`}
+        excerpt={props.notebookSeo?.summary}
+        slug={`/ml/notebooks/${props.slug}`}
+        robots="noindex,follow"
+        jsonLdType="WebPage"
+      />
       <Header name={props.globalData.name} />
       <article className="px-6 md:px-0 mt-[40px]">
         <BreadCrumbs slugs={props.slugArr} />
         <main className="mx-auto p-3">
+          <h1>{notebookTitle} Notebook</h1>
           {!loadedNotebook && (
             <section>
               {props.notebookSeo?.summary && (

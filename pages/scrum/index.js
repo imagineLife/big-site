@@ -3,10 +3,17 @@ import { getMdPostSummaries, getGlobalData } from '../../utils';
 import Layout from './../../components/Layout';
 import Link from 'next/link';
 import PostLink from '../../components/PostLink';
+import Seo from '../../components/Seo';
 
 const ScrumIndex = ({ posts }) => {
   return (
     <Fragment>
+      <Seo
+        title="Scrum Notes and Professional Scrum Master Study Articles | Eric Laursen"
+        metaDescription="Scrum notes from Professional Scrum Master study, covering roles, events, artifacts, empiricism, and team practices."
+        slug="/scrum"
+        jsonLdType="WebPage"
+      />
       {/* <Hero /> */}
       <Layout>
         <section className="toc-wrapper">

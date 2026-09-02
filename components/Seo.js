@@ -1,14 +1,15 @@
 import Head from 'next/head';
 
 export default function Seo({
-  title,
-  excerpt,
-  description,
-  metaDescription,
+  title = '',
+  excerpt = '',
+  description = '',
+  metaDescription = '',
   tags = [],
   slug = '',
-  jsonLdOverride,
-  robots,
+  jsonLdOverride = null,
+  jsonLdType = 'BlogPosting',
+  robots = '',
 }) {
   const summary = metaDescription || excerpt || description || '';
   const resolvedTitle = title || 'Jake Laursen Blog';
@@ -17,7 +18,21 @@ export default function Seo({
     ? `https://laursen.tech/${normalizedSlug}`
     : 'https://laursen.tech';
 
-  const defaultJsonLd = {
+  const webPageJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: resolvedTitle,
+    url: canonicalUrl,
+    description: summary,
+    inLanguage: 'en-US',
+    isPartOf: {
+      '@type': 'WebSite',
+      name: 'Jake Laursen Blog',
+      url: 'https://laursen.tech',
+    },
+  };
+
+  const blogPostingJsonLd = {
     '@context': 'http://schema.org',
     '@type': 'BlogPosting',
     name: resolvedTitle,
@@ -32,6 +47,7 @@ export default function Seo({
     keywords: [...tags, 'blog', 'blog post', 'blogpost'],
     inLanguage: 'en-US',
   };
+  const defaultJsonLd = jsonLdType === 'WebPage' ? webPageJsonLd : blogPostingJsonLd;
   const jsonLd = jsonLdOverride || defaultJsonLd;
 
   return (

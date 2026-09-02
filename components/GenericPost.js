@@ -15,6 +15,7 @@ import Mermaid from './mermaid';
 
 const components = {
   a: CustomLink,
+  h1: (props) => <h2 {...props} />,
   Head,
   Mermaid,
 };
@@ -27,7 +28,9 @@ export default function GenericPost(props) {
     slug,
     tags,
     description,
+    metaDescription,
     jsonLdOverride,
+    jsonLdType,
     preTitleLink,
     source,
     prevPost,
@@ -43,9 +46,12 @@ export default function GenericPost(props) {
       <Seo
         title={`${title}${globalData?.name ? ` -  ${globalData.name}` : ''}`}
         excerpt={excerpt}
+        description={description}
+        metaDescription={metaDescription}
         slug={slug}
         tags={tags}
         jsonLdOverride={jsonLdOverride}
+        jsonLdType={jsonLdType}
       />
       <Header name={globalData?.name || title} />
       {/* mt-[80px] */}

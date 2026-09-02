@@ -58,6 +58,8 @@ function About() {
         title: 'About Me',
         name: 'about',
         slug: '/about',
+        metaDescription:
+          'About Eric (Jake) Laursen, a senior software engineer focused on React, Node.js, TypeScript, data visualization, and applied machine learning.',
         tags: ['bio', 'blog', 'biography', 'about', 'about me'],
         jsonLdOverride: aboutProfileJsonLd,
         slugArr: ['about'],

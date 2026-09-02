@@ -9,6 +9,8 @@ export default function PyForDS(){
     title: 'Introduction To Machine Learning',
     name: 'Introduction To Machine Learning',
     slug: '/ai-ml/intro-to-ml',
+    metaDescription:
+      'Introductory machine learning notebooks covering supervised learning, loan default prediction, and Boston housing price prediction.',
     tags: [
       'python',
       'data science',

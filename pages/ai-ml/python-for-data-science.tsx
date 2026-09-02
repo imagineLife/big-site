@@ -10,6 +10,8 @@ export default function PyForDS(){
     title: 'Learn Python for DataScience',
     name: 'Learn Python for DataScience',
     slug: '/ai-ml/python-for-data-science',
+    metaDescription:
+      'Python for data science notebooks covering statistics, exploratory data analysis, TensorFlow, regression, clustering, and model evaluation.',
     tags: [
       'python',
       'data science'

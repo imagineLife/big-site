@@ -3,6 +3,7 @@ import { getPosts, getGlobalData } from '../../../utils';
 import Layout from './../../../components/Layout';
 import Hero from './../../../components/hero';
 import PostLink from '../../../components/PostLink';
+import Seo from '../../../components/Seo';
 
 /*
   before filter
@@ -13,6 +14,13 @@ import PostLink from '../../../components/PostLink';
 const MlNotebooksIndex = ({ posts }) => {
   return (
     <>
+      <Seo
+        title="Machine Learning Notebooks Archive | Eric Laursen"
+        metaDescription="Legacy machine learning notebook archive kept available for direct visitors but excluded from search indexing."
+        slug="/ml/notebooks"
+        robots="noindex,follow"
+        jsonLdType="WebPage"
+      />
       <Hero />
       <Layout>
         <section className="toc-wrapper">

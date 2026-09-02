@@ -4,7 +4,7 @@ import GenericPost from '../../components/GenericPost';
 
 const k8s_VAR = 'k8s';
 export default function k8sBySlug({
-  // frontMatter,
+  frontMatter,
   globalData,
   slugArr,
   source,
@@ -13,7 +13,7 @@ export default function k8sBySlug({
     globalData,
     source,
     slugArr,
-    // ...frontMatter,
+    ...frontMatter,
   };
   return <GenericPost {...props} />;
 }

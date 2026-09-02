@@ -8,8 +8,11 @@ const MlUiIndex = (params) => {
   return (
     <Layout>
       <Seo
-        title={params.globalData.name}
-        excerpt={params.globalData.blogTitle}
+        title="Machine Learning UI Demos | Eric Laursen"
+        metaDescription="Browser-based machine learning UI experiments with image detection, webcam input, and interactive model demos."
+        slug="/ml-ui"
+        robots="noindex,follow"
+        jsonLdType="WebPage"
       />
       <Header name={params.globalData.name} />
       <section className="mt-[80px] max-w-[90%]">

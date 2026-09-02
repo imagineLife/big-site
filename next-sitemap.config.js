@@ -8,7 +8,16 @@ const PAGES_DIR = path.join(ROOT_DIR, 'pages');
 const MARKDOWN_DIR = path.join(ROOT_DIR, 'markdown');
 const NOTEBOOKS_DIR = path.join(ROOT_DIR, 'public', 'notebooks');
 
-const EXCLUDED_EXPORT_ROUTES = new Set(['/404', '/__forms', '/thanks']);
+const EXCLUDED_EXPORT_ROUTES = new Set([
+  '/404',
+  '/__forms',
+  '/thanks',
+  '/3d',
+  '/ml-ui',
+  '/ml-ui/face-detection-with-webcamera',
+  '/stock-analysis',
+]);
+const EXCLUDED_EXPORT_ROUTE_PREFIXES = ['/ml/notebooks'];
 const PAGE_EXTENSIONS = ['.js', '.jsx', '.ts', '.tsx', '.md', '.mdx'];
 const FILE_LASTMOD_CACHE = new Map();
 
@@ -78,7 +87,12 @@ function getExportedHtmlRoutes() {
   for (const file of htmlFiles) {
     const route = toRoutePath(file.relPath);
 
-    if (EXCLUDED_EXPORT_ROUTES.has(route)) {
+    if (
+      EXCLUDED_EXPORT_ROUTES.has(route) ||
+      EXCLUDED_EXPORT_ROUTE_PREFIXES.some((prefix) => (
+        route === prefix || route.startsWith(`${prefix}/`)
+      ))
+    ) {
       continue;
     }
 
@@ -392,7 +406,15 @@ module.exports = {
   siteUrl: process.env.SITE_URL || 'https://laursen.tech',
   generateRobotsTxt: true,
   autoLastmod: false,
-  exclude: ['/thanks'],
+  exclude: [
+    '/thanks',
+    '/3d',
+    '/ml-ui',
+    '/ml-ui/face-detection-with-webcamera',
+    '/ml/notebooks',
+    '/ml/notebooks/*',
+    '/stock-analysis',
+  ],
 
   additionalPaths: async (config) => {
     const paths = [];

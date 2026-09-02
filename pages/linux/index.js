@@ -11,8 +11,10 @@ const LinuxIndex = (params) => {
   return (
     <Layout>
       <Seo
-        title={params.globalData.name}
-        excerpt={params.globalData.blogTitle}
+        title="Linux and Bash Articles | Eric Laursen"
+        metaDescription="Linux and Bash notes covering files, permissions, processes, shell scripting, networking, users, and command-line tools."
+        slug="/linux"
+        jsonLdType="WebPage"
       />
       <Header name={params.globalData.name} />
       <section className="mt-[80px] max-w-[90%]">

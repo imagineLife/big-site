@@ -157,6 +157,7 @@ export default function ScrollyTimeline() {
     <section
       className="relative"
     >
+      <h1 className="sr-only">{title}</h1>
 
       <div className="hidden lg:block">
         <TimelineRail

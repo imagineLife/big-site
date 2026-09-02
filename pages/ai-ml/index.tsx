@@ -10,6 +10,8 @@ export default function AiPage() {
           name: titleText,
         },
         slug: '/ai-ml',
+        metaDescription:
+          'AI and machine learning projects, system design case studies, and applied ML notebooks from Eric (Jake) Laursen.',
         tags: [
           'ai',
           'artificial intelligence',

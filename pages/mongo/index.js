@@ -4,10 +4,17 @@ import Layout from './../../components/Layout';
 import Hero from './../../components/hero';
 import Card from './../../components/Card';
 import Link from 'next/link';
+import Seo from '../../components/Seo';
 
 const MongoIndex = (props) => {
   return (
     <Fragment>
+      <Seo
+        title="MongoDB Articles and Certification Notes | Eric Laursen"
+        metaDescription="MongoDB study notes and articles covering aggregation, CRUD, schema design, replication, roles, performance, and sharding."
+        slug="/mongo"
+        jsonLdType="WebPage"
+      />
       <Hero />
       <Layout>
         <section className="toc-wrapper">

@@ -17,6 +17,43 @@ const nb_dir = join(cwd, 'notebooks');
 //
 const mdBySlugCache = {};
 
+function stripMarkdownForSeo(value) {
+  return String(value || '')
+    .replace(/^---[\s\S]*?---/, ' ')
+    .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/!\[[^\]]*\]\([^)]+\)/g, ' ')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/`{1,3}([^`]+)`{1,3}/g, '$1')
+    .replace(/^#{1,6}\s+/gm, '')
+    .replace(/[*_>#-]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function titleFromSlug(slug) {
+  return String(slug || '')
+    .split('/')
+    .filter(Boolean)
+    .pop()
+    .replace(/[-_]+/g, ' ')
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+}
+
+function extractFirstHeading(markdown) {
+  const headingMatch = String(markdown || '').match(/^#\s+(.+)$/m);
+  return headingMatch ? stripMarkdownForSeo(headingMatch[1]) : '';
+}
+
+function createExcerpt(markdown, maxLength = 160) {
+  const text = stripMarkdownForSeo(markdown);
+
+  if (text.length <= maxLength) {
+    return text;
+  }
+
+  return `${text.slice(0, maxLength).replace(/\s+\S*$/, '')}...`;
+}
+
 // directories in /public/<dir-here>
 export const mongo_path = join(pages_dir, 'mongo');
 export const notebooks_path = join(public_dir, 'notebooks');
@@ -132,6 +169,27 @@ export async function getMdBySlugs(mdSlugString, nestedDirString) {
   }
 
   const matterResult = matter(fileContents);
+  const frontmatter = { ...matterResult.data };
+
+  if (!frontmatter.title) {
+    frontmatter.title = extractFirstHeading(matterResult.content) || titleFromSlug(cleanedBasePath);
+  }
+
+  if (!frontmatter.slug) {
+    frontmatter.slug = cleanedBasePath;
+  }
+
+  if (!frontmatter.excerpt) {
+    frontmatter.excerpt = frontmatter.description || createExcerpt(matterResult.content);
+  }
+
+  if (!frontmatter.author) {
+    frontmatter.author = 'Jake Laursen';
+  }
+
+  if (!frontmatter.tags) {
+    frontmatter.tags = [];
+  }
 
   const mdxSource = await serialize(matterResult.content, {
     mdxOptions: {
@@ -147,7 +205,7 @@ export async function getMdBySlugs(mdSlugString, nestedDirString) {
     id: slugBySection[slugBySection.length - 1],
     // contentHtml,
     contentHtml: mdxSource,
-    ...matterResult.data,
+    ...frontmatter,
   };
 
   //

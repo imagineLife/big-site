@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
+import Seo from "../components/Seo";
 
 interface LogEntry {
   time: string;
@@ -105,7 +106,19 @@ const StockAnalysis = () => {
   useEffect(() => {
     fetchLogs().then(setLogs);
   }, []);
-  return <StockCharts  logs={logs.map(log => JSON.stringify(log))}stockSymbols={["NVDA","SPY"]} />;
+  return (
+    <>
+      <Seo
+        title="Stock Analysis Dashboard | Eric Laursen"
+        metaDescription="A personal stock analysis dashboard kept available for direct visitors."
+        slug="/stock-analysis"
+        robots="noindex,follow"
+        jsonLdType="WebPage"
+      />
+      <h1>Stock Analysis Dashboard</h1>
+      <StockCharts logs={logs.map(log => JSON.stringify(log))} stockSymbols={["NVDA","SPY"]} />
+    </>
+  );
 };
 
 export default StockAnalysis;

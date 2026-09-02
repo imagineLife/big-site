@@ -15,7 +15,6 @@ export default function NodeIndex({ sections }) {
       }}
     >
       <>
-        <h1>Node</h1>
         <section className="flex gap-3 p-5 flex-wrap">
           {sections?.map((s) => (
             <Card key={s.t} title={s.t} subTitle={s.d} url={s.url} />

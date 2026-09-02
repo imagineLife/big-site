@@ -490,6 +490,8 @@ export default function WorkPage() {
     <GenericPost
       {...{
         title: 'Work Experience',
+        metaDescription:
+          'Work experience, certifications, and project background for Eric (Jake) Laursen, senior software engineer working with React, Node.js, TypeScript, and cloud applications.',
         globalData: {
           name: 'Eric Laursen CV, Experience, and Certifications',
         },
@@ -546,12 +548,12 @@ export default function WorkPage() {
       <div className="m-32" />
       <ThisSite />
       <div className="m-32" />
-      <h1
+      <h2
         className="text-3xl md:text-5xl dark:text-white text-center mb-12 font-normal"
         id="certifications"
       >
         Certifications
-      </h1>
+      </h2>
       {certs.map((itm, itmIdex) => (
         <CertItem key={`folio-item-${itmIdex}`} {...itm} />
       ))}

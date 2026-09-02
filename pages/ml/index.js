@@ -3,10 +3,17 @@ import { getMdPostSummaries, getGlobalData } from '../../utils';
 import Layout from './../../components/Layout';
 import Hero from './../../components/hero';
 import PostLink from '../../components/PostLink';
+import Seo from '../../components/Seo';
 
 const MlIndex = ({ posts }) => {
   return (
     <>
+      <Seo
+        title="Machine Learning Articles and Experiments | Eric Laursen"
+        metaDescription="Machine learning articles and experiments covering object detection, model exploration, and applied ML concepts."
+        slug="/ml"
+        jsonLdType="WebPage"
+      />
       <Hero />
       <Layout>
         <section className="toc-wrapper">

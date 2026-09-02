@@ -3,6 +3,7 @@ import { getMdPostSummaries, getGlobalData } from '../../utils';
 import Layout from './../../components/Layout';
 import Hero from './../../components/hero';
 import PostLink from '../../components/PostLink';
+import Seo from '../../components/Seo';
 
 const DockerIndex = (params) => {
   const myPages = {
@@ -19,6 +20,12 @@ const DockerIndex = (params) => {
 
   return (
     <Fragment>
+      <Seo
+        title="Docker Articles and Node Container Notes | Eric Laursen"
+        metaDescription="Docker notes covering container basics, Dockerfiles, CLI usage, and containerizing Node.js applications."
+        slug="/docker"
+        jsonLdType="WebPage"
+      />
       <Hero />
       <Layout>
         <section className="toc-wrapper">
