@@ -7,6 +7,11 @@ const EXPORT_DIR = path.join(ROOT_DIR, 'out');
 const PAGES_DIR = path.join(ROOT_DIR, 'pages');
 const MARKDOWN_DIR = path.join(ROOT_DIR, 'markdown');
 const NOTEBOOKS_DIR = path.join(ROOT_DIR, 'public', 'notebooks');
+const {
+  getCuratedMlNotebooks,
+  getCuratedMlNotebookRoute,
+  getCuratedMlNotebookSourcePath,
+} = require('./utils/ml-notebooks');
 
 const EXCLUDED_EXPORT_ROUTES = new Set([
   '/404',
@@ -197,6 +202,30 @@ function getChangefreqForLastmod(route, lastmodIso, hubRoutes, referenceNowMs) {
   }
 
   return 'yearly';
+}
+
+function resolveMaybeRelativeSourcePath(sourcePath) {
+  if (!sourcePath) {
+    return null;
+  }
+
+  return path.isAbsolute(sourcePath)
+    ? sourcePath
+    : path.join(ROOT_DIR, sourcePath);
+}
+
+function getCuratedMlNotebookSitemapEntries() {
+  return getCuratedMlNotebooks().map((entry) => {
+    const loc = normalizeRoute(getCuratedMlNotebookRoute(entry));
+    const sourcePath = resolveMaybeRelativeSourcePath(
+      getCuratedMlNotebookSourcePath(entry)
+    );
+
+    return {
+      loc,
+      sourcePath,
+    };
+  });
 }
 
 function escapeRegex(value) {
@@ -419,7 +448,18 @@ module.exports = {
   additionalPaths: async (config) => {
     const paths = [];
     const exportedRoutes = getExportedHtmlRoutes();
-    const routeList = exportedRoutes.map((routeObj) => routeObj.loc);
+    const curatedNotebookRoutes = getCuratedMlNotebookSitemapEntries();
+    const indexableNotebookRoutes = [
+      {
+        loc: '/ml/notebooks',
+        sourcePath: path.join(PAGES_DIR, 'ml', 'notebooks', 'index.js'),
+      },
+      ...curatedNotebookRoutes,
+    ];
+    const routeList = [
+      ...exportedRoutes.map((routeObj) => routeObj.loc),
+      ...indexableNotebookRoutes.map((routeObj) => routeObj.loc),
+    ];
     const hubRoutes = buildHubRouteSet(routeList);
     const resolvedEntries = [];
 
@@ -432,6 +472,24 @@ module.exports = {
 
       const sourceFile = resolveSourceFileForRoute(loc, absPath, SOURCE_INDICES);
       const lastmod = getFileLastmodIso(sourceFile);
+
+      resolvedEntries.push({
+        loc,
+        ...transformed,
+        lastmod,
+      });
+    }
+
+    for (const { loc, sourcePath } of indexableNotebookRoutes) {
+      const transformed = await config.transform(config, loc);
+
+      if (!transformed) {
+        continue;
+      }
+
+      const lastmod = sourcePath && fs.existsSync(sourcePath)
+        ? getFileLastmodIso(sourcePath)
+        : new Date().toISOString();
 
       resolvedEntries.push({
         loc,

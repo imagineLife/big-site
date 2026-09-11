@@ -1,39 +1,46 @@
 import React from 'react';
-import { getPosts, getGlobalData } from '../../../utils';
+import { getGlobalData } from '../../../utils';
 import Layout from './../../../components/Layout';
 import Hero from './../../../components/hero';
 import PostLink from '../../../components/PostLink';
 import Seo from '../../../components/Seo';
+import {
+  getCuratedMlNotebooks,
+  getCuratedMlNotebookRoute as getMlNotebookRoute,
+} from '../../../utils/ml-notebooks';
 
-/*
-  before filter
+function normalizePostLinkSlug(entry) {
+  return String(getMlNotebookRoute(entry) || `/ml/notebooks/${entry.slug}`)
+    .replace(/^\/+/, '')
+    .replace(/\/+$/, '');
+}
 
-  re-introduce in frontmatter when done-zo
-  order: { gt: 0 }
-*/
-const MlNotebooksIndex = ({ posts }) => {
+const MlNotebooksIndex = ({ notebooks }) => {
   return (
     <>
       <Seo
-        title="Machine Learning Notebooks Archive | Eric Laursen"
-        metaDescription="Legacy machine learning notebook archive kept available for direct visitors but excluded from search indexing."
+        title="Machine Learning Notebooks | Eric Laursen"
+        metaDescription="Curated machine learning notebooks covering classification, transfer learning, CNNs, model analysis, data wrangling, and TensorFlow experiments."
         slug="/ml/notebooks"
-        robots="noindex,follow"
         jsonLdType="WebPage"
       />
       <Hero />
       <Layout>
         <section className="toc-wrapper">
           <h1>Machine Learning Notebooks</h1>
-          <p>Some more dabbling...</p>
+          <p>
+            A curated set of applied machine learning notebooks with crawlable
+            summaries, project context, and links to the full interactive notebook
+            renderings.
+          </p>
         </section>
         <section>
-          {posts?.map((p) => (
+          {notebooks?.map((notebook) => (
             <PostLink
-              key={`machine-learning-toc-post-${p}`}
-              slug={`ml/notebooks/${p}`}
-              title={p}
-              // excerpt={'mic check'}
+              key={`machine-learning-toc-post-${notebook.slug}`}
+              slug={normalizePostLinkSlug(notebook)}
+              title={notebook.title}
+              excerpt={notebook.excerpt || notebook.description}
             />
           ))}
         </section>
@@ -45,8 +52,7 @@ const MlNotebooksIndex = ({ posts }) => {
 export default MlNotebooksIndex;
 
 export async function getStaticProps() {
-  const posts = await getPosts('notebooks');
+  const notebooks = getCuratedMlNotebooks();
   const globalData = getGlobalData();
-  // globalData
-  return { props: { posts, globalData } };
+  return { props: { notebooks, globalData } };
 }

@@ -8,3 +8,28 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+[[redirects]]
+  from = "/ml/notebooks/transfer-learning-I"
+  to = "/ml/notebooks/transfer-learning-i"
+  status = 301
+
+[[redirects]]
+  from = "/ml/notebooks/Multi-Class-cnn"
+  to = "/ml/notebooks/multi-class-cnn"
+  status = 301
+
+[[redirects]]
+  from = "/ml/notebooks/Transfer-learning-fine-tuning"
+  to = "/ml/notebooks/transfer-learning-fine-tuning"
+  status = 301
+
+[[redirects]]
+  from = "/ml/notebooks/Model-Analysis-In-Depth"
+  to = "/ml/notebooks/model-analysis-in-depth"
+  status = 301
+
+[[redirects]]
+  from = "/ml/notebooks/Modeling-with-transformations"
+  to = "/ml/notebooks/modeling-with-transformations"
+  status = 301
