@@ -130,6 +130,25 @@ li {
   opacity: 0.9;
 }
 
+.notebook-toc-content {
+  min-width: 0;
+}
+
+.notebook-toc-content .text_cell_render,
+.notebook-toc-content .output_error {
+  overflow-wrap: anywhere;
+}
+
+.notebook-toc-content .output_text pre {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.notebook-toc-content .output_text pre:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
 .notebook-toc-content h1,
 .notebook-toc-content h2,
 .notebook-toc-content h3,
