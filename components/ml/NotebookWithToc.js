@@ -45,6 +45,39 @@ export default function NotebookWithToc({ ipynb }) {
     return () => window.clearTimeout(timeoutId);
   }, [ipynb]);
 
+  useEffect(() => {
+    const root = notebookRef.current;
+    if (!root) return;
+
+    const outputs = Array.from(root.querySelectorAll('.output_text pre'));
+    const originalTabIndexes = new Map(
+      outputs.map((output) => [output, output.getAttribute('tabindex')])
+    );
+    const updateOutputFocus = () => {
+      outputs.forEach((output) => {
+        if (originalTabIndexes.get(output) !== null) return;
+        if (output.scrollWidth > output.clientWidth + 1) {
+          output.setAttribute('tabindex', '0');
+        } else {
+          output.removeAttribute('tabindex');
+        }
+      });
+    };
+
+    const observer = new ResizeObserver(updateOutputFocus);
+    outputs.forEach((output) => observer.observe(output));
+    updateOutputFocus();
+
+    return () => {
+      observer.disconnect();
+      outputs.forEach((output) => {
+        const original = originalTabIndexes.get(output);
+        if (original === null) output.removeAttribute('tabindex');
+        else output.setAttribute('tabindex', original);
+      });
+    };
+  }, [ipynb]);
+
   const tocList = useMemo(
     () => (
       <ul className="notebook-toc-list">
