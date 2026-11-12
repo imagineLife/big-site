@@ -14,11 +14,13 @@ const nyChapter = {
         '• More obvious ‘pop’ structure\n' +
         '• Crowd-friendly choruses\n' +
         '• A rhythm feel that can lean toward R&B while keeping Latin percussion identity\n\n' +
+        'The concrete anchors are Joe Cuba’s 1966 “Bang Bang” breakthrough and Pete Rodríguez’s 1967 “I Like It Like That”: bilingual, hooky, street-level records that show Latin music working inside the same pop/R&B pressure field as the rest of 1960s New York.\n\n' +
         'In your UI, boogaloo is a perfect ‘gateway’ panel: it explains how the scene moves from older dance-band forms into the modern salsa explosion by proving Latin music can dominate clubs with contemporary attitude.',
       musicalImpact: [
         'Pushes Latin music toward pop-forward hooks and dance-floor immediacy.',
         'Creates a bilingual, urban identity that becomes central to NYC salsa’s story.',
         'Blends Latin percussion with R&B-oriented phrasing and groove expectations.',
+        'Uses “Bang Bang” and “I Like It Like That” as concrete crossover hits before salsa dura takes over the public story.',
       ],
       instrumentation: [
         'Piano or organ (often more ‘club’ sounding)',
@@ -31,12 +33,12 @@ const nyChapter = {
         {
           name: 'Joe Cuba',
           role: 'bandleader',
-          why: 'Major boogaloo-era figure; helped define the crossover club sound.',
+          why: 'Major boogaloo-era figure; “Bang Bang” gives the crossover club sound a chant-like anthem.',
         },
         {
           name: 'Pete Rodríguez',
           role: 'singer',
-          why: 'A well-known voice in the boogaloo wave; emblematic of the era’s bilingual club energy.',
+          why: 'His “I Like It Like That” becomes the canonical Latin boogaloo reference point.',
         },
         {
           name: 'Eddie Palmieri',
@@ -249,6 +251,48 @@ const nyChapter = {
       accent: 'nyc',
     },
 
+    {
+      id: 'nyc-colon-lavoe-el-malo',
+      dateLabel: '1967',
+      title: 'El Malo launches the Colón/Lavoe street sound',
+      body:
+        'Willie Colón’s debut **El Malo** launches the Colón/Lavoe partnership inside the young Fania ecosystem.\n\n' +
+        'The record matters because it makes the label’s streetwise identity audible: trombone grit, barrio imagery, a teenage bandleader’s attitude, and Héctor Lavoe’s Puerto Rican vocal phrasing. By **Guisando** in 1969, the duo is already moving away from boogaloo-era fashion toward the harder salsa dura language that will define the 1970s.',
+      musicalImpact: [
+        'Makes Fania’s trombone-forward, street-coded NYC sound concrete before the All-Stars spectacle.',
+        'Introduces the Colón/Lavoe partnership as a central engine of salsa dura.',
+        'Marks the shift from boogaloo crossover toward harder son/guaracha/guaguancó-based salsa identity.',
+      ],
+      instrumentation: [
+        'Trombones with gritty, low-register weight',
+        'Piano montuno + bass tumbao',
+        'Congas + timbales + bongó',
+        'Lead vocal + coro with barrio storytelling energy',
+      ],
+      keyMusicians: [
+        {
+          name: 'Willie Colón',
+          role: 'trombonist / bandleader',
+          why: 'Shapes the aggressive trombone-led Fania sound from the start.',
+        },
+        {
+          name: 'Héctor Lavoe',
+          role: 'singer',
+          why: 'Turns the arrangements into vivid street storytelling and dancer memory.',
+        },
+      ],
+      relatedStyles: ['salsa dura', 'boogaloo aftermath', 'guaracha', 'guaguancó'],
+      bg: 'https://commons.wikimedia.org/wiki/Special:FilePath/Willie%20Col%C3%B3n%20and%20H%C3%A9ctor%20Lavoe%20(1969%20Fania%20Records%20publicity%20photo).jpg?width=2400',
+      bgCredit: {
+        label: 'Willie Colón and Héctor Lavoe (1969 Fania publicity photo)',
+        sourceName: 'Wikimedia Commons',
+        sourceUrl:
+          'https://commons.wikimedia.org/wiki/File:Willie_Col%C3%B3n_and_H%C3%A9ctor_Lavoe_(1969_Fania_Records_publicity_photo).jpg',
+      },
+      accent: 'nyc',
+      rhythmicProfileId: 'nyc',
+    },
+
     //
     // ---- Musician spotlight: Johnny Pacheco
     //
@@ -324,6 +368,7 @@ const nyChapter = {
         'Popularizes the All-Star ‘supergroup’ format and concert-scale salsa performance.',
         'Centers descarga/jam culture as a core salsa experience (not just studio songs).',
         'Elevates crowd interaction and call-and-response as a live performance tool.',
+        'Creates the performance footage and live-recording mythology that Our Latin Thing turns into salsa’s defining screen document.',
       ],
       instrumentation: [
         'Full horn section (trombones/trumpets) + tight rhythmic hits',
@@ -380,6 +425,118 @@ const nyChapter = {
         'guaguancó feel (vocal phrasing)',
         'son montuno architecture',
       ],
+      bg: 'https://commons.wikimedia.org/wiki/Special:FilePath/Salsa%20performers%20in%20New%20York.jpg?width=2400',
+      bgCredit: {
+        label: 'Salsa performers in New York',
+        sourceName: 'Wikimedia Commons',
+        sourceUrl:
+          'https://commons.wikimedia.org/wiki/File:Salsa_performers_in_New_York.jpg',
+      },
+      accent: 'nyc',
+    },
+
+    {
+      id: 'nyc-our-latin-thing',
+      dateLabel: '1972',
+      title: 'Our Latin Thing makes salsa visible on screen',
+      body:
+        '**Our Latin Thing / Nuestra Cosa Latina** turns the Cheetah concert and the surrounding Nuyorican salsa world into film.\n\n' +
+        'That matters because salsa becomes more than a record label or dance-floor sound. The movie gives the scene faces, bodies, streets, crowds, and stage energy: a visual identity that helps salsa read as a New York cultural movement.',
+      musicalImpact: [
+        'Turns a live Fania moment into a portable visual document.',
+        'Makes salsa legible as Nuyorican culture, not only as a set of musical traits.',
+        'Extends the Cheetah concert from event memory into media circulation.',
+      ],
+      instrumentation: [
+        'Fania All-Stars concert ensemble',
+        'Multiple lead singers + coro',
+        'Percussion battery and descarga sections',
+        'Film editing around crowd and street energy',
+      ],
+      keyMusicians: [
+        {
+          name: 'Fania All-Stars',
+          role: 'supergroup',
+          why: 'The film turns the collective into salsa’s most visible early-1970s symbol.',
+        },
+        {
+          name: 'Leon Gast',
+          role: 'filmmaker',
+          why: 'Frames the Cheetah concert and NYC salsa world as a cultural document.',
+        },
+      ],
+      relatedStyles: ['salsa dura', 'descarga', 'Nuyorican culture', 'concert film'],
+      bg: 'https://commons.wikimedia.org/wiki/Special:FilePath/Salsa%20performers%20in%20New%20York.jpg?width=2400',
+      bgCredit: {
+        label: 'Salsa performers in New York',
+        sourceName: 'Wikimedia Commons',
+        sourceUrl:
+          'https://commons.wikimedia.org/wiki/File:Salsa_performers_in_New_York.jpg',
+      },
+      accent: 'nyc',
+    },
+
+    {
+      id: 'nyc-yankee-stadium',
+      dateLabel: 'Aug 24, 1973',
+      title: 'Fania All-Stars scale salsa up to Yankee Stadium',
+      body:
+        'Fania All-Stars bring salsa to Yankee Stadium, turning a club-born supergroup into a stadium-scale spectacle.\n\n' +
+        'This is the escalation after the Cheetah: salsa is no longer only a packed ballroom or a documentary image. It is a huge public event, captured for later records and film, with the Bronx itself becoming part of the mythology.',
+      musicalImpact: [
+        'Expands salsa spectacle from club scale to stadium scale.',
+        'Strengthens Fania’s image as a label, concert machine, and cultural brand.',
+        'Turns live performance into archive: records, film, and memory all reinforce the event.',
+      ],
+      instrumentation: [
+        'Large Fania All-Stars concert lineup',
+        'Stacked horns and rhythm section',
+        'Multiple singers trading lead features',
+        'Extended descarga-style performance structure',
+      ],
+      keyMusicians: [
+        {
+          name: 'Fania All-Stars',
+          role: 'supergroup',
+          why: 'The collective proves salsa can function as stadium spectacle.',
+        },
+      ],
+      relatedStyles: ['salsa dura', 'descarga', 'concert salsa'],
+      bg: 'https://commons.wikimedia.org/wiki/Special:FilePath/Salsa%20performers%20in%20New%20York.jpg?width=2400',
+      bgCredit: {
+        label: 'Salsa performers in New York',
+        sourceName: 'Wikimedia Commons',
+        sourceUrl:
+          'https://commons.wikimedia.org/wiki/File:Salsa_performers_in_New_York.jpg',
+      },
+      accent: 'nyc',
+    },
+
+    {
+      id: 'nyc-don-kirshner',
+      dateLabel: 'Mar 8, 1975',
+      title: 'Fania All-Stars reach a national rock-TV audience',
+      body:
+        'Fania All-Stars appear on **Don Kirshner’s Rock Concert**, giving salsa one of its clearest shots at a broad U.S. pop/rock television audience.\n\n' +
+        'This is a media-visibility card: salsa is being pitched beyond Latin radio, Latin clubs, and neighborhood scenes into the same televised space that framed rock as national youth culture.',
+      musicalImpact: [
+        'Places salsa in front of a national pop/rock television audience.',
+        'Frames Fania as a crossover concert act, not only a Latin-label phenomenon.',
+        'Extends the Cheetah/Yankee Stadium media arc into mainstream TV exposure.',
+      ],
+      instrumentation: [
+        'Televised salsa concert ensemble',
+        'Fania horn and percussion battery',
+        'Lead singers + coro in broadcast format',
+      ],
+      keyMusicians: [
+        {
+          name: 'Fania All-Stars',
+          role: 'supergroup',
+          why: 'Carries salsa’s live-show format into national television visibility.',
+        },
+      ],
+      relatedStyles: ['salsa dura', 'television concert', 'media crossover'],
       bg: 'https://commons.wikimedia.org/wiki/Special:FilePath/Salsa%20performers%20in%20New%20York.jpg?width=2400',
       bgCredit: {
         label: 'Salsa performers in New York',
@@ -572,6 +729,7 @@ const nyChapter = {
       title: 'Siembra (Colón & Blades) — salsa becomes literature',
       body:
         'This step is about **lyric ambition** meeting massive reach.\n\n' +
+        'Rubén Blades signs to Fania in 1974, and the label eventually becomes the platform for his biggest leap with Willie Colón.\n\n' +
         'With *Siembra*, salsa leans into:\n' +
         '• Story songs that feel like short films\n' +
         '• Social commentary and character-driven writing\n' +
@@ -581,6 +739,7 @@ const nyChapter = {
         'Pushes salsa lyricism toward socially conscious, narrative songwriting at blockbuster scale.',
         'Shows salsa can be both deeply literary and relentlessly danceable.',
         'Becomes a cultural reference point for what ‘serious’ salsa songwriting can do.',
+        'Turns Blades’s Fania arrival into a label-era payoff: the songwriter becomes a mass salsa narrator.',
       ],
       instrumentation: [
         'Trombones/trumpets with cinematic hits and transitions',
@@ -612,6 +771,46 @@ const nyChapter = {
         sourceName: 'Wikimedia Commons',
         sourceUrl:
           'https://commons.wikimedia.org/wiki/File:Willie_Col%C3%B3n_and_H%C3%A9ctor_Lavoe_(1969_Fania_Records_publicity_photo).jpg',
+      },
+      accent: 'nyc',
+    },
+
+    {
+      id: 'nyc-fania-fragments',
+      dateLabel: '1979–1984',
+      title: 'Fania fragments and salsa’s center starts shifting',
+      body:
+        'After *Siembra*, Fania’s original label structure begins to splinter: Masucci sells assets to Valsyn in 1979, and Rubén Blades leaves for Elektra in 1984 amid rights and royalty conflict.\n\n' +
+        'This does not end salsa. It marks the fading of one dominant infrastructure. The music keeps moving through stars, regional scenes, salsa romántica, Latin jazz, Colombia, and later global institutions.',
+      musicalImpact: [
+        'Closes the classic Fania-dominance arc without treating salsa as finished.',
+        'Shows how business structures shape what music gets recorded, marketed, and remembered.',
+        'Sets up later decentralization: global scenes and new industry models carry salsa forward.',
+      ],
+      instrumentation: [
+        'No single groove change; this is an industry and authorship turning point',
+        'Catalog ownership, artist rights, and label infrastructure',
+        'Post-Fania pathways into pop, romántica, regional salsa, and global circuits',
+      ],
+      keyMusicians: [
+        {
+          name: 'Jerry Masucci',
+          role: 'label executive',
+          why: 'His asset sale marks the fragmentation of Fania’s original label structure.',
+        },
+        {
+          name: 'Rubén Blades',
+          role: 'singer / songwriter',
+          why: 'His departure and legal disputes point to the artist-rights afterlife of the Fania era.',
+        },
+      ],
+      relatedStyles: ['fania', 'salsa industry', 'salsa romántica', 'global salsa'],
+      bg: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ruben%20Blades%20by%20Gage%20Skidmore.jpg?width=2400',
+      bgCredit: {
+        label: 'Rubén Blades',
+        sourceName: 'Wikimedia Commons',
+        sourceUrl:
+          'https://commons.wikimedia.org/wiki/File:Ruben_Blades_by_Gage_Skidmore.jpg',
       },
       accent: 'nyc',
     },

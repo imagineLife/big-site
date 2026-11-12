@@ -75,6 +75,29 @@ export default function AiPage() {
           ]}
         />
 
+        <h2>Personal AI Assistant Team</h2>
+        <Link
+          href="/ai-ml/personal-ai-assistant-team"
+          className="no-underline hover:underline"
+        >
+          <h3>Building a Personal AI Assistant Team</h3>
+        </Link>
+        <p>
+          A build journal for turning a Mac mini into a local-first assistant
+          appliance with bounded helpers for personal software, notes, household
+          research, and admin-oriented setup.
+        </p>
+        <TagList
+          hideTitle
+          tags={[
+            'ai',
+            'local ai',
+            'mac mini',
+            'personal software',
+            'automation',
+          ]}
+        />
+
 
         <h2>Projects</h2>
         

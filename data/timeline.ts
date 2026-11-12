@@ -1,11 +1,13 @@
 import type { TimelineChapter, TimelineStep } from './../types/repo';
 import { rootsChapter } from './timeline-roots';
 import { cubaChapter } from './timeline-cuba';
+import { bridgesChapter } from './timeline-bridges';
 import { nyChapter } from './timeline-ny';
 import { globalChapter } from './timeline-global';
 export const chapters: TimelineChapter[] = [
   rootsChapter,
   cubaChapter,
+  bridgesChapter,
   nyChapter as TimelineChapter,
   globalChapter as TimelineChapter,
 

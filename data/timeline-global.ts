@@ -78,6 +78,44 @@ const globalChapter = {
       accent: 'global',
       rhythmicProfileId: 'global',
     },
+    {
+      id: 'global-latin-grammys',
+      dateLabel: 'Sep 13, 2000',
+      title: 'The first Latin Grammys institutionalize salsa on TV',
+      body:
+        'The first Latin Grammy Awards air with salsa visible inside a major U.S. Latin music institution.\n\n' +
+        'This is not a new groove or a new bandstand. It is a recognition moment: salsa, tropical music, and Latin pop now have a televised awards infrastructure that canonizes artists, categories, and histories for a broad public.',
+      musicalImpact: [
+        'Places salsa inside a dedicated U.S. Latin music awards institution.',
+        'Makes recognition and canon-building part of salsa’s global story.',
+        'Shows the post-Fania era moving through television, awards, and industry categories as much as through labels and ballrooms.',
+      ],
+      instrumentation: [
+        'Awards-broadcast format rather than a single ensemble',
+        'Salsa/tropical categories and televised performances',
+        'Industry recognition as cultural infrastructure',
+      ],
+      keyMusicians: [
+        {
+          name: 'Celia Cruz',
+          role: 'singer',
+          why: 'A salsa icon whose Latin Grammy visibility connects classic-era star power to institutional recognition.',
+        },
+        {
+          name: 'Marc Anthony',
+          role: 'singer',
+          why: 'Represents salsa’s late-1990s/2000s crossover presence inside the televised Latin music industry.',
+        },
+      ],
+      relatedStyles: ['salsa', 'tropical Latin', 'Latin pop crossover'],
+      bg: 'https://commons.wikimedia.org/wiki/Special:FilePath/Celia%20Cruz%201.jpg?width=2400',
+      bgCredit: {
+        label: 'Celia Cruz (Paris, 1980)',
+        sourceName: 'Wikimedia Commons',
+        sourceUrl: 'https://commons.wikimedia.org/wiki/File:Celia_Cruz_1.jpg',
+      },
+      accent: 'global',
+    },
   ],
 };
 

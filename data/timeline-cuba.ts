@@ -314,11 +314,13 @@ export const cubaChapter: TimelineChapter = {
         '• **Bright time texture**: güiro is front-and-center; timbales feel clean and dance-guiding.\n\n' +
         '• **Less “busy” syncopation** than hot son montuno/mambo sections — more “everyone can lock in” energy.\n\n' +
         '• **Orchestration continuity**: charanga instruments (flute/violins) often remain a signature voice, keeping the dance feel light and elegant.\n\n' +
+        'The specific recording trail makes that adoption visible: Orquesta América records Enrique Jorrín’s “La engañadora” in March 1953, and Miguelito Valdés records a U.S.-market version on June 30, 1953 with Seeco billing it as **ritmo de cha cha cha**.\n\n' +
         'This step is important because salsa history isn’t only about complexity — it’s also about *mass adoption*. Cha-cha-chá shows how Cuban rhythmic logic can be packaged into a global social groove.',
       musicalImpact: [
         'Creates a widely accessible Cuban-rooted social dance groove that spreads internationally.',
         'Reinforces güiro+timbales as a clear rhythmic grid for dancers.',
         'Keeps charanga orchestration prominent as Afro-Latin dance music globalizes.',
+        'Uses recordings like “La engañadora” to move the cha-cha-chá label from Cuban charanga practice into wider commercial circulation.',
       ],
       instrumentation: [
         'Güiro (high, steady time texture)',
@@ -332,7 +334,7 @@ export const cubaChapter: TimelineChapter = {
         {
           name: 'Enrique Jorrín',
           role: 'composer / bandleader',
-          why: 'Canonical early cha-cha-chá lineage; strong “origin-era” reference point.',
+          why: 'Canonical early cha-cha-chá lineage; “La engañadora” is the key origin-era recording anchor.',
           spotifyEmbeds: [
             {
               kind: 'artist',
@@ -355,6 +357,11 @@ export const cubaChapter: TimelineChapter = {
               note: 'Convenient “starter album” anchor for cha-cha-chá feel and repertoire.',
             },
           ],
+        },
+        {
+          name: 'Miguelito Valdés',
+          role: 'singer',
+          why: 'His 1953 U.S.-market “La engañadora” recording documents cha-cha-chá entering broader commercial circulation.',
         },
       ],
       bg: 'https://commons.wikimedia.org/wiki/Special:FilePath/Cha-cha-cha%20dancers.jpg?width=2400',
@@ -485,11 +492,13 @@ export const cubaChapter: TimelineChapter = {
         '• **Clave-respecting big-band arranging** (jazz harmony without losing Afro-Cuban time)\n' +
         '• **Section precision** (horns as a unified rhythmic instrument)\n' +
         '• **Improvisation culture** — solos that sit *inside* the clave grid\n\n' +
+        'Their landmark “Tanga” is the cleanest shorthand: not a tidy single-date origin myth, but a 1940s Afro-Cuban jazz framework where clave, horn writing, and improvisation lock together.\n\n' +
         'Think of this as the ‘wiring harness’ that later salsa inherits: horns + jazz harmony + Afro-Cuban rhythm, all cooperating.\n\n' +
         '**Starter listening (search these):** “Tanga” (often associated with this lineage), plus Machito big-band classics/compilations.',
       musicalImpact: [
         'Normalizes clave-aware jazz arranging as a professional standard.',
         'Shapes the NYC pipeline where Cuban rhythmic science meets jazz orchestration.',
+        'Turns “Tanga” into a landmark example of Afro-Cuban rhythm and jazz big-band thinking cooperating.',
       ],
       instrumentation: [
         'Trumpets/saxes/trombones (tight sectional writing)',
@@ -538,13 +547,11 @@ export const cubaChapter: TimelineChapter = {
         'Afro-Cuban jazz',
         'big-band mambo lineage',
       ],
-      // bg: 'https://commons.wikimedia.org/wiki/Special:FilePath/Machito%20and%20Graciella%20cropped.jpg?width=2400',
       bg: 'https://upload.wikimedia.org/wikipedia/commons/f/f6/Mario_Bauz%C3%A1.jpg',
       bgCredit: {
-        label: 'Machito (with Graciela) – photo by William P. Gottlieb',
+        label: 'Mario Bauzá',
         sourceName: 'Wikimedia Commons',
-        sourceUrl:
-          'https://commons.wikimedia.org/wiki/File:Machito_and_Graciella_cropped.jpg',
+        sourceUrl: 'https://commons.wikimedia.org/wiki/File:Mario_Bauz%C3%A1.jpg',
       },
       accent: 'cuba',
     },
@@ -560,10 +567,12 @@ export const cubaChapter: TimelineChapter = {
         '• **Percussion as a lead voice** (fills, breaks, callouts)\n' +
         '• **Big-band discipline** (hits land *together*)\n' +
         '• **Dance-floor propulsion** — the groove feels like it’s always accelerating\n\n' +
-        '**Starter listening (search these):** “Oye Como Va”, “Ran Kan Kan”, “Mambo Gozón”.',
+        'His 1958 album **Dance Mania** is a perfect recorded-media anchor for that Palladium-era electricity: precise, hot, and built for dancers.\n\n' +
+        '**Starter listening (search these):** “Ran Kan Kan”, “Mambo Gozón”, “Dance Mania”; “Oye Como Va” later becomes globally famous through Santana.',
       musicalImpact: [
         'Popularizes timbales-forward performance culture that later salsa inherits (breaks, fireworks, precision).',
         'Strengthens the idea that percussion can be both timekeeper *and* front-line character.',
+        'Carries Palladium-era mambo discipline into a landmark LP with Dance Mania.',
       ],
       instrumentation: [
         'Timbales (lead percussion voice)',
@@ -575,7 +584,7 @@ export const cubaChapter: TimelineChapter = {
         {
           name: 'Tito Puente',
           role: 'timbalero / bandleader',
-          why: 'Iconic mambo/Latin jazz leader; a reference point for salsa’s later showmanship + precision.',
+          why: 'Nuyorican mambo and Latin-jazz superstar; a reference point for salsa’s later showmanship + precision.',
           spotifyEmbeds: [
             {
               kind: 'artist',
